@@ -2,9 +2,9 @@
     $role = array(
         'STD' => 'Student',
         'CCH' => 'Coach',
-        'PRT' => 'Coach Partner',
+        'PRT' => 'Coach Affiliate',
         'ADM' => 'Admin Region',
-        'SPR' => 'Student Partner',
+        'SPR' => 'Student Affiliate',
         'RAD' => 'Super Admin',
     );
 ?>
@@ -173,11 +173,11 @@
                                 </li>
 
                                 <li class="pure-menu-item adm-partner">
-                                    <a href="<?php echo site_url('admin/manage_partner'); ?>" class="pure-menu-link icon dyned-icon-partner">Partners</a>
+                                    <a href="<?php echo site_url('admin/manage_partner'); ?>" class="pure-menu-link icon dyned-icon-partner">Affiliate</a>
                                 </li>
 
                                 <li class="pure-menu-item adm-pmatches">
-                                    <a href="<?php echo site_url('admin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Partner Matches</a>
+                                    <a href="<?php echo site_url('admin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Affiliate Matches</a>
                                 </li>
                                 
                                 <li class="pure-menu-item adm-capproval">
@@ -197,21 +197,35 @@
                                         </li>
                                     </ul>                     
                                 </li>
+
+                                <li id="dropdown" class="pure-menu-item dropdown">
+                                    <a class="pure-menu-link icon icon-study-dashboard" data-toggle="dropdown">Reporting
+                                        <span></span>
+                                    </a>
+                                    <ul class="menu-dropdown">
+                                        <li class="pure-menu-item adm-rtoken">
+                                            <a href="<?php echo site_url('admin/reporting/coach'); ?>" class="pure-menu-link icon icon-study-dashboard">Coach</a>
+                                       </li>
+                                        <li class="pure-menu-item adm-tapproval">
+                                            <a href="<?php echo site_url('admin/reporting/student'); ?>" class="pure-menu-link icon icon-study-dashboard">Student</a>
+                                        </li>
+                                    </ul>                     
+                                </li>
                             <?php } else if ($this->auth_manager->role() == 'RAD') { ?>
                                 <li class="pure-menu-item std-profile"><a href="<?php echo site_url('account/identity/detail/profile'); ?>" class="pure-menu-link icon dyned-icon-profile"><?php echo $this->auth_manager->lang('lbl_profile');?></a></li>
                                 <li class="pure-menu-item rad-region"><a href="<?php echo site_url('superadmin/region/index/active'); ?>" class="pure-menu-link icon dyned-icon-region">Region</a></li>
                                 
                                 <li id="dropdown" class="pure-menu-item dropdown">
-                                    <a class="pure-menu-link icon dyned-icon-partner" data-toggle="dropdown">Partner
+                                    <a class="pure-menu-link icon dyned-icon-partner" data-toggle="dropdown">Affiliate
                                         <span></span>
                                     </a>
                                     <ul class="menu-dropdown">
-                                        <li class="pure-menu-item rad-papproval"><a href="<?php echo site_url('superadmin/manage_partner/approve_coach'); ?>" class="pure-menu-link icon dyned-icon-coach-approval">Partners Approval</a></li>
+                                        <li class="pure-menu-item rad-papproval"><a href="<?php echo site_url('superadmin/manage_partner/approve_coach'); ?>" class="pure-menu-link icon dyned-icon-coach-approval">Affiliate Approval</a></li>
                                         <li class="pure-menu-item rad-trapproval"><a href="<?php echo site_url('superadmin/manage_partner/token'); ?>" class="pure-menu-link icon dyned-icon-token-approval">Token Request Approval</a></li>                                                
                                     </ul>
                                 </li>
 
-                                <li class="pure-menu-item rad-pmatches"><a href="<?php echo site_url('superadmin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Partner Matches</a></li>
+                                <li class="pure-menu-item rad-pmatches"><a href="<?php echo site_url('superadmin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Affiliate Matches</a></li>
 
                                 <li id="dropdown" class="pure-menu-item dropdown">
                                     <a class="pure-menu-link icon dyned-icon-setting" data-toggle="dropdown">Settings
@@ -219,7 +233,7 @@
                                     </a>
                                     <ul class="menu-dropdown">
                                         <li class="pure-menu-item rad-grsetting"><a href="<?php echo site_url('superadmin/settings/region'); ?>" class="pure-menu-link icon dyned-icon-region-setting">Global Region Settings</a></li>
-                                        <li class="pure-menu-item rad-gpsetting"><a href="<?php echo site_url('superadmin/settings/partner'); ?>" class="pure-menu-link icon dyned-icon-partner-setting">Global Partner Settings</a></li>
+                                        <li class="pure-menu-item rad-gpsetting"><a href="<?php echo site_url('superadmin/settings/partner'); ?>" class="pure-menu-link icon dyned-icon-partner-setting">Global Affiliate Settings</a></li>
                                     </ul>
                                 </li>
                                 <li class="pure-menu-item rad-cmaterials"><a href="<?php echo site_url('superadmin/coach_script'); ?>" class="pure-menu-link icon icon-study-dashboard">Coach Materials</a></li>
@@ -469,11 +483,11 @@
                                         </li>
 
                                         <li class="pure-menu-item adm-partner">
-                                            <a href="<?php echo site_url('admin/manage_partner'); ?>" class="pure-menu-link icon dyned-icon-partner">Partners</a>
+                                            <a href="<?php echo site_url('admin/manage_partner'); ?>" class="pure-menu-link icon dyned-icon-partner">Affiliate</a>
                                         </li>
 
                                         <li class="pure-menu-item adm-pmatches">
-                                            <a href="<?php echo site_url('admin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Partner Matches</a>
+                                            <a href="<?php echo site_url('admin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Affiliate Matches</a>
                                         </li>
                                         
                                         <li class="pure-menu-item adm-capproval">
@@ -489,27 +503,41 @@
                                                 <li class="pure-menu-item adm-tapproval"><a href="<?php echo site_url('admin/manage_partner/token'); ?>" class="pure-menu-link icon dyned-icon-token-request">Token Approval</a></li>
                                             </ul>                     
                                         </li>
+
+                                        <li id="dropdown" class="pure-menu-item dropdown">
+                                            <a class="pure-menu-link icon icon-study-dashboard" data-toggle="dropdown">Reporting
+                                                <span></span>
+                                            </a>
+                                            <ul class="menu-dropdown">
+                                                <li class="pure-menu-item adm-rtoken">
+                                                    <a href="<?php echo site_url('admin/reporting/coach'); ?>" class="pure-menu-link icon icon-study-dashboard">Coach</a>
+                                               </li>
+                                                <li class="pure-menu-item adm-tapproval">
+                                                    <a href="<?php echo site_url('admin/reporting/student'); ?>" class="pure-menu-link icon icon-study-dashboard">Student</a>
+                                                </li>
+                                            </ul>                     
+                                        </li>
              
                                     <?php } else if ($this->auth_manager->role() == 'RAD') { ?>
                                         <li class="pure-menu-item std-profile"><a href="<?php echo site_url('account/identity/detail/profile'); ?>" class="pure-menu-link icon dyned-icon-profile"><?php echo $this->auth_manager->lang('lbl_profile');?></a></li>
                                         <li class="pure-menu-item rad-region"><a href="<?php echo site_url('superadmin/region/index/active'); ?>" class="pure-menu-link icon dyned-icon-region">Region</a></li>
                                         <li id="dropdown" class="pure-menu-item rad-partner dropdown">
-                                            <a class="pure-menu-link icon dyned-icon-partner" data-toggle="dropdown">Partner
+                                            <a class="pure-menu-link icon dyned-icon-partner" data-toggle="dropdown">Affiliate
                                                 <span></span>
                                             </a>
                                             <ul class="menu-dropdown part">
-                                                <li class="pure-menu-item rad-papproval"><a href="<?php echo site_url('superadmin/manage_partner/approve_coach'); ?>" class="pure-menu-link icon dyned-icon-coach-approval">Partners Approval</a></li>
+                                                <li class="pure-menu-item rad-papproval"><a href="<?php echo site_url('superadmin/manage_partner/approve_coach'); ?>" class="pure-menu-link icon dyned-icon-coach-approval">Affiliate Approval</a></li>
                                                 <li class="pure-menu-item rad-trapproval"><a href="<?php echo site_url('superadmin/manage_partner/token'); ?>" class="pure-menu-link icon dyned-icon-token-approval">Token Request Approval</a></li>                                                
                                             </ul>
                                         </li>
-                                        <li class="pure-menu-item rad-pmatches"><a href="<?php echo site_url('superadmin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Partner Matches</a></li>
+                                        <li class="pure-menu-item rad-pmatches"><a href="<?php echo site_url('superadmin/match_partner'); ?>" class="pure-menu-link icon dyned-icon-partners-matching">Affiliate Matches</a></li>
                                         <li id="dropdown" class="pure-menu-item rad-setting dropdown">
                                             <a class="pure-menu-link icon dyned-icon-setting" data-toggle="dropdown">Settings
                                                 <span></span>
                                             </a>
                                             <ul class="menu-dropdown sett">
                                                 <li class="pure-menu-item rad-grsetting"><a href="<?php echo site_url('superadmin/settings/region'); ?>" class="pure-menu-link icon dyned-icon-region-setting">Global Region Settings</a></li>
-                                                <li class="pure-menu-item rad-gpsetting"><a href="<?php echo site_url('superadmin/settings/partner'); ?>" class="pure-menu-link icon dyned-icon-partner-setting">Global Partner Settings</a></li>
+                                                <li class="pure-menu-item rad-gpsetting"><a href="<?php echo site_url('superadmin/settings/partner'); ?>" class="pure-menu-link icon dyned-icon-partner-setting">Global Affiliate Settings</a></li>
                                             </ul>
                                         </li>
                                         <li class="pure-menu-item rad-cmaterials"><a href="<?php echo site_url('superadmin/coach_script'); ?>" class="pure-menu-link icon icon-study-dashboard">Coach Materials</a></li>

@@ -113,8 +113,8 @@
 
 
             <?php $i =1; foreach(@$data as $d){
-                  $status = ['approved' => 'Book', 'cancelled' => 'Resc', 'declined' => 'Deli', 'added' => 'added', 'given' => 'added']; //ditambah
-                  $tooltip = ['approved' => 'Token Request has been approved', 'cancelled' => 'Token Requests has been cancelled', 'declined' => 'Token Request has been declined', 'requested' => 'Token has been requested', 'added' => 'Token has been added', 'given' => 'Token has been given'];
+                  $status = ['approved' => 'Book', 'cancelled' => 'Resc', 'declined' => 'Deli', 'added' => 'added', 'given' => 'added', 'refund' => 'Resc']; //ditambah
+                  $tooltip = ['approved' => 'Token Request has been approved', 'cancelled' => 'Token Requests has been cancelled', 'declined' => 'Token Request has been declined', 'requested' => 'Token has been requested', 'added' => 'Token has been added', 'given' => 'Token has been given', 'refund' => 'Token has been refunded'];
 
                 $users = $this->db->select('up.fullname as fullname, u.email, p.name as partner')
                     ->from('token_requests tr')

@@ -26,7 +26,7 @@ class match_partner extends MY_Site_Controller {
 
     // Index
     public function index() {
-        $this->template->title = 'Partner Matching';
+        $this->template->title = 'Affiliate Matching';
         
         $data = array();
         foreach($this->class_matchmaking_model->get_all() as $d){
@@ -53,7 +53,7 @@ class match_partner extends MY_Site_Controller {
     public function add(){
         $id = $this->auth_manager->userid();
 
-        $this->template->title = 'Add Partner Match';
+        $this->template->title = 'Add Affiliate Match';
         $data_student_supplier = $this->partner_model->get_student_supplier($id);
         $data_coach_supplier = $this->partner_model->get_coach_supplier($id);
        // echo('<pre>');
@@ -84,7 +84,7 @@ class match_partner extends MY_Site_Controller {
             $status = 0;
             foreach($student as $s){
                 if($this->student_supplier_relation_model->where('student_supplier_id', $s)->get()){
-                    $this->messages->add('Student Partner Has Already Has a Match', 'warning');
+                    $this->messages->add('Student Affiliate Has Already Has a Match', 'warning');
                     $status = 1;
                     redirect('admin/match_partner/');
                 }
@@ -128,7 +128,7 @@ class match_partner extends MY_Site_Controller {
     }
     
     public function edit($class_matchmaking_id = ''){
-        $this->template->title = 'Edit Partner Match';
+        $this->template->title = 'Edit Affiliate Match';
         $data_student_supplier = $this->partner_model->get_student_supplier();
         $data_coach_supplier = $this->partner_model->get_coach_supplier();
 //        echo('<pre>');
@@ -188,7 +188,7 @@ class match_partner extends MY_Site_Controller {
             $status = 0;
             foreach($student as $s){
                 if($this->student_supplier_relation_model->where_not_in('class_matchmaking_id', $this->input->post('class_matchmaking_id'))->where('student_supplier_id', $s)->get()){
-                    $this->messages->add('Student Partner Has Already Has a Match', 'warning');
+                    $this->messages->add('Student Affiliate Has Already Has a Match', 'warning');
                     $status = 1;
                 }
             }

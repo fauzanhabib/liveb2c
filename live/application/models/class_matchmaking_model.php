@@ -49,6 +49,28 @@ class class_matchmaking_model extends MY_Model {
         return $this->db->get()->result();
     }
 
+     public function get_student_group($class_matchmaking_id = '',$id = ''){
+        $this->db->select("s.*");
+        $this->db->from('subgroup s');
+        $this->db->join('student_group_relations sgr', 's.id = sgr.subgroup_id');
+        $this->db->where('sgr.class_matchmaking_id', $class_matchmaking_id);
+        if($id){
+            $this->db->where('s.partner_id',$id);
+        }
+        return $this->db->get()->result();
+    }
+    
+    public function get_coach_group($class_matchmaking_id = '',$id = ''){
+        $this->db->select("s.*");
+        $this->db->from('subgroup s');
+        $this->db->join('coach_group_relations cgr', 's.id = cgr.subgroup_id');
+        $this->db->where('cgr.class_matchmaking_id', $class_matchmaking_id);
+        if($id){
+            $this->db->where('s.partner_id',$id);
+        }
+        return $this->db->get()->result();
+    }
+
     
 }
 

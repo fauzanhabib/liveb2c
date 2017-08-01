@@ -34,7 +34,7 @@
                 </li>
                 <?php } ?>
                 <?php if($role_link == 'admin'){ ?>
-                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Partner</a></li>
+                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Affiliate</a></li>
                 <?php } ?>
                 <li><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id);?>"><?php echo $partner->name;?></a></li>
                
@@ -44,12 +44,12 @@
                 <li><a href="<?php echo site_url($role_link.'/manage_partner/list_partner/student/'.$partner_id);?>">
                     <?php } 
                     
-                        foreach ($subgroup as $gsb) {
-                             // if($gsb->subgroup_id == $this->uri->segment(5)){
-                                echo ucfirst(@$gsb->name);
-                             // }
-                         } 
-
+                        // foreach ($subgroup as $gsb) {
+                        //      // if($gsb->subgroup_id == $this->uri->segment(5)){
+                        //         echo ucfirst(@$gsb->name);
+                        //      // }
+                        //  } 
+                        echo $subgroup[0]->name;
                     ?>
                     </a>
                 </li>
@@ -171,7 +171,7 @@
                         </g>
                         </svg>
                     </div>
-                    Student Subgroup Setting
+                    Student Group Setting
                 </button>
                 </a>
                 <?php } ?>
@@ -230,9 +230,9 @@
                         </g>
                         </svg>
                         <?php if($type == "coach") { ?>
-                        Coach Supplier's Admin
+                        Coach Affiliate's Admin
                         <?php } elseif($type == "student") { ?>
-                        Student Supplier's Admin
+                        Student Affiliate's Admin
                         <?php } ?>
                     </a>
                 </li>
@@ -300,8 +300,8 @@
                         
                         <td><?php echo $a?></td>
                         <td><a href="<?php echo site_url($role_link.'/manage_partner/student_detail/'.$partner_id.'/'.$student->id);?>" class="status-disable bg-green text-cl-white"><?php echo $student->fullname?></a></td>
-                        <td><?php echo $subgroup[0]->phone?></td>
-                        <td><?php echo $student->email?></td>
+                        <td><?php echo $subgroup[0]->dial_code.$subgroup[0]->phone;?></td>
+                        <td><?php echo $student->email;?></td>
                     </tr>
                     <?php $no++; $a++; } } ?>
                 </tbody>

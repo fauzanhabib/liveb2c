@@ -24,7 +24,11 @@
                         </svg>
                     </div>
                 </a></li>
+                <?php if ($role_link=="superadmin"){ ?>
                 <li><a href="<?php echo site_url($role_link.'/region/index/active');?>">Regions</a></li>
+                <?php }else{ ?>
+                <li><a href="<?php echo site_url($role_link.'/manage_partner');?>">Affiliates</a></li>
+                <?php } ?>
                 <li><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id); ?>"><?php echo $partner->name;?></a></li>
                 <li><a href="#">Coach</a></li>
 <!--                 <li>
@@ -242,17 +246,12 @@
             //alert(this.name);
             
             var loadUrl = "<?php echo site_url($role_link.'/find_coaches/availability/name'); ?>" + "/" + this.name + "/" + $(this).val();
-            var m = $('[id^=result_]').html($('[id^=result_]').val());
             if ($(this).val() !== '') {
                 //alert(loadUrl);
                 $("#schedule-loading").show();
                 $(".txt").hide();
                 $("#result_" + this.name).load(loadUrl, function () {
                     //alert('test');
-                    for(i=0; i<m.length; i++){
-                        $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
-                        $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
-                    }
                     $("#schedule-loading").hide();
                     $('.selected-date').css({'margin-top':'-5px'});
                 });
@@ -261,15 +260,10 @@
 
         $(".weekly_schedule").click(function () {
             var loadUrl = "<?php echo site_url($role_link.'/find_coaches/schedule_detail'); ?>" + "/" + this.value;
-            var m = $('[id^=result_]').html($('[id^=result_]').val());
             if (this.value !== '') {
                 $("#schedule-loading").show();
                 $(".txt").hide();
                 $("#result_" + this.value).load(loadUrl, function () {
-                    for(i=0; i<m.length; i++){
-                        $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
-                        $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
-                    }
                     $("#schedule-loading").hide();
                     $('.table-reschedule th').css({'border-top':'none'});
                 });

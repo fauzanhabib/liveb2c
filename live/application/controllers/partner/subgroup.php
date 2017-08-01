@@ -66,7 +66,7 @@ class subgroup extends MY_Site_Controller {
   //   }
 
     public function index($page='') {
-        $this->template->title = 'Add Subgroup';
+        $this->template->title = 'Add Group';
         $offset = 0;
         $per_page = 6;
         $uri_segment = 4;
@@ -163,7 +163,7 @@ class subgroup extends MY_Site_Controller {
     }
     
     public function add_subgroup() {
-        $this->template->title = 'Add Subgroup';
+        $this->template->title = 'Add Group';
         $data = $this->identity_model->get_subgroup_identity();
         $vars = array(
             'data' => $data,
@@ -188,7 +188,7 @@ class subgroup extends MY_Site_Controller {
         }
         
         $rules = array(
-                array('field'=>'name', 'label' => 'Name', 'rules'=>'trim|required|xss_clean|max_length[30]'),
+                array('field'=>'name', 'label' => 'Name', 'rules'=>'trim|required|xss_clean|max_length[30]|callback_is_subgroup_available'),
                 
             );
 
@@ -205,11 +205,22 @@ class subgroup extends MY_Site_Controller {
             'partner_id' => $partner_id,
         );
 
+
         // Inserting and checking to partner table
         $this->db->insert('subgroup', $partner);
 
-        $this->messages->add('Inserting Subgroup Succeeded', 'success');
+        $this->messages->add('Inserting Group Succeeded', 'success');
         redirect('partner/subgroup');
+    }
+
+    public function is_subgroup_available($name) {
+        $partner_id = $this->auth_manager->partner_id();
+        if ($this->subgroup_model->where('name', $name)->where('type', 'coach')->where('partner_id', $partner_id)->get_all()) {
+            $this->form_validation->set_message('is_subgroup_available', $name . ' has been registered, use another name');
+            return false;
+        } else {
+            return true;
+        }
     }
 	
 	public function setting($subgroup_id='', $id='')
@@ -277,7 +288,7 @@ class subgroup extends MY_Site_Controller {
     //---------------------------------------------------------------------------------------------------------------------
      public function edit_subgroup($subgroup_id = '', $page='', $id='') {
         
-        $this->template->title = 'Edit Subgroup';
+        $this->template->title = 'Edit Group';
         $offset = 0;
         $per_page = 6;
         $uri_segment = 4;
@@ -297,9 +308,9 @@ class subgroup extends MY_Site_Controller {
 
     public function list_coach($subgroup_id = '', $page='', $id='') {
 
-        $this->template->title = 'Edit Subgroup';
+        $this->template->title = 'Edit Group';
 		$offset = 0;
-        $per_page = 6;
+        $per_page = 10;
         $uri_segment = 5;
 		$pagination = $this->common_function->create_link_pagination($page, $offset, site_url('partner/subgroup/list_coach/'.$subgroup_id), count($this->identity_model->get_coach_identity('','','',$this->auth_manager->partner_id(),null,null,null)), $per_page, $uri_segment,$subgroup_id);
         
@@ -314,7 +325,7 @@ class subgroup extends MY_Site_Controller {
                                 ->where('users.role_id','2')
                                 ->where('user_profiles.subgroup_id',$subgroup_id)
                                 ->get()->result();
-        
+
         $date_limit = date("Y-m-d");
         $hour_limit = date("H:i:s");
         $total_stud = count($all_coachs);
@@ -331,9 +342,7 @@ class subgroup extends MY_Site_Controller {
         }
 
         $total_sess_val = count(@$session_pull, COUNT_RECURSIVE);
-
         $total_sess_val = $total_sess_val - $w;
-
         // Total Sessions ---------------------------------------------------------
 
         $number_page = 0;
@@ -347,9 +356,8 @@ class subgroup extends MY_Site_Controller {
         $vars = array(
             'data' => $data,
             'form_action' => 'update_subgroup',
-			'data2' => $this->identity_model->get_coach_identity('','','',$this->auth_manager->partner_id(), '', '', '', $per_page, $offset, $subgroup_id),
+			'data2' => $this->identity_model->get_coach_identity('','','',$this->auth_manager->partner_id(), '', '', '', '', $offset, $subgroup_id),
             'all_coachs' => $all_coachs,
-            // 'total_coach' => $this->identity_model->get_coach_identity('','','',$this->auth_manager->partner_id()),
             'total_coach' => $this->identity_model->get_coach_identity('','','',$this->auth_manager->partner_id()),
             'subgroup_id' => $subgroup_id,
 			'total_sess_val' => $total_sess_val,
@@ -389,7 +397,7 @@ class subgroup extends MY_Site_Controller {
         $this->db->where('type', 'coach');
         $this->db->update('subgroup', $partner); 
 
-        $this->messages->add('Update Region Succeeded', 'success');
+        $this->messages->add('Update Group Succeeded', 'success');
         redirect('partner/subgroup');
     }
 
@@ -455,7 +463,7 @@ class subgroup extends MY_Site_Controller {
                     }
                 }
           else{
-                        $this->messages->add('Please Choose Subgroup', 'error');
+                        $this->messages->add('Please Choose Group', 'error');
            }
 
           redirect ('partner/subgroup');
@@ -477,18 +485,21 @@ class subgroup extends MY_Site_Controller {
 
             if($check_appointment){
 
-                $this->messages->add('This coach still have a session scheduled', 'error');
+                $this->messages->add('This coach has upcoming session scheduled, reassign the session to delete this coach', 'error');
                 redirect('partner/subgroup/list_coach/'.$id);
 
             } else {
+                $status = array(
+                    'status' => 'disable',
+                    );
                 $this->db->where('role_id',2);
                 $this->db->where_in('id',$check_list);
-                $this->db->delete('users');
+                $this->db->update('users', $status);
 
-                $this->db->flush_cache();
+                // $this->db->flush_cache();
 
-                $this->db->where_in('user_id',$check_list);
-                $this->db->delete('user_profiles');
+                // $this->db->where_in('user_id',$check_list);
+                // $this->db->delete('user_profiles');
 
                 $this->messages->add('Deleted Succeeded', 'success');
 
@@ -518,18 +529,45 @@ class subgroup extends MY_Site_Controller {
         foreach ($getsubgroup as $value) {
             $subgroup[$value->id] = $value->name; 
         }
+
+        $partner_id = $this->auth_manager->partner_id();
+        $partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$partner_id)->get_all();
+        $partner_country = $partner[0]->country;
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($partner_country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
         
         $vars = array(
             'form_action' => 'create_coach',
             'subgroup' => $subgroup,
             'subgroup_id' => $subgroup_id,
             'coach_type' => $coach_type,
-            'server_code' => $this->common_function->server_code()
+            'server_code' => $this->common_function->server_code(),
+            'option_country' => $this->common_function->country_code,
+            'partner_country' => $partner_country,
+            'dial_code' => $dial_code
         );
 
 
         $this->template->content->view('default/contents/adding/coach/form', $vars);
         $this->template->publish();
+    }
+
+    public function dial_code(){
+
+        $country = $this->input->post('country');
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
+
+        echo $dial_code;
+
     }
 
     public function create_coach() {
@@ -648,6 +686,7 @@ class subgroup extends MY_Site_Controller {
         // Inserting user home town data
         $geography = array(
             'user_id' => $user_id,
+            'country' => $this->input->post('country')
         );
 
 

@@ -59,8 +59,8 @@
                 <?php $i =1; foreach(@$data as $d){ 
                     $userid = $this->auth_manager->userid();
                     $gmt_user = $this->identity_model->new_get_gmt($userid);
-                    $status = ['approved' => 'Book', 'cancelled' => 'Resc', 'declined' => 'Deli','added' => 'added','given' => 'added']; //ditambah
-                    $tooltip = ['approved' => 'Token Request has been approved', 'cancelled' => 'Token Requests has been cancelled', 'declined' => 'Token Request has been declined', 'requested' => 'Token has been requested', 'added' => 'Token has been added', 'given' => 'Token has been given'];
+                    $status = ['approved' => 'Book', 'cancelled' => 'Resc', 'declined' => 'Deli','added' => 'added','given' => 'added', 'refund' => 'Resc']; //ditambah
+                    $tooltip = ['approved' => 'Token Request has been approved', 'cancelled' => 'Token Requests has been cancelled', 'declined' => 'Token Request has been declined', 'requested' => 'Token has been requested', 'added' => 'Token has been added', 'given' => 'Token has been given', 'refund' => 'Token has been refund'];
                     
                         date_default_timezone_set('UTC');
                         $dcrea     = date('H:i:s',$d->dcrea);

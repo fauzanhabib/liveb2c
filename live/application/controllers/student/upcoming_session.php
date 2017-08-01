@@ -22,6 +22,7 @@ class upcoming_session extends MY_Site_Controller {
 
     // Index
     public function index($page = '') {
+    
         $this->template->title = "Upcoming Session";
         $offset = 0;
         $per_page = 5;
@@ -68,6 +69,7 @@ class upcoming_session extends MY_Site_Controller {
             'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
             'pagination' => @$pagination
         );
+
 
         $this->template->content->view('default/contents/student/upcoming_session/index', $vars);
         $this->template->publish();
@@ -189,5 +191,11 @@ class upcoming_session extends MY_Site_Controller {
 
     public function coach_detail($coach_id = '') {
         redirect('student/session/coach_detail/'.$coach_id);
+    }
+
+    function delete_temp(){
+        // delete data from table temp_student_booking
+        $this->db->where('student_id', $this->auth_manager->userid());
+        $this->db->delete('temp_student_booking');
     }
 }

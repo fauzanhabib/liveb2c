@@ -16,7 +16,7 @@
                         </svg>
                     </div>
                 </a></li>
-                <li><a href="<?php echo site_url('student_partner/subgroup') ?>">Subgroup</a></li>
+                <li><a href="<?php echo site_url('student_partner/subgroup') ?>">Group</a></li>
 				<li><a href="#"><?php foreach ($data as $ds) {
                     if($ds->id == $subgroup_id){
                         echo $ds->name;
@@ -39,7 +39,7 @@
                     }
                 } ?>
             </h1>
-        <span class="padding-l-18 text-cl-secondary font-18 font-semi-bold"><?php echo ucfirst($data[0]->type); ?> Partner</span><br>
+        <span class="padding-l-18 text-cl-secondary font-18 font-semi-bold"><?php echo ucfirst($data[0]->type); ?> Affiliate</span><br>
         <!--<span class="padding-l-18 font-14 text-cl-secondary">Bangkok, Thailand</span>-->
     </div>
 
@@ -100,7 +100,7 @@
 
         <div class="delete-add-btn padding-l-10 padding-t-65 pure-u-md-8-24 pure-u-lg-10-24">
             <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('student_partner/subgroup/student/'.@$subgroup_id ); ?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Student To Group</em></a></div>
-            <!-- <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('student_partner/adding/multiple_student/'.@$subgroup_id ); ?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Multiple Student To Group</em></a></div> -->
+            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('student_partner/adding/multiple_student/'.@$subgroup_id ); ?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Multiple Student To Group</em></a></div>
             <button class="btn-noborder btn-normal bg-white-fff" name="_submit" type="submit" onclick="return confirm('Are you sure you want to delete?')"><a><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Student From Group</em></a></button>
         </div>
 
@@ -142,7 +142,7 @@
     </div>
 
     <div class="content padding-t-10">
-       <div class="box">   
+       <div class="box">
             <div class="flex justify_content-sb padding-b-5">
                 <div class="select-all flex">                             
                     <div class="padding-r-5 m-t-2">
@@ -178,6 +178,7 @@
                     /*background: #c00;*/
                 }
             </style>
+
             <table id="large" class="display table-session tablesorter paginated" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -201,7 +202,7 @@
                         </td>
                         <td><?php echo $a?></td>
                         <td><a href="<?php echo site_url('student_partner/member_list/student_detail/'.$d->id);?>" class="text-cl-tertiary"><u><?php echo $d->fullname?></u></a></td>
-                        <td><?php echo $d->phone?></td>
+                        <td><?php echo $d->dial_code.$d->phone?></td>
                         <td><?php echo $d->email?></td>
                     </tr>
                     <?php $no++; $a++; } ?>
@@ -209,7 +210,7 @@
             </table>
         </div>
     </div>
-    <?php echo @$pagination;?>
+    
 </div>
 </form>
 
@@ -285,6 +286,6 @@ $('table.paginated').each(function() {
             $(this).addClass('active').siblings().removeClass('active');
         }).appendTo($pager).addClass('clickable');
     }
-    // $pager.insertAfter($table).find('span.page-number:first').addClass('active');
+    $pager.insertAfter($table).find('span.page-number:first').addClass('active');
 });
 </script>

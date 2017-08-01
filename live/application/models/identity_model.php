@@ -92,7 +92,7 @@ class identity_model extends MY_Model {
         if(($this->uri->segment(1) == 'student_partner') && ($this->uri->segment(2) != 'member_list') && ($this->uri->segment(2) != 'add_token') && ($this->uri->segment(3) != 'student_detail')){
              $subgroup_id = $this->uri->segment(4);
         }
-        $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.dyned_pro_id, c.server_dyned_pro, c.cert_studying, d.token_amount, e.city, e.state, e.zip, e.country,e.address, f.language_goal, f.like, f.dislike, f.hobby, j.timezone");
+        $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.dial_code, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.dyned_pro_id, c.server_dyned_pro, c.cert_studying, d.token_amount, e.city, e.state, e.zip, e.country,e.address, f.language_goal, f.like, f.dislike, f.hobby, j.timezone");
         $this->db->from('users a');
         // $this->db->order_by("a.status", "desc"); 
         $this->db->join('user_roles b', 'a.role_id = b.id','left');
@@ -151,9 +151,17 @@ class identity_model extends MY_Model {
         if(($this->uri->segment(1) == 'partner') && ($this->uri->segment(3) != 'coach_detail')){
            $subgroup_id = $this->uri->segment(4);
         }
-
+        $coach_group = '';
         if(($this->uri->segment(1) == 'partner') && ($this->uri->segment(3) == 'reschedule')){
-           $subgroup_id = '';
+            $subgroup_id = '';
+            $appointment_id = $this->uri->segment(4);
+
+            $student_id = $this->db->select('appointments.student_id as student_id')->from('appointments')->where('appointments.id',$appointment_id)->get()->result();
+            $student_id = $student_id[0]->student_id;
+
+            $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id')->from('user_profiles')->where('user_profiles.user_id',$student_id)->get()->result();
+            $user_subgroup = $user_subgroup[0]->subgroup_id;
+            $coach_group = $this->get_coach_group($user_subgroup);
         }
 
     
@@ -167,11 +175,17 @@ class identity_model extends MY_Model {
             $cert_studying = $this->db->select('user_profiles.cert_studying as cert_studying')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
             $cert_studying = $cert_studying[0]->cert_studying;
 
+            if($this->auth_manager->role() == 'STD'){
+                $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
+                $user_subgroup = $user_subgroup[0]->subgroup_id;
+                $coach_group = $this->get_coach_group($user_subgroup);
+            }
+
         //echo('<pre>');
         //print_r($this->get_coach_supplier($partner_id)); exit;
         $coach_supplier = $this->get_coach_supplier($partner_id);
         
-        $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.pt_score, d.teaching_credential, d.dyned_certification_level, d.year_experience, d.special_english_skill, d.higher_education, d.undergraduate, d.masters, d.phd, e.city, e.state, e.zip, e.country, e.address, h.token_for_student, h.token_for_group, j.timezone, c.coach_type_id as coach_type_id");
+        $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.dial_code, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.pt_score, d.teaching_credential, d.dyned_certification_level, d.year_experience, d.special_english_skill, d.higher_education, d.undergraduate, d.masters, d.phd, e.city, e.state, e.zip, e.country, e.address, h.token_for_student, h.token_for_group, j.timezone, c.coach_type_id as coach_type_id");
         $this->db->from('users a');
         $this->db->order_by("a.status", "desc");
         $this->db->join('user_roles b', 'a.role_id = b.id');
@@ -188,22 +202,38 @@ class identity_model extends MY_Model {
         if($partner_id){
             if(!$id){
                 
-                if(($this->auth_manager->role() == 'STD') || ($this->auth_manager->role() == 'SPR')){
+                if(($this->auth_manager->role() == 'STD') || ($this->auth_manager->role() == 'SPR') || ($this->auth_manager->role() == 'PRT')){
                     //$this->db->where('c.partner_id', $partner_id);
-                    $partner_array= array($partner_id);
-                    foreach(@$coach_supplier as $cs){
-                        if($cs->coach_supplier_id != $partner_id){
-                            //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
-                            $partner_array[] = $cs->coach_supplier_id;
+                    if($coach_group){
+                        $partner_array= array($partner_id);
+                        $group_array= array($user_subgroup);
+                        foreach(@$coach_supplier as $cs){
+                            foreach(@$coach_group as $cg){
+                            if($cs->coach_supplier_id != $partner_id){
+                                if($cg->subgroup_id != $user_subgroup){
+                                    //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
+                                    $partner_array[] = $cs->coach_supplier_id;
+                                    $group_array[] = $cg->subgroup_id;
+                                    }
+                                }
+                            }
                         }
-                    }
                     $this->db->where_in('c.partner_id', $partner_array);
+                    $this->db->where_in('c.subgroup_id', $group_array);
+                    }else{
+                        $partner_array= array($partner_id);
+                        foreach(@$coach_supplier as $cs){
+                            if($cs->coach_supplier_id != $partner_id){
+                                    //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
+                                    $partner_array[] = $cs->coach_supplier_id;
+                            }
+                        }
+                        $this->db->where_in('c.partner_id', $partner_array);
+                    }
                 }else{
                     $this->db->where('c.partner_id', $partner_id);
                 } 
             }
-
-
         }
         if($date_available){
             $this->db->join('coach_dayoffs f', 'a.id = f.coach_id', 'full');
@@ -261,13 +291,39 @@ class identity_model extends MY_Model {
         }
         ///////////////////////////////////////////////
         return $this->db->get()->result();
-    }    
+    }  
 
-    public function get_coach_identity_rescedule($partner_id = '', $cert_studying = ''){       
+    public function get_new_coach_identity_rescedule($partner_id = '', $coach_id='', $cert_studying = ''){       
         
+        if(($this->uri->segment(1) == 'partner') && ($this->uri->segment(3) == 'reschedule')){
+            $subgroup_id = '';
+            $appointment_id = $this->uri->segment(4);
+
+            $student_id = $this->db->select('appointments.student_id as student_id')->from('appointments')->where('appointments.id',$appointment_id)->get()->result();
+            $student_id = $student_id[0]->student_id;
+
+            $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id, user_profiles.partner_id as partner_id')->from('user_profiles')->where('user_profiles.user_id',$student_id)->get()->result();
+            $partner_id = $user_subgroup[0]->partner_id;
+            $user_subgroup = $user_subgroup[0]->subgroup_id;
+            $coach_group = $this->get_coach_group($user_subgroup);
+        }
+
+    
+
+//        $fullname = 'coach1';
+//        print_r($fullname); //exit;
         if(!$partner_id){
             $partner_id = $this->auth_manager->partner_id();
         }
+
+            $cert_studying = $this->db->select('user_profiles.cert_studying as cert_studying')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
+            $cert_studying = $cert_studying[0]->cert_studying;
+
+            if($this->auth_manager->role() == 'STD'){
+                $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
+                $user_subgroup = $user_subgroup[0]->subgroup_id;
+                $coach_group = $this->get_coach_group($user_subgroup);
+            }
 
         $coach_supplier = $this->get_coach_supplier($partner_id);
         
@@ -281,26 +337,42 @@ class identity_model extends MY_Model {
         $this->db->join('coach_token_costs h', 'a.id = h.coach_id', 'left');
         $this->db->join('timezones i', 'c.user_timezone = i.id', 'left');
         $this->db->order_by('c.fullname', 'asc');
+        $this->db->where('a.id !=', $coach_id);
+        $this->db->where('a.status', 'active');
   
         if($partner_id){
-       
-                
-                if(($this->auth_manager->role() == 'STD') || ($this->auth_manager->role() == 'SPR')){
+        
+                if(($this->auth_manager->role() == 'STD') || ($this->auth_manager->role() == 'SPR') || ($this->auth_manager->role() == 'PRT')){
                     //$this->db->where('c.partner_id', $partner_id);
-                    $partner_array= array($partner_id);
-                    foreach(@$coach_supplier as $cs){
-                        if($cs->coach_supplier_id != $partner_id){
-                            //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
-                            $partner_array[] = $cs->coach_supplier_id;
+                    if($coach_group){
+                        $partner_array= array($partner_id);
+                        $group_array= array($user_subgroup);
+                        foreach(@$coach_supplier as $cs){
+                            foreach(@$coach_group as $cg){
+                            if($cs->coach_supplier_id != $partner_id){
+                                if($cg->subgroup_id != $user_subgroup){
+                                    //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
+                                    $partner_array[] = $cs->coach_supplier_id;
+                                    $group_array[] = $cg->subgroup_id;
+                                    }
+                                }
+                            }
                         }
-                    }
                     $this->db->where_in('c.partner_id', $partner_array);
+                    $this->db->where_in('c.subgroup_id', $group_array);
+                    }else{
+                        $partner_array= array($partner_id);
+                        foreach(@$coach_supplier as $cs){
+                            if($cs->coach_supplier_id != $partner_id){
+                                    //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
+                                    $partner_array[] = $cs->coach_supplier_id;
+                            }
+                        }
+                        $this->db->where_in('c.partner_id', $partner_array);
+                    }
                 }else{
                     $this->db->where('c.partner_id', $partner_id);
                 } 
-            
-
-
         }
        
         
@@ -333,50 +405,88 @@ class identity_model extends MY_Model {
         // }
         ///////////////////////////////////////////////
         return $this->db->get()->result();
-    }
-    
-    public function get_new_coach_identity_rescedule($partner_id = '', $coach_id='', $cert_studying = ''){       
+    }  
+
+    public function get_coach_identity_rescedule($partner_id = '', $cert_studying = ''){       
         
+        if(($this->uri->segment(1) == 'partner') && ($this->uri->segment(3) == 'reschedule')){
+            $subgroup_id = '';
+            $appointment_id = $this->uri->segment(4);
+
+            $student_id = $this->db->select('appointments.student_id as student_id')->from('appointments')->where('appointments.id',$appointment_id)->get()->result();
+            $student_id = $student_id[0]->student_id;
+
+            $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id')->from('user_profiles')->where('user_profiles.user_id',$student_id)->get()->result();
+            $user_subgroup = $user_subgroup[0]->subgroup_id;
+            $coach_group = $this->get_coach_group($user_subgroup);
+        }
+
+    
+
+//        $fullname = 'coach1';
+//        print_r($fullname); //exit;
         if(!$partner_id){
             $partner_id = $this->auth_manager->partner_id();
         }
+
+            $cert_studying = $this->db->select('user_profiles.cert_studying as cert_studying')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
+            $cert_studying = $cert_studying[0]->cert_studying;
+
+            if($this->auth_manager->role() == 'STD'){
+                $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
+                $user_subgroup = $user_subgroup[0]->subgroup_id;
+                $coach_group = $this->get_coach_group($user_subgroup);
+            }
 
         $coach_supplier = $this->get_coach_supplier($partner_id);
         
         $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.pt_score, d.teaching_credential, d.dyned_certification_level, d.year_experience, d.special_english_skill, d.higher_education, d.undergraduate, d.masters, d.phd, e.city, e.state, e.zip, e.country, e.address, h.token_for_student, h.token_for_group, i.timezone, c.coach_type_id as coach_type_id");
         $this->db->from('users a');
         $this->db->order_by("a.status", "desc");
-        $this->db->join('user_roles b', 'a.role_id = b.id', 'left');
-        $this->db->join('user_profiles c', 'a.id = c.user_id', 'left');
-        $this->db->join('user_educations d', 'a.id = d.user_id', 'left');
-        $this->db->join('user_geography e', 'a.id = e.user_id', 'left');
-        $this->db->join('coach_token_costs h', 'a.id = h.coach_id', 'left');
-        $this->db->join('timezones i', 'c.user_timezone = i.id', 'left');
+        $this->db->join('user_roles b', 'a.role_id = b.id');
+        $this->db->join('user_profiles c', 'a.id = c.user_id');
+        $this->db->join('user_educations d', 'a.id = d.user_id');
+        $this->db->join('user_geography e', 'a.id = e.user_id', 'full');
+        $this->db->join('coach_token_costs h', 'a.id = h.coach_id');
+        $this->db->join('timezones i', 'c.user_timezone = i.id');
         $this->db->order_by('c.fullname', 'asc');
-        $this->db->where('a.id !=', $coach_id);
+        $this->db->where('a.status', 'active');
   
         if($partner_id){
-       
-                
-                if(($this->auth_manager->role() == 'STD') || ($this->auth_manager->role() == 'SPR')){
+           
+                if(($this->auth_manager->role() == 'STD') || ($this->auth_manager->role() == 'SPR') || ($this->auth_manager->role() == 'PRT')){
                     //$this->db->where('c.partner_id', $partner_id);
-                    $partner_array= array($partner_id);
-                    foreach(@$coach_supplier as $cs){
-                        if($cs->coach_supplier_id != $partner_id){
-                            //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
-                            $partner_array[] = $cs->coach_supplier_id;
+                    if($coach_group){
+                        $partner_array= array($partner_id);
+                        $group_array= array($user_subgroup);
+                        foreach(@$coach_supplier as $cs){
+                            foreach(@$coach_group as $cg){
+                            if($cs->coach_supplier_id != $partner_id){
+                                if($cg->subgroup_id != $user_subgroup){
+                                    //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
+                                    $partner_array[] = $cs->coach_supplier_id;
+                                    $group_array[] = $cg->subgroup_id;
+                                    }
+                                }
+                            }
                         }
-                    }
                     $this->db->where_in('c.partner_id', $partner_array);
+                    $this->db->where_in('c.subgroup_id', $group_array);
+                    }else{
+                        $partner_array= array($partner_id);
+                        foreach(@$coach_supplier as $cs){
+                            if($cs->coach_supplier_id != $partner_id){
+                                    //$this->db->or_where('c.partner_id', $cs->coach_supplier_id);
+                                    $partner_array[] = $cs->coach_supplier_id;
+                            }
+                        }
+                        $this->db->where_in('c.partner_id', $partner_array);
+                    }
                 }else{
                     $this->db->where('c.partner_id', $partner_id);
-                } 
-            
-
-
+                }  
         }
-       
-        
+          
         $this->db->where('b.id', 2);
         
  
@@ -413,6 +523,15 @@ class identity_model extends MY_Model {
             $this->db->from('coach_supplier_relations csr');
             $this->db->join('student_supplier_relations ssr', 'csr.class_matchmaking_id = ssr.class_matchmaking_id');
             $this->db->where('ssr.student_supplier_id', $student_partner_id);
+
+            return $this->db->get()->result();
+        }
+
+        private function get_coach_group($student_group_id){
+            $this->db->select("cgr.subgroup_id");
+            $this->db->from('coach_group_relations cgr');
+            $this->db->join('student_group_relations sgr', 'cgr.class_matchmaking_id = sgr.class_matchmaking_id');
+            $this->db->where('sgr.subgroup_id', $student_group_id);
 
             return $this->db->get()->result();
         }

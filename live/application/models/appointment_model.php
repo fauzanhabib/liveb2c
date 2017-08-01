@@ -87,7 +87,7 @@ class appointment_model extends MY_Model {
         $stringtodate_to = date('Y-m-d', $min_to);
         $stringtotime_to = date('H:i:s', $min_to);
         
-        $this->db->select('ap.session, ap.downloadurl, ap.cch_attend, ap.std_attend, ap.id, ap.dupd, ap.date, ap.start_time, ap.end_time, ap.student_id, ap.status, up1.fullname as coach_name, up2.fullname as student_name, ap.coach_id, cr.rate, cr2.note, w.stream_url')
+        $this->db->select('ap.session, ap.downloadurl, ap.cch_attend, ap.std_attend, ap.id, ap.dupd, ap.date, ap.start_time, ap.end_time, ap.student_id, ap.status, up1.fullname as coach_name, up2.fullname as student_name, up2.cert_studying as student_goal, ap.coach_id, cr.rate, cr2.note, w.stream_url')
                 ->from($this->table . ' ap')
                 ->join('user_profiles up1', 'up1.user_id = ap.coach_id')
                 ->join('user_profiles up2', 'up2.user_id = ap.student_id')
@@ -148,10 +148,10 @@ class appointment_model extends MY_Model {
         $stringtodate_to = date('Y-m-d', $min_to);
         $stringtotime_to = date('H:i:s', $min_to);
         
-        $this->db->select('ap.id, ap.student_id, ap.coach_id, ap.date, ap.start_time, ap.end_time, ap.status, ap.dcrea, ap.dupd, ctc.token_for_student, we.status as webex_status, up.fullname as student_name, up2.fullname as coach_fullname')
+        $this->db->select('ap.id, ap.student_id, ap.coach_id, ap.date, ap.start_time, ap.end_time, ap.status, ap.dcrea, ap.dupd, ctc.token_for_student, up.fullname as student_name, up2.fullname as coach_fullname')
                 ->from($this->table . ' ap ')
                 ->join('coach_token_costs ctc', 'ap.coach_id = ctc.coach_id')
-                ->join('webex we', 'ap.id = we.appointment_id', 'left')
+                //->join('webex we', 'ap.id = we.appointment_id', 'left')
                 ->join('user_profiles up', "ap.student_id = up.user_id")
                 ->join('user_profiles up2', "ap.coach_id = up2.user_id") 
                 // ->where('ap.status', 'active')

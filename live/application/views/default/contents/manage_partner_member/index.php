@@ -83,14 +83,14 @@
                                 <td class="pad15">Phone</td>
                                 <td>
                                     <span class="r-only"><?php echo @$user->phone; ?></span>
-                                    <input name="phone" type="text" value="<?php echo @$user->phone; ?>" class="e-only" data-parsley-type="digits" required data-parsley-required-message="Please input partner’s admin phone number" data-parsley-type-message="Please input numbers only">
+                                    <input name="phone" type="text" value="<?php echo @$user->phone; ?>" class="e-only" data-parsley-type="digits" required data-parsley-required-message="Please input affiliate`s admin phone number" data-parsley-type-message="Please input numbers only">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="pad15">Skype ID</td>
                                 <td>
                                     <span class="r-only"><?php echo @$user->skype_id; ?></span>
-                                    <input name="skype_id" type="text" value="<?php echo @$user->skype_id; ?>" class="e-only" required data-parsley-required-message="Please input partner’s admin Skype-ID">
+                                    <input name="skype_id" type="text" value="<?php echo @$user->skype_id; ?>" class="e-only" required data-parsley-required-message="Please input affiliate`s admin Skype-ID">
                                 </td>
                             </tr>
                         </tbody>

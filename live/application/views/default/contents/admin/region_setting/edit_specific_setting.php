@@ -9,7 +9,7 @@
             <?php echo form_open_multipart('admin/region_setting/update_specific_setting/student/'.$region_data->id, 'id="form" role="form" class="pure-form pure-form-aligned padding15" data-parsley-validate'); ?>
             <div class="heading pure-g">
                 <div class="pure-u-12-24">
-                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">STUDENT PARTNER SETTING</h3>
+                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">STUDENT AFFILIATE SETTING</h3>
                 </div>
                 <div class="pure-u-12-24">
                     <div class="edit action-icon">
@@ -76,7 +76,7 @@
             <?php echo form_open_multipart('admin/region_setting/update_specific_setting/coach/'.$region_data->id, 'role="form" class="pure-form pure-form-aligned padding15"'); ?>
             <div class="heading pure-g">
                 <div class="pure-u-12-24">
-                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">COACH PARTNER SETTING</h3>
+                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">COACH AFFILIATE SETTING</h3>
                 </div>
                 <div class="pure-u-12-24">
                     <div class="edit action-icon">

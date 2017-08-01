@@ -248,6 +248,9 @@ class region extends MY_Site_Controller {
             'max_day_per_week' => $region_setting[0]->max_day_per_week,
             'max_token' => $region_setting[0]->max_token,
             'max_token_for_student' => $region_setting[0]->max_token_for_student,
+            'max_session_per_x_day' => $region_setting[0]->max_session_per_x_day,
+            'x_day' => $region_setting[0]->x_day,
+            'set_max_session' => $region_setting[0]->set_max_session,
             'status_set_setting' => $this->input->post('status_set_setting'),
             'type' => $region_setting[0]->type,
             'dcrea' => time(),
@@ -298,7 +301,31 @@ class region extends MY_Site_Controller {
         $data_admin = $this->identity_model->get_region_admin_identity($id);
 
         $id_regional = $data_admin[0]->id;
+        $submit = $this->input->post('_submit');
+                if($submit == 'SAVE'){
 
+                     $rules = array(
+                        array('field'=>'region', 'label' => 'region', 'rules'=>'trim|required|xss_clean|max_length[50]')
+                    );
+
+                    if (!$this->common_function->run_validation($rules)) {
+                        $this->messages->add(validation_errors(), 'warning');
+                        redirect('superadmin/region/detail/'.$id_regional);
+                        return;
+                    }
+                    $update_admin = $this->user_profile_model->where('user_id', $id_regional)->get();
+                    $data_region = ['region_id' => $this->input->post('region')];
+                    
+                    if (!$this->user_profile_model->update($update_admin->id, $data_region, TRUE)) {
+                        $this->messages->add(validation_errors(), 'warning');
+                        redirect('superadmin/region/detail/'.$id_regional);
+                        return;
+                    }
+                    $this->messages->add('Update Succeeded', 'success');
+                    redirect('superadmin/region/detail/'.$id_regional);
+                }
+                    
+                    
         // get info token
         $token = $this->user_token_model->select('token_amount')->where('user_id',$id_regional)->get();
 
@@ -425,11 +452,11 @@ class region extends MY_Site_Controller {
                 $this->db->trans_commit();
                 $this->messages->add('Deleted Succeeded', 'success');
             } else {
-                $this->messages->add('Please Move your supplier', 'error');
+                $this->messages->add('Please Move your affiliate', 'error');
 
             }
         } else {
-            $this->messages->add('Please select partner', 'error');
+            $this->messages->add('Please select affiliate', 'error');
         }
 
         redirect('superadmin/region/detail/'.$region_id);
@@ -571,7 +598,9 @@ class region extends MY_Site_Controller {
                     array('field'=>'max_day_per_week', 'label' => 'max_day_per_week', 'rules'=>'trim|required|xss_clean'),
                     array('field'=>'max_session_per_day', 'label' => 'max_session_per_day', 'rules'=>'trim|required|xss_clean'),
                     array('field'=>'max_token', 'label' => 'max_token', 'rules'=>'trim|required|xss_clean'),
-                    array('field'=>'max_token_for_student', 'label' => 'max_token_for_student', 'rules'=>'trim|required|xss_clean')
+                    array('field'=>'max_token_for_student', 'label' => 'max_token_for_student', 'rules'=>'trim|required|xss_clean'),
+                    array('field'=>'max_session_per_x_day', 'label' => 'max_session_per_x_day', 'rules'=>'trim|required|xss_clean'),
+                    array('field'=>'x_day', 'label' => 'x_day', 'rules'=>'trim|required|xss_clean')
                 );
 
             if (!$this->common_function->run_validation($rules)) {
@@ -596,6 +625,9 @@ class region extends MY_Site_Controller {
                 'max_session_per_day' => $this->input->post('max_session_per_day'),
                 'max_token' => $this->input->post('max_token'),
                 'max_token_for_student' => $this->input->post('max_token_for_student'),
+                'max_session_per_x_day' => $this->input->post('max_session_per_x_day'), 
+                'x_day' => $this->input->post('x_day'),
+                'set_max_session' => $this->input->post('set_max_session'),
                 
                 
             );
@@ -624,10 +656,133 @@ class region extends MY_Site_Controller {
        redirect('superadmin/region/setting/'.$id.'/'.$type);
     }
 
+    function refund_token($region_id){
+        $this->template->title = 'Refund Token';
+
+        $data_token_region = $this->db->select('token_amount')->from('user_tokens')->where('user_id', $region_id)->get()->result();
+
+        $data_token_refund = $this->db->select('token_amount, balance')
+                                  ->from('token_histories')
+                                  ->where('user_id', $region_id)
+                                  ->where('token_status_id',27)
+                                  ->order_by('id','desc')
+                                  ->get()->result();
+  
+        $token_region = @$data_token_region[0]->token_amount;
+
+        $token_amount = @$data_token_refund[0]->token_amount;
+        $balance = @$data_token_refund[0]->balance;
+
+        $status = '';
+        if($token_region == $balance){
+            $status = 1;
+        } 
+        if($token_region != $balance) {
+            $status = 0;
+        }
+        if(!$data_token_refund){
+            $status = 3;
+        }
+
+        $link = base_url().'index.php/superadmin/region/action_refund_token'.'/'.$region_id;
+        $cancel = base_url().'index.php/superadmin/region/detail/'.$region_id;
+
+        $vars = array('region_id' => $region_id,
+                     'status' => $status,
+                     'token_amount' => $token_amount,
+                     'link' => $link,
+                     'cancel' => $cancel);
+
+        $this->template->content->view('default/contents/managing/token/refund', $vars);
+        $this->template->publish();
+
+    }
+
+    function action_refund_token($region_id){
+        $old_data_token_region = $this->db->select('token_amount')->from('user_tokens')->where('user_id', $region_id)->get()->result();
+
+        $data_token_refund = $this->db->select('token_amount, balance')
+                                  ->from('token_histories')
+                                  ->where('user_id', $region_id)
+                                  ->where('token_status_id',27)
+                                  ->order_by('id','desc')
+                                  ->get()->result();
+  
+        $token_region = @$old_data_token_region[0]->token_amount;
+
+        $token_amount = @$data_token_refund[0]->token_amount;
+        $balance = @$data_token_refund[0]->balance;
+
+        // check apakah tokennya sama
+        
+        if($token_region != $balance) {
+            $this->messages->add('Your token failed refund ', 'warning');
+            redirect('superadmin/region/detail/'.$region_id);
+        }
+
+
+
+        // =====
+
+        // update token user
+        $token_update = $balance-$token_amount;
+
+        $data_users = array('token_amount' => $token_update,
+                                  'dcrea' => time(),
+                                  'dupd' => time()
+                                  );
+
+        $update_users_token = $this->db->where('user_id', $region_id)
+                                          ->update('user_tokens', $data_users);
+
+        $data_token_region = $this->db->select('token_amount')->from('user_tokens')->where('user_id', $region_id)->get()->result();
+
+        // insert into tabel token histories
+
+        $data_histories_token = array('balance' => $data_token_region[0]->token_amount,
+                                      'token_amount' => $token_amount,
+                                      'user_id' => $region_id,
+                                      'transaction_date' => time(),
+                                      'description' => 'Your tokens were refunded by Super admin',
+                                      'token_status_id' => 29);
+
+        $this->db->insert('token_histories', $data_histories_token);
+
+        // insert into table token_requests
+        $insert_table_req = array('approve_id' => $this->auth_manager->userid(),
+                                  'user_id' => $region_id,
+                                  'token_amount' => $token_amount,
+                                  'status' => 'refund',
+                                  'dcrea' => time(),
+                                  'dupd' => time());
+        $this->db->insert('token_requests',$insert_table_req);
+
+        // send notification and email
+        $partner_notification = array(
+            'user_id' => $region_id,
+            'description' => 'Your token has been refund. '.$token_amount.' by Super Admin',
+            'status' => 2,
+            'dcrea' => time(),
+            'dupd' => time(),
+        );
+
+
+         $this->db->trans_commit();
+
+        // messaging inserting data notification
+
+        $this->user_notification_model->insert($partner_notification);
+        $this->send_email->add_token($get_email[0]->email, $get_name[0]->fullname, $request_token, $get_email[0]->role_id, $get_name2[0]->fullname);
+
+        $this->messages->add('Your token success refund ', 'success');
+        redirect('superadmin/region/detail/'.$region_id);
+
+    }
+
     function add_token($region_id){
         $this->template->title = 'Add Tokens';
 
-        $link = base_url().'index.php/superadmin/region/action_add_token/'.'/'.$region_id;
+        $link = base_url().'index.php/superadmin/region/action_add_token'.'/'.$region_id;
         $cancel = base_url().'index.php/superadmin/region/detail/'.$region_id;
         $vars = array(
                 'link' => $link,
@@ -709,6 +864,18 @@ class region extends MY_Site_Controller {
                                   'dcrea' => time(),
                                   'dupd' => time());
         $this->db->insert('token_requests',$insert_table_req);
+
+        // insert into tabel token histories
+
+        $data_histories_token = array('balance' => $total_request_token,
+                                      'token_amount' => $request_token,
+                                      'user_id' => $region_id,
+                                      'transaction_date' => time(),
+                                      'description' => 'Your token has been added by your Super Admin',
+                                      'token_status_id' => 27);
+
+        $this->db->insert('token_histories', $data_histories_token);
+
 
         $this->db->trans_commit();
 

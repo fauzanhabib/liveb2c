@@ -34,7 +34,7 @@
                 </li>
                 <?php } ?>
                 <?php if($role_link == 'admin'){ ?>
-                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Partner</a></li>
+                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Affiliate</a></li>
 
                 <?php } ?>
                 <li><a href="#"><?php echo $partner->name;?></a></li>
@@ -72,9 +72,9 @@
 
     <div class="left-tabs pure-menu pure-menu-horizontal padding-t-17">
         <ul class="pure-menu-list padding-t-18 left">
-            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id);?>" class="pure-menu-link font-14">Partner Profile</a></li>
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.$region_id);?>" class="pure-menu-link font-14">Student Partner</a></li>
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.$region_id);?>" class="pure-menu-link font-14">Coach Partner</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id);?>" class="pure-menu-link font-14">Affiliate Profile</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.$region_id);?>" class="pure-menu-link font-14">Student Affiliate</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.$region_id);?>" class="pure-menu-link font-14">Coach Affiliate</a></li>
             <li class="pure-menu-item padding-tb-9 no-hover">
                 <?php if($role_link == 'superadmin'){ ?>
                 <a href="<?php echo site_url($role_link.'/region/detail/'.$region_id);?>">
@@ -242,21 +242,21 @@
                             <td class="pad15">Name</td>
                             <td>
                                 <span class="r-only"><?php echo @$partner->name; ?></span>
-                                <input name="name" type="text" value="<?php echo  @$partner->name; ?>" id="td_value_1_0" class="e-only" required data-parsley-required-message="Please input partner’s Name">
+                                <input name="name" type="text" value="<?php echo  @$partner->name; ?>" id="td_value_1_0" class="e-only" required data-parsley-required-message="Please input affiliate`s Name">
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">Address</td>
                             <td>
                                 <span class="r-only"><?php echo @$partner->address; ?></span>
-                                <input name="address" type="text" value="<?php echo  @$partner->address; ?>" class="e-only" required data-parsley-required-message="Please input partner’s Address">
+                                <input name="address" type="text" value="<?php echo  @$partner->address; ?>" class="e-only" required data-parsley-required-message="Please input affiliate`s Address">
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">City</td>
                             <td>
                                 <span class="r-only"><?php echo @$partner->city; ?></span>
-                                <input name="city" type="text" value="<?php echo  @$partner->city; ?>" id="td_value_1_2" class="e-only" required data-parsley-required-message="Please input partner’s City">
+                                <input name="city" type="text" value="<?php echo  @$partner->city; ?>" id="td_value_1_2" class="e-only" required data-parsley-required-message="Please input affiliate`s City">
                             </td>
                         </tr>
 
@@ -264,14 +264,14 @@
                             <td class="pad15">State</td>
                             <td>
                                 <span class="r-only"><?php echo @$partner->state; ?></span>
-                                <input name="state" type="text" value="<?php echo  @$partner->state; ?>" id="td_value_1_3" class="e-only" required data-parsley-required-message="Please input partner’s State">
+                                <input name="state" type="text" value="<?php echo  @$partner->state; ?>" id="td_value_1_3" class="e-only" required data-parsley-required-message="Please input affiliate`s State">
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">ZIP</td>
                             <td>
                                 <span class="r-only"><?php echo @$partner->zip; ?></span>
-                                <input name="zip" type="text" value="<?php echo  @$partner->zip; ?>" id="td_value_1_4" class="e-only" data-parsley-type="digits" required data-parsley-required-message="Please input partner’s ZIP code" data-parsley-type-message="Please input numbers only">
+                                <input name="zip" type="text" value="<?php echo  @$partner->zip; ?>" id="td_value_1_4" class="e-only" data-parsley-type="digits" required data-parsley-required-message="Please input affiliate`s ZIP code" data-parsley-type-message="Please input numbers only">
                             </td>
                         </tr>
                         <tr>
@@ -281,7 +281,7 @@
                                 <?php
                                     $country = array_column($option_country, 'name', 'name');
                                     $newoptions = array('' => '') + $country;
-                                    echo form_dropdown('country', $newoptions, @$partner->country, ' id="td_value_2_3" class="e-only" required data-parsley-required-message="Please select partner’s Country"'); 
+                                    echo form_dropdown('country', $newoptions, @$partner->country, ' id="td_value_2_3" class="e-only" required data-parsley-required-message="Please select affiliate`s Country"'); 
                                 ?>
                             </td>
                         </tr>

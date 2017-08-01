@@ -25,7 +25,7 @@ class member_list extends MY_Site_Controller {
     }
 
     public function subgroup(){
-        $this->template->title = "Subgroup";
+        $this->template->title = "Group";
 
         $partner_id = $this->auth_manager->partner_id();
         // =================
@@ -318,7 +318,7 @@ class member_list extends MY_Site_Controller {
         $insert_table_hist = array('user_id' => $student_id,
                                    'transaction_date' => time(),
                                    'token_amount' => $request_token,
-                                   'description' => 'Your Token has been added by your Student Partner',
+                                   'description' => 'Your Token has been added by your Student Affiliate',
                                    'token_status_id' => 15,
                                    'balance' => $total_request_token,
                                    'dcrea' => time(),

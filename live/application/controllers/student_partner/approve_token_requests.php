@@ -187,8 +187,9 @@ class approve_token_requests extends MY_Site_Controller {
                 'user_id' => $token_request->user_id,
                 'transaction_date' => time(),
                 'token_amount' => $token_request->token_amount,
-                'description' => 'Partner admin has declined your token request.',
+                'description' => 'Partner admin has declined you token request.',
                 'token_status_id' => 4,
+
                 'balance' => $token->token_amount,
             );
             $this->db->insert('token_histories',$token_history);
@@ -202,23 +203,6 @@ class approve_token_requests extends MY_Site_Controller {
             //                 );
 
             // $this->db->insert('token_requests',$data_token_request);
-            $partner_notification = array(
-                'user_id' => $token_request->user_id,
-                'description' => 'Your token request has been declined.',
-                'status' => 2,
-                'dcrea' => time(),
-                'dupd' => time(),
-            );
-            // coach's data for reminder messaging
-            // IMPORTANT : array index in content must be in mutual with table field in database
-            $data_partner = array(
-                'table' => 'user_notifications',
-                'content' => $partner_notification,
-            );
-
-            // messaging inserting data notification
-            $this->user_notification_model->insert($partner_notification);
-            
             $studentemail = $this->user_model->select('id, email')->where('id', $token_request->user_id)->get_all();
             $name = $this->user_profile_model->select('user_id, fullname')->where('user_id', $token_request->user_id)->get_all();
 

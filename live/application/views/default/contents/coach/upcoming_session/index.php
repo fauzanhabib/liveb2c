@@ -108,21 +108,7 @@
                                 <?php
                                     $defaultend  = strtotime($d->end_time);
                                     $endsession = $defaultend-(5*60);
-
-                                    $new_endtime = date("H:i", $endsession);
-                                    $cekmenit = date("i", $endsession);
-
-                                    $super_new_endtime = '';
-                                    if($cekmenit == 54){
-                                        $newtimestamp = strtotime('+1 minutes', strtotime($new_endtime));
-                                        $super_new_endtime = date("H:i",$newtimestamp);
-                                    } else {
-                                        $super_new_endtime = $new_endtime;
-                                    }
-
-
-
-                                    echo $super_new_endtime . " (UTC " . $new_gmt . " )"; 
+                                    echo date("H:i", $endsession) . " (UTC " . $new_gmt . " )"; 
                                 ?>
                                 </span>
                             </div>

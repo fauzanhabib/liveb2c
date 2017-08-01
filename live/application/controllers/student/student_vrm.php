@@ -60,32 +60,9 @@ class Student_vrm extends MY_Site_Controller {
                $callOneJson  = $this->call1->callOneJson();
                $student_vrm2 = $this->call2->getdataObj();
 
+               // echo "<pre>";print_r($student_vrm2);exit();
+
                $checkCallOne   = @$callOneJson->studentName;
-
-               if(!@$checkCallOne){
-                    $this->template->content->view('default/contents/vrm/student/noconnect');
-                    $this->template->publish();
-
-                    // exit(); 
-               }
-
-               $a1exist = @$student_vrm2->cert_level_completion->A1;
-               $a2exist = @$student_vrm2->cert_level_completion->A2;
-               $b1exist = @$student_vrm2->cert_level_completion->B1;
-               $b2exist = @$student_vrm2->cert_level_completion->B2;
-               $c1exist = @$student_vrm2->cert_level_completion->C1;
-               $c2exist = @$student_vrm2->cert_level_completion->C2;
-               
-               // echo "<pre>";
-               // print_r($student_vrm2->cert_level_completion->A1);exit();
-
-               if($a1exist == '' && $a2exist == '' && $b1exist == '' && $b2exist == '' && $c1exist == '' && $c2exist == ''){
-                $this->template->content->view('default/contents/vrm/student/nodata');
-                $this->template->publish(); 
-               }
-
-               else{
-
                if($checkCallOne){
                     $module_extract = $callOneJson->lessonCompletion;
                     // $placement_test = end(@$callOneJson->placementTestGENs);
@@ -1286,13 +1263,10 @@ class Student_vrm extends MY_Site_Controller {
                     'allmodule6'   => @$allmodule6
                 );
 
-               // echo "<pre>";
-               // print_r($vars);
-               // exit();
+               // echo "<pre>";print_r($vars);exit();
 
                 $this->template->content->view('default/contents/vrm/student/index', $vars);
                 $this->template->publish();   
-                }
             
         }
         else{

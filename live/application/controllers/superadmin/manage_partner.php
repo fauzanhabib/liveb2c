@@ -18,6 +18,7 @@ class manage_partner extends MY_Site_Controller {
         $this->load->model('identity_model');
         $this->load->model('creator_member_model');
         $this->load->model('user_token_model');
+        $this->load->model('user_geography_model');
         $this->load->model('token_request_model');
         $this->load->model('history_request_model');
         $this->load->model('subgroup_model');
@@ -34,6 +35,7 @@ class manage_partner extends MY_Site_Controller {
         // for messaging action and timing
         $this->load->library('queue');
         $this->load->library('send_email');
+        $this->load->library('send_sms');
 
         
         //checking user role and giving action
@@ -45,7 +47,7 @@ class manage_partner extends MY_Site_Controller {
 
     // Index
     public function index($page='') {
-        $this->template->title = 'Add Partner';
+        $this->template->title = 'Add Affiliate';
         
         $offset = 0;
         $per_page = 6;
@@ -64,7 +66,7 @@ class manage_partner extends MY_Site_Controller {
     }
 
     public function add_partner() {
-        $this->template->title = 'Add Partner';
+        $this->template->title = 'Add Affiliate';
         $id = $this->uri->segment(4);
         
         $region = $this->identity_model->get_region_admin_identity($id);
@@ -92,11 +94,11 @@ class manage_partner extends MY_Site_Controller {
         $data_profile_picture['profile_picture'] = $this->upload_path . $profile_picture['file_name'];
         $partner = $this->partner_model->select('id')->where('id', $id)->get();
         if (!$this->partner_model->update($partner->id, $data_profile_picture, TRUE)) {
-            $this->messages->add('Update Partner Profile Picture Failed', 'success');
+            $this->messages->add('Update Affiliate Profile Picture Failed', 'success');
             redirect('admin/manage_partner/edit_partner/'.$id);
         }
         
-        $this->messages->add('Partner Profile Picture has been Updated Successfully', 'success');
+        $this->messages->add('Affiliate Profile Picture has been Updated Successfully', 'success');
         redirect('admin/manage_partner/edit_partner/'.$id);
     }
     
@@ -188,13 +190,13 @@ class manage_partner extends MY_Site_Controller {
 
         $this->db->trans_commit();
 
-        $this->messages->add('Inserting Partner Succeeded', 'success');
+        $this->messages->add('Inserting Affiliate Succeeded', 'success');
         redirect('superadmin/region/detail/'.$id);
     }
 
 
     public function edit_partner($id = '') {
-        $this->template->title = 'Edit Partner';
+        $this->template->title = 'Affiliate Partner';
         $data = $this->partner_model->select('id, name, address, country, state, city, zip')->where('id', $id)->get();
         $vars = array(
             'data' => $data,
@@ -241,7 +243,7 @@ class manage_partner extends MY_Site_Controller {
         }
         $this->db->trans_commit();
 
-        $this->messages->add('Updating Partner Succeeded', 'success');
+        $this->messages->add('Updating Affiliate Succeeded', 'success');
         redirect('superadmin/manage_partner/detail/'.$id);
     }
 
@@ -263,12 +265,24 @@ class manage_partner extends MY_Site_Controller {
 
         $region_id = $this->auth_manager->region_id($partner);
 
-        $this->template->title = 'Add Partner Member';
+        $partner = $this->partner_model->select('id, name, address, country, state, city, zip')->where('id',$partner)->get_all();
+        $partner_country = $partner[0]->country;
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($partner_country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
+
+        $this->template->title = 'Add Affiliate Member';
         $vars = array(
             'selected' => $partner,
             'region_id' => $region_id,
             'partner' => $this->partner_model->where('name not like', 'No Partner')->dropdown('id', 'name'),
-            'form_action' => 'create_partner_member'
+            'form_action' => 'create_partner_member',
+            'option_country' => $this->common_function->country_code,
+            'partner_country' => $partner_country,
+            'dial_code' => $dial_code
         );
 
         $this->template->content->view('default/contents/manage_partner/add_partner_member/form', $vars);
@@ -283,6 +297,15 @@ class manage_partner extends MY_Site_Controller {
         }
         
         @$get_region_id = @$this->common_function->region_from_partner($this->input->post('partner_id'));
+
+        $partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$this->input->post('partner_id'))->get_all();
+        $partner_country = $partner[0]->country;
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($partner_country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
 
 
         // generating password
@@ -336,7 +359,7 @@ class manage_partner extends MY_Site_Controller {
 
             // check jika request melebihi maksimal
             if($request_token > $max_token_student_supplier){
-                $this->messages->add('Token Request exceeds the maximum, maximum token for student partner = '.$max_token_student_supplier, 'warning');
+                $this->messages->add('Token Request exceeds the maximum, maximum token for student affiliate = '.$max_token_student_supplier, 'warning');
                 redirect('superadmin/manage_partner/add_partner_member/'.$partner_id.'/student');
             }
 
@@ -372,6 +395,11 @@ class manage_partner extends MY_Site_Controller {
             return;
         }
 
+        $country_code = $this->input->post('dial_code');
+        $phone_number = $this->input->post('phone');
+        $phone = $country_code . $phone_number;
+        $full_number = substr($phone, 1);
+
         // Inserting user profile data
         $profile = array(
             'profile_picture' => 'uploads/images/profile.jpg', // default profile picture
@@ -380,7 +408,8 @@ class manage_partner extends MY_Site_Controller {
             'nickname' => $this->input->post('nickname'),
             'gender' => $this->input->post('gender'),
             'date_of_birth' => $this->input->post('date_of_birth'),
-            'phone' => $this->input->post('phone'),
+            'dial_code' => $country_code,
+            'phone' => $phone_number,
             'partner_id' => $this->input->post('partner_id'),
             'skype_id' => $this->input->post('skype_id'),
             'user_timezone' => 27,
@@ -394,6 +423,22 @@ class manage_partner extends MY_Site_Controller {
             $this->db->trans_rollback();
             $this->messages->add(validation_errors(), 'error');
             $this->add_partner_member($this->input->post('partner_id'));
+            return;
+        }
+
+        $geography = array(
+            'user_id' => $user_id,
+            'country' => $this->input->post('country')
+        );
+
+
+        // Inserting and checking to geography table then storing it into users_georaphy table
+        $geography_id = $this->user_geography_model->insert($geography);
+        
+        if (!$geography_id) {
+            $this->user_model->delete($user_id);
+            $this->messages->add(validation_errors(), 'danger');
+            $this->coach();
             return;
         }
 
@@ -464,7 +509,7 @@ class manage_partner extends MY_Site_Controller {
 
         $partner_notification = array(
             'user_id' => $user_id,
-            'description' => 'Hi '.$profile['fullname'].'. Welcome to DynEd Live, you have permission to access Dyned Live as Partner admin.',
+            'description' => 'Hi '.$profile['fullname'].'. Welcome to DynEd Live, you have permission to access Dyned Live as Affiliate admin.',
             'status' => 2,
             'dcrea' => time(),
             'dupd' => time(),
@@ -488,7 +533,7 @@ class manage_partner extends MY_Site_Controller {
         if($this->input->post('role_id') == 5){
             $region_notification = array(
                 'user_id' => $region_id,
-                'description' => 'New Student Partner created',
+                'description' => 'New Student Affiliate created',
                 'status' => 2,
                 'dcrea' => time(),
                 'dupd' => time(),
@@ -503,13 +548,25 @@ class manage_partner extends MY_Site_Controller {
 
             redirect('superadmin/manage_partner/partner/coach/'.$this->input->post('partner_id').'/'.@$get_region_id[0]->admin_regional_id);
         }
+        //$this->send_sms->create_partner($full_number, $this->input->post('fullname'), $this->input->post('email'));
+    }
 
+    public function dial_code(){
 
+        $country = $this->input->post('country');
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
+
+        echo $dial_code;
 
     }
 
     public function setting($id='', $type=''){
-        $this->template->title = 'Partner Setting';
+        $this->template->title = 'Affiliate Setting';
 
         $setting = $this->region_model->get_partner_specific_setting($id);
         $regionid = $this->auth_manager->region_id($id);
@@ -521,6 +578,9 @@ class manage_partner extends MY_Site_Controller {
         $max_day_per_week = $region_setting[0]->max_day_per_week;
         $max_token = $region_setting[0]->max_token;
         $max_token_for_student = $region_setting[0]->max_token_for_student;
+        // $max_session_per_x_day = $region_setting[0]->max_session_per_x_day;
+        // $x_day = $region_setting[0]->x_day;
+        $set_max_session = $region_setting[0]->set_max_session;
         $max_session_duration = $region_setting[0]->session_duration;
         $standard_coach_cost = $region_setting[0]->standard_coach_cost;
         $elite_coach_cost = $region_setting[0]->elite_coach_cost;
@@ -536,6 +596,9 @@ class manage_partner extends MY_Site_Controller {
                 'max_day_per_week' => $max_day_per_week,
                 'max_token' => $max_token,
                 'max_token_for_student' => $max_token_for_student,
+                // 'max_session_per_x_day' => $max_session_per_x_day, 
+                // 'x_day' => $x_day,
+                'set_max_session' => $set_max_session,
                 'max_session_duration' => $max_session_duration,
                 'standard_coach_cost' => $standard_coach_cost,
                 'elite_coach_cost' => $elite_coach_cost];
@@ -558,6 +621,9 @@ function update_setting($id) {
         $max_day_per_week = $region_setting[0]->max_day_per_week;
         $max_token = $region_setting[0]->max_token;
         $max_token_for_student = $region_setting[0]->max_token_for_student;
+        // $max_session_per_x_day = $region_setting[0]->max_session_per_x_day;
+        // $x_day = $region_setting[0]->x_day;
+        $set_max_session = $region_setting[0]->set_max_session;
         $max_session_duration = $region_setting[0]->session_duration;
         $standard_coach_cost = $region_setting[0]->standard_coach_cost;
         $elite_coach_cost = $region_setting[0]->elite_coach_cost;
@@ -569,6 +635,9 @@ function update_setting($id) {
             $update_max_session_per_day = $this->input->post('max_session_per_day');
             $update_max_token = $this->input->post('max_token');
             $update_max_token_for_student = $this->input->post('max_token_for_student');
+            // $update_max_session_per_x_day = $this->input->post('max_session_per_x_day');
+            // $update_x_day = $this->input->post('x_day');
+            $update_set_max_session = $this->input->post('set_max_session');
             $update_max_session_duration = $this->input->post('session_duration');
             $update_standard_coach_cost = $this->input->post('standard_coach_cost');
             $update_elite_coach_cost = $this->input->post('elite_coach_cost');
@@ -580,7 +649,9 @@ function update_setting($id) {
                     array('field'=>'max_student_supplier', 'label' => 'max_student_supplier', 'rules'=>'trim|required|xss_clean'),
                     array('field'=>'max_day_per_week', 'label' => 'max_day_per_week', 'rules'=>'trim|required|xss_clean'),
                     array('field'=>'max_session_per_day', 'label' => 'max_session_per_day', 'rules'=>'trim|required|xss_clean'),
-                    array('field'=>'max_token', 'label' => 'max_token', 'rules'=>'trim|required|xss_clean')
+                    array('field'=>'max_token', 'label' => 'max_token', 'rules'=>'trim|required|xss_clean'),
+                    // array('field'=>'max_session_per_x_day', 'label' => 'max_session_per_x_day', 'rules'=>'trim|required|xss_clean'),
+                    // array('field'=>'x_day', 'label' => 'x_day', 'rules'=>'trim|required|xss_clean')
             );
 
             if (!$this->common_function->run_validation($rules)) {
@@ -595,7 +666,7 @@ function update_setting($id) {
             }
 
             if($update_max_student_supplier > $max_student_supplier){
-                $message_setting = 'Max Student Supplier '.$max_student_supplier;
+                $message_setting = 'Max Student Affiliate '.$max_student_supplier;
                 $this->messages->add($message_setting, 'warning');
                 redirect('superadmin/manage_partner/setting/'.$id.'/student');
             }
@@ -624,7 +695,23 @@ function update_setting($id) {
                 redirect('superadmin/manage_partner/setting/'.$id.'/student');
             }
 
-        
+            // if($update_max_session_per_x_day > $max_session_per_x_day){
+            //     $message_setting = 'Max Session Per X Day '.$max_session_per_x_day;
+            //     $this->messages->add($message_setting, 'warning');
+            //     redirect('superadmin/manage_partner/setting/'.$id.'/student');
+            // }
+
+            // if($update_x_day > $x_day){
+            //     $message_setting = 'Max X Day '.$x_day;
+            //     $this->messages->add($message_setting, 'warning');
+            //     redirect('superadmin/manage_partner/setting/'.$id.'/student');
+            // }
+
+            // if($update_set_max_session != $set_max_session){
+            //     $message_setting = 'Max Session for Student is Set to '.$set_max_session;
+            //     $this->messages->add($message_setting, 'warning');
+            //     redirect('superadmin/manage_partner/setting/'.$id.'/student');
+            // }
 
             $setting = array(
                 'max_student_class' => $this->input->post('max_student_class'),
@@ -632,7 +719,10 @@ function update_setting($id) {
                 'max_day_per_week' => $this->input->post('max_day_per_week'),
                 'max_session_per_day' => $this->input->post('max_session_per_day'),
                 'max_token' => $this->input->post('max_token'),
-                'max_token_for_student' => $this->input->post('max_token_for_student')
+                'max_token_for_student' => $this->input->post('max_token_for_student'),
+                // 'max_session_per_x_day' => $this->input->post('max_session_per_x_day'), 
+                // 'x_day' => $this->input->post('x_day'),
+                'set_max_session' => $this->input->post('set_max_session'),
                          
             );
         } else if($this->input->post('__submit') == 'region_coach'){
@@ -694,7 +784,7 @@ function update_setting($id) {
 
     // Index
     public function list_partner_member($partner_id='',$region_id='') {
-        $this->template->title = 'List Partner Member';
+        $this->template->title = 'List Affiliate Member';
         
         if(!$partner_id){
             $this->messages->add('Invalid ID Partner', 'error');
@@ -717,7 +807,7 @@ function update_setting($id) {
 
     public function supplier($type='',$partner_id='',$region_id=''){
         if(!$partner_id){
-            $this->messages->add('Invalid ID Partner', 'error');
+            $this->messages->add('Invalid ID Affiliate', 'error');
             redirect('superadmin/manage_partner');
         }
         
@@ -738,8 +828,8 @@ function update_setting($id) {
     }
 
     public function partner($type='',$partner_id='',$region_id=''){
-        $this->template->title = ucfirst($type).' Partner';
-
+        $this->template->title = ucfirst($type).' Affiliate';
+        
         if(!$partner_id){
             $this->messages->add('Invalid ID Partner', 'error');
             redirect('superadmin/manage_partner');
@@ -767,10 +857,10 @@ function update_setting($id) {
         if($type == ''){
             $type="coach";
         }
-        $this->template->title = 'List Partner Member';
+        $this->template->title = 'List Affiliate Member';
         
         if(!$partner_id){
-            $this->messages->add('Invalid ID Partner', 'error');
+            $this->messages->add('Invalid ID Affiliate', 'error');
             redirect('superadmin/manage_partner');
         }
 
@@ -808,10 +898,10 @@ function update_setting($id) {
         if($type == ''){
             $type="coach";
         }
-        $this->template->title = 'List Partner Member';
+        $this->template->title = 'List Affiliate Member';
         
         if(!$partner_id){
-            $this->messages->add('Invalid ID Partner', 'error');
+            $this->messages->add('Invalid ID Affiliate', 'error');
             redirect('superadmin/manage_partner');
         }
 
@@ -851,10 +941,10 @@ function update_setting($id) {
         if($type == ''){
             $type="coach";
         }
-        $this->template->title = 'List Partner Member';
+        $this->template->title = 'List Affiliate Member';
         
         if(!$partner_id){
-            $this->messages->add('Invalid ID Partner', 'error');
+            $this->messages->add('Invalid ID Affiliate', 'error');
             redirect('superadmin/manage_partner');
         }
 
@@ -947,7 +1037,7 @@ function update_setting($id) {
         $partner = $this->identity_model->get_identity('profile')->where('user_id', $user_id)->get();
         if($this->identity_model->get_partner_identity($user_id, '', '', '')){
             if($this->user_model->delete($user_id)){
-                $this->messages->add('Delete Partner Member Succeeded', 'success');
+                $this->messages->add('Delete Affiliate Member Succeeded', 'success');
                 redirect('admin/manage_partner/list_partner_member/'.$partner->partner_id);
             }
             else{
@@ -1004,7 +1094,7 @@ function update_setting($id) {
     }
 
     public function detail($partner_id='',$region_id=''){
-        $this->template->title = 'Partner Detail';
+        $this->template->title = 'Affiliate Detail';
         if(!$partner_id){
             $this->messages->add('Invalid Action', 'warning');
             redirect('superadmin/manage_partner');
@@ -1132,7 +1222,12 @@ function update_setting($id) {
         $status_set_setting = $this->region_model->get_specific_setting($id_region);
         $status_set_setting = $status_set_setting[0]->status_set_setting;
 
-        $subgroup = $this->subgroup_model->select('*')->join('user_profiles','user_profiles.subgroup_id = subgroup.id')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','student')->group_by('subgroup.id')->get_all();
+        $subgroup = $this->subgroup_model->select('*')->join('user_profiles','user_profiles.subgroup_id = subgroup.id')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','student')->where('subgroup.id', $subgroup_id)->get_all();
+        if($subgroup){
+          $subgroup = $this->subgroup_model->select('*')->join('user_profiles','user_profiles.subgroup_id = subgroup.id')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','student')->where('subgroup.id', $subgroup_id)->get_all();
+        }else{
+            $subgroup = $this->subgroup_model->select('*')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','student')->where('subgroup.id', $subgroup_id)->get_all();
+        }
         $region_id = $this->auth_manager->region_id($partner_id);
         $offset = 0;
         $per_page = 6;
@@ -1184,8 +1279,12 @@ function update_setting($id) {
 
         $partner = $this->partner_model->select('*')->where('id',$partner_id)->get();
         
-        $subgroup = $this->subgroup_model->select('*')->join('user_profiles','user_profiles.subgroup_id = subgroup.id')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','coach')->group_by('subgroup.id')->get_all();
-
+        $subgroup = $this->subgroup_model->select('*')->join('user_profiles','user_profiles.subgroup_id = subgroup.id')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','coach')->where('subgroup.id', $subgroup_id)->get_all();
+        if($subgroup){
+          $subgroup = $this->subgroup_model->select('*')->join('user_profiles','user_profiles.subgroup_id = subgroup.id')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','coach')->where('subgroup.id', $subgroup_id)->get_all();
+        }else{
+            $subgroup = $this->subgroup_model->select('*')->where('subgroup.partner_id',$partner_id)->where('subgroup.type','coach')->where('subgroup.id', $subgroup_id)->get_all();
+        }
         $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('superadmin/manage_partner/member_of_coach/'.$status.'/'.$subgroup_id.'/'.$partner_id), count($this->user_profile_model->get_coaches($partner_id,$subgroup_id,$status)), $per_page, $uri_segment);
 
         $region_id = $this->auth_manager->region_id($partner_id);
@@ -1259,7 +1358,7 @@ function update_setting($id) {
 
     public function approve_coach($page=''){
 
-        $this->template->title = 'Approve Coach Partner';
+        $this->template->title = 'Approve Coach Affiliate';
         
         $offset = 0;
         $per_page = 6;
@@ -1282,7 +1381,7 @@ function update_setting($id) {
 
     public function approve_student($page=''){
 
-        $this->template->title = 'Approve Student Partner';
+        $this->template->title = 'Approve Student Affiliate';
         
         $offset = 0;
         $per_page = 6;
@@ -1418,7 +1517,7 @@ function update_setting($id) {
         if($type == 'student'){
             $partner_notification = array(
                 'user_id' => $partner->creator_id,
-                'description' => 'The student partner ' .$user_data->fullname. ' has been declined and your ' .$token_user. ' tokens have been refunded',
+                'description' => 'The student affiliate ' .$user_data->fullname. ' has been declined and your ' .$token_user. ' tokens have been refunded',
                 'status' => 2,
                 'dcrea' => time(),
                 'dupd' => time(),
@@ -1426,7 +1525,7 @@ function update_setting($id) {
         }elseif($type == 'coach'){
             $partner_notification = array(
                 'user_id' => $partner->creator_id,
-                'description' => 'The coach partner ' .$user_data->fullname. ' has been declined',
+                'description' => 'The coach affiliate ' .$user_data->fullname. ' has been declined',
                 'status' => 2,
                 'dcrea' => time(),
                 'dupd' => time(),

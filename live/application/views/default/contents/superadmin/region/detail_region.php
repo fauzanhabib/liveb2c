@@ -39,6 +39,12 @@
                 Add Token
             </button>
         </a>
+
+        <a href="<?php echo site_url('superadmin/region/refund_token/'.$data_admin[0]->id);?>">
+            <button class="btn-small border-1-grey bg-white-fff">
+                Refund Token
+            </button>
+        </a>
         <?php if($status_set_setting == 1){ ?>
         <a href="<?php echo site_url('superadmin/region/setting/'.$data_admin[0]->id);?>">
             <button class="btn-small border-1-grey bg-white-fff">
@@ -56,6 +62,12 @@
 
         <div class="content-title clear-both">
             <span class="">Basic Info</span>
+            <form action="<?php echo site_url('superadmin/region/detail/'.$data_admin[0]->id);?>" method="POST">
+            <div class="edit action-icon">
+                <button id="btn_save_info" name="_submit" value="SAVE" type="submit" class="pure-button btn-tiny btn-white-tertinary m-b-15 save_click asd">SAVE</button>
+                <i class="icon icon-close close_click" title="Cancel"></i>
+                <i class="icon icon-edit edit_click" title="Edit"></i>
+            </div>
         </div>
 
         <div class="pure-g padding-b-20">           
@@ -63,21 +75,37 @@
                 <table class="table-no-border2"> 
                     <tbody>
                         <tr>
-                            <td class="pad15">Admin Name</td>
+                            <td class="pad15">Region Name</td>
                             <td>
-                                <span class=""><?php echo $data_admin[0]->fullname;?></span>
+                                <span class="r-only"><?php echo $data_admin[0]->region_id;?></span>
+                                <input name="region" type="text" id="td_value_4_0" value="<?php echo @$data_admin[0]->region_id; ?>" class="e-only" required data-parsley-required-message="Admin name can’t be blank">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pad15">Admin Name</td>
+                            <td  class="r-only">
+                                <span><?php echo @$data_admin[0]->fullname; ?></span>
+                            </td>
+                            <td class="e-only" style="cursor:not-allowed;background: #ebebeb;color: #939393;padding-left: 5px;">
+                                <span><?php echo @$data_admin[0]->fullname; ?></span>
                             </td>
                         </tr>
                          <tr>
                             <td class="pad15">Email</td>
-                            <td>
-                                <span class=""><?php echo $data_admin[0]->email;?></span>
+                            <td  class="r-only">
+                                <span><?php echo @$data_admin[0]->email; ?></span>
+                            </td>
+                            <td class="e-only" style="cursor:not-allowed;background: #ebebeb;color: #939393;padding-left: 5px;">
+                                <span><?php echo @$data_admin[0]->email; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">Tokens</td>
-                            <td>
-                                <span class=""><?php echo $token->token_amount;?></span>
+                            <td  class="r-only">
+                                <span><?php echo @$token->token_amount; ?></span>
+                            </td>
+                            <td class="e-only" style="cursor:not-allowed;background: #ebebeb;color: #939393;padding-left: 5px;">
+                                <span><?php echo @$token->token_amount; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -124,8 +152,8 @@
                 ?>
 
 
-                    <div class="btn-noborder btn-normal bg-white left"><a href="<?php echo site_url($role_link.'/manage_partner/add_partner/'.$data_admin[0]->id);?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Partner</em></a></div>
-                    <button type="submit" name="_submit" class="btn-noborder btn-normal bg-white" onclick="return confirm('Are you sure you want to delete?')"><a><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Partner</em></a></button>
+                    <div class="btn-noborder btn-normal bg-white left"><a href="<?php echo site_url($role_link.'/manage_partner/add_partner/'.$data_admin[0]->id);?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Affiliate</em></a></div>
+                    <button type="submit" name="_submit" class="btn-noborder btn-normal bg-white" onclick="return confirm('Are you sure you want to delete?')"><a><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Affiliate</em></a></button>
                 </div>
 
                 <div class="padding-t-20">

@@ -46,7 +46,6 @@ class Live extends MY_Site_Controller {
         //         ->get()->result();
         
         // $minutes = $tz[0]->minutes;
-
         $tz    = $this->db->select('*')
                 ->from('user_timezones')
                 ->where('user_id', $id)

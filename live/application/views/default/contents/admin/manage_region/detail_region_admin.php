@@ -26,11 +26,11 @@
                 </div>
                 <?php
                     if(@$students && @$coaches){
-                        $type = "Student and Coach Supplier";
+                        $type = "Student and Coach Affiliate";
                     }elseif(@$students){
-                        $type = "Student Supplier";
+                        $type = "Student Affiliate";
                     }elseif(@$coaches){
-                        $type = "Coach Supplier";
+                        $type = "Coach Affiliate";
                     }
                 ?>
                 <div class="tag">
@@ -72,7 +72,7 @@
                             <td class="pad15">Name</td>
                             <td>
                                 <span class="r-only"><?php echo($data[0]->fullname);?></span>
-                                <input name="fullname" type="text" value="<?php echo($data[0]->fullname);?>" id="td_value_1_0" class="e-only" required data-parsley-required-message="Please input partner’s Name">
+                                <input name="fullname" type="text" value="<?php echo($data[0]->fullname);?>" id="td_value_1_0" class="e-only" required data-parsley-required-message="Please input affiliate`s Name">
                             </td>
                         </tr>
                         <tr>
@@ -102,7 +102,7 @@
                             <td class="pad15">Phone Number</td>
                             <td>
                                 <span class="r-only"><?php echo($data[0]->phone);?></span>
-                                <input name="phone" type="text" value="<?php echo($data[0]->phone);?>" id="td_value_1_5" class="e-only" required data-parsley-required-message="Please input partner’s State">
+                                <input name="phone" type="text" value="<?php echo($data[0]->phone);?>" id="td_value_1_5" class="e-only" required data-parsley-required-message="Please input affiliate`s State">
                             </td>
                         </tr>
                         
@@ -117,7 +117,7 @@
 <div class="box">
     <div class="heading">
         <div class="pure-u-12-24">
-            <h3 class="h3 font-normal padding15 text-cl-secondary">PARTNER</h3>
+            <h3 class="h3 font-normal padding15 text-cl-secondary">AFFILIATE</h3>
         </div>
         <div class="pure-u-12-24 text-right" style="margin: 15px -10px;">
             <a href="<?php echo site_url('admin/manage_region/detail_region_partner/'.$region_id.'/1');?>" class="pure-button btn-small btn-white availability"> VIEW ALL</a>

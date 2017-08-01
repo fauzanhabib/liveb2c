@@ -34,7 +34,7 @@
                 </li>
                 <?php } ?>
                 <?php if($role_link == 'admin'){ ?>
-                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Partner</a></li>
+                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Affiliate</a></li>
                 <?php } ?>
                 <li><a href="#"><?php echo $partner->name;?></a></li>
 
@@ -54,13 +54,13 @@
 
     <div class="left-tabs pure-menu pure-menu-horizontal padding-t-17 padding-l-170">
         <ul class="pure-menu-list padding-t-18">
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Partner Profile</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Affiliate Profile</a></li>
             <?php if($type == "student") { ?>
-            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Partner</a></li>
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Partner</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Affiliate</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Affiliate</a></li>
             <?php } else if ($type == "coach") { ?>
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Partner</a></li>
-            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Partner</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Affiliate</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Affiliate</a></li>
             <?php } ?>
             <li class="pure-menu-item padding-tb-9 no-hover">
                 <a href="<?php echo $back;?>">
@@ -147,9 +147,9 @@
                     </g>
                     </svg>
                     <?php if($type == "coach") { ?>
-                    Coach Supplier's Admin
+                    Coach Affiliate's Admin
                     <?php } elseif($type == "student") { ?>
-                    Student Supplier's Admin
+                    Student Affiliate's Admin
                     <?php } ?>
                 </a>
                 </li>
@@ -215,7 +215,7 @@
                             <!-- <th class="bg-secondary bg-none text-cl-white border-none" style=""></th> -->
                             <?php } ?>
                             <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">No</th>
-                            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Subgroup</th>
+                            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Group</th>
                             </tr>
                     </thead>
                     <tbody>
@@ -230,7 +230,7 @@
                                 </td> -->
                             <?php } ?>
                             <td><?php echo $a; ?></td>
-                            <td><a href="<?php echo site_url($role_link.'/manage_partner/member_of_'.$type.'/active/'.$s->id.'/'.$partner_id);?>" class="status-disable bg-green text-cl-white"><?php echo $s->name?></a></td>
+                            <td><a href="<?php echo site_url($role_link.'/manage_partner/member_of_'.$type.'/active/'.$s->id.'/'.$partner_id);?>" class="text-cl-tertiary"><u><?php echo $s->name?></u></a></td>
                                    
                          </tr>
                         <?php $no++; $a++; } ?>
@@ -255,9 +255,9 @@
                     </select>
                 </li>
                 <li class="pure-menu-item bg-green box-but-noBtn padding-t-b-5 border-l-5 no-hover">
-                    Choose Partners &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Choose Affiliates &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <select id="state" name="move_partner" class="get_partner pure-input-1-2 text-cl-grey font-14">
-                        <option value="">Select Partner</option>
+                        <option value="">Select Affiliate</option>
                     </select>
                 </li>
 

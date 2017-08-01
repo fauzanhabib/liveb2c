@@ -86,12 +86,12 @@
                             </div>
                         </div>
                         <?php
-                        $pc_mt = $student_vrm2->mt->percent_to_goal;
-                        $pc_rp = $student_vrm2->repeats->percent_to_goal;
-                        $pc_hp = $student_vrm2->headphone->percent_to_goal;
-                        $pc_sp = $student_vrm2->mic->percent_to_goal;
-                        $pc_sr = $student_vrm2->sr->percent_to_goal;
-                        $pc_wss = $student_vrm2->wss->percent_to_goal;
+                        $pc_mt = @$student_vrm2->mt->percent_to_goal;
+                        $pc_rp = @$student_vrm2->repeats->percent_to_goal;
+                        $pc_hp = @$student_vrm2->headphone->percent_to_goal;
+                        $pc_sp = @$student_vrm2->mic->percent_to_goal;
+                        $pc_sr = @$student_vrm2->sr->percent_to_goal;
+                        $pc_wss = @$student_vrm2->wss->percent_to_goal;
 
                         $val_mt = $student_vrm2->mt->raw_value;
                         $val_rp = $student_vrm2->repeats->raw_value;

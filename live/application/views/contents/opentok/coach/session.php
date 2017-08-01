@@ -749,6 +749,11 @@ div.panel.show {
     <div class="heading" id="heading1" style="background: #d3ffe6;border-left: solid 5px #4fa574">
       <div id="waiting" style="color: #419c68;font-weight: 400;">
         Waiting for <b><?php echo $student_name; ?></b> to join the session. Remain in the session until the end to receive your tokens.
+        <!-- <?php if($total_sec <= 300) {?>
+        If <b><?php echo $student_name; ?></b> isn't connected, <br>you have to wait until the end of session in case <b><?php echo $student_name; ?></b> shows up. And you will get your token at the end of session.
+        <?php } else{ ?>
+          Remain in the session until the end to receive your tokens.
+        <?php } ?> -->
       </div>
     </div>
     <div class="heading hidden" id="heading2" style="background: #ffe9e9;border-left: solid 5px #c87373;">

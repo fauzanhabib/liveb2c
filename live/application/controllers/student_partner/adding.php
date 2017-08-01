@@ -36,6 +36,7 @@ class adding extends MY_Site_Controller {
         $this->load->library('email_structure');
         $this->load->library('send_email');
         $this->load->library('send_sms');
+        $this->load->library('common_function');
 
         //checking user role and giving action
         if (!$this->auth_manager->role() || $this->auth_manager->role() != 'SPR') {
@@ -429,7 +430,7 @@ class adding extends MY_Site_Controller {
         // $this->send_email->notif_admin($adminmail, $password,'created', $this->input->post('fullname'), 'student');
 
         //sms
-        //$this->send_sms->testing($full_number, $this->input->post('fullname'), $this->input->post('email'));
+        //$this->send_sms->create_student($full_number, $this->input->post('fullname'), $this->input->post('email'));
 
        
 

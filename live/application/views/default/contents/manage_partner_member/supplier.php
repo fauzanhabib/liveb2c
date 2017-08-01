@@ -41,7 +41,7 @@
                 </li>
                 <?php } ?>
                 <?php if($role_link == 'admin'){ ?>
-                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Partner</a></li>
+                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Affiliate</a></li>
                 <?php } ?>
                 <li><a href="#"><?php echo ucfirst($partner->name);?></a></li>
 <!--                 <li>
@@ -65,13 +65,13 @@
 
     <div class="left-tabs pure-menu pure-menu-horizontal padding-t-17 padding-l-170">
         <ul class="pure-menu-list padding-t-18">
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Partner Profile</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Affiliate Profile</a></li>
             <?php if($type == "student") { ?>
-            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Partner</a></li>
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Partner</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Affiliate</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Affiliate</a></li>
             <?php } else if ($type == "coach") { ?>
-            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Partner</a></li>
-            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Partner</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-tertiary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/student/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Student Affiliate</a></li>
+            <li class="pure-menu-item padding-tb-9 bg-primary font-semi-bold"><a href="<?php echo site_url($role_link.'/manage_partner/partner/coach/'.$partner_id.'/'.@$region_id);?>" class="pure-menu-link font-14">Coach Affiliate</a></li>
             <?php } ?>
             <li class="pure-menu-item padding-tb-9 no-hover">
                 <a href="<?php echo $back;?>">
@@ -158,9 +158,9 @@
                         </g>
                         </svg>
                         <?php if($type == "coach") { ?>
-                        Coach Partner's Admin
+                        Coach Affiliate's Admin
                         <?php } elseif($type == "student") { ?>
-                        Student Partner's Admin
+                        Student Affiliate's Admin
                         <?php } ?>
                     </a>
                 </li>
@@ -198,7 +198,7 @@
         </div>
 
         <div class="delete-add-btn right">
-            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url($role_link.'/manage_partner/add_partner_member/'. @$partner->id.'/'.@$type); ?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Partner</em></a></div>
+            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url($role_link.'/manage_partner/add_partner_member/'. @$partner->id.'/'.@$type); ?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Affiliate's Admin</em></a></div>
         </div>
 
         <div class="box clear-both">
@@ -225,6 +225,12 @@
                                     ADD TOKEN
                                 </div>
                             </a>
+
+                            <div class="more pure-u-1 width50perc padding-t-10 list-partner">
+                                <a href="<?php echo site_url('admin/manage_partner/refund_token/'.$user->id.'/'.$partner_id);?>" class="pure-button btn-green btn-small width100perc text-cl-white">
+                                    REFUND TOKEN
+                                </a>
+                            </div>
                             <?php } ?>
                             
                             <div class="more pure-u-1 width50perc padding-t-10 list-partner">
@@ -260,7 +266,8 @@
                                                 <span><?php echo @$user->email; ?></span>
                                             </td>
                                         </tr>
-                                        <td class="pad15">Birthdate</td>
+                                        <tr>
+                                            <td class="pad15">Birthdate</td>
                                             <td>
                                                 <span class="r-only"><?php echo @$user->date_of_birth; ?></span>
                                                 <input name="date_of_birth" type="text" value="<?php echo @$user->date_of_birth; ?>" class="e-only datepicker" required readonly>
@@ -269,16 +276,18 @@
                                         
                                         <tr>
                                             <td class="pad15">Phone</td>
-                                            <td>
-                                                <span class="r-only"><?php echo @$user->phone; ?></span>
-                                                <input name="phone" type="text" value="<?php echo @$user->phone; ?>" class="e-only" data-parsley-type="digits" required data-parsley-required-message="Please input partner’s admin phone number" data-parsley-type-message="Please input numbers only">
+                                            <td class="flex width100perc">
+                                                <span class="r-only"> <?php echo  @$user->dial_code;?></span>
+                                                <span class="r-only"><?php echo @$user->phone;?></span>
+                                                <!-- <input type="text" name="dial_code" value="<?php echo @$user->dial_code;?>" class="e-only pure-input-1-20" style="margin-right:1px;" readonly> -->
+                                                <input name="phone" type="text" value="<?php echo @$user->phone; ?>" class="e-only" style="width:80%" data-parsley-type='digits' required data-parsley-required-message="Please input affiliate`s phone number" data-parsley-type-message="Please input numbers only">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="pad15">Skype ID</td>
                                             <td>
                                                 <span class="r-only"><?php echo @$user->skype_id; ?></span>
-                                                <input name="skype_id" type="text" value="<?php echo @$user->skype_id; ?>" class="e-only" required data-parsley-required-message="Please input partner’s admin Skype-ID">
+                                                <input name="skype_id" type="text" value="<?php echo @$user->skype_id; ?>" class="e-only" required data-parsley-required-message="Please input affiliate`s admin Skype-ID">
                                             </td>
                                         </tr>
                                         <?php if($type == "student") { 

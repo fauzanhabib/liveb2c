@@ -22,7 +22,7 @@ class coach_day_off_model extends MY_Model {
         $this->db->from('coach_dayoffs cd');
         $this->db->join('user_profiles up', 'cd.coach_id = up.user_id');
         $this->db->where('up.partner_id', $partner_id);
-        $this->db->where('cd.status', 'pending');
+        $this->db->where('cd.status', 'pending')->or_where('cd.status', 'booked');
         if ($coach_id){
             $this->db->where('cd.coach_id', $coach_id);
         }

@@ -60,7 +60,7 @@ class user_model extends MY_Model {
             @$ntype = 3;
         }
 
-        $this->db->select('u.id, u.email, up.profile_picture, up.fullname, up.gender, up.date_of_birth, up.phone, up.skype_id, up.dyned_pro_id, p.name as partner_name, ur.code as role, ur.id as partner_type')
+        $this->db->select('u.id, u.email, up.profile_picture, up.fullname, up.gender, up.date_of_birth, up.dial_code, up.phone, up.skype_id, up.dyned_pro_id, p.name as partner_name, ur.code as role, ur.id as partner_type')
                 ->from($this->table . ' u')
                 ->join('user_profiles up', 'up.user_id = u.id')
                 ->join('partners p', 'up.partner_id = p.id')

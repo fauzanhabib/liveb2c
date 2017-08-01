@@ -1,6 +1,6 @@
 <div class="heading text-cl-primary padding15">
 
-    <h1 class="margin0">Partner Setting</h1>
+    <h1 class="margin0">Affiliate Setting</h1>
 </div>
 
 <div class="box">
@@ -8,8 +8,8 @@
 
         <div class="left-list-tabs pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list margin-left70">
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Student Supplier</a></li>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5">Coach Supplier</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Student Affiliate</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5">Coach Affiliate</a></li>
             </ul>
         </div>
 
@@ -26,7 +26,7 @@
             <div class="sess-duration pure-g width90perc margin-auto">
                 <div class="grids pure-u-md-1-24"></div>
                 <div class="grids pure-u-md-10-24 padding-t-12 font-semi-bold">
-                    Maximum Tokens for Student Supplier
+                    Maximum Tokens for Student Affiliate
                 </div>
                 <div class="grids pure-u-md-8-24 padding-t-12">
                     <span class="r-only"><?php echo(@$data[0]->max_token); ?></span>
@@ -38,7 +38,7 @@
             <div class="sess-duration pure-g margin0 width90perc margin-auto">
                 <div class="grids pure-u-md-1-24"></div>
                 <div class="grids pure-u-md-10-24 padding-t-12 font-semi-bold">
-                    Set Maximum Token Per Student in Student Suppliers 
+                    Set Maximum Token Per Student in Student Affiliate 
                 </div>
                 <div class="grids pure-u-md-8-24 padding-t-12">
                     <span class="r-only"><?php echo(@$data[0]->max_token_for_student); ?></span>
@@ -63,7 +63,7 @@
             <div class="sess-duration pure-g margin0 width90perc margin-auto">
                 <div class="grids pure-u-md-1-24"></div>
                 <div class="grids pure-u-md-10-24 padding-t-12 font-semi-bold">
-                    Maximum Student for Student Supplier
+                    Maximum Student for Student Affiliate
                 </div>
                 <div class="grids pure-u-md-8-24 padding-t-12">
                     <span class="r-only"><?php echo(@$data[0]->max_student_supplier); ?></span>

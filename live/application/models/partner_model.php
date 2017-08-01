@@ -42,6 +42,26 @@ class partner_model extends MY_Model {
             return $this->db->get()->result();
         }
 
+        public function get_student_group($id = ''){
+            $this->db->select("s.id, s.name, s.type, s.partner_id");
+            $this->db->from('subgroup s');
+            $this->db->where('s.type', 'student');
+            if($id){
+                $this->db->where_in('s.partner_id', $id);
+            }
+            return $this->db->get()->result();
+        }
+        
+         public function get_coach_group($id = ''){
+            $this->db->select("s.id, s.name, s.type, s.partner_id");
+            $this->db->from('subgroup s');
+            $this->db->where('s.type', 'coach'); 
+            if($id){
+                $this->db->where_in('s.partner_id', $id);
+            }
+            return $this->db->get()->result();
+        }
+
         public function get_id_region($partner_id){
             $this->db->select('admin_regional_id as id_region');
             $this->db->from('partners');

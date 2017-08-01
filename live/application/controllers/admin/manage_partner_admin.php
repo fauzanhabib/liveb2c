@@ -29,7 +29,7 @@ class manage_partner_admin extends MY_Site_Controller {
 
     // Index
     public function index($page='') {
-        $this->template->title = 'Add Partner';
+        $this->template->title = 'Add Affiliate';
         
         $offset = 0;
         $per_page = 6;
@@ -47,7 +47,7 @@ class manage_partner_admin extends MY_Site_Controller {
     }
     
     public function edit($partner_id='', $user_id=''){
-        $this->template->title = 'Edit Partner Admin';
+        $this->template->title = 'Edit Affiliate Admin';
         $data = $this->user_model->get_partner_members($partner_id, $user_id);
         $partner = $this->partner_model->select('*')->where('id', $partner_id)->get();
         if(!$partner || !$data){
@@ -81,9 +81,9 @@ class manage_partner_admin extends MY_Site_Controller {
         if($role_link == 'superadmin'){
             $regional_id = $this->db->select('admin_regional_id')->from('partners')->where('id',$partner_id)->get()->result();
             $admin_regional_id = $regional_id[0]->admin_regional_id;
-            $link_redirect = 'superadmin/manage_partner/partner/'.$type.'/'.$partner_id.'/'.$admin_regional_id;
+            $link_redirect = 'superadmin/manage_partner/supplier/'.$type.'/'.$partner_id.'/'.$admin_regional_id;
         } else if($role_link == 'admin'){
-            $link_redirect = 'admin/manage_partner/partner/'.$type.'/'.$partner_id.'/'.@$user_id;
+            $link_redirect = 'admin/manage_partner/partner/'.$type.'/'.$partner_id;
         }
 
 
@@ -108,6 +108,7 @@ class manage_partner_admin extends MY_Site_Controller {
             'user_id' => $user_id,
             'date_of_birth' => $this->input->post('date_of_birth'),
             'phone' => $this->input->post('phone'),
+            'dial_code' => $this->input->post('dial_code'),
             'skype_id' => $this->input->post('skype_id')
         );
 

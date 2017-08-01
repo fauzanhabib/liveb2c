@@ -40,6 +40,8 @@ class adding extends MY_Site_Controller {
         $this->load->library('phpass');
         $this->load->library('email_structure');
         $this->load->library('send_email');
+        $this->load->library('send_sms');
+        $this->load->library('common_function');
 
         date_default_timezone_set('Etc/GMT+0');
 
@@ -242,13 +244,26 @@ class adding extends MY_Site_Controller {
         $timezones = $this->timezone_model->where_not_in('minutes',array('-210','330','570',))->dropdown('id', 'timezone');
         $coach_type = $this->db->select('*')->from('coach_type')->get();
 
+        $id_partner = $this->auth_manager->partner_id($id);
         
+        $partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$id_partner)->get_all();
+        $partner_country = $partner[0]->country;
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($partner_country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
+
         $vars = array(
             'form_action' => 'create_coach',
             'subgroup' => $subgroup,
             'timezones' => $timezones,
             'coach_type' => $coach_type,
-            'server_code' => $this->common_function->server_code()
+            'server_code' => $this->common_function->server_code(),
+            'option_country' => $this->common_function->country_code,
+            'partner_country' => $partner_country,
+            'dial_code' => $dial_code
         );
         $this->template->content->view('default/contents/adding/coach/form', $vars);
         $this->template->publish();
@@ -261,6 +276,17 @@ class adding extends MY_Site_Controller {
             redirect('partner/member_list/coach');
         }
 
+        $id = $this->auth_manager->userid();
+        $id_partner = $this->auth_manager->partner_id($id);
+
+        $partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$id_partner)->get_all();
+        $partner_country = $partner[0]->country;
+
+        $option_country = $this->common_function->country_code;
+        $code = array_column($option_country, 'dial_code', 'name');
+        $newoptions = $code;
+        $arsearch = array_search($partner_country, array_column($option_country, 'name'));
+        $dial_code = $option_country[$arsearch]['dial_code'];
 
         $rules = array(
             array('field'=>'fullname', 'label' => 'Name', 'rules'=>'trim|required|xss_clean|max_length[150]'),
@@ -322,6 +348,10 @@ class adding extends MY_Site_Controller {
             return;
         }
 
+        $country_code = $this->input->post('dial_code');
+        $phone_number = $this->input->post('phone');
+        $phone = $country_code . $phone_number;
+        $full_number = substr($phone, 1);
 
         // Inserting user profile data
         $user_id_to_partner_id = $this->identity_model->get_identity('profile')->dropdown('user_id', 'partner_id');
@@ -332,9 +362,10 @@ class adding extends MY_Site_Controller {
             'nickname' => $this->input->post('nickname'),
             'gender' => $this->input->post('gender'),
             'date_of_birth' => $this->input->post('date_of_birth'),
-            'phone' => $this->input->post('phone'),
+            'dial_code' => $country_code,
+            'phone' => $phone_number,
             'partner_id' => $this->auth_manager->partner_id(),
-            'user_timezone' => 27,
+            'user_timezone' => $this->input->post('user_timezone'),
             'subgroup_id' => $this->input->post('subgroup'),
             'dyned_pro_id' => $this->input->post('email_pro_id'),
             'server_dyned_pro' => $this->input->post('server_dyned_pro'),
@@ -512,6 +543,7 @@ class adding extends MY_Site_Controller {
 
         $this->send_email->create_user($this->input->post('email'), $password,'created', $this->input->post('fullname'), 'coach', $partnername);
         $this->send_email->notif_admin($adminmail, $password,'created', $this->input->post('fullname'), 'coach', $adminname);
+        //$this->send_sms->create_coach($full_number, $this->input->post('fullname'), $this->input->post('email'));
 
 
 

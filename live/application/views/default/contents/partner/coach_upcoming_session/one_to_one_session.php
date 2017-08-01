@@ -121,7 +121,28 @@
                                 $dat = date('Y-m-d', strtotime(@$d->date));
                                 $dat_now = date('Y-m-d');
 
-                                if($dat > $dat_now){
+                                // jam sekarang
+                                $minutes = $this->identity_model->new_get_gmt($coach_id)[0]->minutes;
+
+                                date_default_timezone_set('UTC');
+                                $hours     = date('H:i:s');
+                                $default_hours  = strtotime($hours);
+                                $usertime_hours = $default_hours+(60*$minutes);
+                                $hour_now = date("Y-m-d H:i:s", $usertime_hours); 
+                                
+                                $user_end_date = date('Y-m-d', strtotime($d->date));
+                                $user_end_time = date('H:i:s',strtotime($d->start_time));
+                                $user_time_final = $user_end_date." ".$user_end_time;
+
+                                $p1 = strtotime($hour_now);
+                                $p2 = strtotime($user_time_final); 
+
+                                $h = abs($p2-$p1)/(60*60);
+                                
+                              // =====
+
+                                // if($dat > $dat_now){
+                                if($h > 24){
 
                                 $appointmen_id = $d->id;
                                 $sqla = $this->db->select('id')
@@ -140,7 +161,11 @@
                                 <div class="b-50">
                                     <a class="reschedule-session text-cl-green">Already Rescheduled</a>
                                 </div>
-                                <?php } } ?>
+                                <?php } } else { ?>
+                                <div class="b-50">
+                                    <a class="pure-button btn-medium btn-grey rescheduled" style="cursor:not-allowed">Reschedule</a>
+                                </div>
+                                <?php } ?>
                               <!--   <div class="b-50">
                                     <a onclick="confirmation('<?php echo site_url('partner/managing/cancel/'. $d->student_id . '/' . $d->id); ?>', 'group', 'Cancel', 'list-session', 'cancel');" class="pure-button btn-medium btn-red cancel">CANCEL</a>
                                 </div> -->

@@ -39,6 +39,17 @@
                 <div class="content-title padding-t-25">
                     One-To-One-Sessions
                 </div>
+                
+                <div class="content-title padding-t-25">
+                    <?php
+                    $arr_mess = @$this->session->flashdata('booking_message');
+                    if($arr_mess){
+                        foreach ($arr_mess as $key_mess) {
+                            echo "- ".$key_mess."<br />";
+                        }
+                    }
+                    ?>
+                </div>
                 <script>
                         $(document).ready(function() {
                             $('#userTable').DataTable( {
@@ -111,32 +122,38 @@
                                         $time = strtotime($get_endtime);
                                         $time = $time - (5 * 60);
                                         $new_endtime = date("H:i", $time);
-                                        $cekmenit = date("i", $time);
-
-                                        $super_new_endtime = '';
-                                        if($cekmenit == 54){
-                                            $newtimestamp = strtotime('+1 minutes', strtotime($new_endtime));
-                                            $super_new_endtime = date("H:i",$newtimestamp);
-                                        } else {
-                                            $super_new_endtime = $new_endtime;
-                                        }
-
-
                                     ?>
-                                    <span class="text-cl-white"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo($super_new_endtime);?> (UTC <?php echo $new_gmt;?>)</span>
+                                    <span class="text-cl-white"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo($new_endtime);?> (UTC <?php echo $new_gmt;?>)</span>
                                 </div>
                               
                             </td>
                               <?php
-                                    $date1 = date('Y-m-d', strtotime($d->date));
-                                    $date2 = date('Y-m-d');
+                              // jam sekarang
+                                date_default_timezone_set('UTC');
+                                $hours     = date('H:i:s');
+                                $default_hours  = strtotime($hours);
+                                $usertime_hours = $default_hours+(60*$minutes);
+                                $hour_now = date("Y-m-d H:i:s", $usertime_hours); 
+                                
+                                $user_end_date = date('Y-m-d', strtotime($d->date));
+                                $user_end_time = date('H:i:s',strtotime($d->start_time));
+                                $user_time_final = $user_end_date." ".$user_end_time;
+                              // =====
 
-                                      $datetime1 = new DateTime($date1);
-                                      $datetime2 = new DateTime($date2);
+                                    // $date1 = date('Y-m-d H:i', strtotime($d->date));
+                                    // $date2 = date('Y-m-d H:i');
+
+                                      $datetime1 = new DateTime($hour_now);
+                                      $datetime2 = new DateTime($user_time_final);
                                       $difference = $datetime1->diff($datetime2);
-                                    
-                                    if($difference->days > 2){
 
+                                      $p1 = strtotime($hour_now);
+                                      $p2 = strtotime($user_time_final); 
+
+                                      $h = abs($p2-$p1)/(60*60);
+                                      
+                                      // if(($difference->days > 0) && ($hour_now > date('H:i',strtotime($d->start_time))) ){
+                                      if($h > 24){
                                 ?>
                             <td class="reschedule margin-auto padding-10-15 sm-12">
                                 <?php
@@ -154,17 +171,19 @@
                                 if(!$sqla){
 
                                 ?>
-                                    <a class="pure-button btn-medium btn-white rescheduled" onclick="confirmation('<?php echo(site_url('student/manage_appointments/reschedule/'.$d->id));?>', 'single', 'Reschedule', '', 'rescheduled');">Reschedule</a>
+                                    <a class="pure-button btn-medium btn-white rescheduled" onclick="confirmation('<?php echo(site_url('student/manage_appointments/reschedule/'.$d->id.'/'.$d->coach_id));?>', 'single', 'Reschedule', '', 'rescheduled');">Reschedule</a>
                                 <?php 
                                     } else {
                                 ?>
                                     <a class="reschedule-session text-cl-green">Already Rescheduled</a>
                                 <?php } } ?>
                             </td> 
-                              <?php } ?>
+                              <?php } else {  ?>
+
+                              <td><a class="pure-button btn-medium btn-grey rescheduled" style="cursor:not-allowed">Reschedule</a></td>
                             <!-- <td>Not Available</td> -->
                         </tr>
-                        <?php } ?>
+                        <?php } } ?>
                     </tbody>
                 </table>
                 <?php } ?>
@@ -297,6 +316,7 @@
                 $("table").tablesorter({debug: true});
             });
         </script>
+
 
     </body>
 </html>

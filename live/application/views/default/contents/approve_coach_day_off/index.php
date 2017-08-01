@@ -82,6 +82,7 @@
                     <th class="bg-secondary text-cl-white border-none">Description</th>
                     <th class="bg-secondary text-cl-white border-none">Start Date</th>
                     <th class="bg-secondary text-cl-white border-none">End Date</th>
+                    <th class="bg-secondary text-cl-white border-none">Status</th>
                     <th class="bg-secondary text-cl-white border-none">Action</th>              
                 </tr>
             </thead>
@@ -96,12 +97,23 @@
                     </td>
                     <td><?php echo date('F d, Y', strtotime($d->start_date)); ?></td>
                     <td><?php echo date('F d, Y', strtotime($d->end_date)); ?></td>
+                    <td><?php echo $d->status; ?></td>
+                    <?php if($d->status != 'booked'){ ?>
                     <td>
                         <div class="blue-red-btn">
                             <a onclick="confirmation('<?php echo site_url('partner/approve_coach_day_off/approve/'.@$d->id ); ?>', 'group', 'Approve', 'list-day', 'approved');" class="pure-button btn-green btn-small approved"> APPROVE </a>
                             <a onclick="confirmation('<?php echo site_url('partner/approve_coach_day_off/decline/'.@$d->id ); ?>', 'group', 'Decline', 'list-day', 'declined');" class="pure-button btn-red btn-small declined"> DECLINE </a>
                         </div>
                     </td>
+                    <?php }else{ ?>
+                    <td>
+                        <div class="blue-red-btn">
+                            <a onclick="confirmation('<?php echo site_url('partner/approve_coach_day_off/approve/'.@$d->id ); ?>', 'group', 'Approve', 'list-day', 'approved');" class="pure-button btn-green btn-small approved"> APPROVE </a>
+                            <a onclick="confirmation('<?php echo site_url('partner/approve_coach_day_off/decline/'.@$d->id ); ?>', 'group', 'Decline', 'list-day', 'declined');" class="pure-button btn-red btn-small declined"> DECLINE </a>
+                            <a onclick="confirmation('<?php echo site_url('partner/approve_coach_day_off/edit/'.@$d->id.'/'.@$d->start_date.'/'.@$d->end_date ); ?>', 'group', 'Edit', 'list-day', 'edited');" class="pure-button btn-blue btn-small edited"> EDIT </a>
+                        </div>
+                    </td>
+                    <?php } ?>
                 </tr>
                  <?php
                 }
@@ -122,6 +134,9 @@
             return false;
         });
         $('.declined').click(function(){
+            return false;
+        });
+        $('.edited').click(function(){
             return false;
         });
     })

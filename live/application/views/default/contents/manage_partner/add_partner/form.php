@@ -30,13 +30,13 @@
                 <li><a href="<?php echo site_url('superadmin/region/index');?>">Regions</a></li>
                 <li><a href="#"><?php echo @$region[0]->region_id?></a></li>
                 <?php } else { ?>
-                <li><a href="<?php echo site_url('admin/manage_partner');?>">Partner</a></li>
+                <li><a href="<?php echo site_url('admin/manage_partner');?>">Affiliate</a></li>
                 <?php } ?>
             </ul>
         </div>
     </div>
 
-    <h1 class="margin0 padding-l-30 left">Add Partner &nbsp;</h1>
+    <h1 class="margin0 padding-l-30 left">Add Affiliate &nbsp;</h1>
 
     <div class="btn-goBack padding-l-210 padding-t-5">
          <?php if($role_link == 'superadmin'){ ?>
@@ -92,35 +92,35 @@
                             <td class="pad15">Name</td>
 
                             <td class="add-form-noborder">
-                                <?php echo form_input('name', set_value('name', @$data->name), 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input partner’s Name"') ?>
+                                <?php echo form_input('name', set_value('name', @$data->name), 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input affiliate`s Name"') ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">Address</td>
 
                             <td class="add-form-noborder">
-                                <?php echo form_input('address', set_value('address', @$data->address),'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input partner’s Address"') ?>
+                                <?php echo form_input('address', set_value('address', @$data->address),'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input affiliate`s Address"') ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">City</td>
 
                             <td class="add-form-noborder">
-                               <?php echo form_input('city', set_value('city', @$data->city), 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input partner’s City"') ?>
+                               <?php echo form_input('city', set_value('city', @$data->city), 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input affiliate`s City"') ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">State</td>
 
                             <td class="add-form-noborder">
-                                <?php echo form_input('state', set_value('state', @$data->state), 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input partner’s State"') ?>
+                                <?php echo form_input('state', set_value('state', @$data->state), 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" style="border:none" required data-parsley-required-message="Please input affiliate`s State"') ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="pad15">Zip</td>
 
                             <td class="add-form-noborder">
-                                <input class="width50perc bg-white-fff padding2 border-1-ccc padding3" type="text" name="zip" value="<?php echo @$data->zip ;?>" data-parsley-type="digits" data-parsley-trigger="keyup" required data-parsley-required-message="Please input partner’s ZIP code" data-parsley-type-message="Please input numbers only">
+                                <input class="width50perc bg-white-fff padding2 border-1-ccc padding3" type="text" name="zip" value="<?php echo @$data->zip ;?>" data-parsley-type="digits" data-parsley-trigger="keyup" required data-parsley-required-message="Please input affiliate`s ZIP code" data-parsley-type-message="Please input numbers only">
                             </td>
                         </tr>
                         <tr>
@@ -130,7 +130,7 @@
                                 <?php
                                     $country = array_column($option_country, 'name', 'name');
                                     $newoptions = array('' => '') + $country;
-                                    echo form_dropdown('country', $newoptions, @$data[0]->country, 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" required data-parsley-required-message="Please select partner’s Country"'); 
+                                    echo form_dropdown('country', $newoptions, @$data[0]->country, 'class="width50perc bg-white-fff padding2 border-1-ccc padding3" required data-parsley-required-message="Please select affiliate`s Country"'); 
                                 ?>
                             </td>
 

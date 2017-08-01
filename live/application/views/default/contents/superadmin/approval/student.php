@@ -17,7 +17,7 @@
                     </div>
                 </a></li>
                 <li>
-                    <a>Student Partner Approval</a>
+                    <a>Student Affiliate Approval</a>
                 </li>
                 <li>
                     <form action="" autocomplete="on" class="search-box">
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <h1 class="margin0">Student Partner Approval </h1>
+    <h1 class="margin0">Student Affiliate Approval </h1>
 </div>
 
 <div class="box">
@@ -36,8 +36,8 @@
 
         <div class="left-list-tabs pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list m-l-20">
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/manage_partner/approve_student'); ?>" class="tabs-blue-active pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5">Student Partner</a></li>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/manage_partner/approve_coach'); ?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5">Coach Partner</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/manage_partner/approve_student'); ?>" class="tabs-blue-active pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5">Student Affiliate</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/manage_partner/approve_coach'); ?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5">Coach Affiliate</a></li>
             </ul>
         </div>
         
@@ -67,8 +67,8 @@
             
             <thead>
                 <tr>
-                    <th class="bg-secondary text-cl-white border-none">Username</th>
-                    <th class="bg-secondary text-cl-white border-none">PARTNER</th>
+                    <th class="bg-secondary text-cl-white border-none">USERNAME</th>
+                    <th class="bg-secondary text-cl-white border-none">AFFILIATE</th>
                     <th class="bg-secondary text-cl-white border-none">STATUS</th>
                     <th class="bg-secondary text-cl-white border-none">Action</th>               
                 </tr>

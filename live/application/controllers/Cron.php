@@ -63,7 +63,7 @@ public function run()
                         $this->db->where('id', $q->id);
                         $this->db->update('appointments', $data); 
 
-                        // $this->send_sms->student_reminder($student_phone, $q->student_name, $q->coach_name, $date_convert_student, $start_hour, $end_hour);
+                        //$this->send_sms->student_reminder($student_phone, $q->student_name, $q->coach_name, $date_convert_student, $start_hour, $end_hour);
                         $this->send_email->student_reminder($q->student_email, $q->coach_name, $q->student_name, $date_convert_student, $start_hour, $end_hour, $q->student_gmt);                        
                 }  
             }
@@ -103,7 +103,7 @@ public function run()
                         $this->db->where('id', $qc->id);
                         $this->db->update('appointments', $data);
 
-                        // $this->send_sms->coach_reminder($coach_phone, $qc->student_name, $qc->coach_name, $date_convert_coach, $start_hour_coach, $end_hour_coach);
+                        //$this->send_sms->coach_reminder($coach_phone, $qc->student_name, $qc->coach_name, $date_convert_coach, $start_hour_coach, $end_hour_coach);
                         $this->send_email->coach_reminder($qc->coach_email, $qc->coach_name, $qc->student_name, $date_convert_coach, $start_hour_coach, $end_hour_coach, $qc->coach_gmt);        
                 }  
             }

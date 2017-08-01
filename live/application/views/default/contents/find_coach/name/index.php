@@ -7,22 +7,19 @@
                 <h3 class="text-center margin-auto font-semi-bold">Book a Coach</h3>
             </div>
 
-            <div class="content padding-lr-0">
+            <div class="content padding-t-0 padding-lr-0">
                 <div class="box">
-                    <div class="box-capsule bg-tertiary padding-tb-8 text-cl-white margin-auto font-14 width190">
-                        <span>Sort By</span>
-                    </div>
                     <ul class="sort-by padding-l-0">
-                        <li class=""><a href="<?php echo site_url('student/find_coaches/single_date'); ?>">Date</a></li>
-                        <li class="border-none"><a href="#">Name</a></li>
+                        <li class=""><a href="<?php echo site_url('student/find_coaches/single_date'); ?>">DATE</a></li>
+                        <li class="border-none"><a href="#">NAME</a></li>
                         <div class="h3 font-normal text-cl-secondary" style="padding: 10px 15px;">
-                            <?php echo form_open('student/find_coaches/search/name', 'class="pure-form search-b-2 margin-auto"'); ?>
-                            <?php echo form_input('search_key', set_value('search_key'), 'class="search-input" placeholder="Search Here" type="text" style="font-size:14px" id="search_key"'); ?>
+                            <?php echo form_open('student/find_coaches/search/name', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
+                            <?php echo form_input('search_key', set_value('search_key'), 'class="search-input border-rounded-5" placeholder="Search Here" type="text" style="font-size:14px" id="search_key"'); ?>
                             <?php echo form_submit('__submit', 'Submit', 'class="pure-button search-button" style="height:20px;"'); ?>
                             <?php echo form_close(); ?> 
                         </div>
-                        <li><a href="<?php echo site_url('student/find_coaches/search/country'); ?>">Country</a></li>
-                        <li><a href="<?php echo site_url('student/find_coaches/search/spoken_language'); ?>">Languages Spoken</a></li>
+                        <li><a href="<?php echo site_url('student/find_coaches/search/country'); ?>">COUNTRY</a></li>
+                        <li><a href="<?php echo site_url('student/find_coaches/search/spoken_language'); ?>">LANGUAGE SPOKEN</a></li>
                     </ul>
                 </div>
             </div>  

@@ -316,13 +316,13 @@ class manage_session extends MY_Site_Controller {
         $data_student = array(
             'subject' => 'Appointment Rescheduled',
             'email' => $id_to_email_address[$student_id],
-            'content' => 'Your appointment has been rescheduled by Coach Partner ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with coach ' . $id_to_name[$new_appointment['coach_id']] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.',
+            'content' => 'Your appointment has been rescheduled by Coach Affiliate ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with coach ' . $id_to_name[$new_appointment['coach_id']] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.',
         );
 
         $data_coach = array(
             'subject' => 'Appointment Rescheduled',
             'email' => $id_to_email_address[$coach_id],
-            'content' => 'Your appointment has been rescheduled by Coach Partner ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with student ' . $id_to_name[$student_id] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.'
+            'content' => 'Your appointment has been rescheduled by Coach Affiliate ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with student ' . $id_to_name[$student_id] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.'
         );
 
         $data_partner = array(
@@ -345,7 +345,7 @@ class manage_session extends MY_Site_Controller {
             // student notification data
             $student_notification = Array(
                 'user_id' => $student_id,
-                'description' => 'Your appointment has been rescheduled by Coach Partner ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with coach ' . $id_to_name[$new_appointment['coach_id']] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.',
+                'description' => 'Your appointment has been rescheduled by Coach Affiliate ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with coach ' . $id_to_name[$new_appointment['coach_id']] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.',
                 'status' => '2',
                 'dcrea' => time(),
                 'dupd' => time()
@@ -354,7 +354,7 @@ class manage_session extends MY_Site_Controller {
             // coach notification data
             $coach_notification = Array(
                 'user_id' => $new_appointment['coach_id'],
-                'description' => 'Your appointment has been rescheduled by Coach Partner ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with student ' . $id_to_name[$student_id] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.',
+                'description' => 'Your appointment has been rescheduled by Coach Affiliate ' . $id_to_name[$this->auth_manager->userid()]. '. ' . date('l jS \of F Y', strtotime($appointment_data->date)) . ' from ' . $appointment_data->start_time . ' until ' . $appointment_data->end_time . ' with student ' . $id_to_name[$student_id] . ' become ' . $new_appointment['date'] . ' from ' . $new_appointment['start_time'] . ' until ' . $new_appointment['end_time'] . '.',
                 'status' => '2',
                 'dcrea' => time(),
                 'dupd' => time()

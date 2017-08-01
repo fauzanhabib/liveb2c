@@ -1,8 +1,3 @@
-<style>
-    .dataTables_wrapper{
-        width: 100% !important;
-    }
-</style>
 <div class="heading text-cl-primary border-b-1 padding15">
 
     <h2 class="margin0">Reporting</h2>
@@ -45,33 +40,21 @@
             <a class="pure-button btn-small btn-green" style="margin:0px 10px;" href="<?php echo site_url('partner/reporting/download_token/'.@$startdate.'/'.@$enddate);?>">Download</a>
         </div>
          <?php echo form_close(); ?>
-         <script>
-            $(document).ready(function() {
-                $('#large').DataTable( {
-                  "bLengthChange": false,
-                  "searching": true,
-                  "userTable": false,
-                  "bInfo" : false,
-                  "bPaginate": true,
-                  "pageLength": 10
-                });
-            } );
-        </script>
-        <table id="large" class="display table-session tablesorter m-t-20" cellspacing="0" width="100%">
+        <table id="" class="display table-session tablesorter m-t-20" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="padding15 bg-secondary uncek text-cl-white border-none">COACH</th>
-                        <th rowspan="2" class="padding15 bg-secondary uncek text-cl-white border-none">STUDENT</th>
-                        <th rowspan="2" class="padding15 bg-secondary uncek text-cl-white border-none">TRANSACTION</th>
-                        <th rowspan="2" class="padding15 bg-secondary uncek text-cl-white border-none">TIME</th>
-                        <th rowspan="2" class="padding15 bg-secondary uncek text-cl-white border-none">STATUS</th>
-                        <th colspan="3" class="padding15 bg-secondary uncek text-cl-white border-none">TOKEN</th>
+                        <th rowspan="2" class="padding15">COACH</th>
+                        <th rowspan="2" class="padding15">STUDENT</th>
+                        <th rowspan="2" class="padding15">TRANSACTION</th>
+                        <th rowspan="2" class="padding15">TIME</th>
+                        <th rowspan="2" class="padding15">STATUS</th>
+                        <th colspan="3" class="padding15">TOKEN</th>
                         <!-- <th class="padding15">BALANCE</th> -->
                     </tr>
                     <tr>
-                        <!-- <td class="font-16 bordered-l text-center bg-secondary uncek text-cl-white border-none">DEBIT</td> -->
-                        <td class="font-16 bordered-m text-center bg-secondary uncek text-cl-white border-none">CREDIT</td>
-                        <td class="font-16 bordered-r text-center bg-secondary uncek text-cl-white border-none">BALANCE</td>
+                        <td class="font-16 bordered-l text-center">DEBIT</td>
+                        <td class="font-16 bordered-m text-center">CREDIT</td>
+                        <td class="font-16 bordered-r text-center">BALANCE</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,9 +108,9 @@
                                 <font class="success">Successful</font>
                             <?php } ?>
                             </td>
-                            <!-- <td class="padding15" data-label="DEBIT">
-                                <span><?php echo($history->token_amount); ?></span>
-                            </td> -->
+                            <td class="padding15" data-label="DEBIT">
+                                <!-- <span><?php echo($history->token_amount); ?></span> -->
+                            </td>
                             <td class="padding15" data-label="CREDIT">
                                 <span><?php echo($history->token_amount); ?></span>
                             </td>  
@@ -140,82 +123,82 @@
             </table>
     </div>  
 </div>
-<script src="../js/main.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.tablescroll.js"></script>
+        <script src="../js/main.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.tablescroll.js"></script>
 
-<script>
-    // ajax
-    // don't cache ajax or content won't be fresh
-    $.ajaxSetup({
-        cache: false
-    });
-
-    $('input#search').on('click', function() { 
-    	$(".fullname").click(function(e){
-        e.preventDefault();  // stops the jump when an anchor clicked.
-        var fullname = $(this).text(); // anchors do have text not values.
-
-        $.ajax({
-        url: '<?php echo site_url('partner/reporting/index') ;?>',
-        data: {'fullname': fullname}, // change this to send js object
-        type: "post",
-        success: function(data){
-        //document.write(data); just do not use document.write
-        console.log(data);
-}
-});
-});
-    });
-
-
-    // load() functions
-    var loadUrl = "<?php echo site_url('coach/ongoing_session'); ?>";
-    $(".load_upcoming").click(function () {
-        $("#result").load(loadUrl);
-    });
-
-    function getDate(dates){
-        var now = new Date(dates);
-        var day = ("0" + (now.getDate() + 1)).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
-        return resultDate;
-    }
-
-    function removeDatepicker(){
-        $('.datepicker2').datepicker('remove');
-    }
-
-    // datepicker
-   $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                endDate: "now",
-                autoclose:true
+        <script>
+            // ajax
+            // don't cache ajax or content won't be fresh
+            $.ajaxSetup({
+                cache: false
             });
 
-            $('.datepicker').change(function(){
-                var dates = $(this).val();
-                removeDatepicker();
-                $('.datepicker2').datepicker({
-                    format: 'yyyy-mm-dd',
-                    startDate: getDate(dates),
-                    endDate: "now",
-                    autoclose: true
-        });
-    });    
+            $('input#search').on('click', function() { 
+            	$(".fullname").click(function(e){
+                e.preventDefault();  // stops the jump when an anchor clicked.
+                var fullname = $(this).text(); // anchors do have text not values.
 
-    $('.height-plus').css({'height':'50px'});
+                $.ajax({
+                url: '<?php echo site_url('partner/reporting/index') ;?>',
+                data: {'fullname': fullname}, // change this to send js object
+                type: "post",
+                success: function(data){
+                //document.write(data); just do not use document.write
+                console.log(data);
+        }
+      });
+   });
+            });
+       
 
-    $('.rescheduled').click(function(){
-        return false;
-    });
+            // load() functions
+            var loadUrl = "<?php echo site_url('coach/ongoing_session'); ?>";
+            $(".load_upcoming").click(function () {
+                $("#result").load(loadUrl);
+            });
 
-    $('.cancel').click(function () {
-        return false;
-    });
-    
-    $(function() {
-        $('#thetable').tableScroll({height:200});
-        $('#thetable2').tableScroll({height:200})
-    });
-</script>
+            function getDate(dates){
+                var now = new Date(dates);
+                var day = ("0" + (now.getDate() + 1)).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
+                return resultDate;
+            }
+
+            function removeDatepicker(){
+                $('.datepicker2').datepicker('remove');
+            }
+
+            // datepicker
+           $('.datepicker').datepicker({
+                        format: 'yyyy-mm-dd',
+                        endDate: "now",
+                        autoclose:true
+                    });
+
+                    $('.datepicker').change(function(){
+                        var dates = $(this).val();
+                        removeDatepicker();
+                        $('.datepicker2').datepicker({
+                            format: 'yyyy-mm-dd',
+                            startDate: getDate(dates),
+                            endDate: "now",
+                            autoclose: true
+                });
+            });    
+
+            $('.height-plus').css({'height':'50px'});
+
+            $('.rescheduled').click(function(){
+                return false;
+            });
+
+            $('.cancel').click(function () {
+                return false;
+            });
+            
+            $(function() {
+                $('#thetable').tableScroll({height:200});
+                $('#thetable2').tableScroll({height:200})
+            });
+        </script>

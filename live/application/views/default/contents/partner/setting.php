@@ -16,26 +16,26 @@
                         </svg>
                     </div>
                 </a></li>
-                <li><a href="<?php echo site_url('partner/subgroup') ?>">Subgroup</a></li>
+                <li><a href="<?php echo site_url('partner/subgroup') ?>">Group</a></li>
 				<li><a href="<?php echo site_url('partner/subgroup/edit_subgroup/'. $data3[0]->id); ?>"><?php echo $data3[0]->name; ?></a></li>
 				<li><a href="#"><?php echo $data3[0]->name; ?> Settings</a></li>
             </ul>
         </div>
     </div>
 
-    <h1 class="margin0">Subgroup Specific Setting</h1>
+    <h1 class="margin0">Group Specific Setting</h1>
 </div>
         <div class="heading pure-g">
             <div class="pure-u-18-24">
                 <h3 class="h3 font-normal padding15 text-cl-secondary" style="float:left"><a href="<?php echo site_url('partner/subgroup/edit_subgroup/'. $data3[0]->id); ?>">BASIC INFO</a> | 
-                    Subgroup Setting
+                    Group Setting
                 </h3> 
             </div>
             
         </div>
 
 <div class="heading text-cl-primary padding15">
-    <h1 class="margin0">Subgroup Specific Setting</h1>
+    <h1 class="margin0">Group Specific Setting</h1>
 </div>
 <div class="box b-f3-2">
 
@@ -45,7 +45,7 @@
             <?php echo form_open_multipart('partner/'.$this->uri->segment(2).'/update_setting/'.$data[0]->user_id, 'id="form" role="form" class="pure-form pure-form-aligned padding15" data-parsley-validate'); ?>
             <div class="heading pure-g">
                 <div class="pure-u-12-24">
-                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">COACH PARTNER SETTING</h3>
+                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">COACH AFFILIATE SETTING</h3>
                 </div>
                 <div class="pure-u-12-24">
                     <div class="edit action-icon">

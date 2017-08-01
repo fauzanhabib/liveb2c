@@ -34,7 +34,7 @@
                 </li>
                 <?php } ?>
                 <?php if($role_link == 'admin'){ ?>
-                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Partner</a></li>
+                    <li><a href="<?php echo site_url('admin/manage_partner');?>">Affiliate</a></li>
                 <?php } ?>
                 <li><a href="<?php echo site_url($role_link.'/manage_partner/detail/'.$partner_id);?>"><?php echo $partner->name;?></a></li>
                 <?php if($role_link == 'superadmin'){?>
@@ -42,12 +42,12 @@
                 <?php  }else if($role_link == 'admin') {?>
                 <li><a href="<?php echo site_url($role_link.'/manage_partner/list_partner/coach/'.$partner_id);?>">
                     <?php } 
-                    foreach ($subgroup as $gsb) {
-                         if($subgroup_id == $this->uri->segment(5)){
-                            echo ucfirst(@$gsb->name);
-                         }
-                     } 
-
+                    // foreach ($subgroup as $gsb) {
+                    //      // if($subgroup_id == $this->uri->segment(5)){
+                    //         echo ucfirst(@$gsb->name);
+                    //      // }
+                    //  } 
+                        echo $subgroup[0]->name;
                 ?>
                 </a></li>
 
@@ -191,7 +191,7 @@
             <!-- <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/manage_partner/member_of_coach/deactive/'.$subgroup_id.'/'.$partner_id);?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Inactive Regions</a></li> -->
             <?php } ?>
               <li class="pure-menu-item pure-menu-selected no-hover">
-                    <a href="<?php echo site_url($role_link.'/manage_partner/partner/'.$type.'/'.$partner_id.'/'.@$partner->admin_regional_id);?>" class="pure-menu-link padding-t-b-5 font-14 font-semi-bold">
+                    <a href="<?php echo site_url($role_link.'/manage_partner/supplier/'.$type.'/'.$partner_id.'/'.@$partner->admin_regional_id);?>" class="pure-menu-link padding-t-b-5 font-14 font-semi-bold">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve" class="width15">
                         <g id="tab-basic">
@@ -223,9 +223,9 @@
                         </g>
                         </svg>
                         <?php if($type == "coach") { ?>
-                        Coach Supplier's Admin
+                        Coach Affiliate's Admin
                         <?php } elseif($type == "student") { ?>
-                        Student Supplier's Admin
+                        Student Affiliate's Admin
                         <?php } ?>
                     </a>
                 </li>
@@ -296,8 +296,8 @@
                         
                         <td><?php echo $a?></td>
                         <td><a href="<?php echo site_url($role_link.'/manage_partner/coach_detail/'.$partner_id.'/'.$coach->id);?>" class="status-disable bg-green text-cl-white"><?php echo $coach->fullname?></a></td>
-                        <td><?php echo $subgroup[0]->phone?></td>
-                        <td><?php echo $coach->email?></td>
+                        <td><?php echo $subgroup[0]->dial_code.$subgroup[0]->phone;?></td>
+                        <td><?php echo $coach->email;?></td>
                     </tr>
                     <?php $no++; $a++; } } ?>
                 </tbody>

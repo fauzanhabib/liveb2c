@@ -34,14 +34,22 @@
 
 
 <div class="box clear-both">
-
+    <div class="heading pure-g padding-t-30">
+        <div class="left-list-tabs pure-menu pure-menu-horizontal text-center margin0">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected text-center width250 no-hover"><a class="pure-menu-link padding-t-b-5 font-16 padding-lr-0 font-light text-cl-lightGrey active-tabs-blue" href="<?php echo site_url('student_partner/add_token/index');?>">Add Token per Student</a></li>
+                <li class="pure-menu-item pure-menu-selected text-center width250 no-hover"><a class="pure-menu-link padding-t-b-5 font-16 padding-lr-0 font-light text-cl-lightGrey" href="<?php echo site_url('student_partner/add_token/group_index');?>" >Add Token per Group</a></li>
+                <li class="pure-menu-item pure-menu-selected text-center width250 no-hover"><a class="pure-menu-link padding-t-b-5 font-16 padding-lr-0 font-light text-cl-lightGrey" href="<?php echo site_url('student_partner/refund_token');?>" >Refund Token</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="content padding-t-10">
        <div class="box">
             <div class="text-center">
                 <ul class="coaching-info-big m-tb-0 padding-l-0 padding-t-25">
                     <li class="coaching-info-box-big margin-auto clearfix">
                         <div class="coaching-box-left-big">
-                            <span>My Tokens</span>
+                            <span>Undistributed Tokens</span>
                         </div>
                         <div class="coaching-box-right-big">
                             <div style="padding: 14px 0 !important;"><?php echo $token; ?></div>
@@ -85,7 +93,7 @@
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Token</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Amount To Add</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;"></th>
-                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Subgroup</th>               
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Group</th>               
                     </tr>
                 </thead>
                 <tbody>
@@ -141,11 +149,12 @@
  
 </div>
 
-
+<script src="<?php echo base_url(); ?>assets/js/main.js"></script>
                        
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/__jquery.tablesorter.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/remodal.min.js"></script>
+
 <script type="text/javascript">
     function isNumber(evt) {
     evt = (evt) ? evt : window.event;

@@ -106,7 +106,7 @@
             <thead>
                 <tr>
                     <th class="bg-secondary text-cl-white border-none">Name</th>
-                    <th class="bg-secondary text-cl-white border-none">Partner</th>
+                    <th class="bg-secondary text-cl-white border-none">Affiliate</th>
                     <th class="bg-secondary text-cl-white border-none">Token Requests</th>
                     <th class="bg-secondary text-cl-white border-none">Action</th>               
                 </tr>

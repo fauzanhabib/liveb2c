@@ -364,7 +364,7 @@ class managing extends MY_Site_Controller {
 
         $schedule = array();
         $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
-
+        
         $time = strtotime('00:00:00');
         $startTime = date("H:i:s", strtotime((-$minutes) . 'minutes', $time));
         $endTime = date("H:i:s", strtotime('+30 minutes', $time));
@@ -835,7 +835,7 @@ class managing extends MY_Site_Controller {
     }
     
     public function reschedule($appointment_id = '', $id_coach = '') {
-        
+
         $this->template->title = 'Reschedule Appointment';
 
         // checking if appointment has already rescheduled
@@ -875,12 +875,16 @@ class managing extends MY_Site_Controller {
 
         $type_coach = $this->db->query('SELECT standard_coach_cost, elite_coach_cost FROM (specific_settings) WHERE partner_id = '.$this->auth_manager->partner_id())->result();                        
 
+
         $temp = array();
         foreach($coach_list as $c){
             $temp2 = $this->reschedule_session($appointment_id, $c->id, $date);
+            // echo "<pre>";
+            // print_r($temp2);
             // if($temp2['availability'] && $c->id != $appointment_data->coach_id){ /* untuk di live */
             if($temp2['availability'] && $c->id != $appointment_data->coach_id){ /* untuk di idbuild */
                 $temp[] = $temp2;
+                
             }
         }
 
@@ -957,15 +961,15 @@ class managing extends MY_Site_Controller {
         // Retrieve post
         $booked = array(
             'appointment_id' => $appointment_id,
+            'old_coach_id' => $appointment_data->coach_id,
             'date' => $appointment_data->date,
             'start_time' => $appointment_data->start_time,
             'end_time' => $appointment_data->end_time,
-            'old_coach_id' => $appointment_data->coach_id,
             'status' => 'active',
         );
 
         $isValid = $this->isAvailable($student_id, $coach_id, $date, $start_time, $end_time);
-//	echo "<pre>"; print_r($isValid); exit;
+//  echo "<pre>"; print_r($isValid); exit;
         // echo "<pre>";
         // print_r($booked);
         // exit();
@@ -979,7 +983,7 @@ class managing extends MY_Site_Controller {
                 $this->db->trans_rollback();
                 $this->messages->add('Invalid Action', 'warning');
                 // $this->index();
-		
+        exit('a');
                 redirect('partner/managing/reschedule/'.$appointment_id);
 
                 return;
@@ -987,7 +991,7 @@ class managing extends MY_Site_Controller {
         } else {
             $this->messages->add('Invalid Action', 'warning');
             // redirect('partner/member_list/coach');
-		
+        exit('b');
             redirect('partner/managing/reschedule/'.$appointment_id);
 
         }
@@ -995,9 +999,6 @@ class managing extends MY_Site_Controller {
         // updating appointment current status to reschedule
         $appointment_update = array(
             'status' => 'reschedule',
-            'coach_id' => $coach_id,
-            'start_time' => $start_time,
-            'end_time' => $end_time
         );
 
 
@@ -1263,6 +1264,8 @@ class managing extends MY_Site_Controller {
     }
     
     public function reschedule_session($appointment_id = '', $coach_id = '', $date_ = '') {
+        
+
         if (!$date_ || !$coach_id) {
             //redirect(home);
             $vars = array();
@@ -1288,13 +1291,15 @@ class managing extends MY_Site_Controller {
         // getting gmt minutes
         $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
         $date = strtotime($date_);
-        //print_r(date('Y-m-d', $date));
+
         // getting day and day after or before based on gmt
         $day = strtolower(date('l', $date));
+
         $day2 = $this->day_index[$this->convert_gmt(array_search($day, $this->day_index), $minutes)];
 
         // appointment data specify by coach, date and status
         // appointment with status cancel considered available for other student
+
         $appointment = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', date("Y-m-d", $date))->get_all();
         // appointment with status temporary considered available for other student but not for student who is in the appointment and 
         // appointment where the student has make an appoinment on the specific date, so there will be no the same start time and end time to be shown to the student from other coach
@@ -1563,9 +1568,9 @@ class managing extends MY_Site_Controller {
         $status1 = 0;
         if ($appointment || $appointment_student || $appointment_class) {
          
-	return true;
+    return true;
         } else if (!$appointment) {
-	
+    
             //if($appointment_count < $setting->max_session_per_day && $appointment_count_week < $setting->max_day_per_week){
             foreach($schedule as $s){
                 if(strtotime($start_time) >= strtotime($s['start_time']) && strtotime($end_time) <= strtotime($s['end_time'])){

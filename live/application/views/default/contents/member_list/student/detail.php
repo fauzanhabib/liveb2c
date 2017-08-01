@@ -11,7 +11,7 @@
     </div> -->
 </div>
 
-<?php echo form_open('student_partner/member_list/update_student/'.$student_id, 'id="form_more_info" role="form" class="pure-form pure-form-aligned" data-parsley-validate'); ?>
+<?php echo form_open('student_partner/member_list/update_student/'.$student_id, 'id="form_more_info" role="form" class="pure-form-aligned" data-parsley-validate'); ?>
 <div class="box">
     
     <div class="content">
@@ -83,10 +83,12 @@
                                 <?php echo str_replace('#', ', ', @$student[0]->spoken_language, $multiplier) ; ?>
                             </td>
                         </tr> -->
-                        <tr>
+                        <tr class="no-inline">
                             <td class="pad15">Phone</td>
-                            <td>
+                            <td class="flex width100perc">
+                                <span class="r-only"> <?php echo  @$student[0]->dial_code;?></span>
                                 <span class="r-only"><?php echo @$student[0]->phone;?></span>
+                                <!-- <input type="text" name="dial_code" value="<?php echo @$student[0]->dial_code;?>" class="pure-input-1-20 e-only" style="margin-right:1px;" readonly> -->
                                 <input name="phone" type="text" value="<?php echo @$student[0]->phone; ?>" class="e-only" style="width:80%" data-parsley-type='digits' required data-parsley-required-message="Please input student phone number" data-parsley-type-message="Please input numbers only">
                             </td>
                         </tr>

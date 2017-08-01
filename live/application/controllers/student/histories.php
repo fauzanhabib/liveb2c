@@ -90,7 +90,7 @@ class Histories extends MY_Site_Controller {
         );
         
         // echo "<pre>";
-        // print_r($minutes);
+        // print_r($histories);
         // exit();
         $this->template->content->view('default/contents/student/history_session/index', $vars);
         $this->template->publish();

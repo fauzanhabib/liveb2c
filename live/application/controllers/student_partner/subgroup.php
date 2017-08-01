@@ -16,6 +16,7 @@ class subgroup extends MY_Site_Controller {
         $this->load->model('identity_model');
         $this->load->model('creator_member_model');
         $this->load->model('user_token_model');
+        $this->load->model('user_geography_model');
         $this->load->model('student_detail_profile_model');
         $this->load->model('timezone_model');
         $this->load->library('common_function');
@@ -178,7 +179,7 @@ class subgroup extends MY_Site_Controller {
         }
         
         $rules = array(
-                array('field'=>'name', 'label' => 'Name', 'rules'=>'trim|required|max_length[30]|xss_clean'),
+                array('field'=>'name', 'label' => 'Name', 'rules'=>'trim|required|max_length[30]|xss_clean|callback_is_subgroup_available'),
                 
             );
 
@@ -190,7 +191,7 @@ class subgroup extends MY_Site_Controller {
         // inserting user data
         $student = array(
             
-            'name' => $this->input->post('name'),
+            'name' => htmlentities($this->input->post('name')),
             'type' => 'student',
             'partner_id' => $partner_id,
         );
@@ -200,6 +201,16 @@ class subgroup extends MY_Site_Controller {
 
         $this->messages->add('Inserting Subgroup Succeeded', 'success');
         redirect('student_partner/subgroup');
+    }
+
+    public function is_subgroup_available($name) {
+        $partner_id = $this->auth_manager->partner_id();
+        if ($this->subgroup_model->where('name', $name)->where('type', 'student')->where('partner_id', $partner_id)->get_all()) {
+            $this->form_validation->set_message('is_subgroup_available', $name . ' has been registered, use another name');
+            return false;
+        } else {
+            return true;
+        }
     }
     //---------------------------------------------------------------------------------------------------------------------
      // public function list_student($subgroup_id = '', $id = '', $page='') {
@@ -272,7 +283,7 @@ class subgroup extends MY_Site_Controller {
         $vars = array(
             'data' => $data,
             'form_action' => 'update_subgroup',
-            'data2' => $this->identity_model->get_student_identity('','',$this->auth_manager->partner_id(), '', $per_page, $offset, $subgroup_id),
+            'data2' => $this->identity_model->get_student_identity('','',$this->auth_manager->partner_id(), '', '', $offset, $subgroup_id),
             'subgroup_id' => $subgroup_id,
             'pagination' => $pagination,
             'total_sess_val' => $total_sess_val,
@@ -329,7 +340,7 @@ class subgroup extends MY_Site_Controller {
             }
         
         $partner = array(
-            'name' => $this->input->post('name'),
+            'name' => htmlentities($this->input->post('name')),
         );
         
         // Inserting and checking to partner table
@@ -580,13 +591,13 @@ class subgroup extends MY_Site_Controller {
         $profile = array(
             'profile_picture' => 'uploads/images/profile.jpg',
             'user_id' => $user_id,
-            'fullname' => $this->input->post('fullname'),
-            'nickname' => $this->input->post('nickname'),
-            'gender' => $this->input->post('gender'),
+            'fullname' => htmlentities($this->input->post('fullname')),
+            'nickname' => htmlentities($this->input->post('nickname')),
+            'gender' => htmlentities($this->input->post('gender')),
             'date_of_birth' => $this->input->post('date_of_birth'),
-            'phone' => $this->input->post('phone'),
+            'phone' => htmlentities($this->input->post('phone')),
             'partner_id' => $user_id_to_partner_id[$this->auth_manager->userid()],
-            'subgroup_id' => $this->input->post('subgroup'),
+            'subgroup_id' => htmlentities($this->input->post('subgroup')),
             'dcrea' => time(),
             'dupd' => time()
         );
@@ -603,7 +614,7 @@ class subgroup extends MY_Site_Controller {
         // inserting user token data
         $token = array(
             'user_id' => $user_id,
-            'token_amount' => $this->input->post('token_amount'),
+            'token_amount' => htmlentities($this->input->post('token_amount')),
         );
 
         // Inserting and checking to profile table then storing it into users_profile table
@@ -616,6 +627,7 @@ class subgroup extends MY_Site_Controller {
 
         $geography = array(
             'user_id' => $user_id,
+            'country' => htmlentities($this->input->post('country'))
         );
         $geography_id = $this->identity_model->get_identity('geography')->insert($geography, true);
         if (!$geography_id) {

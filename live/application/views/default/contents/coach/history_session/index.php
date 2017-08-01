@@ -135,6 +135,7 @@
                     <th class="text-cl-tertiary font-light font-16 border-none">TIME<br>(Based on Coach's Timezone)</th>
                     <?php } ?>
                     <th class="text-cl-tertiary font-light font-16 border-none">COACH ATTENDANCE</th>
+                    <th class="text-cl-tertiary font-light font-16 border-none">STUDENT'S GOAL</th>
                     <th class="text-cl-tertiary font-light font-16 border-none">RECORDED SESSIONS</th>
                     <!-- <?php if($this->auth_manager->role()!='ADM' && $this->auth_manager->role()!='SPR'){?>
                         <th class="text-cl-tertiary font-light font-16 border-none">ACTION</th>
@@ -249,11 +250,23 @@
                     </td>
 
                     <td>
+                        <?php 
+                            if($history->student_goal == NULL)
+                            {
+                                echo '-';
+                            }else{
+                                echo $history->student_goal; 
+                            }
+                        ?>
+                    </td>
+
+                    <td>
                          <form name ="sessiondone" action="<?php echo(site_url('opentok/checkrecord/'));?>" method="post">
                             <input type="hidden" name="sessionid" value="<?php echo @$history->session; ?>">
                             <input type="submit" class="pure-button btn-tiny btn-expand-tiny btn-white" value="Check Availibility">
                         </form>
                     </td>
+
 
                     <!-- <td>
                         <?php

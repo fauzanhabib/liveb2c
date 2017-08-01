@@ -1,12 +1,12 @@
 <div class="heading text-cl-primary padding15">
-    <h1 class="margin0">List Of Admin Partner</h1>
+    <h1 class="margin0">List Of Admin Affiliate</h1>
 </div>
 
 <div class="box">
     <div class="heading pure-g">
         <!-- block edit -->
         <div class="pure-u-1 edit no-left">
-            <a href="<?php echo site_url('superadmin/manage_partner/add_partner_member');?>" class="add"><i class="icon icon-add"></i>Add Admin Partner</a>
+            <a href="<?php echo site_url('superadmin/manage_partner/add_partner_member');?>" class="add"><i class="icon icon-add"></i>Add Admin Affiliate</a>
             <!-- <a href="<?php echo site_url('admin/partner_setting');?>" class="add"><i class="icon icon-setting"></i>Partner Setting</a> -->
         </div>
         <!-- end block edit -->
@@ -16,7 +16,7 @@
             <!-- block edit -->
             <div class="pure-u-23-24 tl tab-list tab-link">
                 <ul>
-                    <li><a href="<?php echo site_url('student/find_coaches/search/partner'); ?>">Partner</a></li>
+                    <li><a href="<?php echo site_url('student/find_coaches/search/partner'); ?>">Affiliate</a></li>
                     <li><a href="<?php echo site_url('student/find_coaches/search/region'); ?>">Region</a></li>
                 </ul>
             </div>

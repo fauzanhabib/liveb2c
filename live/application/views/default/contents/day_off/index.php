@@ -120,7 +120,7 @@
                         } );
                     </script>
 
-                    <table id="userTable" class="display padding-t-20" cellspacing="0" width="100%">
+                    <table id="userTable" class="display table-session padding-t-20" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th class="text-cl-tertiary font-light font-16 border-none">START DATE</th>
@@ -138,18 +138,18 @@
                                 <td><?php echo date('M d, Y', strtotime($d->start_date)); ?></td>
                                 <td><?php echo date('M d, Y', strtotime($d->end_date)); ?></td>
                                 <td>
-                                    <div class="status-disable m-l-20">
+                                    <div class="status-disable">
                                         <span class="<?php echo $d->status; ?>"><?php echo $d->remark; ?></span>
                                     </div>
                                 </td>
                                <td>
-                                    <div class="status-disable m-l-20">
+                                    <div class="status-disable">
                                         <span class="text-cl-white active labels <?php echo $d->status; ?>"><?php echo $d->status; ?></span>
                                     </div>
                                 </td>
                                 <td>
                                     <?php
-                                    if($d->status != 'pending') {
+                                    if(($d->status != 'booked') && ($d->status != 'pending')) {
                                     ?>
                                     <div class="rw">
                                         <div class="b-50">

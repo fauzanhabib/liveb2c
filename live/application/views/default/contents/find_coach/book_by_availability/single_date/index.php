@@ -7,33 +7,23 @@
                 <h3 class="text-center margin-auto font-semi-bold">Book a Coach <?php echo $cert_studying;?></h3>
             </div>
 
-            <div class="content padding-lr-0">
+            <div class="content padding-t-0 padding-lr-0">
                 <div class="box">
-                    <div class="box-capsule bg-tertiary padding-tb-8 text-cl-white margin-auto font-14 width190">
-                        <span>Sort By</span>
-                    </div>
                     <ul class="sort-by padding-l-0">
-                        <li class="border-none"><a href="#">Date</a></li>
-                        <div class="text-center book-date">
-                            <?php
-                                echo form_open('student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-form"');
-                            ?>
-                                <div class="">
-                                    <div class="frm-date">
-                                         <?php echo form_input('date', set_value('date'), 'class="dateavailable datepicker frm-date" id="date" required readonly');?>
-                                            <ul class="parsley-errors-list" id="parsley-id-8951"></ul>                
-                                        <span class="icon dyned-icon-coach-schedules"></span>
-                                    </div>
-                                </div>  
-                                <div class="">
-                                    <?php echo form_submit('__submit', @$this->auth_manager->userid() ? 'SEARCH' : 'SEARCH', 'class="pure-button btn-tertiary btn-expand-tiny height-30"'); ?>
+                        <div class="text-right book-date" style="padding: 1px 15px;">
+                            <div class="width100perc">
+                                <div class="frm-date">
+                                    <input type="text" name="date" value="" class="dateavailable datepicker frm-date width100perc border-2-primary border-rounded-5 text-left" id="date" data-parsley-no-focus="" required="" readonly="" data-parsley-id="8951" placeholder="Date" data-parsley-required-message="Please click for date." style="padding: 1.02em 0.5em;">
                                 </div>
-                                <!-- <a href="<?php echo site_url('student/find_coaches/multiple_date');?>" class="addmultiple text-cl-green font-14"><i class="icon icon-add font-10"></i> Add More Sessions</a> -->
-                             <?php echo form_close(); ?> 
-                         </div>
-                        <li><a href="<?php echo site_url('student/find_coaches/search/name'); ?>">Name</a></li>
-                        <li><a href="<?php echo site_url('student/find_coaches/search/country'); ?>">Country</a></li>
-                        <li><a href="<?php echo site_url('student/find_coaches/search/spoken_language'); ?>">Languages Spoken</a></li>
+                            </div>
+                        </div>
+                        <div class="" style="padding: 5px 15px;">
+
+                            <?php echo form_submit('__submit', @$this->auth_manager->userid() ? 'SEARCH' : 'SEARCH', 'class="pure-button btn-primary border-rounded-5 width100perc"'); ?>
+                        </div>
+                        <li><a href="<?php echo site_url('student/find_coaches/search/name'); ?>">NAME</a></li>
+                        <li><a href="<?php echo site_url('student/find_coaches/search/country'); ?>">COUNTRY</a></li>
+                        <li><a href="<?php echo site_url('student/find_coaches/search/spoken_language'); ?>">LANGUAGE SPOKEN</a></li>
                     </ul>
                 </div>
             </div>  

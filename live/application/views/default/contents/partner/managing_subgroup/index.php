@@ -16,7 +16,7 @@
                         </svg>
                     </div>
                 </a></li>
-                <li><a href="#">Subgroup</a></li>
+                <li><a href="#">Group</a></li>
 				<li>
                     <form action="<?php echo site_url('partner/subgroup');?>" method="POST" autocomplete="on" class="search-box">
                       <input id="search" name="search_subgroup" type="text" placeholder="Type here.."><input id="search_submit" value="Rechercher" type="submit">
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <h1 class="margin0 left">Coach Partner Subgroup</h1>
+    <h1 class="margin0 left">Coach Affiliate Group</h1>
 
 </div>
 
@@ -36,8 +36,8 @@
         <form class="pure-g pure-u-md-24-24 pure-u-sm-24-24 pure-u-lg-24-24" action="<?php echo site_url('partner/subgroup/delete_subgroup');?>" method="POST">
 
         <div class="delete-add-btn padding-l-10 padding-t-65 pure-u-md-8-24 pure-u-lg-10-24">
-            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('partner/subgroup/add_subgroup');?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Subgroup</em></a></div>
-            <button class="btn-noborder btn-normal bg-white-fff" type="submit" value="delete_subgroup" name="__submit" onclick="return confirm('Are you sure you want to delete?')"><a><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Subgroup</em></a></button>
+            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('partner/subgroup/add_subgroup');?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Group</em></a></div>
+            <button class="btn-noborder btn-normal bg-white-fff" type="submit" value="delete_subgroup" name="__submit" onclick="return confirm('Are you sure you want to delete?')"><a><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Group</em></a></button>
         </div>
 
         <div class="pure-menu-horizontal pure-u-md-12-24 pure-u-lg-10-24 padding-r-10 right">
@@ -92,7 +92,7 @@
                     <tr>
                         <th class="bg-secondary bg-none text-cl-white border-none" style=""></th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">No</th>
-                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Subgroup</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Group</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Type</th>
                         </tr>
                 </thead>
@@ -108,7 +108,7 @@
                         </td>
                         <td><?php echo $a; ?></td>
                         <td><a href="<?php echo site_url('partner/subgroup/list_coach/'. $p->id); ?>" class="text-cl-tertiary"><u><?php echo $p->name?></u></a></td>
-                        <td><?php echo ucfirst($p->type); ?> Partner</td>
+                        <td><?php echo ucfirst($p->type); ?> Affiliate</td>
                                 </tr>
                     <?php $no++; $a++; } ?>
                 </tbody>

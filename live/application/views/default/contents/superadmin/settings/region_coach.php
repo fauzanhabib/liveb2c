@@ -8,8 +8,8 @@
 
         <div class="left-list-tabs pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list margin-left70">
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/settings/region/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Partner</a></li>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/settings/region/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Partner</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/settings/region/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Affiliate</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/settings/region/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Affiliate</a></li>
             </ul>
         </div>
 
@@ -89,6 +89,7 @@
 
 
         <script type="text/javascript">
+
             $(function(){
 
                 $('.list-frm').each(function(){
@@ -100,7 +101,7 @@
                     var _edit = $('.edit_click', _each);
                     var _eonly = $('.e-only', _each);
                     var _ronly = $('.r-only', _each)
-
+                    
                     _eonly.hide();
                     _close.hide();
                     _save.hide();

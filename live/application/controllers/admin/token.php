@@ -116,7 +116,7 @@ class token extends MY_Site_Controller {
 
         $partner_notification = array(
             'user_id' => $id_superadmin,
-            'description' => 'New token request from '.$fullname,
+            'description' => 'New Token request from '.$fullname,
             'status' => 2,
             'dcrea' => time(),
             'dupd' => time(),

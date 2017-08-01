@@ -28,7 +28,7 @@ class Histories extends MY_Site_Controller {
     }
     
     public function partner(){
-        $this->template->title = 'Partner';
+        $this->template->title = 'Affiliate';
         $partners = $this->partner_model->select('id, name, address')->get_all();
         
         $vars = array(
@@ -41,7 +41,7 @@ class Histories extends MY_Site_Controller {
     }
     
     public function coach($partner_id){
-        $this->template->title = 'Partner';
+        $this->template->title = 'Affiliate';
         $coaches = $this->user_model->get_coach_by_partner($partner_id);
         
         $vars = array(

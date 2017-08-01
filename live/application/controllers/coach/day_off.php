@@ -67,14 +67,17 @@ class day_off extends MY_Site_Controller {
             $this->edit($this->session->userdata("day_off_id"));
             return;
         }
-        
+        $default_status = 'pending';
+        if(!$this->checkSchedule($this->auth_manager->userid(),$this->input->post('start_date'), $this->input->post('end_date'))){
+            $default_status = 'booked';
+        }
         // inserting user data
         $day_off = array(
             'coach_id' => $this->auth_manager->userid(),
             'start_date' => $this->input->post('start_date'),
             'end_date' => $this->input->post('end_date'),
             'remark' => $this->input->post('remark'),
-            'status' => 'pending',
+            'status' => $default_status,
         );
         
         if (!$this->isValidDayOff($day_off['start_date'], $day_off['end_date'])){
@@ -83,11 +86,11 @@ class day_off extends MY_Site_Controller {
             return;
         }
         
-        if(!$this->checkSchedule($this->auth_manager->userid(),$day_off['start_date'], $day_off['end_date'])){
-            $this->messages->add('You have already booked by your student', 'danger');
-            $this->add();
-            return;
-        }
+        // if(!$this->checkSchedule($this->auth_manager->userid(),$day_off['start_date'], $day_off['end_date'])){
+        //     $this->messages->add('You have already booked by your student', 'danger');
+        //     $this->add();
+        //     return;
+        // }
 
         if(!$this->checkDayoff($this->auth_manager->userid(),$day_off['start_date'], $day_off['end_date'])){
             $this->messages->add('You have already requested on this date', 'danger');

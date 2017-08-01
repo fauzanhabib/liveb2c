@@ -124,6 +124,7 @@
                             <tr>
                                 <th class="text-cl-tertiary font-light font-16 border-none">TRANSACTION</th>
                                 <th class="text-cl-tertiary font-light font-16 border-none">COACH</th>
+                                <th class="text-cl-tertiary font-light font-16 border-none">OLD COACH</th>
                                 <th class="text-cl-tertiary font-light font-16 border-none">SESSION DATE</th>
                                 <?php if($this->auth_manager->role() == 'STD'){ ?>
                                 <th class="text-cl-tertiary font-light font-16 border-none">TIME</th>
@@ -198,6 +199,34 @@
                                         </span>
                                     </div>
                                 </td>
+
+                                <!-- get old coach -->
+                                <td>
+                                    <?php
+                                    $id_appointment = $history->id;
+                                    $check_reschedule = $this->db->select('appointment_id,old_coach_id')
+                                                                 ->from('appointment_reschedules')
+                                                                 ->where('appointment_id',$id_appointment)
+                                                                 ->get()->result();
+
+                                    if(@$check_reschedule[0]->appointment_id){
+                                        if($check_reschedule[0]->old_coach_id == 0){
+                                            echo "Unknown";
+                                        } else {
+                                            $get_name_coach = $this->db->select('fullname')
+                                                                       ->from('user_profiles')
+                                                                       ->where('user_id',$check_reschedule[0]->old_coach_id)
+                                                                       ->get()->result();
+                                            echo $get_name_coach[0]->fullname;
+                                        }
+                                    } else {
+                                        echo "-";
+                                    }
+                                    ?>
+
+                                </td>
+
+
                                 <td><?php echo date('M j Y', strtotime($history->date)); ?></td>
                                 <td>
                                     <div class="rounded-box bg-green">

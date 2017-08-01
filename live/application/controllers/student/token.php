@@ -29,7 +29,7 @@ class Token extends MY_Site_Controller {
     
     public function index($page=''){
         $this->template->title = 'Student Token';
-        $date_from = strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "-2 month");
+        $date_from = strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "-12 month");
         
         $offset = 0;
         $per_page = 6;

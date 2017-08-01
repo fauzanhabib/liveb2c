@@ -66,7 +66,7 @@
                 <tr>
                     <th class="bg-secondary text-cl-white border-none">Username</th>
                     <th class="bg-secondary text-cl-white border-none">Email</th>
-                    <th class="bg-secondary text-cl-white border-none">Partner</th>
+                    <th class="bg-secondary text-cl-white border-none">Affiliate</th>
                     <th class="bg-secondary text-cl-white border-none">Status</th>
                     <th class="bg-secondary text-cl-white border-none">Action</th>               
                 </tr>

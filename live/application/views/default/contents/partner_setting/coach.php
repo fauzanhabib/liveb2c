@@ -1,6 +1,6 @@
 <div class="heading text-cl-primary padding15">
 
-    <h1 class="margin0">Partner Setting</h1>
+    <h1 class="margin0">Affiliate Setting</h1>
 </div>
 
 <div class="box">
@@ -8,8 +8,8 @@
 
         <div class="left-list-tabs pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list margin-left70">
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Supplier</a></li>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Supplier</a></li>
+Affiliate                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Affiliate</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/partner_setting/setting_partner/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Affiliate</a></li>
             </ul>
         </div>
 

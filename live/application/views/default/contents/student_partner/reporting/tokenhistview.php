@@ -9,16 +9,16 @@
 			    <thead>
 			        <tr>
 			        	<th rowspan="2" class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">#</th>
-			            <th rowspan="2" class="bg-secondary uncek text-cl-white border-none">TRANSACTION</th>
-			            <th rowspan="2" class="bg-secondary uncek text-cl-white border-none">DESCRIPTION</th>
-			            <th rowspan="2" class="bg-secondary uncek text-cl-white border-none">STATUS</th>
-			            <th colspan="3" class="bg-secondary uncek text-cl-white border-none">TOKENS</th>
+			            <th rowspan="2" class="bg-secondary uncek text-cl-white border-none">Booking Date</th>
+			            <th rowspan="2" class="bg-secondary uncek text-cl-white border-none">Descroption</th>
+			            <th rowspan="2" class="bg-secondary uncek text-cl-white border-none">Status</th>
+			            <th colspan="3" class="bg-secondary uncek text-cl-white border-none">Token</th>
 			            <!-- <th class="bg-secondary uncek text-cl-white border-none">BALANCE</th>                -->
 			        </tr>
 			        <tr>
-			            <th class="bg-secondary uncek text-cl-white border-none">DEBIT</th>
-			            <th class="bg-secondary uncek text-cl-white border-none">CREDIT</th>
-			            <th class="bg-secondary uncek text-cl-white border-none">BALANCE</th>
+			            <th class="bg-secondary uncek text-cl-white border-none">Used</th>
+			            <th class="bg-secondary uncek text-cl-white border-none">Refunded</th>
+			            <th class="bg-secondary uncek text-cl-white border-none">Balance</th>
 			        </tr>
 			    </thead>
 			    <tbody>
@@ -153,7 +153,7 @@
                 "orderable": false,
                 "targets": 0
             } ],
-            "order": [[ 1, 'asc' ]],
+            "order": [[ 1, 'desc' ]],
             "bLengthChange": false,
             "searching": true,
             "userTable": false,

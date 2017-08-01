@@ -1,5 +1,5 @@
 <div class="heading text-cl-primary padding15">
-    <h1 class="margin0">Region <?php echo $partner[0]->region_name?> Partner</h1>
+    <h1 class="margin0">Region <?php echo $partner[0]->region_name?> Affiliate</h1>
 </div>
 
 <div class="box">

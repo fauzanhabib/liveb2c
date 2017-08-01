@@ -8,7 +8,7 @@
 
 <div class="heading text-cl-primary padding15">
     <?php if($this->uri->segment(2) == 'manage_partner'){ ?>
-        <h1 class="margin0">Partner Settings</h1>
+        <h1 class="margin0">Affiliate Settings</h1>
     <?php } else { ?>
         <h1 class="margin0">Region Settings</h1>
     <?php } ?>
@@ -21,11 +21,11 @@
         <div class="left-list-tabs pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list margin-left70">
                 <?php if($role_link == "superadmin") { ?>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/'.$this->uri->segment(2).'/setting/'.@$this->uri->segment(4).'/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Partner</a></li>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/'.$this->uri->segment(2).'/setting/'.@$this->uri->segment(4).'/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Partner</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/'.$this->uri->segment(2).'/setting/'.@$this->uri->segment(4).'/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Affiliate</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('superadmin/'.$this->uri->segment(2).'/setting/'.@$this->uri->segment(4).'/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Affiliate</a></li>
                 <?php } else { ?>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/manage_partner/setting/'.$id.'/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Partner</a></li>
-                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/manage_partner/setting/'.$id.'/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Partner</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/manage_partner/setting/'.$id.'/student');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 ">Student Affiliate</a></li>
+                <li class="pure-menu-item pure-menu-selected no-hover"><a href="<?php echo site_url('admin/manage_partner/setting/'.$id.'/coach');?>" class="pure-menu-link padding-t-b-5 font-semi-bold font-14 padding-lr-5 active-tabs-blue">Coach Affiliate</a></li>
                 <?php } ?>
             </ul>
 

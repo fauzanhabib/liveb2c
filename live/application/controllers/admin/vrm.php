@@ -62,23 +62,6 @@ class Vrm extends MY_Site_Controller {
                $student_vrm2 = $this->call2->getdataObj();
 
                $checkCallOne   = @$callOneJson->studentName;
-
-               $a1exist = $student_vrm2->cert_level_completion->A1;
-               $a2exist = $student_vrm2->cert_level_completion->A2;
-               $b1exist = $student_vrm2->cert_level_completion->B1;
-               $b2exist = $student_vrm2->cert_level_completion->B2;
-               $c1exist = $student_vrm2->cert_level_completion->C1;
-               $c2exist = $student_vrm2->cert_level_completion->C2;
-               
-               // echo "<pre>";
-               // print_r($student_vrm2->cert_level_completion->A1);exit();
-
-               if($a1exist == '' && $a2exist == '' && $b1exist == '' && $b2exist == '' && $c1exist == '' && $c2exist == ''){
-                $this->template->content->view('default/contents/vrm/student/nodata');
-                $this->template->publish(); 
-               }
-               else{
-
                if($checkCallOne){
                     $module_extract = $callOneJson->lessonCompletion;
                     $placement_test = end(@$callOneJson->placementTestGENs);
@@ -1284,7 +1267,7 @@ class Vrm extends MY_Site_Controller {
 
                 $this->template->content->view('default/contents/vrm/coach/index', $vars);
                 $this->template->publish();   
-            }
+            
         }
         else{
             $this->messages->add($data_dyned_pro[0]->fullname. ' does not connect to DynEd Pro yet', 'warning');

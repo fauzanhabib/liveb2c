@@ -164,7 +164,7 @@ class request_token extends MY_Site_Controller {
 
         $partner_notification = array(
             'user_id' => $this->auth_manager->region_id($gpid),
-            'description' => 'New token request from Student Partner. Please decide to Approve/Decline.',
+            'description' => 'New token request from Student Affiliate. Please decide to Approve/Decline.',
             'status' => 2,
             'dcrea' => time(),
             'dupd' => time(),

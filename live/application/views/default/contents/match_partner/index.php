@@ -1,5 +1,5 @@
 <div class="heading text-cl-primary padding15">
-    <h1 class="margin0">Partner Matches</h1>
+    <h1 class="margin0">Affiliate Matches</h1>
 </div>
 
 <?php
@@ -41,8 +41,8 @@ if($this->auth_manager->role() == 'RAD'){
                     <th class="bg-secondary bg-none text-cl-white border-none" style="width:30px;">
                        No.
                     </th>
-                    <th class="bg-secondary text-cl-white border-none">Student Partner</th>
-                    <th class="bg-secondary text-cl-white border-none">Coach Partner</th>
+                    <th class="bg-secondary text-cl-white border-none">Student Affiliate<br>(Student Groups)</th>
+                    <th class="bg-secondary text-cl-white border-none">Coach Affiliate<br>(Coach Groups)</th>
                     <th class="bg-secondary text-cl-white border-none width20perc">Action</th>               
                 </tr>
             </thead>
@@ -52,6 +52,8 @@ if($this->auth_manager->role() == 'RAD'){
                     foreach (@$data as $d) { 
                         $ss = $d['student_supplier_data'];
                         $sp = $d['coach_supplier_data'];
+                        $sg = $d['student_group_data'];
+                        $cg = $d['coach_group_data'];
 
                         if((count($ss) > 0) && (count($sp) > 0)){
 
@@ -59,10 +61,16 @@ if($this->auth_manager->role() == 'RAD'){
                         <tr class="list-match">
                             <td class="padding15" data-label="NO"><?php echo($i++);?></td>
                             <td class="padding15" data-label="STUDENT PARTNER">
-                                <span class="text-cl-secondary"><?php foreach($d['student_supplier_data'] as $d2){ @$temp1[]=@$d2->name; } echo @implode( ', ', @$temp1); @$temp1=''; ?></span>
+                                <span class="text-cl-secondary"><?php foreach($d['student_supplier_data'] as $d2){ @$temp1[]=@$d2->name; } echo @implode( ', ', @$temp1); @$temp1=''; ?></span><br>
+                                <?php if(count($sg) > 0){ ?>
+                                (<span class="text-cl-secondary"><?php foreach($d['student_group_data'] as $d4){ @$temp3[]=@$d4->name; } echo @implode( ', ', @$temp3); @$temp3=''; ?></span>)
+                                <?php } ?>
                             </td>
                             <td class="padding15" data-label="COACH PARTNER">
-                                <span class="text-cl-green"><?php foreach($d['coach_supplier_data'] as $d3){ @$temp2[] = @$d3->name; } echo @implode( ', ', @$temp2); @$temp2='';?></span>
+                                <span class="text-cl-green"><?php foreach($d['coach_supplier_data'] as $d3){ @$temp2[] = @$d3->name; } echo @implode( ', ', @$temp2); @$temp2='';?></span><br>
+                                <?php if(count($cg) > 0){ ?>
+                                (<span class="text-cl-green"><?php foreach($d['coach_group_data'] as $d5){ @$temp4[]=@$d5->name; } echo @implode( ', ', @$temp4); @$temp4=''; ?></span>)
+                                <?php } ?>
                             </td>
                             <td>
                             <div class="blue-red-btn">

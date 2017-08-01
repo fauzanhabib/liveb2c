@@ -84,20 +84,23 @@ class Reporting extends MY_Site_Controller {
                          ->where('type','student')
                          ->get()->result();
 
+            $date_from1   = date('d-M-y', strtotime($_POST["date_from"]));
+			$date_to1     = date('d-M-y', strtotime($_POST["date_to"])); 
+
             $vars = array(
                 'stu_rpt'      => $stu_rpt,
                 'partner_id'   => $partner_id,
                 'subgrouplist' => $subgrouplist,
+                'date_from1'    => $date_from1,
                 'date_from'    => $date_from,
+                'date_to1'      => $date_to1,
                 'date_to'      => $date_to,
                 'sglist'      => $sglist,
                 'selected' => $selected,
                 'noselect' => $noselect
             );
 
-            // echo "<pre>";
-            // print_r($vars);
-            // exit();
+            // echo "<pre>";print_r($vars);exit();
 
             $this->template->content->view('default/contents/student_partner/reporting/studentreport', $vars);
             $this->template->publish();
@@ -119,6 +122,7 @@ class Reporting extends MY_Site_Controller {
                      ->join('appointments','appointments.student_id = user_profiles.user_id')
                      ->order_by('date', 'DESC')
                      ->where_in('subgroup.id',$sglist)
+                     ->where('appointments.status','completed')
                      ->get()->result();
             }else if(@$date_from && !@$date_to){
             $ses_rpt = $this->db->select('*')
@@ -129,6 +133,7 @@ class Reporting extends MY_Site_Controller {
                      ->order_by('date', 'DESC')
                      ->where('date >=', $date_from)
                      ->where_in('subgroup.id',$sglist)
+                     ->where('appointments.status','completed')
                      ->get()->result();
             }else if(@$date_from && @$date_to){
             $ses_rpt = $this->db->select('*')
@@ -140,6 +145,7 @@ class Reporting extends MY_Site_Controller {
                      ->where('date >=', $date_from)
                      ->where('date <=', $date_to)
                      ->where_in('subgroup.id',$sglist)
+                     ->where('appointments.status','completed')
                      ->get()->result();
             }
 
@@ -156,20 +162,23 @@ class Reporting extends MY_Site_Controller {
                          ->where('type','student')
                          ->get()->result();
 
+         	$date_from1   = date('d-M-y', strtotime($_POST["date_from"]));
+			$date_to1     = date('d-M-y', strtotime($_POST["date_to"])); 
+
             $vars = array(
                 'ses_rpt' => $ses_rpt,
                 'spr_tz' => $spr_tz,
                 'date_from' => @$date_from,
+                'date_from1' => @$date_from1,
                 'date_to' => @$date_to,
+                'date_to1' => @$date_to1,
                 'partner_id'   => $partner_id,
                 'subgrouplist' => $subgrouplist,
                 'selected' => $selected,
                 'noselect' => $noselect
             );
 
-            // echo "<pre>";
-            // print_r($vars);
-            // exit();
+            // echo "<pre>";print_r($vars);exit();
 
             $this->template->content->view('default/contents/student_partner/reporting/sessionreport', $vars);
             $this->template->publish();
@@ -234,6 +243,7 @@ class Reporting extends MY_Site_Controller {
                  ->join('appointments','appointments.student_id = user_profiles.user_id')
                  ->order_by('date', 'DESC')
                  ->where_in('subgroup.id',$sglist)
+                 ->where('appointments.status','completed')
                  ->get()->result();
         }else if(@$date_from && !@$date_to){
         $ses_rpt = $this->db->select('*')
@@ -244,6 +254,7 @@ class Reporting extends MY_Site_Controller {
                  ->order_by('date', 'DESC')
                  ->where('date >=', $date_from)
                  ->where_in('subgroup.id',$sglist)
+                 ->where('appointments.status','completed')
                  ->get()->result();
         }else if(@$date_from && @$date_to){
         $ses_rpt = $this->db->select('*')
@@ -255,6 +266,7 @@ class Reporting extends MY_Site_Controller {
                  ->where('date >=', $date_from)
                  ->where('date <=', $date_to)
                  ->where_in('subgroup.id',$sglist)
+                 ->where('appointments.status','completed')
                  ->get()->result();
         }
 

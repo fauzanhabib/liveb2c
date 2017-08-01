@@ -13,6 +13,8 @@ class match_partner extends MY_Site_Controller {
         $this->load->model('class_matchmaking_model');
         $this->load->model('student_supplier_relation_model');
         $this->load->model('coach_supplier_relation_model');
+        $this->load->model('student_group_relation_model');
+        $this->load->model('coach_group_relation_model');
         $this->load->model('creator_member_model');
         // for messaging action and timing
         $this->load->library('queue');
@@ -26,7 +28,7 @@ class match_partner extends MY_Site_Controller {
 
     // Index
     public function index() {
-        $this->template->title = 'Partner Matching';
+        $this->template->title = 'Affiliate Matching';
         $id = $this->auth_manager->userid();
         
         $data = array();
@@ -37,6 +39,8 @@ class match_partner extends MY_Site_Controller {
                     'id' => $d->id,
                     'student_supplier_data' => $this->class_matchmaking_model->get_student_supplier($d->id),
                     'coach_supplier_data' => $this->class_matchmaking_model->get_coach_supplier($d->id,$id),
+                    'student_group_data' => $this->class_matchmaking_model->get_student_group($d->id),
+                    'coach_group_data' => $this->class_matchmaking_model->get_coach_group($d->id),
                     // 'coach_supplier_data' => $this->class_matchmaking_model->get_coach_supplier($d->id,$id),
                 );
             }else{
@@ -44,6 +48,8 @@ class match_partner extends MY_Site_Controller {
                     'id' => $d->id,
                     'student_supplier_data' => $this->class_matchmaking_model->get_student_supplier($d->id,$id),
                     'coach_supplier_data' => $this->class_matchmaking_model->get_coach_supplier($d->id),
+                    'student_group_data' => $this->class_matchmaking_model->get_student_group($d->id),
+                    'coach_group_data' => $this->class_matchmaking_model->get_coach_group($d->id),
                     // 'coach_supplier_data' => $this->class_matchmaking_model->get_coach_supplier($d->id,$id),
                 );
             }
@@ -53,7 +59,7 @@ class match_partner extends MY_Site_Controller {
         );
         
        // echo('<pre>');
-       // print_r($a); 
+       // print_r($vars); 
        // exit;
         
         $this->template->content->view('default/contents/match_partner/index', $vars);
@@ -61,13 +67,36 @@ class match_partner extends MY_Site_Controller {
         //publish template
         $this->template->publish();
     }
+
+    public function student_preview(){
+    $post = $this->input->post('stu_sup_id');
+        if($post){
+            $data_student_group = $this->partner_model->get_student_group($post);
+            echo json_encode($data_student_group);
+        }else{
+            echo '';
+        }
+    }
+
+    public function coach_preview(){
+    $post = $this->input->post('coa_sup_id');
+        if($post){
+            $data_coach_group = $this->partner_model->get_coach_group($post);
+            echo json_encode($data_coach_group);
+        }else{
+            echo '';
+        }
+    }
     
     public function add(){
         $id = $this->auth_manager->userid();
 
-        $this->template->title = 'Add Partner Match';
+        $this->template->title = 'Add Affiliate Match';
         $data_student_supplier = $this->partner_model->get_student_supplier($id);
         $data_coach_supplier = $this->partner_model->get_coach_supplier($id);
+
+        $data_student_group = $this->partner_model->get_student_group();
+        $data_coach_group = $this->partner_model->get_coach_group();
        // echo('<pre>');
        //print_r($data_student_supplier); 
        // print_r($data_coach_supplier);
@@ -76,6 +105,8 @@ class match_partner extends MY_Site_Controller {
             'action' => 'create',
             'data_student_supplier' => $data_student_supplier,
             'data_coach_supplier' => $data_coach_supplier,
+            'data_student_group' => $data_student_group,
+            'data_coach_group' => $data_coach_group,
         );
         $this->template->content->view('default/contents/match_partner/form', $vars);
 
@@ -91,14 +122,23 @@ class match_partner extends MY_Site_Controller {
         
         if($this->input->post('student_supplier_id') && $this->input->post('coach_supplier_id')){
             // explode multiple supplier id
-            $student = explode(',' , $this->input->post('student_supplier_id'));
-            $coach = explode(',' , $this->input->post('coach_supplier_id'));
+            $student = $this->input->post('stu_sup');
+            $coach = $this->input->post('coa_sup');
+            $student_group = $this->input->post('stu_gru');
+            $coach_group = $this->input->post('coa_gru');
             $status = 0;
-            foreach($student as $s){
-                if($this->student_supplier_relation_model->where('student_supplier_id', $s)->get()){
-                    $this->messages->add('Student Partner Has Already Has a Match', 'warning');
+            // foreach($student as $s){
+            //     if($this->student_supplier_relation_model->where('student_supplier_id', $s)->get()){
+            //         $this->messages->add('Student Affiliate Has Already Has a Match', 'warning');
+            //         $status = 1;
+            //         redirect('admin/match_partner/');
+            //     }
+            // }
+            foreach ($student_group as $sg) {
+                if($this->student_group_relation_model->where('subgroup_id', $sg)->get()){
+                    $this->messages->add('Student Group Has Already Has a Match', 'warning');
                     $status = 1;
-                    redirect('admin/match_partner/');
+                    redirect('superadmin/match_partner/');
                 }
             }
             
@@ -124,6 +164,26 @@ class match_partner extends MY_Site_Controller {
                     );
                     $this->coach_supplier_relation_model->insert($data_coach_supplier);
                 }
+
+                foreach($student_group as $sg){
+                    if($sg != ''){
+                    $data_student_group = array(
+                        'subgroup_id' => $sg,
+                        'class_matchmaking_id' => $class_matchmaking_id,
+                    );
+                    $this->student_group_relation_model->insert($data_student_group);
+                    }
+                }
+                    
+                foreach($coach_group as $cg){
+                    if($cg != ''){
+                    $data_coach_group = array(
+                        'subgroup_id' => $cg,
+                        'class_matchmaking_id' => $class_matchmaking_id,
+                    );
+                    $this->coach_group_relation_model->insert($data_coach_group);
+                    }
+                }
                 
                 $this->messages->add('Matchmaking created', 'success');
                 redirect('admin/match_partner/'); 
@@ -140,9 +200,23 @@ class match_partner extends MY_Site_Controller {
     }
     
     public function edit($class_matchmaking_id = ''){
-        $this->template->title = 'Edit Partner Match';
-        $data_student_supplier = $this->partner_model->get_student_supplier();
-        $data_coach_supplier = $this->partner_model->get_coach_supplier();
+        $this->template->title = 'Edit Affiliate Match';
+        $id = $this->auth_manager->userid();
+        $data_student_supplier = $this->partner_model->get_student_supplier($id);
+        if(!$data_student_supplier){
+            $data_student_supplier = $this->partner_model->get_student_supplier();
+        }else{
+            $data_student_supplier = $this->partner_model->get_student_supplier($id);
+        }
+        $data_coach_supplier = $this->partner_model->get_coach_supplier($id);
+        if(!$data_coach_supplier){
+            $data_coach_supplier = $this->partner_model->get_coach_supplier();
+        }else{
+            $data_coach_supplier = $this->partner_model->get_coach_supplier($id);
+        }
+        $data_student_group = $this->partner_model->get_student_group();
+        $data_coach_group = $this->partner_model->get_coach_group();
+//        echo('<pre>');
 //        echo('<pre>');
 //        print_r($data_student_supplier); 
 //        print_r($data_coach_supplier);exit;
@@ -162,6 +236,24 @@ class match_partner extends MY_Site_Controller {
                 'name' => $s->name,
             );
         }
+        $selected_student_group = $this->class_matchmaking_model->get_student_group($class_matchmaking_id);
+        $studentgroup_temp = array();
+        foreach($selected_student_group as $s){
+            $studentgroup_temp[] = array(
+                'id' => $s->id,
+                'name' => $s->name,
+            );
+            // $data_student_group = $this->partner_model->get_student_group($s->partner_id);
+        }
+        $selected_coach_group = $this->class_matchmaking_model->get_coach_group($class_matchmaking_id);
+        $coachgroup_temp = array();
+        foreach($selected_coach_group as $s){
+            $coachgroup_temp[] = array(
+                'id' => $s->id,
+                'name' => $s->name,
+            );
+            // $data_coach_group = $this->partner_model->get_coach_group($s->partner_id);
+        }
         $vars = array(
             'action' => 'update',
             'class_matchmaking_id' => $class_matchmaking_id,
@@ -169,6 +261,14 @@ class match_partner extends MY_Site_Controller {
             'selected_coach_supplier' => $coach_temp,
             'data_student_supplier' => $data_student_supplier,
             'data_coach_supplier' => $data_coach_supplier,
+            'selected_student_group' => $studentgroup_temp,
+            'selstusup' => $selected_student_supplier,
+            'selstugru' => $selected_student_group,
+            'selcoasup' => $selected_coach_supplier,
+            'selcoagru' => $selected_coach_group,
+            'selected_coach_group' => $coachgroup_temp,
+            'data_student_group' => $data_student_group,
+            'data_coach_group' => $data_coach_group,
             );
         
 //        echo('<pre>');
@@ -194,13 +294,21 @@ class match_partner extends MY_Site_Controller {
         if($this->input->post('class_matchmaking_id') && $this->input->post('student_supplier_id') && $this->input->post('coach_supplier_id')){
             
             // explode multiple supplier id
-            $student = array_filter(explode(',' , $this->input->post('student_supplier_id')));
-            $coach = array_filter(explode(',' , $this->input->post('coach_supplier_id')));
+            $student = $this->input->post('stu_sup');
+            $coach = $this->input->post('coa_sup');
+            $student_group = $this->input->post('stu_gru');
+            $coach_group = $this->input->post('coa_gru');
             
             $status = 0;
-            foreach($student as $s){
-                if($this->student_supplier_relation_model->where_not_in('class_matchmaking_id', $this->input->post('class_matchmaking_id'))->where('student_supplier_id', $s)->get()){
-                    $this->messages->add('Student Partner Has Already Has a Match', 'warning');
+            // foreach($student as $s){
+            //     if($this->student_supplier_relation_model->where_not_in('class_matchmaking_id', $this->input->post('class_matchmaking_id'))->where('student_supplier_id', $s)->get()){
+            //         $this->messages->add('Student Affiliate Has Already Has a Match', 'warning');
+            //         $status = 1;
+            //     }
+            // }
+            foreach($student_group as $sg){
+                if($this->student_group_relation_model->where_not_in('class_matchmaking_id', $this->input->post('class_matchmaking_id'))->where('subgroup_id', $sg)->get()){
+                    $this->messages->add('Student Group Has Already Has a Match', 'warning');
                     $status = 1;
                 }
             }
@@ -224,6 +332,29 @@ class match_partner extends MY_Site_Controller {
                     );
                     $this->coach_supplier_relation_model->insert($data_coach_supplier);
                 }
+
+                $this->student_group_relation_model->where('class_matchmaking_id', $this->input->post('class_matchmaking_id'))->delete();
+                foreach($student_group as $sg){
+                    if($sg != ''){
+                    $data_student_group = array(
+                        'subgroup_id' => $sg,
+                        'class_matchmaking_id' => $this->input->post('class_matchmaking_id'),
+                    );
+                    $this->student_group_relation_model->insert($data_student_group);
+                    }
+                }
+                
+                $this->coach_group_relation_model->where('class_matchmaking_id', $this->input->post('class_matchmaking_id'))->delete();   
+                foreach($coach_group as $cg){
+                    if($cg != ''){
+                    $data_coach_group = array(
+                        'subgroup_id' => $cg,
+                        'class_matchmaking_id' => $this->input->post('class_matchmaking_id'),
+                    );
+                    $this->coach_group_relation_model->insert($data_coach_group);
+                    }
+                }
+
                 $this->messages->add('Matchmaking Updated', 'success');
                 redirect('admin/match_partner/');
             }
@@ -244,8 +375,9 @@ class match_partner extends MY_Site_Controller {
         $this->class_matchmaking_model->delete($class_matchmaking_id);
         // delete table student_supplier_relation_model
         $this->student_supplier_relation_model->where('class_matchmaking_id', $class_matchmaking_id)->delete();
+        $this->student_group_relation_model->where('class_matchmaking_id', $class_matchmaking_id)->delete();
             
-	    $this->messages->add('Delete Succeeded', 'success');
+        $this->messages->add('Delete Succeeded', 'success');
         redirect('admin/match_partner/'); 
     }
 

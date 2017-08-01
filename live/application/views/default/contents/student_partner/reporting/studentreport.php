@@ -25,6 +25,9 @@
     td{
         font-weight: 400 !important;
     }
+    #large_wrapper{
+        overflow: auto;
+    }
 </style>
 <style type="text/css" src="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></style>
 <style type="text/css" src="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"></style>
@@ -80,6 +83,15 @@
 
 <div class="heading text-cl-primary padding-l-20">
     <h3 class="margin0" style="font-size: 28px;font-weight: 600;color: #2b89b9;">Student Report</h3>
+    <?php 
+    if(!@$date_from){  
+        echo "Data without date range";
+    }else if(@$date_from && !@$date_to){ 
+        echo "Data From: <strong>".$date_from1."</strong> To: <strong>Today</strong>";
+    }else if(@$date_from && @$date_to){ 
+        echo "Data From: <strong>".$date_from1."</strong> To: <strong>".$date_to1."</strong>";
+    } 
+    ?>
 </div>
 
 
@@ -99,6 +111,41 @@
             <script>
                 $(document).ready(function() {
                     var t = $('#large').DataTable( {
+                        "footerCallback": function ( row, data, start, end, display ) {
+                            var api = this.api(), data;
+                 
+                            // Remove the formatting to get integer data for summation
+                            var intVal = function ( i ) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '')*1 :
+                                    typeof i === 'number' ?
+                                        i : 0;
+                            };
+                 
+                            // Total over all pages
+                            startb = api.column( 6 ).data().reduce( function (a, b) {return intVal(a) + intVal(b);}, 0 );
+                            addeds = api.column( 7 ).data().reduce( function (a, b) {return intVal(a) + intVal(b);}, 0 );
+                            usedto = api.column( 8 ).data().reduce( function (a, b) {return intVal(a) + intVal(b);}, 0 );
+                            tokbal = api.column( 9 ).data().reduce( function (a, b) {return intVal(a) + intVal(b);}, 0 );
+                            comses = api.column( 10 ).data().reduce( function (a, b) {return intVal(a) + intVal(b);}, 0 );
+                 
+                            // Update footer
+                            $( api.column( 6 ).footer() ).html(startb);
+                            $( api.column( 7 ).footer() ).html(addeds);
+                            $( api.column( 8 ).footer() ).html(usedto);
+                            $( api.column( 9 ).footer() ).html(tokbal);
+                            $( api.column( 10 ).footer() ).html(comses);
+
+                            // String target = usedto.replaceAll("<a.*?</a>", "");
+                            // console.log(target);
+                            // console.log(api.column( 8 ).data());
+                        },
+
+
+                        "fixedHeader": {
+                            // "header": true,
+                            "footer": true
+                        },
                         "columnDefs": [ {
                             "searchable": false,
                             "orderable": false,
@@ -118,34 +165,220 @@
                             cell.innerHTML = i+1;
                         } );
                     } ).draw();
-
+                    var asd = t.column( 3 ).data().average();console.log(asd);
                 } );
             </script>
-            <table id="large" class="display table-session tablesorter" cellspacing="0" width="100%">
+            <table id="large" class="display table-session tablesorter" cellspacing="0" width="100%" style="overflow: auto;">
                 <thead>
                     <tr>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">#</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Group Name</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Name</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Email</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Pro ID</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Goal</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Start Balance</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Added Tokens</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Used Tokens</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Token Balance</th>
-                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Token Usage</th>               
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Completed Sessions</th>               
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Last Session</th>               
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Next Session</th>               
-                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Coach Rating Average</th>               
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Avg. Coach Rating</th>               
                     </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <th class="thfoot"></th>
+                        <th class="thfoot">Total</th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                        <th class="thfoot"></th>
+                    </tr>
+                </tfoot>
                 <tbody>
                 <?php
                 $a = 1;
                 $no = 1;
+                $nowdate  = date("Y-m-d");
+
                 foreach ($stu_rpt as $d) {
-                    $token_usage = $this->db->select('token_amount')
+
+                    if(!@$date_from){
+                        $tokenbal = $d->token_amount;
+                        $token_usage = $this->db->select('token_amount')
                                         ->from('token_histories')
                                         ->where('user_id',$d->user_id)
                                         ->where('token_status_id',1)
                                         ->get()->result();
+
+                        $token_balance = $this->db->select('token_amount')
+                                        ->from('token_histories')
+                                        ->where('user_id',$d->user_id)
+                                        ->get()->result();
+
+                        $token_added = $this->db->select('token_amount')
+                                        ->from('token_histories')
+                                        ->where('user_id',$d->user_id)
+                                        ->where('token_status_id',15)
+                                        ->get()->result();
+
+                        $total_ses = $this->db->select('id')
+                                    ->from('appointments')
+                                    ->where('student_id',$d->user_id)
+                                    ->get();
+
+                        $last_ses = $this->db->select('date')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            // ->where('status','comleted')
+                                            ->where('date <', $nowdate)
+                                            ->order_by('date','DESC')
+                                            ->get()->result();
+
+                        $next_ses = $this->db->select('date')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            // ->where('status','active')
+                                            ->where('date >', $nowdate)
+                                            ->order_by('date','ASC')
+                                            ->get()->result();
+
+                        $appid = $this->db->select('id')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            ->where('date <', $nowdate)
+                                            ->get()->result();
+                    }else if(@$date_from && !@$date_to){
+                        $from = strtotime(@$date_from);
+                        $tokenbal = $d->token_amount;
+
+                        $token_usage = $this->db->select('*')
+                                        ->from('token_histories')
+                                        ->where('transaction_date >=',$from)
+                                        ->where('user_id',$d->user_id)
+                                        ->where('token_status_id',1)
+                                        ->order_by('transaction_date','DESC')
+                                        ->get()->result();
+
+                        $token_balance = $this->db->select('*')
+                                        ->from('token_histories')
+                                        ->where('transaction_date <=',$from)
+                                        ->where('user_id',$d->user_id)
+                                        ->order_by('transaction_date','DESC')
+                                        ->get()->result();
+
+                        $token_added = $this->db->select('token_amount')
+                                        ->from('token_histories')
+                                        ->where('transaction_date >=',$from)
+                                        ->where('user_id',$d->user_id)
+                                        ->where('token_status_id',15)
+                                        ->get()->result();
+
+                        $total_ses = $this->db->select('id')
+                                    ->from('appointments')
+                                    ->where('student_id',$d->user_id)
+                                    ->where('date >=',$date_from)
+                                    ->get();
+
+                        $last_ses = $this->db->select('date')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            // ->where('status','comleted')
+                                            ->where('date <', $date_from)
+                                            ->order_by('date','DESC')
+                                            ->get()->result();
+
+                        $next_ses = $this->db->select('date')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            // ->where('status','active')
+                                            ->where('date >', $nowdate)
+                                            ->order_by('date','ASC')
+                                            ->get()->result();
+
+                        $appid = $this->db->select('id')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            ->where('date >=', $nowdate)
+                                            ->get()->result();
+                    }else if(@$date_from && @$date_to){
+                        $from = strtotime(@$date_from);
+                        $to   = strtotime(@$date_to);
+
+                        $token_usage = $this->db->select('*')
+                                        ->from('token_histories')
+                                        ->where('transaction_date >=',$from)
+                                        ->where('transaction_date <=',$to)
+                                        ->where('user_id',$d->user_id)
+                                        ->where('token_status_id',1)
+                                        ->order_by('transaction_date','DESC')
+                                        ->get()->result();
+
+                        $token_balance = $this->db->select('*')
+                                        ->from('token_histories')
+                                        ->where('transaction_date <=',$from)
+                                        ->where('user_id',$d->user_id)
+                                        ->order_by('transaction_date','DESC')
+                                        ->get()->result();
+
+                        $token_balance2 = $this->db->select('*')
+                                        ->from('token_histories')
+                                        ->where('transaction_date <=',$to)
+                                        ->where('user_id',$d->user_id)
+                                        ->order_by('transaction_date','DESC')
+                                        ->get()->result();
+
+                        $tokenbal = $token_balance2[0]->balance;
+
+                        $token_added = $this->db->select('token_amount')
+                                        ->from('token_histories')
+                                        ->where('transaction_date >=',$from)
+                                        ->where('transaction_date <=',$to)
+                                        ->where('user_id',$d->user_id)
+                                        ->where('token_status_id',15)
+                                        ->get()->result();
+
+                        $total_ses = $this->db->select('id')
+                                    ->from('appointments')
+                                    ->where('student_id',$d->user_id)
+                                    ->where('date >=',$date_from)
+                                    ->where('date <=',$date_to)
+                                    ->get();
+
+                        $last_ses = $this->db->select('date')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            // ->where('status','comleted')
+                                            ->where('date <', $date_from)
+                                            ->order_by('date','DESC')
+                                            ->get()->result();
+
+                        $next_ses = $this->db->select('date')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            // ->where('status','active')
+                                            ->where('date >', $date_to)
+                                            ->order_by('date','ASC')
+                                            ->get()->result();
+
+                        $appid = $this->db->select('id')
+                                            ->from('appointments')
+                                            ->where('student_id',$d->user_id)
+                                            ->where('date >=', $nowdate)
+                                            ->get()->result();
+                    }
+
+                    
 
                     $sum = 0;
                     foreach($token_usage as $key=>$value){
@@ -153,33 +386,6 @@
                          $sum += $value->token_amount;
                     }
 
-                    $nowdate  = date("Y-m-d");
-                    $total_ses = $this->db->select('id')
-                                    ->from('appointments')
-                                    ->where('student_id',$d->user_id)
-                                    ->get();
-
-                    $last_ses = $this->db->select('date')
-                                        ->from('appointments')
-                                        ->where('student_id',$d->user_id)
-                                        // ->where('status','comleted')
-                                        ->where('date <', $nowdate)
-                                        ->order_by('date','DESC')
-                                        ->get()->result();
-
-                    $next_ses = $this->db->select('date')
-                                        ->from('appointments')
-                                        ->where('student_id',$d->user_id)
-                                        // ->where('status','active')
-                                        ->where('date >', $nowdate)
-                                        ->order_by('date','ASC')
-                                        ->get()->result();
-
-                    $appid = $this->db->select('id')
-                                        ->from('appointments')
-                                        ->where('student_id',$d->user_id)
-                                        ->where('date <', $nowdate)
-                                        ->get()->result();
 
                     $app_id="";
                     foreach($appid as $ap){
@@ -204,31 +410,36 @@
                     }else{
                         $rateaverage = 0;
                     }
-                    $countrate = count($getrating);
-                    if ($countrate > 1) {
-                        $sess = "sessions)";
-                    }else{
-                        $sess = "session)";
-                    }
+
+                    $start_b = @$token_balance[0]->balance;
                     // echo $rateaverage;
-                    // echo "<pre>";
-                    // print_r($asdf);
-                    // exit();
+
+                    $addeds = 0;
+                    foreach($token_added as $key=>$value){
+                      if(isset($value->token_amount))
+                         $addeds += $value->token_amount;
+                    }
+
+                    // echo "<pre>";print_r($token_balance);exit();
                     ?>
                     <tr>
                         <td></td>
                         <td style="text-align: left;padding-left: 5px !important;"><?php echo $d->name; ?></td>
-                        <td style="text-align: left;padding-left: 5px !important;"><a href="<?php echo site_url('student_partner/member_list/student_detail/'.$d->user_id);?>" class="text-cl-tertiary" target="_blank"><?php echo $d->fullname; ?></a></td>
+                        <td style="text-align: left;padding-left: 5px !important;"><a href="<?php echo site_url('student_partner/reporting/tokenhist/'.$d->user_id);?>" class="text-cl-tertiary" target="_blank"><?php echo $d->fullname; ?></a></td>
                         <td style="text-align: left;padding-left: 5px !important;"><?php echo $d->email; ?></td>
-                        <td><a href="<?php echo site_url('student_partner/reporting/tokenhist/'.$d->user_id);?>" class="text-cl-tertiary" target="_blank"><?php echo $d->token_amount; ?></a></td>
+                        <td style="padding: 0px 10px !important;"><?php echo $d->dyned_pro_id; ?></td>
+                        <td><?php echo $d->cert_studying; ?></td>
+                        <td><?php if(@$start_b){echo @$start_b;}else{echo '0';} ?></td>
+                        <td><?php if(@$addeds){echo @$addeds;}else{echo '0';} ?></td>
                         <td>
                             <?php if($sum != 0){ ?>
-                            <a href="<?php echo site_url('student_partner/reporting/tokenusage/'.$d->user_id);?>" class="text-cl-tertiary" target="_blank"><?php echo $sum; ?></a>
+                            <?php echo $sum; ?>
                             <?php }else{ echo $sum; }?>
                         </td>
+                        <td><?php echo @$tokenbal; ?></td>
                         <td>
                             <?php if($total_ses->num_rows() != 0){ ?>
-                                <a href="<?php echo site_url('student_partner/reporting/completed/'.$d->user_id);?>" class="text-cl-tertiary" target="_blank"><?php echo $total_ses->num_rows(); ?></a>
+                                <?php echo $total_ses->num_rows(); ?>
                             <?php }else{ echo $total_ses->num_rows(); }?>
                         </td>
                         <td><?php 
@@ -246,7 +457,7 @@
                         ?></td>
                         <td><?php 
                             if(@$rateaverage == 0){
-                                echo '<span class="labels tooltip-bottom" data-tooltip="Never rated a coach" style="color:#000 !important;font-size:14px;">-</span>';
+                                echo '';
                             }else{
                                 echo $rateaverage;
                             }

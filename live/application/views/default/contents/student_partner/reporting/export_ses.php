@@ -26,17 +26,19 @@
 <table id="large" class="display table-session tablesorter" cellspacing="0" width="100%">
     <thead>
         <tr>
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">#</th>
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Group Name</th>
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Session Date</th>
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Session Time</th>
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Name</th>
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Email</th>             
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Coach Name</th>             
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Student Attendance</th>             
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Coach Attendance</th>             
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Length of Session</th>             
-            <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Coach Rating</th>             
+            <th style="cursor:pointer;">#</th>
+            <th style="cursor:pointer;">Group Name</th>
+            <th style="cursor:pointer;">Student</th>
+            <th style="cursor:pointer;">Email</th>
+            <th style="cursor:pointer;">Pro ID</th>
+            <th style="cursor:pointer;">Goal</th>
+            <th style="cursor:pointer;">Coach</th>
+            <th style="cursor:pointer;">Rating</th>
+            <th style="cursor:pointer;">Session Date</th>
+            <th style="cursor:pointer;">Session Time</th>
+            <th style="cursor:pointer;">Student Attendance</th>
+            <th style="cursor:pointer;">Coach Attendance</th>
+            <th style="cursor:pointer;">Length of Session</th>
         </tr>
     </thead>
     <tbody>
@@ -59,7 +61,7 @@
         if(@$getrating != NULL){
             $ratingsess = $getrating[0]->rate;
         }else{
-            $ratingsess = "Not Rated";
+            $ratingsess = '<span class="labels tooltip-bottom" data-tooltip="Not rated" style="color:#000 !important;font-size:14px;">-</span>';
         }
 
         $std_attend = @$d->std_attend;
@@ -93,9 +95,15 @@
         $endmin_real  = date("H:i", $endmin);
         ?>
         <tr>
-            <td class="textcent"></td>
+            <td></td>
             <td><?php echo $d->name; ?></td>
-            <td><?php 
+            <td style="text-align: left;padding-left: 5px !important;"><?php echo $d->fullname; ?></td>
+            <td style="text-align: left;padding-left: 5px !important;"><?php echo $d->email; ?></td>
+            <td style="text-align: left;padding-left: 5px !important;"><?php echo $d->dyned_pro_id; ?></td>
+            <td class="textcent"><?php echo $d->cert_studying; ?></td>
+            <td style="text-align: left;padding-left: 10px !important;"><?php echo $cch_name[0]->fullname; ?></td>
+            <td class="textcent"><?php echo $ratingsess; ?></td>
+            <td style="text-align: left;padding-left: 10px !important;"><?php 
                 $minutes_to_add = $spr_tz;
 
                 $time = new DateTime($d->date." ".$d->start_time);
@@ -106,16 +114,13 @@
                 echo $stamp;
                 // echo $d->date; 
             ?></td>
-            <td class="textcent"><?php 
+            <td style="text-align: center;padding-left: 0px !important;"><?php 
                 // echo $d->start_time." - ".$end_time."<br>"; 
                 echo $start_conv_real." - ".$endmin_real; 
             ?></td>
-            <td><?php echo $d->fullname; ?></td>
-            <td><?php echo $d->email; ?></td>
-            <td><?php echo $cch_name[0]->fullname; ?></td>
             <td class="textcent"><?php 
                 if(!@$std_attend){
-                    echo "No Show";
+                    echo '-';
                 }else{
                     $std_conv = strtotime(@$std_attend) + ($spr_tz * 60);
                     $std_conv_real = date("H:i:s", $std_conv);
@@ -124,7 +129,7 @@
             ?></td>
             <td class="textcent"><?php
                 if(!@$cch_attend){
-                    echo "No Show";
+                    echo '-';
                 }else{
                     $cch_conv = strtotime(@$cch_attend) + ($spr_tz * 60);
                     $cch_conv_real = date("H:i:s", $cch_conv);
@@ -132,7 +137,6 @@
                 }
             ?></td>
             <td class="textcent"><?php echo @$length; ?></td>
-            <td class="textcent"><?php echo $ratingsess; ?></td>
         </tr>
         <?php $no++; $a++; } ?>
     </tbody>

@@ -8,7 +8,7 @@
             <ul>
                 <li><a href="#">Account Info</a></li>
                 <li class="current"><a href="#" class="active">Session Duration</a></li>
-                <li><a href="#">Partner Setting</a></li>
+                <li><a href="#">Affiliate Setting</a></li>
             </ul>
         </div>
     </div>

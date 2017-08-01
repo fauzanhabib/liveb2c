@@ -1,5 +1,5 @@
 <div class="heading text-cl-primary padding15">
-    <h1 class="margin0">Partner Setting</h1>
+    <h1 class="margin0">Affiliate Setting</h1>
 </div>
 <div class="box b-f3-2">
     <!-- <div class="heading pure-g">
@@ -17,7 +17,7 @@
             <?php echo form_open_multipart('admin/partner_setting/update_setting_partner/'.$data->partner_id, 'id="form" role="form" class="pure-form pure-form-aligned padding15" data-parsley-validate'); ?>
             <div class="heading pure-g">
                 <div class="pure-u-12-24">
-                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">STUDENT PARTNER SETTING</h3>
+                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">STUDENT AFFILIATE SETTING</h3>
                 </div>
                 <div class="pure-u-12-24">
                     <div class="edit action-icon">
@@ -68,9 +68,9 @@
                     </div>
                     <div class="b-f3-1"></div>
                      <div class="pure-control-group" style="margin-bottom:8px">
-                        <h4 class="m-b-15">Set Maximum Student per Supplier</h4>
+                        <h4 class="m-b-15">Set Maximum Student per Affiliate</h4>
                         <div class="label">
-                            <label for="student">Max Student per Supplier</label>
+                            <label for="student">Max Student per Affiliate</label>
                         </div>
                         <div class="input">
                             <span class="r-only"><?php echo(@$data->max_student_supplier); ?></span>
@@ -104,7 +104,7 @@
         
             <div class="heading pure-g">
                 <div class="pure-u-12-24">
-                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">COACH PARTNER SETTING</h3>
+                    <h3 class="h3 font-normal padding-tb-15 text-cl-secondary">COACH AFFILIATE SETTING</h3>
                 </div>
                 
             </div>

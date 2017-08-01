@@ -28,20 +28,8 @@ class Croncoachatt extends MY_Controller {
             ->order_by('id', 'DESC')
             ->get()->result();
     
-    foreach($pulldb as $pdid){
-        $listid[] = $pdid->id;
-    }
-    if(@$listid){
-        $upd_status_appointment = array(
-           'status' => 'completed'
-        );
-        // echo "<pre>";print_r($listid);
-        // exit();
 
-        $this->db->where_in('id', $listid);
-        $this->db->update('appointments', $upd_status_appointment);
-        // echo "<pre>";print_r($pulldb);exit();
-    }
+    // echo "<pre>";print_r($pulldb);exit();
 
     foreach($pulldb as $pd){
         $appointment_id   = $pd->id;

@@ -1,5 +1,5 @@
 <div class="heading text-cl-primary padding15">
-    <h1 class="margin0">Edit Partner Admin</h1>
+    <h1 class="margin0">Edit Affiliate Admin</h1>
 </div>
 
 <div class="box">

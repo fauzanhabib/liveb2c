@@ -83,7 +83,7 @@
   }
   #bwresult{
     padding: 15px 15px;
-    height: 250px;
+    height: 400px;
     background: #fff;
     width: 47%;
     display: inline-block;
@@ -118,7 +118,12 @@
     </div>
 
     <div id="bwresult" class="hover">
-      
+      <div style="width: 100%;text-align: left;margin-bottom: 20px;">
+      	<h5 style="margin: 0px !important;">Browser Info:</h5>
+      	<p style="font-size: 14px;"><b id="browinfo"></b></p>
+      	<p style="font-size: 14px;" id="browmess"></p>
+      </div>
+
       <h5 style="margin: 0px !important;">Your Bandwidth:</h5>
 
       <div style="text-align: center;">
@@ -348,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // This publisher uses the default resolution (640x480 pixels) and frame rate (30fps).
   // For other resoultions you may need to adjust the bandwidth conditions in
   // testStreamingCapability().
-
+  
   publisher = OT.initPublisher(publisherEl, {}, callbacks.onInitPublisher);
 
   session = OT.initSession(API_KEY, SESSION_ID);
@@ -566,6 +571,43 @@ function fbwps(){
   $('#resultaudio').animate({"scrollTop": $('#resultaudio')[0].scrollHeight}, "fast");
 
 }
+</script>
+<script>
+	function get_browser() {
+	    var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+	    if(/trident/i.test(M[1])){
+	        tem=/\brv[ :]+(\d+)/g.exec(ua) || []; 
+	        return {name:'IE',version:(tem[1]||'')};
+	        }   
+	    if(M[1]==='Chrome'){
+	        tem=ua.match(/\bOPR|Edge\/(\d+)/)
+	        if(tem!=null)   {return {name:'Opera', version:tem[1]};}
+	        }   
+	    M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+	    if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+	    return {
+	      name: M[0],
+	      version: M[1]
+	    };
+	}
+
+	var browser=get_browser();
+	// console.log(browser);
+	if(browser.name == "Chrome" || browser.name == "Firefox"){
+		$('#browinfo').text(browser.name + ' v.' + browser.version);
+		if(browser.name == "Chrome" && browser.version < 59){
+			$('#browmess').append('Your Chrome browser is <font style="color:#ba3a3a;font-weight:600;">outdated</font>. Please update by clicking <a href="https://www.google.com/chrome/browser/desktop/index.html" style="text-decoration: underline;">this link</a> then run this page again after you have updated.');
+		}else if(browser.name == "Chrome" && browser.version >= 59){
+			$('#browmess').append('Your Chrome is able to run session <a style="color: #58ba84;">&#x2714;</a>');
+		}else if(browser.name == "Firefox" && browser.version < 53){
+			$('#browmess').append('Your Firefox browser is <font style="color:#ba3a3a;font-weight:600;">outdated</font>. Please update by clicking <a href="https://www.mozilla.org/en-US/firefox/new/" style="text-decoration: underline;">this link</a> then run this page again after you have updated.');
+		}else if(browser.name == "Firefox" && browser.version >= 53){
+			$('#browmess').append('Your Firefox is able to run session <a style="color: #58ba84;">&#x2714;</a>');
+		}
+	}else{
+		$('#browinfo').text(browser.name + ' v.' + browser.version);
+		$('#browmess').append('Your browser <font style="color:#ba3a3a;font-weight:600;">does NOT</font> support LIVE Session, please only use latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" style="text-decoration: underline;">Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/" style="text-decoration: underline;">Firefox</a>');
+	}
 </script>
 </body>
 </html>

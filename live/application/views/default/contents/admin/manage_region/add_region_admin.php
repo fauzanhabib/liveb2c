@@ -23,7 +23,7 @@
                             <label for="email">Email</label>
                         </div>
                         <div class="input">
-                            <input type="email" name="email" data-parsley-trigger="change" value="<?php echo @$data->email;?>" id="email" class="pure-input-1-2" required data-parsley-required-message="Please input partner’s e-mail" data-parsley-type-message="Please input valid e-mail address">
+                            <input type="email" name="email" data-parsley-trigger="change" value="<?php echo @$data->email;?>" id="email" class="pure-input-1-2" required data-parsley-required-message="Please input affiliate`s e-mail" data-parsley-type-message="Please input valid e-mail address">
                         </div>
                     </div>
                     
@@ -79,7 +79,7 @@
                             <label for="skype_id">Skype ID</label>
                         </div>
                         <div class="input">
-                            <?php echo form_input('skype_id','', 'id="skype_id" class="pure-input-1-2" required data-parsley-required-message="Please input partner’s skype id"') ?>
+                            <?php echo form_input('skype_id','', 'id="skype_id" class="pure-input-1-2" required data-parsley-required-message="Please input affiliate`s skype id"') ?>
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@
                             <label for="phone">Phone Number</label>
                         </div>
                         <div class="input">
-                            <?php echo form_input('phone','', 'id="phone" class="pure-input-1-2" data-parsley-type="digits" required data-parsley-required-message="Please input partner’s phone" data-parsley-type-message="Please input numbers only"') ?>
+                            <?php echo form_input('phone','', 'id="phone" class="pure-input-1-2" data-parsley-type="digits" required data-parsley-required-message="Please input affiliate`s phone" data-parsley-type-message="Please input numbers only"') ?>
                         </div>
                     </div>
                     

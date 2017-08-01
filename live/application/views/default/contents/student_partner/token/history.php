@@ -119,8 +119,8 @@
                         $userid = $this->auth_manager->userid();
                         $gmt_user = $this->identity_model->new_get_gmt($userid);
                         
-                        $status = ['approved' => 'Book', 'cancelled' => 'Resc', 'declined' => 'Deli', 'added' => 'added', 'given' => 'added'];
-                        $tooltip = ['approved' => 'Token Request has been approved', 'cancelled' => 'Token Requests has been cancelled', 'declined' => 'Token Request has been declined', 'requested' => 'Token has been requested', 'added' => 'Token has been added', 'given' => 'Token has been given'];  //ditambah
+                        $status = ['approved' => 'Book', 'cancelled' => 'Resc', 'declined' => 'Deli', 'added' => 'added', 'given' => 'added', 'refund' => 'Resc'];
+                        $tooltip = ['approved' => 'Token Request has been approved', 'cancelled' => 'Token Requests has been cancelled', 'declined' => 'Token Request has been declined', 'requested' => 'Token has been requested', 'added' => 'Token has been added', 'given' => 'Token has been given', 'refund' => 'Token has been refunded'];  //ditambah
                         ?>
                 <tr>
                     <!-- <td><?php echo $i; ?></td> -->

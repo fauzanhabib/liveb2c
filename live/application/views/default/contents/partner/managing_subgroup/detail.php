@@ -16,7 +16,7 @@
                         </svg>
                     </div>
                 </a></li>
-                <li><a href="<?php echo site_url('partner/subgroup') ?>">Coach Group</a></li>
+                <li><a href="<?php echo site_url('partner/subgroup') ?>">Coach Partner</a></li>
 				<li><a href="#"><?php foreach ($data as $ds) {
                     if($ds->id == $subgroup_id){
                         echo $ds->name;
@@ -29,7 +29,7 @@
 
 
     <div class="profilePic-top thumb-small left img-circle-big" style="border: 1px solid #fff;">
-        <img src="img/ariana.jpeg" width="150" class="pure-img fit-cover-top" />
+        <img src="<?php echo base_url();?>index.php/account/identity/detail/profile" width="150" class="pure-img fit-cover-top" />
     </div>
 
     <div class="tag">
@@ -38,7 +38,7 @@
                         echo $ds->name;
                     }
                 } ?></h1>
-        <span class="padding-l-18 text-cl-secondary font-18 font-semi-bold"><?php echo $data[0]->type; ?> Partner</span><br>
+        <span class="padding-l-18 text-cl-secondary font-18 font-semi-bold"><?php echo $data[0]->type; ?> Affiliate</span><br>
         <!--<span class="padding-l-18 font-14 text-cl-secondary">Bangkok, Thailand</span>-->
     </div>
 
@@ -140,17 +140,45 @@
 
     </div>
 
-   <div class="content padding-t-10">
+    <div class="content padding-t-10">
         <div class="box">   
-            <div class="select-all">                             
-                <div class="padding-r-5 m-t-2 left">
-                    <input type="checkbox" id="checkbox-1-0" name="Region" value="Region-1" class="regular-checkbox checkAll" /><label class="" for="checkbox-1-0"></label>
+            <div class="flex justify_content-sb padding-b-5">
+                <div class="select-all flex">                             
+                    <div class="padding-r-5 m-t-2">
+                        <input type="checkbox" id="checkbox-1-0" name="Region" value="Region-1" class="regular-checkbox checkAll" /><label class="" for="checkbox-1-0"></label>
+                    </div>
+                    <div class="">
+                        <label class="font-12">Select All</label>
+                    </div>
                 </div>
-                <div class="">
-                    <label class="font-12">Select All</label>
-                </div>
+                <input type="text" id="myInput" class="font-12" onkeyup="myFunction()" placeholder="Search for names..">
             </div>
-            <table id="large" class="display table-session tablesorter" cellspacing="0" width="100%">
+            <style type="text/css">
+                div.pager {
+                    text-align: center;
+                    margin: 1em 0;
+                }
+
+                div.pager span {
+                    display: inline-block;
+                    width: 1.8em;
+                    height: 1.8em;
+                    line-height: 1.8;
+                    text-align: center;
+                    cursor: pointer;
+                    /*background: #000;*/
+                    color: #939393;
+                    margin-right: 0.5em;
+                    font-size: 14px;
+                }
+
+                div.pager span.active {
+                    color: #3baae3;
+                    /*background: #c00;*/
+                }
+            </style>
+
+            <table id="large" class="display table-session tablesorter paginated" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th class="bg-secondary bg-none text-cl-white border-none" style="width:30px;"></th>
@@ -173,7 +201,7 @@
                         </td>
                         <td><?php echo $a?></td>
                         <td><a href="<?php echo site_url('partner/subgroup/coach_detail/'.@$subgroup_id.'/'.$d->id);?>" class="status-disable bg-green text-cl-white"><?php echo $d->fullname?></a></td>
-                        <td><?php echo $d->phone?></td>
+                        <td><?php echo $d->dial_code.$d->phone?></td>
                         <td><?php echo $d->email?></td>
                     </tr>
                     <?php $no++; $a++; } ?>
@@ -181,7 +209,7 @@
             </table>
         </div>
     </div>
-    <?php echo $pagination;?>
+    
 </div>
 </form>
 
@@ -201,4 +229,63 @@
     $(".checkAll").change(function () {
         $("input:checkbox").prop('checked', $(this).prop("checked"));
     });
+</script>
+<script type="text/javascript">
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("large");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerText.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+$('#myInput').keypress(function(event){
+
+    if (event.keyCode === 10 || event.keyCode === 13) 
+        event.preventDefault();
+
+  });
+</script>
+<script>
+$('td', 'table').each(function(i) {
+    $(this).text();
+});
+
+
+
+$('table.paginated').each(function() {
+    var currentPage = 0;
+    var numPerPage = 10;
+    var $table = $(this);
+    $table.bind('repaginate', function() {
+        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    });
+    $table.trigger('repaginate');
+    var numRows = $table.find('tbody tr').length;
+    var numPages = Math.ceil(numRows / numPerPage);
+    var $pager = $('<div class="pager"></div>');
+    for (var page = 0; page < numPages; page++) {
+        $('<span class="page-number"></span>').text(page + 1).bind('click', {
+            newPage: page
+        }, function(event) {
+            currentPage = event.data['newPage'];
+            $table.trigger('repaginate');
+            $(this).addClass('active').siblings().removeClass('active');
+        }).appendTo($pager).addClass('clickable');
+    }
+    $pager.insertAfter($table).find('span.page-number:first').addClass('active');
+});
 </script>

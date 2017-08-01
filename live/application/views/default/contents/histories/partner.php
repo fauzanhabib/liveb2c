@@ -3,7 +3,7 @@
 <div>
     <table border="1">
         <tr>
-            <th>Partner</th>
+            <th>Affiliate</th>
             <th>Address</th>
         </tr>
         <?php foreach (@$partners as $partner) { ?>

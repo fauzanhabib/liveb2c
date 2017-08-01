@@ -17,7 +17,7 @@
 
 // $config['base_url'] = 'https://idbuild.id.dyned.com/live_v20/';
 if($_SERVER['SERVER_NAME'] == 'idbuild.id.dyned.com'){
-	$config['base_url'] = 'https://idbuild.id.dyned.com/live_v20/';	
+	$config['base_url'] = 'https://idbuild.id.dyned.com/liveprod/';	
 } else {
 	$config['base_url'] = '';
 }

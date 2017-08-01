@@ -16,7 +16,7 @@
                         </svg>
                     </div>
                 </a></li>
-                <li><a href="#">Subgroup</a></li>
+                <li><a href="#">Group</a></li>
 				<li>
                     <form action="<?php echo site_url('student_partner/subgroup');?>" method="POST" autocomplete="on" class="search-box">
                       <input id="search" name="search_subgroup" type="text" placeholder="Type here.."><input id="search_submit" value="Rechercher" type="submit">
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <h1 class="margin0 left">Subgroup</h1>
+    <h1 class="margin0 left">Group</h1>
 
    <!--  <div class="padding-l-10 padding-t-5 left">
         <button class="btn-small border-none bg-green text-cl-white height-32">
@@ -41,8 +41,8 @@
     <div class="heading heading-total-session pure-g prelative">
         <form action="<?php echo site_url('student_partner/subgroup/delete_subgroup');?>" method="POST" class="pure-g pure-u-md-24-24 pure-u-sm-24-24 pure-u-lg-24-24">
         <div class="delete-add-btn padding-l-10 padding-t-65 pure-u-md-8-24 pure-u-lg-8-24">
-            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('student_partner/subgroup/add_subgroup');?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Subgroup</em></a></div>
-            <button class="btn-noborder btn-normal bg-white-fff" type="submit" name="__submit" value="delete_subgroup" onclick="return confirm('Are you sure you want to delete subgroup?')"><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Subgroup</em></button>
+            <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('student_partner/subgroup/add_subgroup');?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Group</em></a></div>
+            <button class="btn-noborder btn-normal bg-white-fff" type="submit" name="__submit" value="delete_subgroup" onclick="return confirm('Are you sure you want to delete group?')"><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Group</em></button>
         </div>
 
         <div class="pure-menu-horizontal pure-u-md-10-24 pure-u-lg-10-24 padding-r-10 right">
@@ -97,7 +97,7 @@
                     <tr>
                         <th class="bg-secondary bg-none text-cl-white border-none" style=""></th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">No</th>
-                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Subgroup</th>
+                        <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Group</th>
                         <th class="bg-secondary uncek text-cl-white border-none" style="cursor:pointer;">Type</th>
                         </tr>
                 </thead>
@@ -113,7 +113,7 @@
                         </td>
                         <td><?php echo $a; ?></td>
                         <td><a href="<?php echo site_url('student_partner/subgroup/list_student/'. $p->id); ?>" class="text-cl-tertiary"><u><?php echo $p->name?><u></a></td>
-                        <td><?php echo ucfirst($p->type); ?> Partner</td>
+                        <td><?php echo ucfirst($p->type); ?> Affiliate</td>
                                 </tr>
                     <?php $no++; $a++; } ?>
                 </tbody>

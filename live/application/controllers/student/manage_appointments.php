@@ -64,7 +64,805 @@ class manage_appointments extends MY_Site_Controller {
         $this->template->publish();
     }
 
-    public function reschedule($appointment_id = '') {
+    public function reschedule($appointment_id = '', $coach_id = '', $page = ''){
+        $this->template->title = 'Reschedule Appointment';
+
+        // checking if appointment has already rescheduled
+        $appointment_reschedule_data = $this->appointment_reschedule_model->select('id')->where('appointment_id', $appointment_id)->get();
+        
+        if ($appointment_reschedule_data) {
+            $this->messages->add('apppointment has already rescheduled', 'warning');
+            redirect('student/upcoming_session');
+        }
+
+        $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, start_time, end_time, status')->where('id', $appointment_id)->get();
+        $student_id_ = $appointment_data->student_id;
+        $old_coach_id = $appointment_data->coach_id;  
+        $date = $appointment_data->date;  
+
+        $week_date = $this->x_week_range($date);
+ 
+       // get other coach
+        $offset = 0;
+        $per_page = 6;
+        $uri_segment = 5;
+
+        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/manage_appointments/new_reschedule/'.$appointment_id."/"), count($this->identity_model->get_coach_identity(null)), $per_page, $uri_segment);
+        $coaches = $this->identity_model->get_coach_identity(null, null, null, null, null, null, null, $per_page, $offset);
+
+        $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+
+        $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
+        $standard_coach_cost = $setting[0]->standard_coach_cost;
+        $elite_coach_cost = $setting[0]->elite_coach_cost;
+        $session_duration = $setting[0]->session_duration;
+
+        $vars = array(
+            'coaches' => $coaches,
+            'rating' => $this->coach_rating_model->get_average_rate(),
+            'pagination' => @$pagination,
+            'standard_coach_cost' => $standard_coach_cost,
+            'elite_coach_cost' => $elite_coach_cost,
+            'session_duration' => $session_duration,
+            'old_coach_id' => $old_coach_id,
+            'end_date' => $week_date[1],
+            'start_date' => $date, 
+        );
+       // echo('<pre>');
+       // print_r($vars); exit;
+        $this->session->set_userdata('appointment_id', $appointment_id);
+
+       $this->template->content->view('default/contents/manage_appointment/reschedule/select_coach', $vars);
+       $this->template->publish();
+    }
+
+    public function availability($search_by = '', $coach_id = '', $date_ = '') {
+        $this->template->title = 'Availability';
+        
+        if (!$date_ || !$coach_id) {
+            
+            $vars = array();
+            $this->template->content->view('default/contents/find_coach/availability', $vars);
+
+            //publish template
+            $this->template->publish();
+        }
+        
+        // checking if the date is valid
+        if (!$this->is_date_available(trim($date_), 0)) {
+            $vars = array();
+            $this->template->content->view('default/contents/find_coach/availability', $vars);
+        }
+         // checking if the date is in day off
+        if ($this->is_day_off($coach_id, $date_) == true) {
+
+            $vars = array();
+            $this->template->content->view('default/contents/find_coach/availability', $vars);
+        }
+
+        // getting the day of $date
+        // getting gmt minutes
+        $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
+
+        $date = strtotime($date_);
+        //print_r(date('Y-m-d', $date));
+        // getting day and day after or before based on gmt
+        $day = strtolower(date('l', $date));
+        $day2 = $this->day_index[$this->convert_gmt(array_search($day, $this->day_index), $minutes)];
+
+        // appointment data specify by coach, date and status
+        // appointment with status cancel considered available for other student
+        $appointment = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', date("Y-m-d", $date))->get_all();
+        // appointment with status temporary considered available for other student but not for student who is in the appointment and 
+        // appointment where the student has make an appoinment on the specific date, so there will be no the same start time and end time to be shown to the student from other coach
+        $appointment_student = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('date', date("Y-m-d", $date))->get_all();
+        // appointment coach in class
+        $appointment_class = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', date("Y-m-d", $date))->get_all();
+
+        
+        // storing appointment to an array so can easily on searching / no object value inside
+                $appointment_start_time_temp = array();
+                $appointment_end_time_temp = array();
+
+                foreach ($appointment as $a) {
+                    if($minutes > 0){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                        }
+                    }
+                    else if($minutes < 0){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                        }
+                    }
+                    else if($minutes == 0){
+                        $appointment_start_time_temp[] = $a->start_time;
+                        $appointment_end_time_temp[] = $a->end_time;
+                    }
+                }
+
+                // storing class meeting days to appointment temp
+                foreach ($appointment_class as $a) {
+                    if($minutes > 0){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                        }
+                    }
+                    else if($minutes < 0){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                        }
+                    }
+                    else if($minutes == 0){
+                        $appointment_start_time_temp[] = $a->start_time;
+                        $appointment_end_time_temp[] = $a->end_time;
+                    }
+                }
+
+                foreach ($appointment_student as $a) {
+                    if($minutes > 0){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                        }
+                    }
+                    else if($minutes < 0){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                        }
+                    }
+                    else if($minutes == 0){
+                        $appointment_start_time_temp[] = $a->start_time;
+                        $appointment_end_time_temp[] = $a->end_time;
+                    }
+                }
+
+
+                if($minutes > 0){
+                    $date2 = date("Y-m-d", strtotime('-1 day'.date("Y-m-d",$date)));
+                  
+                    $appointment2 = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', $date2)->get_all();
+                    $appointment_student2 = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('date', $date2)->get_all();
+                    $appointment_class2 = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', $date2)->get_all();
+
+                    foreach($appointment2 as $a){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                        }
+                    }
+                    foreach($appointment_student2 as $a){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                        }
+                    }
+                    foreach($appointment_class2 as $a){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                        }
+                    }
+
+                }
+                else if($minutes < 0){
+                    $date2 = date("Y-m-d", strtotime('+1 day'.date("Y-m-d",$date)));
+                    $appointment2 = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', $date2)->get_all();
+                    $appointment_student2 = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('date', $date2)->get_all();
+                    $appointment_class2 = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', $date2)->get_all();
+
+                    foreach($appointment2 as $a){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                        }
+                    }
+                    foreach($appointment_student2 as $a){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                        }
+                    }
+                    foreach($appointment_class2 as $a){
+                        if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                            $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                            $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                        }
+                    }
+                }
+
+
+                //getting all data
+                $schedule_data1 = $this->schedule_model->select('id, user_id, day, start_time, end_time')->where('user_id', $coach_id)->where('day', $day)->get();
+                $schedule_data2 = $this->schedule_model->select('id, user_id, day, start_time, end_time')->where('user_id', $coach_id)->where('day', $day2)->get();
+
+                $availability = $this->schedule_block($coach_id, $day, $schedule_data1->start_time, $schedule_data1->end_time, $schedule_data2->day, $schedule_data2->start_time, $schedule_data2->end_time);
+
+
+                $date_parameter = strtotime($date_);
+                $availability_temp = array();
+                $availability_exist;
+                foreach ($availability as $a) {
+                    $duration = (strtotime($a['end_time']) - strtotime($a['start_time'])) / ($this->session_duration($this->auth_manager->partner_id()) * 60);
+                    if ($duration >= 1) {
+                        for ($i = 0; $i < $duration; $i++) {
+                            $availability_exist = array(
+                                // adding  minutes for every session
+                                'start_time' => date('H:i:s', strtotime($a['start_time']) + (($this->session_duration($this->auth_manager->partner_id()) * 60) * ($i))),
+                                'end_time' => date('H:i:s', strtotime($a['start_time']) + (($this->session_duration($this->auth_manager->partner_id()) * 60) * ($i + 1))),
+                            );
+                            // checking if the time is not out of coach schedule
+                            if(strtotime($availability_exist['end_time']) <= strtotime($a['end_time'])){
+                                // checking if availability is existed in the appointment
+                                if (in_array($availability_exist['start_time'], $appointment_start_time_temp) && in_array($availability_exist['end_time'], $appointment_end_time_temp)) {
+                                    // no action
+                                } else {
+                                    // storing availability that still active and not been boooked yet
+                                    if($this->isValidAppointment($availability_exist['start_time'], $availability_exist['end_time'], $appointment_start_time_temp, $appointment_end_time_temp)){
+                                                // @date_default_timezone_set('Etc/GMT'.(-$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 >= 0 ? '+'.-$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 : -$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60));
+                                                @date_default_timezone_set('Etc/GMT'.(-$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 >= 0 ? '+'.-$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 : -$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60));
+                                                // if ($date_ == date('Y-m-d', strtotime(date('Y-m-d') . ' + 2 days'))) {
+                                                //     exit('hai');
+                                                //     if (DateTime::createFromFormat('H:i:s', $availability_exist['start_time']) >= DateTime::createFromFormat('H:i:s', date('H:i:s'))) {
+                                                //         $availability_temp[] = $availability_exist;
+                                                //     }
+                                                // } else {
+                                                    $availability_temp[] = $availability_exist;
+                                                // }
+                                    }
+                                    if($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes > 0){
+                                        @date_default_timezone_set('Etc/GMT'.($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 >= 0 ? '+'.$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 : $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        
+        $vars = array(
+            'availability' => $availability_temp,
+            'coach_id' => $coach_id,
+            'date' => $date_parameter,
+            'date_title' => strtotime($date_),
+            'search_by' => $search_by,
+            'cost' => $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get()
+        );
+        // echo "<pre>";
+        // print_r($availability_temp);
+        // exit();
+
+        $this->template->content->view('default/contents/find_coach/reschedule/availability', $vars);
+
+        //publish template
+        $this->template->publish();
+    }
+
+    public function schedule_detail($id = '') {
+        $schedule_data = $this->schedule_model->select('id, user_id, day, start_time, end_time, dcrea, dupd')->where('user_id', $id)->order_by('id', 'asc')->get_all();
+        $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
+        if (!$schedule_data) {
+            redirect('student/find_coaches/single_date');
+        }
+
+        $schedule = array();
+        //foreach($schedule_data as $s){
+        for ($i = 0; $i < count($schedule_data); $i++) {
+            $schedule[$schedule_data[$i]->day] = $this->schedule_block($id, $schedule_data[$i]->day, $schedule_data[$i]->start_time, $schedule_data[$i]->end_time, $schedule_data[$this->convert_gmt($i, $minutes)]->day, $schedule_data[$this->convert_gmt($i, $minutes)]->start_time, $schedule_data[$this->convert_gmt($i, $minutes)]->end_time);
+            if(!$schedule[$schedule_data[$i]->day]){
+                $schedule[$schedule_data[$i]->day] = array(
+                    array(
+                        'start_time' => '00:00:00',
+                        'end_time' => '00:00:00',
+                    )   
+                );
+            }
+            
+        }
+        $vars = array(
+            'coach_id' => $id,
+            'schedule' => $schedule,
+        );
+        $this->template->content->view('default/contents/find_coach/schedule_detail', $vars);
+
+        //publish template
+        $this->template->publish();
+    }
+
+    public function summary_book($search_by = '', $coach_id = '', $date = '', $start_time = '', $end_time = '') {
+        
+        $this->template->title = 'Reschedule Booking Summary';
+
+        $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+        
+        $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
+        $standard_coach_cost = $setting[0]->standard_coach_cost;
+        $elite_coach_cost = $setting[0]->elite_coach_cost;
+
+        $vars = array(
+            'data_coach' => $this->identity_model->get_coach_identity($coach_id),
+            'date' => $date,
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+            'search_by' => $search_by,
+            'standard_coach_cost' => $standard_coach_cost,
+            'elite_coach_cost' => $elite_coach_cost
+        );
+
+
+        $this->template->content->view('default/contents/find_coach/reschedule/summary_book', $vars);
+        //publish template
+        $this->template->publish();
+    }
+
+    public function booking($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '', $token) {
+
+        $appointment_id_old = $this->session->userdata('appointment_id');
+    
+
+        $start_time_available = $start_time_;
+        $end_time_available = $end_time_;
+        
+        $convert = $this->schedule_function->convert_book_schedule(-($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), $date_, $start_time_, $end_time_);
+        $date = $convert['date'];
+        $dateconvert = date('Y-m-d', $date_);
+        $dateconvertcoach = date('Y-m-d', $date);
+        $start_time = $convert['start_time'];
+        $end_time = $convert['end_time'];
+
+
+
+        // timezone
+                    $id_student = $this->auth_manager->userid();
+                    
+   
+                    // student
+                    $gmt_student = $this->identity_model->new_get_gmt($id_student);
+                    // coach
+                    $gmt_coach = $this->identity_model->new_get_gmt($coach_id);
+              
+        
+                    // student
+                    $minutes = $gmt_student[0]->minutes;
+                    // coach
+                    $minutes_coach = $gmt_coach[0]->minutes;
+
+                    @date_default_timezone_set('UTC');
+                    // student
+                    $st  = strtotime($start_time);
+                    $usertime1 = $st+(60*$minutes);
+                    $start_hour = date("H:i", $usertime1);
+
+                    $et  = strtotime($end_time);
+                    $usertime2 = $et+(60*$minutes)-(5*60);
+                    $end_hour = date("H:i", $usertime2);
+
+                    // coach
+
+                    $st_coach  = strtotime($start_time);
+                    $usertime1_coach = $st_coach+(60*$minutes_coach);
+                    $start_hour_coach = date("H:i", $usertime1_coach);
+
+                    $et_coach  = strtotime($end_time);
+                    $usertime2_coach = $et_coach+(60*$minutes_coach)-(5*60);
+                    $end_hour_coach = date("H:i", $usertime2_coach);
+
+
+        $check_max_book_coach_per_day = $this->max_book_coach_per_day($coach_id,$date);
+        if(!$check_max_book_coach_per_day){
+            $this->messages->add('This coach has exceeded maximum booked today', 'warning');
+            redirect('student/manage_appointments/new_reschedule/'.$appointment_id_old);
+            
+        }
+
+        //print_r(date('Y-m-d', $date)); exit;
+        
+        try {
+            // First of all, let's begin a transaction
+            // A set of queries; if one fails, an exception should be thrown
+            $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
+            if ($isValid) {
+                $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
+
+                if (in_array(array('start_time' => $start_time_available, 'end_time' => $end_time_available), $availability)) {
+                    // go to next step 
+                    //exit;
+                } else {
+                    $this->messages->add('Invalid Time', 'warning');
+                    redirect('student/manage_appointments/new_reschedule/'.$appointment_id_old);
+                }
+                // begin the transaction to ensure all data created or modified structural
+ 
+                 $token_cost = $token;
+
+
+                $remain_token = $this->update_token($token_cost);
+                
+                if ($this->db->trans_status() === true && $remain_token >= 0){
+                    
+                    redirect('student/manage_appointments/reschedule_booking/'.$appointment_id_old."/".$coach_id."/". $dateconvert."/". $start_hour."/". $end_hour);
+                } else {
+                    $this->db->trans_rollback();
+                    $this->messages->add('Not Enough Token', 'warning');
+                    redirect('student/manage_appointments/new_reschedule/'.$appointment_id_old);
+                }
+            } else {
+                $this->db->trans_rollback();
+                $this->messages->add('Invalid Appointment', 'warning');
+                redirect('student/manage_appointments/new_reschedule/'.$appointment_id_old);
+            }
+
+
+            // If we arrive here, it means that no exception was thrown
+            // i.e. no query has failed, and we can commit the transaction
+
+        } catch (Exception $e) {
+            // An exception has been thrown
+            // We must rollback the transaction
+            $this->db->trans_rollback();
+            $this->messages->add('An error has occured, please try again.', 'warning');
+            redirect('student/manage_appointments/new_reschedule/'.$appointment_id_old);
+        }
+    }
+
+    private function isAvailable($coach_id = '', $date = '', $start_time = '', $end_time = '') {
+        //getting the day of $date
+        $day = strtolower(date('l', $date));
+        $schedule_data = $this->schedule_model->select('id, user_id, day, start_time, end_time, dcrea, dupd')->where('user_id', $coach_id)->where('day', $day)->order_by('id', 'asc')->get();
+        $schedule = $this->block($coach_id, $day, $schedule_data->start_time, $schedule_data->end_time);
+
+        // check if coach availability has been booked or nothing
+        // appointment data specify by coach, date and status
+        // appointment with status cancel considered available for other student
+        $appointment = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', date("Y-m-d", $date))->where('start_time', $start_time)->where('end_time', $end_time)->get();
+        // appointment with status temporary considered available for other student but not for student who is in the appointment and 
+        // appointment where the student has make an appoinment on the specific date, so there will be no the same start time and end time to be shown to the student from other coach
+        $appointment_student = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', date("Y-m-d", $date))->where('start_time', $start_time)->where('end_time', $end_time)->get();
+        // appointment coach in class
+        $appointment_class = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', date("Y-m-d", $date))->where('start_time', $start_time)->where('end_time', $end_time)->get();
+        
+        // partner setting about student appointment
+        // $setting = $this->partner_setting_model->get();
+        $partner_id = $this->auth_manager->partner_id($coach_id);
+        
+        // check apakah status setting region allow atau disallow
+        $region_id = $this->auth_manager->region_id($partner_id);
+        
+        $get_status_setting_region = $this->specific_settings_model->get_specific_settings($region_id,'region');
+        
+        $max_session_per_day = '';
+        $max_day_per_week = '';
+        if($get_status_setting_region[0]->status_set_setting == 0){
+            $get_setting = $this->global_settings_model->get_partner_settings();
+            $max_session_per_day = $get_setting[0]->max_session_per_day; 
+            $max_day_per_week = $get_setting[0]->max_day_per_week; 
+        } else {
+            $get_setting = $this->specific_settings_model->get_partner_settings($partner_id);
+            $max_session_per_day = $get_setting[0]->max_session_per_day;
+            $max_day_per_week = $get_setting[0]->max_day_per_week;
+        }
+      
+        $student_id = $this->auth_manager->userid();
+        $appointment_count = count($this->appointment_model->where('student_id', $student_id)->where('date', date("Y-m-d", $date))->get_all());
+     
+        $appointment_count_week = 0;
+        foreach($this->get_date_week($date) as $s){
+            $appointment_count_week = $appointment_count_week + count($this->appointment_model->where('student_id', $student_id)->where('date', $s)->get_all());
+        }
+     
+        $status1 = 0;
+        if ($appointment || $appointment_student || $appointment_class) {
+            return false;
+        } else if (!$appointment) {
+            if($appointment_count < $max_session_per_day && $appointment_count_week < $max_day_per_week){
+                foreach($schedule as $s){
+                    if(strtotime($start_time) >= strtotime($s['start_time']) && strtotime($end_time) <= strtotime($s['end_time'])){
+                        $status1 = 1;
+                        break;
+                    }
+                }
+                if($status1 == 1){
+                    return true;
+                }
+                else{
+                    $this->messages->add('Invalid Appointment Time', 'warning');
+                    return false;
+                }
+            }
+            else{
+                $this->messages->add('Exceeded Max Session Per Day or Week', 'warning');
+                return false; 
+                // diganti tanggal 23 maret 2017
+
+                // return true; 
+            }
+        }
+    }
+
+    private function isOnAvailability($coach_id = '', $date_ = '') {
+        if (!$date_ || !$coach_id) {
+            //redirect(home);
+            $vars = array();
+            $this->template->content->view('default/contents/find_coach/availability', $vars);
+
+            //publish template
+            $this->template->publish();
+        }
+        
+        // checking if the date is valid
+        // if (!$this->is_date_available(trim($date_), 0)) {
+        if (!$this->is_date_available(trim($date_), -1)) {
+            $vars = array();
+            $this->template->content->view('default/contents/find_coach/availability', $vars);
+        }
+        
+        // checking if the date is in day off
+        if ($this->is_day_off($coach_id, $date_) == true) {
+            $vars = array();
+            $this->template->content->view('default/contents/find_coach/availability', $vars);
+        }
+        
+        // getting the day of $date
+        // getting gmt minutes
+        $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
+        $date = strtotime($date_);
+        // getting day and day after or before based on gmt
+        $day = strtolower(date('l', $date));
+        $day2 = $this->day_index[$this->convert_gmt(array_search($day, $this->day_index), $minutes)];
+
+        // appointment data specify by coach, date and status
+        // appointment with status cancel considered available for other student
+        $appointment = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', date("Y-m-d", $date))->get_all();
+        // appointment with status temporary considered available for other student but not for student who is in the appointment and 
+        // appointment where the student has make an appoinment on the specific date, so there will be no the same start time and end time to be shown to the student from other coach
+        $appointment_student = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('date', date("Y-m-d", $date))->get_all();
+        // appointment coach in class
+        $appointment_class = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', date("Y-m-d", $date))->get_all();
+
+        // storing appointment to an array so can easily on searching / no object value inside
+        $appointment_start_time_temp = array();
+        $appointment_end_time_temp = array();
+        
+        // getting all unavailable schedule to be not shown on coach availability
+        foreach ($appointment as $a) {
+            if($minutes > 0){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                }
+            }
+            else if($minutes < 0){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                }
+            }
+            else if($minutes == 0){
+                $appointment_start_time_temp[] = $a->start_time;
+                $appointment_end_time_temp[] = $a->end_time;
+            }
+        }
+        // storing class meeting days to appointment temp
+        foreach ($appointment_class as $a) {
+            if($minutes > 0){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                }
+            }
+            else if($minutes < 0){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                }
+            }
+            else if($minutes == 0){
+                $appointment_start_time_temp[] = $a->start_time;
+                $appointment_end_time_temp[] = $a->end_time;
+            }
+        }
+        
+        foreach ($appointment_student as $a) {
+            if($minutes > 0){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                }
+            }
+            else if($minutes < 0){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                }
+            }
+            else if($minutes == 0){
+                $appointment_start_time_temp[] = $a->start_time;
+                $appointment_end_time_temp[] = $a->end_time;
+            }
+        }
+        
+        if($minutes > 0){
+            $date2 = date("Y-m-d", strtotime('-1 day'.date("Y-m-d",$date)));
+            $appointment2 = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', $date2)->get_all();
+            $appointment_student2 = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('date', $date2)->get_all();
+            $appointment_class2 = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', $date2)->get_all();
+            
+            foreach($appointment2 as $a){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                }
+            }
+            foreach($appointment_student2 as $a){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                }
+            }
+            foreach($appointment_class2 as $a){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)))) < strtotime($a->start_time)){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)));
+                }
+            }
+            
+        }
+        else if($minutes < 0){
+            $date2 = date("Y-m-d", strtotime('+1 day'.date("Y-m-d",$date)));
+            $appointment2 = $this->appointment_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', $date2)->get_all();
+            $appointment_student2 = $this->appointment_model->select('id, date, start_time, end_time')->where('student_id', $this->auth_manager->userid())->where('status not like', 'cancel')->where('date', $date2)->get_all();
+            $appointment_class2 = $this->class_meeting_day_model->select('id, date, start_time, end_time')->where('coach_id', $coach_id)->where('date', $date2)->get_all();
+            foreach($appointment2 as $a){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                }
+            }
+            foreach($appointment_student2 as $a){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                }
+            }
+            foreach($appointment_class2 as $a){
+                if(strtotime(date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time)))) > strtotime($a->end_time) || date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00'){
+                    $appointment_start_time_temp[] = date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->start_time)));
+                    $appointment_end_time_temp[] = (date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))) == '00:00:00' ? '23:59:59' : date("H:i:s", strtotime($minutes . 'minutes', strtotime($a->end_time))));
+                }
+            }
+        }
+        
+
+        
+        //getting all data
+        $schedule_data1 = $this->schedule_model->select('id, user_id, day, start_time, end_time')->where('user_id', $coach_id)->where('day', $day)->get();
+        $schedule_data2 = $this->schedule_model->select('id, user_id, day, start_time, end_time')->where('user_id', $coach_id)->where('day', $day2)->get();
+        
+        $availability = $this->schedule_block($coach_id, $day, $schedule_data1->start_time, $schedule_data1->end_time, $schedule_data2->day, $schedule_data2->start_time, $schedule_data2->end_time);
+
+
+
+        $availability_temp = array();
+        $availability_exist;
+        foreach ($availability as $a) {
+            $duration = (strtotime($a['end_time']) - strtotime($a['start_time'])) / ($this->session_duration($this->auth_manager->partner_id()) * 60);
+            if ($duration >= 1) {
+                for ($i = 0; $i < $duration; $i++) {
+                    $availability_exist = array(
+                        // adding  minutes for every session
+                        'start_time' => date('H:i:s', strtotime($a['start_time']) + (($this->session_duration($this->auth_manager->partner_id()) * 60) * ($i))),
+                        'end_time' => date('H:i:s', strtotime($a['start_time']) + (($this->session_duration($this->auth_manager->partner_id()) * 60) * ($i + 1))),
+                    );
+                    
+                    // checking if the time is not out of coach schedule
+                    if(strtotime($availability_exist['end_time']) <= strtotime($a['end_time'])){
+                        // checking if availability is existed in the appointment
+                        if (in_array($availability_exist['start_time'], $appointment_start_time_temp) && in_array($availability_exist['end_time'], $appointment_end_time_temp)) {
+                            // no action
+                        } else {
+                            // storing availability that still active and not been boooked yet
+                            if($this->isValidAppointment($availability_exist['start_time'], $availability_exist['end_time'], $appointment_start_time_temp, $appointment_end_time_temp)){
+                                if(!$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes == 0){
+                                    @date_default_timezone_set('Etc/GMT'.(-$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 >= 0 ? '+'.-$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 : -$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60));
+                                }
+                                        // if ($date_ == date('Y-m-d', strtotime(date('Y-m-d') . ' + 2 days'))) {
+                                        //     if (DateTime::createFromFormat('H:i:s', $availability_exist['start_time']) >= DateTime::createFromFormat('H:i:s', date('H:i:s'))) {
+                                        //         $availability_temp[] = $availability_exist;
+                                        //     }
+                                        // } else {
+                                            $availability_temp[] = $availability_exist;
+                                        // }
+                                        
+                                        // mengatasi tanggal yang tidak sesuai
+                                        if($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes <= 0){
+                                            @date_default_timezone_set('Etc/GMT'.($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 >= 0 ? '+'.$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60 : $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes/60));
+                                        }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return $availability_temp;
+    }
+
+    public function max_book_coach_per_day($coach_id='',$date=''){
+        // get setting partner
+        // $coach_id = '187';
+        // $date = '2016-07-28';
+        $partner_id = $this->auth_manager->partner_id($coach_id);
+
+        // check apakah status setting region allow atau disallow
+        $region_id = $this->auth_manager->region_id($partner_id);
+        
+        $get_status_setting_region = $this->specific_settings_model->get_specific_settings($region_id,'region');
+        
+        $max_per_day = '';
+        if($get_status_setting_region[0]->status_set_setting == 0){
+            $get_setting = $this->global_settings_model->get_partner_settings();
+            $max_per_day = $get_setting[0]->max_session_per_day; 
+        } else {
+            $get_setting = $this->specific_settings_model->get_partner_settings($id_partner);
+            $max_per_day = $get_setting[0]->max_session_per_day;
+        }
+
+        $max_coach = count($this->appointment_model->select('id')->where('coach_id',$coach_id)->where('date',$date)->get_All());
+   
+        if($max_coach > $max_per_day){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private function get_date_week($date = ''){
+        $index = array_search(strtolower(date("l", $date)), $this->day_index);
+        $date_index = array();
+        for($i=0;$i<7;$i++){
+            $date_index[] = date('Y-m-d', strtotime(date('Y-m-d', $date). ''. ($i-$index).' days'));
+        }
+        return $date_index;
+    }
+
+    private function update_token($cost = '') {
+        $status = false;
+        $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
+        //$coach_cost = $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get();
+        if ($student_token->token_amount < $cost) {
+            $status = false;
+        } else if ($student_token->token_amount >= $cost) {
+            $remain_token = $student_token->token_amount - $cost;
+            $data = array(
+                'token_amount' => $remain_token,
+            );
+            $this->identity_model->get_identity('token')->update($student_token->id, $data);
+            $status = true;
+        }
+
+        if ($status == true) {
+            return $remain_token;
+        } else {
+            return -1;
+        }
+    }
+
+    function x_week_range($date) {
+        $ts = strtotime($date);
+        $start = (date('w', $ts) == 0) ? $ts : strtotime('last sunday', $ts);
+        $start_date = date('Y-m-d', $start);
+        $end_date = date('Y-m-d', strtotime('next saturday', $start));
+
+        $a = [$start_date, $end_date];
+
+        return $a;
+    }
+
+    public function old_reschedule($appointment_id = '') {
         $this->template->title = 'Reschedule Appointment';
 
         // checking if appointment has already rescheduled
@@ -485,6 +1283,7 @@ class manage_appointments extends MY_Site_Controller {
     }
 
     public function reschedule_booking($appointment_id = '', $coach_id = '', $date = '', $start_time = '', $end_time = '') {
+        
         $get_name_student = $this->db->select('fullname')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();
         $get_email_student = $this->db->select('email')->from('users')->where('id',$this->auth_manager->userid())->get()->result();
         $get_name_coach = $this->db->select('fullname')->from('user_profiles')->where('user_id',$coach_id)->get()->result();
@@ -514,10 +1313,11 @@ class manage_appointments extends MY_Site_Controller {
         $booked = array(
             'appointment_id' => $appointment_id,
             'old_coach_id' => $appointment_data->coach_id,
+            'user_id_reschedule' => $this->auth_manager->userid(),
             'date' => $appointment_data->date,
             'start_time' => $appointment_data->start_time,
             'end_time' => $appointment_data->end_time,
-            'status' => 'reschedule',
+            'status' => 'active',
         );
 
 
@@ -571,7 +1371,7 @@ class manage_appointments extends MY_Site_Controller {
         // }
         
         // update table appointment
-        $appointment_id = (int)$appointment_id;
+        // $appointment_id = (int)$appointment_id;
         // echo $appointment_id;
         // exit();
         // $update_appointment = $this->db->where('id',$appointment_id)->update('appointments',$appointment_update);
@@ -775,54 +1575,6 @@ class manage_appointments extends MY_Site_Controller {
         redirect('student/upcoming_session');
     }
 
-    private function isAvailable($coach_id = '', $date = '', $start_time = '', $end_time = '') {
-        // getting the day of $date
-        $day = strtolower(date('l', $date));
-
-        // getting all data
-        $schedule_data = $this->schedule_model->select('id, start_time, end_time')->where('user_id', $coach_id)->where('day', $day)->get();
-        $offwork = $this->offwork_model->get_offwork($coach_id, $day);
-
-        // convert time to be able to compare
-        // offwork by day
-        $start_time_offwork = DateTime::createFromFormat('H:i:s', $offwork[0]->start_time);
-        $end_time_offwork = DateTime::createFromFormat('H:i:s', $offwork[0]->end_time);
-        //schedule by day
-        $start_time_schedule = DateTime::createFromFormat('H:i:s', $schedule_data->start_time);
-        $end_time_schedule = DateTime::createFromFormat('H:i:s', $schedule_data->end_time);
-
-        // booking time
-        $start_time_booking = DateTime::createFromFormat('H:i:s', $start_time);
-        $end_time_booking = DateTime::createFromFormat('H:i:s', $end_time);
-
-        // check if coach availability has been booked or nothing
-        // appointment data specify by coach, date and status
-        // appointment with status cancel considered available for other student
-        $appointment = $this->appointment_model->select('id, start_time, end_time')->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('date', date("Y-m-d", $date))->where('start_time', $start_time)->where('end_time', $end_time)->get();
-
-        if ($appointment) {
-            return false;
-        } else if (!$appointment) {
-            // compare booking time if there is offwork in the schedule
-            if ($start_time_offwork >= $start_time_schedule && $start_time_offwork <= $end_time_schedule && $end_time_offwork >= $start_time_schedule && $end_time_offwork <= $end_time_schedule) {
-                // compare booking time if its in available range -> start time schedule to start time offwork and end time schedule to end time offwork
-                if ($start_time_booking >= $start_time_schedule && $start_time_booking <= $start_time_offwork && $end_time_booking >= $start_time_schedule && $end_time_booking <= $start_time_offwork) {
-                    return true;
-                } else if ($start_time_booking >= $end_time_offwork && $start_time_booking <= $end_time_schedule && $end_time_booking >= $end_time_offwork && $end_time_booking <= $end_time_schedule) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                // compare booking time if there is NO offwork in the schedule
-                if ($start_time_booking >= $start_time_schedule && $end_time_booking <= $end_time_schedule) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-    }
 
     public function cancel($appointment_id = '') {
         // checking if appointment has already cancelled

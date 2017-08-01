@@ -13,9 +13,9 @@ class identity extends MY_Site_Controller {
     var $titles = array(
         'STD' => 'Student Identity',
         'CCH' => 'Coach Identity',
-        'PRT' => 'Partner Identity',
+        'PRT' => 'Affiliate Identity',
         'ADM' => 'Admin Identity',
-        'SPR' => 'Student Partner Identity',
+        'SPR' => 'Student Affiliate Identity',
         'RAD' => 'Super Admin Identity',
     );
 
@@ -169,10 +169,10 @@ class identity extends MY_Site_Controller {
         $get_utz =  $this->db->select('timezone')->from('timezones')->where('minutes',$minute_user_timezone)->get()->result();
         $user_tz = $get_utz[0]->timezone;
         $id_partner = $this->auth_manager->partner_id();
-        @$partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$id_partner)->get_all();
-        @$partner_country = $partner[0]->country;
-        @$get_country = $this->db->select('dial_code')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();
-        @$country_code = $get_country[0]->dial_code;
+        $partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$id_partner)->get_all();
+        $partner_country = @$partner[0]->country;
+        $get_country = $this->db->select('dial_code')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();
+        $country_code = $get_country[0]->dial_code;
         if (!$country_code){
             $option_country = $this->common_function->country_code;
             $code = array_column($option_country, 'dial_code', 'name');
@@ -182,6 +182,17 @@ class identity extends MY_Site_Controller {
         }
        
         array_search('Indonesia', array_column($this->common_function->country_code, 'name'));
+
+        //Check Number Verification ------------------------------
+        $idchecknum = $this->auth_manager->userid();
+        $getsat = $this->db->select('status')
+                ->from('verified_numbers')
+                ->where('user_id', $idchecknum)
+                ->get()->result();
+
+        $status = @$getsat[0]->status;
+        //Check Number Verification ------------------------------
+
         $vars = array(
             'name_region' => @$name_region,
             'title' => 'Detail ' . $this->detail[$key],
@@ -195,7 +206,8 @@ class identity extends MY_Site_Controller {
             'option_country' => $this->common_function->country_code,
             'admin_timezone' => @$data_timezone_admin->user_timezone,
             'country_code' => $country_code,
-            'partner_country' => $partner_country
+            'partner_country' => $partner_country,
+            'status' => $status
              
         );
         if ($this->auth_manager->role() == 'STD') {
@@ -204,7 +216,7 @@ class identity extends MY_Site_Controller {
 
         // echo $key;
        // echo('<pre>');
-       // print_r($data); exit;
+       // print_r($vars); exit;
         $this->template->content->view('default/contents/identity/' . $key . '/index', $vars);
         // Publish template by specific identity part
         $this->template->publish();
@@ -274,6 +286,7 @@ class identity extends MY_Site_Controller {
         
         if ($part == 'info') {
 
+
             foreach ($this->input->post() as $t => $value) {
                 if ($t != "__submit" && $t != "spoken_lang") {
                     $data[$t] = $value; 
@@ -281,6 +294,11 @@ class identity extends MY_Site_Controller {
                 if($t == "spoken_language"){
                     if($value != ''){
                         $data["spoken_language"] = str_replace(',', '#', $value);
+                    }
+                }
+                if($t == "fullname"){
+                    if($value != ''){
+                        $data['fullname'] = htmlentities($value);
                     }
                 }
             }
@@ -296,6 +314,7 @@ class identity extends MY_Site_Controller {
                 $this->messages->add('Invalid Date', 'warning');
                 redirect('account/identity/detail/profile');
             }
+
             
             if($this->auth_manager->role() == 'PRT' || $this->auth_manager->role() == 'SPR'){
                 //$rules[] = array('field'=>'user_timezone', 'label' => 'Timezone', 'rules'=>'trim|required|xss_clean');
@@ -306,6 +325,7 @@ class identity extends MY_Site_Controller {
                 $this->detail('profile');
                 return;
             }
+
             
             $id_profile = $this->identity_model->get_identity('profile')->select('id')->where('user_id', $this->auth_manager->userid())->get();
             if (!$this->identity_model->get_identity('profile')->update($id_profile->id, $data, TRUE)) {
@@ -338,25 +358,25 @@ class identity extends MY_Site_Controller {
 
                 if($get_appointment){
                     $data_user_profile = Array(
-                        'up.skype_id' => $this->input->post('skype_id')
+                        'up.skype_id' => htmlentities($this->input->post('skype_id'))
                     );
                     //$this->messages->add('You can not change your timezone because you have upcoming sessions', 'warning');
 
                 } else {
                     $data_user_profile = Array(
-                        'up.skype_id' => $this->input->post('skype_id'),
-                        'up.user_timezone' => $this->input->post('user_timezone'),
-                        'up.phone' => $this->input->post('phone'),
-                        'up.dial_code' => $this->input->post('dial_code')
+                        'up.skype_id' => htmlentities($this->input->post('skype_id')),
+                        'up.user_timezone' => htmlentities($this->input->post('user_timezone')),
+                        // 'up.phone' => $this->input->post('phone'),
+                        'up.dial_code' => htmlentities($this->input->post('dial_code'))
                     );
                 }
 
 
                 $data_geography = Array(
-                    'ge.city' => $this->input->post('city'),
-                    'ge.state' => $this->input->post('state'),
-                    'ge.address' => $this->input->post('address'),
-                    'ge.country' => $this->input->post('country')
+                    'ge.city' => htmlentities($this->input->post('city')),
+                    'ge.state' => htmlentities($this->input->post('state')),
+                    'ge.address' => htmlentities($this->input->post('address')),
+                    'ge.country' => htmlentities($this->input->post('country'))
                 );
                 
                 $user_profile = $this->identity_model->get_identity('profile')->select('id')->where('user_id', $this->auth_manager->userid())->get();
@@ -396,35 +416,35 @@ class identity extends MY_Site_Controller {
                                             ->get()->result();
                 if($get_appointment){
                     $data_user_profile = Array(
-                        'up.skype_id' => $this->input->post('skype_id'),
-                        'up.phone' => $this->input->post('phone'),
-                        'up.dial_code' => $this->input->post('dial_code')
+                        'up.skype_id' => htmlentities($this->input->post('skype_id')),
+                        // 'up.phone' => $this->input->post('phone'),
+                        'up.dial_code' => htmlentities($this->input->post('dial_code'))
                     );
                     //$this->messages->add('You can not change your timezone because you have upcoming sessions', 'warning');
 
                 } else {
                     $data_user_profile = Array(
-                        'up.skype_id' => $this->input->post('skype_id'),
-                        'up.user_timezone' => $this->input->post('user_timezone'),
-                        'up.phone' => $this->input->post('phone'),
-                        'up.dial_code' => $this->input->post('dial_code')
+                        'up.skype_id' => htmlentities($this->input->post('skype_id')),
+                        'up.user_timezone' => htmlentities($this->input->post('user_timezone')),
+                        // 'up.phone' => $this->input->post('phone'),
+                        'up.dial_code' => htmlentities($this->input->post('dial_code'))
                     );
                 }
           
 
 
                 $data_geography = Array(
-                    'ge.city' => $this->input->post('city'),
-                    'ge.state' => $this->input->post('state'),
-                    'ge.address' => $this->input->post('address'),
-                    'ge.country' => $this->input->post('country')
+                    'ge.city' => htmlentities($this->input->post('city')),
+                    'ge.state' => htmlentities($this->input->post('state')),
+                    'ge.address' => htmlentities($this->input->post('address')),
+                    'ge.country' => htmlentities($this->input->post('country'))
                 );
 
                 $data_student_detail = Array(
-                    'sd.language_goal' => $this->input->post('language_goal'),
-                    'sd.hobby' => $this->input->post('hobby'),
-                    'sd.like' => $this->input->post('like'),
-                    'sd.dislike' => $this->input->post('dislike')
+                    'sd.language_goal' => htmlentities($this->input->post('language_goal')),
+                    'sd.hobby' => htmlentities($this->input->post('hobby')),
+                    'sd.like' => htmlentities($this->input->post('like')),
+                    'sd.dislike' => htmlentities($this->input->post('dislike'))
                 );
                 
                 $user_profile = $this->identity_model->get_identity('profile')->select('id')->where('user_id', $this->auth_manager->userid())->get();
@@ -517,7 +537,7 @@ class identity extends MY_Site_Controller {
                     
                     if($this->auth_manager->role() == 'ADM'){
                         $data_timezone_admin = array(
-                            'user_timezone' => $this->input->post('user_timezone'),
+                            'user_timezone' => htmlentities($this->input->post('user_timezone')),
                         );
                         //print_r ($data_timezone_admin); exit;
                         $data_admin = $this->user_profile_model->where('user_id', $this->auth_manager->userid())->get();
@@ -542,8 +562,8 @@ class identity extends MY_Site_Controller {
                     }
 
                     $data_admin = $this->user_profile_model->where('user_id', $this->auth_manager->userid())->get();
-                    $data_fullname = ['fullname' => $this->input->post('fullname'),
-                                      'user_timezone' => $this->input->post('user_timezone')];
+                    $data_fullname = ['fullname' => htmlentities($this->input->post('fullname')),
+                                      'user_timezone' => htmlentities($this->input->post('user_timezone'))];
                     if (!$this->user_profile_model->update($data_admin->id, $data_fullname, TRUE)) {
                         $this->messages->add(validation_errors(), 'warning');
                         $this->detail('profile');
@@ -601,7 +621,7 @@ class identity extends MY_Site_Controller {
             
             if($this->auth_manager->role() == 'ADM'){
                 $data_timezone_admin = array(
-                    'user_timezone' => $this->input->post('user_timezone'),
+                    'user_timezone' => htmlentities($this->input->post('user_timezone')),
                 );
                 //print_r ($data_timezone_admin); exit;
                 $data_admin = $this->user_profile_model->where('user_id', $this->auth_manager->userid())->get();
@@ -756,5 +776,93 @@ class identity extends MY_Site_Controller {
 
     function alpha_dash_space($str){
         return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
-    } 
+    }
+
+    public function verifynumber(){
+        $userid = $this->auth_manager->userid();
+        $realnum = $_POST['realnum'];
+        $phcode = $_POST['phcode'];
+        $phnum  = $_POST['phnum'];
+
+        $countupd  = $_POST['countupd'];
+
+        $data = array(
+               'phone' => $phnum,
+               'dial_code' => $phcode
+            );
+
+        $this->db->where('user_id', $userid);
+        $this->db->update('user_profiles', $data); 
+
+        $data2 = array(
+               'country' => $countupd,
+            );
+
+        $this->db->where('user_id', $userid);
+        $this->db->update('user_geography', $data2);
+
+        $codenumber = mt_rand(1000,9999);
+
+        $checkexist = $this->db->select('user_id')
+	                ->from('verified_numbers')
+	                ->where('user_id', $userid)
+	                ->get()->result();
+
+	    if(!@$checkexist[0]->user_id){
+	        $data3 = array(
+			   'user_id' => $userid,
+			   'phone_verif' => $realnum,
+			   'status' => 'Not Verified',
+			   'code' => $codenumber
+			);
+
+			$this->db->insert('verified_numbers', $data3); 
+		}else{
+            $checkstatus =  $this->db->select('*')
+                            ->from('verified_numbers')
+                            ->where('user_id', $userid)
+                            ->get()->result();
+
+            $codestatus = $checkstatus[0]->status;
+            $codeexpiry = $checkstatus[0]->expiration;
+            $phone_db   = $checkstatus[0]->phone_verif;
+
+            $currtime = date("Y-m-d H:i:s");
+
+            if ($codestatus != "sent") {
+                $data4 = array(
+                    'phone_verif' => $realnum,
+                    'code' => $codenumber
+                );
+
+                $this->db->where('user_id', $userid);
+                $this->db->update('verified_numbers', $data4);
+            }else if($codestatus = "sent" && $realnum != $phone_db){
+                // exit();
+                $data5 = array(
+                    'phone_verif' => $realnum,
+                    'code' => $codenumber,
+                    'status' => 'Not Verified'
+                );
+
+                $this->db->where('user_id', $userid);
+                $this->db->update('verified_numbers', $data5);
+            }
+		}
+
+        echo $realnum;
+    }
+
+    public function changenumber(){
+        $userid = $this->auth_manager->userid();
+
+        $this->db->delete('verified_numbers', array('user_id' => $userid));
+        $data4 = array(
+            'phone' => ''
+        );
+
+        $this->db->where('user_id', $userid);
+        $this->db->update('user_profiles', $data4);
+    }
+
 }

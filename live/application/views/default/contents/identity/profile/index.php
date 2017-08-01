@@ -1,3 +1,28 @@
+<style>
+    .numverified{
+        padding: 1px 10px;
+        border: solid 1px #029c1c;
+        color: #029c1c;
+    }
+    .numnotverif{
+        padding: 2px 10px;
+        border: solid 1px #f7c9c9;
+        color: #ea6060;
+        margin-right: 10px;
+        font-size: 12px;
+    }
+    .changenum{
+        color: #535353;font-size: 12px;margin-left: 10px;
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+    }
+</style>
+
 <div class="heading text-cl-primary padding15">
     <h1 class="margin0"><?php echo $this->auth_manager->lang('lbl_profile');?></h1>
 </div>
@@ -106,28 +131,61 @@
                                     <?php echo form_dropdown('gender', $this->auth_manager->gender(), trim(@$data[0]->gender), 'id="td_value_1_4" class="e-only" required required data-parsley-required-message="Please select your gender"') ?>
                                 </td>
                             </tr>
-                            
-                            <?php if($this->auth_manager->role() == 'STD' || $this->auth_manager->role() == 'CCH'){ ?>
+
+                            <?php if ($this->auth_manager->role() == 'STD' || $this->auth_manager->role() == 'CCH') { ?>
                             <tr id="active-1-3" class="no-inline">
-	                            <td>Phone</td>
-	                            <td class="flex width100perc">
-	                                <span class="r-only"> <?php echo @$country_code; ?></span>
-	                                <span class="r-only"> <?php echo @$data[0]->phone; ?></span>
-	                                <input type="text" name="dial_code" data-parsley-trigger="change" value="<?php echo @$country_code; ?>" id="dial_code" class="pure-input-1-20 e-only" style="margin-right:1px;" readonly>
-	                                <input name="phone" type="number" value="<?php echo @$data[0]->phone; ?>" id="td_value_1_3" class="e-only" data-parsley-type='digits' data-parsley-type-message="Please input numbers only">
-	                            </td>
-	                        </tr>
-	                        <tr id="active-1-4" class="no-inline">
-	                            <td></td>
-	                            <td class="flex width100perc" style="border-bottom: none !important;">
-	                            	<form action="<?php echo site_url('account/identityverifynumber');?>" method="POST">
-		                            	<input type="hidden" name="phoneverif" id="verifnumber">
-		                                <button name="__submit" type="submit" class="pure-button btn-tiny btn-white-tertinary e-only" id="verifbutton">Send Verification</button>
-		                                <!-- <input name="__submit" type="submit" class="pure-button btn-tiny btn-white-tertinary e-only" value="Send Verification"> -->
-	                                </form>
-	                            </td>
-	                        </tr>
-	                        <?php } ?>
+                                <td>Phone</td>
+                                <td class="flex width100perc">
+                                    <span class="r-only"> <?php echo @$country_code; ?></span>                                    
+                                    <span class="r-only"> <?php echo @$data[0]->phone; ?></span>
+                                    <?php if($status != "verified") {?>
+                                        <input type="text" name="dial_code" data-parsley-trigger="change" value="<?php echo @$country_code; ?>" id="dial_code" class="pure-input-1-20 e-only" style="margin-right:1px;" readonly>
+                                        <input name="phone" type="number" value="<?php echo @$data[0]->phone; ?>" id="td_value_1_3" class="e-only" data-parsley-type='digits' data-parsley-type-message="Please input numbers only">
+                                    <?php } else{ ?>
+                                        <input type="text" name="dial_code" data-parsley-trigger="change" value="<?php echo @$country_code; ?>" id="dial_code" class="pure-input-1-20 e-only" style="margin-right:1px;" readonly disabled>
+                                        <input name="phone" type="number" value="<?php echo @$data[0]->phone; ?>" id="" class="e-only" data-parsley-type='digits' data-parsley-type-message="Please input numbers only" disabled>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                            <tr id="active-1-4" class="no-inline">
+                                <td></td>
+                                <td class="flex width100perc" style="border-bottom: none !important;">
+                                    <input type="hidden" name="phoneverif" id="verifnumber">
+                                    <?php if($status != "verified") {?>
+                                        <font class="e-only numnotverif">Not Verified</font> <a class="pure-button btn-tiny btn-tertiary e-only" id="verifbutton">Verify</a>
+                                    <?php } else{ ?>
+                                        <font><font class="numverified">Verified</font> <a class="e-only changenum" id="chnum">Change</a></font>
+                                    <?php } ?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+
+                            <?php if ($this->auth_manager->role() == 'CCH'){ 
+                                // get total rating
+                                $rating = $this->db->select('AVG(rate) as rate')
+                                                   ->from('coach_ratings')
+                                                   ->where('coach_id',$this->auth_manager->userid())
+                                                   ->get()->result();
+
+                                ?>
+                            <tr id="active-1-3" class="no-inline">
+                                <td>Average Rating</td>
+                                <td class="flex width100perc">
+                                    
+                                    <span class="r-only"> 
+                                        <?php 
+                                            $j = round($rating[0]->rate, 2);
+                                            if($j < 5){
+                                                echo "Need 5 rated sessions to be displayed";
+
+                                            } else {
+                                                echo $j;
+                                            }
+                                        ?>
+                                    </span>                                    
+                                </td>
+                            </tr>
+                            <?php } ?>
 
                             <?php if($this->auth_manager->role() == 'PRT' || $this->auth_manager->role() == 'SPR'){ ?>
                                 <tr id="active-2-8" class="no-inline">
@@ -200,7 +258,7 @@ if ($this->auth_manager->role() == 'STD' || $this->auth_manager->role() == 'CCH'
                                     $newoptions = $country;
                                     echo form_dropdown('country', $newoptions, @$data[0]->country, ' id="td_value_2_3" class="e-only" required data-parsley-required-message="Please select your country"'); 
                                 ?>
-
+                                <input type="hidden" name="dial_code" data-parsley-trigger="change" value="<?php echo @$country_code; ?>" id="dial_code" class="pure-input-1-20 e-only" style="margin-right:1px;" readonly>
                             </td>
                         </tr>
                         <tr id="active-2-1" class="no-inline">
@@ -809,6 +867,23 @@ var dial_code = $('#dial_code').val();
 var country = $('#td_value_2_3').val();
 
 $( "#td_value_2_3" ).change(function() {
+  var phonstat = '<?php echo $status;?>';
+  if(phonstat == 'verified'){
+    var chcount = confirm('Your number is already verified. If you changed your country, it will remove your verified numbers. Proceed?');
+    if (chcount == true) {
+        $.ajax({
+          type:"POST",
+          url:"<?php echo site_url('account/identity/changenumber');?>",    
+          data: {},        
+          success: function(data){    
+            window.location.href = '<?php echo site_url('account/identity/detail/profile');?>';
+          }
+        });
+    } else {
+
+    }
+  }
+  
   var dial_code = $('#dial_code').val();
   var country = $(this).val();
     if((dial_code != '') && (country != '')){
@@ -831,4 +906,81 @@ $( "#td_value_2_3" ).change(function() {
 
   });
     
+</script>
+<script>
+$( "#verifbutton" ).click(function() {
+    var phcode = $('#dial_code').val();
+    var phnum  = $('#td_value_1_3').val();
+    var countupd  = $('#td_value_2_3').val();
+
+    var realnum = phcode+phnum;
+    // console.log(countupd);
+
+    $.ajax({
+      type:"POST",
+      url:"<?php echo site_url('account/identity/verifynumber');?>",    
+      data: {'realnum':realnum, 'phnum':phnum, 'phcode':phcode, 'countupd':countupd},        
+      success: function(data){    
+        window.location.href = '<?php echo site_url('account/verification');?>';
+      }
+    });
+});
+$( "#chnum" ).click(function() {
+    var r = confirm('It will remove your verified number. And you will not getting reminder for your sessions. Proceed?');
+    if (r == true) {
+        $.ajax({
+          type:"POST",
+          url:"<?php echo site_url('account/identity/changenumber');?>",    
+          data: {},        
+          success: function(data){    
+            window.location.href = '<?php echo site_url('account/identity/detail/profile');?>';
+          }
+        });
+    } else {
+
+    }
+});
+</script>
+<script>
+    ;(function() {
+
+    var states = [];
+    var customSelect = $('.js-select');
+    var customSelectOptions = customSelect.children();
+
+    // Get each state then push them to the array
+    // Initial state declaration
+    customSelectOptions.each(function() {
+        var state = $(this).text();
+        states.push({ state: state });
+        if ($(this).is(':selected')) {
+            $(this).text($(this).attr('value'));
+        }
+    });
+
+    // On focus, always retain the full state name
+    customSelect.on('focus', function() {
+
+        customSelectOptions.each(function(index) {   
+            $(this).text(states[index].state);
+        });
+
+        // On change, append the value to the selected option
+        $(this).on('change', function() {
+
+            customSelectOptions.each(function(options) {
+                if ($(this).is(':selected')) {
+                    $(this).text($(this).attr('value'));
+                }
+            });
+
+            // Un-focus select on finish
+            $(this).blur();
+
+        });
+
+    });
+
+}(jQuery));
+    // On focus, always retain the full state name
 </script>

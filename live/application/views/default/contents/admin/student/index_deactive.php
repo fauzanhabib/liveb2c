@@ -141,7 +141,7 @@
                         </g>
                         </svg>
                     </div>
-                        Student Subgroup Setting
+                        Student Group Setting
                 </button>
             </li>
         </ul>

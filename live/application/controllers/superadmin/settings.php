@@ -94,7 +94,11 @@ class settings extends MY_Site_Controller {
                     'max_student_supplier' => $this->input->post('max_student_supplier'),
                     'max_day_per_week' => $this->input->post('max_day_per_week'),
                     'max_session_per_day' => $this->input->post('max_session_per_day'), 
+                    'max_session_per_x_day' => $this->input->post('max_session_per_x_day'), 
+                    'x_day' => $this->input->post('x_day'),
+                    'set_max_session' => $this->input->post('set_max_session'),
                     'status_set_setting' => $this->input->post('status_set_setting'), 
+
                                 
                 );
 
@@ -132,6 +136,9 @@ class settings extends MY_Site_Controller {
                 $max_day_per_week = $region_setting[0]->max_day_per_week;
                 $max_token = $region_setting[0]->max_token;
                 $max_token_for_student = $region_setting[0]->max_token_for_student;
+                // $max_session_per_x_day = $region_setting[0]->max_session_per_x_day;
+                // $x_day = $region_setting[0]->x_day;
+                $set_max_session = $region_setting[0]->set_max_session;
 
                 // =========================
                 // cek perbandingan setting max region setting dengan update input
@@ -141,6 +148,9 @@ class settings extends MY_Site_Controller {
                 $update_max_session_per_day = $this->input->post('max_session_per_day');
                 $update_max_token = $this->input->post('max_token');
                 $update_max_token_for_student = $this->input->post('max_token_for_student');
+                // $update_max_session_per_x_day = $this->input->post('max_session_per_x_day');
+                // $update_x_day = $this->input->post('x_day');
+                $update_set_max_session = $this->input->post('set_max_session');
 
 
                 // if($this->input->post('max_session_per_day') > $this->input->post('max_day_per_week')){
@@ -157,7 +167,7 @@ class settings extends MY_Site_Controller {
                 }
 
                 if($update_max_student_supplier > $max_student_supplier){
-                    $message_setting = 'Max Student Supplier '.$max_student_supplier;
+                    $message_setting = 'Max Student Affiliate '.$max_student_supplier;
                     $this->messages->add($message_setting, 'warning');
                     redirect('superadmin/settings/partner/student');
                 }
@@ -185,6 +195,24 @@ class settings extends MY_Site_Controller {
                     $this->messages->add($message_setting, 'warning');
                     redirect('superadmin/settings/partner/student');
                 }
+
+                // if($update_max_session_per_x_day > $max_session_per_x_day){
+                //     $message_setting = 'Max Session Per X Day '.$max_session_per_x_day;
+                //     $this->messages->add($message_setting, 'warning');
+                //     redirect('superadmin/settings/partner/student');
+                // }
+
+                // if($update_x_day > $x_day){
+                //     $message_setting = 'Max X Day '.$x_day;
+                //     $this->messages->add($message_setting, 'warning');
+                //     redirect('superadmin/settings/partner/student');
+                // }
+
+                // if($update_set_max_session != $set_max_session){
+                //     $message_setting = 'Max Session for Student is Set to '.$set_max_session;
+                //     $this->messages->add($message_setting, 'warning');
+                //     redirect('superadmin/settings/partner/student');
+                // }
                 // update partner setting
 
                 $data = array(
@@ -194,6 +222,9 @@ class settings extends MY_Site_Controller {
                     'max_student_supplier' => $this->input->post('max_student_supplier'),
                     'max_day_per_week' => $this->input->post('max_day_per_week'),
                     'max_session_per_day' => $this->input->post('max_session_per_day'), 
+                    // 'max_session_per_x_day' => $this->input->post('max_session_per_x_day'), 
+                    // 'x_day' => $this->input->post('x_day'),
+                    'set_max_session' => $this->input->post('set_max_session'),
                                 
                 );
 

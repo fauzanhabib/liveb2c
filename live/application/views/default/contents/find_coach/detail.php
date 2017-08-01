@@ -43,7 +43,7 @@
         <td><?php echo @$coaches[0]->dyned_pro_id;?></td>
     </tr>
     <tr>
-        <td>Partner</td>
+        <td>Affiliate</td>
         <td>:</td>
         <td><?php echo @$coaches[0]->partner_id;?></td>
     </tr>
