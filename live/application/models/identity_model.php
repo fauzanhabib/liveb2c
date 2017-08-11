@@ -109,7 +109,12 @@ class identity_model extends MY_Model {
             $this->db->where('g.creator_id', $creator_id);
         }
         else{
-            $this->db->where('a.status', 'active');
+            if(($this->uri->segment(3) == 'list_disable_student') || ($this->uri->segment(3) == 'index_disable')){
+                $this->db->where('a.status', 'disable');
+            }else
+            {
+                $this->db->where('a.status', 'active');
+            }
         }
 
         if (is_array($subgroup_id)) {
@@ -219,7 +224,7 @@ class identity_model extends MY_Model {
                             }
                         }
                     $this->db->where_in('c.partner_id', $partner_array);
-                    $this->db->where_in('c.subgroup_id', $group_array);
+                    $this->db->or_where_in('c.subgroup_id', $group_array);
                     }else{
                         $partner_array= array($partner_id);
                         foreach(@$coach_supplier as $cs){
@@ -243,7 +248,12 @@ class identity_model extends MY_Model {
             $this->db->where('g.creator_id', $creator_id);
         }
         else{
-            $this->db->where('a.status', 'active');
+            if(($this->uri->segment(3) == 'list_disable_coach') || ($this->uri->segment(3) == 'index_disable')){
+                $this->db->where('a.status', 'disable');
+            }else
+            {
+                $this->db->where('a.status', 'active');
+            }
         }
         
         $this->db->where('b.id', 2);
@@ -683,7 +693,7 @@ class identity_model extends MY_Model {
         return $this->db->get()->result();
     }
 
-    public function get_subgroup_identity($id = '', $type = '', $partner_id = '', $search ='', $limit='', $offset=''){
+    public function get_subgroup_identity($id = '', $type = '', $status = '', $partner_id = '', $search ='', $limit='', $offset=''){
       if(!$partner_id){
                 $partner_id = $this->auth_manager->partner_id();
             }
@@ -696,6 +706,7 @@ class identity_model extends MY_Model {
         $this->db->join('user_profiles b', 'a.partner_id = b.partner_id');
         $this->db->join('users c', 'c.id = b.user_id');
         $this->db->where('a.type', $type);
+        $this->db->where('a.status', $status);
         $this->db->where('b.partner_id', $partner_id);
 
         $this->db->like('a.name',$search,'both'); 

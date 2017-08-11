@@ -42,7 +42,7 @@
         <form action="<?php echo site_url('student_partner/subgroup/delete_subgroup');?>" method="POST" class="pure-g pure-u-md-24-24 pure-u-sm-24-24 pure-u-lg-24-24">
         <div class="delete-add-btn padding-l-10 padding-t-65 pure-u-md-8-24 pure-u-lg-8-24">
             <div class="btn-noborder btn-normal bg-white-fff left"><a href="<?php echo site_url('student_partner/subgroup/add_subgroup');?>"><img src="<?php echo base_url();?>assets/img/iconmonstr-plus-6-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-tertiary">Add Group</em></a></div>
-            <button class="btn-noborder btn-normal bg-white-fff" type="submit" name="__submit" value="delete_subgroup" onclick="return confirm('Are you sure you want to delete group?')"><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Delete Group</em></button>
+            <button class="btn-noborder btn-normal bg-white-fff" type="submit" name="__submit" value="delete_subgroup" onclick="return confirm('Are you sure you want to disable group?')"><img src="<?php echo base_url();?>assets/img/iconmonstr-x-mark-7-16.png" class="left padding-t-1 padding-r-5"><em class="textDec-none text-cl-red">Disable Group</em></button>
         </div>
 
         <div class="pure-menu-horizontal pure-u-md-10-24 pure-u-lg-10-24 padding-r-10 right">
@@ -80,6 +80,14 @@
             </ul>
         </div>
 
+    </div>
+    <div class="heading pure-g padding-t-30">
+        <div class="left-list-tabs pure-menu pure-menu-horizontal text-center margin0">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-selected text-center width250 no-hover"><a class="pure-menu-link padding-t-b-5 font-16 padding-lr-0 font-light text-cl-lightGrey active-tabs-blue" href="<?php echo site_url('student_partner/subgroup/');?>">Active Groups</a></li>
+                <li class="pure-menu-item pure-menu-selected text-center width250 no-hover"><a class="pure-menu-link padding-t-b-5 font-16 padding-lr-0 font-light text-cl-lightGrey" href="<?php echo site_url('student_partner/subgroup/index_disable/');?>" >Disabled Groups</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="content padding-t-0">

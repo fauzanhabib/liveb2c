@@ -195,7 +195,11 @@ class manage_partner_admin extends MY_Site_Controller {
 
         $partner = $this->identity_model->get_identity('profile')->where('user_id', $user_id)->get();
         if($this->identity_model->get_partner_identity($user_id, '', '', '')){
-            if($this->user_model->delete($user_id)){
+            $status = array(
+                    'status' => 'disable',
+                    );
+                    $this->db->where('id',$user_id);
+            if($this->db->update('users', $status)){
                 $this->messages->add('Delete Partner Member Succeeded', 'success');
                 redirect($role_link.'/manage_partner/partner/'.$type.'/'.$partner_id);
             }
