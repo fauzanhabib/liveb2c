@@ -24,6 +24,7 @@ class Login extends MY_Controller {
                                       ->where('user_login.user_id',$user_id)
                                       ->where('user_login.session',$session_user_login)
                                       ->get()->result();
+
                 if($check_session){
                     if((!$check_session[0]->user_id) && (!$check_session[0]->session)){
                         
@@ -78,10 +79,20 @@ class Login extends MY_Controller {
                     $this->db->replace('user_timezones', $timezone);
                     // ====
 
-                    if($this->auth_manager->role() == 'STD'){
+                    $check_login_type = $this->db->select('*')
+                                        ->from('users')
+                                        ->where('id', $this->auth_manager->userid())
+                                        ->get()->result();
+
+                    $login_type = $check_login_type[0]->login_type;
+                    //=====
+
+                    if($this->auth_manager->role() == 'STD' && $login_type == 0){
                         redirect('student/dashboard');                    
                     } else if($this->auth_manager->role() == 'CCH'){
                         redirect('coach/dashboard');                    
+                    } else if($this->auth_manager->role() == 'STD' && $login_type == 1){
+                        redirect('b2c/student/dashboard');
                     } else{
                         redirect('account/identity/detail/profile');
                     }
