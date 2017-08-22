@@ -1,4 +1,4 @@
-<?php 
+<?php
     $role = array(
         'STD' => 'Student',
         'CCH' => 'Coach',
@@ -19,6 +19,11 @@
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/jquery.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
         <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <style media="screen">
+          .active{
+            background: #303e62;
+          }
+        </style>
     </head>
 
     <body>
@@ -71,7 +76,7 @@
             </nav>
         </div>
     </header>
-   
+
     <!-- mobile header and nav menu -->
     <div class="wrapper">
      <!-- <div class="stars"></div>
@@ -80,7 +85,7 @@
         <main class="main flex">
         	<aside class="main__sidebar">
                 <ul>
-                    <li>
+                    <li id="dashboard">
                         <svg width="24px" height="24px" viewBox="0 0 13 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>home</title>
@@ -98,9 +103,9 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a href="dashboard.html"> Dashboard </a></span>
+                        <span><a> Dashboard </a></span>
                     </li>
-                    <li>
+                    <li id="profile">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>user</title>
@@ -120,7 +125,7 @@
                         </svg>
                         <span><a href="profil.html"> Profile </a></span>
                     </li>
-                    <li>
+                    <li id="study_dashboard">
                         <svg width="24px" height="24px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>new-file</title>
@@ -143,7 +148,7 @@
                         </svg>
                         <span><a href="study-dashboard.html">Study Dashboard</a></span>
                     </li>
-                    <li>
+                    <li id="session_simulator">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>play-button</title>
@@ -180,6 +185,30 @@
 		    <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin-left:10px;" alt="DynEd International, Inc.">
 		    </a>
 		</footer>
+    <script>
+      //redirect -----------------------------------------
+      $('.main__sidebar ul li').on('click', function(){
+        // var url_href =  window.location.pathname.split( '/' );;
+        var base_url =  "<?php echo site_url(); ?>";
+        var getrole  =  "<?php echo $this->auth_manager->role(); ?>";
+
+        if (role = "STD") {
+          var role = 'student'
+        }
+
+        var url_href = base_url+'/b2c/'+role+'/'+this.id;
+
+        window.location.href = url_href;
+        // console.log(current_page);
+        // console.log(url_href);
+      });
+
+      //Add menu active ----------------------------------
+      current_page = document.location.href;
+      menuClass    = current_page.split("/")[6];
+      $('#'+menuClass).addClass('active');
+      console.log(menuClass);
+    </script>
     </div>
     </body>
 </html>

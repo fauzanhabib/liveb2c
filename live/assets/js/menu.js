@@ -1,9 +1,9 @@
 $(document).ready(function(){
 	//check curruent page
 	current_page = document.location.href;
-	
+
 	if (current_page.match(/account/)) {
-		console.log('profile');
+		// console.log('profile');
 		$("ul.nav-side li.pure-menu-item.std-profile a").addClass('pure-menu-active');
 	}
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
 				$("ul.nav-side li.pure-menu-item.rad-partner a").addClass('pure-menu-active');
 				$("ul.menu-dropdown.part li.pure-menu-item.rad-papproval a").addClass('active');
 				$('.menu-dropdown.part').addClass('show');
-			}  
+			}
 			else if (current_page.match(/token/)) {
 				$("ul.nav-side li.pure-menu-item.rad-partner a").addClass('pure-menu-active');
 				$("ul.menu-dropdown.part li.pure-menu-item.rad-trapproval a").addClass('active');
@@ -36,7 +36,7 @@ $(document).ready(function(){
 			}
 			else if(current_page.match(/detail/) || current_page.match(/partner/) || current_page.match(/list_partner/) || current_page.match(/member_of_student/) || current_page.match(/student_detail/) || current_page.match(/member_of_coach/) || current_page.match(/coach_detail/)){
 				$("ul.nav-side li.pure-menu-item.rad-region a").addClass('pure-menu-active');
-			} 
+			}
 		}
 		else if (current_page.match(/settings/)){
 			if (current_page.match(/region/)) {
@@ -106,10 +106,10 @@ $(document).ready(function(){
 		}
 		else if (current_page.match(/find_coaches/)) {
 			$("ul.nav-side li.pure-menu-item.std-book a").addClass('pure-menu-active');
-		} 
+		}
 		else if (current_page.match(/student_vrm/) || current_page.match(/certificate/)) {
 			$("ul.nav-side li.pure-menu-item.std-sdashboard a").addClass('pure-menu-active');
-		}	
+		}
 		else if (current_page.match(/upcoming_session/) || current_page.match(/ongoing_session/) || current_page.match(/histories/) || current_page.match(/reschedule/) || current_page.match(/session/)) {
 			console.log('sessions');
 			$("ul.nav-side li.pure-menu-item.std-session a").addClass('pure-menu-active');
@@ -123,7 +123,7 @@ $(document).ready(function(){
 		}
 		else if (current_page.match(/class_detail/)) {
 			$("ul.nav-side li.pure-menu-item.std-class a").addClass('pure-menu-active');
-		} 
+		}
 	}
 
 	else if (current_page.match(/partner/)) {
