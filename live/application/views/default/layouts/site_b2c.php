@@ -123,7 +123,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a href="profil.html"> Profile </a></span>
+                        <span><a> Profile </a></span>
                     </li>
                     <li id="study_dashboard">
                         <svg width="24px" height="24px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -146,7 +146,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a href="study-dashboard.html">Study Dashboard</a></span>
+                        <span><a> Study Dashboard </a></span>
                     </li>
                     <li id="session_simulator">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -169,7 +169,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a href="">Session Simulator</a></span>
+                        <span><a> Session Simulator </a></span>
                     </li>
                 </ul>
             </aside>
@@ -191,8 +191,8 @@
         // var url_href =  window.location.pathname.split( '/' );;
         var base_url =  "<?php echo site_url(); ?>";
         var getrole  =  "<?php echo $this->auth_manager->role(); ?>";
-
-        if (role = "STD") {
+        
+        if (getrole = "STD") {
           var role = 'student'
         }
 
