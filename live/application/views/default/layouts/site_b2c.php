@@ -15,9 +15,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
         <title><?php echo $this->template->title->append(' - DynEd Live') ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/multiple-select.css">
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/jquery.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
         <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <style media="screen">
           .active{
@@ -35,7 +37,7 @@
         <div class="header__profile flex">
             <div class="profile__name">
                 <h4><?php echo $this->auth_manager->get_name();?></h4>
-                <h5><?php echo($role[$this->auth_manager->role()]);?></h5>
+                <h5><?php echo $this->auth_manager->role();?></h5>
             </div>
             <div class="header__profpic pic__circle--small">
                 <img src="assets/img/galgadot.jpg">
@@ -191,7 +193,7 @@
         // var url_href =  window.location.pathname.split( '/' );;
         var base_url =  "<?php echo site_url(); ?>";
         var getrole  =  "<?php echo $this->auth_manager->role(); ?>";
-        
+
         if (getrole = "STD") {
           var role = 'student'
         }

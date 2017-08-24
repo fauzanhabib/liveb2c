@@ -75,6 +75,7 @@ class Profile extends MY_Site_Controller {
 
       $status = @$getsat[0]->status;
       //Check Number Verification ------------------------------
+      $listspoke = array_values($this->common_function->language());
 
       $vars = array(
           'name_region' => @$name_region,
@@ -89,7 +90,8 @@ class Profile extends MY_Site_Controller {
           'admin_timezone' => @$data_timezone_admin->user_timezone,
           'country_code' => $country_code,
           'partner_country' => $partner_country,
-          'status' => $status
+          'status' => $status,
+          'listspoke' => $listspoke
 
       );
       if ($this->auth_manager->role() == 'STD') {
@@ -97,8 +99,7 @@ class Profile extends MY_Site_Controller {
       }
 
       // echo $key;
-    //  echo('<pre>');
-    //  print_r($vars); exit;
+      // echo('<pre>');print_r($vars); exit;
       $this->template->content->view('contents/b2c/student/profile/index',$vars);
       $this->template->publish();
     }
@@ -109,16 +110,9 @@ class Profile extends MY_Site_Controller {
         $updatedVal  = $this->input->post("updatedVal");
 
         if($fieldType == 'City'){
-          // $upd_geograph = array(
-          //    'city' => $updatedVal
-          // );
-          //
-          // $this->db->where('user_id', $id);
-          // $this->db->update('user_geography', $upd_geograph);
-
-          $txtUpd = 'City';
           $column = 'city';
           $table  = 'user_geography';
+          $txtUpd = 'City';
           $idCol  = 'user_id';
         }else if($fieldType == 'State/Province'){
           $column = 'state';
@@ -140,6 +134,16 @@ class Profile extends MY_Site_Controller {
           $table  = 'student_detail_profiles';
           $txtUpd = 'Dislikes';
           $idCol  = 'student_id';
+        }else if($fieldType == 'Gender'){
+          $column = 'gender';
+          $table  = 'user_profiles';
+          $txtUpd = 'Gender';
+          $idCol  = 'user_id';
+        }else if($fieldType == 'spoken'){
+          $column = 'spoken_language';
+          $table  = 'user_profiles';
+          $txtUpd = 'Home Languages';
+          $idCol  = 'user_id';
         }
 
         echo $txtUpd.' has been updated to '.$updatedVal;
