@@ -1,12 +1,18 @@
 <section class="main__content">
     <div class="dashboard">
         <div class="dashboard__notif">
-            <span>You Have 2 Upcoming Sessions</span>
+            <?php if(count($data)==0){ ?>
+            <span>You Have No Session Left For Today</span>
+            <?php }elseif(count($data)==1){ ?>
+            <span>You Have <?php echo count($data); ?> Session Left For Today</span>
+            <?php }else{ ?>
+            <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
+            <?php } ?>
             <i class="fa fa-times"></i>
         </div>
 
         <div class="dashboard__menu">
-            <a href="index.html">
+            <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
                 <div class="booking">
                     <svg width="54px" height="65px" viewBox="0 0 54 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -66,7 +72,7 @@
                     <span>Sessions</span>
                 </div>
             </a>
-            <a href="tokens.html">
+            <a href="<?php echo site_url('b2c/student/token'); ?>">
                 <div class="tokens">
                     <svg width="63px" height="63px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -91,7 +97,7 @@
                     <span>Tokens</span>
                 </div>
             </a>
-            <a href="help.html">
+            <a href="<?php echo site_url('b2c/student/help'); ?>">
                 <div class="help">
                     <svg width="46px" height="55px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -128,82 +134,178 @@
                 </ul>
             </div>
             <div class="boxsessions">
-                <div class="boxsessions__today tab-content current" id="tab-1">
-                    <div class="todaysessions">
-                        <span class="date">Wed, 19 April 2017</span>
-                        <span class="time">12 : 34 : 14 - Until Next Sessions</span>
-                        <div class="boxinfo">
-                            <div class="playsession">
-                                <i class="fa fa-play"></i>
-                            </div>
-                            <div class="coachinfo">
-                                Coach Info
-                            </div>
-                        </div>
-                    </div>
+                <?php if($wm != NULL && strtotime($countdown) <= strtotime($nowc) && $nowh <= $hourend && $nowh >= $hourstart){ ?>
+                    <?php if(@$statuscheck == 0){ ?>
+                                <div class="boxsessions__today tab-content current" id="tab-1">
+                                    <div class="todaysessions">
+                                        <span class="date">You Have a Live Session</span>
+                                            <div class="boxinfo">
+                                                <div class="playsession">
+                                                    <form name ="livesession" action="<?php echo(site_url('opentok/live/'));?>" method="post">
+                                                        <input type="hidden" name="appoint_id" value="<?php echo $wm_id ?>">
+                                                            <button type="submit" class="fa fa-play"></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                        <?php }else if(@$statuscheck == 1){ ?> 
+                                <div class="boxsessions__today tab-content current" id="tab-1">
+                                    <div class="todaysessions">
+                                        <span class="date">You Have Opened Live Session</span>
+                                            <div class="boxinfo">
+                                                <div class="playsession">
+                                                    <i class="fa fa-play"></i>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                    <?php } ?>
 
+                <?php }else if($wm == NULL){ ?>
+                    <div class="boxsessions__today tab-content current" id="tab-1">
+                        <div class="todaysessions">
+                            <span class="date">You Have No Sessions Today</span>
+                        </div>
+                    </div>
+                <?php }else{ ?> 
+                    <div class="boxsessions__today tab-content current" id="tab-1">
+                    <?php foreach($data as $d){ ?>
                     <div class="todaysessions">
-                        <span class="date">Wed, 19 April 2017</span>
-                        <span class="time">12 : 34 : 14 - Until Next Sessions</span>
+                        <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
+                        <span class="time">
+                        <div id="clockdiv" class="">
+                            <div><span class="hours"></span><div class="smalltext">Hours</div></div>
+                            <div class="border-lr-1-grey padding-lr-7"><span class="minutes"></span><div class="smalltext">Mins</div></div>
+                            <div><span class="seconds"></span><div class="smalltext">Secs</div></div>
+                            <h5 class="padding0">Until Next Session</h5>
+                        </div>
+                        </span>
                         <div class="boxinfo">
-                            <div class="playsession">
+                            <div class="playsession" id="nosess">
                                 <i class="fa fa-play"></i>
                             </div>
+                            <div class="playsession hide" id="sess">
+                                <form name ="livesession" action="<?php echo(site_url('opentok/live/'));?>" method="post">
+                                <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
+                                <input type="image" src="<?php echo base_url();?>assets/img/Play-After.svg" alt="Submit" width="100" height="100" style="margin-top: 14px;margin-left: 15px;">
+                                </form>
+                            </div>
                             <div class="coachinfo">
-                                Coach Info
+                                <id="viewcoach" idcoach="<?php echo $d->coach_id;?>"><a href="#modal">Coach Info</a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="todaysessions">
-                        <span class="date">Wed, 19 April 2017</span>
-                        <span class="time">12 : 34 : 14 - Until Next Sessions</span>
-                        <div class="boxinfo">
-                            <div class="playsession">
-                                <i class="fa fa-play"></i>
-                            </div>
-                            <div class="coachinfo">
-                                Coach Info
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="todaysessions">
-                        <span class="date">Wed, 19 April 2017</span>
-                        <span class="time">12 : 34 : 14 - Until Next Sessions</span>
-                        <div class="boxinfo">
-                            <div class="playsession">
-                                <i class="fa fa-play"></i>
-                            </div>
-                            <div class="coachinfo">
-                                Coach Info
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="todaysessions">
-                        <span class="date">Wed, 19 April 2017</span>
-                        <span class="time">12 : 34 : 14 - Until Next Sessions</span>
-                        <div class="boxinfo">
-                            <div class="playsession">
-                                <i class="fa fa-play"></i>
-                            </div>
-                            <div class="coachinfo">
-                                Coach Info
-                            </div>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
-
+                <?php } ?>
+                
                 <div class="boxsessions__upcoming tab-content" id="tab-2">
-                    dfsdfsd
+                    <?php foreach($dataupcoming as $d){ ?>
+                    <div class="todaysessions">
+                        <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
+                        <span class="date"><?php echo(date('H:i',strtotime($d->start_time)));?> - </span>
+                        <span class="date"><?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
+                        <div class="boxinfo">
+                            <div class="coachinfo">
+                                <id="viewcoach" idcoach="<?php echo $d->coach_id;?>"><a href="#modal">Coach Info</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 
 
 <script src="assets/lib/jQuery/jquery-2.2.3.min.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script type="text/javascript">
+    // var deadline = '2016-08-25 18:20:00';
+
+    var end = '<?php echo $hourend; ?>';
+    var deadline = '<?php echo $countdown; ?>';
+
+    function time_remaining(endtime){
+        // var t = Date.parse(endtime) - Date.parse(new Date());
+        // var t = Date.parse(endtime) - Date.parse("<?php echo $nowc ?>");
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor( (t/1000) % 60 );
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        var hours = Math.floor( (t/(1000*60*60)) % 24 );
+        return {'total':t, 'hours':hours, 'minutes':minutes, 'seconds':seconds};
+
+    }
+    function run_clock(id,endtime){
+        var clock = document.getElementById(id);
+        
+        // get spans where our clock numbers are held
+        var hours_span = clock.querySelector('.hours');
+        var minutes_span = clock.querySelector('.minutes');
+        var seconds_span = clock.querySelector('.seconds');
+
+        function update_clock(){
+            var trigdate = new Date;
+
+            var trig_s = trigdate.getSeconds();
+            var sn = trig_s.toString().length;
+            if (sn == 1){
+                trig_s = '0'+trig_s;
+            }
+
+            var trig_m = trigdate.getMinutes();
+            var mn = trig_m.toString().length;
+            if (mn == 1){
+                trig_m = '0'+trig_m;
+            }
+
+            var trig_h = trigdate.getHours();
+            var hn = trig_h.toString().length;
+            if (hn == 1){
+                trig_h = '0'+trig_h;
+            }
+
+            var now = trig_h+':'+trig_m+':'+trig_s;
+
+            var t = time_remaining(endtime);
+            
+            // update the numbers in each part of the clock
+            hours_span.innerHTML = ('0' + t.hours).slice(-2);
+            minutes_span.innerHTML = ('0' + t.minutes).slice(-2);
+            seconds_span.innerHTML = ('0' + t.seconds).slice(-2);
+            
+            // console.log(now);
+            // console.log(end);
+            if(t.total<=0){ 
+                if (now < end){
+                    clearInterval(timeinterval); 
+                    $("#clockdiv").hide();
+                    $("#nosess").hide();
+                    $("#sess").removeClass("hide");
+                    $.get("<?php echo site_url('b2c/student/dashboard/get_id');?>",function(data) {
+                        var val_id = data;
+                        // console.log(val_id);
+                        document.getElementById('get_id_ajax').value = val_id;
+                        // alert(document.getElementById("get_id_ajax").value);
+                        // $("#clockdiv").show();
+                        // $("#clockarea").show();
+                        $("#sess").show();
+                    });
+                }
+                else if(now > end){
+                    // console.log(now);
+                    // console.log(end);
+                    $("#clockdiv").show();
+                    $("#clockarea").show();
+                    $("#sess").hide();
+                }
+            }
+        }
+        update_clock();
+        var timeinterval = setInterval(update_clock,1000);
+    }
+    run_clock('clockdiv',deadline);
+</script>

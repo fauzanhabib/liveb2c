@@ -10,6 +10,7 @@ class Dashboard extends MY_Site_Controller {
         parent::__construct();
         $this->load->model('appointment_model');
         $this->load->model('class_member_model');
+        $this->load->library('send_sms');
 
         //checking user role and giving action
         if (!$this->auth_manager->role() || $this->auth_manager->role() != 'STD') {
@@ -88,9 +89,24 @@ class Dashboard extends MY_Site_Controller {
                       ->order_by('start_time', 'ASC')
                       ->limit(5)
                       ->get()->result(); 
+
+        $pull_appoint3 = $this->db->select('*')
+                      ->from('appointments')
+                      ->where($tipe, $id)
+                      ->where('date >', $nowdate)
+                      ->where('status', 'active')
+                      ->or_where($tipe, $id)
+                      ->where('date >=', $nowdate)
+                      ->where('end_time >=', $hour_start_db)
+                      ->where('status', 'active')
+                      ->order_by('date', 'ASC')
+                      ->order_by('start_time', 'ASC')
+                      ->limit(5)
+                      ->get()->result(); 
         //------------wm
         
         $data = @$pull_appoint;
+        $dataupcoming = @$pull_appoint3;
         // $data = $this->appointment_model->get_appointment_for_upcoming_session('student_id','','',  $this->auth_manager->userid());
         $data_class = $this->class_member_model->get_appointment_for_upcoming_session('', '', $this->auth_manager->userid());
         
@@ -116,6 +132,16 @@ class Dashboard extends MY_Site_Controller {
                 $d->date = date('Y-m-d', $data_schedule['date']);
                 $d->start_time = $data_schedule['start_time'];
                 $d->end_time = $data_schedule['end_time'];
+            }
+        }
+
+        if ($dataupcoming) {
+            foreach ($dataupcoming as $d) {
+                $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
+                $d->date = date('Y-m-d', $data_schedule['date']);
+                $d->start_time = $data_schedule['start_time'];
+                $d->end_time = $data_schedule['end_time'];
+                
             }
         }
         // wimo----------------------
@@ -178,6 +204,7 @@ class Dashboard extends MY_Site_Controller {
             'wm'    => $wm,
             'nowh'  => $nowh,
             'data'  => $data,
+            'dataupcoming' => $dataupcoming,
             'nowd'  => $nowd,
             'nowc'  => $nowc,
             'wm_id' => $wm_id,
