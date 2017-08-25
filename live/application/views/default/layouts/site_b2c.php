@@ -16,11 +16,10 @@
         <title><?php echo $this->template->title->append(' - DynEd Live') ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/multiple-select.css">
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/jquery.js"></script>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.css">
         <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
         <style media="screen">
           .active{
             background: #303e62;
@@ -35,6 +34,43 @@
             DODO
         </div>
         <div class="header__profile flex">
+            <div id="noti__container">
+                <div id="noti__counter"></div>   <!--SHOW NOTIFICATIONS COUNT.-->
+                
+                <div id="noti__button" class="fa fa-bell-o"></div>    
+
+                <!--THE NOTIFICAIONS DROPDOWN BOX.-->
+                <div id="notifications">
+                    <ul class="notification__list">
+                        <li>
+                            <a href="">New session booked with Adam <br>
+                            <span>1 hour ago</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">New session booked with Adam <br>
+                            <span>2 hour ago</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">New session booked with Dylan <br>
+                            <span>3 hour ago</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">New session booked with Anna <br>
+                            <span>4 hour ago</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">New session booked with Dylan <br>
+                            <span>5 hour ago</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="seeAll"><a href="#">See All</a></div>
+                </div>
+            </div>
             <div class="profile__name">
                 <h4><?php echo $this->auth_manager->get_name();?></h4>
                 <h5><?php echo $this->auth_manager->role();?></h5>
@@ -187,6 +223,11 @@
 		    <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin-left:10px;" alt="DynEd International, Inc.">
 		    </a>
 		</footer>
+
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
     <script>
       //redirect -----------------------------------------
       $('.main__sidebar ul li').on('click', function(){

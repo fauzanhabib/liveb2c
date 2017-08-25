@@ -1,7 +1,17 @@
 $(document).ready(function(){
 
-	//ARCODION SHOW BOOKING TIME IN PAGE BOOKING A COACH
+    // MODAL
+    $('.trigger').each(function() {
+        $(this).click(function() {
+            $(this).next().addClass('open');
+            return false;
+        });
+    });
+    $('.btn-close').click(function() {
+        (this).find('.modal-wrapper').removeClass('open');
+    })
 
+	//ARCODION SHOW BOOKING TIME IN PAGE BOOKING A COACH
  	$(function() {
  		// (Optional) Active an item if it has the class "is-active"    
  		$(".accordion_book > .accordion-item.is-active").children(".accordion-panel").slideDown();
@@ -24,13 +34,13 @@ $(document).ready(function(){
   	});
 
 	// burger menu click event
-	$('.burger_menu').click(function() {
-		$('.menu_bar').toggleClass('clicked');
-			if($('.menu_bar').hasClass('clicked')) {
-				$('.mobile_nav').addClass('act');
+	$('.burger__menu').click(function() {
+		$('.menu__bar').toggleClass('clicked');
+			if($('.menu__bar').hasClass('clicked')) {
+				$('.mobile__nav').addClass('act');
 			}
 			else {
-				$('.mobile_nav').removeClass('act');
+				$('.mobile__nav').removeClass('act');
 			}
 	});
 	// end burger menu click event
@@ -48,6 +58,17 @@ $(document).ready(function(){
 
  	})
 
+    $('.tabs div').click(function() {
+        var tab_id = $(this).attr('data-tab');
+
+        $('.tabs div').removeClass('current');
+        $('.tab-content').fadeOut(300);
+
+        $(this).addClass('current');
+        $("#" + tab_id).delay(300).fadeIn(300);
+
+    })
+
  	//DATE TIME PICKER IN BOOKING A COACH
  	$(function() {
  		$(".calendar").datepicker({
@@ -61,7 +82,6 @@ $(document).ready(function(){
  			$parent.toggleClass('open');
  		});
 
-
  		$(".calendar").on("change", function() {
  			var $me = $(this),
  				$selected = $me.val(),
@@ -71,7 +91,6 @@ $(document).ready(function(){
  	});
 
  	//DROPDOWN COUNTRY AND LANGUAGES BOOKING A COACH
- 	;
  	(function($, window, document, undefined) {
 
  		'use strict';
@@ -107,34 +126,34 @@ $(document).ready(function(){
  		$('#town').on('change', function() {
  			//use toggle for ease of use
  			if ($(this).val() === "1") {
- 				$("#alt1").show(this.value == 1);
- 				$("#alt2").hide();
- 				$("#alt3").hide();
- 				$("#alt4").hide();
+ 				$(".alt1").show(this.value == 1);
+ 				$(".alt2").hide();
+ 				$(".alt3").hide();
+ 				$(".alt4").hide();
  			} else if ($(this).val() === "2") {
- 				$("#alt2").show(this.value == 2);
- 				$("#alt1").hide();
- 				$("#alt3").hide();
- 				$("#alt4").hide();
+ 				$(".alt2").show(this.value == 2);
+ 				$(".alt1").hide();
+ 				$(".alt3").hide();
+ 				$(".alt4").hide();
  			} else if ($(this).val() === "3") {
- 				$("#alt3").show(this.value == 3);
- 				$("#alt1").hide();
- 				$("#alt2").hide();
- 				$("#alt4").hide();
+ 				$(".alt3").show(this.value == 3);
+ 				$(".alt1").hide();
+ 				$(".alt2").hide();
+ 				$(".alt4").hide();
  			} else if ($(this).val() === "4") {
- 				$("#alt4").show(this.value == 4);
- 				$("#alt1").hide();
- 				$("#alt2").hide();
- 				$("#alt3").hide();
+ 				$(".alt4").show(this.value == 4);
+ 				$(".alt1").hide();
+ 				$(".alt2").hide();
+ 				$(".alt3").hide();
  			} else if ($(this).val() === "0") {
 
- 				$("#alt1").hide();
- 				$("#alt2").hide();
- 				$("#alt3").hide();
- 				$("#alt4").hide();
+ 				$(".alt1").hide();
+ 				$(".alt2").hide();
+ 				$(".alt3").hide();
+ 				$(".alt4").hide();
  			}
  		});
- 	})
+ 	});
 
  		 //RATING COACH  MENU BOOKING A COACH 
 
@@ -187,4 +206,81 @@ $(document).ready(function(){
  		$('.success-box').fadeIn(200);
  		$('.success-box div.text-message').html("<span>" + msg + "</span>");
  	}
+
+ 	$('.fa-times').click(function() {
+        $('.dashboard__notif').remove();
+    });
+
+
+    // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER. // notification thing
+    var totalNotif = 13;
+
+    $('#noti__counter')
+        .css({ opacity: 0 })
+        .text(totalNotif)              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+        .css({ top: '10px', right: '5px' })
+        .animate({ opacity: 1 }, 500);
+
+    if (totalNotif == 0) {
+        $('#noti__counter').hide();
+    };
+
+    $('#noti__button').click(function () {
+
+        // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+        $('#notifications').fadeToggle('fast', 'linear', function () {
+            if ($('#notifications').is(':hidden')) {
+                $('#noti__button').css('background-color', '#2E467C');
+            }       // CHANGE BACKGROUND COLOR OF THE BUTTON.
+        });
+
+        $('#noti__counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+        return false;
+    });
+
+    // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+    $(document).click(function () {
+        $('#notifications').hide();
+
+        // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+        if ($('#noti__counter').is(':hidden')) {
+            // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            $('#noti__button').css('background-color', '#2E467C');
+        }
+    });
+
+    $('#notifications').click(function () {
+        return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+    });
+
+    // logout 
+    $('#logout__button').click(function () {
+
+        // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+        $('#logout__box').fadeToggle('fast', 'linear', function () {
+            if ($('#logout__box').is(':hidden')) {
+                $('#logout__button').css('background-color', '#2E467C');
+            }       // CHANGE BACKGROUND COLOR OF THE BUTTON.
+        });
+
+        $('#logout__counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+        return false;
+    });
+
+    // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+    $(document).click(function () {
+        $('#logout__box').hide();
+
+        // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+        if ($('#logout__counter').is(':hidden')) {
+            // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            $('#logout__button').css('background-color', '#2E467C');
+        }
+    });
+
+    $('#logout__box').click(function () {
+        return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+    });
 });
