@@ -46,7 +46,7 @@
             </a>
             <a href="#">
                 <div class="sessions">
-                    <i>2</i>
+                    <i><?php echo count($data)?></i>
                     <svg width="54px" height="63px" viewBox="0 0 54 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
                         <title>ic_Sessions</title>

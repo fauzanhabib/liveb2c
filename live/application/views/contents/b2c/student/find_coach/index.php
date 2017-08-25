@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="dashboard__menu">
-                        <a href="index.html" >
+                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>" >
                             <div class="booking activediv">
                                 <svg width="54px" height="65px" viewBox="0 0 54 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -46,7 +46,7 @@
                         </a>
                         <a href="#">
                             <div class="sessions">
-                                <i>2</i>
+                                <i><?php echo count($datasession);?></i>
                                 <svg width="54px" height="63px" viewBox="0 0 54 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
                                     <title>ic_Sessions</title>
@@ -72,7 +72,7 @@
                                 <span>Sessions</span>
                             </div>
                         </a>
-                        <a href="tokens.html">
+                        <a href="<?php echo site_url('b2c/student/token'); ?>">
                             <div class="tokens">
                                 <svg width="63px" height="63px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -97,7 +97,7 @@
                                 <span>Tokens</span>
                             </div>
                         </a>
-                        <a href="help.html">
+                        <a href="<?php echo site_url('b2c/student/help'); ?>">
                             <div class="help">
                                 <svg width="46px" height="55px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -218,7 +218,7 @@
                             $('#ui-datepicker-div').hide();
                         } 
                     });
-                } );
+                });
             </script>
 </body>
 

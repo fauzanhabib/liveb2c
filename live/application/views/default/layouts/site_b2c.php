@@ -20,6 +20,7 @@
         <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
         <style media="screen">
           .active{
             background: #303e62;
@@ -227,7 +228,6 @@
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
     <script>
       //redirect -----------------------------------------
       $('.main__sidebar ul li').on('click', function(){

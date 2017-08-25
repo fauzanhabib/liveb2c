@@ -11,12 +11,19 @@
                         <i class="fa fa-times"></i>
                     </div>
 
-
                     <div class="dashboard__menubookingcoachresult">
-                        <div class="bookkacoach notactive"><a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">Book a Coach</a></div>
-                        <div class="session notactive"><a href=""> Session</a></div>
-                        <div class="token activetitle"><a href="<?php echo site_url('b2c/student/token'); ?>">Tokens</a></div>
-                        <div class="help notactive"><a href="<?php echo site_url('b2c/student/help'); ?>">Help</a></div>
+                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
+                            <div class="bookkacoach">Book a Coach</div>
+                        </a>
+                        <a href="">
+                            <div class="session ">Session</div>
+                        </a>
+                        <a href="<?php echo site_url('b2c/student/token'); ?>">
+                            <div class="token activediv">Token</div>
+                        </a>
+                        <a href="<?php echo site_url('b2c/student/help'); ?>">
+                            <div class="help ">Help</div>
+                        </a>
                     </div>
 
                     <div class="dashboard__bxtokenstab">

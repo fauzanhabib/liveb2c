@@ -1,10 +1,18 @@
             <section class="main__content">
                 <div class="help__content">
                     <div class="dashboard__menubookingcoachresult">
-                        <div class="bookkacoach notactive"><a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">Book a Coach</a></div>
-                        <div class="session notactive"><a href=""> Session</a></div>
-                        <div class="token notactive"><a href="<?php echo site_url('b2c/student/token'); ?>">Tokens</a></div>
-                        <div class="help activetitle"><a href="<?php echo site_url('b2c/student/help'); ?>">Help</a></div>
+                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
+                            <div class="bookkacoach">Book a Coach</div>
+                        </a>
+                        <a href="">
+                            <div class="session ">Session</div>
+                        </a>
+                        <a href="<?php echo site_url('b2c/student/token'); ?>">
+                            <div class="token">Token</div>
+                        </a>
+                        <a href="<?php echo site_url('b2c/student/help'); ?>">
+                            <div class="help activediv">Help</div>
+                        </a>
                     </div>
                     <div class="help__accordion">
                         <ul class="accordion">
