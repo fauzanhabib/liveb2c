@@ -4,48 +4,66 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link href="<?php echo base_url();?>assets/simulator/styles.css" rel="stylesheet">
   </head>
-  <body>
-<style>
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 99; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
-}
+  <body style="background:#2d3b5e;color:white;">
+  <style>
+  .header_sim{
+    background-color: rgb(59, 74, 116);
+    color: white;
+    height: 80px;
+  }
+  h1{
+    background-color: rgb(59, 74, 116);
+    font-size: 16px;
+    position: absolute;
+    top: 2%;
+    border-bottom: none !important;
+  }
+  h1 small {
+    color: #49C5FE;
+  }
+  .container{
+    min-height: 400px;
+  }
+  /* The Modal (background) */
+  .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 99; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  }
 
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    color: black;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%;
-}
+  /* Modal Content */
+  .modal-content {
+      background-color: #fefefe;
+      color: black;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+  }
 
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+  /* The Close Button */
+  .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
 
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  </style>
 
   <style>
   .hover{
@@ -63,8 +81,8 @@
   .resultps{
     height: 150px;
     overflow-y: scroll;
-    background: #f6f6f6;
-    color: #666666;
+    background: #2d3b5e;
+    color: white;
     padding:10px;
     text-align: left !important;
     font-size: 14px;
@@ -80,11 +98,12 @@
     display: inline-block !important;
     height: 500px;
     transform: translateY(8px);
+    background: #3c4c77;
   }
   #bwresult{
     padding: 15px 15px;
     height: 400px;
-    background: #fff;
+    background: #3c4c77;
     width: 47%;
     display: inline-block;
     margin-top: 40px;
@@ -92,7 +111,7 @@
   #liststat{
     height: 200px;
     padding: 10px;
-    background-color: #f6f6f6;
+    background-color: #2d3b5e;
     margin-top: 35px;
     text-align: left;
     font-size: 16px;
@@ -104,10 +123,16 @@
     margin-bottom: -15px;
     cursor: pointer;
     display: none;
+    color: #49C5FE;
+  }
+  div.prettyBox p {
+    color: white;
   }
   </style>
 
-  <h1>DynEd Live Session <small>Network test</small></h1>
+  <div class="header_sim">
+    <h1>DODO <small>Network test</small></h1>
+  </div>
   <div style="margin-top: 420px;text-align: center;">
     <div id="status_container" class="prettyBox hover">
       <h2>Testing stream capabilities</h2>
@@ -215,7 +240,7 @@ var bwps;
 
 var testStreamingCapability = function(subscriber, callback) {
   performQualityTest({subscriber: subscriber, timeout: TEST_TIMEOUT_MS}, function(error, results) {
-    console.log('Test concluded', results);
+    // console.log('Test concluded', results);
 
     var audioVideoSupported = results.video.bitsPerSecond > 250000 &&
       results.video.packetLossRatioPerSecond < 0.03 &&
@@ -223,7 +248,7 @@ var testStreamingCapability = function(subscriber, callback) {
       results.audio.packetLossRatioPerSecond < 0.05;
 
     if (audioVideoSupported) {
-      $('#liststat').append('<p style="font-size:15px;color:#666666;"><img src="<?php echo base_url();?>assets/icon/simulator/Audio_videoready.svg"><br>Your bandwidth is sufficient for both video and audio <a style="color: #58ba84;">&#x2714;</a></p>');
+      $('#liststat').append('<p style="font-size:15px;color:white;"><img src="<?php echo base_url();?>assets/icon/simulator/Audio_videoready.svg"><br>Your bandwidth is sufficient for both video and audio <a style="color: #58ba84;">&#x2714;</a></p>');
       return callback(false, {
         text: 'You\'re all set!',
         icon: '<?php echo base_url();?>assets/icon/simulator/success.svg'
@@ -267,12 +292,12 @@ var testStreamingCapability = function(subscriber, callback) {
 var callbacks = {
   onInitPublisher: function onInitPublisher(error) {
     if (error) {
-      $('#liststat').append('<p style="font-size:15px;color:#666666;">Your browser is blocking your camera.</p>');
+      $('#liststat').append('<p style="font-size:15px;color:white;">Your browser is blocking your camera.</p>');
       $('#allowcamera').show();
       setText(statusMessageEl, 'Could not acquire your camera');
       return;
     }
-    $('#liststat').append('<p style="font-size:15px;color:#666666;"><img src="<?php echo base_url();?>assets/icon/simulator/camera.svg"><br>Camera is connected <a style="color: #58ba84;">&#x2714;</a></p>');
+    $('#liststat').append('<p style="font-size:15px;color:white;"><img src="<?php echo base_url();?>assets/icon/simulator/camera.svg"><br>Camera is connected <a style="color: #58ba84;">&#x2714;</a></p>');
     setText(statusMessageEl, 'Connecting to session');
   },
 
@@ -285,7 +310,7 @@ var callbacks = {
       );
       return;
     }
-    $('#liststat').append('<p style="font-size:15px;color:#666666;"><img src="<?php echo base_url();?>assets/icon/simulator/Publish_Video.svg"><br>You can publish a video <a style="color: #58ba84;">&#x2714;</a></p>');
+    $('#liststat').append('<p style="font-size:15px;color:white;"><img src="<?php echo base_url();?>assets/icon/simulator/Publish_Video.svg"><br>You can publish a video <a style="color: #58ba84;">&#x2714;</a></p>');
     setText(
       statusMessageEl,
       'Subscribing to video'
@@ -312,7 +337,7 @@ var callbacks = {
       setText(statusMessageEl, 'Could not subscribe to video');
       return;
     }
-    $('#liststat').append('<p style="font-size:15px;color:#666666;"><img src="<?php echo base_url();?>assets/icon/simulator/Video_Subscribe.svg"><br>You can subscribe to video <a style="color: #58ba84;">&#x2714;</a></p>');
+    $('#liststat').append('<p style="font-size:15px;color:white;"><img src="<?php echo base_url();?>assets/icon/simulator/Video_Subscribe.svg"><br>You can subscribe to video <a style="color: #58ba84;">&#x2714;</a></p>');
     setText(statusMessageEl, 'Checking your available bandwidth');
 
     testStreamingCapability(subscriber, function(error, message) {

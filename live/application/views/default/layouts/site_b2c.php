@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/multiple-select.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.css">
         <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        
+
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
         <style media="screen">
@@ -37,8 +37,8 @@
         <div class="header__profile flex">
             <div id="noti__container">
                 <div id="noti__counter"></div>   <!--SHOW NOTIFICATIONS COUNT.-->
-                
-                <div id="noti__button" class="fa fa-bell-o"></div>    
+
+                <div id="noti__button" class="fa fa-bell-o"></div>
 
                 <!--THE NOTIFICAIONS DROPDOWN BOX.-->
                 <div id="notifications">
@@ -241,7 +241,12 @@
 
         var url_href = base_url+'/b2c/'+role+'/'+this.id;
 
-        window.location.href = url_href;
+        if( this.id == 'session_simulator' ){
+          window.open(url_href, '_blank');
+          window.focus();
+        }else{
+          window.location.href = url_href;
+        }
         // console.log(current_page);
         // console.log(url_href);
       });
