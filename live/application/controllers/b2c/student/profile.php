@@ -109,6 +109,8 @@ class Profile extends MY_Site_Controller {
         $fieldType   = $this->input->post("elPrev");
         $updatedVal  = $this->input->post("updatedVal");
 
+        $mod_val = '';
+
         if($fieldType == 'City'){
           $column = 'city';
           $table  = 'user_geography';
@@ -144,9 +146,22 @@ class Profile extends MY_Site_Controller {
           $table  = 'user_profiles';
           $txtUpd = 'Home Languages';
           $idCol  = 'user_id';
+        }else if($fieldType == 'birthdate'){
+          $column = 'date_of_birth';
+          $table  = 'user_profiles';
+          $txtUpd = 'Date of Birth';
+          $idCol  = 'user_id';
+          $updatedVal = date("Y-m-d", strtotime($updatedVal));
+          $mod_val = date("d - M - Y", strtotime($updatedVal));
         }
 
-        echo $txtUpd.' has been updated to '.$updatedVal;
+        $var[] = [
+          'textUpd' => $txtUpd.' has been updated to '.$updatedVal,
+          'upd_date' => $mod_val
+        ];
+
+        echo json_encode($var);
+        // echo $txtUpd.' has been updated to '.$updatedVal;
         $upd_geograph = array(
            $column => $updatedVal
         );
