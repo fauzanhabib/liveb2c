@@ -77,7 +77,7 @@
                 <h5><?php echo $this->auth_manager->role();?></h5>
             </div>
             <div class="header__profpic pic__circle--small">
-                <img src="assets/img/galgadot.jpg">
+                <img src="<?php echo base_url().'/'.($this->auth_manager->get_avatar()); ?>">
             </div>
         </div>
     </header>
@@ -255,7 +255,7 @@
       current_page = document.location.href;
       menuClass    = current_page.split("/")[6];
       $('#'+menuClass).addClass('active');
-      console.log(menuClass);
+      // console.log(menuClass);
     </script>
     </div>
     </body>

@@ -1,5 +1,6 @@
 <html>
   <head>
+    <title>Dodo - Network Test</title>
     <script type="text/javascript" src="https://static.opentok.com/v2/js/opentok.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <link href="<?php echo base_url();?>assets/simulator/styles.css" rel="stylesheet">
