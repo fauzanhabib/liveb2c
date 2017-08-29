@@ -216,6 +216,112 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- result -->
+                    <div class="dashboard__resultbook">
+                        <?php for($i=0;$i<count($coaches);$i++){ ?>
+                        <div class="boxprofilecoach">
+                            <div class="profilecoach">
+                                <div class="profilecoach__picture">
+                                    <img src="<?php echo base_url().$coaches[$i]->profile_picture;?>" alt="">
+                                </div>
+                                <div class="profilecoach__name">
+                                    <?php echo($coaches[$i]->fullname); ?>
+                                </div>
+                                <div class="profilecoach__rate">
+                                    <section class='rating-widget'>
+
+                                        <!-- Rating Stars Box -->
+                                        <div class='rating-stars text-center'>
+                                            <ul id='stars'>
+                                                <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Good' data-value='3'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class='success-box'>
+                                            <div class='text-message'></div>
+                                        </div>
+                                    </section>
+
+                                </div>
+
+                                <div class="profilecoach__location">
+                                    <i class="fa fa-map-marker"> </i><?php echo($coaches[$i]->country); ?>
+                                </div>
+
+                                <div class="profilecoach__token">
+                                    <i class="fa fa-google-wallet"> </i> 
+                                    <?php 
+                                        if($coaches[$i]->coach_type_id == 1){
+                                            echo $standard_coach_cost;
+                                        } else if($coaches[$i]->coach_type_id == 2){
+                                            echo $elite_coach_cost; 
+                                        }
+                                    ?> 
+                                    Tokens
+                                </div>
+                            </div>
+
+                            <div class="profilecoach__timebook">
+                                    <ul class="accordion_book">
+                                        <li class="accordion-item">
+                                            <div class="accordion-thumb">
+                                                <span>Available At</span>
+                                                <i class="fa fa-angle-down"></i>
+                                            </div>
+
+                                            <div class="accordion-panel">
+                                                <div class="booking">
+                                                    <i>14:00 - 14:25</i>
+                                                    <a href="#">Book Now</a>
+                                                </div>
+                                                <div class="booking">
+                                                    <i>14:00 - 14:25</i>
+                                                    <a href="#">Book Now</a>
+                                                </div>
+                                                <div class="booking">
+                                                    <i>14:00 - 14:25</i>
+                                                    <a href="#">Book Now</a>
+                                                </div>
+                                                <div class="booking">
+                                                    <i>14:00 - 14:25</i>
+                                                    <a href="#">Book Now</a>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                        <?php } ?>
+
+                        <!-- dummy element to align left the content -->
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <!-- dummy element to align left the content -->
+                    </div>
                 </div>
             </section>
         <script>
@@ -229,28 +335,23 @@
             });
         </script>
         <script type="text/javascript">
-        //     $(function () {
-        //     var now = new Date();
-        //     var day = ("0" + (now.getDate() + 1)).slice(-2);
-        //     var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        //     var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
-        //     $('.datepicker').datepicker({
-        //     startDate: resultDate,
-        //     format: 'yyyy-mm-dd',
-        //     autoclose: true,
-        //     });
-        //         $('.dateavailable').change(function(){
-        //         $('.dateavailable').parsley().reset();
-        //     });
-        // });
+            $(function () {
+            var now = new Date();
+            var day = ("0" + (now.getDate() + 1)).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
+            $('.datepicker').datepicker({
+            startDate: resultDate,
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            });
+                $('.dateavailable').change(function(){
+                $('.dateavailable').parsley().reset();
+            });
+        });
     
-        document.getElementById("datepicker").onchange = function() {
-            // console.log(this.value);
-            var date = this.value;
-            var newdate = date.split('/');
-            var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
-            // console.log(dateformat);
-            var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+dateformat;
+        document.getElementById("date").onchange = function() {
+            var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+this.value;
             $('#date_value').attr('action', newurl);
         };
 

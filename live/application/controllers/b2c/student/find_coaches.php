@@ -82,20 +82,73 @@ class find_coaches extends MY_Site_Controller {
         //print_r($this->email_structure->header().$this->email_structure->title('ini title').$this->email_structure->content('ini content').$this->email_structure->button('ini button').$this->email_structure->footer('ini footer')); EXIT;
         $this->template->title = 'Find Coach';
 
+        $id    = $this->auth_manager->userid();
+        $tz = $this->db->select('*')
+            ->from('user_timezones')
+            ->where('user_id', $id)
+            ->get()->result();
+        
+        $minutes = @$tz[0]->minutes_val;
+        $gmt_val = @$tz[0]->gmt_val;
 
+        if(@$gmt_val > 0){
+            @$gmt_val = "+".@$gmt_val;
+        }
+
+        $tipe = '';
+        if($this->auth_manager->role() == "STD"){
+            $tipe = 'student_id';
+        } else if($this->auth_manager->role() == "CCH"){
+            $tipe = 'coach_id';
+        }
+        
+        $dates3     = date('Y-m-d H:i:s');
+        $def3      = strtotime($dates3);
+        $datetime3 = $def3+(60*$minutes);
+        $nowdate  = date("Y-m-d");
+        $hour_start_db  = date('H:i:s');
+
+        $pull_appoint = $this->db->select('*')
+                      ->from('appointments')
+                      ->where($tipe, $id)
+                      ->where('date =', $nowdate)
+                      ->where('end_time >=', $hour_start_db)
+                      ->where('status', 'active')
+                      ->order_by('date', 'ASC')
+                      ->order_by('start_time', 'ASC')
+                      ->limit(5)
+                      ->get()->result();
+
+        $datasession = @$pull_appoint;
+
+        $country = array_column($this->common_function->country_code, 'name', 'name');
+        $countrylist = array('Country..' => 'Country..') + $country;
+
+        $languagelist = array('Language..' => 'Language..') + $this->common_function->language();
+
+        $country = '';
+        $name = '';
+        $language = '';
+        if($this->input->post('country')){
+            $country = $this->input->post('country');
+        }elseif($this->input->post('name')){
+            $name = $this->input->post('name');
+        }elseif($this->input->post('language')){
+            $language = $this->input->post('language');
+        }
         
         $offset = 0;
-        $per_page = 6;
-        $uri_segment = 5;
+        $per_page = '';
+        $uri_segment = 6;
         if ($category == 'name' || $category == null) {
-            $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches/search/name'), count($this->identity_model->get_coach_identity(null, @$this->input->post('search_key'))), $per_page, $uri_segment);
-            $coaches = $this->identity_model->get_coach_identity(null, @$this->input->post('search_key'), null, null, null, null, null, $per_page, $offset);           
+            // $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('b2c/student/find_coaches/search/name'), count($this->identity_model->get_coach_identity(null, @$this->input->post('name'))), $per_page, $uri_segment);
+            $coaches = $this->identity_model->get_coach_identity(null, @$name, null, null, null, null, null, $per_page, $offset);           
         } else if ($category == 'country') {
-            $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches/search/country'), count($this->identity_model->get_coach_identity(null, null, @$this->input->post('search_key'))), $per_page, $uri_segment);
-            $coaches = $this->identity_model->get_coach_identity(null, null, @$this->input->post('search_key'), null, null, null, null, $per_page, $offset);
+            // $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('b2c/student/find_coaches/search/country'), count($this->identity_model->get_coach_identity(null, null, @$this->input->post('country'))), $per_page, $uri_segment);
+            $coaches = $this->identity_model->get_coach_identity(null, null, @$country, null, null, null, null, $per_page, $offset);
         } else if ($category == 'spoken_language') {
-            $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches/search/spoken_language'), count($this->identity_model->get_coach_identity(null, null, null, null, null, null, @$this->input->post('search_key'))), $per_page, $uri_segment);
-            $coaches = $this->identity_model->get_coach_identity(null, null, null, null, null, null, @$this->input->post('search_key'), $per_page, $offset);
+            // $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('b2c/student/find_coaches/search/spoken_language'), count($this->identity_model->get_coach_identity(null, null, null, null, null, null, @$this->input->post('language'))), $per_page, $uri_segment);
+            $coaches = $this->identity_model->get_coach_identity(null, null, null, null, null, null, @$language, $per_page, $offset);
         } else {
             redirect('account/identity/detail/profile');
         }
@@ -111,15 +164,18 @@ class find_coaches extends MY_Site_Controller {
             'coaches' => $coaches,
             'selected' => $category,
             'rating' => $this->coach_rating_model->get_average_rate(),
-            'pagination' => @$pagination,
+            // 'pagination' => @$pagination,
             'standard_coach_cost' => $standard_coach_cost,
             'elite_coach_cost' => $elite_coach_cost,
-            'session_duration' => $session_duration
+            'session_duration' => $session_duration,
+            'datasession' => $datasession,
+            'countrylist' => $countrylist,
+            'languagelist' => $languagelist
         );
        // echo('<pre>');
        // print_r($vars); exit;
 
-        $this->template->content->view('default/contents/find_coach/' . $category . '/index', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/' . $category . '/index', $vars);
         $this->template->publish();
     }
 
@@ -447,14 +503,58 @@ class find_coaches extends MY_Site_Controller {
 
     public function book_by_single_date($date = '', $page='') {
         $this->template->title = 'Detail Schedule';
-
+        
         // if ($date <= date('Y-m-d')) {
         //     $this->messages->add('Invalid Date', 'warning');
         //     redirect('student/find_coaches/single_date/');
         // }
 
+        $id    = $this->auth_manager->userid();
+        $tz = $this->db->select('*')
+            ->from('user_timezones')
+            ->where('user_id', $id)
+            ->get()->result();
+        
+        $minutes = @$tz[0]->minutes_val;
+        $gmt_val = @$tz[0]->gmt_val;
+
+        if(@$gmt_val > 0){
+            @$gmt_val = "+".@$gmt_val;
+        }
+
+        $tipe = '';
+        if($this->auth_manager->role() == "STD"){
+            $tipe = 'student_id';
+        } else if($this->auth_manager->role() == "CCH"){
+            $tipe = 'coach_id';
+        }
+        
+        $dates3     = date('Y-m-d H:i:s');
+        $def3      = strtotime($dates3);
+        $datetime3 = $def3+(60*$minutes);
+        $nowdate  = date("Y-m-d");
+        $hour_start_db  = date('H:i:s');
+
+        $pull_appoint = $this->db->select('*')
+                      ->from('appointments')
+                      ->where($tipe, $id)
+                      ->where('date =', $nowdate)
+                      ->where('end_time >=', $hour_start_db)
+                      ->where('status', 'active')
+                      ->order_by('date', 'ASC')
+                      ->order_by('start_time', 'ASC')
+                      ->limit(5)
+                      ->get()->result();
+
+        $datasession = @$pull_appoint;
+
+        $country = array_column($this->common_function->country_code, 'name', 'name');
+        $countrylist = array('Country..' => 'Country..') + $country;
+
+        $languagelist = array('Language..' => 'Language..') + $this->common_function->language();
+
         $offset = 0;
-        $per_page = 6;
+        $per_page = '';
         $uri_segment = 5;
         $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches/book_by_single_date/'.$date), count($this->get_available_coach($date)), $per_page, $uri_segment);
         
@@ -475,19 +575,23 @@ class find_coaches extends MY_Site_Controller {
             'gmt_user' => $gmt_student[0]->minutes,
             'gmt_val_user' => $gmt_student[0]->gmt,
             'data' => $data,
+            'coaches' => $coaches = $this->identity_model->get_coach_identity('','','',$this->auth_manager->partner_id()),
             'date' => $date,
             'standard_coach_cost' => $standard_coach_cost,
             'elite_coach_cost' => $elite_coach_cost,
             'rating' => $this->coach_rating_model->get_average_rate(),
             'pagination' => @$pagination,
-            'cert_studying' => $cert_studying[0]->cert_studying
+            'cert_studying' => $cert_studying[0]->cert_studying,
+            'datasession' => $datasession,
+            'countrylist' => $countrylist,
+            'languagelist' => $languagelist
         );
 
         // echo "<pre>";
         // print_r($data);
         // exit();
 
-        $this->template->content->view('default/contents/find_coach/book_by_availability/single_date/index', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/date/index', $vars);
         $this->template->publish();
     }
 
@@ -682,19 +786,19 @@ class find_coaches extends MY_Site_Controller {
                         
                         $this->messages->add($message, 'success');
   
-                        redirect('student/find_coaches/book_by_single_date/' . date("Y-m-d", $date));
+                        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date));
                     } else {
                         $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
                         $this->messages->add('Fail to book appointment, please try again.', 'warning');
-                        redirect('student/find_coaches/single_date/');
+                        redirect('b2c/student/find_coaches/single_date/');
                     }
                 } else {
                     $this->messages->add('Not Enough Token', 'warning');
-                    redirect('student/find_coaches/single_date/');
+                    redirect('b2c/student/find_coaches/single_date/');
                 }
             } else {
                 $this->messages->add('Invalid Appointment', 'warning');
-                redirect('student/find_coaches/single_date/');
+                redirect('b2c/student/find_coaches/single_date/');
             }
             
 
@@ -2092,23 +2196,23 @@ class find_coaches extends MY_Site_Controller {
                         
                         
                         $this->messages->add($message, 'success');
-                        redirect('student/find_coaches/search/name/');
+                        redirect('b2c/student/find_coaches/search/name/');
                     } else {
                         //throw $e;
                         $this->db->trans_rollback();
                         $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
                         $this->messages->add('Fail to book appointment, please try again.', 'warning');
-                        redirect('student/find_coaches/search/name/');
+                        redirect('b2c/student/find_coaches/search/name/');
                     }
                 } else {
                     $this->db->trans_rollback();
                     $this->messages->add('Not Enough Token', 'warning');
-                    redirect('student/find_coaches/search/name/');
+                    redirect('b2c/student/find_coaches/search/name/');
                 }
             } else {
                 $this->db->trans_rollback();
                 $this->messages->add('Invalid Appointment', 'warning');
-                redirect('student/find_coaches/search/name/');
+                redirect('b2c/student/find_coaches/search/name/');
             }
 
 
@@ -2470,6 +2574,45 @@ class find_coaches extends MY_Site_Controller {
         $this->template->title = 'Booking Summary';
 
         $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+
+        $id    = $this->auth_manager->userid();
+        $tz = $this->db->select('*')
+            ->from('user_timezones')
+            ->where('user_id', $id)
+            ->get()->result();
+        
+        $minutes = @$tz[0]->minutes_val;
+        $gmt_val = @$tz[0]->gmt_val;
+
+        if(@$gmt_val > 0){
+            @$gmt_val = "+".@$gmt_val;
+        }
+
+        $tipe = '';
+        if($this->auth_manager->role() == "STD"){
+            $tipe = 'student_id';
+        } else if($this->auth_manager->role() == "CCH"){
+            $tipe = 'coach_id';
+        }
+        
+        $dates3     = date('Y-m-d H:i:s');
+        $def3      = strtotime($dates3);
+        $datetime3 = $def3+(60*$minutes);
+        $nowdate  = date("Y-m-d");
+        $hour_start_db  = date('H:i:s');
+
+        $pull_appoint = $this->db->select('*')
+                      ->from('appointments')
+                      ->where($tipe, $id)
+                      ->where('date =', $nowdate)
+                      ->where('end_time >=', $hour_start_db)
+                      ->where('status', 'active')
+                      ->order_by('date', 'ASC')
+                      ->order_by('start_time', 'ASC')
+                      ->limit(5)
+                      ->get()->result();
+
+        $datasession = @$pull_appoint;
         
         $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
         $standard_coach_cost = $setting[0]->standard_coach_cost;
@@ -2482,11 +2625,12 @@ class find_coaches extends MY_Site_Controller {
             'end_time' => $end_time,
             'search_by' => $search_by,
             'standard_coach_cost' => $standard_coach_cost,
-            'elite_coach_cost' => $elite_coach_cost
+            'elite_coach_cost' => $elite_coach_cost,
+            'datasession' => $datasession
         );
 
 
-        $this->template->content->view('default/contents/find_coach/summary_book/index', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
         //publish template
         $this->template->publish();
     }

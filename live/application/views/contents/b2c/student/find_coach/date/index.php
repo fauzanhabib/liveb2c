@@ -216,6 +216,202 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- result -->
+                    <div class="dashboard__resultbook">
+                        <?php foreach ($data as $d) { ?>
+                        <div class="boxprofilecoach">
+                            <div class="profilecoach">
+                                <div class="profilecoach__picture">
+                                    <img src="<?php echo base_url().$d['profile_picture'];?>" alt="">
+                                </div>
+                                <div class="profilecoach__name">
+                                    <?php echo($d['fullname']); ?>
+                                </div>
+                                <div class="profilecoach__rate">
+                                    <section class='rating-widget'>
+
+                                        <!-- Rating Stars Box -->
+                                        <div class='rating-stars text-center'>
+                                            <style type="text/css">
+
+                                                .disabled {
+                                                    pointer-events: none;
+                                                    opacity: 0.6;
+                                                }
+
+                                            </style>
+                                            <ul id='stars' class="disabled">
+                                                <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Good' data-value='3'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class='success-box'>
+                                            <div class='text-message'></div>
+                                        </div>
+                                    </section>
+
+                                </div>
+
+                                <div class="profilecoach__location">
+                                    <i class="fa fa-map-marker"> </i><?php echo($d['country']); ?>
+                                </div>
+
+                                <div class="profilecoach__token">
+                                    <i class="fa fa-google-wallet"> </i> 
+                                    <?php 
+                                        if($d['coach_type_id'] == 1){
+                                            echo $standard_coach_cost;
+                                        } else if($d['coach_type_id'] == 2){
+                                            echo $elite_coach_cost; 
+                                        }
+                                    ?> 
+                                    Tokens
+                                </div>
+                            </div>
+
+                            <div class="profilecoach__timebook">
+                                    <ul class="accordion_book">
+                                        <li class="accordion-item">
+                                            <div class="accordion-thumb available-at">
+                                                <span>Available At</span>
+                                                <i class="fa fa-angle-down"></i>
+                                            </div>
+                                            <?php foreach ($d['availability'] as $av) { ?>
+                                            <div class="accordion-panel">
+                                                <div class="booking">
+                                                    <?php
+                                                    $get_endtime = date('H:i:s',strtotime(@$av['end_time']));
+
+                                                        // $date = date("Y-m-d H:i:s");
+                                                        $time = strtotime($get_endtime);
+                                                        $time = $time - (5 * 60);
+                                                        $endtime = date("H:i", $time);
+
+                                                        // xxxxxxxxxxxx
+                                                        $CheckInX = explode("-", $date);
+                                                        $CheckOutX =  explode("-", date('Y-m-d'));
+                                                        $date1 =  mktime(0, 0, 0, $CheckInX[1],$CheckInX[2],$CheckInX[0]);
+                                                        $date2 =  mktime(0, 0, 0, $CheckOutX[1],$CheckOutX[2],$CheckOutX[0]);
+                                                        $interval =($date2 - $date1)/(3600*24);
+                                                            
+                                                        // xxxxxxxxxxxx
+                                                        $new_gmt_val_user = $gmt_val_user*1;
+                                                        @date_default_timezone_set('Etc/GMT'.$gmt_val_user*(-1));      
+                                                        $adate = $date;
+                                                        $bdate = date('Y-m-d');
+                                                         // echo $adate." + ".$bdate;
+                                                        // exit();
+                                                        $res = (int)$gmt_val_user;
+                                                        if($adate < $bdate){
+
+                                                            @date_default_timezone_set('Etc/GMT+0');
+                                                            $dt = date('H:i:s');
+                                                            $default_dt  = strtotime($dt);
+                                                            $usertime = $default_dt+(60*$gmt_user);
+                                                            $hour = date("H:i:s", $usertime);
+
+                                                            $selesai=date('H:i:s',strtotime(@$av['start_time']));
+                                                            $mulai=$hour;
+                                                            list($jam,$menit,$detik)=explode(':',$mulai);
+                                                            $buatWaktuMulai=mktime($jam,$menit,$detik,1,1,1);
+
+                                                            list($jam,$menit,$detik)=explode(':',$selesai);
+                                                            $buatWaktuSelesai=mktime($jam,$menit,$detik,1,1,1);
+                                                            $selisihDetik=$buatWaktuSelesai-$buatWaktuMulai;
+                                                                    
+                                                                    if($selisihDetik > 3599){ ?>
+                                                                                <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
+                                                                                <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
+                                                                                <?php }
+
+                                                            }else if (($adate == $bdate) && ($res > 0 )){  
+                                                                @date_default_timezone_set('Etc/GMT+0');
+                                                                    $dt = date('H:i:s');
+                                                                    $default_dt  = strtotime($dt);
+                                                                    $usertime = $default_dt+(60*$gmt_user);
+                                                                    $hour = date("H:i:s", $usertime);
+
+                                                                    $selesai=date('H:i:s',strtotime(@$av['start_time']));
+                                                                    $mulai=$hour;
+                                                                    list($jam,$menit,$detik)=explode(':',$mulai);
+                                                                    $buatWaktuMulai=mktime($jam,$menit,$detik,1,1,1);
+
+                                                                    list($jam,$menit,$detik)=explode(':',$selesai);
+                                                                    $buatWaktuSelesai=mktime($jam,$menit,$detik,1,1,1);
+                                                                    $selisihDetik=$buatWaktuSelesai-$buatWaktuMulai;
+                                                                    
+                                                                            if($selisihDetik > 3599){
+
+                                                                                ?>
+                                                                                <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
+                                                                                <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
+                                                                                <?php }
+
+                                                            }else if (($adate == $bdate) && ($res < 0 )){  
+                                                                @date_default_timezone_set('Etc/GMT+0');
+                                                                    $dt = date('H:i:s');
+                                                                    $default_dt  = strtotime($dt);
+                                                                    $usertime = $default_dt+(60*$gmt_user);
+                                                                    $hour = date("H:i:s", $usertime);
+
+                                                                    $selesai=date('H:i:s',strtotime(@$av['start_time']));
+                                                                    $mulai=$hour;
+                                                                    list($jam,$menit,$detik)=explode(':',$mulai);
+                                                                    $buatWaktuMulai=mktime($jam,$menit,$detik,1,1,1);
+
+                                                                    list($jam,$menit,$detik)=explode(':',$selesai);
+                                                                    $buatWaktuSelesai=mktime($jam,$menit,$detik,1,1,1);
+                                                                    $selisihDetik=$buatWaktuSelesai-$buatWaktuMulai;
+                                                                    
+                                                                            if($selisihDetik > 3599){
+
+                                                                                ?>
+                                                                                <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
+                                                                                <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
+                                                                                <?php }
+                                                            }else {  
+                                                            @date_default_timezone_set('Etc/GMT+0');
+                                                                    ?>
+                                                                    <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
+                                                                    <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
+                                                        <?php } ?>
+                                                </div>
+                                            </div>
+                                            <?php } ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                        <?php } ?>
+
+                        <!-- dummy element to align left the content -->
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <div class="boxprofilecoach flex-dummy"></div>
+                        <!-- dummy element to align left the content -->
+                    </div>
                 </div>
             </section>
         <script>
@@ -228,21 +424,47 @@
                 });
             });
         </script>
+
         <script type="text/javascript">
-        //     $(function () {
-        //     var now = new Date();
-        //     var day = ("0" + (now.getDate() + 1)).slice(-2);
-        //     var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        //     var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
-        //     $('.datepicker').datepicker({
-        //     startDate: resultDate,
-        //     format: 'yyyy-mm-dd',
-        //     autoclose: true,
-        //     });
-        //         $('.dateavailable').change(function(){
-        //         $('.dateavailable').parsley().reset();
-        //     });
-        // });
+
+            // $(".available-at").click(function () {
+            //     //alert(this.name);
+            //     var avail = $(".available").val();
+            //     var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + avail;
+            //     var m = $('[id^=result_]').html($('[id^=result_]').val());
+            //     console.log(m);
+            //     //alert(loadUrl);
+            //     if (this.value != '') {
+            //         $("#schedule-loading").show();
+            //         $(".txt").hide();
+            //         $("#result_" + avail).load(loadUrl, function () {
+            //             for(i=0; i<m.length; i++){
+            //                 $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
+            //                 $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
+            //             }
+            //             $("#schedule-loading").hide();
+            //         });
+            //     }
+
+            // });
+
+        </script>
+
+        <script type="text/javascript">
+            // $(function () {
+            // var now = new Date();
+            // var day = ("0" + (now.getDate() + 1)).slice(-2);
+            // var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            // var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
+            // $('.datepicker').datepicker({
+            // startDate: resultDate,
+            // format: 'yyyy-mm-dd',
+            // autoclose: true,
+            // });
+            //     $('.dateavailable').change(function(){
+            //         $('.dateavailable').parsley().reset();
+            //     });
+            // });
     
         document.getElementById("datepicker").onchange = function() {
             // console.log(this.value);
