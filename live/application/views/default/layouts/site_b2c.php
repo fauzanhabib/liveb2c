@@ -21,6 +21,8 @@
 
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
+        
         <style media="screen">
           .active{
             background: #303e62;
@@ -225,7 +227,6 @@
 		    </a>
 		</footer>
 
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
     <script>

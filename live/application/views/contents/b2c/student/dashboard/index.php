@@ -139,7 +139,7 @@
                                 <div class="boxsessions__today tab-content current" id="tab-1">
                                     <div class="todaysessions">
                                         <span class="date">You Have a Live Session</span>
-                                            <div class="boxinfo">
+                                            <div class="boxinfo activesession">
                                                 <div class="playsession">
                                                     <form name ="livesession" action="<?php echo(site_url('opentok/live/'));?>" method="post">
                                                         <input type="hidden" name="appoint_id" value="<?php echo $wm_id ?>">

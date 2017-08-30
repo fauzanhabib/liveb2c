@@ -7,23 +7,31 @@ $(document).ready(function(){
             return false;
         });
     });
-    $('.btn-close').click(function() {
-        (this).find('.modal-wrapper').removeClass('open');
+    $('a.btn-close').click(function() {
+        $(this).parents('.modal-wrapper').removeClass('open');
     })
 
 	//ARCODION SHOW BOOKING TIME IN PAGE BOOKING A COACH
- 	$(function() {
- 		// (Optional) Active an item if it has the class "is-active"    
- 		$(".accordion_book > .accordion-item.is-active").children(".accordion-panel").slideDown();
+ 	$('.accordion-thumb').click( function() {
+      $(this).next(".accordion-panel").slideToggle();
+    });
 
- 		$(".accordion_book > .accordion-item").click(function() {
- 			// Cancel the siblings
- 			$(this).siblings(".accordion-item").removeClass("is-active").children(".accordion-panel").slideUp();
- 			// Toggle the item
- 			$(this).toggleClass("is-active").children(".accordion-panel").slideToggle("ease-out");
- 		});
- 	});
+    $(".weekly_schedule").each(function () {
+        $(this).click(function() {
+            //alert(this.name);
+            var loadUrl = "<?php echo site_url('student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
+            //alert(loadUrl);
+            if (this.value != '') {
+                $("#schedule-loading").show();
+                $(".txt").hide();
+                $("#result_" + this.value).load(loadUrl, function () {
+                    $("#schedule-loading").hide();
+                });
+            }
+        })
+    });
 
+    // GRAPH BAR IN STUDY DASHBOARD
   	$(".graph__bar__each").each(function() {
     	var dataWidth = $(this).data('value') / 125 * 100;
     	$(this).css("width", dataWidth + "%");
@@ -230,7 +238,7 @@ $(document).ready(function(){
         // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
         $('#notifications').fadeToggle('fast', 'linear', function () {
             if ($('#notifications').is(':hidden')) {
-                $('#noti__button').css('background-color', '#2E467C');
+                $('#noti__button').css('background-color', 'rgb(59, 74, 116)');
             }       // CHANGE BACKGROUND COLOR OF THE BUTTON.
         });
 

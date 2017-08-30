@@ -150,10 +150,10 @@ class member_list extends MY_Site_Controller {
         $subgroup = $this->subgroup_model->select('subgroup.name as subgroupname')->join('user_profiles', 'user_profiles.subgroup_id = subgroup.id')->where('user_profiles.user_id',$student_id)->get();
         // =================
         // get sub group by partner id
-        $getlistsubgroup = $this->subgroup_model->select('*')->where('partner_id',$partner_id)->where('type','student')->get_all();
+        $getlistsubgroup = $this->subgroup_model->select('*')->where('partner_id',$partner_id)->where('type','student')->where('status', 'active')->get_all();
 
-        $listsubgroup = '';
-        foreach ($getlistsubgroup as $value) {
+        $listsubgroup = array();
+        foreach($getlistsubgroup as $value){
             $listsubgroup[$value->id] = $value->name;        
         }
         

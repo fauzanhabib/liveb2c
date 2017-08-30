@@ -504,10 +504,10 @@ class find_coaches extends MY_Site_Controller {
     public function book_by_single_date($date = '', $page='') {
         $this->template->title = 'Detail Schedule';
         
-        // if ($date <= date('Y-m-d')) {
-        //     $this->messages->add('Invalid Date', 'warning');
-        //     redirect('student/find_coaches/single_date/');
-        // }
+        if ($date <= date('Y-m-d')) {
+            $this->messages->add('Invalid Date', 'warning');
+            redirect('b2c/student/find_coaches/single_date/');
+        }
 
         $id    = $this->auth_manager->userid();
         $tz = $this->db->select('*')
@@ -811,7 +811,7 @@ class find_coaches extends MY_Site_Controller {
             // We must rollback the transaction
             $this->db->trans_rollback();
             $this->messages->add('An error has occured, please try again.', 'warning');
-            redirect('student/find_coaches/single_date/');
+            redirect('b2c/student/find_coaches/single_date/');
         }
     }
     
@@ -2096,7 +2096,7 @@ class find_coaches extends MY_Site_Controller {
         $check_max_book_coach_per_day = $this->max_book_coach_per_day($coach_id,$date);
         if(!$check_max_book_coach_per_day){
             $this->messages->add('This coach has exceeded maximum booked today', 'warning');
-            redirect('student/find_coaches/search/name/');
+            redirect('b2c/student/find_coaches/search/name/');
         }
 
         //print_r(date('Y-m-d', $date)); exit;
@@ -2224,7 +2224,7 @@ class find_coaches extends MY_Site_Controller {
             // We must rollback the transaction
             $this->db->trans_rollback();
             $this->messages->add('An error has occured, please try again.', 'warning');
-            redirect('student/find_coaches/search/name/');
+            redirect('b2c/student/find_coaches/search/name/');
         }
     }
 
