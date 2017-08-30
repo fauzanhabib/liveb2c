@@ -335,23 +335,28 @@
             });
         </script>
         <script type="text/javascript">
-            $(function () {
-            var now = new Date();
-            var day = ("0" + (now.getDate() + 1)).slice(-2);
-            var month = ("0" + (now.getMonth() + 1)).slice(-2);
-            var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
-            $('.datepicker').datepicker({
-            startDate: resultDate,
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            });
-                $('.dateavailable').change(function(){
-                $('.dateavailable').parsley().reset();
-            });
-        });
+            // $(function () {
+            // var now = new Date();
+            // var day = ("0" + (now.getDate() + 1)).slice(-2);
+            // var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            // var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
+            // $('.datepicker').datepicker({
+            // startDate: resultDate,
+            // format: 'yyyy-mm-dd',
+            // autoclose: true,
+            // });
+            //     $('.dateavailable').change(function(){
+            //         $('.dateavailable').parsley().reset();
+            //     });
+            // });
     
-        document.getElementById("date").onchange = function() {
-            var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+this.value;
+        document.getElementById("datepicker").onchange = function() {
+            // console.log(this.value);
+            var date = this.value;
+            var newdate = date.split('/');
+            var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
+            // console.log(dateformat);
+            var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+dateformat;
             $('#date_value').attr('action', newurl);
         };
 

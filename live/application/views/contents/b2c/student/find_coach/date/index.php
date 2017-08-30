@@ -291,8 +291,8 @@
                                                 <span>Available At</span>
                                                 <i class="fa fa-angle-down"></i>
                                             </div>
-                                            <?php foreach ($d['availability'] as $av) { ?>
                                             <div class="accordion-panel">
+                                            <?php foreach ($d['availability'] as $av) { ?>
                                                 <div class="booking">
                                                     <?php
                                                     $get_endtime = date('H:i:s',strtotime(@$av['end_time']));
@@ -391,8 +391,8 @@
                                                                     <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
                                                         <?php } ?>
                                                 </div>
-                                            </div>
                                             <?php } ?>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
