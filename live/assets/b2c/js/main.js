@@ -7,8 +7,8 @@ $(document).ready(function(){
             return false;
         });
     });
-    $('.btn-close').click(function() {
-        (this).find('.modal-wrapper').removeClass('open');
+    $('a.btn-close').click(function() {
+        $(this).parents('.modal-wrapper').removeClass('open');
     })
 
 	//ARCODION SHOW BOOKING TIME IN PAGE BOOKING A COACH
@@ -48,15 +48,15 @@ $(document).ready(function(){
 	//MENU TAB IN DASHBOARD
 
  	$('ul.tabs li').click(function() {
- 		var tab_id = $(this).attr('data-tab');
+        var tab_id = $(this).attr('data-tab');
 
- 		$('ul.tabs li').removeClass('current');
- 		$('.tab-content').fadeOut(300);
+        $('ul.tabs li').removeClass('current');
+        $('.tab-content').fadeOut(50);
 
- 		$(this).addClass('current');
- 		$("#" + tab_id).delay(300).fadeIn(300);
+        $(this).addClass('current');
+        $("#" + tab_id).fadeIn(1000).css('display', 'flex');
 
- 	})
+    })
 
     $('.tabs div').click(function() {
         var tab_id = $(this).attr('data-tab');

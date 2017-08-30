@@ -1,6 +1,6 @@
 <section class="main__content">
     <div class="dashboard">
-        <div class="dashboard__notif">
+        <div class="dashboard__notif success__notif">
             <?php if(count($data)==0){ ?>
             <span>You Have No Session Left For Today</span>
             <?php }elseif(count($data)==1){ ?>
@@ -204,11 +204,43 @@
                     <?php foreach($dataupcoming as $d){ ?>
                     <div class="todaysessions">
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
-                        <span class="date"><?php echo(date('H:i',strtotime($d->start_time)));?> - </span>
-                        <span class="date"><?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
-                        <div class="boxinfo">
-                            <div class="coachinfo">
-                                <id="viewcoach" idcoach="<?php echo $d->coach_id;?>"><a href="#modal">Coach Info</a>
+                        <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
+
+                        <div class="boxinfo activesession">
+                            <div class="coachinfo trigger" idcoach="<?php echo $d->coach_id;?>">
+                                Coach Info
+                            </div>
+                            <!-- MODAL -->
+                            <div class="modal-wrapper">
+                                <div class="modal">
+                                    <a class="btn-close"></a>
+                                    <div class="content">
+                                        <div class="profile__info">
+                                            <div class="profile__info__picture">
+                                                <img src="assets/img/pic2.jpg" alt="">
+                                            </div>
+                                            <div class="profile__info__name">
+                                                Jack Bishop
+                                            </div>
+                                            <div class="profile__info__birth">
+                                                <label>Date Of Birth </label>
+                                                <span>01 - Jan - 1990</span>
+                                            </div>
+                                            <div class="profile__info__email">
+                                                <label> Email</label>
+                                                <span>jd@gmail.com</span>
+                                            </div>
+                                            <div class="profile__info__language">
+                                                <label>Home Language </label>
+                                                <span>Indonesian</span>
+                                            </div>
+                                            <div class="profile__info__gender">
+                                                <label>Gender</label>
+                                                <span>Male</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
