@@ -135,15 +135,20 @@
                                                         <?php
                                                             if($history->status == 'Booked'){
                                                             ?>
-                                                            <div class="status-disable bg-green m-l-20">
+
+                                                            <?php echo($history->status); ?>
+                                                            <!-- <div class="status-disable bg-green m-l-20">
                                                                 <span class="text-cl-white <?php echo $a;?> <?php echo substr($history->status, 0,4)?> tooltip-bottom" data-tooltip="<?php echo($history->status_description); ?>" style="width:75px"><?php echo($history->status); ?></span>
-                                                            </div>
+                                                            </div> -->
+                                                            
                                                             <?php }
                                                             else{
                                                             ?>
-                                                            <div class="status-disable bg-tertiary m-l-20">
+
+                                                            <!-- <div class="status-disable bg-tertiary m-l-20">
                                                                 <span class="text-cl-white <?php echo $a;?> <?php echo substr($history->status, 0,4)?> tooltip-bottom" data-tooltip="<?php echo($history->status_description); ?>" style="width:75px"><?php echo($history->status); ?></span>
-                                                            </div>
+                                                            </div> -->
+                                                            <?php echo($history->status); ?>
                                                             
                                                         <?php } ?>
                                                     </span>
@@ -151,23 +156,19 @@
                                             </div>
                                             <div class="bxhistory__boxdebit">
                                                 <label> Debit</label>
-                                                <span>
-                                                    <?php if(@$history->status !== 'Refund'){ ?>
-                                                        <span><?php echo($history->token_amount); ?></span>
-                                                    <?php } else{ ?>
-                                                        <span>-</span>
-                                                    <?php } ?>  
-                                                </span>
+                                                <?php if(@$history->status !== 'Refund'){ ?>
+                                                    <span><?php echo($history->token_amount); ?></span>
+                                                <?php } else{ ?>
+                                                    <span>-</span>
+                                                <?php } ?>  
                                             </div>
                                             <div class="bxhistory__boxcredit">
                                                 <label> Credit</label>
-                                                <span>
-                                                    <?php if(@$history->status == 'Refund'){ ?>
-                                                        <span><?php echo($history->token_amount); ?></span>
-                                                    <?php } else{ ?>
-                                                            <span>-</span>
-                                                    <?php } ?>
-                                                </span>
+                                                <?php if(@$history->status == 'Refund'){ ?>
+                                                    <span><?php echo($history->token_amount); ?></span>
+                                                <?php } else{ ?>
+                                                        <span>-</span>
+                                                <?php } ?>
                                             </div>
                                             <div class="bxhistory__boxbalance">
                                                 <label> Balance</label>

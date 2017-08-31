@@ -81,6 +81,9 @@
             <div class="header__profpic pic__circle--small">
                 <img src="<?php echo base_url().'/'.($this->auth_manager->get_avatar()); ?>">
             </div>
+            <div id="logout__container">
+                <i class="fa fa-power-off" aria-hidden="true"></i>
+            </div>
         </div>
     </header>
     <!-- desktop header and nav menu -->
