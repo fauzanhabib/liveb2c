@@ -1,15 +1,15 @@
             <section class="main__content">
                 <div class="dashboard">
+                    <?php if(count($datasession)!=0){ ?>
                     <div class="dashboard__notif">
-                        <?php if(count($datasession)==0){ ?>
-                        <span>You Have No Session Left For Today</span>
-                        <?php }elseif(count($datasession)==1){ ?>
+                        <?php if(count($datasession)==1){ ?>
                         <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
                         <?php }else{ ?>
                         <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
                         <?php } ?>
                         <i class="fa fa-times"></i>
                     </div>
+                    <?php } ?>
 
                     <div class="dashboard__menu">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>" >

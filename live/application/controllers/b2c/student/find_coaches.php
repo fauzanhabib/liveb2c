@@ -126,15 +126,21 @@ class find_coaches extends MY_Site_Controller {
 
         $languagelist = array('Language..' => 'Language..') + $this->common_function->language();
 
-        $country = '';
+        $countries = '';
         $name = '';
         $language = '';
         if($this->input->post('country')){
-            $country = $this->input->post('country');
+            $countries = $this->input->post('country');
         }elseif($this->input->post('name')){
             $name = $this->input->post('name');
         }elseif($this->input->post('language')){
             $language = $this->input->post('language');
+        }
+
+        if($this->input->post('country') == 'Country..'){
+            $countries = '';
+        }elseif($this->input->post('language') == 'Language..'){
+            $language = '';
         }
         
         $offset = 0;
@@ -145,7 +151,7 @@ class find_coaches extends MY_Site_Controller {
             $coaches = $this->identity_model->get_coach_identity(null, @$name, null, null, null, null, null, $per_page, $offset);           
         } else if ($category == 'country') {
             // $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('b2c/student/find_coaches/search/country'), count($this->identity_model->get_coach_identity(null, null, @$this->input->post('country'))), $per_page, $uri_segment);
-            $coaches = $this->identity_model->get_coach_identity(null, null, @$country, null, null, null, null, $per_page, $offset);
+            $coaches = $this->identity_model->get_coach_identity(null, null, @$countries, null, null, null, null, $per_page, $offset);
         } else if ($category == 'spoken_language') {
             // $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('b2c/student/find_coaches/search/spoken_language'), count($this->identity_model->get_coach_identity(null, null, null, null, null, null, @$this->input->post('language'))), $per_page, $uri_segment);
             $coaches = $this->identity_model->get_coach_identity(null, null, null, null, null, null, @$language, $per_page, $offset);
