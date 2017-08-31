@@ -9,16 +9,16 @@
 </style>
 <section class="main__content">
     <div class="dashboard">
-        <div class="dashboard__notif success__notif">
-            <?php if(count($data)==0){ ?>
-            <span>You Have No Session Left For Today</span>
-            <?php }elseif(count($data)==1){ ?>
-            <span>You Have <?php echo count($data); ?> Session Left For Today</span>
-            <?php }else{ ?>
-            <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
-            <?php } ?>
-            <i class="fa fa-times"></i>
-        </div>
+        <?php if(count($data)!=0){ ?>
+            <div class="dashboard__notif success__notif">
+                <?php if(count($data)==1){ ?>
+                <span>You Have <?php echo count($data); ?> Session Left For Today</span>
+                <?php }else{ ?>
+                <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
+                <?php } ?>
+                <i class="fa fa-times"></i>
+            </div>
+        <?php } ?>
 
         <div class="dashboard__menu">
             <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
@@ -212,7 +212,7 @@
                         <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
 
                         <div class="boxinfo activesession">
-                            <div class="coachinfo trigger" idcoach="<?php echo $d->coach_id;?>">
+                            <div class="coachinfo trigger" id="viewcoach" idcoach="<?php echo $d->coach_id;?>">
                                 Coach Info
                             </div>
                             <!-- MODAL -->
@@ -222,26 +222,26 @@
                                     <div class="content">
                                         <div class="profile__info">
                                             <div class="profile__info__picture">
-                                                <img src="assets/img/pic2.jpg" alt="">
+                                                <img src="" alt="" class="profile_picturecoach">
                                             </div>
                                             <div class="profile__info__name">
-                                                Jack Bishop
+                                                <span class="namecoach"></span>
                                             </div>
                                             <div class="profile__info__birth">
                                                 <label>Date Of Birth </label>
-                                                <span>01 - Jan - 1990</span>
+                                                <span class="birthdatecoach"></span>
                                             </div>
                                             <div class="profile__info__email">
                                                 <label> Email</label>
-                                                <span>jd@gmail.com</span>
+                                                <span class="emailcoach"></span>
                                             </div>
                                             <div class="profile__info__language">
                                                 <label>Home Language </label>
-                                                <span>Indonesian</span>
+                                                <span class="spoken_languagecoach"></span>
                                             </div>
                                             <div class="profile__info__gender">
                                                 <label>Gender</label>
-                                                <span>Male</span>
+                                                <span class="gendercoach"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -267,6 +267,40 @@
             window.location.href = "<?php echo site_url('b2c/student/dashboard'); ?>";
         });
     });
+</script>
+
+<script type="text/javascript">
+
+
+$("#viewcoach").click(function() {
+    var coach_id = $(this).attr('idcoach');
+   
+    $.ajax({
+        url: "<?php echo site_url('b2c/student/dashboard/coach_detail');?>",
+            type: 'POST',
+            dataType: 'json',
+            data: {coach_id : coach_id},
+            success: function(data) {
+                var name = data[0].name;
+                var email = data[0].email;
+                var birthdate = data[0].birthdate;
+                var spoken_language = data[0].spoken_language;
+                var gender = data[0].gender;
+                // var timezone = data[0].timezone;
+                var profile_picture = data[0].profile_picture;
+
+                $('.namecoach').text(name);
+                $('.emailcoach').text(email);
+                $('.birthdatecoach').text(birthdate);
+                $('.spoken_languagecoach').text(spoken_language);
+                $('.gendercoach').text(gender);
+                // $('.timezonecoach').text(': '+timezone);
+                $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
+
+            }                
+    });
+});
+
 </script>
 
 <script type="text/javascript">

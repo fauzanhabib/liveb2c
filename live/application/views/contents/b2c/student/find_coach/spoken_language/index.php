@@ -1,15 +1,15 @@
             <section class="main__content">
                 <div class="dashboard">
+                    <?php if(count($datasession)!=0){ ?>
                     <div class="dashboard__notif">
-                        <?php if(count($datasession)==0){ ?>
-                        <span>You Have No Session Left For Today</span>
-                        <?php }elseif(count($datasession)==1){ ?>
+                        <?php if(count($datasession)==1){ ?>
                         <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
                         <?php }else{ ?>
                         <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
                         <?php } ?>
                         <i class="fa fa-times"></i>
                     </div>
+                    <?php } ?>
 
                     <div class="dashboard__menu">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>" >
@@ -220,7 +220,7 @@
                     <!-- result -->
                     <div class="dashboard__resultbook">
                         <?php for($i=0;$i<count($coaches);$i++){ ?>
-                        <div class="boxprofilecoach">
+                        <div class="boxprofilecoach list">
                             <div class="profilecoach">
                                 <div class="profilecoach__picture">
                                     <img src="<?php echo base_url().$coaches[$i]->profile_picture;?>" alt="">
@@ -277,35 +277,34 @@
                             </div>
 
                             <div class="profilecoach__timebook">
-                                    <ul class="accordion_book">
-                                        <li class="accordion-item">
-                                            <div class="accordion-thumb">
-                                                <span>Available At</span>
-                                                <i class="fa fa-angle-down"></i>
-                                            </div>
+                                <ul class="accordion_book">
+                                    <li class="accordion-item">
+                                        <div class="accordion-thumb available-at click">
+                                            <span>Available At</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
 
-                                            <div class="accordion-panel">
-                                                <div class="booking">
-                                                    <i>14:00 - 14:25</i>
-                                                    <a href="#">Book Now</a>
-                                                </div>
-                                                <div class="booking">
-                                                    <i>14:00 - 14:25</i>
-                                                    <a href="#">Book Now</a>
-                                                </div>
-                                                <div class="booking">
-                                                    <i>14:00 - 14:25</i>
-                                                    <a href="#">Book Now</a>
-                                                </div>
-                                                <div class="booking">
-                                                    <i>14:00 - 14:25</i>
-                                                    <a href="#">Book Now</a>
-                                                </div>
-                                            </div>
+                                        <div class="accordion-panel">
+                                            <div style="display:flex;flex-direction: column;margin:15px;">
+                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date..">
+                                                 <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
-                                        </li>
-                                    </ul>
-                                </div>
+                                                 <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
+
+                                                 <form class="pure-form">
+                                                    <div class="list-schedule" style="color:#939393;height: 150px;overflow-y: auto;margin-top:5px;">
+                                                        <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
+                                                        <div id="result_<?php echo(@$coaches[$i]->id); ?>">
+                                                            <img src='<?php echo base_url(); ?>assets/images/small-loading.gif' alt='loading...' style="display:none;" id="schedule-loading"/>
+                                                        </div>
+                                                    </div>
+                                                </form>   
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <?php } ?>
 
@@ -332,8 +331,119 @@
                         $('#ui-datepicker-div').hide();
                     } 
                 });
+            } );
+
+            $('.datepicker__each').each(function() {
+                $(this).datepicker({ 
+                    beforeShow:function(textbox, instance){
+                        $(this).next().append($('#ui-datepicker-div'));
+                        $('#ui-datepicker-div').hide();
+                    } 
+                });
             });
         </script>
+
+        <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+
+                $('.list').each(function() {
+                var $dropdown = $(this);
+
+                    $(".click", $dropdown).click(function(e) {
+                        e.preventDefault();
+
+                        $schedule = $(".accordion-panel", $dropdown);
+                        $span = $("span", $dropdown);
+                        $icon = $("i", $dropdown);
+
+                        if($($schedule).hasClass("show")) {
+                            $($schedule).addClass('hide');
+                            $($schedule).removeClass('show');
+                            $($span).removeClass('active-schedule');
+                            $($icon).addClass('icon-arrow-down');
+                            $($icon).removeClass('icon-arrow-up');
+                        }
+                        else {
+                            $($schedule).addClass('show');
+                            $($schedule).removeClass('hide');
+                            $($span).addClass('active-schedule');
+                            $($icon).addClass('icon-arrow-up');
+                            $($icon).removeClass('icon-arrow-down');
+                        }
+
+                        $(".view-schedule").not($schedule).addClass('hide');
+                        $(".view-schedule").not($schedule).removeClass('show');
+                        $("span").not($span).removeClass('active-schedule');
+                        $("i").not($icon).removeClass('icon-arrow-up').addClass('icon-arrow-down');
+
+                        return false;
+                    });
+                });
+
+                var now = new Date();
+                var day = ("0" + (now.getDate() + 1)).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
+
+                $('.datepicker__each').datepicker({
+                    startDate: resultDate,
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                });
+
+
+            });
+
+            // ajax
+            // don't cache ajax or content won't be fresh
+            $.ajaxSetup({
+                cache: false
+            });
+
+            $(".datepicker__each").on('change', function () {
+                var date = $(this).val();
+                var newdate = date.split('/');
+                var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
+                //alert(this.name);
+                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/availability/spoken_language'); ?>" + "/" + this.name + "/" + dateformat;
+                var m = $('[id^=result_]').html($('[id^=result_]').val());
+                // alert(loadUrl);
+                if (dateformat != '') {
+                    $("#schedule-loading").show();
+                    $(".txt").hide();
+                    $("#result_" + this.name).load(loadUrl, function () {
+                        for(i=0; i<m.length; i++){
+                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
+                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
+                        }
+                        $("#schedule-loading").hide();
+                    });
+                }
+
+            });
+
+            $(".weekly_schedule").click(function () {
+                //alert(this.name);
+                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
+                var m = $('[id^=result_]').html($('[id^=result_]').val());
+                //alert(loadUrl);
+                if (this.value != '') {
+                    $("#schedule-loading").show();
+                    $(".txt").hide();
+                    $("#result_" + this.value).load(loadUrl, function () {
+                        for(i=0; i<m.length; i++){
+                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
+                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
+                        }
+                        $("#schedule-loading").hide();
+                    });
+                }
+
+            });
+        })
+    </script>
+
         <script type="text/javascript">
             // $(function () {
             // var now = new Date();

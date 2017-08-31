@@ -1,15 +1,15 @@
             <section class="main__content">
                 <div class="dashboard">
+                    <?php if(count($datasession)!=0){ ?>
                     <div class="dashboard__notif">
-                        <?php if(count($datasession)==0){ ?>
-                        <span>You Have No Session Left For Today</span>
-                        <?php }elseif(count($datasession)==1){ ?>
+                        <?php if(count($datasession)==1){ ?>
                         <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
                         <?php }else{ ?>
                         <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
                         <?php } ?>
                         <i class="fa fa-times"></i>
                     </div>
+                    <?php } ?>
 
                     <div class="dashboard__menu">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>" >
@@ -285,34 +285,35 @@
                             </div>
 
                             <div class="profilecoach__timebook">
-                                    <ul class="accordion_book">
-                                        <li class="accordion-item">
-                                            <div class="accordion-thumb available-at click">
-                                                <span>Available At</span>
-                                                <i class="fa fa-angle-down"></i>
-                                            </div>
+                                <ul class="accordion_book">
+                                    <li class="accordion-item">
+                                        <div class="accordion-thumb available-at click">
+                                            <span>Available At</span>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
 
-                                            <div class="accordion-panel">
-                                                <div style="display:flex;flex-direction: column;margin:15px;">
-                                                     <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date..">
-                                                     <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
+                                        <div class="accordion-panel">
+                                            <div style="display:flex;flex-direction: column;margin:15px;">
+                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date..">
+                                                 <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
-                                                     <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
+                                                 <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
 
-                                                     <form class="pure-form">
-                                                        <div class="list-schedule" style="color:#939393;height: 150px;overflow-y: auto;margin-top:5px;">
-                                                            <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
-                                                            <div id="result_<?php echo(@$coaches[$i]->id); ?>">
-                                                                <img src='<?php echo base_url(); ?>assets/images/small-loading.gif' alt='loading...' style="display:none;" id="schedule-loading"/>
-                                                            </div>
+                                                 <form class="pure-form">
+                                                    <div class="list-schedule" style="color:#939393;height: 150px;overflow-y: auto;margin-top:5px;">
+                                                        <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
+                                                        <div id="result_<?php echo(@$coaches[$i]->id); ?>">
+                                                            <img src='<?php echo base_url(); ?>assets/images/small-loading.gif' alt='loading...' style="display:none;" id="schedule-loading"/>
                                                         </div>
-                                                    </form>   
-                                                </div>
+                                                    </div>
+                                                </form>   
                                             </div>
+                                        </div>
 
-                                        </li>
-                                    </ul>
-                                </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            
                         </div>
                         <?php } ?>
 
