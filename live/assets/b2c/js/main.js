@@ -39,7 +39,7 @@ $(document).ready(function(){
   	$(".graph__bar__each").each(function() {
     	var dataWidth = $(this).data('value') / 125 * 100;
     	$(this).css("width", dataWidth + "%");
-    
+
     	if ($(this).data('value') >= 100) {
       		$(this).css('background', 'linear-gradient(-136deg, rgb(73, 197, 254) 0%, rgb(121, 231, 68) 92%)');
     	}
@@ -167,7 +167,7 @@ $(document).ready(function(){
  		});
  	});
 
- 		 //RATING COACH  MENU BOOKING A COACH 
+ 		 //RATING COACH  MENU BOOKING A COACH
 
  	/* 1. Visualizing things on Hover - See next part for action on click */
  	$('#stars li').on('mouseover', function() {
@@ -225,48 +225,48 @@ $(document).ready(function(){
 
 
     // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER. // notification thing
-    var totalNotif = 13;
+    // var totalNotif = 13;
+    //
+    // $('#noti__counter')
+    //     .css({ opacity: 0 })
+    //     .text(totalNotif)              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+    //     .css({ top: '10px', right: '5px' })
+    //     .animate({ opacity: 1 }, 500);
+    //
+    // if (totalNotif == 0) {
+    //     $('#noti__counter').hide();
+    // };
+    //
+    // $('#noti__button').click(function () {
+    //
+    //     // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+    //     $('#notifications').fadeToggle('fast', 'linear', function () {
+    //         if ($('#notifications').is(':hidden')) {
+    //             $('#noti__button').css('background-color', 'rgb(59, 74, 116)');
+    //         }       // CHANGE BACKGROUND COLOR OF THE BUTTON.
+    //     });
+    //
+    //     $('#noti__counter').fadeOut('slow');                 // HIDE THE COUNTER.
+    //
+    //     return false;
+    // });
+    //
+    // // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+    // $(document).click(function () {
+    //     $('#notifications').hide();
+    //
+    //     // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+    //     if ($('#noti__counter').is(':hidden')) {
+    //         // CHANGE BACKGROUND COLOR OF THE BUTTON.
+    //         $('#noti__button').css('background-color', '#2E467C');
+    //     }
+    // });
+    //
+    // $('#notifications').click(function () {
+    //     return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+    // });
 
-    $('#noti__counter')
-        .css({ opacity: 0 })
-        .text(totalNotif)              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
-        .css({ top: '10px', right: '5px' })
-        .animate({ opacity: 1 }, 500);
-
-    if (totalNotif == 0) {
-        $('#noti__counter').hide();
-    };
-
-    $('#noti__button').click(function () {
-
-        // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
-        $('#notifications').fadeToggle('fast', 'linear', function () {
-            if ($('#notifications').is(':hidden')) {
-                $('#noti__button').css('background-color', 'rgb(59, 74, 116)');
-            }       // CHANGE BACKGROUND COLOR OF THE BUTTON.
-        });
-
-        $('#noti__counter').fadeOut('slow');                 // HIDE THE COUNTER.
-
-        return false;
-    });
-
-    // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
-    $(document).click(function () {
-        $('#notifications').hide();
-
-        // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
-        if ($('#noti__counter').is(':hidden')) {
-            // CHANGE BACKGROUND COLOR OF THE BUTTON.
-            $('#noti__button').css('background-color', '#2E467C');
-        }
-    });
-
-    $('#notifications').click(function () {
-        return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
-    });
-
-    // logout 
+    // logout
     $('#logout__button').click(function () {
 
         // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
