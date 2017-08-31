@@ -3114,7 +3114,7 @@ footer span {
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column;
-      height: 130px;
+      height: 40px;
       -webkit-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center; }
@@ -3130,13 +3130,14 @@ footer span {
           font-size: 0.8em;
           color: rgba(255, 255, 255, 0.71); }
       .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .status {
-        margin-top: 30px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
                 justify-content: space-between; }
+        .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .status span {
+          padding: 0; }
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxdebit, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxcredit, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxbalance {
       height: 40px;
       -webkit-box-pack: justify;
@@ -3148,7 +3149,7 @@ footer span {
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxnotifstatus i,
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxnotifstatus span, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus i,
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus span {
-      margin-left: 30px; }
+      padding: 0 10px; }
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus label, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxdebit label, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxcredit label, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxbalance label {
       color: #49c5fe;
       margin-left: 30px; }

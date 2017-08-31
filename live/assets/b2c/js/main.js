@@ -16,6 +16,10 @@ $(document).ready(function(){
       $(this).next(".accordion-panel").slideToggle();
     });
 
+    $('.accordion-item').click( function() {
+      $(this).children(".accordion-panel").slideToggle();
+    });
+
     $(".weekly_schedule").each(function () {
         $(this).click(function() {
             //alert(this.name);
