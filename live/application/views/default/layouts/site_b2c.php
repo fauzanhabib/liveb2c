@@ -22,7 +22,7 @@
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
-        
+
         <style media="screen">
           .active{
             background: #303e62;
@@ -45,6 +45,11 @@
                 <!--THE NOTIFICAIONS DROPDOWN BOX.-->
                 <div id="notifications">
                     <ul class="notification__list">
+                      <?php
+                      // print_r($this->auth_manager->new_notification()['data_notification']);
+                      // exit();
+                      ?>
+                      <?php  ?>
                         <li>
                             <a href="">New session booked with Adam <br>
                             <span>1 hour ago</span>
@@ -81,9 +86,9 @@
             <div class="header__profpic pic__circle--small">
                 <img src="<?php echo base_url().'/'.($this->auth_manager->get_avatar()); ?>">
             </div>
-            <div id="logout__container">
+            <a id="logout__container" href="<?php echo site_url('logout'); ?>">
                 <i class="fa fa-power-off" aria-hidden="true"></i>
-            </div>
+            </a>
         </div>
     </header>
     <!-- desktop header and nav menu -->
@@ -104,17 +109,17 @@
             </div>
             <nav class="mobile__nav">
                 <ul>
-                    <li>
-                        <a href="#">Dashboard</a>
+                    <li id="dashboard" class="clicklimenu">
+                        <a>Dashboard</a>
                     </li>
-                    <li>
-                        <a href="Profile.html">Profile</a>
+                    <li id='profile' class="clicklimenu">
+                        <a>Profile</a>
                     </li>
-                    <li>
-                        <a href="#">Study Dashboard</a>
+                    <li id="study_dashboard" class="clicklimenu">
+                        <a>Study Dashboard</a>
                     </li>
-                    <li>
-                        <a href="#">Session Simulator</a>
+                    <li id="session_simulator" class="clicklimenu">
+                        <a>Session Simulator</a>
                     </li>
                 </ul>
             </nav>
@@ -129,7 +134,7 @@
         <main class="main flex">
         	<aside class="main__sidebar">
                 <ul>
-                    <li id="dashboard">
+                    <li id="dashboard" class="clicklimenu dashboardactive">
                         <svg width="24px" height="24px" viewBox="0 0 13 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>home</title>
@@ -149,7 +154,7 @@
                         </svg>
                         <span><a> Dashboard </a></span>
                     </li>
-                    <li id="profile">
+                    <li id="profile" class="clicklimenu profileactive">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>user</title>
@@ -169,7 +174,7 @@
                         </svg>
                         <span><a> Profile </a></span>
                     </li>
-                    <li id="study_dashboard">
+                    <li id="study_dashboard" class="clicklimenu study_dashboardactive">
                         <svg width="24px" height="24px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>new-file</title>
@@ -192,7 +197,7 @@
                         </svg>
                         <span><a> Study Dashboard </a></span>
                     </li>
-                    <li id="session_simulator">
+                    <li id="session_simulator" class="clicklimenu session_simulatoractive">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <!-- Generator: Sketch 43 (38999) - http://www.bohemiancoding.com/sketch -->
                             <title>play-button</title>
@@ -233,8 +238,8 @@
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
     <script>
-      //redirect -----------------------------------------
-      $('.main__sidebar ul li').on('click', function(){
+      //redirect ----------------------------------------- class="clicklimenu"
+      $('.clicklimenu').on('click', function(){
         // var url_href =  window.location.pathname.split( '/' );;
         var base_url =  "<?php echo site_url(); ?>";
         var getrole  =  "<?php echo $this->auth_manager->role(); ?>";
@@ -258,8 +263,68 @@
       //Add menu active ----------------------------------
       current_page = document.location.href;
       menuClass    = current_page.split("/")[6];
-      $('#'+menuClass).addClass('active');
-      // console.log(menuClass);
+      $('.'+menuClass+'active').addClass('active');
+      console.log(menuClass);
+    </script>
+
+    <script>
+    //notifications
+      var totalNotif = '<?php echo ($this->auth_manager->new_notification()['notification'])?>';
+      console.log(totalNotif);
+
+      $('#noti__counter')
+          .css({ opacity: 0 })
+          .text(totalNotif)              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+          .css({ top: '10px', right: '5px' })
+          .animate({ opacity: 1 }, 500);
+
+      if (totalNotif == 0) {
+          $('#noti__counter').hide();
+      };
+
+      $('#noti__button').click(function () {
+
+          // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+          $('#notifications').fadeToggle('fast', 'linear', function () {
+              if ($('#notifications').is(':hidden')) {
+                  $('#noti__button').css('background-color', 'rgb(59, 74, 116)');
+              }       // CHANGE BACKGROUND COLOR OF THE BUTTON.
+          });
+
+          $('#noti__counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+          return false;
+      });
+
+      // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+      $(document).click(function () {
+          $('#notifications').hide();
+
+          // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+          if ($('#noti__counter').is(':hidden')) {
+              // CHANGE BACKGROUND COLOR OF THE BUTTON.
+              $('#noti__button').css('background-color', '#2E467C');
+          }
+      });
+
+      $('#notifications').click(function () {
+          return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+      });
+
+
+      // $("#numnotif").addClass("hide");
+      $("#noti__button").click(function(){
+        console.log('a');
+        var id = '<?php echo $this->auth_manager->userid(); ?>';
+        $.ajax({
+          type:"POST",
+          url:"<?php echo site_url('account/notification/ajax_update');?>",
+          data: {'id':id},
+          success: function(data){
+              console.log(id);
+            }
+         });
+       });
     </script>
     </div>
     </body>
