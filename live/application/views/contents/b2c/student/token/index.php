@@ -41,8 +41,23 @@
                                         <label>Balance</label>
                                         <span><?php echo $remain_token->token_amount; ?></span>
                                     </div>
-                                    <div class="bxrequest__requesttokens__buttonreq">
+                                    <div class="bxrequest__requesttokens__buttonreq trigger">
                                         <button class="neobutton">Request Token</button>
+                                    </div>
+
+                                    <!-- MODAL -->
+                                    <div class="modal-wrapper">
+                                        <div class="modal">
+                                            <a class="btn-close"></a>
+                                            <div class="content">
+                                                <div class="input_request_token">
+                                                    <div class="profile">
+                                                        <input type="number" placeholder="Token amount..">
+                                                        <button type="submit" class="neobutton__small">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +142,7 @@
                                                 ?>
                                             </span>
                                         </div>
-                                        <div class="accordion-panel" style="display: none;">
+                                        <div class="accordion__panel--history" style="display: none;">
                                             <div class="bxhistory__boxstatus">
                                                 <div class="status">
                                                     <label>Status</label>

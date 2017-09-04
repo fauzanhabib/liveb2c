@@ -17,7 +17,7 @@ $(document).ready(function(){
     });
 
     $('.accordion-item').click( function() {
-      $(this).children(".accordion-panel").slideToggle();
+      $(this).children(".accordion__panel--history").slideToggle();
     });
 
     $(".weekly_schedule").each(function () {

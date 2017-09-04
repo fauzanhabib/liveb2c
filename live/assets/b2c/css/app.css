@@ -130,7 +130,7 @@ html {
   color: #ffffff;
   font-family: "neoFontBold", sans-serif; }
 
-.blue, .title, .blue-text, .blue-text-small, .neobutton, .neobutton__white {
+.blue, .title, .blue-text, .blue-text-small, .neobutton, .neobutton__white, .neobutton__small__white, .neobutton__small {
   color: #49C5FE;
   font-family: "neoFontMedium", sans-serif; }
 
@@ -176,7 +176,7 @@ html {
   margin-top: 1em;
   margin-bottom: 1em; }
 
-.blue-text-small, .neobutton, .neobutton__white {
+.blue-text-small, .neobutton, .neobutton__white, .neobutton__small__white, .neobutton__small {
   font-size: 16px; }
 
 a {
@@ -404,7 +404,7 @@ input[type=number]::-webkit-outer-spin-button {
   .btn__secondary {
     background-color: transparent; }
 
-.neobutton, .neobutton__white {
+.neobutton, .neobutton__white, .neobutton__small__white {
   background: #3F4E7B;
   border: 1px solid #49C5FE;
   border-radius: 100px;
@@ -417,14 +417,37 @@ input[type=number]::-webkit-outer-spin-button {
   min-width: 160px;
   background-color: #3F4E7B;
   color: #49C5FE; }
-  .neobutton:hover, .neobutton__white:hover {
+  .neobutton:hover, .neobutton__white:hover, .neobutton__small__white:hover {
     background-color: #49C5FE; }
-  .neobutton:hover, .neobutton__white:hover {
+  .neobutton:hover, .neobutton__white:hover, .neobutton__small__white:hover {
     color: #fff; }
   @media screen and (max-width: 390px) {
-    .neobutton, .neobutton__white {
+    .neobutton, .neobutton__white, .neobutton__small__white {
       padding: .5em 1em; } }
   .neobutton__white {
+    background: none;
+    border: 0;
+    color: #fff; }
+
+.neobutton__small {
+  background: #3F4E7B;
+  border: 1px solid #49C5FE;
+  border-radius: 100px;
+  padding: .5em 1em;
+  -webkit-transition: all ease .5s;
+  transition: all ease .5s;
+  cursor: pointer;
+  min-width: 100px;
+  background-color: #3F4E7B;
+  color: #49C5FE; }
+  .neobutton__small:hover {
+    background-color: #49C5FE; }
+  .neobutton__small:hover {
+    color: #fff; }
+  @media screen and (max-width: 390px) {
+    .neobutton__small {
+      padding: .5em 1em; } }
+  .neobutton__small__white {
     background: none;
     border: 0;
     color: #fff; }
@@ -607,9 +630,9 @@ footer span {
   min-height: 100%; }
 
 .header__profile {
-  -webkit-box-flex: 1.3;
-      -ms-flex: 1.3;
-          flex: 1.3; }
+  -webkit-box-flex: 1.4;
+      -ms-flex: 1.4;
+          flex: 1.4; }
 
 .dashboard, .profile {
   width: 80%; }
@@ -747,41 +770,9 @@ footer span {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 0 0 10px; }
-
-#logout__button {
-  width: 22px;
-  height: 22px;
-  line-height: 22px;
-  margin: -3px 10px 0 10px;
-  cursor: pointer;
-  font-size: 1em; }
-
-/* THE logout WINDOW. THIS REMAINS HIDDEN WHEN THE PAGE LOADS. */
-#logout__box {
-  display: none;
-  position: absolute;
-  width: 120px;
-  top: 50px;
-  right: -34px;
-  background: #FFF;
-  text-align: center;
-  border: solid 1px rgba(100, 100, 100, 0.2);
-  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1; }
-  #logout__box :before {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    color: transparent;
-    border: 10px solid #CCC;
-    border-color: transparent transparent #FFF;
-    margin-top: -20px;
-    margin-left: 50px; }
-  #logout__box a span {
-    color: #8b8b8b;
-    font-size: 0.7em; }
+  margin: 0 0 0 15px; }
+  #logout__container i {
+    cursor: pointer; }
 
 /****** mobile menu ******/
 /* burger menu button */
@@ -2541,14 +2532,14 @@ footer span {
 .bylanguage,
 .boxselect {
   /**
-     * Component: Button
-     * --------------------------------------------------
-     */
+   * Component: Button
+   * --------------------------------------------------
+   */
   /**
-     * Component: Button
-     * Modifier: Dropdown
-     * --------------------------------------------------
-     */ }
+   * Component: Button
+   * Modifier: Dropdown
+   * --------------------------------------------------
+   */ }
   .bycountry .c-dropdown,
   .bylanguage .c-dropdown,
   .boxselect .c-dropdown {
@@ -3246,6 +3237,7 @@ footer span {
       transform: rotate(-45deg); }
 
 .content {
+  min-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3258,5 +3250,23 @@ footer span {
   .content .profile__info {
     border: none;
     background: transparent; }
+  .content .input_request_token {
+    width: 80%; }
+    .content .input_request_token .profile {
+      width: 100%;
+      margin-bottom: 0;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+      .content .input_request_token .profile input {
+        text-align: center;
+        border-left: none;
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid #fafafa; }
 
 /*# sourceMappingURL=app.css.map */
