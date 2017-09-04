@@ -21,7 +21,7 @@
         <?php } ?>
 
         <div class="dashboard__menu">
-            <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
+            <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>" >
                 <div class="booking">
                     <svg width="54px" height="65px" viewBox="0 0 54 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -29,7 +29,7 @@
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-                            <g id="9.Dashboard" transform="translate(-391.000000, -187.000000)" stroke="#49C5FE">
+                            <g id="9.Dashboard" class="svgstroke" transform="translate(-391.000000, -187.000000)" stroke="#a1a6b3">
                                 <g id="Group-2" transform="translate(330.000000, 158.000000)">
                                     <g id="icBookCoach" transform="translate(62.507392, 30.913298)">
                                         <g id="Group">
@@ -53,16 +53,16 @@
                     <span>Book a coach</span>
                 </div>
             </a>
-            <a href="<?php echo site_url('b2c/student/session'); ?>">
-                <div class="sessions">
-                    <i><?php echo count($data)?></i>
+            <a href="#">
+                <div class="sessions activediv">
+                    <i><?php echo count($data);?></i>
                     <svg width="54px" height="63px" viewBox="0 0 54 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
                         <title>ic_Sessions</title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="9.Dashboard" transform="translate(-594.000000, -188.000000)" stroke="#49C5FE" stroke-width="2">
+                            <g id="9.Dashboard" class="svgstroke" transform="translate(-594.000000, -188.000000)" stroke="#a1a6b3" stroke-width="2">
                                 <g id="Group-2" transform="translate(330.000000, 158.000000)">
                                     <g id="ic_Sessions" transform="translate(263.854839, 31.400000)">
                                         <path d="M43.0921057,6.74471962 L47.4534766,6.74471962 C50.517084,6.74471962 53.0400548,10.1170794 53.0400548,14.2388525 L53.0400548,52.833637 C53.0400548,56.9554101 49.7962352,60.3277699 45.8315668,60.3277699 L8.70785352,60.3277699 C4.74318511,60.3277699 1.49936551,56.9554101 1.49936551,52.833637 L1.49936551,14.2388525 C1.49936551,10.1170794 4.38276071,6.74471962 7.98700472,6.74471962 L13.1296377,6.74471962" id="Shape" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -89,14 +89,14 @@
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="9.Dashboard" transform="translate(-788.000000, -188.000000)">
-                                <g id="Group-2" transform="translate(330.000000, 158.000000)">
+                            <g id="9.Dashboard" class="svgstroke" transform="translate(-788.000000, -188.000000)">
+                                <g id="Group-2"  transform="translate(330.000000, 158.000000)">
                                     <g id="Token" transform="translate(458.604839, 30.144000)">
                                         <g id="Group">
                                             <circle id="Oval-2-Copy-2" stroke="#FFFFFF" stroke-width="2" cx="31" cy="31" r="30"></circle>
-                                            <circle id="Oval-2" stroke="#49C5FE" stroke-width="2" cx="31" cy="31" r="30"></circle>
-                                            <circle id="Oval-2-Copy" stroke="#49C5FE" cx="31" cy="31" r="21.3823529"></circle>
-                                            <path d="M36.7185882,33.1882353 C36.7185882,31.1458824 35.4250979,29.6481567 32.8381176,28.6950588 L30.9234118,28.0312941 C30.344745,27.7930197 29.915,27.559 29.6341765,27.3292353 C29.3533529,27.0994706 29.2129412,26.7973727 29.2129412,26.4229412 C29.2129412,25.9804315 29.387392,25.6528038 29.7362941,25.4400588 C30.0851962,25.2273139 30.5234509,25.1209412 31.0510588,25.1209412 C32.2254118,25.1209412 33.2040391,25.699608 33.9869412,26.8569412 L36.2845882,25.1209412 C35.4165882,23.5040786 34.1486273,22.5339609 32.4807059,22.2105882 L32.4807059,19.1725882 L29.4682353,19.1725882 L29.4682353,22.2616471 C28.3789803,22.5169412 27.5024706,23.0105097 26.8387059,23.7423529 C26.1749412,24.4741962 25.8430588,25.3592156 25.8430588,26.3974118 C25.8430588,28.422745 27.1110197,29.9034509 29.6469412,30.8395294 L31.3829412,31.4777647 C32.0637256,31.7500786 32.5615491,32.0096273 32.8764118,32.2564118 C33.1912744,32.5031962 33.3487059,32.8308235 33.3487059,33.2392941 C33.3487059,33.7328626 33.1444706,34.1072941 32.736,34.3625882 C32.3275294,34.6178824 31.7914118,34.7455294 31.1276471,34.7455294 C29.5448235,34.7455294 28.2598433,33.9711374 27.2727059,32.4223529 L24.9495294,34.1583529 C25.9366668,36.0305097 27.4429021,37.1793332 29.4682353,37.6048235 L29.4682353,40.7704706 L32.4807059,40.7704706 L32.4807059,37.6558824 C33.7401567,37.4516471 34.7613332,36.9538235 35.5442353,36.1624118 C36.3271374,35.371 36.7185882,34.379608 36.7185882,33.1882353 Z" id="$" fill="#49C5FE"></path>
+                                            <circle class="svgstroke" id="Oval-2" stroke="#a1a6b3" stroke-width="2" cx="31" cy="31" r="30"></circle>
+                                            <circle class="svgstroke" id="Oval-2-Copy" stroke="#a1a6b3" cx="31" cy="31" r="21.3823529"></circle>
+                                            <path class="svgfill" d="M36.7185882,33.1882353 C36.7185882,31.1458824 35.4250979,29.6481567 32.8381176,28.6950588 L30.9234118,28.0312941 C30.344745,27.7930197 29.915,27.559 29.6341765,27.3292353 C29.3533529,27.0994706 29.2129412,26.7973727 29.2129412,26.4229412 C29.2129412,25.9804315 29.387392,25.6528038 29.7362941,25.4400588 C30.0851962,25.2273139 30.5234509,25.1209412 31.0510588,25.1209412 C32.2254118,25.1209412 33.2040391,25.699608 33.9869412,26.8569412 L36.2845882,25.1209412 C35.4165882,23.5040786 34.1486273,22.5339609 32.4807059,22.2105882 L32.4807059,19.1725882 L29.4682353,19.1725882 L29.4682353,22.2616471 C28.3789803,22.5169412 27.5024706,23.0105097 26.8387059,23.7423529 C26.1749412,24.4741962 25.8430588,25.3592156 25.8430588,26.3974118 C25.8430588,28.422745 27.1110197,29.9034509 29.6469412,30.8395294 L31.3829412,31.4777647 C32.0637256,31.7500786 32.5615491,32.0096273 32.8764118,32.2564118 C33.1912744,32.5031962 33.3487059,32.8308235 33.3487059,33.2392941 C33.3487059,33.7328626 33.1444706,34.1072941 32.736,34.3625882 C32.3275294,34.6178824 31.7914118,34.7455294 31.1276471,34.7455294 C29.5448235,34.7455294 28.2598433,33.9711374 27.2727059,32.4223529 L24.9495294,34.1583529 C25.9366668,36.0305097 27.4429021,37.1793332 29.4682353,37.6048235 L29.4682353,40.7704706 L32.4807059,40.7704706 L32.4807059,37.6558824 C33.7401567,37.4516471 34.7613332,36.9538235 35.5442353,36.1624118 C36.3271374,35.371 36.7185882,34.379608 36.7185882,33.1882353 Z" id="$" fill="#a1a6b3"></path>
                                         </g>
                                     </g>
                                 </g>
@@ -113,18 +113,18 @@
                         <title>icHelp</title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
-                        <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="WebView-NeoLive"  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g id="9.Dashboard" transform="translate(-999.000000, -190.000000)">
                                 <g id="Group-2" transform="translate(330.000000, 158.000000)">
                                     <g id="icHelp" transform="translate(664.945601, 32.201352)">
                                         <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(3.857143, 0.000000)">
-                                            <rect id="Rectangle-2-Copy" stroke="#49C5FE" stroke-width="2" x="1.64285714" y="1" width="43" height="52.1207762" rx="4"></rect>
-                                            <text id="?" font-family="CeraGR-Medium" font-size="24" font-weight="500" line-spacing="20" fill="#49C5FE">
+                                            <rect  class="svgstroke" id="Rectangle-2-Copy" stroke="#a1a6b3" stroke-width="2" x="1.64285714" y="1" width="43" height="52.1207762" rx="4"></rect>
+                                            <text id="?" font-family="CeraGR-Medium" font-size="24" font-weight="500" line-spacing="20" fill="#a1a6b3">
                                                 <tspan x="18.2857143" y="27">?</tspan>
                                             </text>
                                         </g>
-                                        <path d="M16.0714286,38.5714286 L37.9285714,38.5714286" id="Line" stroke="#49C5FE" stroke-width="2" stroke-linecap="square"></path>
-                                        <path d="M16.0714286,45 L37.9285714,45" id="Line-Copy" stroke="#49C5FE" stroke-width="2" stroke-linecap="square"></path>
+                                        <path  class="svgstroke" d="M16.0714286,38.5714286 L37.9285714,38.5714286" id="Line" stroke="#a1a6b3" stroke-width="2" stroke-linecap="square"></path>
+                                        <path  class="svgstroke" d="M16.0714286,45 L37.9285714,45" id="Line-Copy" stroke="#a1a6b3" stroke-width="2" stroke-linecap="square"></path>
                                     </g>
                                 </g>
                             </g>
@@ -138,81 +138,19 @@
         <div class="dashboard__menutab">
             <div class="tabsessions">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Today Session</li>
-                    <li class="tab-link" data-tab="tab-2">Upcoming Session</li>
+                    <li class="tab-link current" data-tab="tab-1">Upcoming Session</li>
+                    <li class="tab-link" data-tab="tab-2">History Session</li>
                 </ul>
             </div>
             <div class="boxsessions">
-                <?php if($wm != NULL && strtotime($countdown) <= strtotime($nowc) && $nowh <= $hourend && $nowh >= $hourstart){ ?>
-                    <?php if(@$statuscheck == 0){ ?>
-                                <div class="boxsessions__today tab-content current" id="tab-1">
-                                    <div class="todaysessions">
-                                        <span class="date">You Have a Live Session</span>
-                                            <div class="boxinfo activesession">
-                                                <div class="playsession">
-                                                    <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
-                                                        <input type="hidden" name="appoint_id" value="<?php echo $wm_id ?>">
-                                                            <button type="submit" class="fa fa-play"></button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                        <?php }else if(@$statuscheck == 1){ ?>
-                                <div class="boxsessions__today tab-content current" id="tab-1">
-                                    <div class="todaysessions">
-                                        <span class="date">You Have Opened Live Session</span>
-                                        <span id="clearlive" class="date refbtn">Not Yet Open? Click Here</span>
-                                    </div>
-                                </div>
-                    <?php } ?>
-
-                <?php }else if($wm == NULL){ ?>
-                    <div class="boxsessions__today tab-content current" id="tab-1">
-                        <div class="todaysessions">
-                            <span class="date">You Have No Sessions Today</span>
-                        </div>
-                    </div>
-                <?php }else{ ?>
-                    <div class="boxsessions__today tab-content current" id="tab-1">
-                    <?php foreach($data as $d){ ?>
-                    <div class="todaysessions">
-                        <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
-                        <span class="time">
-                        <div id="clockdiv" class="">
-                            <div><span class="hours"></span><div class="smalltext">Hours</div></div>
-                            <div class="border-lr-1-grey padding-lr-7"><span class="minutes"></span><div class="smalltext">Mins</div></div>
-                            <div><span class="seconds"></span><div class="smalltext">Secs</div></div>
-                            <h5 class="padding0">Until Next Session</h5>
-                        </div>
-                        </span>
-                        <div class="boxinfo">
-                            <div class="playsession" id="nosess">
-                                <i class="fa fa-play"></i>
-                            </div>
-                            <div class="playsession hide" id="sess">
-                                <form name ="livesession" action="<?php echo(site_url('opentok/live/'));?>" method="post">
-                                    <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
-                                    <button type="submit" class="fa fa-play"></button>
-                                </form>
-                            </div>
-                            <div class="coachinfo">
-                                <id="viewcoach" idcoach="<?php echo $d->coach_id;?>"><a href="#modal">Coach Info</a>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
-                <?php } ?>
-
-                <div class="boxsessions__upcoming tab-content" id="tab-2">
+                <div class="boxsessions__today tab-content current" id="tab-1">
                     <?php foreach($dataupcoming as $d){ ?>
                     <div class="todaysessions">
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
                         <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
 
                         <div class="boxinfo activesession">
-                            <div class="coachinfo trigger viewcoach" idcoach="<?php echo $d->coach_id;?>">
+                            <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $d->coach_id;?>">
                                 Coach Info
                             </div>
                             <!-- MODAL -->
@@ -222,22 +160,81 @@
                                     <div class="content">
                                         <div class="profile__info">
                                             <div class="profile__info__picture">
-                                                <img src="" alt="" class="profile_picturecoach">
+                                                <img src="" alt="" class="profile_picturecoaches">
                                             </div>
                                             <div class="profile__info__name">
-                                                <span class="namecoach"></span>
+                                                <span class="namecoaches"></span>
                                             </div>
                                             <div class="profile__info__birth">
                                                 <label>Date Of Birth </label>
-                                                <span class="birthdatecoach"></span>
+                                                <span class="birthdatecoaches"></span>
                                             </div>
                                             <div class="profile__info__language">
                                                 <label>Home Language </label>
-                                                <span class="spoken_languagecoach"></span>
+                                                <span class="spoken_languagecoaches"></span>
                                             </div>
                                             <div class="profile__info__gender">
                                                 <label>Gender</label>
-                                                <span class="gendercoach"></span>
+                                                <span class="gendercoaches"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+
+                <div class="boxsessions__upcoming tab-content" id="tab-2">
+                    <?php foreach($histories as $h){ ?>
+                    <div class="todaysessions">
+                        <span class="date"><?php echo date('M j Y', strtotime($h->date)); ?></span>
+                        <span class="time">
+                            <?php
+                                $defaultstart  = strtotime($h->start_time);
+                                $hourattstart  = date("H:i", $defaultstart);
+                                echo $hourattstart; 
+                            ?> 
+                            -
+                            <?php
+                                $defaultend  = strtotime($h->end_time);
+                                $endsession = $defaultend-(5*60);
+                                $hourattend  = date("H:i", $endsession);
+                                echo $hourattend; 
+                            ?> 
+                            <?php 
+                                echo "(UTC ".$gmt_val.")"
+                            ?>
+                        </span>
+
+                        <div class="boxinfo activesession">
+                            <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $h->coach_id;?>">
+                                Coach Info
+                            </div>
+                            <!-- MODAL -->
+                            <div class="modal-wrapper">
+                                <div class="modal">
+                                    <a class="btn-close"></a>
+                                    <div class="content">
+                                        <div class="profile__info">
+                                            <div class="profile__info__picture">
+                                                <img src="" alt="" class="profile_picturecoaches">
+                                            </div>
+                                            <div class="profile__info__name">
+                                                <span class="namecoaches"></span>
+                                            </div>
+                                            <div class="profile__info__birth">
+                                                <label>Date Of Birth </label>
+                                                <span class="birthdatecoaches"></span>
+                                            </div>
+                                            <div class="profile__info__language">
+                                                <label>Home Language </label>
+                                                <span class="spoken_languagecoaches"></span>
+                                            </div>
+                                            <div class="profile__info__gender">
+                                                <label>Gender</label>
+                                                <span class="gendercoaches"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -249,134 +246,40 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
-
-<script>
-    var userid = "<?php echo $userid; ?>";
-    $("#clearlive").click(function() {
-        $.post("<?php echo site_url('b2c/student/dashboard/clear_live');?>", { 'id': userid },function(data) {
-            window.location.href = "<?php echo site_url('b2c/student/dashboard'); ?>";
-        });
-    });
-</script>
 
 <script type="text/javascript">
 
 
-$(".viewcoach").click(function() {
-    var coach_id = $(this).attr('idcoach');
+$(".viewcoaches").click(function() {
+    coach_id = $(this).attr('idcoaches');
    
     $.ajax({
-        url: "<?php echo site_url('b2c/student/dashboard/coach_detail');?>",
-            type: 'POST',
-            dataType: 'json',
-            data: {coach_id : coach_id},
-            success: function(data) {
-                var name = data[0].name;
-                var email = data[0].email;
-                var birthdate = data[0].birthdate;
-                var spoken_language = data[0].spoken_language;
-                var gender = data[0].gender;
-                // var timezone = data[0].timezone;
-                var profile_picture = data[0].profile_picture;
+        url: "<?php echo site_url('b2c/student/session/coach_detail');?>",
+        type: 'POST',
+        dataType: 'json',
+        data: {coach_id : coach_id},
+        success: function(data) {
+            var name = data[0].name;
+            var email = data[0].email;
+            var birthdate = data[0].birthdate;
+            var spoken_language = data[0].spoken_language;
+            var gender = data[0].gender;
+            // var timezone = data[0].timezone;
+            var profile_picture = data[0].profile_picture;
 
-                $('.namecoach').text(name);
-                // $('.emailcoach').text(email);
-                $('.birthdatecoach').text(birthdate);
-                $('.spoken_languagecoach').text(spoken_language);
-                $('.gendercoach').text(gender);
-                // $('.timezonecoach').text(': '+timezone);
-                $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
+            $('.namecoaches').text(name);
+            // $('.emailcoach').text(email);
+            $('.birthdatecoaches').text(birthdate);
+            $('.spoken_languagecoaches').text(spoken_language);
+            $('.gendercoaches').text(gender);
+            // $('.timezonecoach').text(': '+timezone);
+            $('.profile_picturecoaches').attr('src','<?php echo base_url();?>'+profile_picture);
 
-            }                
+        }                
     });
 });
 
 </script>
 
-<script type="text/javascript">
-    // var deadline = '2016-08-25 18:20:00';
-
-    var end = '<?php echo $hourend; ?>';
-    var deadline = '<?php echo $countdown; ?>';
-
-    function time_remaining(endtime){
-        // var t = Date.parse(endtime) - Date.parse(new Date());
-        // var t = Date.parse(endtime) - Date.parse("<?php echo $nowc ?>");
-        var t = Date.parse(endtime) - Date.parse(new Date());
-        var seconds = Math.floor( (t/1000) % 60 );
-        var minutes = Math.floor( (t/1000/60) % 60 );
-        var hours = Math.floor( (t/(1000*60*60)) % 24 );
-        return {'total':t, 'hours':hours, 'minutes':minutes, 'seconds':seconds};
-
-    }
-    function run_clock(id,endtime){
-        var clock = document.getElementById(id);
-
-        // get spans where our clock numbers are held
-        var hours_span = clock.querySelector('.hours');
-        var minutes_span = clock.querySelector('.minutes');
-        var seconds_span = clock.querySelector('.seconds');
-
-        function update_clock(){
-            var trigdate = new Date;
-
-            var trig_s = trigdate.getSeconds();
-            var sn = trig_s.toString().length;
-            if (sn == 1){
-                trig_s = '0'+trig_s;
-            }
-
-            var trig_m = trigdate.getMinutes();
-            var mn = trig_m.toString().length;
-            if (mn == 1){
-                trig_m = '0'+trig_m;
-            }
-
-            var trig_h = trigdate.getHours();
-            var hn = trig_h.toString().length;
-            if (hn == 1){
-                trig_h = '0'+trig_h;
-            }
-
-            var now = trig_h+':'+trig_m+':'+trig_s;
-
-            var t = time_remaining(endtime);
-
-            // update the numbers in each part of the clock
-            hours_span.innerHTML = ('0' + t.hours).slice(-2);
-            minutes_span.innerHTML = ('0' + t.minutes).slice(-2);
-            seconds_span.innerHTML = ('0' + t.seconds).slice(-2);
-
-            // console.log(now);
-            // console.log(end);
-            if(t.total<=0){
-                if (now < end){
-                    clearInterval(timeinterval);
-                    $("#clockdiv").hide();
-                    $("#nosess").hide();
-                    $("#sess").removeClass("hide");
-                    $.get("<?php echo site_url('b2c/student/dashboard/get_id');?>",function(data) {
-                        var val_id = data;
-                        // console.log(val_id);
-                        document.getElementById('get_id_ajax').value = val_id;
-                        // alert(document.getElementById("get_id_ajax").value);
-                        // $("#clockdiv").show();
-                        // $("#clockarea").show();
-                        $("#sess").show();
-                    });
-                }
-                else if(now > end){
-                    // console.log(now);
-                    // console.log(end);
-                    $("#clockdiv").show();
-                    $("#clockarea").show();
-                    $("#sess").hide();
-                }
-            }
-        }
-        update_clock();
-        var timeinterval = setInterval(update_clock,1000);
-    }
-    run_clock('clockdiv',deadline);
-</script>

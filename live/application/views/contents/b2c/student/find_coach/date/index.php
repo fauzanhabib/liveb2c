@@ -241,22 +241,53 @@
                                                 }
 
                                             </style>
+                                            <?php 
+                                                $id = $d['coach_id'];
+
+                                                $allrate = $this->db->select('rate')
+                                                                ->from('coach_ratings')
+                                                                ->where('coach_id', $id)
+                                                                ->get()->result();
+
+                                                $temp = array();
+                                                foreach($allrate as $in)
+                                                {
+                                                    $temp[] = $in->rate;
+                                                }
+
+                                                $sumrate   = array_sum($temp);
+                                                $countrate = count((array)$allrate);
+
+                                                if($sumrate != null && $countrate != null){
+                                                    $classrate = $sumrate / $countrate * 20;
+                                                    $tooltip   = $sumrate / $countrate;
+                                                }else{
+                                                    $classrate = 0;
+                                                    $tooltip   = 0;
+                                                }
+                                                
+                                                $nostar = 5 - $tooltip;
+                                                // echo "<pre>";
+                                                // print_r($i);
+                                                // exit();
+                                            ?>
                                             <ul id='stars' class="disabled">
-                                                <li class='star' title='Poor' data-value='1'>
+                                                <?php 
+                                                if($tooltip != 0){
+                                                    for($s=0;$s<$tooltip;$s++){
+                                                ?>
+                                                <li class='star hover selected'>
                                                     <i class='fa fa-star fa-fw'></i>
                                                 </li>
-                                                <li class='star' title='Fair' data-value='2'>
+                                                <?php } for($t=0;$t<$nostar;$t++){ ?>
+                                                    <li class='star'>
+                                                        <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                <?php } }else{ for($u=0;$u<5;$u++){?>
+                                                <li class='star'>
                                                     <i class='fa fa-star fa-fw'></i>
                                                 </li>
-                                                <li class='star' title='Good' data-value='3'>
-                                                    <i class='fa fa-star fa-fw'></i>
-                                                </li>
-                                                <li class='star' title='Excellent' data-value='4'>
-                                                    <i class='fa fa-star fa-fw'></i>
-                                                </li>
-                                                <li class='star' title='WOW!!!' data-value='5'>
-                                                    <i class='fa fa-star fa-fw'></i>
-                                                </li>
+                                                <?php } } ?>
                                             </ul>
                                         </div>
 

@@ -76,7 +76,7 @@ class Dashboard extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result(); 
 
         $pull_appoint2 = $this->db->select('*')
@@ -87,7 +87,7 @@ class Dashboard extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result(); 
 
         $pull_appoint3 = $this->db->select('*')
@@ -101,7 +101,7 @@ class Dashboard extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result(); 
         //------------wm
         
@@ -253,7 +253,7 @@ class Dashboard extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result(); 
 
 

@@ -116,7 +116,7 @@ class find_coaches extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result();
 
         $datasession = @$pull_appoint;
@@ -223,7 +223,7 @@ class find_coaches extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result();
 
         $datasession = @$pull_appoint;
@@ -549,7 +549,7 @@ class find_coaches extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result();
 
         $datasession = @$pull_appoint;
@@ -2615,7 +2615,7 @@ class find_coaches extends MY_Site_Controller {
                       ->where('status', 'active')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
-                      ->limit(5)
+                      // ->limit(5)
                       ->get()->result();
 
         $datasession = @$pull_appoint;
