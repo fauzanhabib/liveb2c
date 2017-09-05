@@ -787,8 +787,8 @@ class find_coaches extends MY_Site_Controller {
                         $student_gmt = $gmt_student[0]->gmt;
                         $coach_gmt = $gmt_coach[0]->gmt;
 
-                        $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
-                        $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
+                        // $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
+                        // $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
                         
                         $this->messages->add($message, 'success');
   
@@ -1136,7 +1136,7 @@ class find_coaches extends MY_Site_Controller {
         $schedule_data = $this->schedule_model->select('id, user_id, day, start_time, end_time, dcrea, dupd')->where('user_id', $id)->order_by('id', 'asc')->get_all();
         $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
         if (!$schedule_data) {
-            redirect('student/find_coaches/single_date');
+            redirect('b2c/student/find_coaches/single_date');
         }
 
         $schedule = array();
@@ -1157,7 +1157,7 @@ class find_coaches extends MY_Site_Controller {
             'coach_id' => $id,
             'schedule' => $schedule,
         );
-        $this->template->content->view('default/contents/find_coach/schedule_detail', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/schedule_detail', $vars);
 
         //publish template
         $this->template->publish();
@@ -1363,7 +1363,7 @@ class find_coaches extends MY_Site_Controller {
         if (!$date_ || !$coach_id) {
             //redirect(home);
             $vars = array();
-            $this->template->content->view('default/contents/find_coach/availability', $vars);
+            $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
 
             //publish template
             $this->template->publish();
@@ -1372,13 +1372,13 @@ class find_coaches extends MY_Site_Controller {
         // checking if the date is valid
         if (!$this->is_date_available(trim($date_), 0)) {
             $vars = array();
-            $this->template->content->view('default/contents/find_coach/availability', $vars);
+            $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
         }
          // checking if the date is in day off
         if ($this->is_day_off($coach_id, $date_) == true) {
 
             $vars = array();
-            $this->template->content->view('default/contents/find_coach/availability', $vars);
+            $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
         }
 
         // getting the day of $date
@@ -1578,7 +1578,7 @@ class find_coaches extends MY_Site_Controller {
         // exit();
 //        echo('<pre>');
 //        print_r(date('Y-m-d','1450962000')); exit;
-        $this->template->content->view('default/contents/find_coach/availability', $vars);
+        $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
 
         //publish template
         $this->template->publish();
@@ -2197,8 +2197,8 @@ class find_coaches extends MY_Site_Controller {
                         $student_gmt = $gmt_student[0]->gmt;
                         $coach_gmt = $gmt_coach[0]->gmt;
 
-                        $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
-                        $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
+                        // $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
+                        // $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
                         
                         
                         $this->messages->add($message, 'success');

@@ -41,9 +41,19 @@
                                         <label>Balance</label>
                                         <span><?php echo $remain_token->token_amount; ?></span>
                                     </div>
+                                    <?php if ($data){ ?>
+                                    <?php echo form_open('b2c/student/token/cancel', 'role="form" class="pure-form" data-parsley-validate');?>
+                                        <div class="bxrequest__requesttokens__buttonreq">
+                                            <input type="hidden" name="cancel">
+                                            <button type="submit" class="neobutton">Cancel Request</button>
+                                        </div>
+                                    <?php echo form_close(); ?>
+                                        <span>You are requesting <?php echo $data->token_amount; ?> token right now</span>
+                                    <?php }else{ ?>
                                     <div class="bxrequest__requesttokens__buttonreq trigger">
                                         <button class="neobutton">Request Token</button>
                                     </div>
+                                    <?php } ?>
 
                                     <!-- MODAL -->
                                     <div class="modal-wrapper">
@@ -52,8 +62,10 @@
                                             <div class="content">
                                                 <div class="input_request_token">
                                                     <div class="profile">
-                                                        <input type="number" placeholder="Token amount..">
-                                                        <button type="submit" class="neobutton__small">Submit</button>
+                                                        <?php echo form_open('b2c/student/token/create', 'role="form" class="pure-form" data-parsley-validate');?>
+                                                            <input class="input" type="number" name="token_amount" id="phonenum1" placeholder="Token Amount.." onkeypress="return numOnly(event)" />
+                                                            <button type="submit" class="neobutton__small">Submit</button>
+                                                        <?php echo form_close(); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,5 +210,14 @@
                     </div>
                 </div>
             </section>
-    <script src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
+
+            <script type="text/javascript">
+            
+            numOnly = function(evt){
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+            </script>
