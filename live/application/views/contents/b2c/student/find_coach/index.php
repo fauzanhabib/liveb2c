@@ -44,7 +44,7 @@
                                 <span>Book a coach</span>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="<?php echo site_url('b2c/student/session'); ?>">
                             <div class="sessions">
                                 <i><?php echo count($datasession);?></i>
                                 <svg width="54px" height="63px" viewBox="0 0 54 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

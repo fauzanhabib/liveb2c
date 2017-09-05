@@ -1363,7 +1363,7 @@ class find_coaches extends MY_Site_Controller {
         if (!$date_ || !$coach_id) {
             //redirect(home);
             $vars = array();
-            $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
+            $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
 
             //publish template
             $this->template->publish();
@@ -1372,13 +1372,13 @@ class find_coaches extends MY_Site_Controller {
         // checking if the date is valid
         if (!$this->is_date_available(trim($date_), 0)) {
             $vars = array();
-            $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
+            $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
         }
          // checking if the date is in day off
         if ($this->is_day_off($coach_id, $date_) == true) {
 
             $vars = array();
-            $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
+            $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
         }
 
         // getting the day of $date
@@ -1578,7 +1578,7 @@ class find_coaches extends MY_Site_Controller {
         // exit();
 //        echo('<pre>');
 //        print_r(date('Y-m-d','1450962000')); exit;
-        $this->template->content->view('contents/b2c/find_coach/student/availability', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
 
         //publish template
         $this->template->publish();
