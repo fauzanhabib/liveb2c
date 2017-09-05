@@ -304,7 +304,7 @@ class Live extends MY_Site_Controller {
 
                 // echo "<pre>";print_r($livesession);exit();
 
-                $this->template->content->view('contents/opentok/student/session', $livesession);
+                $this->template->content->view('contents/b2c/student/opentok/session', $livesession);
                 $this->template->publish();
             }else{
                 $this->template->content->view('contents/opentok/student/nosession');
@@ -488,7 +488,7 @@ class Live extends MY_Site_Controller {
     {
         $user=$this->input->post("user");
         $pesan=$this->input->post("pesan");
-        $pesan2 = mysql_real_escape_string($pesan);
+        $pesan2 = $pesan;
         $appointment_id = $this->input->post("appointment_id");
 
         $id  = $this->auth_manager->userid();
@@ -503,8 +503,17 @@ class Live extends MY_Site_Controller {
         //User Hour
         $hourss = date("H:i");
 
-        mysql_query("insert into chat (coach_name,chat_messages, appointment_id, time)
-          VALUES ('$user','$pesan2','$appointment_id','$hourss')");
+        $chatarray = array(
+           'coach_name' => $user,
+           'chat_messages' => $pesan2,
+           'appointment_id' => $appointment_id,
+           'time' => $hourss
+        );
+
+        $this->db->insert('chat', $chatarray);
+
+        // mysqli_query("insert into chat (coach_name,chat_messages, appointment_id, time)
+        //   VALUES ('$user','$pesan2','$appointment_id','$hourss')");
         redirect("opentok/live/ambil_pesan");
     }
 

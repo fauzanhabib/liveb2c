@@ -96,7 +96,7 @@
     <!-- mobile header and nav menu -->
     <header class="header__mobile">
         <div class="header__profpic pic__circle--small">
-            <img src="assets/img/galgadot.jpg">
+            <img src="<?php echo base_url().'/'.($this->auth_manager->get_avatar()); ?>">
         </div>
         <div class="header__title">
             Dashboard

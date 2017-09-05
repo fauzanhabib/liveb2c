@@ -29,7 +29,7 @@ if(@$user_extract2){
   };
 </script>
 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/efiofhlccdnkddnjdagljnhgoibifhki">
-<script src='//static.opentok.com/v2/js/opentok.min.js'></script> 
+<script src='//static.opentok.com/v2/js/opentok.min.js'></script>
 <script src="<?php echo base_url();?>assets/js/script.js"></script>
 <script charset="utf-8">
     var apiKey = '<?php echo $apiKey ?>';
@@ -124,24 +124,24 @@ if(@$user_extract2){
     }
 </script>
 
-  <script>    
+  <script>
         $(document).ready(function(){
          var countmsg;
          var checkmsg;
-         
+
         function tampildata(){
            $.ajax({
             type:"POST",
-            url:"<?php echo site_url('opentok/live/ambil_pesan');?>",   
+            url:"<?php echo site_url('opentok/live/ambil_pesan');?>",
             success: function(data){
-                //document.getElementById('chat_audio').play();                 
+                //document.getElementById('chat_audio').play();
                 $('#isi_chat').html(data);
-              }  
+              }
            });
         }
-   
+
          $('#kirim').click(function(){
-           var pesan = $('#pesan').val(); 
+           var pesan = $('#pesan').val();
            var user  = $('#user').val();
            var appointment_id = '<?php echo $appointment_id ?>';
            if (pesan == null || pesan == "") {
@@ -151,19 +151,19 @@ if(@$user_extract2){
             else{
              $.ajax({
               type:"POST",
-              url:"<?php echo site_url('opentok/live/kirim_chat');?>",    
-              data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},        
-              success: function(data){    
+              url:"<?php echo site_url('opentok/live/kirim_chat');?>",
+              data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},
+              success: function(data){
                 $('#pesan').val('');
                 $('#isi_chat').html(data);
-              }  
+              }
              });
-            } 
+            }
           });
-          
+
           $('#pesan').keypress(function (e){
-          if(e.keyCode == 13){    
-           var pesan = $('#pesan').val(); 
+          if(e.keyCode == 13){
+           var pesan = $('#pesan').val();
            var user = $('#user').val();
            var appointment_id = '<?php echo $appointment_id ?>';
            if (pesan == null || pesan == "") {
@@ -173,11 +173,11 @@ if(@$user_extract2){
             else{
                $.ajax({
                 type:"POST",
-                url:"<?php echo site_url('opentok/live/kirim_chat');?>",    
-                data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},        
+                url:"<?php echo site_url('opentok/live/kirim_chat');?>",
+                data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},
                 success: function(data){
                   $('#pesan').val('');
-                      
+
                   $('#isi_chat').html(data);
                 }
                });
@@ -206,89 +206,89 @@ if(@$user_extract2){
 
 
     <!-- ======= -->
-            <script>
-            // Wait until the DOM has loaded before querying the document
-            $(document).ready(function(){
-                $('div.tabs2').each(function(){
-                    // For each set of tabs, we want to keep track of
-                    // which tab is active and its associated content
-                    var $active, $content, $links = $(this).find('a');
+    <script>
+    // Wait until the DOM has loaded before querying the document
+    $(document).ready(function(){
+        $('div.tabs2').each(function(){
+            // For each set of tabs, we want to keep track of
+            // which tab is active and its associated content
+            var $active, $content, $links = $(this).find('a');
 
-                    // If the location.hash matches one of the links, use that as the active tab.
-                    // If no match is found, use the first link as the initial active tab.
-                    $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
-                    $active.addClass('active');
+            // If the location.hash matches one of the links, use that as the active tab.
+            // If no match is found, use the first link as the initial active tab.
+            $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+            $active.addClass('active');
 
-                    $content = $($active[0].hash);
+            $content = $($active[0].hash);
 
-                    // Hide the remaining content
-                    $links.not($active).each(function () {
-                        $(this.hash).hide();
-                    });
-
-                    // Bind the click event handler
-                    $(this).on('click', 'a', function(e){
-                        // Make the old tab inactive.
-                        $active.removeClass('active');
-                        $content.hide();
-
-                        // Update the variables with the new link and content
-                        $active = $(this);
-                        $content = $(this.hash);
-
-                        // Make the tab active.
-                        $active.addClass('active');
-                        $content.show();
-
-                        // Prevent the anchor's default click action
-                        e.preventDefault();
-                    });
-                });
+            // Hide the remaining content
+            $links.not($active).each(function () {
+                $(this.hash).hide();
             });
-        </script>
-        <script>
-            // Wait until the DOM has loaded before querying the document
-            $(document).ready(function(){
-                $('ul.tabs').each(function(){
-                    // For each set of tabs, we want to keep track of
-                    // which tab is active and its associated content
-                    var $active, $content, $links = $(this).find('a');
 
-                    // If the location.hash matches one of the links, use that as the active tab.
-                    // If no match is found, use the first link as the initial active tab.
-                    $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
-                    $active.addClass('active');
+            // Bind the click event handler
+            $(this).on('click', 'a', function(e){
+                // Make the old tab inactive.
+                $active.removeClass('active');
+                $content.hide();
 
-                    $content = $($active[0].hash);
+                // Update the variables with the new link and content
+                $active = $(this);
+                $content = $(this.hash);
 
-                    // Hide the remaining content
-                    $links.not($active).each(function () {
-                        $(this.hash).hide();
-                    });
+                // Make the tab active.
+                $active.addClass('active');
+                $content.show();
 
-                    // Bind the click event handler
-                    $(this).on('click', 'a', function(e){
-                        // Make the old tab inactive.
-                        $active.removeClass('active');
-                        $content.hide();
-
-                        // Update the variables with the new link and content
-                        $active = $(this);
-                        $content = $(this.hash);
-
-                        // Make the tab active.
-                        $active.addClass('active');
-                        $('.checkB').show();
-                        $('#tabs-content1').show();
-                        $('.tabs2').show();
-                        $content.show();
-
-                        // Prevent the anchor's default click action
-                        e.preventDefault();
-                    });
-                });
+                // Prevent the anchor's default click action
+                e.preventDefault();
             });
-        </script>
+        });
+    });
+</script>
+<script>
+    // Wait until the DOM has loaded before querying the document
+    $(document).ready(function(){
+        $('ul.tabs').each(function(){
+            // For each set of tabs, we want to keep track of
+            // which tab is active and its associated content
+            var $active, $content, $links = $(this).find('a');
+
+            // If the location.hash matches one of the links, use that as the active tab.
+            // If no match is found, use the first link as the initial active tab.
+            $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+            $active.addClass('active');
+
+            $content = $($active[0].hash);
+
+            // Hide the remaining content
+            $links.not($active).each(function () {
+                $(this.hash).hide();
+            });
+
+            // Bind the click event handler
+            $(this).on('click', 'a', function(e){
+                // Make the old tab inactive.
+                $active.removeClass('active');
+                $content.hide();
+
+                // Update the variables with the new link and content
+                $active = $(this);
+                $content = $(this.hash);
+
+                // Make the tab active.
+                $active.addClass('active');
+                $('.checkB').show();
+                $('#tabs-content1').show();
+                $('.tabs2').show();
+                $content.show();
+
+                // Prevent the anchor's default click action
+                e.preventDefault();
+            });
+        });
+    });
+</script>
     <!-- ======= -->
 
     <style>
@@ -453,27 +453,27 @@ if(@$user_extract2){
     -o-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
-    
+
     -webkit-animation-direction: normal;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-name: blink;
     -webkit-animation-timing-function: ease-in-out;
-    
+
 -moz-animation-direction: normal;
     -moz-animation-duration: 1s;
     -moz-animation-iteration-count: infinite;
     -moz-animation-name: blink;
-    -moz-animation-timing-function: ease-in-out;    
+    -moz-animation-timing-function: ease-in-out;
 }
 </style>
 
 <!-- modal -->
   <div class="sess-details-modal remodal max-width900" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
-      <div class="pure-g">         
+      <div class="pure-g">
           <div class="profile-detail text-left prelative width75perc">
               <h4 class="border-b-1 font-semi-bold text-cl-grey">Session Information</h4>
-              <table class="table-no-border2"> 
+              <table class="table-no-border2">
                   <tbody>
                       <tr>
                           <td class="">Coach Name</td>
@@ -481,22 +481,22 @@ if(@$user_extract2){
                               <span class=""><?php echo $user_extract->fullname?></span>
                           </td>
                       </tr>
-                  </tbody>    
+                  </tbody>
               </table>
           </div>
       </div>
-  
+
       <div class="coach-comment width100perc">
           <div class="comment-message padding0 clearfix">
               <div class="text-left">
-                  
+
                   <p><?php echo $sentence.''.$different.' ago.';?></p>
                   <p><?php echo $notes_s;?></p><br>
                   <span>Notes :</span>
                   <table style="width:100%">
                     <tr>
                       <td style="width: 3%" valign="top">1.</td>
-                      <td style="width: 90%">If your coach is less than 10 minutes late, your session will still take place. However, you may reschedule the session or request a refund but this should be done immediately upon entering.</td> 
+                      <td style="width: 90%">If your coach is less than 10 minutes late, your session will still take place. However, you may reschedule the session or request a refund but this should be done immediately upon entering.</td>
                     </tr>
                     <tr>
                       <td style="width: 3%" valign="top">2.</td>
@@ -506,7 +506,7 @@ if(@$user_extract2){
                   <div>
                     <a data-remodal-action="confirm" class="pure-button btn-small btn-white" id="closemodal">Join Session</a>
                   </div>
-                  
+
               </div>
           </div>
       </div>
@@ -544,7 +544,7 @@ if(@$user_extract2){
 
     <div class="heading objblink hidden" id="camerablocked" style="background: #ffe9e9;border-left: solid 5px #c87373;">
       <div style="color: #c36969;font-weight: 400;opacity: 1 !important;">
-        Your browser is blocking your camera, please enable it and then reload the page. See How To: 
+        Your browser is blocking your camera, please enable it and then reload the page. See How To:
         <b><a id="myBtn">Chrome</a></b>
       </div>
     </div>
@@ -581,7 +581,7 @@ if(@$user_extract2){
             <input type="hidden" name="appoint_id" value="<?php echo $appoint_id ?>">
             <input type="submit" value="Leave Session" class="pure-button btn-small btn-red hidden">
         </form>
-        
+
         <div class="video-conference width100perc">
           <div class="fullscreenarea" id="fullarea">
               <div class="preloader2" id="connecting">
@@ -608,7 +608,7 @@ if(@$user_extract2){
                 </center>
             </div>
 
-            <div id="ajaxcall"></div> 
+            <div id="ajaxcall"></div>
             </div>
             <div class="coach-comment pure-u-md-12-24 pure-u-sm-1">
 
@@ -626,8 +626,8 @@ if(@$user_extract2){
                     </div>
                 </div>
             </div>
-        
-              
+
+
     </div>
 </div>
 
@@ -678,7 +678,7 @@ window.onclick = function(event) {
 </script>
 
 <script type="text/javascript">
-  
+
   $( function() {
     var appointment_id = "<?php echo $appointment_id; ?>";
     var std_id = "<?php echo $std_id; ?>";
@@ -694,11 +694,11 @@ window.onclick = function(event) {
     });
 
   } );
- 
+
 </script>
 
 <script>
-    $(function(){ 
+    $(function(){
         var inst = $.remodal.lookup[$('[data-remodal-id=modal]').data('remodal')];
         inst.open();
     });
@@ -735,7 +735,7 @@ function timer() {
     var minutes     = Math.floor(minutesLeft/60);
     var remainingSeconds = seconds % 60;
     if (remainingSeconds < 10) {
-        remainingSeconds = "0" + remainingSeconds; 
+        remainingSeconds = "0" + remainingSeconds;
     }
     document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
     if (seconds == 0) {
@@ -761,7 +761,7 @@ function timer2() {
     var minutes2     = Math.floor(minutesLeft2/60);
     var remainingSeconds2 = seconds2 % 60;
     if (remainingSeconds2 < 10) {
-        remainingSeconds2 = "0" + remainingSeconds2; 
+        remainingSeconds2 = "0" + remainingSeconds2;
     }
     document.getElementById('countdown2').innerHTML = minutes2 + ":" + remainingSeconds2;
     if (seconds2 == 0) {
@@ -786,7 +786,7 @@ function timer3() {
     var minutes3     = Math.floor(minutesLeft3/60);
     var remainingSeconds3 = seconds3 % 60;
     if (remainingSeconds3 < 10) {
-        remainingSeconds3 = "0" + remainingSeconds3; 
+        remainingSeconds3 = "0" + remainingSeconds3;
     }
     document.getElementById('countdown3').innerHTML = minutes3 + ":" + remainingSeconds3;
     if (seconds3 == 0) {
