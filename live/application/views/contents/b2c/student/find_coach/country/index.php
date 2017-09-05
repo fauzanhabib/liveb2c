@@ -331,7 +331,7 @@
                                                  <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
 
                                                  <form class="pure-form">
-                                                    <div class="list-schedule" style="color:#939393;height: 150px;overflow-y: auto;margin-top:5px;">
+                                                    <div class="list-schedule" style="color:#939393;height: 150px;margin-top:5px;">
                                                         <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
                                                         <div id="result_<?php echo(@$coaches[$i]->id); ?>">
                                                             <img src='<?php echo base_url(); ?>assets/images/small-loading.gif' alt='loading...' style="display:none;" id="schedule-loading"/>

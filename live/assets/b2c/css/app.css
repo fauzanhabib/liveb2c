@@ -295,7 +295,6 @@ button:focus {
 .error__notif {
   background-color: #a53853; }
 
-
 .text--center, .title {
   text-align: center; }
 
@@ -2039,7 +2038,7 @@ footer span {
         color: #fff; }
   .dashboard__menutab .boxsessions {
     margin-top: 20px; }
-    .dashboard__menutab .boxsessions__today {
+    .dashboard__menutab .boxsessions__today, .dashboard__menutab .boxsessions__upcoming {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -2048,7 +2047,7 @@ footer span {
       -webkit-box-pack: justify;
           -ms-flex-pack: justify;
               justify-content: space-between; }
-      .dashboard__menutab .boxsessions__today .todaysessions {
+      .dashboard__menutab .boxsessions__today .todaysessions, .dashboard__menutab .boxsessions__upcoming .todaysessions {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -2062,14 +2061,14 @@ footer span {
         height: 140px;
         margin-bottom: 20px;
         background-color: rgba(56, 70, 112, 0.98); }
-        .dashboard__menutab .boxsessions__today .todaysessions span {
+        .dashboard__menutab .boxsessions__today .todaysessions span, .dashboard__menutab .boxsessions__upcoming .todaysessions span {
           font-size: 0.9em;
           margin-left: 10px; }
-          .dashboard__menutab .boxsessions__today .todaysessions span:nth-child(1) {
+          .dashboard__menutab .boxsessions__today .todaysessions span:nth-child(1), .dashboard__menutab .boxsessions__upcoming .todaysessions span:nth-child(1) {
             font-weight: 700;
             margin-top: 10px;
             margin-bottom: 10px; }
-        .dashboard__menutab .boxsessions__today .todaysessions .boxinfo {
+        .dashboard__menutab .boxsessions__today .todaysessions .boxinfo, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo {
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
@@ -2080,7 +2079,7 @@ footer span {
               -ms-flex-align: center;
                   align-items: center;
           margin: 10px; }
-          .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .playsession {
+          .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .playsession, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .playsession {
             border: 3px solid #606983;
             width: 35px;
             height: 35px;
@@ -2089,14 +2088,14 @@ footer span {
             text-align: center;
             cursor: not-allowed;
             margin: 0 5px; }
-            .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .playsession button {
+            .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .playsession button, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .playsession button {
               cursor: pointer;
               border: transparent;
               background: transparent; }
-            .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .playsession .fa-play {
+            .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .playsession .fa-play, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .playsession .fa-play {
               color: #606983;
               font-size: 0.9em; }
-          .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .coachinfo {
+          .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .coachinfo, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .coachinfo {
             border: 3px solid #fff;
             width: 124px;
             border-radius: 21px;
@@ -2106,12 +2105,12 @@ footer span {
             color: #fff;
             cursor: pointer;
             font-weight: 600; }
-            .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .coachinfo:hover {
+            .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .coachinfo:hover, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .coachinfo:hover {
               background-color: rgba(39, 52, 84, 0.36); }
-        .dashboard__menutab .boxsessions__today .todaysessions .activesession .playsession {
+        .dashboard__menutab .boxsessions__today .todaysessions .activesession .playsession, .dashboard__menutab .boxsessions__upcoming .todaysessions .activesession .playsession {
           border: 3px solid #fff;
           cursor: pointer; }
-          .dashboard__menutab .boxsessions__today .todaysessions .activesession .playsession .fa-play {
+          .dashboard__menutab .boxsessions__today .todaysessions .activesession .playsession .fa-play, .dashboard__menutab .boxsessions__upcoming .todaysessions .activesession .playsession .fa-play {
             color: #fff; }
     .dashboard__menutab .boxsessions__upcoming {
       display: none; }
@@ -2946,6 +2945,38 @@ footer span {
           .dashboard__bxsummary__bookingsummary .bxbutton button:nth-child(2):hover {
             background-color: #ef737b; }
 
+.table-reschedule thead tr th, .table-reschedule tbody tr th {
+  font-size: 0.7em;
+  color: #26b2a1;
+  text-align: center; }
+
+.table-reschedule thead tr td, .table-reschedule tbody tr td {
+  font-size: 0.7em;
+  color: #8b8b8b;
+  text-align: center; }
+
+.selected-date {
+  font-size: 0.7em;
+  color: #26b2a1; }
+
+.tbl-booking thead tr th {
+  font-size: 0.8em;
+  color: #8b8b8b;
+  width: 50%;
+  text-align: center; }
+
+.tbl-booking tbody tr td {
+  font-size: 0.9em;
+  color: #000; }
+  .tbl-booking tbody tr td a {
+    color: #8b8b8b;
+    padding: 0 5px; }
+  .tbl-booking tbody tr td a:hover {
+    color: #fff; }
+
+.tbl-booking tbody tr:hover {
+  background-color: #49c5fe; }
+
 .booking__tabs {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2979,6 +3010,10 @@ footer span {
     font-weight: bold; }
     .booking__tabs div:hover {
       color: #26b2a1; }
+
+.list-schedule p.txt {
+  color: #8b8b8b;
+  font-size: 0.7em; }
 
 .flex-dummy {
   height: 0 !important;
@@ -3124,8 +3159,8 @@ footer span {
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
                 justify-content: space-between; }
-    .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .status span {
-      padding: 0; }
+        .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .status span {
+          padding: 0; }
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxdebit, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxcredit, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxbalance {
       height: 40px;
       -webkit-box-pack: justify;
@@ -3144,36 +3179,6 @@ footer span {
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus span, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxdebit span, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxcredit span, .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxbalance span {
       font-weight: bold;
       margin-right: 30px; }
-
-.boxsession {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; }
-  .boxsession__livestue {
-    border: 1px solid rgba(250, 250, 250, 0.1);
-    min-height: 400px;
-    background: black; }
-  .boxsession__livecomponentstue {
-    margin-top: 10px; }
-    .boxsession__livecomponentstue .study__dashboard__top .progress__point__top {
-      width: 48%; }
-    .boxsession__livecomponentstue .study__dashboard__top .chatstudent {
-      border: 1px solid rgba(250, 250, 250, 0.1);
-      background-color: #3c4c77;
-      width: 50%;
-      border-radius: 3px; }
-    .boxsession__livecomponentstue .study__dashboard__bottom .progress__step {
-      width: 32%; }
-    .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph {
-      width: 32%;
-      max-height: 300px; }
-      .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph h5 {
-        text-align: center; }
 
 .help__content {
   width: 80%; }
@@ -3241,7 +3246,8 @@ footer span {
   width: 32px;
   height: 32px;
   position: absolute;
-  right: 5px; }
+  right: 5px;
+  cursor: pointer; }
 
 .btn-close::before, .btn-close::after {
   content: '';
@@ -3294,5 +3300,35 @@ footer span {
         border-top: none;
         border-right: none;
         border-bottom: 1px solid #fafafa; }
+
+.boxsession {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .boxsession__livestue {
+    border: 1px solid rgba(250, 250, 250, 0.1);
+    min-height: 400px;
+    background: black; }
+  .boxsession__livecomponentstue {
+    margin-top: 10px; }
+    .boxsession__livecomponentstue .study__dashboard__top .progress__point__top {
+      width: 48%; }
+    .boxsession__livecomponentstue .study__dashboard__top .chatstudent {
+      border: 1px solid rgba(250, 250, 250, 0.1);
+      background-color: #3c4c77;
+      width: 50%;
+      border-radius: 3px; }
+    .boxsession__livecomponentstue .study__dashboard__bottom .progress__step {
+      width: 32%; }
+    .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph {
+      width: 32%;
+      max-height: 300px; }
+      .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph h5 {
+        text-align: center; }
 
 /*# sourceMappingURL=app.css.map */
