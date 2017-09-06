@@ -4,7 +4,7 @@
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
                             <div class="bookkacoach">Book a Coach</div>
                         </a>
-                        <a href="">
+                        <a href="<?php echo site_url('b2c/student/session'); ?>">
                             <div class="session ">Session</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/token'); ?>">

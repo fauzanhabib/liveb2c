@@ -180,10 +180,10 @@
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
                         <span class="time">
                         <div id="clockdiv" class="">
-                            <div><span class="hours"></span><div class="smalltext">Hours</div></div>
-                            <div class="border-lr-1-grey padding-lr-7"><span class="minutes"></span><div class="smalltext">Mins</div></div>
-                            <div><span class="seconds"></span><div class="smalltext">Secs</div></div>
-                            <h5 class="padding0">Until Next Session</h5>
+                            <span class="hours"></span> <span class="smalltext">Hours</span>
+                            <span class="minutes"></span> <span class="smalltext">Mins</span>
+                            <span class="seconds"></span> <span class="smalltext">Secs</span>
+                            <span class="smalltext"><h5 class="padding0">Until Next Session</h5></span>
                         </div>
                         </span>
                         <div class="boxinfo">
@@ -196,8 +196,36 @@
                                     <button type="submit" class="fa fa-play"></button>
                                 </form>
                             </div>
-                            <div class="coachinfo">
-                                <id="viewcoach" idcoach="<?php echo $d->coach_id;?>"><a href="#modal">Coach Info</a>
+                            <div class="coachinfo trigger viewcoach" idcoach="<?php echo $d->coach_id;?>">
+                                Coach Info
+                            </div>
+                            <!-- MODAL -->
+                            <div class="modal-wrapper">
+                                <div class="modal">
+                                    <a class="btn-close"></a>
+                                    <div class="content">
+                                        <div class="profile__info">
+                                            <div class="profile__info__picture">
+                                                <img src="" alt="" class="profile_picturecoach">
+                                            </div>
+                                            <div class="profile__info__name">
+                                                <span class="namecoach"></span>
+                                            </div>
+                                            <div class="profile__info__birth">
+                                                <label>Date Of Birth </label>
+                                                <span class="birthdatecoach"></span>
+                                            </div>
+                                            <div class="profile__info__language">
+                                                <label>Home Language </label>
+                                                <span class="spoken_languagecoach"></span>
+                                            </div>
+                                            <div class="profile__info__gender">
+                                                <label>Gender</label>
+                                                <span class="gendercoach"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,7 +293,6 @@
 
 $(".viewcoach").click(function() {
     var coach_id = $(this).attr('idcoach');
-   
     $.ajax({
         url: "<?php echo site_url('b2c/student/dashboard/coach_detail');?>",
             type: 'POST',

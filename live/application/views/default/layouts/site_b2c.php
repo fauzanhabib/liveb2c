@@ -264,13 +264,13 @@
       current_page = document.location.href;
       menuClass    = current_page.split("/")[6];
       $('.'+menuClass+'active').addClass('active');
-      console.log(menuClass);
+      // console.log(menuClass);
     </script>
 
     <script>
     //notifications
       var totalNotif = '<?php echo ($this->auth_manager->new_notification()['notification'])?>';
-      console.log(totalNotif);
+      // console.log(totalNotif);
 
       $('#noti__counter')
           .css({ opacity: 0 })
