@@ -221,6 +221,7 @@
         <script>
             $( function() {
                 $("#datepicker").datepicker({ 
+                    minDate: 0,
                     beforeShow:function(textbox, instance){
                         $('.datepicker__here').append($('#ui-datepicker-div'));
                         $('#ui-datepicker-div').hide();

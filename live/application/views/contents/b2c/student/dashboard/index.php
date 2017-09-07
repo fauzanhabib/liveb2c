@@ -180,10 +180,13 @@
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
                         <span class="time">
                         <div id="clockdiv" class="">
-                            <span class="hours"></span> <span class="smalltext">Hours</span>
-                            <span class="minutes"></span> <span class="smalltext">Mins</span>
-                            <span class="seconds"></span> <span class="smalltext">Secs</span>
-                            <span class="smalltext"><h5 class="padding0">Until Next Session</h5></span>
+                            <span class="hours"></span>
+                            <font>:</font>
+                            <span class="minutes"></span>
+                            <font>:</font>
+                            <span class="seconds"></span>
+                            <span>-</span>
+                            <span class="smalltext">Until Next Session</span>
                         </div>
                         </span>
                         <div class="boxinfo">
