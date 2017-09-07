@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bxhistory tab-content hide" id="tab-2">
+                            <div class="bxhistory tab-content flex__direction--col hide" id="tab-2">
                                 <ul class="accordion_book">
                                     <?php $detcount = 0; foreach (@$histories as $history) { 
                                         $gmt_user = $this->identity_model->new_get_gmt($this->auth_manager->userid());
@@ -88,7 +88,7 @@
                                             $a = 'Deli';
                                         }
                                     ?>
-                                    <li class="accordion-item">
+                                    <li class="accordion-item article-loop">
                                         <div class="bxhistory__boxnotifstatus">
                                             <i class="datestatus">
                                                 <?php 
@@ -220,4 +220,7 @@
             return true;
         }
 
+            </script>
+            <script>
+                 $('.article-loop').paginate(3);
             </script>
