@@ -1998,7 +1998,12 @@ footer span {
   .bxleavesessionstue__note {
     margin: 40px 0 0 0 !important; }
     .bxleavesessionstue__note p {
-      font-size: 0.8em !important; } }
+      font-size: 0.8em !important; }
+  .dashboard__menutab .boxsessions__today .todaysessions,
+  .dashboard__menutab .boxsessions__upcoming .todaysessions {
+    width: 100% !important; }
+  .pagination {
+    width: 100% !important; } }
 
 .dashboard__menu {
   display: -webkit-box;

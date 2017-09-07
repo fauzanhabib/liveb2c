@@ -6,6 +6,22 @@
         cursor: pointer;
         text-decoration: underline;
     }
+
+    .pagination-items{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+                justify-content: space-between;
+    }
+
+    .addingparent{
+         
+        width: 100%;
+    }
 </style>
 <section class="main__content">
     <div class="dashboard">
@@ -188,7 +204,8 @@
 
                 <div class="boxsessions__upcoming tab-content" id="tab-2">
                     <?php foreach($histories as $h){ ?>
-                    <div class="todaysessions">
+                    <div class="addingparent">
+                        <div class="todaysessions article-loop">
                         <span class="date"><?php echo date('M j Y', strtotime($h->date)); ?></span>
                         <span class="time">
                             <?php
@@ -241,6 +258,7 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </div>
                     <?php } ?>
                 </div>
@@ -281,5 +299,9 @@ $(".viewcoaches").click(function() {
     });
 });
 
+</script>
+
+ <script>
+    $('.article-loop').paginate(6);
 </script>
 
