@@ -1,3 +1,17 @@
+<?php
+if(@$user_extract2){
+    $student_name = $user_extract2->fullname;
+    $std_id = $user_extract2->student_id;
+  }else{
+    $student_name = $user_extract->fullname;
+    $std_id = $user_extract->student_id;
+  }
+
+  // echo "<pre>";print_r($apiKey);
+  // echo "<pre>";print_r($sessionId);
+  // echo "<pre>";print_r($student_name);exit();
+
+?>
 <script src='//static.opentok.com/v2/js/opentok.min.js'></script>
 <script charset="utf-8">
     var apiKey = '<?php echo $apiKey ?>';
@@ -61,6 +75,7 @@
           connectionCreated: function (event) {
             connectionCount++;
             if (event.connection.connectionId != session.connection.connectionId) {
+              console.log('a');
               $("#waiting").hide();
               $("#heading1").hide();
               $("#heading2").hide();
@@ -79,85 +94,98 @@
         });
 </script>
 <script>
-    $(document).ready(function(){
-     var countmsg;
-     var checkmsg;
+$(document).ready(function(){
+   var countmsg;
+   var checkmsg;
 
-    function tampildata(){
+  function tampildata(){
+     $.ajax({
+      type:"POST",
+      url:"<?php echo site_url('b2c/student/opentok/live/ambil_pesan');?>",
+      success: function(data){
+          //document.getElementById('chat_audio').play();
+          $('#isi_chat').html(data);
+          // console.log(data);
+        }
+     });
+  }
+
+   $('#kirim').click(function(){
+     var pesan = $('#pesan').val();
+     var user  = '<?php echo $this->auth_manager->get_name();?>';
+     console.log(user);
+     var appointment_id = '<?php echo $appointment_id ?>';
+     if (pesan == null || pesan == "") {
+          alert("Oops, you can't send an empty chat");
+          return false;
+      }
+      else{
        $.ajax({
         type:"POST",
-        url:"<?php echo site_url('b2c/student/opentok/live/ambil_pesan');?>",
+        url:"<?php echo site_url('b2c/student/opentok/live/kirim_chat');?>",
+        data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},
         success: function(data){
-            //document.getElementById('chat_audio').play();
-            $('#isi_chat').html(data);
-            // console.log(data);
-          }
-       });
-    }
-
-     $('#kirim').click(function(){
-       var pesan = $('#pesan').val();
-       var user  = '<?php echo $this->auth_manager->get_name();?>';
-       console.log(user);
-       var appointment_id = '<?php echo $appointment_id ?>';
-       if (pesan == null || pesan == "") {
-            alert("Oops, you can't send an empty chat");
-            return false;
+          $('#pesan').val('');
+          $('#isi_chat').html(data);
         }
-        else{
+       });
+      }
+    });
+
+    $('#pesan').keypress(function (e){
+    if(e.keyCode == 13){
+     var pesan = $('#pesan').val();
+     var user = '<?php echo $this->auth_manager->get_name();?>';
+     var appointment_id = '<?php echo $appointment_id ?>';
+     if (pesan == null || pesan == "") {
+          alert("Oops, you can't send an empty chat");
+          return false;
+      }
+      else{
          $.ajax({
           type:"POST",
           url:"<?php echo site_url('b2c/student/opentok/live/kirim_chat');?>",
           data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},
           success: function(data){
             $('#pesan').val('');
+
             $('#isi_chat').html(data);
           }
          });
-        }
-      });
-
-      $('#pesan').keypress(function (e){
-      if(e.keyCode == 13){
-       var pesan = $('#pesan').val();
-       var user = '<?php echo $this->auth_manager->get_name();?>';
-       var appointment_id = '<?php echo $appointment_id ?>';
-       if (pesan == null || pesan == "") {
-            alert("Oops, you can't send an empty chat");
-            return false;
-        }
-        else{
-           $.ajax({
-            type:"POST",
-            url:"<?php echo site_url('b2c/student/opentok/live/kirim_chat');?>",
-            data: {'pesan':pesan,'user': user, 'appointment_id': appointment_id},
-            success: function(data){
-              $('#pesan').val('');
-
-              $('#isi_chat').html(data);
-            }
-           });
-        }
       }
-      });
+    }
+    });
 
-      setInterval(
-        function(){
-          tampildata();
-          if (countmsg !== checkmsg){
-            document.getElementById('chat_audio').play();
-            // console.log(countmsg);
-            countmsg = checkmsg;
-          }
-        },1000);
+    setInterval(
+      function(){
+        tampildata();
+        if (countmsg !== checkmsg){
+          document.getElementById('chat_audio').play();
+          // console.log(countmsg);
+          countmsg = checkmsg;
+        }
+      },1000);
 
-      });
+  });
+</script>
+<script>
+function makeFullScreen(divId){
+    document.getElementById("fullarea").webkitRequestFullScreen() //example for Chrome
+    var element = document.getElementById("fullarea");
+    var fullScreenFunction = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen || element.oRequestFullScreen;
+
+    if (fullScreenFunction) {
+        fullScreenFunction.apply(element);
+    } else {
+        alert("don't know the prefix for this browser");
+    }
+}
 </script>
 <style>
 #myPublisherElementId{
   border: solid 1px;
   left: 87%;
-  top: 37%;
+  top: 50%;
   height: 150px;
   position: absolute;
   z-index: 1;
@@ -196,11 +224,50 @@
   max-height: 260px;
   overflow: auto;
 }
+.width100perc{
+  width: 100% !important;
+}
+.hidden{
+  display: none !important;
+}
+.fs-icon{
+  cursor: pointer;
+  opacity: 0.2;
+  transition: opacity 1s;
+  /*display: none;*/
+}
+.fs-icon:hover{
+  opacity: 1;
+}
+.insideElement{
+  opacity: 0;
+}
+.boxsession__livestue:hover .insideElement, .subscriber:hover .insideElement{
+opacity: 1 !important;
+}
 </style>
 <section class="main__content">
     <div class="boxsession">
-        <div class="boxsession__livestue">
-          <div class="subscriber" id="subscriberContainer"><div class="publisher" id="myPublisherElementId"></div></div>
+        <div>
+          <div class="dashboard__notif success__notif width100perc" id="heading1">
+            Waiting for <?php echo ' '.$student_name.' '; ?> to join the session. Remain in the session until the end in order to receive a refund of your tokens.
+          </div>
+          <div class="dashboard__notif error__notif width100perc hidden" id="camerablocked">
+            Your browser is blocking your camera, please enable it and then reload the page.
+          </div>
+
+          <h3>Remaining Time: <span id="countdown" class="timer"></span></h3>
+        </div>
+        <div class="boxsession__livestue" id='fullarea'>
+          <div class="subscriber" id="subscriberContainer"></div>
+          <div class='insideElement'>
+            <div class="publisher" id="myPublisherElementId"></div>
+            <button onclick="makeFullScreen(fullarea)" style="background:none;border:none;">
+              <img class="fs-icon" src="<?php echo base_url();?>assets/icon/expand2x.png"></img>
+            </button>
+            <button id="videooff" class="pure-button btn-small btn-green w3-animate-opacity" onclick="javascript:toggleOff();" data-tooltip="Click to Turn Off Your Camera">Camera is On</button>
+            <button id="videoon" class="pure-button btn-small btn-red w3-animate-opacity hidden" onclick="javascript:toggleOn();" data-tooltip="Click to Turn On Your Camera">Camera is Off</button>
+          </div>
         </div>
         <div class="boxsession__livecomponentstue">
             <div class="study__dashboard__top">
@@ -535,6 +602,11 @@
                         </div>
                     </div>
                 </div>
+                <?php $appoint_id = $appointment_id; ?>
+                <form name ="leaving" action="<?php echo(site_url('b2c/student/opentok/leavesession/'));?>" method="post">
+                    <input type="hidden" name="appoint_id" value="<?php echo $appoint_id ?>">
+                    <input type="submit" value="Leave Session" class="pure-button btn-small btn-red hidden">
+                </form>
                 <!-- End speaking graph -->
             </div>
         </div>
@@ -601,4 +673,39 @@ window.onload = function() {
     document.getElementById("arc2").setAttribute("d", describeArc(80, 80, 67, 180, 180));
 
 };
+</script>
+<script>
+var upgradeTime = '<?php echo $total_sec ?>';
+var seconds = upgradeTime;
+function timer() {
+    var days        = Math.floor(seconds/24/60/60);
+    var hoursLeft   = Math.floor((seconds) - (days*86400));
+    var hours       = Math.floor(hoursLeft/3600);
+    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+    var minutes     = Math.floor(minutesLeft/60);
+    var remainingSeconds = seconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+    document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+    if (seconds == 0) {
+        clearInterval(countdownTimer);
+        document.getElementById('countdown').innerHTML = "Completed";
+    }else if ( seconds==300 ){
+        $("#sessionalert").removeClass("hidden");
+        seconds--;
+    }else {
+        seconds--;
+    }
+}
+var countdownTimer = setInterval('timer()', 1000);
+</script>
+<script type="text/javascript">
+  var secfromdb  = '<?php echo $total_sec ?>';
+  var milisecond = secfromdb * 1000;
+  window.setTimeout(function() {
+    alert(" Your session has ended ");
+    window.onbeforeunload = null;
+    document.forms['leaving'].submit();
+}, milisecond);
 </script>

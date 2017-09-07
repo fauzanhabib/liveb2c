@@ -111,17 +111,17 @@ if(@$user_extract2){
         });
 </script>
 <script>
-    function makeFullScreen(divId){
-        document.getElementById("fullarea").webkitRequestFullScreen() //example for Chrome
-        var element = document.getElementById("fullarea");
-        var fullScreenFunction = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen || element.oRequestFullScreen;
+function makeFullScreen(divId){
+    document.getElementById("fullarea").webkitRequestFullScreen() //example for Chrome
+    var element = document.getElementById("fullarea");
+    var fullScreenFunction = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen || element.oRequestFullScreen;
 
-        if (fullScreenFunction) {
-            fullScreenFunction.apply(element);
-        } else {
-            alert("don't know the prefix for this browser");
-        }
+    if (fullScreenFunction) {
+        fullScreenFunction.apply(element);
+    } else {
+        alert("don't know the prefix for this browser");
     }
+}
 </script>
 
   <script>

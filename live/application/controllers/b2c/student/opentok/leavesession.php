@@ -74,8 +74,8 @@ class Leavesession extends MY_Site_Controller {
                   ->where('appointments.id', $a)
                   ->get()->result();
         }
-        
-         
+
+
         $user_extract = $user[0];
         $coach_id     = $user_extract->coach_id;
         $student_id   = $user_extract->student_id;
@@ -93,7 +93,7 @@ class Leavesession extends MY_Site_Controller {
                 ->from('user_timezones')
                 ->where('user_id', $coach_id)
                 ->get()->result();
-        
+
         $minutes = $tz[0]->minutes_val;
         date_default_timezone_set('UTC');
         $start_time   = $user_extract->start_time;
@@ -115,10 +115,10 @@ class Leavesession extends MY_Site_Controller {
 
         $type_id = $type_coach[0]->coach_type_id;
 
-        
+
         //----------
         $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
-        
+
         $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
         $standard_coach_cost = $setting[0]->standard_coach_cost;
         $elite_coach_cost = $setting[0]->elite_coach_cost;
@@ -158,7 +158,7 @@ class Leavesession extends MY_Site_Controller {
                     ->where('appointment_id', $a)
                     ->get()->result();
 
-            
+
             if(@$check[0]->id == NULL){
                 $curr_token_pull = $this->db->select('token_amount')
                     ->from('user_tokens')
@@ -198,7 +198,7 @@ class Leavesession extends MY_Site_Controller {
         if(@$cch_att_val > '05:00' || @$cch_att_val == NULL || @$cch_att_val == '00:00'){
             // exit('b');
             //Preventing refresh to insert token
-            
+
             $checks = $this->db->select('*')
                     ->from('token_histories_coach')
                     ->where('appointment_id', $a)
@@ -207,8 +207,8 @@ class Leavesession extends MY_Site_Controller {
             $datest     = date('H:i:s');
             $defaultst  = strtotime($datest);
             $usertimest = $defaultst+(60*$minutes);
-            
-            
+
+
             if(@$checks[0]->id == NULL){
                 $curr_token_pulls = $this->db->select('token_amount')
                     ->from('user_tokens')
@@ -282,7 +282,7 @@ class Leavesession extends MY_Site_Controller {
 
         //$opentok->stopArchive($archiveId);
         // $archive = $opentok->getArchive($sessid);
-        
+
         $sessionhist = array(
             'user' => $user_extract,
             'role' => $role,
@@ -295,10 +295,10 @@ class Leavesession extends MY_Site_Controller {
         // exit();
 
         $this->template->title = "Session Summaries";
-        $this->template->content->view('contents/opentok/leave', $sessionhist);
+        $this->template->content->view('contents/b2c/student/opentok/leave', $sessionhist);
         $this->template->publish();
     }
-    
+
     public function rate_coach(){
         $star  = $this->input->post("star");
         $coach_id  = $this->input->post("coach_id");
@@ -352,16 +352,16 @@ class Leavesession extends MY_Site_Controller {
     {
         $cch_note       = $this->input->post("cch_note");
         $appoint_id_cch = $this->input->post("appointment_id");
-  
+
         $ins_note = array(
             'cch_notes' => $cch_note
         );
-        
+
         $this->db->where('id', $appoint_id_cch);
         $this->db->update('appointments', $ins_note);
-        
+
 
         // redirect("opentok/live/ambil_pesan");
     }
-    
+
 }
