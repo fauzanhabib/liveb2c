@@ -14,7 +14,7 @@
 
                     <div class="dashboard__menubookingcoachresult">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
-                            <div class="bookkacoach">Book a Coach</div>
+                            <div class="bookkacoach activediv">Book a Coach</div>
                         </a>
                         <a href="">
                             <div class="session ">Session</div>
