@@ -55,12 +55,12 @@
 
 		  	<div class="progress__achievement">
 		  		<div class="study__progress__achievement">
-		  			<div class="bullet__achievement <?php echo ?>"></div>
-		  			<div class="bullet__achievement bg-blue-gradient"></div>
-		  			<div class="bullet__achievement bg-blue-gradient"></div>
-		  			<div class="bullet__achievement bg-red-gradient"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt2']; ?>"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt3']; ?>"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt4']; ?>"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt5']; ?>"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div>
 
 		  			<div class="achievement__point__info">
 		  				<h5><?php echo $gsp->data->study_points_until_today;?></h5>

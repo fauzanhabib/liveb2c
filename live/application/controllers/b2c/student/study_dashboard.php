@@ -36,7 +36,7 @@ class Study_dashboard extends MY_Site_Controller {
 
       $mt_status_to_colour = array(
         "passed" => "bg-blue-gradient",
-        "open" => "bg-white-gradient",
+        "open" => "bg-white",
         "locked" => "",
         "failed" => "bg-red-gradient"
       );
@@ -57,7 +57,7 @@ class Study_dashboard extends MY_Site_Controller {
       );
 
       // echo $key;
-      echo('<pre>');print_r($vars); exit;
+      // echo('<pre>');print_r($vars); exit;
       $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
       $this->template->publish();
     }
