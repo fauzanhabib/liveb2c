@@ -21,6 +21,14 @@
     .addingparent{
          
         width: 100%;
+        display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+            justify-content: space-between;
     }
 </style>
 <section class="main__content">
@@ -103,8 +111,8 @@
                 </div>
 
                 <div class="boxsessions__upcoming tab-content" id="tab-2">
-                    <?php foreach($histories as $h){ ?>
                     <div class="addingparent">
+                    <?php foreach($histories as $h){ ?>
                         <div class="todaysessions article-loop">
                         <span class="date"><?php echo date('M j Y', strtotime($h->date)); ?></span>
                         <span class="time">
@@ -163,8 +171,8 @@
                             </div>
                         </div>
                         </div>
-                    </div>
                     <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
