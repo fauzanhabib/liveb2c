@@ -276,6 +276,9 @@ button:focus {
 .bg-green {
   background: #4fe564; }
 
+.bg-white {
+  background: #fff; }
+
 .bg-red-gradient {
   background: -webkit-gradient(linear, left top, left bottom, from(#F5515F), to(#9F041B));
   background: -webkit-linear-gradient(top, #F5515F 0%, #9F041B 100%);
