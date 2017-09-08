@@ -276,6 +276,9 @@ button:focus {
 .bg-green {
   background: #4fe564; }
 
+.bg-white {
+  background: #fff; }
+
 .bg-red-gradient {
   background: -webkit-gradient(linear, left top, left bottom, from(#F5515F), to(#9F041B));
   background: -webkit-linear-gradient(top, #F5515F 0%, #9F041B 100%);
@@ -640,11 +643,14 @@ footer span {
       -ms-flex: 1.4;
           flex: 1.4; }
 
-.dashboard, .profile {
+.dashboard,
+.profile {
   width: 80%; }
-  .dashboard__menu, .profile__menu {
+  .dashboard__menu,
+  .profile__menu {
     margin-top: 20px; }
-  .dashboard__menutab, .profile__menutab {
+  .dashboard__menutab,
+  .profile__menutab {
     margin-top: 20px; }
 
 .profile__name {
@@ -907,7 +913,6 @@ footer span {
 .pagination-button:last-of-type {
   border-radius: 0 18px 18px 0; }
 
-/* arbitrary styles */
 .article-loop {
   display: block; }
 
@@ -2224,6 +2229,18 @@ footer span {
 
 .time #clockdiv span {
   margin: 0; }
+
+.addingparent form {
+  margin: 0 0 0 5px; }
+  .addingparent form .recorded_session_download {
+    background: transparent;
+    border: none;
+    color: #49c5fe;
+    text-decoration: underline;
+    cursor: pointer; }
+
+.addingparent .boxinfo {
+  margin: 0 10px !important; }
 
 .profile {
   display: -webkit-box;
@@ -3543,5 +3560,71 @@ footer span {
       min-width: 60px;
       border-radius: 4px;
       padding: 0.5em; }
+
+.box__assessment {
+  padding: 1em 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: rgba(63, 78, 123, 0.65);
+  border-top: 7px solid #5367A4;
+  border-bottom: 7px solid #5367A4;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 35%;
+  font-family: "neoFontThin", sans-serif;
+  color: #fff;
+  font-size: 16px; }
+
+.assignup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.signup__title {
+  font-size: 25px;
+  font-family: "neoFontBold", sans-serif;
+  color: #49c5fe;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  text-align: center; }
+
+.signup__form {
+  padding: 2em; }
+  .signup__form .label {
+    font-family: "neoFontThin", sans-serif;
+    color: #fff; }
+
+.control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 10px 5px;
+  margin: 0;
+  border: 0;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: normal;
+  background: white;
+  font-size: 13px; }
+
+.signin {
+  text-align: center;
+  position: relative;
+  color: #fff; }
 
 /*# sourceMappingURL=app.css.map */

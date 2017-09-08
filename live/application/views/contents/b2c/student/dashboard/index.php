@@ -7,7 +7,7 @@
         text-decoration: underline;
     }
 </style>
-<section class="main__content">
+
     <div class="dashboard">
         <?php if(count($data)!=0){ ?>
             <div class="dashboard__notif success__notif">

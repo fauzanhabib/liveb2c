@@ -1,4 +1,3 @@
-<section class="main__content">
 	<div class="study__dashboard__top">
 		<!-- achievement goal step -->
 		<div class="progress__step">
