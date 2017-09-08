@@ -40,7 +40,6 @@
     overflow: auto;
 }
 </style>
-<section class="main__content">
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
       <span id='textNotif'></span>
   </div>

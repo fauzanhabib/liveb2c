@@ -1,4 +1,3 @@
-            <section class="main__content">
                 <div class="help__content">
                     <div class="dashboard__menubookingcoachresult">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 

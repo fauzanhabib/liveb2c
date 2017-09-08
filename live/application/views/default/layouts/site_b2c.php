@@ -223,6 +223,8 @@
                     </li>
                 </ul>
             </aside>
+            
+            <section class="main__content">
 
             <?php
             echo $this->template->partial->widget('messages_widget', '', true);

@@ -1,4 +1,3 @@
-            <section class="main__content">
                 <div class="dashboard">
                     <?php if(count($datasession)!=0){ ?>
                     <div class="dashboard__notif">

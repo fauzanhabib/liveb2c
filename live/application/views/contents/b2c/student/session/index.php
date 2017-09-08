@@ -22,16 +22,15 @@
          
         width: 100%;
         display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-            justify-content: space-between;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
     }
 </style>
-<section class="main__content">
     <div class="dashboard">
         <?php if(count($data)!=0){ ?>
             <div class="dashboard__notif success__notif">
@@ -132,9 +131,9 @@
                                 echo "(UTC ".$gmt_val.")"
                             ?>
                         </span>
-                        <form name ="sessiondone" action="<?php echo(site_url('opentok/checkrecord/'));?>" method="post">
+                        <form name="sessiondone" action="<?php echo(site_url('opentok/checkrecord/'));?>" method="post">
                             <input type="hidden" name="sessionid" value="<?php echo @$h->session; ?>">
-                            <input type="submit" class="pure-button btn-tiny btn-expand-tiny btn-white" value="Check Availibility">
+                            <input type="submit" class="recorded_session_download" value="Recorded Session">
                         </form>
 
                         <div class="boxinfo activesession">
