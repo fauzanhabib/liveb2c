@@ -46,17 +46,17 @@
 				        </svg> -->
 
 				        <div class="donut__progress__info">
-				            <div class="point__progress__info">A1</div>
+				            <div class="point__progress__info"><?php echo $gsp->data->certification_level;?></div>
 				        </div>
 				    </div>
 				</div>
 
-				<div class="progress__info__label">20.096</div>
+				<div class="progress__info__label"><?php echo $gsp->data->total_points_until_today;?></div>
 		  	</div>
 
 		  	<div class="progress__achievement">
 		  		<div class="study__progress__achievement">
-		  			<div class="bullet__achievement bg-blue-gradient"></div>
+		  			<div class="bullet__achievement <?php echo ?>"></div>
 		  			<div class="bullet__achievement bg-blue-gradient"></div>
 		  			<div class="bullet__achievement bg-blue-gradient"></div>
 		  			<div class="bullet__achievement bg-red-gradient"></div>
@@ -64,7 +64,7 @@
 		  			<div class="bullet__achievement"></div>
 
 		  			<div class="achievement__point__info">
-		  				<h5>29 K</h5>
+		  				<h5><?php echo $gsp->data->study_points_until_today;?></h5>
 		  				<h3>Study</h3>
 		  			</div>
 		  		</div>
@@ -89,7 +89,7 @@
 		  			<div class="bullet__achievement"></div>
 
 		  			<div class="achievement__point__info">
-		  				<h5>27 K</h5>
+		  				<h5><?php echo $gsp->data->coach_points_until_today;?></h5>
 		  				<h3>Coach</h3>
 		  			</div>
 		  		</div>
@@ -102,32 +102,38 @@
 			<h5>Points</h5>
 			<div class="graph__wrap">
 			  	<div class="bar__graph">
+						<?php
+						$bar_now = ( $gwp->data[0]->points_goal == 0 ? 0 : $gwp->data[0]->points / $gwp->data[0]->points_goal);
+						$bar_w1  = ( $gwp->data[1]->points_goal == 0 ? 0 : $gwp->data[1]->points / $gwp->data[1]->points_goal);
+						$bar_w2  = ( $gwp->data[2]->points_goal == 0 ? 0 : $gwp->data[2]->points / $gwp->data[2]->points_goal);
+						$bar_w3  = ( $gwp->data[3]->points_goal == 0 ? 0 : $gwp->data[3]->points / $gwp->data[3]->points_goal);
+						?>
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="25">
+			        		<li class="graph__bar__each" data-value="<?php echo $bar_now; ?>">
 			          		<span class="graph__legend">Now</span>
-			          		<label>1700</label>
+			          		<label><?php echo $gwp->data[0]->points;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="100">
+			        		<li class="graph__bar__each" data-value="<?php echo $bar_w1; ?>">
 			          		<span class="graph__legend">w 1</span>
-			          		<label>2300</label>
+			          		<label><?php echo $gwp->data[1]->points;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="55">
+			        		<li class="graph__bar__each" data-value="<?php echo $bar_w2; ?>">
 			          		<span class="graph__legend">w 2</span>
-			          		<label>2100</label>
+			          		<label><?php echo $gwp->data[2]->points;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="85">
+			        		<li class="graph__bar__each" data-value="<?php echo $bar_w3; ?>">
 			          		<span class="graph__legend">w 3</span>
-			          		<label>1900</label>
+			          		<label><?php echo $gwp->data[3]->points;?></label>
 			        		</li>
 			      		</span>
 
@@ -151,18 +157,18 @@
 		  		<div class="step--circle circle"
 			         data-thickness="15"
 			         data-size="150">
-                          <svg>
-                              <path stroke-linecap="round" id="arc1" fill="none" stroke="transparent" stroke-width="10" />
-                          </svg>
-                          <svg>
-                              <path stroke-linecap="round" id="arc2" fill="none" stroke="#fafafa" stroke-width="20" />
-                          </svg>
-                          <div class="step__progress__info">
-                              <div class="step__info__label">4095</div>
-                          </div>
-				</div>
+              <svg>
+                  <path stroke-linecap="round" id="arc1" fill="none" stroke="transparent" stroke-width="10" />
+              </svg>
+              <svg>
+                  <path stroke-linecap="round" id="arc2" fill="none" stroke="#fafafa" stroke-width="20" />
+              </svg>
+              <div class="step__progress__info">
+                  <div class="step__info__label"><?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?></div>
+              </div>
+					</div>
 		  	</div>
-                  <h5><font>120</font> points left</h5>
+      	<h5><font><?php echo ($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today);?></font> points left</h5>
 		</div>
 		<!-- end daily progress donut graph -->
 	</div>
@@ -174,30 +180,30 @@
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="100">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->comprehension_grammar;?>">
 			          		<span class="graph__legend">Now</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[0]->comprehension_grammar;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="5">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->comprehension_grammar;?>">
 			          		<span class="graph__legend">w 1</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[1]->comprehension_grammar;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="75">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->comprehension_grammar;?>">
 			          		<span class="graph__legend">w 2</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[2]->comprehension_grammar;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="85">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->comprehension_grammar;?>">
 			          		<span class="graph__legend">w 3</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[3]->comprehension_grammar;?></label>
 			        		</li>
 			      		</span>
 
@@ -221,30 +227,30 @@
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="25">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->pronunciation;?>">
 			          		<span class="graph__legend">Now</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[0]->pronunciation;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="10">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->pronunciation;?>">
 			          		<span class="graph__legend">w 1</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[1]->pronunciation;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="90">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->pronunciation;?>">
 			          		<span class="graph__legend">w 2</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[2]->pronunciation;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="85">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->pronunciation;?>">
 			          		<span class="graph__legend">w 3</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[3]->pronunciation;?></label>
 			        		</li>
 			      		</span>
 
@@ -268,30 +274,30 @@
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="25">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->listening;?>">
 			          		<span class="graph__legend">Now</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[0]->listening;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="10">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->listening;?>">
 			          		<span class="graph__legend">w 1</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[1]->listening;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="35">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->listening;?>">
 			          		<span class="graph__legend">w 2</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[2]->listening;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="100">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->listening;?>">
 			          		<span class="graph__legend">w 3</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[3]->listening;?></label>
 			        		</li>
 			      		</span>
 
@@ -315,30 +321,30 @@
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="20">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->speaking;?>">
 			          		<span class="graph__legend">Now</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[0]->speaking;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="40">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->speaking;?>">
 			          		<span class="graph__legend">w 1</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[1]->speaking;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="95">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->speaking;?>">
 			          		<span class="graph__legend">w 2</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[2]->speaking;?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
-			        		<li class="graph__bar__each" data-value="125">
+			        		<li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->speaking;?>">
 			          		<span class="graph__legend">w 3</span>
-			        		<label>2300</label>
+			        		<label><?php echo $gwp->data[3]->speaking;?></label>
 			        		</li>
 			      		</span>
 
@@ -371,9 +377,14 @@ outter.circleProgress({
 });
 
 var inner = $('.inner--circle.circle');
+
+var innerup   = '<?php echo $gsp->data->total_points_until_today;?>';
+var innerdown = '<?php echo $gsp->data->study_points_to_pass;?>';
+var innerperc = innerup / innerdown;
+// console.log(innerperc);
 inner.circleProgress({
     startAngle: -Math.PI / 2,
-    value: 0.6,
+    value: innerperc,
     lineCap: 'round',
     fill: {gradient: ['#49c0fe', '#4b80fc']}
 });
