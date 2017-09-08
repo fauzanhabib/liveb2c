@@ -292,6 +292,10 @@ button:focus {
   background: -webkit-linear-gradient(227deg, #4C61FC 0%, #49C5FE 60%);
   background: linear-gradient(-137deg, #4C61FC 0%, #49C5FE 60%); }
 
+.bg-white-gradient {
+  background: -webkit-linear-gradient(227deg, #bcc2d3 0%, #fafafa 60%);
+  background: linear-gradient(-137deg, #bcc2d3 0%, #fafafa 60%); }
+
 .success__notif {
   background-color: #26b2a1; }
 
