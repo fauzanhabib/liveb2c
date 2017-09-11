@@ -638,6 +638,34 @@ footer span {
   width: 100%;
   padding: 10px; }
 
+.dashboard__notif {
+  margin-top: 10px;
+  color: #fff;
+  width: 37%;
+  height: 37px;
+  border-radius: 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -ms-flex-item-align: baseline;
+      align-self: baseline;
+  margin-left: 10%; }
+  .dashboard__notif span {
+    font-size: 0.9em; }
+  .dashboard__notif i {
+    position: absolute;
+    right: 1%;
+    top: 5px;
+    font-size: .7em;
+    cursor: pointer; }
+
 .main {
   width: 100%;
   min-height: 100%; }
@@ -1419,7 +1447,10 @@ footer span {
         .dashboard__resultbook .boxprofilecoach .profilecoach__timebook .accordion-item {
           width: 100% !important; }
         .dashboard__resultbook .boxprofilecoach .profilecoach__timebook .accordion-panel {
-          width: 100% !important; } }
+          width: 100% !important; }
+  .dashboard__notif {
+    margin-left: 2.5% !important;
+    width: 44%; } }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .header__profpic {
@@ -1481,8 +1512,6 @@ footer span {
             justify-content: center; }
   .dashboard {
     width: 100%; }
-    .dashboard__notif {
-      width: 100% !important; }
     .dashboard__menu {
       -webkit-box-pack: justify;
           -ms-flex-pack: justify;
@@ -2012,7 +2041,10 @@ footer span {
   .dashboard__menutab .boxsessions__upcoming .todaysessions {
     width: 100% !important; }
   .pagination {
-    width: 100% !important; } }
+    width: 100% !important; }
+  .dashboard__notif {
+    margin-left: 0 !important;
+    width: 100%; } }
 
 .dashboard__menu {
   display: -webkit-box;
@@ -3565,6 +3597,34 @@ footer span {
       border-radius: 4px;
       padding: 0.5em; }
 
+.login__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  position: absolute; }
+  .login__header .login__header__logo {
+    width: 15%; }
+    .login__header .login__header__logo img {
+      width: 110px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      margin: auto; }
+  .login__header .login__header__nav {
+    width: 25%; }
+    .login__header .login__header__nav ul {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+      .login__header .login__header__nav ul .btn__signin a {
+        color: #49c5fe; }
+
 .box__assessment {
   padding: 1em 2em;
   display: -webkit-box;
@@ -3580,7 +3640,7 @@ footer span {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 35%;
+  width: 25%;
   font-family: "neoFontThin", sans-serif;
   color: #fff;
   font-size: 16px; }
@@ -3607,6 +3667,12 @@ footer span {
   .signup__form .label {
     font-family: "neoFontThin", sans-serif;
     color: #fff; }
+  .signup__form .login__warning {
+    color: #ff3333;
+    font-size: 0.8em; }
+  .signup__form .error, .signup__form i {
+    color: #ed584c;
+    font-size: 0.9em; }
 
 .control {
   display: -webkit-box;

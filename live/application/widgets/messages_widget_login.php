@@ -11,7 +11,8 @@ class messages_widget_login extends Widget {
 		$all = $this->messages->get();
 		foreach($all as $type=>$messages) {
 			foreach($messages as $message) {
-                            echo "<p class='error'><i class='icon icon-warning' style='top: 2px;position: relative;'></i> $message</p>";
+                            // echo "<p class='error'><i class='icon icon-warning' style='top: 2px;position: relative;'></i> $message</p>";
+                            echo "<p class='error'><i class='fa fa-exclamation-triangle' style='position: relative;'></i> $message</p>";
 			}
 		}
 	}
