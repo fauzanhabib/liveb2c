@@ -6,10 +6,17 @@ class Login extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('Study_progress');
 	}
 
 	// Index
 	public function index(){
+						//Generate Token API --
+						$tokenresult = $this->study_progress->GenerateToken();
+						$this->load->library('session');
+						$this->session->set_userdata(array(
+							'token_api'  => $tokenresult
+						));
 
             // User is already logged in
             if ($this->auth->loggedin()) {
@@ -18,7 +25,7 @@ class Login extends MY_Controller {
                 $user_id = $this->auth_manager->userid();
                 session_start();
                 $session_user_login = session_id();
-                
+
                 $check_session = $this->db->select('user_login.user_id, user_login.session')
                                       ->from('user_login')
                                       ->where('user_login.user_id',$user_id)
@@ -27,17 +34,17 @@ class Login extends MY_Controller {
 
                 if($check_session){
                     if((!$check_session[0]->user_id) && (!$check_session[0]->session)){
-                        
+
                         $this->session->set_userdata('user_id_session',$user->id);
-                        redirect('home/confirmation'); 
+                        redirect('home/confirmation');
                     } else if (!$check_session){
-                        
+
                         redirect('login');
                     } else {
                         if($this->auth_manager->role() == 'STD'){
-                            redirect('student/dashboard');                    
+                            redirect('b2c/student/dashboard');
                         } else if($this->auth_manager->role() == 'CCH'){
-                            redirect('coach/dashboard');                    
+                            redirect('coach/dashboard');
                         } else{
                             redirect('account/identity/detail/profile');
                         }
@@ -50,9 +57,23 @@ class Login extends MY_Controller {
 
             // Checking user's login attempt
             if($this->input->post('__submit')) {
+								$check_login = $this->db->select('*')
+																	->from('users')
+																	->where('email', $this->input->post('email'))
+																	->get()->result();
+
+								$sso_enabled  = $check_login[0]->sso_enabled;
+								$sso_username = $check_login[0]->sso_username;
+
+								if($sso_enabled == 0){
+									$this->messages->add('Not Registered on SSO', 'warning');
+									redirect('login');
+								}
+								// print_r($sso_enabled);exit();
                 // Success to identify
-                if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) ) {
-            
+                else if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) && $sso_enabled == 1) {
+										// print_r($this->session->userdata('token_api'));exit();
+
                     // insert timezone
                     $min_raw = $this->input->post("min_raw");
                     $userid  = $this->auth_manager->userid();
@@ -86,32 +107,31 @@ class Login extends MY_Controller {
 
                     $login_type = $check_login_type[0]->login_type;
                     //=====
-
-                    if($this->auth_manager->role() == 'STD' && $login_type == 0){
-                        redirect('student/dashboard');                    
-                    } else if($this->auth_manager->role() == 'CCH'){
-                        redirect('coach/dashboard');                    
+										// print_r($sso_enabled);exit();
+										if($this->auth_manager->role() == 'CCH'){
+                        redirect('coach/dashboard');
                     } else if($this->auth_manager->role() == 'STD' && $login_type == 1){
                         redirect('b2c/student/dashboard');
                     } else{
                         redirect('account/identity/detail/profile');
                     }
+
                 }
                 // Not valid user
                 redirect('login');
             }
-                
+
         // Set Template
         // $this->template->content->view('default/contents/login/index');
         $this->template->title = 'Login';
-       
+
         $this->template->set_template('default/layouts/login');
         $this->template->publish();
 	}
 
     function update_login(){
-        session_start();    
-        $session_user_login = session_id(); 
+        session_start();
+        $session_user_login = session_id();
         $user_id = $this->input->post('user_id');
 
         $update = $this->db->where('user_id',$user_id)
