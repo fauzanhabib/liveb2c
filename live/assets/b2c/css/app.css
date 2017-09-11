@@ -641,7 +641,7 @@ footer span {
 .dashboard__notif {
   margin-top: 10px;
   color: #fff;
-  width: 47%;
+  width: 37%;
   height: 37px;
   border-radius: 3px;
   display: -webkit-box;
@@ -1447,7 +1447,10 @@ footer span {
         .dashboard__resultbook .boxprofilecoach .profilecoach__timebook .accordion-item {
           width: 100% !important; }
         .dashboard__resultbook .boxprofilecoach .profilecoach__timebook .accordion-panel {
-          width: 100% !important; } }
+          width: 100% !important; }
+  .dashboard__notif {
+    margin-left: 2.5% !important;
+    width: 44%; } }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .header__profpic {
@@ -1509,8 +1512,6 @@ footer span {
             justify-content: center; }
   .dashboard {
     width: 100%; }
-    .dashboard__notif {
-      width: 100% !important; }
     .dashboard__menu {
       -webkit-box-pack: justify;
           -ms-flex-pack: justify;
@@ -2040,7 +2041,10 @@ footer span {
   .dashboard__menutab .boxsessions__upcoming .todaysessions {
     width: 100% !important; }
   .pagination {
-    width: 100% !important; } }
+    width: 100% !important; }
+  .dashboard__notif {
+    margin-left: 0 !important;
+    width: 100%; } }
 
 .dashboard__menu {
   display: -webkit-box;
