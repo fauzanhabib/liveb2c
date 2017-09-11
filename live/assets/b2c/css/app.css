@@ -2113,31 +2113,6 @@ footer span {
     .activediv #WebView-NeoLive .svgfill {
       fill: #49C5FE; }
 
-.dashboard__notif {
-  margin-top: 10px;
-  color: #fff;
-  width: 47%;
-  height: 37px;
-  border-radius: 3px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative; }
-  .dashboard__notif span {
-    font-size: 0.9em; }
-  .dashboard__notif i {
-    position: absolute;
-    right: 1%;
-    top: 5px;
-    font-size: .7em;
-    cursor: pointer; }
-
 .dashboard__menutab {
   padding-bottom: 2rem; }
   .dashboard__menutab .tabsessions {

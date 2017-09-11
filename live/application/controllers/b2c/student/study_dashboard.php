@@ -27,7 +27,8 @@ class Study_dashboard extends MY_Site_Controller {
       $id = $this->auth_manager->userid();
       $this->template->title = "Study Dashboard";
 
-      $tokenresult = $this->study_progress->GenerateToken();
+      $tokenresult = $this->session->userdata('token_api');
+      // $tokenresult = $this->study_progress->GenerateToken();
       // echo('<pre>');print_r($tokenresult); exit;
 
       $gsp = $this->study_progress->GetStudyProgress($tokenresult);
