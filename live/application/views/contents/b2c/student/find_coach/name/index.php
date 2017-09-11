@@ -1,3 +1,20 @@
+                    <style>
+                        .pagination-items{
+                            width: 100%;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -ms-flex-wrap: wrap;
+                            flex-wrap: wrap;
+                            
+                        }
+
+                        .dashboard__resultbook .boxprofilecoach {
+                            margin: 20px 33px 20px 20px !important;
+                        }
+
+                    </style>
+
                 <div class="dashboard">
                     <?php if(count($datasession)!=0){ ?>
                     <div class="dashboard__notif">
@@ -119,7 +136,7 @@
                     <!-- result -->
                     <div class="dashboard__resultbook">
                         <?php for($i=0;$i<count($coaches);$i++){ ?>
-                        <div class="boxprofilecoach list">
+                        <div class="boxprofilecoach list article-loop">
                             <div class="profilecoach">
                                 <div class="profilecoach__picture">
                                     <img src="<?php echo base_url().$coaches[$i]->profile_picture;?>" alt="">
@@ -410,4 +427,8 @@
             $('#date_value').attr('action', newurl);
         };
 
+        </script>
+
+        <script>
+            $('.article-loop').paginate(6);
         </script>
