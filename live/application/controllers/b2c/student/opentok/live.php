@@ -23,6 +23,7 @@ class Live extends MY_Site_Controller {
         $this->load->library('Auth_manager');
         $this->load->library('call1');
         $this->load->library('call2');
+        $this->load->library('Study_progress');
         $this->load->model('coaching_script_model');
         /* if ($this->auth_manager->role() != 'STD' || $this->auth_manager->role() != 'CCH') {
             redirect('home');
@@ -210,6 +211,30 @@ class Live extends MY_Site_Controller {
         @$std_id_for_cert = $user_extract2->student_id;
         // echo "<pre>";print_r($user_extract);exit();
 
+        //New API -----
+        $tokenresult = $this->session->userdata('token_api');
+        // $tokenresult = $this->study_progress->GenerateToken();
+        // echo('<pre>');print_r($tokenresult); exit;
+
+        $gsp = $this->study_progress->GetStudyProgress($tokenresult);
+        $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
+        $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+
+        $mt_status_to_colour = array(
+          "passed" => "bg-blue-gradient",
+          "open" => "bg-white-gradient",
+          "locked" => "",
+          "failed" => "bg-red-gradient"
+        );
+        $mt_color = array(
+          'mt1' => $mt_status_to_colour[$gsp->data->mastery_tests[0]->status],
+          'mt2' => $mt_status_to_colour[$gsp->data->mastery_tests[1]->status],
+          'mt3' => $mt_status_to_colour[$gsp->data->mastery_tests[2]->status],
+          'mt4' => $mt_status_to_colour[$gsp->data->mastery_tests[3]->status],
+          'mt5' => $mt_status_to_colour[$gsp->data->mastery_tests[4]->status],
+          'mt6' => $mt_status_to_colour[$gsp->data->mastery_tests[5]->status]
+        );
+
         $userrole   = $this->auth_manager->role();
         if($userrole == "STD"){
             if(@$appoint_id){
@@ -245,10 +270,10 @@ class Live extends MY_Site_Controller {
                     'user_extract'   => @$user_extract,
                     'user_extract2'   => @$user_extract2,
                     'appointment_id' => $appoint_id,
-                    'allmodule'  => @$allmodule,
-                    'cert_plan'  => @$cert_plan,
-                    'student_vrm'    => @$student_vrm,
-                    'student_vrm_json' => @$student_vrm_json
+                    'gsp' => @$gsp,
+                    'gcp' => @$gcp,
+                    'gwp' => @$gwp,
+                    'mt_color' => @$mt_color
                     );
                 }
                 else{
@@ -275,10 +300,10 @@ class Live extends MY_Site_Controller {
                     'user_extract'   => @$user_extract,
                     'user_extract2'   => @$user_extract2,
                     'appointment_id' => $appoint_id,
-                    'allmodule'  => @$allmodule,
-                    'cert_plan'  => @$cert_plan,
-                    'student_vrm'    => @$student_vrm,
-                    'student_vrm_json' => @$student_vrm_json
+                    'gsp' => @$gsp,
+                    'gcp' => @$gcp,
+                    'gwp' => @$gwp,
+                    'mt_color' => @$mt_color
                     );
                 }
 

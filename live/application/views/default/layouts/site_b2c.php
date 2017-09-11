@@ -223,7 +223,7 @@
                     </li>
                 </ul>
             </aside>
-            
+
             <section class="main__content">
 
             <?php
@@ -238,7 +238,7 @@
 		    </a>
 		</footer>
 
-        
+
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
     <script>
       //redirect ----------------------------------------- class="clicklimenu"
@@ -266,6 +266,11 @@
       //Add menu active ----------------------------------
       current_page = document.location.href;
       menuClass    = current_page.split("/")[6];
+
+      if(menuClass == 'find_coaches' || menuClass == 'session' || menuClass == 'token' || menuClass == 'help'){
+        menuClass = 'dashboard';
+      }
+
       $('.'+menuClass+'active').addClass('active');
       // console.log(menuClass);
     </script>
@@ -324,7 +329,7 @@
           url:"<?php echo site_url('account/notification/ajax_update');?>",
           data: {'id':id},
           success: function(data){
-              console.log(id);
+              // console.log(id);
             }
          });
        });
