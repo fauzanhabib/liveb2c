@@ -46,43 +46,26 @@
                 <!--THE NOTIFICAIONS DROPDOWN BOX.-->
                 <div id="notifications">
                     <ul class="notification__list">
-                      <?php
-                      // print_r($this->auth_manager->new_notification()['data_notification']);
-                      // exit();
-                      ?>
-                      <?php  ?>
+                        <?php
+                        foreach($this->auth_manager->new_notification()['data_notification'] as $d){
+                        ?>
                         <li>
-                            <a href="">New session booked with Adam <br>
-                            <span>1 hour ago</span>
+                            <a href=""><?php echo($d->description);?><br>
+                            <span><?php echo($this->auth_manager->new_notification()['received_time'][$d->id]);?></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="">New session booked with Adam <br>
-                            <span>2 hour ago</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">New session booked with Dylan <br>
-                            <span>3 hour ago</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">New session booked with Anna <br>
-                            <span>4 hour ago</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">New session booked with Dylan <br>
-                            <span>5 hour ago</span>
-                            </a>
-                        </li>
+                        <?php } ?>
                     </ul>
                     <div class="seeAll"><a href="#">See All</a></div>
                 </div>
             </div>
             <div class="profile__name">
                 <h4><?php echo $this->auth_manager->get_name();?></h4>
-                <h5><?php echo $this->auth_manager->role();?></h5>
+                <h5><?php
+                  if($this->auth_manager->role() == 'STD'){
+                    echo 'Student';
+                  }
+                ?></h5>
             </div>
             <div class="header__profpic pic__circle--small">
                 <img src="<?php echo base_url().'/'.($this->auth_manager->get_avatar()); ?>">

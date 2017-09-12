@@ -19,7 +19,7 @@ class Profile extends MY_Site_Controller {
         // To convert id to name of Social Media
         $this->load->model('social_media_model');
         $this->load->model('timezone_model');
-
+        $this->load->library('phpass');
         $this->load->library('common_function');
 
         // Load language
@@ -175,7 +175,7 @@ class Profile extends MY_Site_Controller {
       $id = $this->auth_manager->userid();
 
       $currpass = $this->input->post('currpass');
-      $newpass  = $this->input->post('newpass ');
+      $newpass  = $this->input->post('newpass');
       $confpass = $this->input->post('confpass');
 
       if (!$this->auth_manager->check_password($this->auth_manager->user_email(), $currpass)) {
@@ -183,7 +183,8 @@ class Profile extends MY_Site_Controller {
         $classcont = 'failedNotif';
         $message = 'Incorrect old password';
       }else{
-        $updated_pass = $this->auth_manager->hashing_password($this->input->post('new_password'));
+        $updated_pass = $this->phpass->hash($newpass);
+        // $updated_pass = $this->auth_manager->hashing_password($this->input->post('new_password'));
         $classtext = 'textNotif';
         $classcont = 'successNotif';
 
@@ -193,7 +194,7 @@ class Profile extends MY_Site_Controller {
 
         $this->db->where('id', $id);
         $this->db->update('users', $upd_pass_arr);
-
+        //
         $message = 'Password updated';
       }
 
@@ -201,6 +202,8 @@ class Profile extends MY_Site_Controller {
         'textUpd' => $message,
         'classtext' => $classtext,
         'classcont' => $classcont,
+        'updated_pass' => $updated_pass,
+        'newpass' => $newpass
       ];
 
       echo json_encode($var);

@@ -430,9 +430,13 @@ $(document).on('click', '#savepass', function() {
       data: {'currpass':currpass, 'newpass': newpass, 'confpass': confpass},
       success: function(data){
         var obj = JSON.parse(data);
-        console.log(obj);
+        // console.log(obj[0].newpass);
+        // console.log(newpass);
         $("#"+obj[0].classtext).text(obj[0].textUpd);
         $("#"+obj[0].classcont).show().delay(2000).fadeOut("slow");
+        $('#currpass').val("");
+        $('#newpass').val("");
+        $('#confpass').val("");
       },
       error: function(data){
         // console.log(data);
