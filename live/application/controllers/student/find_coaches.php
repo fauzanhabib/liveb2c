@@ -2482,7 +2482,7 @@ class find_coaches extends MY_Site_Controller {
 
         $gmt_coach = $this->db->select("minutes_val as minutes, gmt_val as gmt")
                              ->from('user_timezones')
-                             ->where('user_id', $this->auth_manager->userid())
+                             ->where('user_id', $coach_id)
                              ->get()->result();
 
         @date_default_timezone_set('Etc/GMT'.$gmt_coach[0]->gmt*(1));      
@@ -2497,11 +2497,13 @@ class find_coaches extends MY_Site_Controller {
             $date_ = $date_;
         }
 
+        $date_ = $chek_date;
+
         
         $day_off = $this->db->select('coach_id, start_date, end_date')
                         ->from('coach_dayoffs')
                         ->where('coach_id', $coach_id)
-                        ->where('status', 'active')
+                        ->where('status', 'approved')
                         ->where('start_date <=', $date_)
                         ->where('end_date >=', $date_)
                         ->get()->result();
