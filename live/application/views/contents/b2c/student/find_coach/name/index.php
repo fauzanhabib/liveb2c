@@ -14,12 +14,12 @@
                         }
 
                 </style>
-                <?php if(count($data)!=0){ ?>
+                <?php if(count($datasession)!=0){ ?>
                     <div class="dashboard__notif">
-                        <?php if(count($data)==1){ ?>
-                        <span>You Have <?php echo count($data); ?> Session Left For Today</span>
+                        <?php if(count($datasession)==1){ ?>
+                        <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
                         <?php }else{ ?>
-                        <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
+                        <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
                         <?php } ?>
                         <i class="fa fa-times"></i>
                     </div>
@@ -134,6 +134,9 @@
 
                     <!-- result -->
                     <div class="dashboard__resultbook">
+                        <?php if(!$coaches){ ?>
+                        <span>No coaches matched your criteria</span>
+                        <?php }else{ ?>
                         <?php for($i=0;$i<count($coaches);$i++){ ?>
                         <div class="boxprofilecoach list article-loop">
                             <div class="profilecoach">
@@ -260,7 +263,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <?php } ?>
+                        <?php } } ?>
 
                         <!-- dummy element to align left the content -->
                         <div class="boxprofilecoach flex-dummy"></div>
