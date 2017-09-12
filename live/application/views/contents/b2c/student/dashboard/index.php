@@ -9,7 +9,7 @@
 </style>
     
     <?php if(count($data)!=0){ ?>
-        <div class="dashboard__notif">
+        <div class="dashboard__notif success__notif">
             <?php if(count($data)==1){ ?>
             <span>You Have <?php echo count($data); ?> Session Left For Today</span>
             <?php }else{ ?>

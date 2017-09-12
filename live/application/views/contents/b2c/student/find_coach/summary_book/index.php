@@ -1,5 +1,5 @@
                 <?php if(count($datasession)!=0){ ?>
-                <div class="dashboard__notif">
+                <div class="dashboard__notif success__notif">
                     <?php if(count($datasession)==1){ ?>
                     <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
                     <?php }else{ ?>
