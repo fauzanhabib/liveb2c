@@ -19,7 +19,7 @@
     }
 
     .addingparent{
-         
+
         width: 100%;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -44,7 +44,7 @@
     <?php } ?>
     <div class="dashboard">
         <div class="dashboard__menubookingcoachresult">
-            <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
+            <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
                 <div class="bookkacoach">Book a Coach</div>
             </a>
             <a href="<?php echo site_url('b2c/student/session'); ?>">
@@ -118,20 +118,20 @@
                             <?php
                                 $defaultstart  = strtotime($h->start_time);
                                 $hourattstart  = date("H:i", $defaultstart);
-                                echo $hourattstart; 
-                            ?> 
+                                echo $hourattstart;
+                            ?>
                             -
                             <?php
                                 $defaultend  = strtotime($h->end_time);
                                 $endsession = $defaultend-(5*60);
                                 $hourattend  = date("H:i", $endsession);
-                                echo $hourattend; 
-                            ?> 
-                            <?php 
+                                echo $hourattend;
+                            ?>
+                            <?php
                                 echo "(UTC ".$gmt_val.")"
                             ?>
                         </span>
-                        <form name="sessiondone" action="<?php echo(site_url('opentok/checkrecord/'));?>" method="post">
+                        <form name="sessiondone" target="_blank" action="<?php echo(site_url('b2c/student/opentok/checkrecord/'));?>" method="post">
                             <input type="hidden" name="sessionid" value="<?php echo @$h->session; ?>">
                             <input type="submit" class="recorded_session_download" value="Recorded Session">
                         </form>
@@ -183,7 +183,7 @@
 
 $(".viewcoaches").click(function() {
     coach_id = $(this).attr('idcoaches');
-   
+
     $.ajax({
         url: "<?php echo site_url('b2c/student/session/coach_detail');?>",
         type: 'POST',
@@ -206,7 +206,7 @@ $(".viewcoaches").click(function() {
             // $('.timezonecoach').text(': '+timezone);
             $('.profile_picturecoaches').attr('src','<?php echo base_url();?>'+profile_picture);
 
-        }                
+        }
     });
 });
 
@@ -215,4 +215,3 @@ $(".viewcoaches").click(function() {
  <script>
     $('.article-loop').paginate(6);
 </script>
-

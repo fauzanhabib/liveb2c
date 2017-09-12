@@ -105,18 +105,18 @@
 			</div>
 			<div class="profile__password__current">
 				<label>Current Password</label>
-				<input type="password" value="">
+				<input type="password" value="" id='currpass' style="letter-spacing: 5px;">
 			</div>
 			<div class="profile__password__new">
 				<label>New Password</label>
-				<input type="password" value="">
+				<input type="password" value="" id='newpass' style="letter-spacing: 5px;">
 			</div>
 			<div class="profile__password__confirm">
 				<label>Confirm New Password</label>
-				<input type="text">
+				<input type="password" id='confpass' style="letter-spacing: 5px;">
 			</div>
 			<div class="profile__password__button">
-				<button class="neobutton next">Save Change</button>
+				<button class="neobutton next" id='savepass'>Save Change</button>
 			</div>
 		</div>
 
@@ -163,7 +163,7 @@
 
 		</div>
 
-		<div class="profile__dynedpro">
+		<!-- <div class="profile__dynedpro">
 			<div class="profile__dynedpro__title">
 				DynEd Pro Info
 			</div>
@@ -176,7 +176,7 @@
 				<span><?php echo $data[0]->server_dyned_pro;?></span>
 			</div>
 
-		</div>
+		</div> -->
 	</div>
 
 
@@ -399,5 +399,49 @@ $(document).on('click', '#inputDate', function() {
       $('#dateChangeCont').hide();
       $('#inputDate').show();
     });
+});
+</script>
+
+<script>
+//Save Password
+
+$(document).on('click', '#savepass', function() {
+  currpass = $('#currpass').val();
+  newpass  = $('#newpass').val();
+  confpass = $('#confpass').val();
+
+  if(currpass == '' || newpass == '' || confpass == ''){
+    $("#textFail").text('All fields are required');
+    $("#failedNotif").show().delay(2000).fadeOut("slow");
+  }else if((jQuery.trim( currpass )).length==0 || (jQuery.trim( newpass )).length==0 || (jQuery.trim( confpass )).length==0){
+    $("#textFail").text('Can not save only spaces');
+    $("#failedNotif").show().delay(2000).fadeOut("slow");
+  }else if((jQuery.trim( currpass )).length<8 || (jQuery.trim( newpass )).length<8 || (jQuery.trim( confpass )).length<8){
+    $("#textFail").text('Minimum password is 8 characters');
+    $("#failedNotif").show().delay(2000).fadeOut("slow");
+  }else if(newpass != confpass){
+    $("#textFail").text('New password did not match');
+    $("#failedNotif").show().delay(2000).fadeOut("slow");
+  }else{
+
+    $.ajax({
+      type:"POST",
+      url: "<?php echo site_url().'/b2c/student/profile/upd_pass'; ?>",
+      data: {'currpass':currpass, 'newpass': newpass, 'confpass': confpass},
+      success: function(data){
+        var obj = JSON.parse(data);
+        console.log(obj);
+        $("#"+obj[0].classtext).text(obj[0].textUpd);
+        $("#"+obj[0].classcont).show().delay(2000).fadeOut("slow");
+      },
+      error: function(data){
+        // console.log(data);
+        return;
+      }
+     });
+
+  }
+
+  // console.log(newpass);
 });
 </script>

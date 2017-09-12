@@ -171,6 +171,41 @@ class Profile extends MY_Site_Controller {
 
     }
 
+    public function upd_pass(){
+      $id = $this->auth_manager->userid();
+
+      $currpass = $this->input->post('currpass');
+      $newpass  = $this->input->post('newpass ');
+      $confpass = $this->input->post('confpass');
+
+      if (!$this->auth_manager->check_password($this->auth_manager->user_email(), $currpass)) {
+        $classtext = 'textFail';
+        $classcont = 'failedNotif';
+        $message = 'Incorrect old password';
+      }else{
+        $updated_pass = $this->auth_manager->hashing_password($this->input->post('new_password'));
+        $classtext = 'textNotif';
+        $classcont = 'successNotif';
+
+        $upd_pass_arr = array(
+           'password' => $updated_pass
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('users', $upd_pass_arr);
+
+        $message = 'Password updated';
+      }
+
+      $var[] = [
+        'textUpd' => $message,
+        'classtext' => $classtext,
+        'classcont' => $classcont,
+      ];
+
+      echo json_encode($var);
+    }
+
     public function dial_code(){
 
         $country = $this->input->post('country');
