@@ -525,8 +525,12 @@ class identity extends MY_Site_Controller {
                         $this->detail('profile');
                         return;
                     }
+
+                    $new_pass = $this->phpass->hash($this->input->post('new_password'));
+                    $this->load->library('phpass');
+                    $data = Array('password' => $new_pass);
                     
-                    $data = Array('password' => $this->auth_manager->hashing_password($this->input->post('new_password')));
+                    // $data = Array('password' => $this->auth_manager->hashing_password($this->input->post('new_password')));
                     
                     $user = $this->identity_model->get_identity('user')->select('id')->where('id', $this->auth_manager->userid())->get();
                     if (!$this->identity_model->get_identity('user')->update($user->id, $data)) {
