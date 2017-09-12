@@ -12,8 +12,8 @@ class messages_widget extends Widget {
 		foreach($all as $type=>$messages) {
 			foreach($messages as $message) {
                             echo 
-                            "  <div class='dashboard__notif $type'>
-                                <span>$type $message</span>
+                            "  <div class='dashboard__notif ".$type."__notif'>
+                                <span>$message</span>
                                 <i class='fa fa-times'></i>
                             </div>";
 			}

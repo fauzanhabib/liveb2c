@@ -31,18 +31,18 @@
         justify-content: space-between;
     }
 </style>
-    <div class="dashboard">
-        <?php if(count($data)!=0){ ?>
-            <div class="dashboard__notif success__notif">
-                <?php if(count($data)==1){ ?>
-                <span>You Have <?php echo count($data); ?> Session Left For Today</span>
-                <?php }else{ ?>
-                <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
-                <?php } ?>
-                <i class="fa fa-times"></i>
-            </div>
-        <?php } ?>
 
+    <?php if(count($data)!=0){ ?>
+        <div class="dashboard__notif">
+            <?php if(count($data)==1){ ?>
+            <span>You Have <?php echo count($data); ?> Session Left For Today</span>
+            <?php }else{ ?>
+            <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
+            <?php } ?>
+            <i class="fa fa-times"></i>
+        </div>
+    <?php } ?>
+    <div class="dashboard">
         <div class="dashboard__menubookingcoachresult">
             <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
                 <div class="bookkacoach">Book a Coach</div>
