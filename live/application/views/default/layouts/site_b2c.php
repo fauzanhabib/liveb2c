@@ -50,13 +50,13 @@
                         foreach($this->auth_manager->new_notification()['data_notification'] as $d){
                         ?>
                         <li>
-                            <a href=""><?php echo($d->description);?><br>
+                            <a href="<?php echo site_url('b2c/student/notification'); ?>"><?php echo($d->description);?><br>
                             <span><?php echo($this->auth_manager->new_notification()['received_time'][$d->id]);?></span>
                             </a>
                         </li>
                         <?php } ?>
                     </ul>
-                    <div class="seeAll"><a href="#">See All</a></div>
+                    <div class="seeAll"><a href="<?php echo site_url('b2c/student/notification'); ?>">See All</a></div>
                 </div>
             </div>
             <div class="profile__name">
@@ -298,14 +298,14 @@
           }
       });
 
-      $('#notifications').click(function () {
-          return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
-      });
+      // $('#notifications').click(function () {
+      //     return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+      // });
 
 
       // $("#numnotif").addClass("hide");
       $("#noti__button").click(function(){
-        console.log('a');
+        // console.log('a');
         var id = '<?php echo $this->auth_manager->userid(); ?>';
         $.ajax({
           type:"POST",
