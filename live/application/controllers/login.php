@@ -13,11 +13,12 @@ class Login extends MY_Controller {
 	public function index(){
 						//Generate Token API --
 						$tokenresult = $this->study_progress->GenerateToken();
-						$this->load->library('session');
-						$this->session->set_userdata(array(
-							'token_api'  => $tokenresult
-						));
-
+						if(@$tokenresult){
+							$this->load->library('session');
+							$this->session->set_userdata(array(
+								'token_api'  => $tokenresult
+							));
+						}
             // User is already logged in
             if ($this->auth->loggedin()) {
 

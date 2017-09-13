@@ -19,7 +19,7 @@ class Study_progress {
       ));
       $tokenconnect = curl_exec($rt) ;
       $pulltr = json_decode($tokenconnect);
-      $tokenresult = $pulltr->token;
+      $tokenresult = @$pulltr->token;
       return $tokenresult;
     }
 

@@ -30,37 +30,44 @@ class Study_dashboard extends MY_Site_Controller {
       $tokenresult = $this->session->userdata('token_api');
       // $tokenresult = $this->study_progress->GenerateToken();
       // echo('<pre>');print_r($tokenresult); exit;
+      if(@$tokenresult){
+        $tokenresult = $this->study_progress->GenerateToken();
+      }
+      if(@$tokenresult){
+        $gsp = $this->study_progress->GetStudyProgress($tokenresult);
+        $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
+        $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
 
-      $gsp = $this->study_progress->GetStudyProgress($tokenresult);
-      $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
-      $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+        $mt_status_to_colour = array(
+          "passed" => "bg-blue-gradient",
+          "open" => "bg-white-gradient",
+          "locked" => "",
+          "failed" => "bg-red-gradient"
+        );
+        $mt_color = array(
+          'mt1' => $mt_status_to_colour[$gsp->data->mastery_tests[0]->status],
+          'mt2' => $mt_status_to_colour[$gsp->data->mastery_tests[1]->status],
+          'mt3' => $mt_status_to_colour[$gsp->data->mastery_tests[2]->status],
+          'mt4' => $mt_status_to_colour[$gsp->data->mastery_tests[3]->status],
+          'mt5' => $mt_status_to_colour[$gsp->data->mastery_tests[4]->status],
+          'mt6' => $mt_status_to_colour[$gsp->data->mastery_tests[5]->status]
+        );
 
-      $mt_status_to_colour = array(
-        "passed" => "bg-blue-gradient",
-        "open" => "bg-white-gradient",
-        "locked" => "",
-        "failed" => "bg-red-gradient"
-      );
-      $mt_color = array(
-        'mt1' => $mt_status_to_colour[$gsp->data->mastery_tests[0]->status],
-        'mt2' => $mt_status_to_colour[$gsp->data->mastery_tests[1]->status],
-        'mt3' => $mt_status_to_colour[$gsp->data->mastery_tests[2]->status],
-        'mt4' => $mt_status_to_colour[$gsp->data->mastery_tests[3]->status],
-        'mt5' => $mt_status_to_colour[$gsp->data->mastery_tests[4]->status],
-        'mt6' => $mt_status_to_colour[$gsp->data->mastery_tests[5]->status]
-      );
+        $vars = array(
+            'gsp' => @$gsp,
+            'gcp' => @$gcp,
+            'gwp' => @$gwp,
+            'mt_color' => @$mt_color
+        );
 
-      $vars = array(
-          'gsp' => @$gsp,
-          'gcp' => @$gcp,
-          'gwp' => @$gwp,
-          'mt_color' => @$mt_color
-      );
-
-      // echo $key;
-      // echo('<pre>');print_r($vars); exit;
-      $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
-      $this->template->publish();
+        // echo $key;
+        // echo('<pre>');print_r($vars); exit;
+        $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
+        $this->template->publish();
+      }else{
+        $this->template->content->view('contents/b2c/student/study_dashboard/nodata');
+        $this->template->publish();
+      }
     }
 
 }
