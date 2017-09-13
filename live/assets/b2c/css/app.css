@@ -591,6 +591,8 @@ footer span {
       -ms-flex: 4;
           flex: 4;
   margin-left: 50px; }
+  .header__logo img {
+    width: 100px; }
 
 .hide {
   display: none; }
@@ -942,10 +944,9 @@ footer span {
   background: #49C5FE;
   color: #fff; }
 
- .pagination-button:not(.active):hover{
-  background: #273454 ;
-  color: #49C5FE ;
- }
+.pagination-button:not(.active):hover {
+  background: #273454;
+  color: #49C5FE; }
 
 .pagination-button:first-of-type {
   border-radius: 18px 0 0 18px; }
