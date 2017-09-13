@@ -28,6 +28,8 @@
   background-color: rgba(38, 178, 161, 0.7) !important;
   z-index: 2;
   width: 30%;
+  transform: translateX(-50%);
+  left: 50%;
 }
 .notifFailed{
   position: fixed;
@@ -38,6 +40,14 @@
 .conv_lang{
   max-height: 20px;
     overflow: auto;
+}
+.dropGender{
+  border: solid 1px #606983;
+  color: white;
+  width: 50%;
+  background: none;
+  letter-spacing: 1px;
+  font-size: 11px;
 }
 </style>
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
@@ -265,17 +275,17 @@
     genderVal = $(this).text();
     // console.log(genderVal);
     if(genderVal == 'Male'){
-      selectbox = $('<select class="dropGender" style="width: 50%;"><option class="optGender" value="Male">Male</option><option class="optGender" value="Female">Female</option></select>');
+      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender" value="Male">Male</option><option class="optGender" value="Female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
     }else{
-      selectbox = $('<select class="dropGender" style="width: 50%;"><option class="optGender" value="Male">Male</option><option class="optGender" value="Female" selected>Female</option></select>');
+      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender" value="Male">Male</option><option class="optGender" value="Female" selected>Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
     }
     $(this).replaceWith(selectbox);
     $('.dropGender').focus();
 
     $(".dropGender").on('change', function() {
-      elPrevGen     = $(this).prev().text();
+      elPrevGen     = 'Gender';
       updatedValGen = $(this).val();
-      // console.log($(this).val());
+      console.log(updatedValGen);
       $.ajax({
         type:"POST",
         url: "<?php echo site_url().'/b2c/student/profile/upd_text'; ?>",
@@ -286,7 +296,7 @@
           $("#successNotif").show().delay(2000).fadeOut("slow");
           $(".dropGender").blur(function(){
             genderSpan = "<span class='genderChange'>"+updatedValGen+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>";
-            $(this).replaceWith(genderSpan);
+            $('.genderCont').replaceWith(genderSpan);
           });
         },
         error: function(data){
@@ -295,6 +305,16 @@
         }
        });
     });
+  });
+
+  $(document).on('click', '#gender_cancel', function() {
+    if(typeof updatedValGen == 'undefined'){
+      cancelVal = genderVal;
+    }else {
+      cancelVal = genderVal;
+    }
+    genderSpan = "<span class='genderChange'>"+cancelVal+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>";
+    $('.genderCont').replaceWith(genderSpan);
   });
   </script>
   <script>
@@ -354,7 +374,7 @@
 $(document).on('click', '#inputDate', function() {
     currDate        = '<?php echo date("m/d/Y", strtotime($data[0]->date_of_birth)); ?>';
     placeholderDate = $(this).text();
-    console.log(currDate);
+    // console.log(currDate);
     $('#dateChangeCont').show();
     $('#datepicker').attr("placeholder", placeholderDate);
     $('#inputDate').hide();
