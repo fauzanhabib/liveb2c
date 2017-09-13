@@ -7,7 +7,65 @@
                 <h3 class="text-center margin-auto font-semi-bold">Book a Coach <?php echo $cert_studying;?></h3>
             </div>
 
-            <div class="content padding-t-0 padding-lr-0">
+            <!-- rendy book a coach baru -->
+                <div class="box">
+                    <?php
+                            echo form_open('student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"');        
+                        ?>
+                    <div class="width100perc" style="padding: 0 15px;">
+                        <div class='border-2-primary border-rounded-5' style="padding: 0 6px;">
+                            <span class='custom-dropdown'>
+                                <select name="selector" id="selector">
+                                    <option disabled selected>Booking Type</option>
+                                    <option value="single-book">Single Book</option>
+                                    <option value="multiple-book">Recurring Book</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="width100perc" id="multi-book2" style="padding: 10px 15px 0;">
+                        <div class='border-2-primary border-rounded-5' style="padding: 0 6px;">
+                            <span class='custom-dropdown'>
+                                <select name="type_booking">
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="sort-by padding-l-0 width100perc">
+                        <div class="text-right book-date" style="padding: 1px 15px;">
+                            <div class="width100perc">
+                                <div class="frm-date">
+                                    <input type="text" name="date" value="" class="dateavailable datepicker frm-date width100perc border-2-primary border-rounded-5 text-left" id="date" data-parsley-no-focus="" required="" readonly="" data-parsley-id="8951" placeholder="Date" data-parsley-required-message="Please click for date." style="padding: 1.02em 0.5em;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="" style="padding: 5px 15px;">
+
+                            <?php echo form_submit('__submit', @$this->auth_manager->userid() ? 'SEARCH' : 'SEARCH', 'class="pure-button btn-primary border-rounded-5 width100perc"'); ?>
+                        </div>
+                        <li class="text-center" style="padding: 5px 15px;">
+                            <a href="<?php echo site_url('student/find_coaches/search/name'); ?>">
+                                NAME
+                            </a>
+                        </li>
+                        <li class="text-center" style="padding: 5px 15px;">
+                            <a href="<?php echo site_url('student/find_coaches/search/country'); ?>">
+                                COUNTRY
+                            </a>
+                        </li>
+                        <li class="text-center" style="padding: 5px 15px;">
+                            <a href="<?php echo site_url('student/find_coaches/search/spoken_language'); ?>">
+                                LANGUAGE SPOKEN
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end rendy book a coach baru -->
+
+            <!-- <div class="content padding-t-0 padding-lr-0">
                 <div class="box">
                     <ul class="sort-by padding-l-0">
                         <div class="text-right book-date" style="padding: 1px 15px;">
@@ -26,7 +84,7 @@
                         <li><a href="<?php echo site_url('student/find_coaches/search/spoken_language'); ?>">LANGUAGE SPOKEN</a></li>
                     </ul>
                 </div>
-            </div>  
+            </div>   -->
         </div>
         <div class="pure-u-1 pure-u-sm-24-24 pure-u-md-18-24 pure-u-lg-18-24">
             <div class="sort-right">
@@ -256,6 +314,19 @@
     </div>
 
 </div>
+
+<script>
+    $(function(){
+            $('#multi-book2').hide(); 
+            $('#selector').change(function(){
+                if($('#selector').val() == 'multiple-book') {
+                    $('#multi-book2').show(); 
+                } else {
+                    $('#multi-book2').hide(); 
+                } 
+            });
+        });
+</script>
 
 <script type="text/javascript">
     $(function(){
