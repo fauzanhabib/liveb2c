@@ -68,12 +68,12 @@ class Login extends MY_Controller {
 								if($sso_enabled == 0){
 									$this->messages->add('Not Registered on SSO', 'warning');
 									redirect('login');
+
 								}
 								// print_r($sso_enabled);exit();
                 // Success to identify
                 else if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) && $sso_enabled == 1) {
-										// print_r($this->session->userdata('token_api'));exit();
-
+									// echo "<pre>";print_r($check_login);exit();
                     // insert timezone
                     $min_raw = $this->input->post("min_raw");
                     $userid  = $this->auth_manager->userid();
