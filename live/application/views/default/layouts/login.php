@@ -72,8 +72,8 @@
             </div>
             <div class="login__header__nav">
                 <ul>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Contact Us</a></li>
+                    <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
+                    <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
                     <li class="btn__signin"><a href="">Sign In</a></li>
                 </ul>
             </div>
