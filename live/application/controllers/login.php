@@ -108,8 +108,8 @@ class Login extends MY_Controller {
 
                     $login_type = $check_login_type[0]->login_type;
                     //=====
-										// print_r($sso_enabled);exit();
-										if($this->auth_manager->role() == 'CCH'){
+					// print_r($sso_enabled);exit();
+					if($this->auth_manager->role() == 'CCH'){
                         redirect('coach/dashboard');
                     } else if($this->auth_manager->role() == 'STD' && $login_type == 1){
                         redirect('b2c/student/dashboard');
