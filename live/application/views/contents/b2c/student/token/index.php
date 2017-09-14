@@ -29,7 +29,7 @@
 
                         <div class="tabtokens">
                             <ul class="tabs">
-                                <li class="tab-link current" data-tab="tab-1">Request</li>
+                                <li class="tab-link current" data-tab="tab-1">Token</li>
                                 <li class="tab-link" data-tab="tab-2">History</li>
                             </ul>
                         </div>
@@ -50,7 +50,7 @@
                                         <span>You are requesting <?php echo $data->token_amount; ?> token right now</span>
                                     <?php }else{ ?>
                                     <div class="bxrequest__requesttokens__buttonreq trigger">
-                                        <button class="neobutton">Request Token</button>
+                                        <button class="neobutton">Buy Token</button>
                                     </div>
                                     <?php } ?>
 

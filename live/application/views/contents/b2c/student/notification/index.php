@@ -1,12 +1,10 @@
 <div class="heading text-cl-primary padding15">
-	<h1 class="margin0">Notification</small></h1>
+	<h1 style="color:#49c5fe;font-size:1.2em;">Notification</small></h1>
 </div>
 
-<div class="box" style="border-top: 2px solid #f3f3f3;">
-	<div class="content">
-		<div class="box">
-			<?php
-			if($data){
+<div class="box seeAll__page">
+	<?php
+		if($data){
 			foreach($data as $d){ 
 			?>
 			<div class="list-notification article-loop">
@@ -23,9 +21,7 @@
 			echo "<div class='padding15'><div class='no-result'>No Data</div></div>";
 
 		}
-			?>
-		</div>
-	</div>		
+	?>
 </div>
 
 <script>

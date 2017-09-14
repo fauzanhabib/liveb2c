@@ -7,10 +7,43 @@
     <title>Live B2c</title>
     <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
-		<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
+
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
+
+	<style>
+		.alert-login {
+			height: 0;
+		}
+		.alert-login.error {
+			z-index: 999;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			color: #f6f6f6;
+		    background: rgba(0, 0, 0, 0.8);
+		    display: table;
+		}
+		#alert-login-confirm {
+			display: table-cell;
+    		vertical-align: middle;
+			text-align: center;
+		}
+		#alert-login-reload {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="alert-login">
+		<div id="alert-login-confirm">
+			<h3 id="alert-login-title"></h3>
+			<button id="alert-login-reload" class="btn-primary pure-button">Continue</button>
+		</div>
+		<!-- pervent adblock -->
 		<script>
 			function adBlockDetected() {
 				$('.alert-login').addClass('error');
@@ -29,9 +62,9 @@
 				fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
 			}
 		</script>
-</head>
+		<!-- pervent adblock -->
+	</div>
 
-<body>
     <div class="wrapper">
         <header class="login__header">
             <div class="login__header__logo">
@@ -64,7 +97,7 @@
                         <div class="field">
                             <label class="label">Password</label>
                             <p class="control">
-                                <input class="input" type="password" placeholder="password" name="password" data-parsley-trigger="change" required data-parsley-required-message="Please input your password">
+                                <input class="input" type="password" placeholder="password" name="password" data-parsley-trigger="change" required data-parsley-required-message="Please input your password" style="letter-spacing:2px;">
                             </p>
                         </div>
                     </div>
@@ -85,21 +118,32 @@
     </div>
 
     <script>
-				$('#login-form').parsley();
+		$('#login-form').parsley();
 
-        function validateEmail(emailField){
-            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+		// TO REFRESH WHEN ADBLOCK POPUP SHOW UP
+		$('#alert-login-reload').click(function() {
+		    location.reload();
+		});
+		// TO REFRESH WHEN ADBLOCK POPUP SHOW UP END
 
-            if (reg.test(emailField.value) == false)
-            {
-                $('.login__warning').show();
-                return false;
-            } else {
-                $('.login__warning').hide();
-            }
+		var d = new Date()
+        var n = d.getTimezoneOffset();
 
-            return true;
-        }
+        $('#min_raw').val(n);
+
+        // function validateEmail(emailField){
+        //     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        //     if (reg.test(emailField.value) == false)
+        //     {
+        //         $('.login__warning').show();
+        //         return false;
+        //     } else {
+        //         $('.login__warning').hide();
+        //     }
+
+        //     return true;
+        // }
     </script>
 </body>
 

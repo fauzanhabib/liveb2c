@@ -3679,14 +3679,19 @@ footer span {
   .signup__form .login__warning {
     color: #ff3333;
     font-size: 0.8em; }
-  .signup__form .error, .signup__form i {
+  .signup__form .error,
+  .signup__form i {
     color: #ed584c;
     font-size: 0.9em; }
 
 .control {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
 
 .input {
   -webkit-box-flex: 1;
@@ -3705,5 +3710,46 @@ footer span {
   text-align: center;
   position: relative;
   color: #fff; }
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #B94A48;
+  background-color: #fff;
+  border: 1px solid #e9322d !important; }
+
+.parsley-errors-list {
+  margin: 5px 0 5px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  letter-spacing: 0;
+  opacity: 0;
+  color: #e9322d;
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in; }
+
+.parsley-errors-list.filled {
+  opacity: 1; }
+
+.seeAll__page {
+  width: 60%; }
+  .seeAll__page .list-notification {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    border-bottom: 1px solid #fafafa;
+    padding: 3px 0; }
+    .seeAll__page .list-notification .text {
+      width: 400px;
+      font-size: 0.9em; }
+    .seeAll__page .list-notification .time {
+      font-size: 0.9em; }
 
 /*# sourceMappingURL=app.css.map */
