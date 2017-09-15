@@ -91,7 +91,7 @@
 				<span><?php echo $data[0]->email;?></span>
 			</div>
 			<div class="profile__info__language">
-				<label>Home Language</label>
+				<label>Native Language</label>
         <?php $langlist = str_replace("#", ", ", $data[0]->spoken_language); ?>
         <span class="conv_lang"><?php if(@$langlist){echo $langlist;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
         <div style="margin-top:0px !important" id='div_spoken'>
