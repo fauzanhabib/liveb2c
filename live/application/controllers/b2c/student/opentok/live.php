@@ -216,9 +216,9 @@ class Live extends MY_Site_Controller {
         // $tokenresult = $this->study_progress->GenerateToken();
         // echo('<pre>');print_r($tokenresult); exit;
 
-        $gsp = $this->study_progress->GetStudyProgress($tokenresult);
-        $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
-        $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+        $gsp = json_decode($this->study_progress->GetStudyProgress($tokenresult));
+        $gcp = json_decode($this->study_progress->GetCurrentProgress($tokenresult));
+        $gwp = json_decode($this->study_progress->GetWeeklyProgress($tokenresult));
 
         $mt_status_to_colour = array(
           "passed" => "bg-blue-gradient",
