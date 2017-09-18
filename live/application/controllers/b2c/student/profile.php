@@ -144,7 +144,7 @@ class Profile extends MY_Site_Controller {
         }else if($fieldType == 'spoken'){
           $column = 'spoken_language';
           $table  = 'user_profiles';
-          $txtUpd = 'Home Languages';
+          $txtUpd = 'Native Languages';
           $idCol  = 'user_id';
         }else if($fieldType == 'birthdate'){
           $column = 'date_of_birth';

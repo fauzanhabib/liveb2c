@@ -50,7 +50,7 @@
 				    </div>
 				</div>
 
-				<div class="progress__info__label"><?php echo $gsp->data->total_points_until_today;?></div>
+				<div class="progress__info__label"><?php echo $gsp->data->total_points_until_today;?> / 180.000</div>
 		  	</div>
 
 		  	<div class="progress__achievement">
