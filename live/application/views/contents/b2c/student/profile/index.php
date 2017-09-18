@@ -74,7 +74,7 @@
         ?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i>
       </span>
       <div id="dateChangeCont" style="display:none;margin-top:0px;">
-        <input type="text" id="datepicker" placeholder="" style="width: 80%;">
+        <input type="text" id="datepicker" placeholder="" style="width: 80%;" readonly>
         <style>
             #ui-datepicker-div {
                 top: 0px !important;

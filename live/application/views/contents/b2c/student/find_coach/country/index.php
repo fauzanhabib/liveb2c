@@ -6,11 +6,7 @@
                             display: flex;
                             -ms-flex-wrap: wrap;
                             flex-wrap: wrap;
-                            
-                        }
-
-                        .dashboard__resultbook .boxprofilecoach {
-                            margin: 20px 33px 20px 20px !important;
+                            justify-content: space-around;
                         }
 
                 </style>

@@ -38,6 +38,10 @@
 </head>
 
 <body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
 	<div class="alert-login">
 		<div id="alert-login-confirm">
 			<h3 id="alert-login-title"></h3>
@@ -78,7 +82,7 @@
                 </ul>
             </div>
         </header>
-        <main class="main flex--center" style="background-image:url('<?php echo base_url();?>assets/b2c/img/bgStarLarge.png')">
+        <main class="main flex--center" >
             <section class="box__assessment">
                 <div class="assignup">
                     <div class="signup__title">
@@ -89,9 +93,8 @@
 
                         <div class="field">
                             <label class="label">Email</label>
-                            <div class="login__warning hide">*Invalid email address</div>
                             <p class="control">
-                                <input class="input" type="email" placeholder="email" data-parsley-trigger="change" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address" name="email" onblur="validateEmail(this);">
+                                <input class="input" type="email" placeholder="email" data-parsley-trigger="change" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address" name="email">
                             </p>
                         </div>
                         <div class="field">
@@ -112,7 +115,7 @@
         </main>
         <footer class="flex--center">
             <span>Powered by</span>
-            <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin-left:10px;" alt="DynEd International, Inc.">
+            <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin: 10px 0 0 10px;" alt="DynEd International, Inc.">
             </a>
         </footer>
     </div>

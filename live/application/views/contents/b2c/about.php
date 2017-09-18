@@ -38,6 +38,10 @@
 </head>
 
 <body>
+	<div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
 	<div class="alert-login">
 		<div id="alert-login-confirm">
 			<h3 id="alert-login-title"></h3>
@@ -78,32 +82,20 @@
                 </ul>
             </div>
         </header>
-        <main class="main flex--center" style="background-image:url('<?php echo base_url();?>assets/b2c/img/bgStarLarge.png')">
-            <h2 class="title"><span style="color:white">About Us</span></h2>
-            <p><b>DynEd International, Inc.</b>, has the world's most comprehensive lineup of award-winning English Language Teaching (ELT/ESL) solutions.</p>
-            <p>DynEd's courses cover all proficiency levels and include a range of age-appropriate courses, from kids in school to adults in university, corporate, aviation or other vocational settings. DynEd courses have been approved by Ministries of Education in several countries.</p>
-            <p>With over 13 million active users, DynEd courses are designed to be used in a blended learning environment, along with teachers and classroom support.</p>
-            <p>DynEd's headquarters and development center is in Burlingame, California – overlooking the San Francisco Bay. The company has sales and support offices around the world and additional development centers in Beijing and Jakarta.</p>
-            <p>For a representative in your area, or to become a partner, please <a href="mailto:info@dyned.com">contact us</a>.</p>
+        <main class="main flex--center">
+            <div class="about__us">
+                <h2 class="title">About Us</h2>
+                <p><b>DynEd International, Inc.</b>, has the world's most comprehensive lineup of award-winning English Language Teaching (ELT/ESL) solutions.</p>
+                <p>DynEd's courses cover all proficiency levels and include a range of age-appropriate courses, from kids in school to adults in university, corporate, aviation or other vocational settings. DynEd courses have been approved by Ministries of Education in several countries.</p>
+                <p>With over 13 million active users, DynEd courses are designed to be used in a blended learning environment, along with teachers and classroom support.</p>
+                <p>DynEd's headquarters and development center is in Burlingame, California – overlooking the San Francisco Bay. The company has sales and support offices around the world and additional development centers in Beijing and Jakarta.</p>
+                <p>For a representative in your area, or to become a partner, please <a href="mailto:info@dyned.com">contact us</a>.</p>
+            </div>
         </main>
         <footer class="flex--center">
-                <div align="left">
-                    <div>
-                        <h3>Need Some Help?</h3>
-                        <span><a href="<?php echo site_url('b2c/contact'); ?>">Get In Touch</a></span>
-                    </div>
-                </div>
-                <div align="center">
-                    <span>Powered by</span>
-                    <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin-left:10px;" alt="DynEd International, Inc."></a>
-                </div>
-                <div align="right">
-                    <div>
-                        <h3>DynEd</h3>
-                        International<br>
-                        Inc.
-                    </div>
-                </div>
+            <span>Powered by</span>
+            <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin: 10px 0 0 10px;" alt="DynEd International, Inc.">
+            </a>
         </footer>
     </div>
 

@@ -38,6 +38,10 @@
 </head>
 
 <body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
 	<div class="alert-login">
 		<div id="alert-login-confirm">
 			<h3 id="alert-login-title"></h3>
@@ -78,50 +82,36 @@
                 </ul>
             </div>
         </header>
-        <main class="main flex--center" style="background-image:url('<?php echo base_url();?>assets/b2c/img/bgStarLarge.png')">
-        <h2 class="title"><span style="color:#585858">Contact Us</span></h2>
-            <form class="pure-form pure-form-stacked" data-parsley-validate>
-                <fieldset>
-                    <legend>Do you have a question? Fill in the form below and we will get back to you within 24 hours:</legend>
-                    <div class="pure-g">
-                        <div class="pure-u-1 pure-u-md-12-24">
-                            <div class="p10">
-                                <input class="pure-u-1" placeholder="Name" type="text" required data-parsley-required-message="Please input your name"  >
-                            </div>
+        <main class="main flex--center">
+            <div class="contact__us">
+                <h2 class="title">Contact Us</h2>
+                <form class="pure-form pure-form-stacked" data-parsley-validate>
+                    <span>Do you have a question? Fill in the form below and we will get back to you within 24 hours:</span>
+                    <div class="contact__us__form">
+                        <div class="p10">
+                            <input class="input" placeholder="Name" type="text" required data-parsley-required-message="Please input your name"  >
+                        </div> 
+                        <div class="p10">
+                            <input class="input" placeholder="Email" type="email" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address">
                         </div>
-
-                        <div class="pure-u-1 pure-u-md-12-24">
-                            <div class="p10">
-                                <input class="pure-u-1" placeholder="Email" type="email" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address">
-                            </div>
+                        <div class="p10">
+                            <input class="input" placeholder="Country" type="text" required data-parsley-required-message="Please input your Country">
                         </div>
-
-                        <div class="pure-u-1 pure-u-md-12-24">
-                            <div class="p10">
-                                <input class="pure-u-1" placeholder="Country" type="text" required data-parsley-required-message="Please input your Country">
-                            </div>
-                        </div>
-
-                        <div class="pure-u-1 pure-u-md-12-24">
-                            <div class="p10">
-                                <input class="pure-u-1" placeholder="City" type="text" required data-parsley-required-message="Please input your City">
-                            </div>  
-                        </div>
-
-                        <div class="pure-u-1">
-                            <div class="p10">
-                                <textarea class="pure-u-1" placeholder="Messages" style="height: 150px;resize: none;" required data-parsley-required-message="Please input your message"></textarea>
-                            </div>
+                        <div class="p10">
+                            <input class="input" placeholder="City" type="text" required data-parsley-required-message="Please input your City">
+                        </div>  
+                        <div class="p10__textarea">
+                            <textarea class="input" placeholder="Messages" style="height: 150px;resize: none;" required data-parsley-required-message="Please input your message"></textarea>
                         </div>
                     </div>
-                    <div class="text-right p10">
-                        <button type="submit" class="pure-button btn-primary">SEND</button>
+                    <div class="p10__button">
+                        <button type="submit" class="neobutton">SEND</button>
                     </div>
-                </fieldset>
-            </form>
+                </form>
+            </div>
         </main>
-        <footer class="flex--center">
-                <div align="left">
+        <div class="contact__us--address">
+                <div class="left">
                     <div>
                         <h3>DynEd International, Inc.</h3>
                         1350 Bayshore Highway, Suite 850<br>
@@ -130,13 +120,14 @@
                         Phone: +1-650-375-7011
                     </div>
                 </div>
-                <div align="center">
-                    <span>Powered by</span>
-                    <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin-left:10px;" alt="DynEd International, Inc."></a>
-                </div>
-                <div align="right">
+                <div class="right">
                     <iframe width='100%' height='180px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/djiepanji.n3c1a3hj/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGppZXBhbmppIiwiYSI6InNXakYwcUUifQ.f1sLn25sWb-DA3VNMQlKJw'></iframe>
                 </div>
+        </div>
+        <footer class="flex--center">
+            <span>Powered by</span>
+            <a style="pointer-events: none;cursor: default;"><img src="http://idbuild.id.dyned.com/dsa-ept/public/assets/img/logo-200pxl" height="20" style="margin: 10px 0 0 10px;" alt="DynEd International, Inc.">
+            </a>
         </footer>
     </div>
 

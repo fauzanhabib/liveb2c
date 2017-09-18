@@ -25,6 +25,6 @@
 </div>
 
 <script>
-    $('.article-loop').paginate(7.3);
+    $('.article-loop').paginate(20);
 </script>
 
