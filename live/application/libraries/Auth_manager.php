@@ -113,7 +113,16 @@ class Auth_Manager {
      // jika id user sudah login dan sessionnya tidak sama
         if(($check_session) && ($check_session[0]->session != $session_user_login)){
                 $this->CI->session->set_userdata('user_id_session',$user->id);
-                redirect('home/confirmation');                
+                // check login type
+                $check_login_type = $this->CI->db->select('*')
+                                        ->from('users')
+                                        ->where('id', $user->id)
+                                        ->get()->result();
+
+                    $login_type = $check_login_type[0]->login_type;
+                if($login_type == 0){
+                    redirect('home/confirmation'); 
+                }               
 
        } else {
             $data_user = array('user_id' => $user->id,

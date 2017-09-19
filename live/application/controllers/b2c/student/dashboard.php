@@ -17,6 +17,17 @@ class Dashboard extends MY_Site_Controller {
             $this->messages->add('ERROR');
             redirect('account/identity/detail/profile');
         }
+
+         $check_login_type = $this->db->select('*')
+                                        ->from('users')
+                                        ->where('id', $this->auth_manager->userid())
+                                        ->get()->result();
+
+        $login_type = $check_login_type[0]->login_type;
+
+        if($login_type == 0){
+            redirect('student/dashboard');
+        }
     }
 
     // Index
