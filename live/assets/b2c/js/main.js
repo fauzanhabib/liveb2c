@@ -160,7 +160,10 @@
       });
       $('a.btn-close').click(function() {
           $(this).parents('.modal-wrapper').removeClass('open');
-      })
+      });
+      $('a.span-close').click(function() {
+          $(this).parents('.modal-wrapper').removeClass('open');
+      });
 
       //ARCODION SHOW BOOKING TIME IN PAGE BOOKING A COACH
       $('.accordion-thumb').click(function() {

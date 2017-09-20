@@ -38,7 +38,7 @@
 </head>
 
 <body>
-    <div class="stars"></div>
+    <div class="stars1"></div>
     <div class="stars2"></div>
     <div class="stars3"></div>
 
@@ -74,11 +74,20 @@
             <div class="login__header__logo">
                 <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
             </div>
+
+            <!-- DESKTOP HEADER -->
             <div class="login__header__nav">
                 <ul>
                     <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
                     <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
                     <li class="btn__signin"><a href="">Sign In</a></li>
+                </ul>
+            </div>
+
+            <!-- MOBILE HEADER -->
+            <div class="login__header__mobile hide">
+                <ul>
+                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
                 </ul>
             </div>
         </header>
