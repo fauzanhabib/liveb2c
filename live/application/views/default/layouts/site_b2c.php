@@ -226,8 +226,9 @@
 
         </main>
         <footer class="flex--center">
-		    <a style="pointer-events: none;cursor: default;">
-                <svg width="56px" height="38px" viewBox="0 0 56 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		    <span>Powered by</span>
+            <a style="pointer-events: none;cursor: default;">
+                <svg width="48px" viewBox="0 0 56 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
                     <title>powerbyDynEd</title>
                     <desc>Created with Sketch.</desc>
@@ -236,10 +237,6 @@
                         <g id="3-copy-2" transform="translate(-132.000000, -478.000000)">
                             <g id="powerbyDynEd" transform="translate(132.000000, 477.000000)">
                                 <g transform="translate(-1.000000, 0.000000)">
-                                    <text id="Powered-by" opacity="0.396908967" font-family="Helvetica" font-size="10" font-weight="normal" letter-spacing="0.400000006" fill="#FFFFFF">
-                                        <tspan x="0.674999973" y="9">Powered b</tspan>
-                                        <tspan x="51.325" y="9">y</tspan>
-                                    </text>
                                     <g id="Logo" transform="translate(1.000000, 19.000000)">
                                         <g id="Group" fill="#FFFFFF">
                                             <path d="M5.52005659,0.0341641964 C5.52005659,0.0341641964 12.9601329,-0.307477768 12.7029874,7.89192937 C12.3429837,14.793097 5.53719962,14.6222761 5.53719962,14.6222761 L0.0171430329,14.6222761 L0.0171430329,0.0170820982 L5.52005659,0.0170820982 L5.52005659,0.0341641964 Z M2.05716395,1.81070241 L2.05716395,12.8628199 L5.77720208,12.8628199 C5.77720208,12.8628199 10.3372488,12.9823946 10.5772513,7.75527258 C10.7486816,1.53738884 5.74291602,1.79362031 5.74291602,1.79362031 L2.05716395,1.79362031 L2.05716395,1.81070241 Z" id="Shape"></path>
@@ -258,7 +255,7 @@
                         </g>
                     </g>
                 </svg>
-		    </a>
+            </a>
 		</footer>
 
 
