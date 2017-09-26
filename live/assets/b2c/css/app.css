@@ -823,6 +823,12 @@ footer span {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 0 0 15px; }
+  @media screen and (max-width: 500px) {
+    #logout__container {
+      margin: 0;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; } }
   #logout__container i {
     cursor: pointer; }
 
@@ -1017,6 +1023,9 @@ footer span {
   .step__progress__info .step__info__label {
     color: #F7F052;
     font-size: 2em; }
+    .step__progress__info .step__info__label svg {
+      top: -55px;
+      left: -45px; }
 
 .progress__achievement {
   width: 50%;
@@ -2280,6 +2289,9 @@ footer span {
       -ms-flex-align: center;
           align-items: center;
   position: relative; }
+  @media screen and (max-width: 500px) {
+    .dashboard__notif {
+      width: 100%; } }
   .dashboard__notif span {
     font-size: 0.9em; }
   .dashboard__notif i {
@@ -3555,8 +3567,14 @@ footer span {
   opacity: 0;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
+  @media screen and (max-width: 500px) {
+    .modal__signout {
+      width: 80%; } }
   .modal__signout .content span {
     padding: 0 5px; }
+    @media screen and (max-width: 500px) {
+      .modal__signout .content span {
+        font-size: 0.9em; } }
     .modal__signout .content span a {
       color: #49C5FE;
       cursor: pointer; }
@@ -3773,6 +3791,9 @@ footer span {
           justify-content: space-between;
   width: 100%;
   position: absolute; }
+  @media screen and (max-width: 500px) {
+    .login__header {
+      display: none; } }
   .login__header .login__header__logo {
     width: 15%; }
     @media screen and (max-width: 768px) {
@@ -3810,6 +3831,27 @@ footer span {
     .login__header .login__header__mobile {
       display: block;
       width: 20%; } }
+
+.header__mobile--login {
+  display: none; }
+  @media screen and (max-width: 500px) {
+    .header__mobile--login {
+      width: 100%;
+      -webkit-box-flex: 0;
+          -ms-flex: 0 64px;
+              flex: 0 64px;
+      background-color: transparent;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      height: 50px; } }
+  .header__mobile--login .login__header__logo {
+    -webkit-box-flex: 4;
+        -ms-flex: 4;
+            flex: 4;
+    margin: 15px 0 0 10px; }
+    .header__mobile--login .login__header__logo img {
+      width: 100px; }
 
 .box__assessment, .about__us, .contact__us {
   padding: 1em 2em;

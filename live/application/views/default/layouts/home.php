@@ -34,14 +34,31 @@
                     <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
                 </ul>
             </div>
+        </header>
 
-            <!-- MOBILE HEADER -->
-            <div class="login__header__mobile">
-                <ul>
-                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
-                </ul>
+        <!-- mobile header and nav menu -->
+        <header class="header__mobile--login">
+            <div class="login__header__logo">
+                <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
+            </div>
+
+            <div class="mobile__menu">
+                <div class="burger__menu">
+                    <div class="menu__bar"></div>
+                    <div class="menu__bar"></div>
+                    <div class="menu__bar"></div>
+                </div>
+                <nav class="mobile__nav">
+                    <ul>
+                        <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
+                        <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
+                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                    </ul>
+                </nav>
             </div>
         </header>
+        <!-- mobile header and nav menu -->
+
         <main class="main flex--center" >
             <section class="box__assessment" style="min-height: 500px;">
                 <div class="assignup flex--center">

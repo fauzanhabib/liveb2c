@@ -115,12 +115,25 @@
                     <li id="session_simulator" class="clicklimenu">
                         <a>Session Simulator</a>
                     </li>
+                    <li>
+                        <a id="logout__container" class="trigger">Logout</a>
+                        <!-- MODAL -->
+                        <div class="modal-wrapper">
+                            <div class="modal__signout">
+                                <div class="content">
+                                    <div>Are you sure?</div>
+                                    <span><a href="<?php echo site_url('logout'); ?>">Yes</a></span>
+                                    <span><a class="span-close">No</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <!-- mobile header and nav menu -->
+
     <div class="wrapper">
      <!-- <div class="stars"></div>
     <div class="stars2"></div>
