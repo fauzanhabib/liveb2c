@@ -218,7 +218,7 @@
                                                 <span class="birthdatecoach"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Home Language </label>
+                                                <label>Native Language </label>
                                                 <span class="spoken_languagecoach"></span>
                                             </div>
                                             <div class="profile__info__gender">
@@ -257,12 +257,12 @@
                                             <div class="profile__info__name">
                                                 <span class="namecoach"></span>
                                             </div>
-                                            <div class="profile__info__birth">
+                                            <!-- <div class="profile__info__birth">
                                                 <label>Date Of Birth </label>
                                                 <span class="birthdatecoach"></span>
-                                            </div>
+                                            </div> -->
                                             <div class="profile__info__language">
-                                                <label>Home Language </label>
+                                                <label>Native Language </label>
                                                 <span class="spoken_languagecoach"></span>
                                             </div>
                                             <div class="profile__info__gender">

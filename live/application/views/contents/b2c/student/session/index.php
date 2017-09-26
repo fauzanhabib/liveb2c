@@ -93,7 +93,7 @@
                                                 <span class="birthdatecoaches"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Home Language </label>
+                                                <label>Native Language </label>
                                                 <span class="spoken_languagecoaches"></span>
                                             </div>
                                             <div class="profile__info__gender">
@@ -157,7 +157,7 @@
                                                 <span class="birthdatecoaches"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Home Language </label>
+                                                <label>Native Language </label>
                                                 <span class="spoken_languagecoaches"></span>
                                             </div>
                                             <div class="profile__info__gender">

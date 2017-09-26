@@ -350,7 +350,7 @@
           url: "<?php echo site_url().'/b2c/student/profile/upd_text'; ?>",
           data: {'elPrev':'spoken','updatedVal': conv_changed},
           success: function(data){
-            $("#textNotif").text('Home Languages updated');
+            $("#textNotif").text('Native Language updated');
             $("#successNotif").show().delay(2000).fadeOut("slow");
             $('.conv_lang').html(conv_selected+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i>");
             $('.conv_lang').show();
