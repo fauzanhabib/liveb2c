@@ -367,6 +367,14 @@
          });
        });
     </script>
+    <script type="text/javascript">
+        var d = new Date()
+        var n = d.getTimezoneOffset();
+
+        $.post("<?php echo site_url('timezone_convert');?>", { 'n': n },function(data) {
+            // console.log(data);
+         });
+    </script>
     </div>
     </body>
 </html>

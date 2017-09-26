@@ -1559,7 +1559,7 @@ footer span {
     display: block; }
   .progress__step,
   .progress__point__top {
-    width: 100%; }
+    width: 100% !important; }
   .study__progress__graph {
     width: 100% !important; }
   .donut__progress {
@@ -2065,7 +2065,35 @@ footer span {
     width: 100% !important; }
   .dashboard__notif {
     margin-left: 0 !important;
-    width: 100%; } }
+    width: 100%; }
+  .boxsession__livecomponentstue .study__dashboard__top {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .boxsession__livecomponentstue .study__dashboard__top .progress__point__top {
+      -webkit-box-ordinal-group: 3;
+          -ms-flex-order: 2;
+              order: 2; }
+      .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap {
+        padding: 0 20px 10px 32px !important; }
+        .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap h5 {
+          margin-left: -10px; }
+    .boxsession__livecomponentstue .study__dashboard__top .chatstudent {
+      width: 100% !important;
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1; }
+  .boxsession__livecomponentstue .study__dashboard__bottom .progress__step {
+    width: 32%; }
+  .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph {
+    width: 32%;
+    max-height: 300px; }
+    .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph h5 {
+      text-align: center; } }
 
 .starsPos {
   z-index: -999 !important;
@@ -3665,7 +3693,34 @@ footer span {
   .boxsession__livecomponentstue {
     margin-top: 10px; }
     .boxsession__livecomponentstue .study__dashboard__top .progress__point__top {
-      width: 48%; }
+      width: 48%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      max-height: 420px;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .stuepicture {
+        border: 3px solid rgba(250, 250, 250, 0.1);
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        overflow: hidden;
+        margin-top: 20px; }
+        .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .stuepicture img {
+          width: 100%; }
+      .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap {
+        width: 88%;
+        padding: 0; }
+        .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap h5 {
+          margin-bottom: 20px;
+          color: #49C5FE;
+          letter-spacing: 1px; }
     .boxsession__livecomponentstue .study__dashboard__top .chatstudent {
       border: 1px solid rgba(250, 250, 250, 0.1);
       background-color: #3c4c77;
