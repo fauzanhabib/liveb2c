@@ -823,6 +823,12 @@ footer span {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 0 0 15px; }
+  @media screen and (max-width: 500px) {
+    #logout__container {
+      margin: 0;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; } }
   #logout__container i {
     cursor: pointer; }
 
@@ -1017,6 +1023,9 @@ footer span {
   .step__progress__info .step__info__label {
     color: #F7F052;
     font-size: 2em; }
+    .step__progress__info .step__info__label svg {
+      top: -55px;
+      left: -45px; }
 
 .progress__achievement {
   width: 50%;
@@ -1550,7 +1559,7 @@ footer span {
     display: block; }
   .progress__step,
   .progress__point__top {
-    width: 100%; }
+    width: 100% !important; }
   .study__progress__graph {
     width: 100% !important; }
   .donut__progress {
@@ -2056,7 +2065,35 @@ footer span {
     width: 100% !important; }
   .dashboard__notif {
     margin-left: 0 !important;
-    width: 100%; } }
+    width: 100%; }
+  .boxsession__livecomponentstue .study__dashboard__top {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .boxsession__livecomponentstue .study__dashboard__top .progress__point__top {
+      -webkit-box-ordinal-group: 3;
+          -ms-flex-order: 2;
+              order: 2; }
+      .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap {
+        padding: 0 20px 10px 32px !important; }
+        .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap h5 {
+          margin-left: -10px; }
+    .boxsession__livecomponentstue .study__dashboard__top .chatstudent {
+      width: 100% !important;
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1; }
+  .boxsession__livecomponentstue .study__dashboard__bottom .progress__step {
+    width: 32%; }
+  .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph {
+    width: 32%;
+    max-height: 300px; }
+    .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph h5 {
+      text-align: center; } }
 
 .starsPos {
   z-index: -999 !important;
@@ -2280,6 +2317,9 @@ footer span {
       -ms-flex-align: center;
           align-items: center;
   position: relative; }
+  @media screen and (max-width: 500px) {
+    .dashboard__notif {
+      width: 100%; } }
   .dashboard__notif span {
     font-size: 0.9em; }
   .dashboard__notif i {
@@ -3555,8 +3595,14 @@ footer span {
   opacity: 0;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
+  @media screen and (max-width: 500px) {
+    .modal__signout {
+      width: 80%; } }
   .modal__signout .content span {
     padding: 0 5px; }
+    @media screen and (max-width: 500px) {
+      .modal__signout .content span {
+        font-size: 0.9em; } }
     .modal__signout .content span a {
       color: #49C5FE;
       cursor: pointer; }
@@ -3647,7 +3693,34 @@ footer span {
   .boxsession__livecomponentstue {
     margin-top: 10px; }
     .boxsession__livecomponentstue .study__dashboard__top .progress__point__top {
-      width: 48%; }
+      width: 48%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      max-height: 420px;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .stuepicture {
+        border: 3px solid rgba(250, 250, 250, 0.1);
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        overflow: hidden;
+        margin-top: 20px; }
+        .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .stuepicture img {
+          width: 100%; }
+      .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap {
+        width: 88%;
+        padding: 0; }
+        .boxsession__livecomponentstue .study__dashboard__top .progress__point__top .graph__wrap h5 {
+          margin-bottom: 20px;
+          color: #49C5FE;
+          letter-spacing: 1px; }
     .boxsession__livecomponentstue .study__dashboard__top .chatstudent {
       border: 1px solid rgba(250, 250, 250, 0.1);
       background-color: #3c4c77;
@@ -3773,6 +3846,9 @@ footer span {
           justify-content: space-between;
   width: 100%;
   position: absolute; }
+  @media screen and (max-width: 500px) {
+    .login__header {
+      display: none; } }
   .login__header .login__header__logo {
     width: 15%; }
     @media screen and (max-width: 768px) {
@@ -3810,6 +3886,27 @@ footer span {
     .login__header .login__header__mobile {
       display: block;
       width: 20%; } }
+
+.header__mobile--login {
+  display: none; }
+  @media screen and (max-width: 500px) {
+    .header__mobile--login {
+      width: 100%;
+      -webkit-box-flex: 0;
+          -ms-flex: 0 64px;
+              flex: 0 64px;
+      background-color: transparent;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      height: 50px; } }
+  .header__mobile--login .login__header__logo {
+    -webkit-box-flex: 4;
+        -ms-flex: 4;
+            flex: 4;
+    margin: 15px 0 0 10px; }
+    .header__mobile--login .login__header__logo img {
+      width: 100px; }
 
 .box__assessment, .about__us, .contact__us {
   padding: 1em 2em;
