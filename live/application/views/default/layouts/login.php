@@ -84,7 +84,7 @@
                 </ul>
             </div>
         </header>
-        
+
         <!-- mobile header and nav menu -->
         <header class="header__mobile--login">
             <div class="login__header__logo">
@@ -116,7 +116,10 @@
                     </div>
 										<form id="login-form" action="login" method="POST">
                     <div class="signup__form">
-
+                      <?php
+                          echo @$this->template->partial->widget('messages_widget_login', '', true);
+                          echo @$content;
+                      ?>
                         <div class="field">
                             <label class="label">Email</label>
                             <p class="control">
