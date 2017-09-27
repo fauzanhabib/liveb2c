@@ -10,11 +10,11 @@ if (!defined('BASEPATH')) {
 }
 
 class Token extends MY_Site_Controller {
-    
+
     // Constructor
     public function __construct() {
         parent::__construct();
-        
+
         // Loading models
         $this->load->model('token_histories_model');
         $this->load->model('token_request_model');
@@ -35,22 +35,22 @@ class Token extends MY_Site_Controller {
             redirect('home');
         }
     }
-    
+
     public function index($page=''){
         $this->template->title = 'Student Token';
         $date_from = strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "-12 month");
-        
+
         $offset = 0;
         $per_page = '';
         $uri_segment = 4;
         $histories = $this->token_histories_model->get_token_histories_for_student($date_from, time(), '', $offset);
-        
+
         $id    = $this->auth_manager->userid();
         $tz = $this->db->select('*')
             ->from('user_timezones')
             ->where('user_id', $id)
             ->get()->result();
-        
+
         $minutes = @$tz[0]->minutes_val;
         $gmt_val = @$tz[0]->gmt_val;
 
@@ -64,7 +64,7 @@ class Token extends MY_Site_Controller {
         } else if($this->auth_manager->role() == "CCH"){
             $tipe = 'coach_id';
         }
-        
+
         $dates3     = date('Y-m-d H:i:s');
         $def3      = strtotime($dates3);
         $datetime3 = $def3+(60*$minutes);
@@ -83,7 +83,7 @@ class Token extends MY_Site_Controller {
                       ->get()->result();
 
         $datasession = @$pull_appoint;
-        
+
         // $id = $this->auth_manager->userid();
         // $utz = $this->db->select('user_timezone')
         //         ->from('user_profiles')
@@ -94,11 +94,35 @@ class Token extends MY_Site_Controller {
         //         ->from('timezones')
         //         ->where('id', $idutz)
         //         ->get()->result();
-        
+
         // $minutes = $tz[0]->minutes;
         $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
 
+        $pull_used_t = $this->db->select('token_amount')
+                      ->from('token_histories')
+                      ->where('user_id', $id)
+                      ->where('token_status_id', 1)
+                      ->get()->result();
 
+        $used_tokens = 0;
+        foreach($pull_used_t as $key){
+           $used_tokens+= $key->token_amount;
+        }
+
+        $ts_id = array('21', '23');
+        $pull_refu_t = $this->db->select('token_amount')
+                      ->from('token_histories')
+                      ->where('user_id', $id)
+                      ->where_in('token_status_id', $ts_id)
+                      ->get()->result();
+
+        $refu_tokens = 0;
+        foreach($pull_refu_t as $key){
+           $refu_tokens+= $key->token_amount;
+        }
+        // echo $sum;
+
+        // echo "<pre>";print_r($refu_tokens);exit();
 
         $vars = array(
             'histories' => $histories,
@@ -107,19 +131,19 @@ class Token extends MY_Site_Controller {
             'data' => $this->token_request_model->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->where('status', 'requested')->get(),
             'remain_token' => $this->identity_model->select('id, token_amount')->get_identity('token')->where('user_id', $this->auth_manager->userid())->get(),
             'datasession' => $datasession,
+            'used_token' => $used_tokens,
+            'refu_token' => $refu_tokens
         );
 
-        // echo "<pre>";
-        // print_r($vars);
-        // exit();
-        
+
+
         $this->template->content->view('contents/b2c/student/token/index', $vars);
         $this->template->publish();
     }
-    
+
     public function search($page=''){
         $this->template->title = 'Student Token';
-        
+
         if($this->input->post('date_from') && $this->input->post('date_to')){
             $this->session->set_userdata('date_from', $this->input->post('date_from'));
             $this->session->set_userdata('date_to', $this->input->post('date_to'));
@@ -134,10 +158,10 @@ class Token extends MY_Site_Controller {
                     redirect('student/token');
             }
         }
-        
+
         $date_from = ($this->input->post('date_from') ? $this->input->post('date_from') : $this->session->userdata('date_from'));
         $date_to = ($this->input->post('date_to') ? $this->input->post('date_to') : $this->session->userdata('date_to'));
-        
+
         if(!$date_from || !$date_to || $date_from > $date_to){
             $this->messages->add('Invalid time period', 'danger');
             redirect('student/token');
@@ -151,7 +175,7 @@ class Token extends MY_Site_Controller {
         $uri_segment = 4;
         $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/token/search'), count($this->token_histories_model->get_token_histories_for_student(strtotime($date_from), $stringdatetoday)), $per_page, $uri_segment);
         $histories = $this->token_histories_model->get_token_histories_for_student(strtotime($date_from), $stringdatetoday, $per_page, $offset);
-        
+
         // $id = $this->auth_manager->userid();
         // $utz = $this->db->select('user_timezone')
         //         ->from('user_profiles')
@@ -162,10 +186,10 @@ class Token extends MY_Site_Controller {
         //         ->from('timezones')
         //         ->where('id', $idutz)
         //         ->get()->result();
-        
+
         // $minutes = $tz[0]->minutes;
         $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
-        
+
 
         $vars = array(
             'form_action' => 'search',
@@ -174,14 +198,14 @@ class Token extends MY_Site_Controller {
             'pagination' => @$pagination,
             'minutes' => $minutes
         );
-        
+
         $this->template->content->view('default/contents/student/token/index', $vars);
         $this->template->publish();
     }
 
     public function create() {
         date_default_timezone_set('Etc/GMT+0');
-        
+
         if (!$this->input->post('token_amount') || $this->input->post('token_amount') <=0) {
             $this->messages->add('Token Request Value Must be More than Zero', 'Warning');
             redirect('b2c/student/token');
@@ -191,7 +215,7 @@ class Token extends MY_Site_Controller {
 
         // $get_idsp = $this->db->select('id_student_supplier')->from('student_supplier_to_student')->where('id_student',$this->auth_manager->userid())->get()->result();
         $get_idsp = $this->db->select('creator_id')->from('creator_members')->where('member_id',$this->auth_manager->userid())->get()->result();
-        
+
         if(!$get_idsp){
             $this->messages->add('Invalid action', 'danger');
             redirect('b2c/student/token');
@@ -227,13 +251,13 @@ class Token extends MY_Site_Controller {
 
         // check apakah status setting region allow atau disallow
         $region_id = $this->auth_manager->region_id($partner_id);
-        
+
         $get_status_setting_region = $this->specific_settings_model->get_specific_settings($region_id,'region');
-        
+
         $max_token_for_student = '';
         if($get_status_setting_region[0]->status_set_setting == 0){
             $get_setting = $this->global_settings_model->get_partner_settings();
-            $max_token_for_student = $get_setting[0]->max_token_for_student; 
+            $max_token_for_student = $get_setting[0]->max_token_for_student;
         } else {
             $get_setting = $this->specific_settings_model->get_partner_settings($partner_id);
             $max_token_for_student = $get_setting[0]->max_token_for_student;
@@ -283,7 +307,7 @@ class Token extends MY_Site_Controller {
             $this->db->trans_rollback();
             $this->messages->add(validation_errors(), 'danger');
             redirect('student/token_requests');
-        } 
+        }
         else {
             // messaging partner
             // $this->messaging_partner('requested');
@@ -330,21 +354,21 @@ class Token extends MY_Site_Controller {
         $data = array(
             'status' => 'cancelled',
         );
-        
+
         $id = $this->isRequested();
         if ($id) {
             //get token
             $get_token = $this->token_request_model->select('token_requests.token_amount as token_amount, users.email as email')->join('users','users.id = token_requests.user_id')->where('token_requests.id',$id)->where('token_requests.status','requested')->get();
-       
+
                 // update tken history
-    
+
                 $data_token_history = array('description' => 'Cancel request token',
                            'token_status_id' => 19,
                            'dupd' => time());
-                
+
                 $this->db->where('user_id', $this->auth_manager->userid());
                 $this->db->where('token_status_id', 17);
-                $this->db->update('token_histories', $data_token_history); 
+                $this->db->update('token_histories', $data_token_history);
 
                 $this->db->flush_cache();
             $this->token_request_model->update($id, $data);
@@ -369,11 +393,11 @@ class Token extends MY_Site_Controller {
 
             // $this->send_email->student_request($emailpartner, $get_token->token_amount, $userfullname, 'cancelled', $name_partner);
             // $this->send_email->add_token_student($useremail, $get_token->token_amount, 'cancelled');
-            
+
             $this->messages->add('Request Token Cancelled', 'success');
             redirect('b2c/student/token');
 
-        } 
+        }
         else {
             $this->messages->add('Invalid Action', 'danger');
             redirect('b2c/student/token');
