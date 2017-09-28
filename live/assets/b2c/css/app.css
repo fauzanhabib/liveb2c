@@ -3453,7 +3453,7 @@ footer span {
         -webkit-box-pack: justify;
             -ms-flex-pack: justify;
                 justify-content: space-between;
-        font-size: 1.2em; }
+        font-size: 0.9em; }
         .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance label {
           color: #49c5fe; }
         .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance span {
@@ -3565,7 +3565,7 @@ footer span {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(73, 197, 254, 0.2);
+  background: rgba(39, 52, 84, 0.8);
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 0.25s ease-in-out;
@@ -3574,7 +3574,7 @@ footer span {
 .modal-wrapper.open {
   opacity: 1;
   visibility: visible;
-  z-index: 1; }
+  z-index: 9999; }
 
 .modal {
   width: 50%;
@@ -3582,8 +3582,15 @@ footer span {
   position: relative;
   background: rgba(56, 70, 112, 0.98);
   opacity: 0;
+  border-top: 7px solid #5367A4;
+  border-bottom: 7px solid #5367A4;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
+  .modal__watch {
+    width: 66%;
+    position: relative;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
   .modal a {
     padding: 10px; }
 
@@ -3593,6 +3600,8 @@ footer span {
   position: relative;
   background: rgba(56, 70, 112, 0.98);
   opacity: 0;
+  border-top: 7px solid #5367A4;
+  border-bottom: 7px solid #5367A4;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
   @media screen and (max-width: 500px) {

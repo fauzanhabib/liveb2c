@@ -67,7 +67,17 @@
                     </div>
                 </div>
                 <a href="<?php echo site_url('login'); ?>" class="home__loginbtn"><button class="neobutton__white">SIGN IN</button></a>
-                <button class="neobutton__white next">WATCH</button>
+                <button class="neobutton__white trigger">WATCH</button>
+
+                <!-- MODAL -->
+                <div class="modal-wrapper">
+                    <div class="modal__watch">
+                        <a class="btn-close"></a>
+                        <div class="content">
+                            <iframe id="video" width="854" height="480" src="https://www.youtube.com/embed/4jf5lcfqgV4" frameborder="0" allowfullscreen=""></iframe>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
         <footer class="flex--center">
@@ -104,6 +114,22 @@
         </footer>
     </div>
 
+    <script>
+
+        // Finds all iframes from youtubes and gives them a unique class
+        $('iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
+
+        $(".btn-close").click(function() {
+            // changes the iframe src to prevent playback or stop the video playback in our case
+            $('.youtube-iframe').each(function(index) {
+                $(this).attr('src', $(this).attr('src'));
+                return false;
+            });
+          
+        //click function
+        });
+
+    </script>
     <script>
 		$('#login-form').parsley();
 

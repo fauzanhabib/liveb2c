@@ -40,11 +40,11 @@
                             <label>Balance</label>
                             <span><?php echo $remain_token->token_amount; ?></span>
                         </div>
-                        <div class="bxrequest__requesttokens__bxbalance" style="font-size: 14px;">
+                        <div class="bxrequest__requesttokens__bxbalance">
                             <label>Used Tokens</label>
                             <span><?php echo @$used_token; ?></span>
                         </div>
-                        <div class="bxrequest__requesttokens__bxbalance" style="font-size: 14px;">
+                        <div class="bxrequest__requesttokens__bxbalance">
                             <label>Refunded Tokens</label>
                             <span><?php echo @$refu_token; ?></span>
                         </div>
