@@ -31,10 +31,10 @@
                                 <label>Coach Name</label>
                                 <span><?php echo($data_coach[0]->fullname); ?></span>
                             </div>
-                            <div class="bxcoachemail">
+                            <!-- <div class="bxcoachemail">
                                 <label>E-Mail</label>
                                 <span><?php echo($data_coach[0]->email); ?></span>
-                            </div>
+                            </div> -->
                              <div class="bxcoacdate">
                                 <label>Date</label>
                                 <span><?php echo(date('l jS \of F Y', @$date)); ?></span>
