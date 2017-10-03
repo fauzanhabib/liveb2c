@@ -97,69 +97,73 @@
                         ?>
                         <li class="accordion-item article-loop">
                             <div class="bxhistory__boxnotifstatus">
-                                <i class="datestatus">
-                                    <?php
-                                        date_default_timezone_set('UTC');
-                                        $dt     = date('H:i:s',$history->transaction_date);
-                                        $default_dt  = strtotime($dt);
-                                        $usertime = $default_dt+(60*$minutes);
-                                        $hour = date("H:i:s", $usertime);
+                                <div class="flex__column">
+                                    <i class="datestatus">
+                                        <?php
+                                            date_default_timezone_set('UTC');
+                                            $dt     = date('H:i:s',$history->transaction_date);
+                                            $default_dt  = strtotime($dt);
+                                            $usertime = $default_dt+(60*$minutes);
+                                            $hour = date("H:i:s", $usertime);
 
 
-                                        $date     = date('F d, Y',$history->transaction_date);
+                                            $date     = date('F d, Y',$history->transaction_date);
 
-                                        echo $date." ".$hour;
-                                    ?>
-                                </i>
-                                <span>
-                                    <?php
-                                        // echo $history->description;
-                                        $des = explode(" ",$history->description);
-                                        if($des[0] == 'Session'){
-                                        $t = count($des);
+                                            echo $date." ".$hour;
+                                        ?>
+                                    </i>
+                                    <span>
+                                        <?php
+                                            // echo $history->description;
+                                            $des = explode(" ",$history->description);
+                                            if($des[0] == 'Session'){
+                                            $t = count($des);
 
-                                        $f_dt_at = $t-3;
-                                        $f_dt_until = $t-1;
-                                        if($des[$t-6] == 'on'){
-                                            $f_date = $t-5;
-                                        }else{
-                                            $f_date = $t-4;
-                                        }
-                                        $CI =& get_instance();
-                                        $CI->load->library('schedule_function');
-                                        $convert = $CI->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), strtotime($des[$f_date]), $des[$f_dt_at], $des[$f_dt_until]);
-                                        $date_token = $convert['date'];
-                                        $dateconvert = date('Y-m-d', $date_token);
-
-
-                                            $default_dt_at  = strtotime($des[$f_dt_at]);
-                                            $usertime_at = $default_dt_at+(60*$minutes);
-                                            $at = date("H:i", $usertime_at);
-
-                                            $default_dt_until  = strtotime($des[$f_dt_until]);
-                                            $usertime_until = $default_dt_until+(60*$minutes);
-                                            $usertime_until_diff = $usertime_until-(60*5);
-                                            $until = date("H:i", $usertime_until_diff);
+                                            $f_dt_at = $t-3;
+                                            $f_dt_until = $t-1;
+                                            if($des[$t-6] == 'on'){
+                                                $f_date = $t-5;
+                                            }else{
+                                                $f_date = $t-4;
+                                            }
+                                            $CI =& get_instance();
+                                            $CI->load->library('schedule_function');
+                                            $convert = $CI->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), strtotime($des[$f_date]), $des[$f_dt_at], $des[$f_dt_until]);
+                                            $date_token = $convert['date'];
+                                            $dateconvert = date('Y-m-d', $date_token);
 
 
-                                                $des[$f_dt_at] = $at;
-                                                $des[$f_dt_until] = $until;
-                                                $des[$f_date] = $dateconvert;
+                                                $default_dt_at  = strtotime($des[$f_dt_at]);
+                                                $usertime_at = $default_dt_at+(60*$minutes);
+                                                $at = date("H:i", $usertime_at);
+
+                                                $default_dt_until  = strtotime($des[$f_dt_until]);
+                                                $usertime_until = $default_dt_until+(60*$minutes);
+                                                $usertime_until_diff = $usertime_until-(60*5);
+                                                $until = date("H:i", $usertime_until_diff);
 
 
-                                            for($a=0; $a<count($des); $a++){
-                                                echo $des[$a]." ";
-                                            } echo '(UTC '.$new_gmt.')';
-                                        } else {
-                                            echo $history->status_description;
-                                        }
+                                                    $des[$f_dt_at] = $at;
+                                                    $des[$f_dt_until] = $until;
+                                                    $des[$f_date] = $dateconvert;
 
-                                        // if(@$history->status == 'Refund'){
-                                        //     echo ' <a id="detail'.$detcount.'" class="detailsbtn">Details</a>';
-                                        //     $detcount++;
-                                        // }
-                                    ?>
-                                </span>
+
+                                                for($a=0; $a<count($des); $a++){
+                                                    echo $des[$a]." ";
+                                                } echo '(UTC '.$new_gmt.')';
+                                            } else {
+                                                echo $history->status_description;
+                                            }
+
+                                            // if(@$history->status == 'Refund'){
+                                            //     echo ' <a id="detail'.$detcount.'" class="detailsbtn">Details</a>';
+                                            //     $detcount++;
+                                            // }
+                                        ?>
+                                    </span>
+                                </div>
+
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
                             </div>
                             <div class="accordion__panel--history" style="display: none;">
                                 <div class="bxhistory__boxstatus">

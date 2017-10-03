@@ -364,6 +364,15 @@ button:focus {
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
+.flex__column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
 .flex__column--c, .progress__step, .nowgoal_btn, .dashboard__bookacoach .tab-content .bookcoach__flexing {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1225,31 +1234,9 @@ footer span {
       -webkit-transform: translate(-6px, 0);
           -ms-transform: translate(-6px, 0);
               transform: translate(-6px, 0);
-      margin: 16px 0 0;
+      margin: 13px 0 0;
       top: 5px;
       right: 7px; }
-      .accordion li i:before {
-        content: "";
-        position: absolute;
-        background-color: #fff;
-        width: 3px;
-        height: 9px;
-        -webkit-transition: all 0.25s ease-in-out;
-        transition: all 0.25s ease-in-out;
-        -webkit-transform: translate(-3px, -1px) rotate(45deg);
-            -ms-transform: translate(-3px, -1px) rotate(45deg);
-                transform: translate(-3px, -1px) rotate(45deg); }
-      .accordion li i:after {
-        content: "";
-        position: absolute;
-        background-color: #fff;
-        width: 3px;
-        height: 9px;
-        -webkit-transition: all 0.25s ease-in-out;
-        transition: all 0.25s ease-in-out;
-        -webkit-transform: translate(2px, -2px) rotate(-45deg);
-            -ms-transform: translate(2px, -2px) rotate(-45deg);
-                transform: translate(2px, -2px) rotate(-45deg); }
     .accordion li input[type=checkbox] {
       position: absolute;
       width: 100%;
@@ -1981,14 +1968,10 @@ footer span {
     font-size: 0.7em !important; }
   .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxnotifstatus span {
     font-size: 0.9em !important; }
-  .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus {
-    height: 140px !important; }
-    .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .daterefund i {
-      font-size: 0.7em !important; }
-    .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .daterefund span {
-      font-size: 0.9em !important; }
-    .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .status {
-      margin-top: 30px !important; }
+  .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .daterefund i {
+    font-size: 0.7em !important; }
+  .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxstatus .daterefund span {
+    font-size: 0.9em !important; }
   .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxsession i {
     font-size: 0.7em !important;
     color: #a3aabe; }
@@ -3474,14 +3457,13 @@ footer span {
       display: flex; }
     .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxnotifstatus {
       background-color: rgba(39, 52, 84, 0.36);
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-              flex-direction: column;
       height: 80px;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
       cursor: pointer; }
       .dashboard__bxtokenstab .bxtabtokens .bxhistory__boxnotifstatus i {
         font-size: 0.8em;
@@ -3591,6 +3573,9 @@ footer span {
     position: relative;
     -webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out; }
+    @media screen and (max-width: 500px) {
+      .modal__watch {
+        width: 100%; } }
   .modal a {
     padding: 10px; }
 
@@ -3616,7 +3601,8 @@ footer span {
       color: #49C5FE;
       cursor: pointer; }
 
-.modal-wrapper.open .modal, .modal-wrapper.open .modal__signout {
+.modal-wrapper.open .modal,
+.modal-wrapper.open .modal__signout {
   opacity: 1; }
 
 .head {
@@ -3935,18 +3921,21 @@ footer span {
   width: 25%;
   font-family: "neoFontThin", sans-serif;
   color: #fff;
-  font-size: 16px; }
+  font-size: 16px;
+  margin: 85px 0 0 0; }
   .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn {
     margin: 0 auto; }
   @media screen and (max-width: 768px) {
     .box__assessment, .about__us, .contact__us {
-      width: 50%; } }
+      width: 50%;
+      margin: 0; } }
   @media screen and (max-width: 500px) {
     .box__assessment, .about__us, .contact__us {
       width: 100% !important;
       background-color: transparent;
       border-top: none;
-      border-bottom: none; } }
+      border-bottom: none;
+      margin: 0; } }
 
 .assignup {
   display: -webkit-box;

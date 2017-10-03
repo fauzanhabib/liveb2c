@@ -17,7 +17,7 @@
             <ul class="accordion">
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Set Time Automaticaly</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -30,7 +30,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Token Rules</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -43,7 +43,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Token System</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -56,7 +56,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>How To Book A Coach</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -69,7 +69,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Check Email & Notification</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -84,7 +84,7 @@
             <ul class="accordion">
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Access To Live Session</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -97,7 +97,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Live Session Guides</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -110,7 +110,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Session Summary Guides</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
@@ -123,7 +123,7 @@
                 </li>
                 <li>
                     <input type="checkbox" checked>
-                    <i></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
                     <h2>Download Recorded Session</h2>
                     <div class="accordion__menu">
                         Check Current Token Status & Request    More Tokens<br>
