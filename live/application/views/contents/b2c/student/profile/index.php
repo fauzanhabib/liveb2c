@@ -19,10 +19,6 @@
   cursor: pointer;
   margin-left: 5px;
 }
-.iconEdit{
-  float: right;
-  margin-right: 10px;
-}
 .notifSuccess{
   position: fixed;
   background-color: rgba(38, 178, 161, 0.7) !important;

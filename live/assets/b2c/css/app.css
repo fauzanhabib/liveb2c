@@ -130,7 +130,7 @@ html {
   color: #ffffff;
   font-family: "neoFontBold", sans-serif; }
 
-.blue, .title, .blue-text, .blue-text-small, .neobutton, .neobutton__white, .neobutton__small__white, .neobutton__small {
+.blue, .title, .blue-text, .blue-text-small, .neobutton__small {
   color: #49C5FE;
   font-family: "neoFontMedium", sans-serif; }
 
@@ -176,7 +176,7 @@ html {
   margin-top: 1em;
   margin-bottom: 1em; }
 
-.blue-text-small, .neobutton, .neobutton__white, .neobutton__small__white, .neobutton__small {
+.blue-text-small, .neobutton__small {
   font-size: 16px; }
 
 a {
@@ -430,6 +430,8 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: transparent; }
 
 .neobutton, .neobutton__white, .neobutton__small__white {
+  font-family: "neoFontRegular", sans-serif;
+  font-size: 16px;
   background: #3F4E7B;
   border: 1px solid #49C5FE;
   border-radius: 100px;
@@ -2418,15 +2420,13 @@ footer span {
               color: #606983;
               font-size: 0.9em; }
           .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .coachinfo, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .coachinfo {
-            border: 3px solid #fff;
-            width: 124px;
-            border-radius: 21px;
-            height: 40px;
-            line-height: 40px;
+            border: 1px solid #fff;
+            border-radius: 50px;
             text-align: center;
             color: #fff;
             cursor: pointer;
-            font-weight: 600; }
+            font-weight: 600;
+            padding: .5em 1em; }
             .dashboard__menutab .boxsessions__today .todaysessions .boxinfo .coachinfo:hover, .dashboard__menutab .boxsessions__upcoming .todaysessions .boxinfo .coachinfo:hover {
               background-color: rgba(39, 52, 84, 0.36); }
         .dashboard__menutab .boxsessions__today .todaysessions .activesession .playsession, .dashboard__menutab .boxsessions__upcoming .todaysessions .activesession .playsession {
@@ -2446,8 +2446,8 @@ footer span {
     background: transparent;
     border: none;
     color: #49c5fe;
-    text-decoration: underline;
-    cursor: pointer; }
+    cursor: pointer;
+    font-size: 13px; }
 
 .addingparent .boxinfo {
   margin: 0 10px !important; }
@@ -2521,7 +2521,7 @@ footer span {
           -ms-flex-pack: center;
               justify-content: center;
       border-bottom: 1px solid #606983;
-      padding-left: 10px;
+      padding-left: 1em;
       height: 60px; }
   .profile__password {
     margin-top: 20px;
@@ -2552,7 +2552,7 @@ footer span {
       border-bottom: 1px solid #606983;
       border-left: 1px solid #606983;
       border-right: 1px solid #606983;
-      padding-left: 10px;
+      padding-left: 1em;
       background-color: rgba(56, 70, 112, 0.98); }
       .profile__password__current input, .profile__password__new input, .profile__password__confirm input {
         padding-left: 10px;
@@ -2608,7 +2608,7 @@ footer span {
       border-bottom: 1px solid #606983;
       border-left: 1px solid #606983;
       border-right: 1px solid #606983;
-      padding-left: 10px;
+      padding-left: 1em;
       background-color: rgba(56, 70, 112, 0.98); }
   .profile__dynedpro {
     border: none;
@@ -2642,10 +2642,14 @@ footer span {
       border-bottom: 1px solid #606983;
       border-left: 1px solid #606983;
       border-right: 1px solid #606983;
-      padding-left: 10px;
+      padding-left: 1em;
       background-color: rgba(56, 70, 112, 0.98); }
       .profile__dynedpro__id label, .profile__dynedpro__server label {
         margin-bottom: 10px; }
+
+.iconEdit {
+  float: right;
+  margin-right: 1em; }
 
 .activetitle {
   font-weight: bold;
@@ -3411,8 +3415,7 @@ footer span {
     margin-top: 20px; }
     .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens {
       border: 1px solid #606983;
-      width: 50%;
-      height: 170px;
+      width: 100%;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -3427,7 +3430,8 @@ footer span {
           -ms-flex-align: center;
               align-items: center;
       background-color: rgba(56, 70, 112, 0.98);
-      border-radius: 3px; }
+      border-radius: 3px;
+      padding: .5em 0; }
       .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance {
         width: 85%;
         display: -webkit-box;
@@ -3437,6 +3441,16 @@ footer span {
             -ms-flex-pack: justify;
                 justify-content: space-between;
         font-size: 0.9em; }
+        .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance:nth-child(1) {
+          margin: 0 0 10px;
+          background-color: #324064;
+          padding: .5em;
+          border-radius: 3px; }
+          .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance:nth-child(1) label {
+            font-size: 18px; }
+          .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance:nth-child(1) span {
+            font-size: 18px;
+            color: yellow; }
         .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance label {
           color: #49c5fe; }
         .dashboard__bxtokenstab .bxtabtokens .bxrequest__requesttokens__bxbalance span {
@@ -3840,7 +3854,8 @@ footer span {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
-  position: absolute; }
+  position: absolute;
+  background-color: transparent; }
   @media screen and (max-width: 500px) {
     .login__header {
       display: none; } }
@@ -3853,7 +3868,7 @@ footer span {
       .login__header .login__header__logo {
         width: 40%; } }
     .login__header .login__header__logo img {
-      width: 110px;
+      height: 55px;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
