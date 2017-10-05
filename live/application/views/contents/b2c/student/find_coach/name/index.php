@@ -17,7 +17,7 @@
 
                 </style>
                 <?php if(count($datasession)!=0){ ?>
-                    <div class="dashboard__notif">
+                    <div class="dashboard__notif success__notif">
                         <?php if(count($datasession)==1){ ?>
                         <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
                         <?php }else{ ?>
@@ -186,7 +186,7 @@
                                                     $tooltip   = 0;
                                                 }
                                                 
-                                                $nostar = 5 - $tooltip;
+                                                $nostar = 5 - round($tooltip);
                                                 // echo "<pre>";
                                                 // print_r($i);
                                                 // exit();
@@ -194,7 +194,7 @@
                                             <ul id='stars' class="disabled">
                                                 <?php 
                                                 if($tooltip != 0){
-                                                    for($s=0;$s<$tooltip;$s++){
+                                                    for($s=0;$s<round($tooltip);$s++){
                                                 ?>
                                                 <li class='star hover selected'>
                                                     <i class='fa fa-star fa-fw'></i>
@@ -219,7 +219,7 @@
                                 </div>
 
                                 <div class="profilecoach__location">
-                                    <i class="fa fa-map-marker"></i><?php echo($coaches[$i]->country); ?>
+                                    <i class="fa fa-map-marker"></i><?php echo($nostar); ?>
                                 </div>
 
                                 <div class="profilecoach__token">
