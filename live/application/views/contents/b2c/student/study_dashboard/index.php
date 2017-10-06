@@ -50,7 +50,7 @@
 				    </div>
 				</div>
 
-				<div class="progress__info__label"><?php echo $gsp->data->total_points_until_today;?> / 180.000</div>
+				<div class="progress__info__label"><?php echo $gsp->data->study->points_until_today;?> / 180.000</div>
 		  	</div>
 
 		  	<div class="progress__achievement">
@@ -63,7 +63,7 @@
 		  			<div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div>
 
 		  			<div class="achievement__point__info">
-		  				<h5><?php echo $gsp->data->study_points_until_today;?></h5>
+		  				<h5><?php echo $gsp->data->study->points_until_today;?></h5>
 		  				<h3>Study</h3>
 		  			</div>
 		  		</div>
@@ -88,7 +88,7 @@
 		  			<div class="bullet__achievement"></div>
 
 		  			<div class="achievement__point__info">
-		  				<h5><?php echo $gsp->data->coach_points_until_today;?></h5>
+		  				<h5><?php echo $gsp->data->coach->points_until_today;?></h5>
 		  				<h3>Coach</h3>
 		  			</div>
 		  		</div>
@@ -163,7 +163,7 @@
 		                <path stroke-linecap="round" id="arc2" fill="none" stroke="#fafafa" stroke-width="20" />
 		            </svg>
 		            <div class="step__progress__info">
-		               	<div class="step__info__label"> <!-- <?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?> --> 
+		               	<div class="step__info__label"> <!-- <?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?> -->
 		               		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  viewBox="0 0 61.8 61.8" style="enable-background:new 0 0 61.8 61.8;" xml:space="preserve">
                                 <style type="text/css">
@@ -475,8 +475,8 @@ outter.circleProgress({
 
 var inner = $('.inner--circle.circle');
 
-var innerup   = '<?php echo $gsp->data->total_points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->study_points_to_pass;?>';
+var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
+var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
 var innerperc = innerup / innerdown;
 // console.log(innerperc);
 inner.circleProgress({
