@@ -16,3 +16,6 @@ application/logs/*
 !application/logs/.htaccess
 
 .DS_Store
+
+live/vendor/**/.git
+live/vendor/**/**/.git
