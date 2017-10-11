@@ -219,7 +219,7 @@
                                 </div>
 
                                 <div class="profilecoach__location">
-                                    <i class="fa fa-map-marker"></i><?php echo($nostar); ?>
+                                    <i class="fa fa-map-marker"></i><?php echo($coaches[$i]->country); ?>
                                 </div>
 
                                 <div class="profilecoach__token">

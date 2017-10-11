@@ -340,8 +340,8 @@ class Token extends MY_Site_Controller {
              $name_partner = $partnername[0]->fullname;
 
             $this->user_notification_model->insert($partner_notification);
-            // $this->send_email->student_request($emailpartner, $this->input->post('token_amount'), $userfullname, 'requested', $name_partner);
-            // $this->send_email->add_token_student($useremail, $this->input->post('token_amount'), 'requested');
+            $this->send_email->student_request($emailpartner, $this->input->post('token_amount'), $userfullname, 'requested', $name_partner);
+            $this->send_email->add_token_student($useremail, $this->input->post('token_amount'), 'requested');
 
 
         // =======
@@ -391,8 +391,8 @@ class Token extends MY_Site_Controller {
             $users = $this->user_model->select('email')->where('id', $this->auth_manager->userid())->get();
             $useremail = $users->email;
 
-            // $this->send_email->student_request($emailpartner, $get_token->token_amount, $userfullname, 'cancelled', $name_partner);
-            // $this->send_email->add_token_student($useremail, $get_token->token_amount, 'cancelled');
+            $this->send_email->student_request($emailpartner, $get_token->token_amount, $userfullname, 'cancelled', $name_partner);
+            $this->send_email->add_token_student($useremail, $get_token->token_amount, 'cancelled');
 
             $this->messages->add('Request Token Cancelled', 'success');
             redirect('b2c/student/token');
