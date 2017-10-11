@@ -2479,6 +2479,102 @@ class find_coaches extends MY_Site_Controller {
     }
 
     private function is_day_off($coach_id = '', $date_ = '') {
+        
+        $gmt_coach = $this->db->select("minutes_val as minutes, gmt_val as gmt")
+                             ->from('user_timezones')
+                             // ->where('user_id', $this->auth_manager->userid())
+                             ->where('user_id', $coach_id)
+                             ->get()->result();
+
+        $gmt_student = $this->db->select("minutes_val as minutes, gmt_val as gmt")
+                             ->from('user_timezones')
+                             ->where('user_id', $this->auth_manager->userid())
+                             // ->where('user_id', $coach_id)
+                             ->get()->result();
+
+        if(@$gmt_coach[0]->gmt == $gmt_student[0]->gmt){
+            $a = 1;
+        } else {
+            if(@$gmt_coach[0]->gmt < 0){
+            
+            $a = 1;
+            
+            } else {
+                
+                $a = -1;
+                
+            }
+        }
+
+        @date_default_timezone_set('Etc/GMT'.$gmt_coach[0]->gmt*($a));
+        
+
+        $chek_date = gmdate('Y-m-d', strtotime($date_) );
+        
+        $diff=date_diff(date_create($date_),date_create($chek_date));
+        $get_sel = $diff->format("%R%a");
+
+
+
+        if($get_sel < 0){
+            if($a == 1){
+                $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
+            } 
+            if($a == -1){
+                $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
+            }
+        } else {
+            $date_ = $date_;
+        }
+
+
+        // $date_ = $chek_date;
+
+        // exit();
+        $day_off = $this->db->select('coach_id, start_date, end_date')
+                        ->from('coach_dayoffs')
+                        ->where('coach_id', $coach_id)
+                        ->where('status', 'approved')
+                        ->where('start_date <=', $date_)
+                        ->where('end_date >=', $date_)
+                        ->get()->result();
+        // echo strtotime($date_)." - ". mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+       
+        // // $start_date = strtotime(@$day_off->start_date);
+        $start_date = @$day_off->start_date;
+        // $end_date = strtotime(@$day_off->end_date);
+        $end_date = @$day_off->end_date;
+        // $date = strtotime($date_);
+        $date = $date_;
+
+        foreach ($day_off as $do) {
+            $start_date = @$do->start_date;
+            $end_date = @$do->end_date;
+            $date = $date_;
+
+            // echo "<br />yak ". $date." - ". $start_date.'<br />';
+
+            if ($date >= $start_date && $date <= $end_date){
+                // echo $coach_id." tanggal ". $date. " start date ". $start_date." end date ". $end_date." cuti";
+                // exit();
+                return true;
+            } else if (!$day_off) {
+                // echo $coach_id. " start date ". $start_date." end date ". $end_date." gak cuti";
+                // exit();
+                return false;
+            } else {
+                // echo $coach_id." tanggal ". $date. " start date ". $start_date." end date ". $end_date." gak cuti juga";
+                // exit();
+                return false;
+            } 
+
+
+        }
+
+        
+    }
+
+    private function is_day_off_old($coach_id = '', $date_ = '') {
 
         $gmt_coach = $this->db->select("minutes_val as minutes, gmt_val as gmt")
                              ->from('user_timezones')
