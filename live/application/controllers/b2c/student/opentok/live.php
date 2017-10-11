@@ -212,14 +212,18 @@ class Live extends MY_Site_Controller {
         // echo "<pre>";print_r($user_extract);exit();
 
         //New API -----
-        $tokenresult = $this->session->userdata('token_api');
+        // $tokenresult = $this->session->userdata('token_api');
+
+        // if(!@$tokenresult){
+          $tokenresult = $this->study_progress->GenerateToken();
+        // }
         // $tokenresult = $this->study_progress->GenerateToken();
         // echo('<pre>');print_r($tokenresult); exit;
 
         $gsp = json_decode($this->study_progress->GetStudyProgress($tokenresult));
         $gcp = json_decode($this->study_progress->GetCurrentProgress($tokenresult));
         $gwp = json_decode($this->study_progress->GetWeeklyProgress($tokenresult));
-
+        // echo('<pre>');print_r($gsp); exit;
         $mt_status_to_colour = array(
           "passed" => "bg-blue-gradient",
           "open" => "bg-white-gradient",
@@ -227,12 +231,12 @@ class Live extends MY_Site_Controller {
           "failed" => "bg-red-gradient"
         );
         $mt_color = array(
-          'mt1' => $mt_status_to_colour[$gsp->data->mastery_tests[0]->status],
-          'mt2' => $mt_status_to_colour[$gsp->data->mastery_tests[1]->status],
-          'mt3' => $mt_status_to_colour[$gsp->data->mastery_tests[2]->status],
-          'mt4' => $mt_status_to_colour[$gsp->data->mastery_tests[3]->status],
-          'mt5' => $mt_status_to_colour[$gsp->data->mastery_tests[4]->status],
-          'mt6' => $mt_status_to_colour[$gsp->data->mastery_tests[5]->status]
+          'mt1' => $mt_status_to_colour[$gsp->data->study->mastery_tests[0]->status],
+          'mt2' => $mt_status_to_colour[$gsp->data->study->mastery_tests[1]->status],
+          'mt3' => $mt_status_to_colour[$gsp->data->study->mastery_tests[2]->status],
+          'mt4' => $mt_status_to_colour[$gsp->data->study->mastery_tests[3]->status],
+          'mt5' => $mt_status_to_colour[$gsp->data->study->mastery_tests[4]->status],
+          'mt6' => $mt_status_to_colour[$gsp->data->study->mastery_tests[5]->status]
         );
 
         $userrole   = $this->auth_manager->role();

@@ -7,9 +7,13 @@ if(@$user_extract2){
     $std_id = $user_extract->student_id;
   }
 
+  $std_img_pull = $this->db->select('profile_picture')
+                ->from('user_profiles')
+                ->where('user_id', $std_id)
+                ->get()->result();
   // echo "<pre>";print_r($apiKey);
   // echo "<pre>";print_r($sessionId);
-  // echo "<pre>";print_r($student_name);exit();
+  // echo "<pre>";print_r($std_img_pull);exit();
 
 ?>
 <script src='//static.opentok.com/v2/js/opentok.min.js'></script>
@@ -276,6 +280,10 @@ opacity: 1 !important;
             <div class="study__dashboard__top">
                 <!-- top point graph -->
                 <div class="progress__point__top">
+                    <div class="stuepicture">
+                        <img src="<?php echo base_url().'/'.$std_img_pull[0]->profile_picture; ?>" alt="">
+                    </div>
+
                     <h5>Points</h5>
                     <div class="graph__wrap">
                         <div class="bar__graph">
