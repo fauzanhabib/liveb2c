@@ -110,67 +110,69 @@
                 </div>
 
                 <div class="boxsessions__upcoming tab-content" id="tab-2">
-                    <div class="addingparent">
+                    <div id="parent" class="addingparent">
                     <?php foreach($histories as $h){ ?>
                         <div class="todaysessions article-loop">
-                        <span class="date"><?php echo date('M j Y', strtotime($h->date)); ?></span>
-                        <span class="time">
-                            <?php
-                                $defaultstart  = strtotime($h->start_time);
-                                $hourattstart  = date("H:i", $defaultstart);
-                                echo $hourattstart;
-                            ?>
-                            -
-                            <?php
-                                $defaultend  = strtotime($h->end_time);
-                                $endsession = $defaultend-(5*60);
-                                $hourattend  = date("H:i", $endsession);
-                                echo $hourattend;
-                            ?>
-                            <?php
-                                echo "(UTC ".$gmt_val.")"
-                            ?>
-                        </span>
-                        <form name="sessiondone" target="_blank" action="<?php echo(site_url('b2c/student/opentok/checkrecord/'));?>" method="post">
-                            <input type="hidden" name="sessionid" value="<?php echo @$h->session; ?>">
-                            <input type="submit" class="recorded_session_download" value="Recorded Session">
-                        </form>
+                            <span class="date"><?php echo date('M j Y', strtotime($h->date)); ?></span>
+                            <span class="time">
+                                <?php
+                                    $defaultstart  = strtotime($h->start_time);
+                                    $hourattstart  = date("H:i", $defaultstart);
+                                    echo $hourattstart;
+                                ?>
+                                -
+                                <?php
+                                    $defaultend  = strtotime($h->end_time);
+                                    $endsession = $defaultend-(5*60);
+                                    $hourattend  = date("H:i", $endsession);
+                                    echo $hourattend;
+                                ?>
+                                <?php
+                                    echo "(UTC ".$gmt_val.")"
+                                ?>
+                            </span>
+                            <form name="sessiondone" target="_blank" action="<?php echo(site_url('b2c/student/opentok/checkrecord/'));?>" method="post">
+                                <input type="hidden" name="sessionid" value="<?php echo @$h->session; ?>">
+                                <input type="submit" class="recorded_session_download" value="Recorded Session">
+                            </form>
 
-                        <div class="boxinfo activesession">
-                            <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $h->coach_id;?>">
-                                Coach Info
+                            <div class="boxinfo activesession">
+                                <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $h->coach_id;?>">
+                                    Coach Info
+                                </div>
                             </div>
-                            <!-- MODAL -->
-                            <div class="modal-wrapper">
-                                <div class="modal">
-                                    <a class="btn-close"></a>
-                                    <div class="content">
-                                        <div class="profile__info">
-                                            <div class="profile__info__picture">
-                                                <img src="" alt="" class="profile_picturecoaches">
-                                            </div>
-                                            <div class="profile__info__name">
-                                                <span class="namecoaches"></span>
-                                            </div>
-                                            <!-- <div class="profile__info__birth">
-                                                <label>Date Of Birth </label>
-                                                <span class="birthdatecoaches"></span>
-                                            </div> -->
-                                            <div class="profile__info__language">
-                                                <label>Native Language </label>
-                                                <span class="spoken_languagecoaches"></span>
-                                            </div>
-                                            <div class="profile__info__gender">
-                                                <label>Gender</label>
-                                                <span class="gendercoaches"></span>
-                                            </div>
-                                        </div>
+                        </div>
+                    <?php } ?>
+
+                    <!-- MODAL -->
+                    <div class="modal-wrapper modalkedua">
+                        <div class="modal">
+                            <a class="btn-close"></a>
+                            <div class="content">
+                                <div class="profile__info">
+                                    <div class="profile__info__picture">
+                                        <img src="" alt="" class="profile_picturecoaches">
+                                    </div>
+                                    <div class="profile__info__name">
+                                        <span class="namecoaches"></span>
+                                    </div>
+                                    <!-- <div class="profile__info__birth">
+                                        <label>Date Of Birth </label>
+                                        <span class="birthdatecoaches"></span>
+                                    </div> -->
+                                    <div class="profile__info__language">
+                                        <label>Native Language </label>
+                                        <span class="spoken_languagecoaches"></span>
+                                    </div>
+                                    <div class="profile__info__gender">
+                                        <label>Gender</label>
+                                        <span class="gendercoaches"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                    <?php } ?>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
@@ -180,35 +182,38 @@
 
 <script type="text/javascript">
 
+    // $(document).on('click', '.viewcoaches', function() {
+        // console.log('a');
+    $(".viewcoaches").click(function() {
+        var coach_id = $(this).attr('idcoaches');
+        // console.log(coach_id);
+        $('.modalkedua').addClass('open');
+        $.ajax({
+            url: "<?php echo site_url('b2c/student/session/coach_detail');?>",
+            type: 'POST',
+            dataType: 'json',
+            data: {coach_id : coach_id},
+            success: function(data) {
+                // console.log(data);
+                var name = data[0].name;
+                var email = data[0].email;
+                var birthdate = data[0].birthdate;
+                var spoken_language = data[0].spoken_language;
+                var gender = data[0].gender;
+                // var timezone = data[0].timezone;
+                var profile_picture = data[0].profile_picture;
 
-$(".viewcoaches").click(function() {
-    coach_id = $(this).attr('idcoaches');
+                $('.namecoaches').text(name);
+                // $('.emailcoach').text(email);
+                $('.birthdatecoaches').text(birthdate);
+                $('.spoken_languagecoaches').text(spoken_language);
+                $('.gendercoaches').text(gender);
+                // $('.timezonecoach').text(': '+timezone);
+                $('.profile_picturecoaches').attr('src','<?php echo base_url();?>'+profile_picture);
 
-    $.ajax({
-        url: "<?php echo site_url('b2c/student/session/coach_detail');?>",
-        type: 'POST',
-        dataType: 'json',
-        data: {coach_id : coach_id},
-        success: function(data) {
-            var name = data[0].name;
-            var email = data[0].email;
-            var birthdate = data[0].birthdate;
-            var spoken_language = data[0].spoken_language;
-            var gender = data[0].gender;
-            // var timezone = data[0].timezone;
-            var profile_picture = data[0].profile_picture;
-
-            $('.namecoaches').text(name);
-            // $('.emailcoach').text(email);
-            $('.birthdatecoaches').text(birthdate);
-            $('.spoken_languagecoaches').text(spoken_language);
-            $('.gendercoaches').text(gender);
-            // $('.timezonecoach').text(': '+timezone);
-            $('.profile_picturecoaches').attr('src','<?php echo base_url();?>'+profile_picture);
-
-        }
+            }
+        })
     });
-});
 
 </script>
 

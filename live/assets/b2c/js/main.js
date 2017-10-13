@@ -152,12 +152,12 @@
   $(document).ready(function() {
 
       // MODAL
-      $('.trigger').each(function() {
-          $(this).click(function() {
-              $(this).next().addClass('open');
-              return false;
-          });
-      });
+      // $('.trigger').each(function() {
+      //     $(this).click(function() {
+      //         $(this).next().addClass('open');
+      //         return false;
+      //     });
+      // });
       $('a.btn-close').click(function() {
           $(this).parents('.modal-wrapper').removeClass('open');
       });
