@@ -3982,7 +3982,7 @@ footer span {
     color: #ed584c;
     font-size: 0.9em; }
 
-.about__us {
+.about__us, .contact__us {
   width: 50%; }
 
 .contact__us--address {

@@ -157,6 +157,14 @@
 
         //     return true;
         // }
+
+        // MODAL
+          $('.trigger').each(function() {
+              $(this).click(function() {
+                  $(this).next().addClass('open');
+                  return false;
+              });
+          });
     </script>
 </body>
 

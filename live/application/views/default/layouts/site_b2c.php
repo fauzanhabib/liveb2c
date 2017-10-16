@@ -272,7 +272,7 @@
 		</footer>
 
 
-        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
     <script>
       //redirect ----------------------------------------- class="clicklimenu"
       $('.clicklimenu').on('click', function(){
@@ -366,6 +366,14 @@
             }
          });
        });
+
+      // MODAL
+      $('.trigger').each(function() {
+          $(this).click(function() {
+              $(this).next().addClass('open');
+              return false;
+          });
+      });
     </script>
     <script type="text/javascript">
         var d = new Date()
