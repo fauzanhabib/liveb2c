@@ -34,11 +34,12 @@ class Study_dashboard extends MY_Site_Controller {
         $tokenresult = $this->study_progress->GenerateToken();
       }
       if(@$tokenresult){
+        $tokenresult = $this->study_progress->GenerateToken();
         $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
         $gcp = json_decode($this->study_progress->GetCurrentProgress($tokenresult));
         $gwp = json_decode($this->study_progress->GetWeeklyProgress($tokenresult));
 
-        // echo('<pre>');print_r($gsp); exit;
+        // echo('<pre>');print_r($tokenresult); exit;
         $mt_status_to_colour = array(
           "passed" => "bg-blue-gradient",
           "open" => "bg-white-gradient",
