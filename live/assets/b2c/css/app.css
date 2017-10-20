@@ -338,7 +338,7 @@ button:focus {
 .margin-b-25, .prev_step {
   margin: 0 0 25px; }
 
-.flex--center, .pic__circle--small, #noti__counter, .pt_logo, .dashboard__bookacoach .boxselect, .dashboard__bookacoach .tab-content .bookcoach__flexing, .contact__us--address .left {
+.flex--center, .pic__circle--small, #noti__counter, .pt_logo, .dashboard__bookacoach .boxselect, .dashboard__bookacoach .tab-content .bookcoach__flexing, .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn, .contact__us--address .left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
