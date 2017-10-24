@@ -233,29 +233,29 @@ class find_coaches extends MY_Site_Controller {
 
         $languagelist = array('Language..' => 'Language..') + $this->common_function->language();
 
-        $this->load->library('call2');
+        // $this->load->library('call2');
 
-        $sql = $this->db->select('dyned_pro_id, server_dyned_pro')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();  
-        $dyned_pro_id = $sql[0]->dyned_pro_id;
-        $server_dyned_pro = $sql[0]->server_dyned_pro;
+        // $sql = $this->db->select('dyned_pro_id, server_dyned_pro')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();  
+        // $dyned_pro_id = $sql[0]->dyned_pro_id;
+        // $server_dyned_pro = $sql[0]->server_dyned_pro;
 
-        // $this->call2->init("site11", "sutomo@dyned.com");
-        $this->call2->init($server_dyned_pro, $dyned_pro_id);
-        $a = $this->call2->getDataJson();
-        $b = json_decode($a);
-        // echo "<pre>";
-        // print_r($b);
-        // exit();
+        // // $this->call2->init("site11", "sutomo@dyned.com");
+        // $this->call2->init($server_dyned_pro, $dyned_pro_id);
+        // $a = $this->call2->getDataJson();
+        // $b = json_decode($a);
+        // // echo "<pre>";
+        // // print_r($b);
+        // // exit();
         
-        $cert_studying = '';
+        // $cert_studying = '';
    
-        if(@$b == ''){
-            $cert_studying = 0;
-        } else if(@$b->error == 'Invalid student email'){
-                $cert_studying = 0;
-        } else {
-                $cert_studying = $b->cert_studying;    
-        }
+        // if(@$b == ''){
+        //     $cert_studying = 0;
+        // } else if(@$b->error == 'Invalid student email'){
+        //         $cert_studying = 0;
+        // } else {
+        //         $cert_studying = $b->cert_studying;    
+        // }
 
         $vars = array(
             'country' => $country,
@@ -265,10 +265,10 @@ class find_coaches extends MY_Site_Controller {
         );
 
 
-        // update student pt score
+        // // update student pt score
 
-        $this->db->where('user_id',$this->auth_manager->userid());
-        $this->db->update('user_profiles',array('cert_studying' => $cert_studying, 'dcrea' => time(), 'dupd' => time()));
+        // $this->db->where('user_id',$this->auth_manager->userid());
+        // $this->db->update('user_profiles',array('cert_studying' => $cert_studying, 'dcrea' => time(), 'dupd' => time()));
 
         $this->template->content->view('contents/b2c/student/find_coach/index', $vars);
         $this->template->publish();
