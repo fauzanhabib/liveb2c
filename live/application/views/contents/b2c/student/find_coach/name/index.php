@@ -263,7 +263,6 @@
                                             <span>Available At</span>
                                             <i class="fa fa-angle-down"></i>
                                         </div>
-
                                         <div class="accordion-panel">
                                             <div style="display:flex;flex-direction: column;margin:15px;">
                                                  <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date..">
@@ -274,9 +273,14 @@
                                                  <form class="pure-form">
                                                     <div class="list-schedule" style="color:#939393;height:150px;margin-top:5px;">
                                                         <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
-                                                        <div id="result_<?php echo(@$coaches[$i]->id); ?>">
-                                                            <img src='<?php echo base_url(); ?>assets/images/small-loading.gif' alt='loading...' style="display:none;" id="schedule-loading"/>
+                                                        <div class="schedule-loading" style="display:none;">
+                                                            <div class="loader" id="loader">
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                            </div>                                                            
                                                         </div>
+                                                        <div id="result_<?php echo(@$coaches[$i]->id); ?>"></div>
                                                     </div>
                                                 </form>   
                                             </div>
@@ -392,36 +396,38 @@
                 var m = $('[id^=result_]').html($('[id^=result_]').val());
                 // alert(loadUrl);
                 if (dateformat != '') {
-                    $("#schedule-loading").show();
+                    $(".schedule-loading").show();
                     $(".txt").hide();
                     $("#result_" + this.name).load(loadUrl, function () {
                         for(i=0; i<m.length; i++){
                             $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
                             $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
                         }
-                        $("#schedule-loading").hide();
+                        $(".schedule-loading").hide();
                     });
                 }
 
             });
 
-            $(".weekly_schedule").click(function () {
-                //alert(this.name);
-                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
-                var m = $('[id^=result_]').html($('[id^=result_]').val());
-                //alert(loadUrl);
-                if (this.value != '') {
-                    $("#schedule-loading").show();
-                    $(".txt").hide();
-                    $("#result_" + this.value).load(loadUrl, function () {
-                        for(i=0; i<m.length; i++){
-                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
-                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
-                        }
-                        $("#schedule-loading").hide();
-                    });
-                }
+            $(".weekly_schedule").each(function() {
+                $(this).click(function () {
+                    //alert(this.name);
+                    var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
+                    var m = $('[id^=result_]').html($('[id^=result_]').val());
+                    //alert(loadUrl);
+                    if (this.value != '') {
+                        $(".schedule-loading").show();
+                        $(".txt").hide();
+                        $("#result_" + this.value).load(loadUrl, function () {
+                            for(i=0; i<m.length; i++){
+                                $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
+                                $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
+                            }
+                            $(".schedule-loading").hide();
+                        });
+                    }
 
+                });
             });
         })
     </script>

@@ -175,20 +175,20 @@
           $(this).children(".accordion__panel--history").slideToggle();
       });
 
-      $(".weekly_schedule").each(function() {
-          $(this).click(function() {
-              //alert(this.name);
-              var loadUrl = "<?php echo site_url('student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
-              //alert(loadUrl);
-              if (this.value != '') {
-                  $("#schedule-loading").show();
-                  $(".txt").hide();
-                  $("#result_" + this.value).load(loadUrl, function() {
-                      $("#schedule-loading").hide();
-                  });
-              }
-          })
-      });
+      // $(".weekly_schedule").each(function() {
+      //     $(this).click(function() {
+      //         //alert(this.name);
+      //         var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
+      //         //alert(loadUrl);
+      //         if (this.value != '') {
+      //             // $(".schedule-loading").show();
+      //             $(".txt").hide();
+      //             $("#result_" + this.value).load(loadUrl, function() {
+      //               // $(".schedule-loading").hide();
+      //             });
+      //         }
+      //     })
+      // });
 
       // GRAPH BAR IN STUDY DASHBOARD
       $(".graph__bar__each").each(function() {
