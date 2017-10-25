@@ -73,6 +73,21 @@ class Profile extends MY_Site_Controller {
               ->where('user_id', $idchecknum)
               ->get()->result();
 
+      $get_gl_users = $this->db->select('cl_id')
+              ->from('users')
+              ->where('id', $idchecknum)
+              ->get()->result();
+
+      $id_gl_users = $get_gl_users[0]->cl_id+1;
+
+      $get_gl_dsa = $this->db->select('cl_name')
+              ->from('dsa_cert_levels')
+              ->where('cl_id', $id_gl_users)
+              ->get()->result();
+
+      $goal_name = $get_gl_dsa[0]->cl_name;
+      // echo('<pre>');print_r($get_gl_dsa); exit;
+
       $status = @$getsat[0]->status;
       //Check Number Verification ------------------------------
       $listspoke = array_values($this->common_function->language());
@@ -91,12 +106,13 @@ class Profile extends MY_Site_Controller {
           'country_code' => $country_code,
           'partner_country' => $partner_country,
           'status' => $status,
-          'listspoke' => $listspoke
+          'listspoke' => $listspoke,
+          'goal_name' => $goal_name
 
       );
-      if ($this->auth_manager->role() == 'STD') {
-          $vars['server_dyned_pro'] = $this->common_function->server_code();
-      }
+      // if ($this->auth_manager->role() == 'STD') {
+      //     $vars['server_dyned_pro'] = $this->common_function->server_code();
+      // }
 
       // echo $key;
       // echo('<pre>');print_r($vars); exit;
@@ -182,6 +198,7 @@ class Profile extends MY_Site_Controller {
         $classtext = 'textFail';
         $classcont = 'failedNotif';
         $message = 'Incorrect old password';
+        $updated_pass = '';
       }else{
         $updated_pass = $this->phpass->hash($newpass);
         // $updated_pass = $this->auth_manager->hashing_password($this->input->post('new_password'));

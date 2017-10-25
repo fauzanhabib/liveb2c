@@ -130,6 +130,10 @@
 			<div class="profile__additional__title">
 				Additional Info
 			</div>
+      <div class="profile__additional__goal">
+				<label>Certification Goal</label>
+				<span><?php echo $goal_name;?></span>
+			</div>
 			<div class="profile__additional__token">
 				<label>Token</label>
 				<span><?php echo $data[0]->token_amount;?></span>
@@ -149,10 +153,6 @@
 			<div class="profile__additional__address">
 				<label>Address</label>
 				<span class="switchText"><?php if($data[0]->address){echo $data[0]->address;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
-			</div>
-			<div class="profile__additional__goal">
-				<label>Certification Goal</label>
-				<span><?php echo $data[0]->cert_studying;?></span>
 			</div>
 			<div class="profile__additional__like">
 				<label>Likes</label>
@@ -447,7 +447,7 @@ $(document).on('click', '#savepass', function() {
       success: function(data){
         var obj = JSON.parse(data);
         // console.log(obj[0].newpass);
-        // console.log(newpass);
+        // console.log(data);
         $("#"+obj[0].classtext).text(obj[0].textUpd);
         $("#"+obj[0].classcont).show().delay(2000).fadeOut("slow");
         $('#currpass').val("");

@@ -239,11 +239,11 @@
 
         </main>
         <footer class="flex--center">
-		    <span>Powered by</span>
+		    <!-- <span>Powered by</span>
             <a style="pointer-events: none;cursor: default;">
-                <svg width="48px" viewBox="0 0 56 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg width="48px" viewBox="0 0 56 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
                     <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-                    <title>powerbyDynEd</title>
+                    <!-- <title>powerbyDynEd</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
                     <g id="Live-portal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -268,7 +268,7 @@
                         </g>
                     </g>
                 </svg>
-            </a>
+            </a> -->
 		</footer>
 
 

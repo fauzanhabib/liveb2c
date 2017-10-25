@@ -135,7 +135,9 @@
 
                     <!-- result -->
                     <div class="dashboard__resultbook">
-                       
+                       <?php if(!$data){ ?>
+                        <span>No coaches matched your criteria</span>
+                        <?php }else{ ?>
                         <?php foreach ($data as $d) { ?>
                         <div class="boxprofilecoach article-loop">
                             <div class="profilecoach">
@@ -366,7 +368,7 @@
                                     </ul>
                                 </div>
                         </div>
-                        <?php } ?>
+                        <?php } } ?>
 
                         <!-- dummy element to align left the content -->
                         <div class="boxprofilecoach flex-dummy"></div>
