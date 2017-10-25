@@ -198,6 +198,7 @@ class Profile extends MY_Site_Controller {
         $classtext = 'textFail';
         $classcont = 'failedNotif';
         $message = 'Incorrect old password';
+        $updated_pass = '';
       }else{
         $updated_pass = $this->phpass->hash($newpass);
         // $updated_pass = $this->auth_manager->hashing_password($this->input->post('new_password'));

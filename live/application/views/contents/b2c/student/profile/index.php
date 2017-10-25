@@ -447,7 +447,7 @@ $(document).on('click', '#savepass', function() {
       success: function(data){
         var obj = JSON.parse(data);
         // console.log(obj[0].newpass);
-        // console.log(newpass);
+        // console.log(data);
         $("#"+obj[0].classtext).text(obj[0].textUpd);
         $("#"+obj[0].classcont).show().delay(2000).fadeOut("slow");
         $('#currpass').val("");
