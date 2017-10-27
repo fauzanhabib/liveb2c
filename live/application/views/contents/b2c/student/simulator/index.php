@@ -132,7 +132,7 @@
   </style>
 
   <div class="header_sim">
-    <h1>DODO <small>Network test</small></h1>
+    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_neo.png'); ?>"> <small>Network test</small>
   </div>
   <div style="margin-top: 420px;text-align: center;">
     <div id="status_container" class="prettyBox hover">
