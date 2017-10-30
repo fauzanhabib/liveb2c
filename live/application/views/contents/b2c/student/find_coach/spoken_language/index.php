@@ -322,6 +322,35 @@
                     } 
                 });
             });
+
+            //DROPDOWN COUNTRY AND LANGUAGES BOOKING A COACH
+            (function($, window, document, undefined) {
+
+                'use strict';
+
+                var $html = $('html');
+
+                $html.on('click.ui.dropdown', '.js-dropdown', function(e) {
+                    e.preventDefault();
+                    $(this).toggleClass('is-open');
+                });
+
+                $html.on('click.ui.dropdown', '.js-dropdown [data-dropdown-value]', function(e) {
+                    e.preventDefault();
+                    var $item = $(this);
+                    var $dropdown = $item.parents('.js-dropdown');
+                    $dropdown.find('.js-dropdown__input').val($item.data('dropdown-value'));
+                    $dropdown.find('.js-dropdown__current').text($item.text());
+                });
+
+                $html.on('click.ui.dropdown', function(e) {
+                    var $target = $(e.target);
+                    if (!$target.parents().hasClass('js-dropdown')) {
+                        $('.js-dropdown').removeClass('is-open');
+                    }
+                });
+
+            })(jQuery, window, document);
         </script>
 
         <script type="text/javascript">
@@ -404,23 +433,25 @@
 
             });
 
-            $(".weekly_schedule").click(function () {
-                //alert(this.name);
-                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
-                var m = $('[id^=result_]').html($('[id^=result_]').val());
-                //alert(loadUrl);
-                if (this.value != '') {
-                    $("#schedule-loading").show();
-                    $(".txt").hide();
-                    $("#result_" + this.value).load(loadUrl, function () {
-                        for(i=0; i<m.length; i++){
-                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
-                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
-                        }
-                        $("#schedule-loading").hide();
-                    });
-                }
+            $(".weekly_schedule").each(function() {
+                $(this).click(function () {
+                    //alert(this.name);
+                    var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
+                    var m = $('[id^=result_]').html($('[id^=result_]').val());
+                    //alert(loadUrl);
+                    if (this.value != '') {
+                        $("#schedule-loading").show();
+                        $(".txt").hide();
+                        $("#result_" + this.value).load(loadUrl, function () {
+                            for(i=0; i<m.length; i++){
+                                $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
+                                $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
+                            }
+                            $("#schedule-loading").hide();
+                        });
+                    }
 
+                });
             });
         })
     </script>

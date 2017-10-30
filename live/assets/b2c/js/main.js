@@ -166,9 +166,9 @@
       });
 
       //ARCODION SHOW BOOKING TIME IN PAGE BOOKING A COACH
-      $('.accordion-thumb').click(function() {
-          $(this).next(".accordion-panel").slideToggle();
-      });
+      // $('.accordion-thumb').click(function() {
+      //     $(this).next(".accordion-panel").slideToggle();
+      // });
 
       $(document).on("click", ".accordion-item", function() {
           // $('.accordion-item').click( function() {
@@ -236,54 +236,54 @@
       })
 
       //DATE TIME PICKER IN BOOKING A COACH
-      $(function() {
-          $(".calendar").datepicker({
-              dateFormat: 'dd - MM - yy',
-              firstDay: 1
-          });
+      // $(function() {
+      //     $(".calendar").datepicker({
+      //         dateFormat: 'dd - MM - yy',
+      //         firstDay: 1
+      //     });
 
-          $(document).on('click', '.date-picker .input', function(e) {
-              var $me = $(this),
-                  $parent = $me.parents('.date-picker');
-              $parent.toggleClass('open');
-          });
+      //     $(document).on('click', '.date-picker .input', function(e) {
+      //         var $me = $(this),
+      //             $parent = $me.parents('.date-picker');
+      //         $parent.toggleClass('open');
+      //     });
 
-          $(".calendar").on("change", function() {
-              var $me = $(this),
-                  $selected = $me.val(),
-                  $parent = $me.parents('.date-picker');
-              $parent.find('.result').children('span').html($selected);
-          });
-      });
+      //     $(".calendar").on("change", function() {
+      //         var $me = $(this),
+      //             $selected = $me.val(),
+      //             $parent = $me.parents('.date-picker');
+      //         $parent.find('.result').children('span').html($selected);
+      //     });
+      // });
 
       //DROPDOWN COUNTRY AND LANGUAGES BOOKING A COACH
-      (function($, window, document, undefined) {
+      // (function($, window, document, undefined) {
 
-          'use strict';
+      //     'use strict';
 
-          var $html = $('html');
+      //     var $html = $('html');
 
-          $html.on('click.ui.dropdown', '.js-dropdown', function(e) {
-              e.preventDefault();
-              $(this).toggleClass('is-open');
-          });
+      //     $html.on('click.ui.dropdown', '.js-dropdown', function(e) {
+      //         e.preventDefault();
+      //         $(this).toggleClass('is-open');
+      //     });
 
-          $html.on('click.ui.dropdown', '.js-dropdown [data-dropdown-value]', function(e) {
-              e.preventDefault();
-              var $item = $(this);
-              var $dropdown = $item.parents('.js-dropdown');
-              $dropdown.find('.js-dropdown__input').val($item.data('dropdown-value'));
-              $dropdown.find('.js-dropdown__current').text($item.text());
-          });
+      //     $html.on('click.ui.dropdown', '.js-dropdown [data-dropdown-value]', function(e) {
+      //         e.preventDefault();
+      //         var $item = $(this);
+      //         var $dropdown = $item.parents('.js-dropdown');
+      //         $dropdown.find('.js-dropdown__input').val($item.data('dropdown-value'));
+      //         $dropdown.find('.js-dropdown__current').text($item.text());
+      //     });
 
-          $html.on('click.ui.dropdown', function(e) {
-              var $target = $(e.target);
-              if (!$target.parents().hasClass('js-dropdown')) {
-                  $('.js-dropdown').removeClass('is-open');
-              }
-          });
+      //     $html.on('click.ui.dropdown', function(e) {
+      //         var $target = $(e.target);
+      //         if (!$target.parents().hasClass('js-dropdown')) {
+      //             $('.js-dropdown').removeClass('is-open');
+      //         }
+      //     });
 
-      })(jQuery, window, document);
+      // })(jQuery, window, document);
 
 
       //SELECTED AND SHOW MENU BOOKING A COACH IN MOBILE
