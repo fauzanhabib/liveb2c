@@ -2078,7 +2078,30 @@ footer span {
     width: 32%;
     max-height: 300px; }
     .boxsession__livecomponentstue .study__dashboard__bottom .study__progress__graph h5 {
-      text-align: center; } }
+      text-align: center; }
+  .contact__us--address {
+    width: 100%;
+    margin-bottom: 20px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .contact__us--address .left {
+      width: 90%;
+      -webkit-box-ordinal-group: 3;
+          -ms-flex-order: 2;
+              order: 2; }
+      .contact__us--address .left div {
+        width: 100%;
+        text-align: center; }
+    .contact__us--address .right {
+      width: 90%;
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1; } }
 
 .starsPos {
   z-index: -999 !important;
