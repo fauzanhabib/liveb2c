@@ -2327,7 +2327,8 @@ footer span {
   position: relative; }
   @media screen and (max-width: 500px) {
     .dashboard__notif {
-      width: 100%; } }
+      width: 94% !important;
+      margin: auto !important; } }
   .dashboard__notif span {
     font-size: 0.9em; }
   .dashboard__notif i {
