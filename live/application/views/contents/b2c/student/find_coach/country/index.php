@@ -311,15 +311,15 @@
                 </div>
             </section>
         <script>
-            $( function() {
-                $("#datepicker").datepicker({ 
+            $("#datepicker").each(function() {
+                $(this).datepicker({ 
                     minDate: 0,
                     beforeShow:function(textbox, instance){
                         $('.datepicker__here').append($('#ui-datepicker-div'));
                         $('#ui-datepicker-div').hide();
                     } 
                 });
-            } );
+            });
 
             $('.datepicker__each').each(function() {
                 $(this).datepicker({ 
@@ -362,9 +362,7 @@
         </script>
 
         <script type="text/javascript">
-        $(function () {
-            $(document).ready(function () {
-
+            $('.datepicker__each').click(function () {
                 $('.list').each(function() {
                 var $dropdown = $(this);
 
@@ -419,27 +417,29 @@
                 cache: false
             });
 
-            $(".datepicker__each").on('change', function () {
-                var date = $(this).val();
-                var newdate = date.split('/');
-                var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
-                //alert(this.name);
-                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/availability/country'); ?>" + "/" + this.name + "/" + dateformat;
-                var m = $('[id^=result_]').html($('[id^=result_]').val());
-                // alert(loadUrl);
-                if (dateformat != '') {
-                    $(".schedule-loading").show();
-                    $(".txt").hide();
-                    $("#result_" + this.name).load(loadUrl, function () {
-                        for(i=0; i<m.length; i++){
-                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
-                            $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
-                        }
-                        $(".schedule-loading").hide();
-                    });
-                }
+            $(".datepicker__each").each(function() {
+               $(this).on('change', function () {
+                    var date = $(this).val();
+                    var newdate = date.split('/');
+                    var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
+                    //alert(this.name);
+                    var loadUrl = "<?php echo site_url('b2c/student/find_coaches/availability/country'); ?>" + "/" + this.name + "/" + dateformat;
+                    var m = $('[id^=result_]').html($('[id^=result_]').val());
+                    // alert(loadUrl);
+                    if (dateformat != '') {
+                        $(".schedule-loading").show();
+                        $(".txt").hide();
+                        $("#result_" + this.name).load(loadUrl, function () {
+                            for(i=0; i<m.length; i++){
+                                $('#'+m[i].id).html($('#'+m[i].id).html().replace('/*',' '));
+                                $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
+                            }
+                            $(".schedule-loading").hide();
+                        });
+                    }
 
-            });
+                });
+            })
 
             $(".weekly_schedule").each(function() {
                 $(this).click(function () {
@@ -461,37 +461,41 @@
 
                 });
             });
+    </script>
+    <script>
+        $('.accordion-thumb').click(function() {
+            $(this).next(".accordion-panel").slideToggle();
         });
     </script>
 
-        <script type="text/javascript">
-            // $(function () {
-            // var now = new Date();
-            // var day = ("0" + (now.getDate() + 1)).slice(-2);
-            // var month = ("0" + (now.getMonth() + 1)).slice(-2);
-            // var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
-            // $('.datepicker').datepicker({
-            // startDate: resultDate,
-            // format: 'yyyy-mm-dd',
-            // autoclose: true,
-            // });
-            //     $('.dateavailable').change(function(){
-            //         $('.dateavailable').parsley().reset();
-            //     });
-            // });
-    
-        document.getElementById("datepicker").onchange = function() {
-            // console.log(this.value);
-            var date = this.value;
-            var newdate = date.split('/');
-            var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
-            // console.log(dateformat);
-            var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+dateformat;
-            $('#date_value').attr('action', newurl);
-        };
+    <script type="text/javascript">
+        // $(function () {
+        // var now = new Date();
+        // var day = ("0" + (now.getDate() + 1)).slice(-2);
+        // var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        // var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
+        // $('.datepicker').datepicker({
+        // startDate: resultDate,
+        // format: 'yyyy-mm-dd',
+        // autoclose: true,
+        // });
+        //     $('.dateavailable').change(function(){
+        //         $('.dateavailable').parsley().reset();
+        //     });
+        // });
 
-        </script>
+    document.getElementById("datepicker").onchange = function() {
+        // console.log(this.value);
+        var date = this.value;
+        var newdate = date.split('/');
+        var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
+        // console.log(dateformat);
+        var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+dateformat;
+        $('#date_value').attr('action', newurl);
+    };
 
-        <script>
-            $('.article-loop').paginate(6);
-        </script>
+    </script>
+
+    <script>
+        $('.article-loop').paginate(6);
+    </script>
