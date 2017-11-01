@@ -174,11 +174,12 @@
                     </div>
                 <?php }else{ ?>
                     <div class="boxsessions__today tab-content current" id="tab-1">
-                    <?php foreach($data as $d){ ?>
+                    <?php $checkdt=1; foreach($data as $d){ ?>
                     <div class="todaysessions">
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
                         <span class="time">
-                        <div id="clockdiv" class="">
+                        <?php if($checkdt==1){ ?>
+                        <div id="clockdiv" class="datetime">
                             <span class="hours"></span>
                             <font>:</font>
                             <span class="minutes"></span>
@@ -187,13 +188,14 @@
                             <span>-</span>
                             <span class="smalltext">Until Next Session</span>
                         </div>
+                        <?php } ?>
                         </span>
-                        <div class="boxinfo">
+                        <div id="todaysess" class="boxinfo">
                             <div class="playsession" id="nosess">
                                 <i class="fa fa-play"></i>
                             </div>
                             <div class="playsession hide" id="sess">
-                                <form name ="livesession" action="<?php echo(site_url('opentok/live/'));?>" method="post">
+                                <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
                                     <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
                                     <button type="submit" class="fa fa-play"></button>
                                 </form>
@@ -231,7 +233,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php } ?>
+                    <?php $checkdt++; } ?>
                 </div>
                 <?php } ?>
 
@@ -385,6 +387,7 @@ $(".viewcoach").click(function() {
                     $("#clockdiv").hide();
                     $("#nosess").hide();
                     $("#sess").removeClass("hide");
+                    $("#todaysess").addClass("activesession");
                     $.get("<?php echo site_url('b2c/student/dashboard/get_id');?>",function(data) {
                         var val_id = data;
                         // console.log(val_id);
