@@ -205,7 +205,7 @@
       $(this).replaceWith($repthis);
       // console.log($(this));
       $('.switchText1').focus();
-      $(document).on('click', '#btn_upd_save', function() {
+      $(document).on('touchstart click', '#btn_upd_save', function() {
         updatedVal = $(this).parent().find('input').val();
         if(updatedVal != '' && getval != updatedVal){
           //check if input is only spaces
@@ -248,7 +248,7 @@
          }
       });
 
-      $(document).on('click', '#btn_upd_cancel', function() {
+      $(document).on('touchstart click', '#btn_upd_cancel', function() {
         var editVal = getval;
         if (editVal == '') {
           clicked = 0;
@@ -265,9 +265,9 @@
     }
   };
 
-  $(document).on("click",".switchText", switchText);
+  $(document).on("touchstart click",".switchText", switchText);
 
-  $(document).on('click', '.genderChange', function() {
+  $(document).on('touchstart click', '.genderChange', function() {
     genderVal = $(this).text();
     // console.log(genderVal);
     if(genderVal == 'Male'){
@@ -303,7 +303,7 @@
     });
   });
 
-  $(document).on('click', '#gender_cancel', function() {
+  $(document).on('touchstart click', '#gender_cancel', function() {
     if(typeof updatedValGen == 'undefined'){
       cancelVal = genderVal;
     }else {
@@ -328,7 +328,7 @@
         select_cont.multipleSelect("setSelects", selected_lang);
       }
     });
-    $(document).on('click', '#spoken_lang_save', function() {
+    $(document).on('touchstart click', '#spoken_lang_save', function() {
       var default_spoken  = $('.conv_lang').text();
       var selected_spoken = select_cont.multipleSelect("getSelects");
       var conv_selected   = selected_spoken.join(', ');
@@ -361,13 +361,13 @@
       // console.log(default_spoken);
       // console.log(conv_selected);
     });
-    $(document).on('click', '#spoken_lang_cancel', function() {
+    $(document).on('touchstart click', '#spoken_lang_cancel', function() {
       $('.conv_lang').show();
       $('#div_spoken').hide();
     });
 </script>
 <script>
-$(document).on('click', '#inputDate', function() {
+$(document).on('touchstart click', '#inputDate', function() {
     currDate        = '<?php echo date("m/d/Y", strtotime($data[0]->date_of_birth)); ?>';
     placeholderDate = $(this).text();
     // console.log(currDate);
@@ -383,7 +383,7 @@ $(document).on('click', '#inputDate', function() {
         changeYear: true,
         yearRange: "1970:2012"
     });
-    $(document).on('click', '#btn_date_save', function() {
+    $(document).on('touchstart click', '#btn_date_save', function() {
       changed_date = $('#datepicker').val();
       if(changed_date == currDate || changed_date == ''){
         $('#dateChangeCont').hide();
@@ -411,7 +411,7 @@ $(document).on('click', '#inputDate', function() {
 
       }
     });
-    $(document).on('click', '#btn_date_cancel', function() {
+    $(document).on('touchstart click', '#btn_date_cancel', function() {
       $('#dateChangeCont').hide();
       $('#inputDate').show();
     });
@@ -421,7 +421,7 @@ $(document).on('click', '#inputDate', function() {
 <script>
 //Save Password
 
-$(document).on('click', '#savepass', function() {
+$(document).on('touchstart click', '#savepass', function() {
   currpass = $('#currpass').val();
   newpass  = $('#newpass').val();
   confpass = $('#confpass').val();
