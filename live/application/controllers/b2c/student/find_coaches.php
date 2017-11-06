@@ -162,18 +162,18 @@ class find_coaches extends MY_Site_Controller {
         $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
 
         $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
-        $standard_coach_cost = $setting[0]->standard_coach_cost;
-        $elite_coach_cost = $setting[0]->elite_coach_cost;
-        $session_duration = $setting[0]->session_duration;
+        $standard_coach_cost = @$setting[0]->standard_coach_cost;
+        $elite_coach_cost = @$setting[0]->elite_coach_cost;
+        $session_duration = @$setting[0]->session_duration;
 
         $vars = array(
             'coaches' => $coaches,
             'selected' => $category,
             'rating' => $this->coach_rating_model->get_average_rate(),
             // 'pagination' => @$pagination,
-            'standard_coach_cost' => $standard_coach_cost,
-            'elite_coach_cost' => $elite_coach_cost,
-            'session_duration' => $session_duration,
+            'standard_coach_cost' => @$standard_coach_cost,
+            'elite_coach_cost' => @$elite_coach_cost,
+            'session_duration' => @$session_duration,
             'datasession' => $datasession,
             'countrylist' => $countrylist,
             'languagelist' => $languagelist

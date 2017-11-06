@@ -53,6 +53,121 @@ var $tube = 'com.live.email';
             // }
     }
 
+    function tes_smtp(){
+
+        $email_body ='<html lang="en">
+
+            <head>
+                <meta http-equiv="content-type" content="text/html" ; charset="utf-8">
+                <title>DynEd Live Email</title>
+
+
+                <style type="text/css" media="screen">
+                    @media screen {
+                        h1,
+                        h2,
+                        h3 {}
+                    }
+                </style>
+
+                <style type="text/css" media="screen">
+
+                    /* Medium Screen */
+                    
+                    @media only screen and (max-width: 660px) {
+                        table[class="container"] {
+                            width: 480px !important;
+                        }
+                        td[class="logo"] img {
+                            display: block;
+                            margin-left: auto!important;
+                            margin-right: auto!important;
+                        }
+                    }
+                    /* Small Screen*/
+                    
+                    @media only screen and (max-width: 500px) {
+                        table[class="container"] {
+                            width: 320px !important;
+                        }
+                        td[class="logo"] img {
+                            display: block;
+                            margin-left: auto!important;
+                            margin-right: auto!important;
+                        }
+                    }
+                </style>
+            </head>
+
+            <body bgcolor="#fafafa">
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#fafafa">
+                    <tr>
+                        <td>
+                            <table class="container" width="640px" align="center" border="0" cellpadding="0" cellspacing="0" style="margin-top: 20px ">
+                                <tr>
+                                    <td valign="top" class="logo" bgcolor="#ffffff" style="padding: 10px 20px 10px 20px; border: 0;">
+                                        <a href="http://live.dyned.com"><img src="http://i1300.photobucket.com/albums/ag89/Devananda_Onta/logo__zpslfnzndsv.png" alt="logo" width="auto" height="30">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" class="headline" bgcolor="#3199DD" style="padding: 30px 20px 10px 20px; border-left: 0; border-right: 0; font-family: Calibri, sans-serif; font-size: 24px; line-height: 22px; color: #ffffff;">
+                                        Coach Created
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" class="headline" bgcolor="#ffffff" style="padding: 40px 20px 40px 20px; border-left: 0; border-right: 0; font-family: Calibri, sans-serif; font-size: 15px; line-height: 22px; color: #666666;">
+                                        Hi Dude
+                                        <br>
+                                        Welcome to DynEd Live!
+                                        <br>Your email has been added to DynEd Live, as Coach Once your Role is approved, you can sign in with below information. 
+                                        <br>
+                                        <br>
+                                        Email = alo@dyned.com
+                                        <br>
+                                        Password = abs
+                                        <br><br><br>
+                                        You can change your password under your profile page on DynEd Live. 
+                                        For more information, please ask the administrator. Thank you!
+                                        <br><br> Best,
+                                        <br> DynEd Live Teams
+                                        <p style="font-family: Calibri, sans-serif; font-size: 13px; line-height: 12px; color: #CCCCCC;">
+                                            This email can`t receive replies. For more information, visit the
+                                            <a href="mailto:livesupport@dyned.com" style="text-decoration: none; color:#3EA6DD;">DynEd Live Help Center.</a>
+                                        </p>
+                                        <p style="font-family: Calibri, sans-serif; font-size: 13px; line-height: 12px; color: #CCCCCC;">
+                                            You received this mandatory email service announcement to update you about important changes to your DynEd product or account.
+                                        </p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" class="footer" bgcolor="#3199DD" style="text-align:center; padding: 10px; font-family: Calibri, sans-serif; font-size: 12px; line-height: 12px; color: #ffffff;">
+                                        DynEd Live - &copy; 2017 All Rights Reserved - DynEd International, Inc. 1350 Bayshore Highway, Suite 850. Burlingame, CA 94010
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </body>
+
+        </html>';
+
+        $this->CI->email->from('test.soerbakti@gmail.com', 'soerbakti');
+        $this->CI->email->to('devanandaonta@gmail.com'); 
+
+        $this->CI->email->subject('Email Test');
+        $this->CI->email->message($email_body);  
+
+        $this->CI->email->send();
+
+
+    }
+
     function testing(){
         $year = date("Y");
                 $email_body ='<html lang="en">
