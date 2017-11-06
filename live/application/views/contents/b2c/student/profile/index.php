@@ -56,7 +56,14 @@
 	<div class="profile">
 		<div class="profile__info">
 			<div class="profile__info__picture">
+      <?php
+        $check_url = base_url();
+        if($check_url == "http://localhost/"){
+      ?>
 				<img src="<?php echo base_url() . $data[0]->profile_picture;?>" alt="">
+      <?php } else {?>
+        <img src="<?php echo 'https://b2ctest.dyned.com/image/' . $data[0]->profile_picture;?>" alt="">
+      <?php } ?>
 			</div>
 			<div class="profile__info__name">
 				<?php echo $data[0]->fullname;?>
