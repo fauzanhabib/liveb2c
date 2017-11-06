@@ -83,13 +83,18 @@
 
         <script>
 
-            $(function(){
-                $('#submit_summary').click(function(){
-                    location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+            
+                $(document).on('touchstart click', '#submit_summary', function () {
+                     location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
                 });
-                $('#cancel_summary').click(function() {
+
+                $(document).on('touchstart click', '#cancel_summary', function () {
                     location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches/search/' . $search_by); ?>";
-                })
-            });
+                });
+
+
+            
 
     </script>
+
+
