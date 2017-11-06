@@ -16,6 +16,7 @@ if(@$user_extract2){
   // echo "<pre>";print_r($std_img_pull);exit();
 
 ?>
+<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
 <script src='//static.opentok.com/v2/js/opentok.min.js'></script>
 <script charset="utf-8">
     var apiKey = '<?php echo $apiKey ?>';
@@ -114,10 +115,11 @@ $(document).ready(function(){
      });
   }
 
-   $('#kirim').click(function(){
+   $(document).on('touchstart click', '#kirim', function () {
+     console.log('a');
      var pesan = $('#pesan').val();
      var user  = '<?php echo $this->auth_manager->get_name();?>';
-     console.log(user);
+    //  console.log(user);
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
           alert("Oops, you can't send an empty chat");
