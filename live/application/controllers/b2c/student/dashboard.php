@@ -11,6 +11,8 @@ class Dashboard extends MY_Site_Controller {
         $this->load->model('appointment_model');
         $this->load->model('class_member_model');
         $this->load->library('send_sms');
+        $this->load->library('send_email');
+        $this->load->library('email');
         $this->load->library('Study_progress');
         //checking user role and giving action
         if (!$this->auth_manager->role() || $this->auth_manager->role() != 'STD') {

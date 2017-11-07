@@ -47,6 +47,7 @@ class find_coaches extends MY_Site_Controller {
         $this->load->library('webex_function');
         $this->load->library('email_structure');
         $this->load->library('send_email');
+        $this->load->library('send_sms');
 
         @date_default_timezone_set('Etc/GMT+0');
 
@@ -787,8 +788,8 @@ class find_coaches extends MY_Site_Controller {
                         $student_gmt = $gmt_student[0]->gmt;
                         $coach_gmt = $gmt_coach[0]->gmt;
 
-                        $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
-                        $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
+                        $this->send_email->student_book_coach_smtp($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
+                        $this->send_email->notif_coach_smtp($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
                         
                         $this->messages->add($message, 'success');
   
@@ -2197,8 +2198,8 @@ class find_coaches extends MY_Site_Controller {
                         $student_gmt = $gmt_student[0]->gmt;
                         $coach_gmt = $gmt_coach[0]->gmt;
 
-                        $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
-                        $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
+                        $this->send_email->student_book_coach_smtp($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
+                        $this->send_email->notif_coach_smtp($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
                         
                         
                         $this->messages->add($message, 'success');
