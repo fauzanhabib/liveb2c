@@ -4033,13 +4033,17 @@ footer span {
       -ms-flex-pack: justify;
           justify-content: space-between; }
   .contact__us__form .p10 {
-    width: 48%; }
+    width: 48%;
+    margin-bottom: 10px; }
     .contact__us__form .p10 input {
-      width: 93%; }
+      width: 93%;
+      border-radius: 4px; }
   .contact__us__form .p10__textarea {
-    width: 100%; }
+    width: 100%;
+    margin-bottom: 10px; }
     .contact__us__form .p10__textarea textarea {
-      width: 97%; }
+      width: 97%;
+      border-radius: 4px; }
 
 .control {
   display: -webkit-box;
