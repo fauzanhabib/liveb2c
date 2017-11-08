@@ -323,7 +323,7 @@
   <script>
     var select_cont   = $('.lang_spoken').multipleSelect();
     $('#div_spoken').hide();
-    $(document).on('click', '.conv_lang', function() {
+    $(document).on('touchstart click', '.conv_lang', function() {
       $('.conv_lang').hide();
       $('#div_spoken').show();
       var pull_lang     = $('.conv_lang').text();
