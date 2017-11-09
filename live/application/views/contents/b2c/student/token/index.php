@@ -69,7 +69,7 @@
                                 <div class="content">
                                     <div class="input_request_token">
                                         <div class="profile">
-                                            <?php echo form_open('b2c/student/token/create', 'role="form" class="pure-form" data-parsley-validate');?>
+                                            <?php echo form_open('b2c/student/token/create', 'role="form" class="pure-form" style="display:flex;" data-parsley-validate');?>
                                                 <input class="input" type="number" name="token_amount" id="phonenum1" placeholder="Token Amount.." onkeypress="return numOnly(event)" />
                                                 <button type="submit" class="neobutton__small">Submit</button>
                                             <?php echo form_close(); ?>
