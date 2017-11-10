@@ -8,7 +8,11 @@ class Study_progress {
     function __construct() {}
 
     public function GenerateToken(){
+    // public function GenerateToken($std_email='', $std_paswd=''){
+
       $useraccount = json_encode(array(
+          // 'username'=>$std_email,
+          // 'password'=>$std_paswd
           'username'=>'ios',
           'password'=>'password'
       ));

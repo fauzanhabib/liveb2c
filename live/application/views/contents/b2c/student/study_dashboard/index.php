@@ -45,7 +45,7 @@
 				        </svg> -->
 
 				        <div class="donut__progress__info">
-				            <div class="point__progress__info"><?php echo $gsp->data->certification_level;?></div>
+				            <div class="point__progress__info"><?php echo $gsp->data->goal_certification_level;?></div>
 				        </div>
 				    </div>
 				</div>

@@ -103,7 +103,7 @@
                         Your study data appears on the lower part of the screen.
                     </div>
                     <div class="accordion__menu">
-                        TA chat feature appears on the lower right part of the screen. From this chat window, you may communicate with your coach by writing.
+                        Chat feature appears on the lower right part of the screen. From this chat window, you may communicate with your coach by writing.
                     </div>
                     <div class="accordion__menu">
                         After the session ends, the screen will redirect you to a Session Summaries page.

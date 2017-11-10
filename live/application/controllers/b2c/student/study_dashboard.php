@@ -27,11 +27,22 @@ class Study_dashboard extends MY_Site_Controller {
       $id = $this->auth_manager->userid();
       $this->template->title = "Study Dashboard";
 
+      $pull_std = $this->db->select('email,password')
+                                 ->from('users')
+                                 ->where('id', $id)
+                                 ->get()->result();
+
+      $std_email = $pull_std[0]->email;
+      $std_paswd = $pull_std[0]->password;
+
+      // echo('<pre>');print_r($pull_std); exit;
+
       $tokenresult = $this->session->userdata('token_api');
       // $tokenresult = $this->study_progress->GenerateToken();
-      // echo('<pre>');print_r($tokenresult); exit;
       if(!@$tokenresult){
         $tokenresult = $this->study_progress->GenerateToken();
+        // $tokenresult = $this->study_progress->GenerateToken($std_email, $std_paswd);
+        // echo('<pre>');print_r($tokenresult); exit;
       }
       if(@$tokenresult){
         $tokenresult = $this->study_progress->GenerateToken();

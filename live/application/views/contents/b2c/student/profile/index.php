@@ -44,6 +44,11 @@
   background: none;
   letter-spacing: 1px;
   font-size: 11px;
+  border-radius: 5px;
+  -moz-appearance: none;
+}
+.optGender{
+  color: black;
 }
 </style>
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
