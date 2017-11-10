@@ -476,6 +476,12 @@
 
         </script>
 
+        <script>
+            $('.accordion-thumb').click(function() {
+                $(this).next(".accordion-panel").slideToggle();
+            });
+        </script>
+
         <script type="text/javascript">
             // $(function () {
             // var now = new Date();
