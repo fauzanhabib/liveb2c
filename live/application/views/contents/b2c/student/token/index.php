@@ -57,27 +57,12 @@
                         <?php echo form_close(); ?>
                             <span>You are requesting <?php echo $data->token_amount; ?> token right now</span>
                         <?php }else{ ?>
-                        <div class="bxrequest__requesttokens__buttonreq trigger">
-                            <button class="neobutton">Buy Token</button>
+                        <div class="bxrequest__requesttokens__buttonreq">
+                            <a class="neobutton" href="https://b2ctest.dyned.com" target="_blank">Buy Token</a>
                         </div>
                         <?php } ?>
 
                         <!-- MODAL -->
-                        <div class="modal-wrapper">
-                            <div class="modal">
-                                <a class="btn-close"></a>
-                                <div class="content">
-                                    <div class="input_request_token">
-                                        <div class="profile">
-                                            <?php echo form_open('b2c/student/token/create', 'role="form" class="pure-form" style="display:flex;" data-parsley-validate');?>
-                                                <input class="input" type="number" name="token_amount" id="phonenum1" placeholder="Token Amount.." onkeypress="return numOnly(event)" />
-                                                <button type="submit" class="neobutton__small">Submit</button>
-                                            <?php echo form_close(); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="bxhistory tab-content flex__direction--col hide" id="tab-2">

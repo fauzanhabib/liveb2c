@@ -36,13 +36,14 @@ class Login extends MY_Controller {
 
           if($check_session){
               if((!$check_session[0]->user_id) && (!$check_session[0]->session)){
-
+								// exit('a');
                   $this->session->set_userdata('user_id_session',$user->id);
                   redirect('home/confirmation');
               } else if (!$check_session){
-
+								// exit('b');
                   redirect('login');
               } else {
+								// exit('c');
                   if($this->auth_manager->role() == 'STD'){
                       redirect('b2c/student/dashboard');
                   } else if($this->auth_manager->role() == 'CCH'){
@@ -52,7 +53,23 @@ class Login extends MY_Controller {
                   }
               }
           } else {
-              redirect('logout');
+						session_start();
+		        $session_user_login = session_id();
+
+		        $this->db->where('user_id',$user_id);
+		        $this->db->where('session',$session_user_login);
+		        $this->db->delete('user_login');
+
+						if($this->auth_manager->role() == 'STD'){
+								redirect('b2c/student/dashboard');
+						} else if($this->auth_manager->role() == 'CCH'){
+								redirect('coach/dashboard');
+						} else{
+								redirect('account/identity/detail/profile');
+						}
+						// echo $this->auth->loggedin();
+						// exit('d');
+              // redirect('logout');
           }
 
       }
