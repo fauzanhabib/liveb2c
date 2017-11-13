@@ -35,7 +35,7 @@
     	    <!-- desktop header and nav menu -->
     <header class="header__desktop">
         <div class="header__logo">
-            <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_neo.png'); ?>">
+            <img src="<?php echo base_url().('assets/b2c/img/logo_neo.png'); ?>">
         </div>
         <div class="header__profile flex">
             <div id="noti__container">
