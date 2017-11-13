@@ -2785,6 +2785,13 @@ footer span {
   float: right;
   margin-right: 1em; }
 
+.iconEdit, #btn_upd_save, #btn_upd_cancel,
+.switchText, .genderChange, #gender_cancel,
+.conv_lang, #spoken_lang_save, #spoken_lang_cancel,
+#inputDate, #btn_date_save, #btn_date_cancel,
+#savepass {
+  cursor: pointer; }
+
 .activetitle {
   font-weight: bold;
   background-color: rgba(39, 52, 84, 0.36) !important;
