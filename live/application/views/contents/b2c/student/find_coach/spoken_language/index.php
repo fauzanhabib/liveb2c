@@ -67,32 +67,36 @@
                             <div class="bookcoach__flexing">
                                 <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker">
                                 <style>
-                                    #ui-datepicker-div {
+                                    .datepicker__here #ui-datepicker-div {
+                                        top: 0!important;
+                                        left: -140px!important;
+                                    }
+                                    .datepickerEach__here #ui-datepicker-div {
                                         top: 0!important;
                                         left: -140px!important;
                                     }
                                     @media only screen and (device-width:768px) and (device-height:1024px) and (-webkit-min-device-pixel-ratio:1) {
-                                        #ui-datepicker-div {
+                                        .datepickerEach__here #ui-datepicker-div {
                                             left: -117px!important;
                                         }
                                     }
                                     @media only screen and (max-device-width:414px) {
-                                        #ui-datepicker-div {
+                                        .datepickerEach__here #ui-datepicker-div {
                                             left: -50px!important;
                                         }
                                     }
                                     @media only screen and (max-device-width:375px) {
-                                        #ui-datepicker-div {
+                                        .datepickerEach__here #ui-datepicker-div {
                                             left: -76px!important;
                                         }
                                     }
                                     @media only screen and (max-device-width:360px) {
-                                        #ui-datepicker-div {
+                                        .datepickerEach__here #ui-datepicker-div {
                                             left: -83px!important;
                                         }
                                     }
                                     @media only screen and (max-device-width:320px) {
-                                        #ui-datepicker-div {
+                                        .datepickerEach__here #ui-datepicker-div {
                                             left: -102px!important;
                                         }
                                     }
