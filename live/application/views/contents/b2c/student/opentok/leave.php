@@ -22,7 +22,7 @@ $(document).ready(function(){
           success: function(data){
             window.onbeforeunload = null;
             alert('Rating: ' + star + ' out of 5');
-            // window.location.href = "<?php echo site_url('student/dashboard');?>";
+            window.location.href = "<?php echo site_url('student/dashboard');?>";
           }
          });
         }
