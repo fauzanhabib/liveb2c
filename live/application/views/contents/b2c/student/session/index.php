@@ -62,7 +62,7 @@
             <div class="tabsessions">
                 <ul class="tabs">
                     <li class="tab-link current" data-tab="tab-1">Upcoming Session</li>
-                    <li class="tab-link" data-tab="tab-2">History Session</li>
+                    <li class="tab-link" data-tab="tab-2">Session History</li>
                 </ul>
             </div>
             <div class="boxsessions">

@@ -827,7 +827,7 @@ footer span {
   background: #fff;
   list-style: none;
   margin: 0;
-  padding: 12px 10px;
+  padding: 12px 15px;
   max-height: 200px;
   overflow-y: auto; }
 
@@ -841,13 +841,11 @@ footer span {
 #notifications ul li a {
   color: #8b8b8b;
   text-decoration: none;
-  padding: 6px 15px;
   cursor: pointer;
   font-size: 0.9em; }
   #notifications ul li a span {
     color: #26b2a1;
-    font-size: 1em;
-    padding: 0 15px; }
+    font-size: 1em; }
 
 #notifications ul li a:hover {
   cursor: pointer; }
@@ -1362,7 +1360,8 @@ footer span {
         opacity: 0;
         -webkit-transform: translate(0, 50%);
             -ms-transform: translate(0, 50%);
-                transform: translate(0, 50%); }
+                transform: translate(0, 50%);
+        position: absolute; }
       .accordion li input[type=checkbox]:checked ~ i:before {
         -webkit-transform: translate(2px, 1px) rotate(45deg);
             -ms-transform: translate(2px, 1px) rotate(45deg);
@@ -3750,14 +3749,29 @@ table.table-reschedule {
   @media screen and (max-width: 500px) {
     .modal__signout {
       width: 80%; } }
-  .modal__signout .content span {
-    padding: 0 5px; }
-    @media screen and (max-width: 500px) {
-      .modal__signout .content span {
-        font-size: 0.9em; } }
-    .modal__signout .content span a {
-      color: #49C5FE;
-      cursor: pointer; }
+  .modal__signout .content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .modal__signout .content .signout__content__confirmation {
+      width: 30%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+    .modal__signout .content span {
+      padding: 0 5px; }
+      @media screen and (max-width: 500px) {
+        .modal__signout .content span {
+          font-size: 0.9em; } }
+      .modal__signout .content span a {
+        color: #49C5FE;
+        cursor: pointer; }
 
 .modal-wrapper.open .modal,
 .modal-wrapper.open .modal__signout {

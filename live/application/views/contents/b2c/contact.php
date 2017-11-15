@@ -134,25 +134,24 @@
                 </form>
             </div>
         </main>
-        <div class="contact__us--address">
-                <div class="left">
-                    <div>
-                        <h3>DynEd International, Inc.</h3>
-                        1350 Bayshore Highway, Suite 850<br>
-                        Burlingame, CA 94010<br>
-                        USA<br>
-                        Phone: +1-650-375-7011
-                    </div>
+        <!-- <div class="contact__us--address">
+            <div class="left">
+                <div>
+                    <h3>DynEd International, Inc.</h3>
+                    1350 Bayshore Highway, Suite 850<br>
+                    Burlingame, CA 94010<br>
+                    USA<br>
+                    Phone: +1-650-375-7011
                 </div>
-                <div class="right">
-                    <iframe width='100%' height='180px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/djiepanji.n3c1a3hj/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGppZXBhbmppIiwiYSI6InNXakYwcUUifQ.f1sLn25sWb-DA3VNMQlKJw'></iframe>
-                </div>
-        </div>
-        <footer class="flex--center">
+            </div>
+            <div class="right">
+                <iframe width='100%' height='180px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/djiepanji.n3c1a3hj/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGppZXBhbmppIiwiYSI6InNXakYwcUUifQ.f1sLn25sWb-DA3VNMQlKJw'></iframe>
+            </div>
+        </div> -->
+        <!-- <footer class="flex--center">
             <span>Powered by</span>
             <a style="pointer-events: none;cursor: default;">
                 <svg width="48px" viewBox="0 0 56 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
                     <title>powerbyDynEd</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -179,7 +178,7 @@
                     </g>
                 </svg>
             </a>
-        </footer>
+        </footer> -->
     </div>
 
     <script>

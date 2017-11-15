@@ -85,8 +85,10 @@
                 <div class="modal__signout">
                     <div class="content">
                         <div>Are you sure?</div>
-                        <span><a href="<?php echo site_url('logout'); ?>">Yes</a></span>
-                        <span><a class="span-close">No</a></span>
+                        <div class="signout__content__confirmation">
+                            <span><a href="<?php echo site_url('logout'); ?>">Yes</a></span>
+                            <span><a class="span-close">No</a></span>
+                        </div>
                     </div>
                 </div>
             </div>

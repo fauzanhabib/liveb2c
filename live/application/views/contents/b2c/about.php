@@ -109,11 +109,12 @@
         <main class="main flex--center">
             <div class="about__us">
                 <h2 class="title">About Us</h2>
-                <p><b>DynEd International, Inc.</b>, has the world's most comprehensive lineup of award-winning English Language Teaching (ELT/ESL) solutions.</p>
+                <!-- <p><b>DynEd International, Inc.</b>, has the world's most comprehensive lineup of award-winning English Language Teaching (ELT/ESL) solutions.</p>
                 <p>DynEd's courses cover all proficiency levels and include a range of age-appropriate courses, from kids in school to adults in university, corporate, aviation or other vocational settings. DynEd courses have been approved by Ministries of Education in several countries.</p>
                 <p>With over 13 million active users, DynEd courses are designed to be used in a blended learning environment, along with teachers and classroom support.</p>
                 <p>DynEd's headquarters and development center is in Burlingame, California – overlooking the San Francisco Bay. The company has sales and support offices around the world and additional development centers in Beijing and Jakarta.</p>
-                <p>For a representative in your area, or to become a partner, please <a href="mailto:info@dyned.com">contact us</a>.</p>
+                <p>For a representative in your area, or to become a partner, please <a href="mailto:info@dyned.com">contact us</a>.</p> -->
+                <p style="text-align: justify;">neo LIVE is our online platform for your personalized coaching sessions where, from the very first session, you will talk about yourself using the English language you've already learned. That will help you personalize what you have been studying in the neo Study App. With neo LIVE, you can practice with our trained coaches anytime, anywhere. The coach can see all your study data, which they will use to help you learn more efficiently. neo LIVE also gives your coach a personalized coaching script to guide your conversation class.</p>
             </div>
         </main>
         <footer class="flex--center">

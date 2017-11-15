@@ -260,7 +260,7 @@ class Dashboard extends MY_Site_Controller {
 
             $user_notification = array(
                 'user_id' => $id,
-                'description' => 'Congratulation '.$pull_name[0]->fullname.' and Welcome to DynEd Live.',
+                'description' => 'Congratulations and Welcome to neo LIVE.',
                 'status' => 2,
                 'dcrea' => time(),
                 'dupd' => time(),

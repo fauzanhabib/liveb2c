@@ -1,5 +1,5 @@
 <div class="heading text-cl-primary padding15">
-	<h1 style="color:#49c5fe;font-size:1.2em;">Notification</small></h1>
+	<h1 style="color:#49c5fe;font-size:1.2em;">Notifications</small></h1>
 </div>
 
 <div class="box seeAll__page">
