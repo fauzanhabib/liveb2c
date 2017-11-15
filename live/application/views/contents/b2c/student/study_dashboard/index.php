@@ -55,37 +55,44 @@
 
 		  	<div class="progress__achievement">
 		  		<div class="study__progress__achievement">
-		  			<div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
+<!-- 		  			<div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt2']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt3']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt4']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt5']; ?>"></div>
-		  			<div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div>
+		  			<div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div> -->
+					
+					<!-- =======edited by rendy bustari========== -->
+					<?php
+					for($l=1;$l<=$max_buletan_student;$l++){ ?>
+						<div class="bullet__achievement <?php echo @$student_color['mt'.$l];?>"></div>
+					<?php 
+						}
+					?>
 
+
+					<!-- ========================================= -->
+					
 		  			<div class="achievement__point__info">
 		  				<h5><?php echo $gsp->data->study->points_until_today;?></h5>
 		  				<h3>Study</h3>
 		  			</div>
 		  		</div>
 		  		<div class="coach__progress__achievement">
+		  			<!-- <div class="bullet__achievement bg-green-gradient"></div>
 		  			<div class="bullet__achievement bg-green-gradient"></div>
 		  			<div class="bullet__achievement bg-green-gradient"></div>
 		  			<div class="bullet__achievement bg-green-gradient"></div>
-		  			<div class="bullet__achievement bg-green-gradient"></div>
-		  			<div class="bullet__achievement bg-red-gradient"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
-		  			<div class="bullet__achievement"></div>
+		  			<div class="bullet__achievement bg-red-gradient"></div> -->
+					<!-- =========edited by rendy bustar============== -->
+					<?php
+					for($i=1;$i<=$max_buletan;$i++){ ?>
+						<div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
+					<?php 
+						}
+					?>
+					<!-- ================================ -->
+
 
 		  			<div class="achievement__point__info">
 		  				<h5><?php echo $gsp->data->coach->points_until_today;?></h5>
@@ -488,11 +495,16 @@
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
 
 <script>
+	// lingkaran bulat pertama
+
+	var innerupcoach   = '<?php echo $gsp->data->coach->points_until_today;?>';
+	var innerdowncoach = '<?php echo $gsp->data->coach->points_to_pass;?>';
+	var innerperccoach = innerupcoach / innerdowncoach;
 
 	var outter = $('.outter--circle.circle');
-outter.circleProgress({
+	outter.circleProgress({
     startAngle: -Math.PI / 2,
-    value: 0.9,
+    value: innerperccoach,
     lineCap: 'round',
     fill: {gradient: ['green', 'yellow']}
 });
@@ -506,21 +518,33 @@ var innerperc = innerup / innerdown;
 inner.circleProgress({
     startAngle: -Math.PI / 2,
     value: innerperc,
+    // value: 0.3,
     lineCap: 'round',
     fill: {gradient: ['#49c0fe', '#4b80fc']}
 });
 
 // daily step progress
 var step = $('.step--circle.circle');
-      var stepVal = 0.6 // circle step value
-step.circleProgress({
-    startAngle: -Math.PI / 2,
-    value: stepVal,
-    lineCap: 'round',
-    fill: {gradient: ['#5f6b8e', '#bcc2d3']}
-});
+
+    var stepVal = '<?php echo $gsp->data->percentage_points;?>';
+
+    var titikVal = '<?php echo $gsp->data->percentage_days;?>';
+
+    var newstepVal = stepVal/100;
+    var newtitikVal = titikVal/100;
+
+    console.log(titikVal);
+
+    
+	step.circleProgress({
+	    startAngle: -Math.PI / 2,
+	    value: newstepVal,
+	    lineCap: 'round',
+	    fill: {gradient: ['#5f6b8e', '#bcc2d3']}
+	});
       // circle step value condition to meet the goal
-      if(stepVal >= 0.4) {
+
+      if(newstepVal >= newtitikVal) {
           step.circleProgress({
               fill: {gradient: ['green', 'yellow']}
           });
@@ -529,7 +553,7 @@ step.circleProgress({
       // Source https://jsbin.com/yaqaxotete/edit?html,css,js,output
       function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
         var angleInRadians = (angleInDegrees + 90);
-        var dailyGoal = (angleInRadians + 360 / 100 * 40) * Math.PI / 180.0; //where to put the goal value
+        var dailyGoal = (angleInRadians + 360 / 100 * titikVal) * Math.PI / 180.0; //where to put the goal value
         return {
           x: centerX + (radius * Math.cos(dailyGoal)),
           y: centerY + (radius * Math.sin(dailyGoal))

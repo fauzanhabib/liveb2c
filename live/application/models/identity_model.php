@@ -376,7 +376,7 @@ class identity_model extends MY_Model {
                                 }
                             }
                         }
-                    $this->db->where_in('c.partner_id', $partner_array);
+                    $this->db->where_in('c.subgroup_id', $group_array);
                     if($date_available){
                         $this->db->join('coach_dayoffs f', 'a.id = f.coach_id', 'full');
                     }
@@ -441,7 +441,7 @@ class identity_model extends MY_Model {
                             }
                         }
                     }
-                    $this->db->or_where_in('c.subgroup_id', $group_array);
+                    $this->db->where_in('c.partner_id', $partner_array);
                     }else{
                         $partner_array= array($partner_id);
                         foreach(@$coach_supplier as $cs){

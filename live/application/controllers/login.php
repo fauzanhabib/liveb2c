@@ -11,6 +11,7 @@ class Login extends MY_Controller {
 
 	// Index
 	public function index(){
+
 		//Generate Token API --
 		$tokenresult = $this->study_progress->GenerateToken();
 		if(@$tokenresult){
@@ -76,6 +77,7 @@ class Login extends MY_Controller {
 
       // Checking user's login attempt
       if($this->input->post('__submit')) {
+
 			$check_login = $this->db->select('*')
 												->from('users')
 												->where('email', $this->input->post('email'))
@@ -95,9 +97,21 @@ class Login extends MY_Controller {
          else if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) && $sso_enabled == 1) {
 							// echo "<pre>";print_r($check_login);exit();
               // insert timezone
+
               $min_raw = $this->input->post("min_raw");
               $userid  = $this->auth_manager->userid();
 
+              $this->session->set_userdata('u_p',$this->input->post('password'));
+
+              // get_sso_username;
+              $g_u_u = $this->db->select('sso_username')
+                                ->from('users')
+                                ->where('email',$this->input->post('email'))
+                                ->get()->result();
+
+              
+              $this->session->set_userdata('u_u',$g_u_u[0]->sso_username);
+              // =====
 
               if ($min_raw < 0) {
                 $minutes = abs($min_raw);

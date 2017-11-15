@@ -3,18 +3,22 @@ class Study_progress {
     var $gcp;
     var $gsp;
     var $gwp;
-
     // var $tokenresult;
-    function __construct() {}
+    function __construct() {
+        
+
+    }
+
 
     public function GenerateToken(){
+
     // public function GenerateToken($std_email='', $std_paswd=''){
 
+        $this->CI = &get_instance();
+        
       $useraccount = json_encode(array(
-          // 'username'=>$std_email,
-          // 'password'=>$std_paswd
-          'username'=>'ios',
-          'password'=>'password'
+          'username'=>$this->CI->session->userdata('u_u'),
+          'password'=>$this->CI->session->userdata('u_p')
       ));
       // Preparing API URL
       $rt = curl_init();
@@ -69,8 +73,8 @@ class Study_progress {
         //
         // // Free up the resources $curl is using
         // curl_close($curl);
-
-        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-record/ios/current');
+        $this->CI = &get_instance();
+        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-record/'.$this->CI->session->userdata('u_u').'/current');
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
@@ -79,7 +83,7 @@ class Study_progress {
         curl_setopt($ch, CURLOPT_POST,0);
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        	'Content-Type: application/json',
+            'Content-Type: application/json',
           'X-Dyned-Tkn: ' . $tokenresult)
         );
 
@@ -95,7 +99,8 @@ class Study_progress {
         // echo $result;
     }
     public function GetStudyProgress($tokenresult) {
-        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-progress/ios');
+        $this->CI = &get_instance();
+        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-progress/'.$this->CI->session->userdata('u_u'));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
@@ -104,7 +109,7 @@ class Study_progress {
         curl_setopt($ch, CURLOPT_POST,0);
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        	'Content-Type: application/json',
+            'Content-Type: application/json',
           'X-Dyned-Tkn: ' . $tokenresult)
         );
 
@@ -118,7 +123,8 @@ class Study_progress {
         // echo $resp;
     }
     public function GetWeeklyProgress($tokenresult) {
-        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-record/ios');
+        $this->CI = &get_instance();
+        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-record/'.$this->CI->session->userdata('u_u'));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
@@ -127,7 +133,7 @@ class Study_progress {
         curl_setopt($ch, CURLOPT_POST,0);
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        	'Content-Type: application/json',
+            'Content-Type: application/json',
           'X-Dyned-Tkn: ' . $tokenresult)
         );
 

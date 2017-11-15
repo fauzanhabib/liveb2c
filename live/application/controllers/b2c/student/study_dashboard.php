@@ -38,15 +38,22 @@ class Study_dashboard extends MY_Site_Controller {
       // echo('<pre>');print_r($pull_std); exit;
 
       $tokenresult = $this->session->userdata('token_api');
+
       // $tokenresult = $this->study_progress->GenerateToken();
       if(!@$tokenresult){
         $tokenresult = $this->study_progress->GenerateToken();
         // $tokenresult = $this->study_progress->GenerateToken($std_email, $std_paswd);
         // echo('<pre>');print_r($tokenresult); exit;
       }
+
+
+
       if(@$tokenresult){
         $tokenresult = $this->study_progress->GenerateToken();
+
+
         $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
+
         $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
         $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
 
@@ -57,20 +64,60 @@ class Study_dashboard extends MY_Site_Controller {
           "locked" => "",
           "failed" => "bg-red-gradient"
         );
-        $mt_color = array(
-          'mt1' => $mt_status_to_colour[$gsp->data->study->mastery_tests[0]->status],
-          'mt2' => $mt_status_to_colour[$gsp->data->study->mastery_tests[1]->status],
-          'mt3' => $mt_status_to_colour[$gsp->data->study->mastery_tests[2]->status],
-          'mt4' => $mt_status_to_colour[$gsp->data->study->mastery_tests[3]->status],
-          'mt5' => $mt_status_to_colour[$gsp->data->study->mastery_tests[4]->status],
-          'mt6' => $mt_status_to_colour[$gsp->data->study->mastery_tests[5]->status]
-        );
+        // $mt_color = array(
+        //   'mt1' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[0]->status],
+        //   'mt2' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[1]->status],
+        //   'mt3' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[2]->status],
+        //   'mt4' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[3]->status],
+        //   'mt5' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[4]->status],
+        //   'mt6' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[5]->status]
+        // );
+
+        /*==============  
+          rendy bustari
+        ===============*/
+
+        $student_color = [];
+        $k = 1;
+        $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
+        
+        for($l=0;$l<$max_buletan_student;$l++){
+          $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
+          $k++;
+        }
+
+
+        
+        // bulatan coach color
+        $coach_status_color = array(
+          "passed" => "bg-green-gradient",
+          "open" => "bg-white-gradient",
+          "locked" => "",
+          "failed" => "bg-red-gradient"
+          );
+
+        $coach_color = [];
+        $j = 1;
+        $max_buletan = sizeof($gsp->data->coach->sessions);
+        
+        for($i=0;$i<$max_buletan;$i++){
+          $coach_color['cc'.$j] = @$coach_status_color[$gsp->data->coach->sessions[$i]->status];
+          $j++;
+        }
+
+        /*============================
+          end of edited rendy bustari
+        =============================*/
+
 
         $vars = array(
             'gsp' => @$gsp,
             'gcp' => @$gcp,
             'gwp' => @$gwp,
-            'mt_color' => @$mt_color
+            'student_color' => @$student_color,
+            'coach_color' => @$coach_color,
+            'max_buletan' => @$max_buletan,
+            'max_buletan_student' => @$max_buletan_student
         );
 
         // echo $key;
