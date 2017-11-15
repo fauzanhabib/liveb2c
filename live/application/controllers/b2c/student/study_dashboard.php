@@ -53,14 +53,9 @@ class Study_dashboard extends MY_Site_Controller {
 
 
         $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
-<<<<<<< cc81760ad1cbe26d144bebb058088497f7b4f98f
+
         $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
         $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
-=======
-        
-        $gcp = json_decode($this->study_progress->GetCurrentProgress($tokenresult));
-        $gwp = json_decode($this->study_progress->GetWeeklyProgress($tokenresult));
->>>>>>> student study dashboard
 
         // echo('<pre>');print_r($tokenresult); exit;
         $mt_status_to_colour = array(

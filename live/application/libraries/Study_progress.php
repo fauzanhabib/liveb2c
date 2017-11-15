@@ -11,21 +11,14 @@ class Study_progress {
 
 
     public function GenerateToken(){
-<<<<<<< cc81760ad1cbe26d144bebb058088497f7b4f98f
+
     // public function GenerateToken($std_email='', $std_paswd=''){
 
-      $useraccount = json_encode(array(
-          // 'username'=>$std_email,
-          // 'password'=>$std_paswd
-          'username'=>'ios',
-          'password'=>'password'
-=======
         $this->CI = &get_instance();
         
       $useraccount = json_encode(array(
           'username'=>$this->CI->session->userdata('u_u'),
           'password'=>$this->CI->session->userdata('u_p')
->>>>>>> student study dashboard
       ));
       // Preparing API URL
       $rt = curl_init();
