@@ -618,19 +618,26 @@ function fbwps(){
 	}
 
 	var browser=get_browser();
-	// console.log(browser);
+	console.log(browser);
 	if(browser.name == "Chrome" || browser.name == "Firefox"){
 		$('#browinfo').text(browser.name + ' v.' + browser.version);
-		if(browser.name == "Chrome" && browser.version < 59){
+		if(browser.name == "Chrome" && browser.version < 61){
 			$('#browmess').append('Your Chrome browser is <font style="color:#ba3a3a;font-weight:600;">outdated</font>. Please update by clicking <a href="https://www.google.com/chrome/browser/desktop/index.html" style="text-decoration: underline;">this link</a> then run this page again after you have updated.');
-		}else if(browser.name == "Chrome" && browser.version >= 59){
+		}else if(browser.name == "Chrome" && browser.version >= 61){
 			$('#browmess').append('Your Chrome is able to run session <a style="color: #58ba84;">&#x2714;</a>');
 		}else if(browser.name == "Firefox" && browser.version < 53){
 			$('#browmess').append('Your Firefox browser is <font style="color:#ba3a3a;font-weight:600;">outdated</font>. Please update by clicking <a href="https://www.mozilla.org/en-US/firefox/new/" style="text-decoration: underline;">this link</a> then run this page again after you have updated.');
 		}else if(browser.name == "Firefox" && browser.version >= 53){
 			$('#browmess').append('Your Firefox is able to run session <a style="color: #58ba84;">&#x2714;</a>');
 		}
-	}else{
+	}else if(browser.name == "Safari"){
+    $('#browinfo').text(browser.name + ' v.' + browser.version);
+    if(browser.version < 11){
+			$('#browmess').append('Your Safari browser is <font style="color:#ba3a3a;font-weight:600;">outdated</font>. Please update by clicking <a href="https://www.google.com/chrome/browser/desktop/index.html" style="text-decoration: underline;">this link</a> then run this page again after you have updated.');
+		}else if(browser.version >= 11){
+			$('#browmess').append('Your Safari is able to run session <a style="color: #58ba84;">&#x2714;</a>');
+		}
+  }else{
 		$('#browinfo').text(browser.name + ' v.' + browser.version);
 		$('#browmess').append('Your browser <font style="color:#ba3a3a;font-weight:600;">does NOT</font> support LIVE Session, please only use latest version of <a href="https://www.google.com/chrome/browser/desktop/index.html" style="text-decoration: underline;">Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/" style="text-decoration: underline;">Firefox</a>');
 	}
