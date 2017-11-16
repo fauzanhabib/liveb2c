@@ -541,7 +541,7 @@ class find_coaches extends MY_Site_Controller {
     public function book_by_single_date($date = '', $page='') {
         $this->template->title = 'Detail Schedule';
         
-        if ($date <= date('Y-m-d')) {
+        if ($date < date('Y-m-d')) {
             $this->messages->add('Invalid Date', 'warning');
             redirect('b2c/student/find_coaches/single_date/');
         }
