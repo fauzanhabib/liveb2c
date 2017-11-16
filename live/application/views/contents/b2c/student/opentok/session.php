@@ -393,19 +393,25 @@ opacity: 1 !important;
                     </div>
                     <div class="progress__achievement">
                         <div class="study__progress__achievement">
-                            <div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
+                            <!-- <div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt2']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt3']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt4']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt5']; ?>"></div>
-                            <div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div>
+                            <div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div> -->
+                            <?php
+                  					for($l=1;$l<=$max_buletan_student;$l++){ ?>
+                  						<div class="bullet__achievement <?php echo @$student_color['mt'.$l];?>"></div>
+                  					<?php
+                  						}
+                  					?>
                             <div class="achievement__point__info">
                                 <h5>29 K</h5>
                                 <h3>Study</h3>
                             </div>
                         </div>
                         <div class="coach__progress__achievement">
-                            <div class="bullet__achievement bg-green-gradient"></div>
+                            <!-- <div class="bullet__achievement bg-green-gradient"></div>
                             <div class="bullet__achievement bg-green-gradient"></div>
                             <div class="bullet__achievement bg-green-gradient"></div>
                             <div class="bullet__achievement bg-green-gradient"></div>
@@ -422,7 +428,13 @@ opacity: 1 !important;
                             <div class="bullet__achievement"></div>
                             <div class="bullet__achievement"></div>
                             <div class="bullet__achievement"></div>
-                            <div class="bullet__achievement"></div>
+                            <div class="bullet__achievement"></div> -->
+                            <?php
+                  					for($i=1;$i<=$max_buletan;$i++){ ?>
+                  						<div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
+                  					<?php
+                  						}
+                  					?>
                             <div class="achievement__point__info">
                                 <h5>27 K</h5>
                                 <h3>Coach</h3>
