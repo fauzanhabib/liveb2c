@@ -18,7 +18,7 @@ var $tube = 'com.live.email';
      * CodeIgniter Instance
      */
     private $CI;
-    
+
     public function __construct() {
         $this->CI = &get_instance();
         $this->CI->load->library('email');
@@ -32,7 +32,7 @@ var $tube = 'com.live.email';
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
+
         // $content['content'] = $this->CI->email_structure->header()
         //         .$this->CI->email_structure->title('TES')
         //         .$this->CI->email_structure->content('TES CONTENT')
@@ -46,8 +46,8 @@ var $tube = 'com.live.email';
                     $this->CI->queue->push($this->tube, $content, 'email.send_email');
 
                 // if ($this->CI->email->send($id ='', $content = '')) {
-                    
-                //     } else { 
+
+                //     } else {
                 //     echo $this->CI->email->print_debugger();
                 //     }
             // }
@@ -73,7 +73,7 @@ var $tube = 'com.live.email';
                 <style type="text/css" media="screen">
 
                     /* Medium Screen */
-                    
+
                     @media only screen and (max-width: 660px) {
                         table[class="container"] {
                             width: 480px !important;
@@ -85,7 +85,7 @@ var $tube = 'com.live.email';
                         }
                     }
                     /* Small Screen*/
-                    
+
                     @media only screen and (max-width: 500px) {
                         table[class="container"] {
                             width: 320px !important;
@@ -121,14 +121,14 @@ var $tube = 'com.live.email';
                                         Hi Dude
                                         <br>
                                         Welcome to DynEd Live!
-                                        <br>Your email has been added to DynEd Live, as Coach Once your Role is approved, you can sign in with below information. 
+                                        <br>Your email has been added to DynEd Live, as Coach Once your Role is approved, you can sign in with below information.
                                         <br>
                                         <br>
                                         Email = alo@dyned.com
                                         <br>
                                         Password = abs
                                         <br><br><br>
-                                        You can change your password under your profile page on DynEd Live. 
+                                        You can change your password under your profile page on DynEd Live.
                                         For more information, please ask the administrator. Thank you!
                                         <br><br> Best,
                                         <br> DynEd Live Teams
@@ -158,10 +158,10 @@ var $tube = 'com.live.email';
         </html>';
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
-        $this->CI->email->to('devanandaonta@gmail.com'); 
+        $this->CI->email->to('devanandaonta@gmail.com');
 
         $this->CI->email->subject('Email Test');
-        $this->CI->email->message($email_body);  
+        $this->CI->email->message($email_body);
 
         $this->CI->email->send();
 
@@ -188,7 +188,7 @@ var $tube = 'com.live.email';
                 <style type="text/css" media="screen">
 
                     /* Medium Screen */
-                    
+
                     @media only screen and (max-width: 660px) {
                         table[class="container"] {
                             width: 480px !important;
@@ -200,7 +200,7 @@ var $tube = 'com.live.email';
                         }
                     }
                     /* Small Screen*/
-                    
+
                     @media only screen and (max-width: 500px) {
                         table[class="container"] {
                             width: 320px !important;
@@ -236,14 +236,14 @@ var $tube = 'com.live.email';
                                         Hi Dude
                                         <br>
                                         Welcome to DynEd Live!
-                                        <br>Your email has been added to DynEd Live, as Coach Once your Role is approved, you can sign in with below information. 
+                                        <br>Your email has been added to DynEd Live, as Coach Once your Role is approved, you can sign in with below information.
                                         <br>
                                         <br>
                                         Email = alo@dyned.com
                                         <br>
                                         Password = abs
                                         <br><br><br>
-                                        You can change your password under your profile page on DynEd Live. 
+                                        You can change your password under your profile page on DynEd Live.
                                         For more information, please ask the administrator. Thank you!
                                         <br><br> Best,
                                         <br> DynEd Live Teams
@@ -277,52 +277,52 @@ var $tube = 'com.live.email';
             'subject' => 'Test Workera',
             'email' => 'test.soerbakti@gmail.com',
         );
-        
+
         $tesworker['content'] = $email_body;
 
         $this->CI->queue->push($this->tube, $tesworker, 'email.send_email');
     }
 
 
-    function add_user($email = '', $password='', $content='') {     
+    function add_user($email = '', $password='', $content='') {
         $year = date("Y");
         // Loads the email library
         // if ($content == 'add') {
         //         $data['subject'] = 'Add Region';
         //         $data['content'] = 'Your region has been created but still inactive.
         //                             Your password is '.$password;
-                   
+
         //         $this->CI->email->subject($data['subject']);
         //         $this->CI->email->message($data['content']);
         //         if ($this->CI->email->send($email = '', $password = '')) {
         //             echo "All OK";
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
 
         //             }
-               
+
         //     } else if ($content == 'cancelled') {
-                
+
         //         $data['subject'] = 'Token Request ';
-        //         $data['content'] = 'Your token request has been cancelled. 
+        //         $data['content'] = 'Your token request has been cancelled.
         //                             Amount : ';
-                    
+
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($data['content']);
         //          if ($this->CI->email->send($id = '', $content = '')) {
         //             echo "All OK";
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
         //     }
-            
+
         $email_add_reg = 'Your region has been created but still inactive.  Your password is '.$password;
 
         $addregion = array(
             'subject' => 'Add Region',
             'email' => $email,
         );
-        
+
         $addregion['content'] = '<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -332,12 +332,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -345,12 +345,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -360,56 +360,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -443,7 +443,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -486,7 +486,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -525,7 +525,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -537,12 +537,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -568,13 +568,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -583,14 +583,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -599,7 +599,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -609,10 +609,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -637,9 +637,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -699,12 +699,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -712,12 +712,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -727,56 +727,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -810,7 +810,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -853,7 +853,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -892,7 +892,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -904,12 +904,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -935,13 +935,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -950,14 +950,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -966,7 +966,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -976,10 +976,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -1004,9 +1004,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -1052,13 +1052,13 @@ var $tube = 'com.live.email';
 
         // $data['subject'] = 'New Password';
         // $data['content'] = 'Your new password is '.$password;
-           
+
         // $this->CI->email->subject($data['subject']);
         // $this->CI->email->message($data['content']);
         // if ($this->CI->email->send()) {
         //     echo "All OK";
 
-        // } else { 
+        // } else {
         //     echo $this->CI->email->print_debugger();
 
         // }
@@ -1069,19 +1069,19 @@ var $tube = 'com.live.email';
     function create_user($email = '', $realpassword = '', $content = '', $fullname = '', $type='', $partner = '') {
 
         $isi = '';
-        if($type == 'student') {    
+        if($type == 'student') {
             $isi = 'Your email has been added to DynEd Live, under '.$partner.' as a '.ucfirst($type).' Role. You now can sign in with below information.';
         } else if ($type == 'coach') {
             $isi = 'Your email has been added to DynEd Live, under '.$partner.' as a '.ucfirst($type).' Role. Once your Role is approved, you can sign in with below information.';
         }
         $year = date("Y");
-        
+
 
             $create_user = array(
             'subject' => ucfirst($type).' Login Created',
             'email' => $email,
         );
-        
+
         $create_user['content'] = '<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -1091,12 +1091,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -1104,12 +1104,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -1119,56 +1119,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -1202,7 +1202,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -1245,7 +1245,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -1284,7 +1284,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -1296,12 +1296,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -1328,13 +1328,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -1356,8 +1356,8 @@ var $tube = 'com.live.email';
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Email : '.$email.'
                                                                    <br>
                                                                     Password : '.$realpassword.'
@@ -1365,9 +1365,9 @@ var $tube = 'com.live.email';
                                                                    <br>
                                                                    You can change your password under your profile page on DynEd.<br><br>Best, <br>DynEd Live Teams.<br><br>
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -1376,7 +1376,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -1386,10 +1386,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -1414,9 +1414,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -1460,19 +1460,19 @@ var $tube = 'com.live.email';
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // if ($content == 'created') {
         //         $data['subject'] = ucfirst($type).' Created';
         //         //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Password = ' . $realpassword . ' If Super Admin Approve, you can login to DynEd Live as Partner Admin. For more information, please ask the administrator. Thank you';
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_body);
         //         if ($this->CI->email->send($id ='', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
-        //     } 
-            
+        //     }
+
     }
 
     //----------------------------------------------------Notif Admin-----------------------------------------------------------
@@ -1493,12 +1493,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -1506,12 +1506,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -1521,56 +1521,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -1604,7 +1604,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -1647,7 +1647,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -1686,7 +1686,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -1698,12 +1698,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -1736,13 +1736,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -1751,14 +1751,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -1767,7 +1767,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -1777,10 +1777,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -1805,9 +1805,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -1851,39 +1851,39 @@ var $tube = 'com.live.email';
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // if ($content == 'created') {
         //         $data['subject'] = ucfirst($type).' Created';
         //         //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Password = ' . $realpassword . ' If Super Admin Approve, you can login to DynEd Live as Partner Admin. For more information, please ask the administrator. Thank you';
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_body);
         //         if ($this->CI->email->send($id ='', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
-        //     } 
-            
+        //     }
+
     }
 
     //----------------------------------------------------Student Supplier Request Token ----------------------------------------------------------
     function send_student_supplier_request_token($email = '', $amount = '', $content = '', $fullname = '', $name_admin = ''){
-       
+
         $isi = '';
-        if($content == 'requested') {    
+        if($content == 'requested') {
             $isi = 'Hi '.$name_admin.'`s Admin, <br><br>'.$fullname.' has requested additional '.$amount.' tokens.';
         } else if ($content == 'cancelled') {
             $isi = 'Hi '.$name_admin.'`s Admin, <br><br>'.$fullname.' has cancelled '.$amount.' tokens.';
         }
         $token_request_data = $this->CI->db->select('user_id, token_amount')->from('token_requests')->where('id', $id)->get();
         $year = date("Y");
-        
-             
+
+
              $sup_req_token = array(
             'subject' => 'Token Request from Student Partner',
             'email' => $email,
         );
-        
+
         $sup_req_token['content'] = '<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -1893,12 +1893,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -1906,12 +1906,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -1921,56 +1921,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -2004,7 +2004,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -2047,7 +2047,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -2086,7 +2086,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -2098,12 +2098,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -2132,13 +2132,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -2147,14 +2147,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -2163,7 +2163,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -2173,10 +2173,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -2201,9 +2201,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -2241,47 +2241,47 @@ var $tube = 'com.live.email';
 
 </html>';
 
-        $this->CI->queue->push($this->tube, $sup_req_token, 'email.send_email');       
+        $this->CI->queue->push($this->tube, $sup_req_token, 'email.send_email');
 
 
             // $this->CI->email->from('no-reply@dyned.com','no-reply');
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
+
             //     // Loads the email library
             //     $data['subject'] = 'Token Request (Reminder)';
-                
+
 
             //     $this->CI->email->subject($data['subject']);
             //     $this->CI->email->message($email_request);
             //     if ($this->CI->email->send($id, $content)) {
             //         echo "All OK";
-            //     } else { 
+            //     } else {
             //         echo $this->CI->email->print_debugger();
             //     }
-               
+
 
     }
 
       //----------------------------------------------------Admin Region Approve Token ----------------------------------------------------------
     function send_region_approve_token($email = '', $content = '', $fullname = '', $token = ''){
-     
+
         $isi = '';
         if ($content == 'approved') {
             $isi = 'Your request for '.$token.' tokens, has been approved.';
         }else if ($content == 'declined') {
             $isi = 'Your request for '.$token.' tokens, has been declined.';
-        }   
+        }
         $year = date("Y");
-        
-                
+
+
 
             $adreg_app_token = array(
             'subject' => 'Token Request' .ucfirst($content),
             'email' => $email,
         );
-        
+
         $adreg_app_token['content'] = '<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -2291,12 +2291,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -2304,12 +2304,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -2319,56 +2319,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -2402,7 +2402,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -2445,7 +2445,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -2484,7 +2484,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -2496,12 +2496,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -2530,13 +2530,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -2545,14 +2545,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -2561,7 +2561,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -2571,10 +2571,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -2599,9 +2599,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -2651,16 +2651,16 @@ var $tube = 'com.live.email';
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($email_approve);
             //         if ($this->CI->email->send($token_request_id = '', $content = '')) {
-                        
-            //         } else { 
-            //             echo $this->CI->email->print_debugger(); 
-            //         }      
-            
+
+            //         } else {
+            //             echo $this->CI->email->print_debugger();
+            //         }
+
     }
 
         //----------------------------------------------------Admin Region Request Token ----------------------------------------------------------
-    function send_admin_request_token($email = '', $fullname = '', $token = '', $content = ''){   
-        
+    function send_admin_request_token($email = '', $fullname = '', $token = '', $content = ''){
+
         $isi = '';
         if ($content == 'requested') {
             $isi = 'Hi '.$fullname.'`s Admin, <br><br>You have made a token request for '.$token.' tokens.';
@@ -2682,12 +2682,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -2695,12 +2695,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -2710,56 +2710,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -2793,7 +2793,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -2836,7 +2836,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -2875,7 +2875,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -2887,12 +2887,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -2920,13 +2920,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -2935,14 +2935,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -2951,7 +2951,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -2961,10 +2961,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -2989,9 +2989,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -3035,20 +3035,20 @@ var $tube = 'com.live.email';
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // // Loads the email library
 
         //         $data['subject'] = 'Token Request (Reminder)';
-                
+
 
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_request);
         //             if ($this->CI->email->send($id = '', $content = '')) {
 
-        //             } else { 
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
-               
+
     }
 
     //----------------------------------------------------Admin Region Approve Coach/Student ----------------------------------------------------------
@@ -3075,12 +3075,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -3088,12 +3088,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -3103,56 +3103,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -3186,7 +3186,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -3229,7 +3229,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -3268,7 +3268,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -3280,12 +3280,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -3311,13 +3311,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -3326,14 +3326,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -3342,7 +3342,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -3352,10 +3352,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -3380,9 +3380,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -3422,24 +3422,24 @@ var $tube = 'com.live.email';
 
         $this->CI->queue->push($this->tube, $adreg_app_member, 'email.send_email');
 
-           
+
             // $this->CI->email->from('no-reply@dyned.com', 'no-reply');
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-        
+
+
             //     $data['subject'] = ''.$role.' Status '.ucfirst($content);
             //     //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Has been activated by Admin, you can login to DynEd Live as member. For more information, please ask the administrator. Thank you';
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($email_app_member);
             //         if ($this->CI->email->send($id ='', $content = '')) {
 
-            //         } else { 
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-            
-            
+
+
     }
 
     //----------------------------------------------------Notif Partner-------------------------------------------------------------------------
@@ -3469,12 +3469,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -3482,12 +3482,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -3497,56 +3497,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -3580,7 +3580,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -3623,7 +3623,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -3662,7 +3662,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -3674,12 +3674,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -3705,13 +3705,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -3720,14 +3720,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -3736,7 +3736,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -3746,10 +3746,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -3774,9 +3774,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -3816,30 +3816,30 @@ var $tube = 'com.live.email';
 
         $this->CI->queue->push($this->tube, $notifpartner, 'email.send_email');
 
-           
+
             // $this->CI->email->from('no-reply@dyned.com', 'no-reply');
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-        
+
+
             //     $data['subject'] = ''.$role.' Status '.ucfirst($content);
             //     //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Has been activated by Admin, you can login to DynEd Live as member. For more information, please ask the administrator. Thank you';
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($isi);
             //         if ($this->CI->email->send($id ='', $content = '')) {
 
-            //         } else { 
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-            
-            
+
+
     }
 
     //--------------------------------------------------------Notif Superadmin------------------------------------------------------------------
     function notif_superadmin($email = '', $realpassword = '', $content = '', $fullname = '', $partner = '', $partnermail = '', $tor = '', $type = ''){
         $isi = 'New supplier has been added by admin under '.$partner.'';
-        
+
 
         $notifsuperadmin = array(
             'subject' => 'New '.$type.' registered',
@@ -3855,12 +3855,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -3868,12 +3868,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -3883,56 +3883,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -3966,7 +3966,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -4009,7 +4009,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -4048,7 +4048,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -4060,12 +4060,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -4081,7 +4081,7 @@ var $tube = 'com.live.email';
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 28px; color: #919191; text-align:center; line-height: auto;" st-title="fulltext-heading" >
                                                                     <br>
-                                                                    Hi Superadmin, 
+                                                                    Hi Superadmin,
 
                                                                     <br><br>A new '.ucfirst($tor).' login ('.$fullname.') has been created.
 
@@ -4100,13 +4100,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -4114,7 +4114,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <!-- content -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -4124,11 +4124,11 @@ var $tube = 'com.live.email';
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -4137,7 +4137,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -4147,11 +4147,11 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -4176,9 +4176,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -4218,30 +4218,30 @@ var $tube = 'com.live.email';
 
         $this->CI->queue->push($this->tube, $notifsuperadmin, 'email.send_email');
 
-           
+
             // $this->CI->email->from('no-reply@dyned.com', 'no-reply');
             // $this->CI->email->to($this->email_superadmin);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-        
+
+
             //     $data['subject'] = ''.$role.' Status '.ucfirst($content);
             //     //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Has been activated by Admin, you can login to DynEd Live as member. For more information, please ask the administrator. Thank you';
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($isi);
             //         if ($this->CI->email->send($id ='', $content = '')) {
 
-            //         } else { 
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-            
-            
+
+
     }
 
         //----------------------------------------------------Admin Region Create Supplier ----------------------------------------------------------
     function admin_create_supplier($email = '', $realpassword = '', $content = '', $fullname = '', $partner = '', $tor = ''){
 
-        
+
 
         $adreg_cre_sup = array(
             'subject' => ucfirst($tor).' login created',
@@ -4257,12 +4257,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -4270,12 +4270,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -4285,56 +4285,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -4368,7 +4368,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -4411,7 +4411,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -4450,7 +4450,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -4462,12 +4462,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -4494,13 +4494,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -4522,8 +4522,8 @@ var $tube = 'com.live.email';
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Email : '.$email.'
                                                                    <br>
                                                                     Password : '.$realpassword.'
@@ -4531,9 +4531,9 @@ var $tube = 'com.live.email';
                                                                    <br>
                                                                    You can change your password under your profile page on DynEd Live.<br><br>Best, <br>DynEd Live Teams.<br><br>
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -4542,7 +4542,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -4552,10 +4552,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -4580,9 +4580,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -4626,23 +4626,23 @@ var $tube = 'com.live.email';
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // if ($content == 'created') {
         //         $data['subject'] = 'Partner Created';
         //         //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Password = ' . $realpassword . ' If Super Admin Approve, you can login to DynEd Live as Partner Admin. For more information, please ask the administrator. Thank you';
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_body);
         //         if ($this->CI->email->send($id ='', $content = '')) {
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
-        //     } 
-            
+        //     }
+
     }
 
         //----------------------------------------------------Super Admin Region Create Region ----------------------------------------------------------
     function superadmin_create_region($fullname='', $email = '', $realpassword = '', $content = ''){
-        
+
         $super_cre_reg = array(
             'subject' => 'Region Created',
             'email' => $email,
@@ -4657,12 +4657,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -4670,12 +4670,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -4685,56 +4685,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -4768,7 +4768,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -4811,7 +4811,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -4850,7 +4850,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -4862,12 +4862,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -4893,13 +4893,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -4909,7 +4909,7 @@ var $tube = 'com.live.email';
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 30px; color: #ea5656; text-align:center; line-height: 35px; font-weight:600;" st-title="fulltext-heading">
-                                                                    '.$fullname.' region has been created. Login Information : 
+                                                                    '.$fullname.' region has been created. Login Information :
                                                                 </td>
                                                             </tr>
                                                             <!-- End of Title -->
@@ -4921,8 +4921,8 @@ var $tube = 'com.live.email';
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Email : '.$email.'
                                                                    <br>
                                                                     Password : '.$realpassword.'
@@ -4932,9 +4932,9 @@ var $tube = 'com.live.email';
                                                                    <br>DynEd Live Teams.
                                                                    <br><br>
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -4943,7 +4943,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -4953,10 +4953,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -4981,9 +4981,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -5022,29 +5022,29 @@ var $tube = 'com.live.email';
 </html>';
 
         $this->CI->queue->push($this->tube, $super_cre_reg, 'email.send_email');
-            
+
         //     $this->CI->email->from('no-reply@dyned.com', 'no-reply');
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // if ($content == 'add') {
         //         $data['subject'] = 'Region Created';
         //         $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_body);
         //         if ($this->CI->email->send($content)) {
 
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
         //     } else if ($content == 'activate') {
-                
+
         //         $data['subject'] = 'Region Activated';
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_activate);
         //          if ($this->CI->email->send($id = '', $content = '')) {
 
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
         //     }
@@ -5073,12 +5073,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -5086,12 +5086,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -5101,56 +5101,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -5184,7 +5184,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -5227,7 +5227,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -5266,7 +5266,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -5278,12 +5278,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -5311,13 +5311,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -5326,14 +5326,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -5342,7 +5342,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -5352,10 +5352,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -5380,9 +5380,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -5426,22 +5426,22 @@ var $tube = 'com.live.email';
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-  
+
+
             //     $data['subject'] = 'Supplier '.ucfirst($content);
             //     //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($email_app_supplier);
             //         if ($this->CI->email->send($id = '', $content = '')) {
-                    
-            //         } else { 
+
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-          
-            
-            
+
+
+
     }
-        
+
     //----------------------------------------------------Notif Creator ----------------------------------------------------------
     function notif_creator($email = '', $content = '', $fullname = '', $emailcreator = '', $namecreator = ''){
         $isi = '';
@@ -5467,12 +5467,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -5480,12 +5480,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -5495,56 +5495,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -5578,7 +5578,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -5621,7 +5621,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -5660,7 +5660,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -5672,12 +5672,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -5705,13 +5705,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -5720,14 +5720,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -5736,7 +5736,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -5746,10 +5746,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -5774,9 +5774,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -5820,20 +5820,20 @@ var $tube = 'com.live.email';
             // $this->CI->email->to($emailcreator);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-  
+
+
             //     $data['subject'] = ;
             //     //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($isi);
             //         if ($this->CI->email->send($id = '', $content = '')) {
-                    
-            //         } else { 
+
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-          
-            
-            
+
+
+
     }
 
     //----------------------------------------------------Super Admin Approve Token ----------------------------------------------------------
@@ -5859,12 +5859,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -5872,12 +5872,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -5887,56 +5887,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -5970,7 +5970,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -6013,7 +6013,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -6052,7 +6052,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -6064,12 +6064,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -6095,13 +6095,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -6110,14 +6110,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -6126,7 +6126,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -6136,10 +6136,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -6164,9 +6164,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -6210,18 +6210,18 @@ var $tube = 'com.live.email';
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
+
             //     $data['subject'] = 'Token Request '.ucfirst($content);
             //     //$data['content'] = 'Your token request ' . $token_request_data->token_amount . ' has been approved by Super Admin';
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($email_app_token);
             //         if ($this->CI->email->send($token_request_id = '', $content = '')) {
-                    
-            //         } else { 
+
+            //         } else {
             //         echo $this->CI->email->print_debugger();
             //         }
-           
-            
+
+
     }
 
 
@@ -6233,7 +6233,7 @@ var $tube = 'com.live.email';
         }else if ($content == 'cancelled') {
             $isi = 'Hi '.$partnername.', <br><br> '.$fullname.' cancelled '.$token.' tokens.';
         }
-        
+
         $stu_req_tok = array(
             'subject' => 'Token Request from student',
             'email' => $email,
@@ -6248,12 +6248,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -6261,12 +6261,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -6276,56 +6276,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -6359,7 +6359,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -6402,7 +6402,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -6441,7 +6441,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -6453,12 +6453,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -6486,13 +6486,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -6501,14 +6501,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -6517,7 +6517,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -6527,10 +6527,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -6555,9 +6555,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -6601,32 +6601,32 @@ var $tube = 'com.live.email';
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-  
+
+
             //     $data['subject'] = 'Supplier '.ucfirst($content);
             //     //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($isi);
             //         if ($this->CI->email->send($id = '', $content = '')) {
-                    
-            //         } else { 
+
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-          
-            
-            
+
+
+
     }
 
 //-----------------------------------------------------Student Partner Approve Token Student-------------------------------------------------
    function student_supplier_approve_token($email = '', $content = '', $fullname = '', $token = ''){
-     
+
         $isi = '';
         if ($content == 'approved') {
            $isi = 'Your request for '.$token.' tokens has been approved by your student partner.';
         }else if ($content == 'declined') {
             $isi = 'Your request for '.$token.' tokens has been declined by your student partner.';
         }
-        $year = date("Y");   
+        $year = date("Y");
 
         // $email_approve ='<html lang="en">
 
@@ -6646,7 +6646,7 @@ var $tube = 'com.live.email';
         //         <style type="text/css" media="screen">
 
         //             /* Medium Screen */
-                    
+
         //             @media only screen and (max-width: 660px) {
         //                 table[class="container"] {
         //                     width: 480px !important;
@@ -6658,7 +6658,7 @@ var $tube = 'com.live.email';
         //                 }
         //             }
         //             /* Small Screen*/
-                    
+
         //             @media only screen and (max-width: 500px) {
         //                 table[class="container"] {
         //                     width: 320px !important;
@@ -6693,7 +6693,7 @@ var $tube = 'com.live.email';
         //                             <td valign="top" class="headline" bgcolor="#ffffff" style="padding: 40px 20px 40px 20px; border-left: 0; border-right: 0; font-family: Calibri, sans-serif; font-size: 15px; line-height: 22px; color: #666666;">
         //                                 Hi '.$fullname.',
         //                                 <br>
-        //                                 <br>'. 
+        //                                 <br>'.
         //                                     $isi.
         //                                 '<br>
         //                                 <br>
@@ -6730,12 +6730,12 @@ var $tube = 'com.live.email';
         //     </body>
 
         // </html>';
-                
+
         $sup_app_tok = array(
             'subject' => 'Token Request' .ucfirst($content),
             'email' => $email,
         );
-        
+
         $sup_app_tok['content'] = '<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -6745,12 +6745,12 @@ var $tube = 'com.live.email';
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -6758,12 +6758,12 @@ var $tube = 'com.live.email';
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -6773,56 +6773,56 @@ var $tube = 'com.live.email';
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -6856,7 +6856,7 @@ var $tube = 'com.live.email';
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -6899,7 +6899,7 @@ var $tube = 'com.live.email';
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -6938,7 +6938,7 @@ var $tube = 'com.live.email';
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -6950,12 +6950,12 @@ var $tube = 'com.live.email';
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -6984,13 +6984,13 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -6999,14 +6999,14 @@ var $tube = 'com.live.email';
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">Please contact your <a href="mailto:livesupport@dyned.com">administrator</a> for more information.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -7015,7 +7015,7 @@ var $tube = 'com.live.email';
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -7025,10 +7025,10 @@ var $tube = 'com.live.email';
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -7053,9 +7053,9 @@ var $tube = 'com.live.email';
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -7105,17 +7105,17 @@ var $tube = 'com.live.email';
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($email_approve);
             //         if ($this->CI->email->send($token_request_id = '', $content = '')) {
-                        
-            //         } else { 
-            //             echo $this->CI->email->print_debugger(); 
-            //         }      
-            
+
+            //         } else {
+            //             echo $this->CI->email->print_debugger();
+            //         }
+
     }
-    
+
 //------------------------------------------------------Day Off-----------------------------------------------------------------------------
 function coach_request_dayoff($email = '', $content = '', $fullname = '', $start = '', $end = '', $remark = '', $partnername = ''){
         $isi = $fullname.' has requested day off from '.$start.' to '.$end.' for '.$remark.' reason.';
-        
+
             $req_dayoff = array(
             'subject' => 'Day Off request from coach',
             'email' => $email,
@@ -7130,12 +7130,12 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -7143,12 +7143,12 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -7158,56 +7158,56 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -7241,7 +7241,7 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -7284,7 +7284,7 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -7323,7 +7323,7 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -7335,12 +7335,12 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -7367,13 +7367,13 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -7382,14 +7382,14 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -7398,7 +7398,7 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -7408,10 +7408,10 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -7436,9 +7436,9 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -7482,20 +7482,20 @@ function coach_request_dayoff($email = '', $content = '', $fullname = '', $start
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-  
+
+
             //     $data['subject'] = 'Coach Requested Day Off';
             //     //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($isi);
             //         if ($this->CI->email->send($id = '', $content = '')) {
-                    
-            //         } else { 
+
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-          
-            
-            
+
+
+
     }
 
 
@@ -7523,12 +7523,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -7536,12 +7536,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -7551,56 +7551,56 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -7634,7 +7634,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -7677,7 +7677,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -7716,7 +7716,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -7728,12 +7728,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -7761,13 +7761,13 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -7776,14 +7776,14 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -7792,7 +7792,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -7802,10 +7802,10 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -7830,9 +7830,9 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -7876,20 +7876,20 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             // $this->CI->email->to($email);
             // $this->CI->email->bcc('test.soerbakti@gmail.com');
             // $this->CI->email->set_mailtype('html');
-            
-  
+
+
             //     $data['subject'] = 'Day Off '.ucfirst($content).'';
             //     //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($isi);
             //         if ($this->CI->email->send($id = '', $content = '')) {
-                    
-            //         } else { 
+
+            //         } else {
             //             echo $this->CI->email->print_debugger();
             //         }
-          
-            
-            
+
+
+
     }
 
 
@@ -7920,12 +7920,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -7933,12 +7933,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -7948,56 +7948,56 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -8031,7 +8031,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -8074,7 +8074,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -8113,7 +8113,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -8125,12 +8125,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -8156,13 +8156,13 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -8184,8 +8184,8 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Coach Name : '.$coachname.'
                                                                    <br>
                                                                     Date : '.$date.'
@@ -8193,11 +8193,11 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                                    Time : From '.$start.' to '.$end.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more details, go to the DynEd Live page.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -8206,7 +8206,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -8216,10 +8216,10 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -8244,9 +8244,9 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -8290,15 +8290,15 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -8327,12 +8327,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -8340,12 +8340,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -8355,56 +8355,56 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -8438,7 +8438,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -8481,7 +8481,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -8520,7 +8520,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -8532,12 +8532,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -8563,13 +8563,13 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -8591,8 +8591,8 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Coach Name : '.$coachname.'
                                                                    <br>
                                                                     Date : '.$date.'
@@ -8600,11 +8600,11 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                                    Time : From '.$start.' to '.$end.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more details, go to the DynEd Live page.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -8613,7 +8613,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -8623,10 +8623,10 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -8651,9 +8651,9 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -8690,12 +8690,12 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
 </body>
 
 </html>';
-    
+
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
-        $this->CI->email->to($studentmail); 
+        $this->CI->email->to($studentmail);
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
-        $this->CI->email->message($stu_book);  
+        $this->CI->email->message($stu_book);
 
         $this->CI->email->send();
     }
@@ -8722,7 +8722,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
     <meta name="viewport" content="width=device-width">
 </head>
 
-<body style="-moz-box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-webkit-text-size-adjust:100%;Margin:0;background-color:#232547;background-image:url(http://i6.cmail20.com/ei/y/33/128/611/030239/footer-background.jpg);background-repeat:no-repeat;background-position:bottom  
+<body style="-moz-box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-webkit-text-size-adjust:100%;Margin:0;background-color:#232547;background-image:url(http://i6.cmail20.com/ei/y/33/128/611/030239/footer-background.jpg);background-repeat:no-repeat;background-position:bottom
 center;background-attachment:scroll;box-sizing:border-box;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;min-width:100%;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;width:100%!important;">
     <style>
         @media only screen and (max-width: 596px) {
@@ -9045,7 +9045,7 @@ center;background-attachment:scroll;box-sizing:border-box;color:#fefefe;font-fam
                 width: 100%!important
             }
         }
-    
+
 
          .neobutton:hover{
           background-color: #49c5fe;
@@ -9063,7 +9063,7 @@ center;background-attachment:scroll;box-sizing:border-box;color:#fefefe;font-fam
                                     <table class="row header" style="border-collapse:collapse;border-spacing:0;display:table;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;position:relative;text-align:left;vertical-align:top;width:100%;">
                                         <tbody>
                                             <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
-                                                <th class="small-12 large-12 columns first last" style="Margin:0  
+                                                <th class="small-12 large-12 columns first last" style="Margin:0
 auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:0;padding-bottom:16px;padding-right:16px;padding-left:16px;text-align:left;width:564px;">
                                                     <table style="border-collapse:collapse;border-spacing:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;width:100%;">
                                                         <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
@@ -9090,7 +9090,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                <!--  <p class="title-subheading text-center" style="Margin:0;Margin-bottom:32px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:24px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;">is here.</p> -->
                                                                 <br>
                                                                 <center data-parsed="" style="min-width:564px;width:100%;">
-                                                                    
+
                                                                 </center>
                                                             </th>
                                                             <th class="expander" style="Margin:0;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;text-align:left;visibility:hidden;width:0;"></th>
@@ -9125,25 +9125,25 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                             </tr>
                                         </tbody>
                                     </table>
-                               
+
                                     <table class="row footer" style="border-collapse:collapse;border-spacing:0;display:table;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;position:relative;text-align:left;vertical-align:top;width:100%;">
                                         <tbody>
                                             <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
-                                                <th class="small-12 large-12 columns first last" style="Margin:0  
+                                                <th class="small-12 large-12 columns first last" style="Margin:0
 auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:0;padding-bottom:16px;padding-right:16px;padding-left:16px;text-align:left;width:564px;">
                                                     <table style="border-collapse:collapse;border-spacing:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;width:100%;">
                                                         <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
                                                             <th style="Margin:0;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;">
                                                                 <center data-parsed="" style="min-width:564px;width:100%;">
                                                                      <br>
-                                                                    <p class="text-center" align="center" style="Margin:0;Margin-bottom:10px;color:#afa8c9;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;"><a href="https://liveb2ctest.dyned.com" class="neobutton" style="text-decoration: none; background:#3f4e7b;border:1px solid #49c5fe;border-radius:100px;margin:0 auto;padding:.75em 1.5em;-webkit-transition:all ease .5s;transition:all ease .5s;cursor:pointer;margin-top:15px;outline:0;min-width:160px;background-color:#3f4e7b;color:#49c5fe;">Login To DynEd Live</a></p>
+                                                                    <p class="text-center" align="center" style="Margin:0;Margin-bottom:10px;color:#afa8c9;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;"><a href="https://live.myneo.space" class="neobutton" style="text-decoration: none; background:#3f4e7b;border:1px solid #49c5fe;border-radius:100px;margin:0 auto;padding:.75em 1.5em;-webkit-transition:all ease .5s;transition:all ease .5s;cursor:pointer;margin-top:15px;outline:0;min-width:160px;background-color:#3f4e7b;color:#49c5fe;">Login To DynEd Live</a></p>
                                                                     <br>
 
                                                                     <p class="text-center" align="center" style="Margin:0;Margin-bottom:10px;color:#afa8c9;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;">DynEd Live © 2017 DynEd International, Inc. All rights reserved.</p>
 
                                                                     <br align="center" class="text-center">
                                                                     <br align="center" class="text-center">
-                                                                   
+
                                                                 </center>
                                                             </th>
                                                             <th class="expander" style="Margin:0;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;text-align:left;visibility:hidden;width:0;"></th>
@@ -9161,17 +9161,17 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             </td>
         </tr>
     </table>
-    <img src="https://foundation.cmail20.com/t/y-o-ddiiijy-jkjdltldtt/o.gif" width="1" height="1" border="0" alt="" style="visibility:hidden !important;display:block !important;height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0  
+    <img src="https://foundation.cmail20.com/t/y-o-ddiiijy-jkjdltldtt/o.gif" width="1" height="1" border="0" alt="" style="visibility:hidden !important;display:block !important;height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0
 !important;padding-left:0 !important;" />
 </body>
 
 </html>';
-    
+
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
-        $this->CI->email->to($studentmail); 
+        $this->CI->email->to($studentmail);
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
-        $this->CI->email->message($stu_book);  
+        $this->CI->email->message($stu_book);
 
         $this->CI->email->send();
     }
@@ -9203,12 +9203,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -9216,12 +9216,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -9231,56 +9231,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -9314,7 +9314,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -9357,7 +9357,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -9396,7 +9396,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -9408,12 +9408,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -9439,13 +9439,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -9467,8 +9467,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Student Name : '.$studentname.'
                                                                    <br>
                                                                     Date : '.$date.'
@@ -9476,11 +9476,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                    Time : From '.$start.' to '.$end.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more details, go to the DynEd Live page.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -9489,7 +9489,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -9499,10 +9499,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -9527,9 +9527,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -9573,15 +9573,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -9609,12 +9609,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -9622,12 +9622,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -9637,56 +9637,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -9720,7 +9720,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -9763,7 +9763,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -9802,7 +9802,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -9814,12 +9814,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -9845,13 +9845,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -9873,8 +9873,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Student Name : '.$studentname.'
                                                                    <br>
                                                                     Date : '.$date.'
@@ -9882,11 +9882,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                    Time : From '.$start.' to '.$end.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more details, go to the DynEd Live page.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -9895,7 +9895,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -9905,10 +9905,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -9933,9 +9933,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -9974,10 +9974,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </html>';
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
-        $this->CI->email->to($coachmail); 
+        $this->CI->email->to($coachmail);
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
-        $this->CI->email->message($notifcoach);  
+        $this->CI->email->message($notifcoach);
 
         $this->CI->email->send();
     }
@@ -10003,7 +10003,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <meta name="viewport" content="width=device-width">
 </head>
 
-<body style="-moz-box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-webkit-text-size-adjust:100%;Margin:0;background-color:#232547;background-image:url(http://i6.cmail20.com/ei/y/33/128/611/030239/footer-background.jpg);background-repeat:no-repeat;background-position:bottom  
+<body style="-moz-box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-webkit-text-size-adjust:100%;Margin:0;background-color:#232547;background-image:url(http://i6.cmail20.com/ei/y/33/128/611/030239/footer-background.jpg);background-repeat:no-repeat;background-position:bottom
 center;background-attachment:scroll;box-sizing:border-box;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;min-width:100%;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;width:100%!important;">
     <style>
         @media only screen and (max-width: 596px) {
@@ -10326,7 +10326,7 @@ center;background-attachment:scroll;box-sizing:border-box;color:#fefefe;font-fam
                 width: 100%!important
             }
         }
-    
+
 
          .neobutton:hover{
           background-color: #49c5fe;
@@ -10344,7 +10344,7 @@ center;background-attachment:scroll;box-sizing:border-box;color:#fefefe;font-fam
                                     <table class="row header" style="border-collapse:collapse;border-spacing:0;display:table;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;position:relative;text-align:left;vertical-align:top;width:100%;">
                                         <tbody>
                                             <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
-                                                <th class="small-12 large-12 columns first last" style="Margin:0  
+                                                <th class="small-12 large-12 columns first last" style="Margin:0
 auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:0;padding-bottom:16px;padding-right:16px;padding-left:16px;text-align:left;width:564px;">
                                                     <table style="border-collapse:collapse;border-spacing:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;width:100%;">
                                                         <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
@@ -10371,7 +10371,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                <!--  <p class="title-subheading text-center" style="Margin:0;Margin-bottom:32px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:24px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:center;">is here.</p> -->
                                                                 <br>
                                                                 <center data-parsed="" style="min-width:564px;width:100%;">
-                                                                    
+
                                                                 </center>
                                                             </th>
                                                             <th class="expander" style="Margin:0;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;text-align:left;visibility:hidden;width:0;"></th>
@@ -10406,11 +10406,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                             </tr>
                                         </tbody>
                                     </table>
-                               
+
                                     <table class="row footer" style="border-collapse:collapse;border-spacing:0;display:table;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;position:relative;text-align:left;vertical-align:top;width:100%;">
                                         <tbody>
                                             <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
-                                                <th class="small-12 large-12 columns first last" style="Margin:0  
+                                                <th class="small-12 large-12 columns first last" style="Margin:0
 auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;padding-top:0;padding-bottom:16px;padding-right:16px;padding-left:16px;text-align:left;width:564px;">
                                                     <table style="border-collapse:collapse;border-spacing:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;width:100%;">
                                                         <tr style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;vertical-align:top;">
@@ -10424,7 +10424,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
                                                                     <br align="center" class="text-center">
                                                                     <br align="center" class="text-center">
-                                                                   
+
                                                                 </center>
                                                             </th>
                                                             <th class="expander" style="Margin:0;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;text-align:left;visibility:hidden;width:0;"></th>
@@ -10442,17 +10442,17 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             </td>
         </tr>
     </table>
-    <img src="https://foundation.cmail20.com/t/y-o-ddiiijy-jkjdltldtt/o.gif" width="1" height="1" border="0" alt="" style="visibility:hidden !important;display:block !important;height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0  
+    <img src="https://foundation.cmail20.com/t/y-o-ddiiijy-jkjdltldtt/o.gif" width="1" height="1" border="0" alt="" style="visibility:hidden !important;display:block !important;height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0
 !important;padding-left:0 !important;" />
 </body>
 
 </html>';
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
-        $this->CI->email->to($coachmail); 
+        $this->CI->email->to($coachmail);
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
-        $this->CI->email->message($notifcoach);  
+        $this->CI->email->message($notifcoach);
 
         $this->CI->email->send();
     }
@@ -10476,12 +10476,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -10489,12 +10489,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -10504,56 +10504,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -10587,7 +10587,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -10630,7 +10630,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -10669,7 +10669,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -10681,12 +10681,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -10712,13 +10712,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -10740,18 +10740,18 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Class Name : '.$classname.'
                                                                    <br>
                                                                     Student Name : '.$studentname.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -10760,7 +10760,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -10770,10 +10770,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -10798,9 +10798,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -10844,15 +10844,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -10876,12 +10876,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -10889,12 +10889,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -10904,56 +10904,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -10987,7 +10987,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -11030,7 +11030,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -11069,7 +11069,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -11081,12 +11081,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -11112,13 +11112,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -11140,18 +11140,18 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Class Name : '.$classname.'
                                                                    <br>
                                                                     Student Partner : '.$partnername.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -11160,7 +11160,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -11170,10 +11170,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -11198,9 +11198,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -11244,15 +11244,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -11276,12 +11276,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -11289,12 +11289,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -11304,56 +11304,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -11387,7 +11387,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -11430,7 +11430,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -11469,7 +11469,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -11481,12 +11481,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -11512,13 +11512,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -11540,8 +11540,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Class Name : '.$classname.'
                                                                    <br>
                                                                     Subgroup : '.$subgroup.'
@@ -11551,11 +11551,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                    Cost : '.$cost.' Token
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -11564,7 +11564,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -11574,10 +11574,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -11602,9 +11602,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -11648,15 +11648,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -11678,12 +11678,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -11691,12 +11691,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -11706,56 +11706,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -11789,7 +11789,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -11832,7 +11832,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -11871,7 +11871,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -11883,12 +11883,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -11917,13 +11917,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -11933,14 +11933,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -11949,7 +11949,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -11959,10 +11959,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -11987,9 +11987,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -12033,15 +12033,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -12055,7 +12055,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         } else if ($content == 'cancelled') {
             $isi = 'Hi Superadmin, <br><br>'.$name.' cancelled '.$token.' tokens.';
         }
-        
+
 
         $addtokenregion = array(
             'subject' => 'New token request from '.$name.'',
@@ -12071,12 +12071,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -12084,12 +12084,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -12099,56 +12099,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -12182,7 +12182,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -12225,7 +12225,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -12264,7 +12264,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -12276,12 +12276,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -12310,13 +12310,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -12325,14 +12325,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -12341,7 +12341,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -12351,10 +12351,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -12379,9 +12379,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -12425,15 +12425,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -12447,7 +12447,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         } else if ($content == 'cancelled') {
             $isi = 'You have cancelled token request. Amount : <font style="color:#2b89b9;">'.$token.'.</font>';
         }
-        
+
 
         $addtokenstudent = array(
             'subject' => 'Token Request',
@@ -12463,12 +12463,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -12476,12 +12476,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -12491,56 +12491,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -12574,7 +12574,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -12617,7 +12617,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -12656,7 +12656,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -12668,12 +12668,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -12699,13 +12699,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -12714,14 +12714,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -12730,7 +12730,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -12740,10 +12740,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -12768,9 +12768,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -12814,15 +12814,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -12844,12 +12844,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -12857,12 +12857,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -12872,56 +12872,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -12955,7 +12955,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -12998,7 +12998,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -13037,7 +13037,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -13049,12 +13049,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -13083,13 +13083,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -13099,14 +13099,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">Please contact your <a href="mailto:livesupport@dyned.com">administrator</a> for more information.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -13115,7 +13115,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -13125,10 +13125,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -13153,9 +13153,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -13199,15 +13199,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -13229,12 +13229,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -13242,12 +13242,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -13257,56 +13257,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -13340,7 +13340,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -13383,7 +13383,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -13422,7 +13422,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -13434,12 +13434,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -13468,13 +13468,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -13484,14 +13484,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">Please contact your <a href="mailto:livesupport@dyned.com">administrator</a> for more information.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -13500,7 +13500,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -13510,10 +13510,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -13538,9 +13538,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -13584,22 +13584,22 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
 
     //----------------------------------------------------Admin Region Request Token ----------------------------------------------------------
-    function send_partner_request_token($email = '', $fullname = '', $token = '', $content = ''){   
-        
+    function send_partner_request_token($email = '', $fullname = '', $token = '', $content = ''){
+
         $isi = '';
         if ($content == 'requested') {
             $isi = 'Hi '.$fullname.', <br><br>You just requested '.$token.' tokens to your regional admin';
@@ -13621,12 +13621,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -13634,12 +13634,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -13649,56 +13649,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -13732,7 +13732,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -13775,7 +13775,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -13814,7 +13814,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -13826,12 +13826,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -13859,13 +13859,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -13874,14 +13874,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">Please contact your <a href="mailto:livesupport@dyned.com">administrator</a> for more information.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -13890,7 +13890,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -13900,10 +13900,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -13928,9 +13928,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -13974,34 +13974,34 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // // Loads the email library
 
         //         $data['subject'] = 'Token Request (Reminder)';
-                
+
 
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_request);
         //             if ($this->CI->email->send($id = '', $content = '')) {
 
-        //             } else { 
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
-               
+
     }
 
     //----------------------------------------------------Admin Region Approve Token ----------------------------------------------------------
     function send_partner_approve_token($email = '', $content = '', $fullname = '', $token = ''){
-     
+
         $isi = '';
         if ($content == 'approved') {
             $isi = 'Your request for '.$token.' tokens has been approved by your regional admin.';
         }else if ($content == 'declined') {
             $isi = 'Your request for '.$token.' tokens has been declined by your regional admin.';
-        }   
+        }
 
-        
-                
+
+
 
             $adreg_app_token = array(
             'subject' => 'Token Request' .ucfirst($content),
@@ -14017,12 +14017,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -14030,12 +14030,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -14045,56 +14045,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -14128,7 +14128,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -14171,7 +14171,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -14210,7 +14210,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -14222,12 +14222,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -14256,13 +14256,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -14271,14 +14271,14 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
                                                             <!-- content -->
                                                             <tr>
-                                                                
-                                                                   
+
+
                                                                 <td>
 
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;text-align:center;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -14287,7 +14287,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -14297,10 +14297,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -14325,9 +14325,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -14377,11 +14377,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             //         $this->CI->email->subject($data['subject']);
             //         $this->CI->email->message($email_approve);
             //         if ($this->CI->email->send($token_request_id = '', $content = '')) {
-                        
-            //         } else { 
-            //             echo $this->CI->email->print_debugger(); 
-            //         }      
-            
+
+            //         } else {
+            //             echo $this->CI->email->print_debugger();
+            //         }
+
     }
 
 //---------------------------------------------------------Coach Partner Reschedule---------------------------------------------------------------
@@ -14410,12 +14410,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -14423,12 +14423,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -14438,56 +14438,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -14521,7 +14521,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -14564,7 +14564,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -14603,7 +14603,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -14615,12 +14615,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -14646,13 +14646,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -14674,8 +14674,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Coach Name : '.$oldcoachname.'
                                                                    <br>
                                                                     Date : '.$olddate.'
@@ -14691,11 +14691,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                     Date : '.$newdate.'
                                                                    <br>
                                                                     Time : From '.$newstart.' to '.$newend.' '.$tz.'
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -14704,7 +14704,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -14714,10 +14714,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -14742,9 +14742,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -14788,15 +14788,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -14827,12 +14827,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -14840,12 +14840,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -14855,56 +14855,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -14938,7 +14938,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -14981,7 +14981,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -15020,7 +15020,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -15032,12 +15032,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -15063,13 +15063,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -15091,8 +15091,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Student Name : '.$studentname.'
                                                                    <br>
                                                                     Date : '.$newdate.'
@@ -15100,11 +15100,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                     Time : From '.$newstart.' to '.$newend.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -15113,7 +15113,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -15123,10 +15123,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -15151,9 +15151,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -15197,15 +15197,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -15236,12 +15236,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -15249,12 +15249,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -15264,56 +15264,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -15347,7 +15347,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -15390,7 +15390,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -15429,7 +15429,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -15441,12 +15441,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -15472,13 +15472,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -15500,8 +15500,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Student Name : '.$studentname.'
                                                                    <br>
                                                                     Date : '.$newdate.'
@@ -15509,11 +15509,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                     Time : From '.$newstart.' to '.$newend.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -15522,7 +15522,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -15532,10 +15532,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -15560,9 +15560,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -15606,15 +15606,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -15645,12 +15645,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -15658,12 +15658,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -15673,56 +15673,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -15756,7 +15756,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -15799,7 +15799,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -15838,7 +15838,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -15850,12 +15850,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -15881,13 +15881,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -15909,8 +15909,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Coach Name : '.$coachname.'
                                                                    <br>
                                                                     Date : '.$newdate.'
@@ -15918,11 +15918,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                     Time : From '.$newstart.' to '.$newend.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -15931,7 +15931,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -15941,10 +15941,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -15969,9 +15969,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -16015,15 +16015,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -16054,12 +16054,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -16067,12 +16067,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -16082,56 +16082,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -16165,7 +16165,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -16208,7 +16208,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -16247,7 +16247,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -16259,12 +16259,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -16290,13 +16290,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -16318,8 +16318,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Student Name : '.$studentname.'
                                                                    <br>
                                                                     Date : '.$olddate.'
@@ -16327,11 +16327,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                     Time : From '.$oldstart.' to '.$oldend.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more information, please contact <a href="mailto:livesupport@dyned.com">administrator</a>. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -16340,7 +16340,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -16350,10 +16350,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -16378,9 +16378,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -16424,15 +16424,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -16440,7 +16440,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 //----------------------------------------------------Notif Admin Region Create Student Partner ----------------------------------------------------------
     function notif_ad_reg_stu($email = '', $fullname = '', $name_admin = '', $token_amount = ''){
 
-        
+
 
         $adreg_cre_stu = array(
             'subject' => 'New Student Partner created',
@@ -16456,12 +16456,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -16469,12 +16469,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -16484,56 +16484,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -16567,7 +16567,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -16610,7 +16610,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -16649,7 +16649,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -16661,12 +16661,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -16693,13 +16693,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -16709,7 +16709,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 30px; color: #ea5656; text-align:center; line-height: 35px; font-weight:600;" st-title="fulltext-heading">
-                                                                    
+
                                                                 </td>
                                                             </tr>
                                                             <!-- End of Title -->
@@ -16721,8 +16721,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Partner`s name : '.$fullname.'.
                                                                    <br>
                                                                     Token amount : '.$token_amount.' tokens.
@@ -16730,11 +16730,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                    <br>
                                                                    Consequently, we have deducted '.$token_amount.' tokens from your administrator`s account and transferred them to the '.$fullname.'.<br><br>
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">Please contact Super Admin for more information.</p>
-                                                                   
+
                                                                     <br><br>Best,
                                                                     <br>DynEd Live Teams.
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -16743,7 +16743,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -16753,10 +16753,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -16781,9 +16781,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -16827,24 +16827,24 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // if ($content == 'created') {
         //         $data['subject'] = 'Partner Created';
         //         //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Password = ' . $realpassword . ' If Super Admin Approve, you can login to DynEd Live as Partner Admin. For more information, please ask the administrator. Thank you';
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_body);
         //         if ($this->CI->email->send($id ='', $content = '')) {
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
-        //     } 
-            
+        //     }
+
     }
 
 //----------------------------------------------------Notif Admin Region Create Student Partner ----------------------------------------------------------
     function notif_ad_reg_coa($email = '', $fullname = '', $name_admin = ''){
 
-        
+
 
         $adreg_cre_coa = array(
             'subject' => 'New Coach Partner created',
@@ -16860,12 +16860,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -16873,12 +16873,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -16888,56 +16888,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -16971,7 +16971,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -17014,7 +17014,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -17053,7 +17053,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -17065,12 +17065,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -17097,13 +17097,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -17113,7 +17113,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 30px; color: #ea5656; text-align:center; line-height: 35px; font-weight:600;" st-title="fulltext-heading">
-                                                                    
+
                                                                 </td>
                                                             </tr>
                                                             <!-- End of Title -->
@@ -17125,16 +17125,16 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                     Partner`s name : '.$fullname.'.
-                                                                   
+
                                                                    <br>
                                                                    <br>
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">Please contact Super Admin for more information. Thank you!</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -17143,7 +17143,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -17153,10 +17153,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -17181,9 +17181,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -17227,18 +17227,18 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($email);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
+
         // if ($content == 'created') {
         //         $data['subject'] = 'Partner Created';
         //         //$data['content'] = 'Welcome to DynEd Live, account information: Email = ' . $email . ' Password = ' . $realpassword . ' If Super Admin Approve, you can login to DynEd Live as Partner Admin. For more information, please ask the administrator. Thank you';
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($email_body);
         //         if ($this->CI->email->send($id ='', $content = '')) {
-        //             } else { 
+        //             } else {
         //             echo $this->CI->email->print_debugger();
         //             }
-        //     } 
-            
+        //     }
+
     }
 
     //---------------------------------------------------------Student Reminder---------------------------------------------------------------
@@ -17268,12 +17268,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -17281,12 +17281,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -17296,56 +17296,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -17379,7 +17379,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -17422,7 +17422,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -17461,7 +17461,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -17473,12 +17473,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -17504,13 +17504,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -17532,8 +17532,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Coach Name : '.$coachname.'
                                                                    <br>
                                                                     Date : '.$date.'
@@ -17541,11 +17541,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                    Time : From '.$start.' to '.$end.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more details, go to DynEd Live page.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -17554,7 +17554,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -17564,10 +17564,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -17592,9 +17592,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -17638,15 +17638,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }
@@ -17678,12 +17678,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     <title>DynEd-Live Email Template</title>
 
     <style type="text/css">
-     
-        
+
+
         #outlook a {
             padding: 0;
         }
-        
+
         body {
             width: 100% !important;
             -webkit-text-size-adjust: 100%;
@@ -17691,12 +17691,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             margin: 0;
             padding: 0;
         }
-        
+
         .ExternalClass {
             width: 100%;
         }
         /* Konfigurasi untuk Hotmail */
-        
+
         .ExternalClass,
         .ExternalClass p,
         .ExternalClass span,
@@ -17706,56 +17706,56 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             line-height: 100%;
         }
         /* Konfigurasi Hotmail*/
-        
+
         #backgroundTable {
             margin: 0;
             padding: 0;
             width: 100% !important;
             line-height: 100% !important;
         }
-        
+
         img {
             outline: none;
             text-decoration: none;
             border: none;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         a img {
             border: none;
         }
-        
+
         .image_fix {
             display: block;
         }
-        
+
         p {
             margin: 0px 0px !important;
         }
-        
+
         table td {
             border-collapse: collapse;
         }
-        
+
         table {
             border-collapse: collapse;
             mso-table-lspace: 0pt;
             mso-table-rspace: 0pt;
         }
-        
+
         a {
             color: #0a8cce;
             text-decoration: none;
             text-decoration: none!important;
         }
         /*STYLES*/
-        
+
         table[class=full] {
             width: 100%;
             clear: both;
         }
         /*IPAD STYLES*/
-        
+
         @media only screen and (max-width: 640px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -17789,7 +17789,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
             }
         }
         /*IPHONE STYLES*/
-        
+
         @media only screen and (max-width: 480px) {
             a[href^="tel"],
             a[href^="sms"] {
@@ -17832,7 +17832,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 </head>
 
 <body>
-   
+
     <!-- Start of header -->
     <tr>
                                                 <td height="20" style="font-size:1px; line-height:1px; mso-line-height-rule: exactly;">&nbsp;</td>
@@ -17871,7 +17871,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                     <!-- end of logo -->
                                                 </td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </td>
@@ -17883,12 +17883,12 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         </tbody>
     </table>
     <!-- End of Header -->
-   
+
     <table>
-        
+
     </table>
-   
-    
+
+
     <table width="600" align="center" cellpadding="0" border="0" class="devicewidthinner">
         <tbody>
             <tr style="background-color:#2b89b9;">
@@ -17914,13 +17914,13 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- End of spacing -->
         </tbody>
     </table>
-   
+
     <!-- Detail Account Start -->
-    
+
     <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner">
                                                         <tbody>
                                                             <!-- Title -->
-                                                            
+
                                                             <!-- End of Title -->
                                                             <!-- spacing -->
                                                             <tr>
@@ -17942,8 +17942,8 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-                                                                 
-                                                                  
+
+
                                                                    Student Name : '.$studentname.'
                                                                    <br>
                                                                     Date : '.$date.'
@@ -17951,11 +17951,11 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                    Time : From '.$start.' to '.$end.' '.$tz.'
                                                                    <br>
                                                                    <br>
-                                                                   
+
                                                                    <p style="font-weight:400;font-size:14px;line-height:30px;">For more details, go to the DynEd Live page.</p>
-                                                                   
+
                                                                 </td>
-                                                                
+
                                                             </tr>
                                                             <!-- End of content -->
                                                             <!-- spacing -->
@@ -17964,7 +17964,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             </tr>
                                                             <!-- End of spacing -->
                                                             <tr>
-                                                                   
+
                                                                     <td width="auto" align="center" valign="middle" height="36" style="background-color:#2b89b9; border-top-left-radius:4px; border-bottom-left-radius:4px;border-top-right-radius:4px; border-bottom-right-radius:4px; background-clip: padding-box;font-size:1.5em; font-family:Helvetica, arial, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:25px; padding-right:25px;padding-top:25px;padding-bottom:25px;">
 
                                                                         <span style="color: #ffffff; font-weight: 300;">
@@ -17974,10 +17974,10 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                 </tr>
                                                         </tbody>
                                                     </table>
-    
+
     <!-- Detail Account End -->
-     
-   
+
+
     <!-- Start of seperator -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="seperator">
         <tbody>
@@ -18002,9 +18002,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     </table>
     <!-- End of seperator -->
     <!-- 2columns -->
-    
-    
-    
+
+
+
     <!-- Start of Postfooter -->
     <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0" id="backgroundTable" st-sortable="postfooter">
         <tbody>
@@ -18048,15 +18048,15 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
         //     $this->CI->email->to($coachmail);
         //     $this->CI->email->bcc('test.soerbakti@gmail.com');
         //     $this->CI->email->set_mailtype('html');
-            
-  
+
+
         //         $data['subject'] = 'Session '.ucfirst($content).'';
         //         //$data['content'] = 'Your partner request has been approved by Super Admin. Email : ' . $email;
         //             $this->CI->email->subject($data['subject']);
         //             $this->CI->email->message($isi);
         //             if ($this->CI->email->send($id = '', $content = '')) {
-                    
-        //             } else { 
+
+        //             } else {
         //                 echo $this->CI->email->print_debugger();
         //             }
     }

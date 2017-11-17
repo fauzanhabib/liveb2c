@@ -58,7 +58,7 @@
                             <span>You are requesting <?php echo $data->token_amount; ?> token right now</span>
                         <?php }else{ ?>
                         <div class="bxrequest__requesttokens__buttonreq">
-                            <a class="neobutton" href="https://b2ctest.dyned.com" target="_blank">Buy Token</a>
+                            <a class="neobutton" href="https://myneo.space" target="_blank">Buy Token</a>
                         </div>
                         <?php } ?>
 

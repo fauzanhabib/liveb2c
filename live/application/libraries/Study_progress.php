@@ -5,7 +5,7 @@ class Study_progress {
     var $gwp;
     // var $tokenresult;
     function __construct() {
-        
+
 
     }
 
@@ -15,7 +15,7 @@ class Study_progress {
     // public function GenerateToken($std_email='', $std_paswd=''){
 
         $this->CI = &get_instance();
-        
+
       $useraccount = json_encode(array(
           'username'=>$this->CI->session->userdata('u_u'),
           'password'=>$this->CI->session->userdata('u_p')
@@ -24,7 +24,7 @@ class Study_progress {
       $rt = curl_init();
       curl_setopt_array($rt, array(
           CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_URL => 'https://b2ctest.dyned.com/api/v1/jwt/token-request',
+          CURLOPT_URL => getenv("JWT_API_HOST").'/token-request',
           CURLOPT_HTTPHEADER => array(
             'Content-Type' => 'application/json'),
           CURLOPT_POSTFIELDS => $useraccount
@@ -74,7 +74,7 @@ class Study_progress {
         // // Free up the resources $curl is using
         // curl_close($curl);
         $this->CI = &get_instance();
-        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-record/'.$this->CI->session->userdata('u_u').'/current');
+        $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-record/'.$this->CI->session->userdata('u_u').'/current');
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
@@ -100,7 +100,7 @@ class Study_progress {
     }
     public function GetStudyProgress($tokenresult) {
         $this->CI = &get_instance();
-        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-progress/'.$this->CI->session->userdata('u_u'));
+        $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-progress/'.$this->CI->session->userdata('u_u'));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
@@ -124,7 +124,7 @@ class Study_progress {
     }
     public function GetWeeklyProgress($tokenresult) {
         $this->CI = &get_instance();
-        $ch = curl_init('https://b2ctest.dyned.com/api/v1/dsa/v1/study-record/'.$this->CI->session->userdata('u_u'));
+        $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-record/'.$this->CI->session->userdata('u_u'));
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
