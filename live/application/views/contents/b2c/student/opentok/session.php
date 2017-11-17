@@ -338,7 +338,7 @@ opacity: 1 !important;
                     <input type="hidden" id="user" class="form-control" value="<?php echo $this->auth_manager->get_name();?>">
                     <audio id="chat_audio" src="<?php echo base_url();?>assets/sound/chat.mp3" preload="auto"></audio>
                     <input type="submit" value="Send" id="kirim" class="neobutton sendbtn">
-                    <!-- <button type="submit" class="neobutton ">Search Coach</button> -->
+                    <!-- <button type="submit" class="neobutton ">Search Coach</button>  ;-->
                   </div>
                   <div class="chatlist">
                       <ul id="isi_chat" style="list-style-type:none;padding-left: 0px;"> <ul>
