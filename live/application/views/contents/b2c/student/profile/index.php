@@ -74,7 +74,7 @@
 				<?php echo $data[0]->fullname;?>
 			</div>
 			<div class="profile__info__birth">
-				<label>Date Of Birth</label>
+				<label>Date of Birth</label>
 				<span id="inputDate">
         <?php
         $newDate = date("d - M - Y", strtotime($data[0]->date_of_birth));

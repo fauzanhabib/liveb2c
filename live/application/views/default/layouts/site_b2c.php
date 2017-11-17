@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
-        <title><?php echo $this->template->title->append(' - DynEd Live') ?></title>
+        <title><?php echo $this->template->title->append(' - neo LIVE') ?></title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/multiple-select.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.css">
