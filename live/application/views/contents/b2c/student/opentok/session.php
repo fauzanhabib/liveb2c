@@ -338,7 +338,7 @@ opacity: 1 !important;
                     <input type="hidden" id="user" class="form-control" value="<?php echo $this->auth_manager->get_name();?>">
                     <audio id="chat_audio" src="<?php echo base_url();?>assets/sound/chat.mp3" preload="auto"></audio>
                     <input type="submit" value="Send" id="kirim" class="neobutton sendbtn">
-                    <!-- <button type="submit" class="neobutton ">Search Coach</button>  ;-->
+                    <!-- <button type="submit" class="neobutton ">Search Coach</button> -->
                   </div>
                   <div class="chatlist">
                       <ul id="isi_chat" style="list-style-type:none;padding-left: 0px;"> <ul>
@@ -399,14 +399,21 @@ opacity: 1 !important;
                             <div class="bullet__achievement <?php echo $mt_color['mt4']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt5']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div> -->
+
+                            
+                            <!-- =======edited by rendy bustari========== -->
                             <?php
-                  					for($l=1;$l<=$max_buletan_student;$l++){ ?>
-                  						<div class="bullet__achievement <?php echo @$student_color['mt'.$l];?>"></div>
-                  					<?php
-                  						}
-                  					?>
+                            for($l=1;$l<=$max_buletan_student;$l++){ ?>
+                              <div class="bullet__achievement <?php echo @$mt['mt'.$l];?>"></div>
+                            <?php 
+                              }
+                            ?>
+
+
+                            <!-- ========================================= -->
+
                             <div class="achievement__point__info">
-                                <h5>29 K</h5>
+                                <h5><?php echo $gsp->data->study->points_until_today;?></h5>
                                 <h3>Study</h3>
                             </div>
                         </div>
@@ -429,14 +436,19 @@ opacity: 1 !important;
                             <div class="bullet__achievement"></div>
                             <div class="bullet__achievement"></div>
                             <div class="bullet__achievement"></div> -->
+
+
+                            <!-- =========edited by rendy bustar============== -->
                             <?php
-                  					for($i=1;$i<=$max_buletan;$i++){ ?>
-                  						<div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
-                  					<?php
-                  						}
-                  					?>
+                            for($i=1;$i<=$max_buletan;$i++){ ?>
+                              <div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
+                            <?php 
+                              }
+                            ?>
+                            <!-- ================================ -->
+
                             <div class="achievement__point__info">
-                                <h5>27 K</h5>
+                                <h5><?php echo $gsp->data->coach->points_until_today;?></h5>
                                 <h3>Coach</h3>
                             </div>
                         </div>
@@ -499,11 +511,11 @@ opacity: 1 !important;
                                 <path stroke-linecap="round" id="arc2" fill="none" stroke="#fafafa" stroke-width="20" />
                             </svg>
                             <div class="step__progress__info">
-                                <div class="step__info__label">4095</div>
+                                <div class="step__info__label"><?php echo @$gsp->data->total_points_until_today;?></div>
                             </div>
                         </div>
                     </div>
-                    <h5><font>120</font> points left</h5>
+                    <h5><font><?php echo (($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today)*-1);?></font> points left</h5>
                 </div>
                 <!-- end daily progress donut graph -->
             </div>
@@ -552,86 +564,118 @@ opacity: 1 !important;
                 <!-- End pronunciation graph -->
                 <!-- listening graph -->
                 <div class="study__progress__graph">
-                    <h5>Listening</h5>
-                    <div class="graph__wrap">
-                        <div class="bar__graph">
-                            <ul class="graph b2">
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="25" style="width: 20%;">
-                            <span class="graph__legend">Now</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="10" style="width: 8%;">
-                            <span class="graph__legend">w 1</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="35" style="width: 28%;">
-                            <span class="graph__legend">w 2</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="100" style="width: 80%; background: linear-gradient(-136deg, rgb(73, 197, 254) 0%, rgb(121, 231, 68) 92%);">
-                            <span class="graph__legend">w 3</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <div class="v__bar">
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
+                  <h5>Listening</h5>
+                  <div class="graph__wrap">
+                      <div class="bar__graph">
+                        <ul class="graph b2">
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->listening;?>">
+                                <span class="graph__legend">Now</span>
+                              <label><?php echo strtok($gwp->data[0]->listening, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->listening;?>">
+                                <span class="graph__legend">w 1</span>
+                              <label><?php echo strtok($gwp->data[1]->listening, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->listening;?>">
+                                <span class="graph__legend">w 2</span>
+                              <label><?php echo strtok($gwp->data[2]->listening, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->listening;?>">
+                                <span class="graph__legend">w 3</span>
+                              <label><?php echo strtok($gwp->data[3]->listening, '.');?></label>
+                              </li>
+                            </span>
+
+                            <div class="v__bar">
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                            </div>
+                        </ul>
+                      </div>
+                  </div>
                 </div>
                 <!-- End listening graph -->
                 <!-- speaking graph -->
                 <div class="study__progress__graph">
-                    <h5>Speaking</h5>
-                    <div class="graph__wrap">
-                        <div class="bar__graph">
-                            <ul class="graph b2">
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="20" style="width: 16%;">
-                            <span class="graph__legend">Now</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="40" style="width: 32%;">
-                            <span class="graph__legend">w 1</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="95" style="width: 76%;">
-                            <span class="graph__legend">w 2</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <span class="graph__bar__cont">
-                            <li class="graph__bar__each" data-value="125" style="width: 100%; background: linear-gradient(-136deg, rgb(73, 197, 254) 0%, rgb(121, 231, 68) 92%);">
-                            <span class="graph__legend">w 3</span>
-                                <label>2300</label>
-                                </li>
-                                </span>
-                                <div class="v__bar">
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                    <div class="v__line"></div>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
+                  <h5>Speaking</h5>
+                  <div class="graph__wrap">
+                      <div class="bar__graph">
+                        <ul class="graph b2">
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="
+                              <?php if(strtok($gwp->data[0]->speaking, '.') > 125){
+                                  echo '125';
+                                }else{
+                                strtok($gwp->data[0]->speaking, '.');
+                              };?>">
+                                <span class="graph__legend">Now</span>
+                              <label>
+                              <?php echo strtok($gwp->data[0]->speaking, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="
+                              <?php if(strtok($gwp->data[1]->speaking, '.') > 125){
+                                  echo '125';
+                                }else{
+                                strtok($gwp->data[1]->speaking, '.');
+                              };?>">
+                                <span class="graph__legend">w 1</span>
+                              <label>
+                              <?php echo strtok($gwp->data[1]->speaking, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="
+                              <?php if(strtok($gwp->data[2]->speaking, '.') > 125){
+                                  echo '125';
+                                }else{
+                                strtok($gwp->data[2]->speaking, '.');
+                              };?>">
+                                <span class="graph__legend">w 2</span>
+                              <label>
+                              <?php echo strtok($gwp->data[2]->speaking, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="
+                              <?php if(strtok($gwp->data[3]->speaking, '.') > 125){
+                                  echo '125';
+                                }else{
+                                strtok($gwp->data[3]->speaking, '.');
+                              };?>">
+                                <span class="graph__legend">w 3</span>
+                              <label>
+                              <?php echo strtok($gwp->data[3]->speaking, '.');?></label>
+                              </li>
+                            </span>
+
+                            <div class="v__bar">
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                            </div>
+                        </ul>
+                      </div>
+                  </div>
                 </div>
                 <?php $appoint_id = $appointment_id; ?>
                 <form name ="leaving" action="<?php echo(site_url('b2c/student/opentok/leavesession/'));?>" method="post">
@@ -646,33 +690,51 @@ opacity: 1 !important;
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
 <script>
+// lingkaran bulat pertama
+
+  var innerupcoach   = '<?php echo $gsp->data->coach->points_until_today;?>';
+  var innerdowncoach = '<?php echo $gsp->data->coach->points_to_pass;?>';
+  var innerperccoach = innerupcoach / innerdowncoach;
+
 var outter = $('.outter--circle.circle');
 outter.circleProgress({
     startAngle: -Math.PI / 2,
-    value: 0.9,
+    value: innerperccoach,
     lineCap: 'round',
     fill: { gradient: ['green', 'yellow'] }
 });
 
+var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
+var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+var innerperc = innerup / innerdown;
+
 var inner = $('.inner--circle.circle');
 inner.circleProgress({
     startAngle: -Math.PI / 2,
-    value: 0.6,
+    value: innerperc,
     lineCap: 'round',
     fill: { gradient: ['#49c0fe', '#4b80fc'] }
 });
 
 // daily step progress
 var step = $('.step--circle.circle');
-var stepVal = 0.6 // circle step value
+
+    var stepVal = '<?php echo $gsp->data->percentage_points;?>';
+
+    var titikVal = '<?php echo $gsp->data->percentage_days;?>';
+
+    var newstepVal = stepVal/100;
+    var newtitikVal = titikVal/100;
+
+// var stepVal = 0.6 // circle step value
 step.circleProgress({
     startAngle: -Math.PI / 2,
-    value: stepVal,
+    value: newstepVal,
     lineCap: 'round',
     fill: { gradient: ['#5f6b8e', '#bcc2d3'] }
 });
 // circle step value condition to meet the goal
-if (stepVal >= 0.4) {
+if (newstepVal >= newtitikVal) {
     step.circleProgress({
         fill: { gradient: ['green', 'yellow'] }
     });
@@ -681,7 +743,7 @@ if (stepVal >= 0.4) {
 // Source https://jsbin.com/yaqaxotete/edit?html,css,js,output
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = (angleInDegrees + 90);
-    var dailyGoal = (angleInRadians + 360 / 100 * 40) * Math.PI / 180.0; //where to put the goal value
+    var dailyGoal = (angleInRadians + 360 / 100 * titikVal) * Math.PI / 180.0; //where to put the goal value
     return {
         x: centerX + (radius * Math.cos(dailyGoal)),
         y: centerY + (radius * Math.sin(dailyGoal))
