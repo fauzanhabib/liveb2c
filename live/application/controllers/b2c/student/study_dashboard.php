@@ -79,7 +79,7 @@ class Study_dashboard extends MY_Site_Controller {
 
         $student_color = [];
         $k = 1;
-        $max_buletan_student = sizeof(@$gsp->data->study->mastery_tests);
+        $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
         
         for($l=0;$l<$max_buletan_student;$l++){
           $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
@@ -98,7 +98,7 @@ class Study_dashboard extends MY_Site_Controller {
 
         $coach_color = [];
         $j = 1;
-        $max_buletan = sizeof(@$gsp->data->coach->sessions);
+        $max_buletan = sizeof($gsp->data->coach->sessions);
         
         for($i=0;$i<$max_buletan;$i++){
           $coach_color['cc'.$j] = @$coach_status_color[$gsp->data->coach->sessions[$i]->status];
