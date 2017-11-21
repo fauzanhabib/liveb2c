@@ -72,9 +72,17 @@
                             </div>
 
                             <div class="bxbutton">
-                                <button type="submit" id="submit_summary" class="neobutton"> Done</button>
+                                <button type="submit" id="submit_summary" class="neobutton trigger__loader"> Done</button>
                                 <button type="submit" id="cancel_summary" class="neobutton"> Cancel</button>
                             </div>
+                        </div>
+                        <div class="page__loader">
+                            <div class="loader" id="loader">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            Processing your booking...
                         </div>
                     </div>
 
@@ -82,8 +90,6 @@
             </section>
 
         <script>
-
-            
                 $(document).on('touchstart click', '#submit_summary', function () {
                      location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
                 });
@@ -91,10 +97,12 @@
                 $(document).on('touchstart click', '#cancel_summary', function () {
                     location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches/search/' . $search_by); ?>";
                 });
+        </script>
 
-
-            
-
-    </script>
+        <script>
+            $('.trigger__loader').click(function() {
+                $('.page__loader').css('display', 'flex');
+            })
+        </script>
 
 
