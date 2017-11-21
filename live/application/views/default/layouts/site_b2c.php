@@ -74,7 +74,7 @@
               ?>
         	       <img src="<?php echo base_url().''.($this->auth_manager->get_avatar()); ?>">
               <?php }else{ ?>
-                    <img src="<?php echo 'https://b2ctest.dyned.com/image/' . ($this->auth_manager->get_avatar()); ?>" alt="">
+                    <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . ($this->auth_manager->get_avatar()); ?>" alt="">
               <?php } ?>
             </div>
             <a id="logout__container" class="trigger">
@@ -105,7 +105,7 @@
               ?>
                    <img src="<?php echo base_url().''.($this->auth_manager->get_avatar()); ?>">
               <?php }else{ ?>
-                    <img src="<?php echo 'https://b2ctest.dyned.com/image/' . ($this->auth_manager->get_avatar()); ?>" alt="">
+                    <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . ($this->auth_manager->get_avatar()); ?>" alt="">
               <?php } ?>
         </div>
         <div class="header__title">

@@ -27,7 +27,7 @@ class Checkrecord extends MY_Site_Controller {
         $sessionID = $this->input->post("sessionid");
 
         $asd = $this->downloadrecord->init();
-
+        // echo "<pre>";print_r($asd);exit();
         $items = $asd->items;
         foreach($items as $a){
             $sess    = $a->sessionId;
@@ -64,7 +64,7 @@ class Checkrecord extends MY_Site_Controller {
             'downloadurl'   => @$downloadurl
         );
 
-        // echo "<pre>";print_r($check);exit();
+        // echo "<pre>";print_r($pullsess);exit();
 
         $this->template->title = "Download Record";
         $this->template->content->view('contents/b2c/student/session/checkrecord', $check);
