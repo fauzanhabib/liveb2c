@@ -11,9 +11,9 @@
     <?php if(count($data)!=0){ ?>
         <div class="dashboard__notif success__notif">
             <?php if(count($data)==1){ ?>
-            <span>You Have <?php echo count($data); ?> Session Left For Today</span>
+            <span>You Have <?php echo count($data); ?> Session For Today</span>
             <?php }else{ ?>
-            <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
+            <span>You Have <?php echo count($data); ?> Sessions For Today</span>
             <?php } ?>
             <i class="fa fa-times"></i>
         </div>

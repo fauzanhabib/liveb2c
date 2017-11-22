@@ -464,25 +464,25 @@ opacity: 1 !important;
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->comprehension_grammar;?>" style="width: 80%; background: linear-gradient(-136deg, rgb(73, 197, 254) 0%, rgb(121, 231, 68) 92%);">
                             <span class="graph__legend">Now</span>
-                                <label><?php echo $gwp->data[0]->comprehension_grammar;?></label>
+                                <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
                                 </li>
                                 </span>
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->comprehension_grammar;?>" style="width: 4%;">
                             <span class="graph__legend">w 1</span>
-                                <label><?php echo $gwp->data[1]->comprehension_grammar;?></label>
+                                <label><?php echo strtok($gwp->data[1]->comprehension_grammar, '.');?></label>
                                 </li>
                                 </span>
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->comprehension_grammar;?>" style="width: 60%;">
                             <span class="graph__legend">w 2</span>
-                                <label><?php echo $gwp->data[2]->comprehension_grammar;?></label>
+                                <label><?php echo strtok($gwp->data[2]->comprehension_grammar, '.');?></label>
                                 </li>
                                 </span>
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->comprehension_grammar;?>" style="width: 68%;">
                             <span class="graph__legend">w 3</span>
-                                <label><?php echo $gwp->data[3]->comprehension_grammar;?></label>
+                                <label><?php echo strtok($gwp->data[3]->comprehension_grammar, '.');?></label>
                                 </li>
                                 </span>
                                 <div class="v__bar">
@@ -529,25 +529,25 @@ opacity: 1 !important;
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->pronunciation;?>" style="width: 20%;">
                             <span class="graph__legend">Now</span>
-                                <label><?php echo $gwp->data[0]->pronunciation;?></label>
+                                <label><?php echo strtok($gwp->data[0]->pronunciation, '.');?></label>
                                 </li>
                                 </span>
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->pronunciation;?>" style="width: 8%;">
                             <span class="graph__legend">w 1</span>
-                                <label><?php echo $gwp->data[1]->pronunciation;?></label>
+                                <label><?php echo strtok($gwp->data[1]->pronunciation, '.');?></label>
                                 </li>
                                 </span>
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->pronunciation;?>" style="width: 72%;">
                             <span class="graph__legend">w 2</span>
-                                <label><?php echo $gwp->data[2]->pronunciation;?></label>
+                                <label><?php echo strtok($gwp->data[2]->pronunciation, '.');?></label>
                                 </li>
                                 </span>
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->pronunciation;?>" style="width: 68%;">
                             <span class="graph__legend">w 3</span>
-                                <label><?php echo $gwp->data[3]->pronunciation;?></label>
+                                <label><?php echo strtok($gwp->data[3]->pronunciation, '.');?></label>
                                 </li>
                                 </span>
                                 <div class="v__bar">

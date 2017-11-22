@@ -36,8 +36,7 @@ class Study_dashboard extends MY_Site_Controller {
       $std_paswd = $pull_std[0]->password;
 
       // echo('<pre>');print_r($pull_std); exit;
-
-      $tokenresult = $this->session->userdata('token_api');
+      $tokenresult = $this->study_progress->GenerateToken();
 
       // $tokenresult = $this->study_progress->GenerateToken();
       if(!@$tokenresult){
@@ -46,7 +45,8 @@ class Study_dashboard extends MY_Site_Controller {
         // echo('<pre>');print_r($tokenresult); exit;
       }
 
-
+        // echo('<pre>');print_r($tokenresult); exit;
+      
 
       if(@$tokenresult){
         $tokenresult = $this->study_progress->GenerateToken();
