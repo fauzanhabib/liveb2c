@@ -6,7 +6,7 @@
                             display: flex;
                             -ms-flex-wrap: wrap;
                             flex-wrap: wrap;
-                            justify-content: space-around;   
+                            justify-content: space-around;
                         }
 
                         i svg {
@@ -25,10 +25,10 @@
                         <i class="fa fa-times"></i>
                     </div>
                 <?php } ?>
-                
+
                 <div class="dashboard">
                     <div class="dashboard__menubookingcoachresult">
-                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
+                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
                             <div class="bookkacoach activediv">Book a Coach</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/session'); ?>">
@@ -171,7 +171,7 @@
                         <div class="boxprofilecoach list article-loop">
                             <div class="profilecoach">
                                 <div class="profilecoach__picture">
-                                    <img src="<?php echo base_url().$coaches[$i]->profile_picture;?>" alt="">
+                                    <img src="<?php echo "https://live.dyned.com/".$coaches[$i]->profile_picture;?>" alt="">
                                 </div>
                                 <div class="profilecoach__name">
                                     <?php echo($coaches[$i]->fullname); ?>
@@ -189,7 +189,7 @@
                                                 }
 
                                             </style>
-                                            <?php 
+                                            <?php
                                                 $id = $coaches[$i]->id;
 
                                                 $allrate = $this->db->select('rate')
@@ -213,14 +213,14 @@
                                                     $classrate = 0;
                                                     $tooltip   = 0;
                                                 }
-                                                
+
                                                 $nostar = 5 - round($tooltip);
                                                 // echo "<pre>";
                                                 // print_r($i);
                                                 // exit();
                                             ?>
                                             <ul id='stars' class="disabled">
-                                                <?php 
+                                                <?php
                                                 if($tooltip != 0){
                                                     for($s=0;$s<round($tooltip);$s++){
                                                 ?>
@@ -251,7 +251,7 @@
                                 </div>
 
                                 <div class="profilecoach__token">
-                                     <i> 
+                                     <i>
                                         <svg width="22px" height="22px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
                                             <title>Token</title>
@@ -272,14 +272,14 @@
                                                 </g>
                                             </g>
                                         </svg>
-                                    </i> 
-                                    <?php 
+                                    </i>
+                                    <?php
                                         if($coaches[$i]->coach_type_id == 1){
                                             echo $standard_coach_cost;
                                         } else if($coaches[$i]->coach_type_id == 2){
-                                            echo $elite_coach_cost; 
+                                            echo $elite_coach_cost;
                                         }
-                                    ?> 
+                                    ?>
                                     Tokens
                                 </div>
                             </div>
@@ -313,7 +313,7 @@
                                                             <img src='<?php echo base_url(); ?>assets/images/small-loading.gif' alt='loading...' style="display:none;" id="schedule-loading"/>
                                                         </div>
                                                     </div>
-                                                </form>   
+                                                </form>
                                             </div>
                                         </div>
 
@@ -341,22 +341,22 @@
 
             <script>
                 $("#datepicker").each(function() {
-                    $(this).datepicker({ 
+                    $(this).datepicker({
                         minDate: 0,
                         beforeShow:function(textbox, instance){
                             $('.datepicker__here').append($('#ui-datepicker-div'));
                             $('#ui-datepicker-div').hide();
-                        } 
+                        }
                     });
                 })
 
                 $('.datepicker__each').each(function() {
-                    $(this).datepicker({ 
+                    $(this).datepicker({
                         minDate: 0,
                         beforeShow:function(textbox, instance){
                             $(this).next().append($('#ui-datepicker-div'));
                             $('#ui-datepicker-div').hide();
-                        } 
+                        }
                     });
                 });
 
@@ -513,7 +513,7 @@
             //         $('.dateavailable').parsley().reset();
             //     });
             // });
-    
+
         document.getElementById("datepicker").onchange = function() {
             // console.log(this.value);
             var date = this.value;

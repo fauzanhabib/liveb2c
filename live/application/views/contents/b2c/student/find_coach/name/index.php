@@ -172,7 +172,7 @@
                         <div class="boxprofilecoach list article-loop">
                             <div class="profilecoach">
                                 <div class="profilecoach__picture">
-                                    <img src="<?php echo base_url().$coaches[$i]->profile_picture;?>" alt="">
+                                    <img src="<?php echo "https://live.dyned.com/".$coaches[$i]->profile_picture;?>" alt="">
                                 </div>
                                 <div class="profilecoach__name">
                                     <?php echo($coaches[$i]->fullname); ?>

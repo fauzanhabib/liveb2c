@@ -25,10 +25,10 @@
                         <i class="fa fa-times"></i>
                     </div>
                 <?php } ?>
-                
+
                 <div class="dashboard">
                     <div class="dashboard__menubookingcoachresult">
-                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
+                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
                             <div class="bookkacoach activediv">Book a Coach</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/session'); ?>">
@@ -171,7 +171,7 @@
                         <div class="boxprofilecoach article-loop">
                             <div class="profilecoach">
                                 <div class="profilecoach__picture">
-                                    <img src="<?php echo base_url().$d['profile_picture'];?>" alt="">
+                                    <img src="<?php echo "https://live.dyned.com/".$d['profile_picture'];?>" alt="">
                                 </div>
                                 <div class="profilecoach__name">
                                     <?php echo($d['fullname']); ?>
@@ -189,7 +189,7 @@
                                                 }
 
                                             </style>
-                                            <?php 
+                                            <?php
                                                 $id = $d['coach_id'];
 
                                                 $allrate = $this->db->select('rate')
@@ -213,14 +213,14 @@
                                                     $classrate = 0;
                                                     $tooltip   = 0;
                                                 }
-                                                
+
                                                 $nostar = 5 - round($tooltip);
                                                 // echo "<pre>";
                                                 // print_r($i);
                                                 // exit();
                                             ?>
                                             <ul id='stars' class="disabled">
-                                                <?php 
+                                                <?php
                                                 if($tooltip != 0){
                                                     for($s=0;$s<round($tooltip);$s++){
                                                 ?>
@@ -251,7 +251,7 @@
                                 </div>
 
                                 <div class="profilecoach__token">
-                                     <i> 
+                                     <i>
                                         <svg width="22px" height="22px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
                                             <title>Token</title>
@@ -272,14 +272,14 @@
                                                 </g>
                                             </g>
                                         </svg>
-                                    </i> 
-                                    <?php 
+                                    </i>
+                                    <?php
                                         if($d['coach_type_id'] == 1){
                                             echo $standard_coach_cost;
                                         } else if($d['coach_type_id'] == 2){
-                                            echo $elite_coach_cost; 
+                                            echo $elite_coach_cost;
                                         }
-                                    ?> 
+                                    ?>
                                     Tokens
                                 </div>
                             </div>
@@ -308,10 +308,10 @@
                                                         $date1 =  mktime(0, 0, 0, $CheckInX[1],$CheckInX[2],$CheckInX[0]);
                                                         $date2 =  mktime(0, 0, 0, $CheckOutX[1],$CheckOutX[2],$CheckOutX[0]);
                                                         $interval =($date2 - $date1)/(3600*24);
-                                                            
+
                                                         // xxxxxxxxxxxx
                                                         $new_gmt_val_user = $gmt_val_user*1;
-                                                        @date_default_timezone_set('Etc/GMT'.$gmt_val_user*(-1));      
+                                                        @date_default_timezone_set('Etc/GMT'.$gmt_val_user*(-1));
                                                         $adate = $date;
                                                         $bdate = date('Y-m-d');
                                                          // echo $adate." + ".$bdate;
@@ -333,13 +333,13 @@
                                                             list($jam,$menit,$detik)=explode(':',$selesai);
                                                             $buatWaktuSelesai=mktime($jam,$menit,$detik,1,1,1);
                                                             $selisihDetik=$buatWaktuSelesai-$buatWaktuMulai;
-                                                                    
+
                                                                     if($selisihDetik > 3599){ ?>
                                                                                 <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
                                                                                 <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
                                                                                 <?php }
 
-                                                            }else if (($adate == $bdate) && ($res > 0 )){  
+                                                            }else if (($adate == $bdate) && ($res > 0 )){
                                                                 @date_default_timezone_set('Etc/GMT+0');
                                                                     $dt = date('H:i:s');
                                                                     $default_dt  = strtotime($dt);
@@ -354,7 +354,7 @@
                                                                     list($jam,$menit,$detik)=explode(':',$selesai);
                                                                     $buatWaktuSelesai=mktime($jam,$menit,$detik,1,1,1);
                                                                     $selisihDetik=$buatWaktuSelesai-$buatWaktuMulai;
-                                                                    
+
                                                                             if($selisihDetik > 3599){
 
                                                                                 ?>
@@ -362,7 +362,7 @@
                                                                                 <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
                                                                                 <?php }
 
-                                                            }else if (($adate == $bdate) && ($res < 0 )){  
+                                                            }else if (($adate == $bdate) && ($res < 0 )){
                                                                 @date_default_timezone_set('Etc/GMT+0');
                                                                     $dt = date('H:i:s');
                                                                     $default_dt  = strtotime($dt);
@@ -377,14 +377,14 @@
                                                                     list($jam,$menit,$detik)=explode(':',$selesai);
                                                                     $buatWaktuSelesai=mktime($jam,$menit,$detik,1,1,1);
                                                                     $selisihDetik=$buatWaktuSelesai-$buatWaktuMulai;
-                                                                    
+
                                                                             if($selisihDetik > 3599){
 
                                                                                 ?>
                                                                                 <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
                                                                                 <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
                                                                                 <?php }
-                                                            }else {  
+                                                            }else {
                                                             @date_default_timezone_set('Etc/GMT+0');
                                                                     ?>
                                                                     <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
@@ -416,12 +416,12 @@
             </section>
         <script>
             $("#datepicker").each(function() {
-                $(this).datepicker({ 
+                $(this).datepicker({
                     minDate: 0,
                     beforeShow:function(textbox, instance){
                         $('.datepicker__here').append($('#ui-datepicker-div'));
                         $('#ui-datepicker-div').hide();
-                    } 
+                    }
                 });
             });
 
@@ -501,7 +501,7 @@
             //         $('.dateavailable').parsley().reset();
             //     });
             // });
-    
+
         document.getElementById("datepicker").onchange = function() {
             // console.log(this.value);
             var date = this.value;
