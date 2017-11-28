@@ -7,5 +7,6 @@ $config['smtp_pass'] = 'Woju7979';
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
 $config['newline'] = "\r\n";
+$config['crlf'] = "\r\n";
 $config['smtp_crypto'] = 'tls';
 ?>
