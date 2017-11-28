@@ -419,7 +419,7 @@ button:focus {
 .margin-b-25, .prev_step {
   margin: 0 0 25px; }
 
-.flex--center, .pic__circle--small, #noti__counter, .pt_logo, .dashboard__bookacoach .boxselect, .dashboard__bookacoach .tab-content .bookcoach__flexing, .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn, .contact__us--address .left {
+.flex--center, .pic__circle--small, #noti__counter, .step__progress__info .step__info__label, .pt_logo, .dashboard__bookacoach .boxselect, .dashboard__bookacoach .tab-content .bookcoach__flexing, .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn, .contact__us--address .left {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1132,7 +1132,11 @@ footer span {
   text-align: center; }
   .step__progress__info .step__info__label {
     color: #F7F052;
-    font-size: 2em; }
+    font-size: 1.2em;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
     .step__progress__info .step__info__label svg {
       top: -55px;
       left: -45px; }

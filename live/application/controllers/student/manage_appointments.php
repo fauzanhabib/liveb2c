@@ -1477,7 +1477,7 @@ class manage_appointments extends MY_Site_Controller {
 
             $student_notification = array(
                 'user_id' => $this->auth_manager->userid(),
-                'description' => 'You have a rescheduled session with ' . $name_coach,
+                'description' => 'You have rescheduled a session with ' . $name_coach,
                 'status' => 2,
                 'dcrea' => time(),
                 'dupd' => time()

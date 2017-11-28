@@ -806,7 +806,7 @@ class find_coaches extends MY_Site_Controller {
                         
                         $student_notification = array(
                             'user_id' => $this->auth_manager->userid(),
-                            'description' => 'New session booked with '.$namecoach[0]->fullname,
+                            'description' => 'You have just booked a session with coach '.$namecoach[0]->fullname,
                             'status' => 2,
                             'dcrea' => time(),
                             'dupd' => time(),
