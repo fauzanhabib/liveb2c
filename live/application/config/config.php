@@ -250,7 +250,7 @@ $config['encryption_key'] = 'oqe5238eqdh62329293y8623ei2vdc8v3';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'mdc_sess';//'ci_session';
+$config['sess_cookie_name']		= 'CISESSION';//'mdc_sess';//'ci_session';
 $config['sess_expiration']		= 5184000; // 60 days
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;
