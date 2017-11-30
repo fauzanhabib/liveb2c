@@ -265,7 +265,7 @@ class Dashboard extends MY_Site_Controller {
                 'dcrea' => time(),
                 'dupd' => time(),
             );
-                        
+
             $this->user_notification_model->insert($user_notification);
         }
 

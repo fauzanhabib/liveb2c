@@ -23,7 +23,7 @@ class Login extends MY_Controller {
 
       // User is already logged in
       if ($this->auth->loggedin()) {
-
+					$this->auth_manager->logout();
           // check user_id dan session
           $user_id = $this->auth_manager->userid();
           session_start();
@@ -109,7 +109,7 @@ class Login extends MY_Controller {
                                 ->where('email',$this->input->post('email'))
                                 ->get()->result();
 
-              
+
               $this->session->set_userdata('u_u',$g_u_u[0]->sso_username);
               // =====
 

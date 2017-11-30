@@ -46,7 +46,7 @@ class Study_dashboard extends MY_Site_Controller {
       }
 
         // echo('<pre>');print_r($tokenresult); exit;
-      
+
 
       if(@$tokenresult){
         $tokenresult = $this->study_progress->GenerateToken();
@@ -73,21 +73,21 @@ class Study_dashboard extends MY_Site_Controller {
         //   'mt6' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[5]->status]
         // );
 
-        /*==============  
+        /*==============
           rendy bustari
         ===============*/
 
         $student_color = [];
         $k = 1;
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
-        
+
         for($l=0;$l<$max_buletan_student;$l++){
           $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
           $k++;
         }
 
 
-        
+
         // bulatan coach color
         $coach_status_color = array(
           "passed" => "bg-green-gradient",
@@ -99,7 +99,7 @@ class Study_dashboard extends MY_Site_Controller {
         $coach_color = [];
         $j = 1;
         $max_buletan = sizeof($gsp->data->coach->sessions);
-        
+
         for($i=0;$i<$max_buletan;$i++){
           $coach_color['cc'.$j] = @$coach_status_color[$gsp->data->coach->sessions[$i]->status];
           $j++;
