@@ -32,7 +32,7 @@ if(@$user_extract2){
                                   resolution: "320x240",
                                   frameRate:15,
                                   publishVideo: true,
-                                  height: 150, name: "a"};
+                                  height: 150, name: "<?php echo $this->auth_manager->get_name();?>"};
 
             publisher = OT.initPublisher('myPublisherElementId',publisherproperties, function (error) {
               if (error) {
@@ -50,18 +50,17 @@ if(@$user_extract2){
             var subscriberProperties = {insertMode: 'append',
                                         width: '100%',
                                         resolution: "320x240",
-                                        frameRate:15,
-                                        height: '100%', name: "b"};
-            var subscriber = session.subscribe(event.stream,
+                                        frameRate:15, name: "b"};
+            subscriber = session.subscribe(event.stream,
             'subscriberContainer',
             subscriberProperties,
             function (error) {
               if (error) {
                 console.log(error);
               } else {
-                console.log('Subscriber added.');
+                // console.log('Subscriber added.');
               }
-              });
+            });
         });
 
     function toggleOff(){
@@ -76,27 +75,27 @@ if(@$user_extract2){
     }
 
     var connectionCount;
-        session.on({
-          connectionCreated: function (event) {
-            connectionCount++;
-            if (event.connection.connectionId != session.connection.connectionId) {
-              console.log('a');
-              $("#waiting").hide();
-              $("#heading1").hide();
-              $("#heading2").hide();
-              $("#connecting").hide();
-              $("#disconnect").addClass("hidden");
-            }
-          },
-          connectionDestroyed: function connectionDestroyedHandler(event) {
-            connectionCount--;
-              $("#heading2").show();
-              $("#connecting").show();
-              $("#disconnect").removeClass("hidden");
-              $("#heading2").removeClass("hidden");
-            console.log('A client disconnected.');
-          }
-        });
+    session.on({
+      connectionCreated: function (event) {
+        connectionCount++;
+        if (event.connection.connectionId != session.connection.connectionId) {
+          // console.log('a');
+          $("#waiting").hide();
+          $("#heading1").hide();
+          $("#heading2").hide();
+          $("#connecting").hide();
+          $("#disconnect").addClass("hidden");
+        }
+      },
+      connectionDestroyed: function connectionDestroyedHandler(event) {
+        connectionCount--;
+          $("#heading2").show();
+          $("#connecting").show();
+          $("#disconnect").removeClass("hidden");
+          $("#heading2").removeClass("hidden");
+        console.log('A client disconnected.');
+      }
+    });
 </script>
 <script>
 $(document).ready(function(){
@@ -116,7 +115,7 @@ $(document).ready(function(){
   }
 
    $(document).on('touchstart click', '#kirim', function () {
-     console.log('a');
+    //  console.log('a');
      var pesan = $('#pesan').val();
      var user  = '<?php echo $this->auth_manager->get_name();?>';
     //  console.log(user);
@@ -188,6 +187,9 @@ function makeFullScreen(divId){
 }
 </script>
 <style>
+.custMargin{
+  margin-top: 475px !important;
+}
 #myPublisherElementId{
   border: solid 1px;
   left: 87%;
@@ -199,6 +201,9 @@ function makeFullScreen(divId){
 }
 #subscriberContainer{
   height: 500px;
+}
+.OT_subscriber{
+  height: 100% !important;
 }
 #pesan{
   width: 86%;
@@ -400,12 +405,12 @@ opacity: 1 !important;
                             <div class="bullet__achievement <?php echo $mt_color['mt5']; ?>"></div>
                             <div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div> -->
 
-                            
+
                             <!-- =======edited by rendy bustari========== -->
                             <?php
                             for($l=1;$l<=$max_buletan_student;$l++){ ?>
                               <div class="bullet__achievement <?php echo @$mt['mt'.$l];?>"></div>
-                            <?php 
+                            <?php
                               }
                             ?>
 
@@ -442,7 +447,7 @@ opacity: 1 !important;
                             <?php
                             for($i=1;$i<=$max_buletan;$i++){ ?>
                               <div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
-                            <?php 
+                            <?php
                               }
                             ?>
                             <!-- ================================ -->
@@ -801,4 +806,16 @@ var countdownTimer = setInterval('timer()', 1000);
     window.onbeforeunload = null;
     document.forms['leaving'].submit();
 }, milisecond);
+</script>
+
+<script>
+function checkShare() {
+  if ($(".OT_fit-mode-contain")[0]){
+    $(".boxsession__livecomponentstue").addClass("custMargin")
+    // console.log($(".boxsession__livecomponentstue"));
+  } else {
+    $(".boxsession__livecomponentstue").removeClass("custMargin")
+  }
+}
+setInterval('checkShare()', 1000);
 </script>
