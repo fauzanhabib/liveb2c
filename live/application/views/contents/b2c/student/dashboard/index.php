@@ -312,6 +312,8 @@ var sp_difftime_updated = "<?php echo $sp_difftime_updated; ?>";
 
 if(now_date > sp_date){
   // alert(sp_difftime_updated);
+  $('.page__loader').css('display', 'flex');
+  update_study();
 }else if(now_date == sp_date){
   if(sp_difftime_updated > 03){
     // alert(sp_difftime_updated);

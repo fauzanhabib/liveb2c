@@ -64,7 +64,7 @@ class Dashboard extends MY_Site_Controller {
         //                   ->where('user_id',$id)
         //                   ->get()->result();
         //
-        // // echo "<pre>";print_r($gsp);exit();
+        // echo "<pre>";print_r($this->session->userdata('u_p'));exit();
         // if(@$check_study_data){
         //   $array_study = array(
         //     'json_gsp' => $gsp,
@@ -440,6 +440,8 @@ class Dashboard extends MY_Site_Controller {
 
           // exit();
         }
+
+        // echo "string";
       }else{}
 
     }
