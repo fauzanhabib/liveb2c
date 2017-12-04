@@ -401,43 +401,46 @@ class Dashboard extends MY_Site_Controller {
       $time  = date('H:i:s');
       $date  = date('Y-m-d');
 
-      $tokenresult = $this->study_progress->GenerateToken();
+      if($this->session->userdata('u_u') != NULL && $this->session->userdata('u_p') != NULL){
 
-      $gsp = $this->study_progress->GetStudyProgress($tokenresult);
-      $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
-      $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+        $tokenresult = $this->study_progress->GenerateToken();
 
-      $check_study_data = $this->db->select('user_id')
-                        ->from('b2c_student_progress')
-                        ->where('user_id',$id)
-                        ->get()->result();
+        $gsp = $this->study_progress->GetStudyProgress($tokenresult);
+        $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
+        $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
 
-      // echo "<pre>";print_r($gsp);exit();
-      if(@$check_study_data){
-        $array_study = array(
-          'json_gsp' => $gsp,
-          'json_gcp' => $gcp,
-          'json_gwp' => $gwp,
-          'updated_date' => $date,
-          'updated_time' => $time
-        );
+        $check_study_data = $this->db->select('user_id')
+                          ->from('b2c_student_progress')
+                          ->where('user_id',$id)
+                          ->get()->result();
 
-        $this->db->where('user_id', $id);
-        $this->db->update('b2c_student_progress', $array_study);
-      }else{
-        $array_study = array(
-          'json_gsp' => $gsp,
-          'json_gcp' => $gcp,
-          'json_gwp' => $gwp,
-          'user_id' => $id,
-          'updated_date' => $date,
-          'updated_time' => $time
-        );
+        // echo "<pre>";print_r($gsp);exit();
+        if(@$check_study_data){
+          $array_study = array(
+            'json_gsp' => $gsp,
+            'json_gcp' => $gcp,
+            'json_gwp' => $gwp,
+            'updated_date' => $date,
+            'updated_time' => $time
+          );
 
-        $this->db->insert('b2c_student_progress', $array_study);
+          $this->db->where('user_id', $id);
+          $this->db->update('b2c_student_progress', $array_study);
+        }else{
+          $array_study = array(
+            'json_gsp' => $gsp,
+            'json_gcp' => $gcp,
+            'json_gwp' => $gwp,
+            'user_id' => $id,
+            'updated_date' => $date,
+            'updated_time' => $time
+          );
 
-        // exit();
-      }
+          $this->db->insert('b2c_student_progress', $array_study);
+
+          // exit();
+        }
+      }else{}
 
     }
 
