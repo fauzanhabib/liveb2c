@@ -37,45 +37,55 @@ class Dashboard extends MY_Site_Controller {
         $this->template->title = "Dashboard";
 
         // $user = "<script language=\"javascript\">alert('a')</script>";
-        // echo $user;exit();
+        // echo $this->session->userdata('u_u');exit();
 
         //------------wm
         $id    = $this->auth_manager->userid();
 
         //save study data ------------------------------------------
-        $tokenresult = $this->session->userdata('token_api');
 
-        $gsp = $this->study_progress->GetStudyProgress($tokenresult);
-        $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
-        $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
-
-        $check_study_data = $this->db->select('user_id')
+        $check_study_data = $this->db->select('*')
                           ->from('b2c_student_progress')
                           ->where('user_id',$id)
                           ->get()->result();
 
-        // echo "<pre>";print_r($gsp);exit();
-        if(@$check_study_data){
-          $array_study = array(
-            'json_gsp' => $gsp,
-            'json_gcp' => $gcp,
-            'json_gwp' => $gwp
-          );
-
-          $this->db->where('user_id', $id);
-          $this->db->update('b2c_student_progress', $array_study);
-        }else{
-          $array_study = array(
-            'json_gsp' => $gsp,
-            'json_gcp' => $gcp,
-            'json_gwp' => $gwp,
-            'user_id' => $id
-          );
-
-          $this->db->insert('b2c_student_progress', $array_study);
-
-          // exit();
-        }
+        $last_upd_date = $check_study_data[0]->updated_date;
+        $last_upd_time = $check_study_data[0]->updated_time;
+        // echo "<pre>";print_r($check_study_data);exit();
+        // $tokenresult = $this->session->userdata('token_api');
+        // $tokenresult = $this->study_progress->GenerateToken();
+        //
+        // $gsp = $this->study_progress->GetStudyProgress($tokenresult);
+        // $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
+        // $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+        //
+        // $check_study_data = $this->db->select('user_id')
+        //                   ->from('b2c_student_progress')
+        //                   ->where('user_id',$id)
+        //                   ->get()->result();
+        //
+        // // echo "<pre>";print_r($gsp);exit();
+        // if(@$check_study_data){
+        //   $array_study = array(
+        //     'json_gsp' => $gsp,
+        //     'json_gcp' => $gcp,
+        //     'json_gwp' => $gwp
+        //   );
+        //
+        //   $this->db->where('user_id', $id);
+        //   $this->db->update('b2c_student_progress', $array_study);
+        // }else{
+        //   $array_study = array(
+        //     'json_gsp' => $gsp,
+        //     'json_gcp' => $gcp,
+        //     'json_gwp' => $gwp,
+        //     'user_id' => $id
+        //   );
+        //
+        //   $this->db->insert('b2c_student_progress', $array_study);
+        //
+        //   // exit();
+        // }
         //save study data ------------------------------------------
         // date_default_timezone_set('Asia/Jakarta');
         // $pulltime = date('H:i:s');
@@ -269,6 +279,10 @@ class Dashboard extends MY_Site_Controller {
             $this->user_notification_model->insert($user_notification);
         }
 
+        $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime($last_upd_time);
+        $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
+        // echo "<pre>";print_r($sp_difftime_updated);exit();
+
         $vars = array(
             'title' => 'Upcoming Session',
             'role'  => 'Coach',
@@ -284,8 +298,12 @@ class Dashboard extends MY_Site_Controller {
             'statuscheck'  => @$statuscheck,
             'hourend'    => $hourend,
             'hourstart'  => $hourstart,
+            'hour_start_db'  => $hour_start_db,
             'data_class' => $data_class,
             'countdown'  => $countdown,
+            'last_upd_date'  => $last_upd_date,
+            'last_upd_time'  => $last_upd_time,
+            'sp_difftime_updated'  => $sp_difftime_updated,
             'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
         );
 
@@ -375,6 +393,52 @@ class Dashboard extends MY_Site_Controller {
 
         $this->db->where('user_id', $id);
         $this->db->delete('session_live');
+    }
+
+    public function update_studyprog(){
+      $id    = $this->auth_manager->userid();
+
+      $time  = date('H:i:s');
+      $date  = date('Y-m-d');
+
+      $tokenresult = $this->study_progress->GenerateToken();
+
+      $gsp = $this->study_progress->GetStudyProgress($tokenresult);
+      $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
+      $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+
+      $check_study_data = $this->db->select('user_id')
+                        ->from('b2c_student_progress')
+                        ->where('user_id',$id)
+                        ->get()->result();
+
+      // echo "<pre>";print_r($gsp);exit();
+      if(@$check_study_data){
+        $array_study = array(
+          'json_gsp' => $gsp,
+          'json_gcp' => $gcp,
+          'json_gwp' => $gwp,
+          'updated_date' => $date,
+          'updated_time' => $time
+        );
+
+        $this->db->where('user_id', $id);
+        $this->db->update('b2c_student_progress', $array_study);
+      }else{
+        $array_study = array(
+          'json_gsp' => $gsp,
+          'json_gcp' => $gcp,
+          'json_gwp' => $gwp,
+          'user_id' => $id,
+          'updated_date' => $date,
+          'updated_time' => $time
+        );
+
+        $this->db->insert('b2c_student_progress', $array_study);
+
+        // exit();
+      }
+
     }
 
     private function convertBookSchedule($minutes = '', $date = '', $start_time = '', $end_time = ''){

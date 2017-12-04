@@ -32,6 +32,7 @@ class Study_progress {
       $tokenconnect = curl_exec($rt) ;
       $pulltr = json_decode($tokenconnect);
       $tokenresult = @$pulltr->token;
+      // echo $tokenresult;exit('');
       return $tokenresult;
     }
 

@@ -7,7 +7,7 @@
         text-decoration: underline;
     }
 </style>
-    
+
     <?php if(count($data)!=0){ ?>
         <div class="dashboard__notif success__notif">
             <?php if(count($data)==1){ ?>
@@ -283,6 +283,15 @@
         </div>
 </section>
 
+<div class="page__loader">
+    <div class="loader" id="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    Updating your study dashboard...
+</div>
+
 <script>
     var userid = "<?php echo $userid; ?>";
     $("#clearlive").click(function() {
@@ -290,6 +299,39 @@
             window.location.href = "<?php echo site_url('b2c/student/dashboard'); ?>";
         });
     });
+</script>
+
+<script>
+var sp_date = "<?php echo $last_upd_date; ?>";
+var sp_time = "<?php echo $last_upd_time; ?>";
+
+var now_date = "<?php echo $nowd; ?>";
+var now_time = "<?php echo $hour_start_db; ?>";
+
+var sp_difftime_updated = "<?php echo $sp_difftime_updated; ?>";
+
+if(now_date > sp_date){
+  // alert(sp_difftime_updated);
+}else if(now_date == sp_date){
+  if(sp_difftime_updated > 03){
+    // alert(sp_difftime_updated);
+    $('.page__loader').css('display', 'flex');
+    update_study();
+  }
+}
+
+function update_study(){
+  $.ajax({
+   type:"POST",
+   url:"<?php echo site_url('b2c/student/dashboard/update_studyprog');?>",
+   success: function(data){
+      $('.page__loader').hide();
+       //document.getElementById('chat_audio').play();
+      //  $('#isi_chat').html(data);
+       console.log(data);
+     }
+  });
+}
 </script>
 
 <script type="text/javascript">
@@ -319,7 +361,7 @@ $(".viewcoach").click(function() {
                 // $('.timezonecoach').text(': '+timezone);
                 $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
 
-            }                
+            }
     });
 });
 
