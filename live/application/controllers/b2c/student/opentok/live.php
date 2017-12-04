@@ -215,15 +215,24 @@ class Live extends MY_Site_Controller {
         // $tokenresult = $this->session->userdata('token_api');
 
         // if(!@$tokenresult){
-          $tokenresult = $this->study_progress->GenerateToken();
-        // }
-        // $tokenresult = $this->study_progress->GenerateToken();
-        // echo('<pre>');print_r($tokenresult); exit;
-
-        $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
-        $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
-        $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
+        //   $tokenresult = $this->study_progress->GenerateToken();
+        // // }
+        // // $tokenresult = $this->study_progress->GenerateToken();
+        // // echo('<pre>');print_r($tokenresult); exit;
+        //
+        // $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
+        // $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
+        // $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
         // echo('<pre>');print_r($gsp); exit;
+        $pull_gcp = $this->db->select('*')
+                  ->from('b2c_student_progress')
+                  ->where('user_id', $std_id_for_cert)
+                  ->get()->result();
+
+        $gsp = json_decode($pull_gcp[0]->json_gsp);
+        $gcp = json_decode($pull_gcp[0]->json_gcp);
+        $gwp = json_decode($pull_gcp[0]->json_gwp);
+
         $mt_status_to_colour = array(
           "passed" => "bg-blue-gradient",
           "open" => "bg-white-gradient",
@@ -239,20 +248,20 @@ class Live extends MY_Site_Controller {
         //   'mt6' => @$mt_status_to_colour[$gsp->data->study->mastery_tests[5]->status]
         // );
 
-        /*==============  
+        /*==============
           rendy bustari
         ===============*/
 
         $mt_color = [];
         $k = 1;
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
-        
+
         for($l=0;$l<$max_buletan_student;$l++){
           $mt_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
           $k++;
         }
 
-        
+
         // bulatan coach color
         $coach_status_color = array(
           "passed" => "bg-green-gradient",
@@ -264,7 +273,7 @@ class Live extends MY_Site_Controller {
         $coach_color = [];
         $j = 1;
         $max_buletan = sizeof($gsp->data->coach->sessions);
-        
+
         for($i=0;$i<$max_buletan;$i++){
           $coach_color['cc'.$j] = @$coach_status_color[$gsp->data->coach->sessions[$i]->status];
           $j++;
