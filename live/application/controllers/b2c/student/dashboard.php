@@ -51,7 +51,16 @@ class Dashboard extends MY_Site_Controller {
 
         $last_upd_date = $check_study_data[0]->updated_date;
         $last_upd_time = $check_study_data[0]->updated_time;
-        // echo "<pre>";print_r($check_study_data);exit();
+
+        $decode_gcp = json_decode($check_study_data[0]->json_gcp);
+        $decode_gsp = json_decode($check_study_data[0]->json_gsp);
+        $decode_gwp = json_decode($check_study_data[0]->json_gwp);
+
+        $err_gcp = @$decode_gcp->error;
+        $err_gsp = @$decode_gsp->error;
+        $err_gwp = @$decode_gwp->error;
+
+        // echo "<pre>";print_r($err_gcp);exit();
         // $tokenresult = $this->session->userdata('token_api');
         // $tokenresult = $this->study_progress->GenerateToken();
         //
@@ -305,6 +314,9 @@ class Dashboard extends MY_Site_Controller {
             'last_upd_time'  => $last_upd_time,
             'sp_difftime_updated'  => $sp_difftime_updated,
             'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
+            'err_gcp' => $err_gcp,
+            'err_gsp' => $err_gsp,
+            'err_gwp' => $err_gwp
         );
 
         // echo "<pre>";print_r($vars);exit();

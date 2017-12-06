@@ -308,9 +308,13 @@ var sp_time = "<?php echo $last_upd_time; ?>";
 var now_date = "<?php echo $nowd; ?>";
 var now_time = "<?php echo $hour_start_db; ?>";
 
-var sp_difftime_updated = "<?php echo $sp_difftime_updated; ?>";
+var err_gcp = "<?php echo $err_gcp;?>";
+var err_gsp = "<?php echo $err_gsp;?>";
+var err_gwp = "<?php echo $err_gwp;?>";
 
-if(now_date > sp_date){
+var sp_difftime_updated = "<?php echo $sp_difftime_updated; ?>";
+// console.log(err_gcp);
+if(now_date > sp_date || err_gcp.indexOf("Invalid")>=0 || err_gsp.indexOf("Invalid")>=0 || err_gwp.indexOf("Invalid")>=0){
   // alert(sp_difftime_updated);
   $('.page__loader').css('display', 'flex');
   update_study();

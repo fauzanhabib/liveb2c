@@ -42,15 +42,20 @@ class Study_dashboard extends MY_Site_Controller {
 
       // if(@$tokenresult){
         // $tokenresult = $this->study_progress->GenerateToken();
-        $pull_gcp = $this->db->select('*')
-                  ->from('b2c_student_progress')
-                  ->where('user_id', $id)
-                  ->get()->result();
+      $pull_gcp = $this->db->select('*')
+                ->from('b2c_student_progress')
+                ->where('user_id', $id)
+                ->get()->result();
 
-        $gsp = json_decode($pull_gcp[0]->json_gsp);
-        $gcp = json_decode($pull_gcp[0]->json_gcp);
-        $gwp = json_decode($pull_gcp[0]->json_gwp);
+      $gsp = json_decode($pull_gcp[0]->json_gsp);
+      $gcp = json_decode($pull_gcp[0]->json_gcp);
+      $gwp = json_decode($pull_gcp[0]->json_gwp);
 
+      $err_gcp = @$gcp->error;
+      $err_gsp = @$gsp->error;
+      $err_gwp = @$gwp->error;
+
+      if(!@$err_gcp || !@$err_gcp || !@$err_gcp){
         // $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
         // $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
         // $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
@@ -122,10 +127,10 @@ class Study_dashboard extends MY_Site_Controller {
         // echo('<pre>');print_r($vars); exit;
         $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
         $this->template->publish();
-      // }else{
-      //   $this->template->content->view('contents/b2c/student/study_dashboard/nodata');
-      //   $this->template->publish();
-      // }
+      }else{
+        $this->template->content->view('contents/b2c/student/study_dashboard/nodata');
+        $this->template->publish();
+      }
     }
 
 }
