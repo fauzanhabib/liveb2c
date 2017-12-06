@@ -118,6 +118,7 @@ $(document).ready(function(){
     //  console.log('a');
      var pesan = $('#pesan').val();
      var user  = '<?php echo $this->auth_manager->get_name();?>';
+     $('#pesan').val('');
     //  console.log(user);
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
@@ -141,6 +142,7 @@ $(document).ready(function(){
     if(e.keyCode == 13){
      var pesan = $('#pesan').val();
      var user = '<?php echo $this->auth_manager->get_name();?>';
+     $('#pesan').val('');
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
           alert("Oops, you can't send an empty chat");
