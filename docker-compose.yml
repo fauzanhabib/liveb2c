@@ -9,7 +9,7 @@ services:
     depends_on:
       - live
     ports:
-      - "80:80"
+      - "8088:80"
   live:
     image: dynedjakartacontainers/live:1.0.0
    #  ports:

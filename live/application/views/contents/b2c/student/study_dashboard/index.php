@@ -45,7 +45,7 @@
 				        </svg> -->
 
 				        <div class="donut__progress__info">
-				            <div class="point__progress__info"><?php echo $gsp->data->goal_certification_level;?></div>
+				            <div class="point__progress__info"><?php echo $gsp->data->certification_level;?></div>
 				        </div>
 				    </div>
 				</div>
@@ -61,18 +61,18 @@
 		  			<div class="bullet__achievement <?php echo $mt_color['mt4']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt5']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt6']; ?>"></div> -->
-					
+
 					<!-- =======edited by rendy bustari========== -->
 					<?php
 					for($l=1;$l<=$max_buletan_student;$l++){ ?>
 						<div class="bullet__achievement <?php echo @$student_color['mt'.$l];?>"></div>
-					<?php 
+					<?php
 						}
 					?>
 
 
 					<!-- ========================================= -->
-					
+
 		  			<div class="achievement__point__info">
 		  				<h5><?php echo $gsp->data->study->points_until_today;?></h5>
 		  				<h3>Study</h3>
@@ -88,7 +88,7 @@
 					<?php
 					for($i=1;$i<=$max_buletan;$i++){ ?>
 						<div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
-					<?php 
+					<?php
 						}
 					?>
 					<!-- ================================ -->
@@ -535,7 +535,7 @@ var step = $('.step--circle.circle');
 
 
 
-    
+
 	step.circleProgress({
 	    startAngle: -Math.PI / 2,
 	    value: newstepVal,
