@@ -109,7 +109,7 @@ class Token extends MY_Site_Controller {
            $used_tokens+= $key->token_amount;
         }
 
-        $ts_id = array('21', '23');
+        $ts_id = array('13', '21', '23');
         $pull_refu_t = $this->db->select('token_amount')
                       ->from('token_histories')
                       ->where('user_id', $id)
