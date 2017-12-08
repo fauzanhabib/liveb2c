@@ -21,6 +21,7 @@ class Profile extends MY_Site_Controller {
         $this->load->model('timezone_model');
         $this->load->library('phpass');
         $this->load->library('common_function');
+        $this->load->library('Change_ssopass');
 
         // Load language
         $this->lang->load('view');
@@ -190,6 +191,11 @@ class Profile extends MY_Site_Controller {
     public function upd_pass(){
       $id = $this->auth_manager->userid();
 
+      $pull_username = $this->db->select('sso_username')
+              ->from('users')
+              ->where('id', $id)
+              ->get()->result();
+
       $currpass = $this->input->post('currpass');
       $newpass  = $this->input->post('newpass');
       $confpass = $this->input->post('confpass');
@@ -209,6 +215,13 @@ class Profile extends MY_Site_Controller {
            'password' => $updated_pass
         );
 
+        $this->load->library('Change_ssopass');
+        $data = array(
+          'username' => $pull_username[0]->sso_username,
+          'password' => $newpass
+        );
+        $chpass_sso = $this->change_ssopass->ch_pass($data);
+        // echo('<pre>');print_r($chpass_sso); exit;
         $this->db->where('id', $id);
         $this->db->update('users', $upd_pass_arr);
         //
@@ -221,6 +234,7 @@ class Profile extends MY_Site_Controller {
         'classcont' => $classcont,
         'updated_pass' => $updated_pass,
         'newpass' => $newpass
+        // 'chpass_sso' => $chpass_sso
       ];
 
       echo json_encode($var);

@@ -55,7 +55,13 @@ class Study_dashboard extends MY_Site_Controller {
       $err_gsp = @$gsp->error;
       $err_gwp = @$gwp->error;
 
-      if(!@$err_gcp || !@$err_gcp || !@$err_gcp){
+      $check_gsp = @$gsp->data->certification_level;
+      $check_gcp = @$gcp->data->certification_level;
+      $check_gwp = @$gwp->status;
+
+      // echo('<pre>');print_r($check_gwp); exit;
+
+      if(!@$err_gcp || !@$err_gcp || !@$err_gcp || @$check_gwp != 'OK' || !@$check_gsp || !@$check_gcp){
         // $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
         // $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
         // $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
