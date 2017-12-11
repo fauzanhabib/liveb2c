@@ -432,7 +432,7 @@ class Dashboard extends MY_Site_Controller {
           $check_gcp = @$gcp->data->certification_level;
           $check_gwp = @$gwp->status;
 
-          if(!empty(@$check_gsp) || !empty(@$check_gcp) || !empty(@$check_gwp)){
+          if(empty(@$check_gsp) || empty(@$check_gcp) || empty(@$check_gwp)){
             $array_study = array(
               'json_gsp' => $gsp,
               'json_gcp' => $gcp,
