@@ -261,6 +261,13 @@ opacity: 1 !important;
 .dashboard__notif{
   margin-left: 0% !important;
 }
+
+@media only screen and (max-width: 568px) {
+  #myPublisherElementId {
+    right: 6%;
+    top: 13%;
+  }
+}
 </style>
 <section class="main__content">
   <div class="dashboard__notif success__notif width100perc" id="heading1">
