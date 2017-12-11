@@ -599,11 +599,11 @@ class find_coaches extends MY_Site_Controller {
 
         $data = $this->get_available_coach($date, $per_page, $offset);
         
-        $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+        // $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
         
-        $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
-        $standard_coach_cost = $setting[0]->standard_coach_cost;
-        $elite_coach_cost = $setting[0]->elite_coach_cost;
+        // $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
+        // $standard_coach_cost = $setting[0]->standard_coach_cost;
+        // $elite_coach_cost = $setting[0]->elite_coach_cost;
 
         $gmt_student = $this->identity_model->new_get_gmt($this->auth_manager->userid());
 
