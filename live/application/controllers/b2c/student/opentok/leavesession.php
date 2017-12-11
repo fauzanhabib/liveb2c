@@ -117,7 +117,7 @@ class Leavesession extends MY_Site_Controller {
 
 
         //----------
-        $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+        $partner_id = $this->auth_manager->partner_id($coach_id);
         $region_id = $this->auth_manager->region_id($partner_id);
 
         $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();

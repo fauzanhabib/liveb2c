@@ -47,9 +47,9 @@ class Study_dashboard extends MY_Site_Controller {
                 ->where('user_id', $id)
                 ->get()->result();
 
-      $gsp = json_decode($pull_gcp[0]->json_gsp);
-      $gcp = json_decode($pull_gcp[0]->json_gcp);
-      $gwp = json_decode($pull_gcp[0]->json_gwp);
+      $gsp = json_decode(@$pull_gcp[0]->json_gsp);
+      $gcp = json_decode(@$pull_gcp[0]->json_gcp);
+      $gwp = json_decode(@$pull_gcp[0]->json_gwp);
 
       $err_gcp = @$gcp->error;
       $err_gsp = @$gsp->error;
@@ -59,9 +59,9 @@ class Study_dashboard extends MY_Site_Controller {
       $check_gcp = @$gcp->data->certification_level;
       $check_gwp = @$gwp->status;
 
-      // echo('<pre>');print_r($check_gwp); exit;
-
-      if(!@$err_gcp || !@$err_gcp || !@$err_gcp || @$check_gwp != 'OK' || !@$check_gsp || !@$check_gcp){
+      // echo('<pre>');print_r($err_gcp); exit;
+      // || @$check_gwp != 'OK' || !@$check_gsp || !@$check_gcp
+      if(!empty(@$check_gsp) || !empty(@$check_gcp) || !empty(@$check_gwp)){
         // $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
         // $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
         // $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));

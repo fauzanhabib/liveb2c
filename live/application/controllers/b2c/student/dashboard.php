@@ -49,12 +49,12 @@ class Dashboard extends MY_Site_Controller {
                           ->where('user_id',$id)
                           ->get()->result();
 
-        $last_upd_date = $check_study_data[0]->updated_date;
-        $last_upd_time = $check_study_data[0]->updated_time;
+        $last_upd_date = @$check_study_data[0]->updated_date;
+        $last_upd_time = @$check_study_data[0]->updated_time;
 
-        $decode_gcp = json_decode($check_study_data[0]->json_gcp);
-        $decode_gsp = json_decode($check_study_data[0]->json_gsp);
-        $decode_gwp = json_decode($check_study_data[0]->json_gwp);
+        $decode_gcp = json_decode(@$check_study_data[0]->json_gcp);
+        $decode_gsp = json_decode(@$check_study_data[0]->json_gsp);
+        $decode_gwp = json_decode(@$check_study_data[0]->json_gwp);
 
         $err_gcp = @$decode_gcp->error;
         $err_gsp = @$decode_gsp->error;
@@ -288,7 +288,7 @@ class Dashboard extends MY_Site_Controller {
             $this->user_notification_model->insert($user_notification);
         }
 
-        $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime($last_upd_time);
+        $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime(@$last_upd_time);
         $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
         // echo "<pre>";print_r($sp_difftime_updated);exit();
 
@@ -310,13 +310,13 @@ class Dashboard extends MY_Site_Controller {
             'hour_start_db'  => $hour_start_db,
             'data_class' => $data_class,
             'countdown'  => $countdown,
-            'last_upd_date'  => $last_upd_date,
-            'last_upd_time'  => $last_upd_time,
+            'last_upd_date'  => @$last_upd_date,
+            'last_upd_time'  => @$last_upd_time,
             'sp_difftime_updated'  => $sp_difftime_updated,
             'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
-            'err_gcp' => $err_gcp,
-            'err_gsp' => $err_gsp,
-            'err_gwp' => $err_gwp
+            'err_gcp' => @$err_gcp,
+            'err_gsp' => @$err_gsp,
+            'err_gwp' => @$err_gwp
         );
 
         // echo "<pre>";print_r($vars);exit();
