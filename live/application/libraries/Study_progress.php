@@ -147,6 +147,100 @@ class Study_progress {
 
         // echo $result;
     }
+
+    public function TokenVerify($get_token) {
+        $this->CI = &get_instance();
+        // $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-record/'.$this->CI->session->userdata('u_u'));
+        $pulled_token = json_encode(array(
+            'token'=>$get_token
+        ));
+        // Preparing API URL
+        $rt = curl_init();
+        curl_setopt_array($rt, array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => getenv("JWT_API_HOST").'/token-verify',
+            CURLOPT_HTTPHEADER => array(
+              'Content-Type' => 'application/json'),
+            CURLOPT_POSTFIELDS => $pulled_token
+        ));
+        $tokencheck = curl_exec($rt) ;
+        $pulltr = json_decode($tokencheck);
+        $is_verify = @$pulltr->token;
+        // echo $rt;exit('a');
+        return $is_verify;
+
+        // echo $result;
+    }
+
+    public function GetCurrentProgress_wa($token, $username) {
+        $this->CI = &get_instance();
+        $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-record/'.$username.'/current');
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+        curl_setopt($ch, CURLOPT_DNS_CACHE_TIMEOUT, 2 );
+        curl_setopt($ch, CURLOPT_POST,0);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+          'X-Dyned-Tkn: ' . $token)
+        );
+
+        $gcp = curl_exec($ch);
+        curl_close($ch);
+
+        return $gcp;
+    }
+    public function GetStudyProgress_wa($token, $username) {
+        $this->CI = &get_instance();
+        $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-progress/'.$username);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+        curl_setopt($ch, CURLOPT_DNS_CACHE_TIMEOUT, 2 );
+        curl_setopt($ch, CURLOPT_POST,0);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+          'X-Dyned-Tkn: ' . $token)
+        );
+
+        $resp = curl_exec($ch);
+
+        // close the connection, release resources used
+        curl_close($ch);
+
+        return $resp;
+
+        // echo $resp;
+    }
+    public function GetWeeklyProgress_wa($token, $username) {
+        $this->CI = &get_instance();
+        $ch = curl_init(getenv("DSA_API_HOST").'/v1/study-record/'.$username);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // true or false
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+        curl_setopt($ch, CURLOPT_DNS_CACHE_TIMEOUT, 2 );
+        curl_setopt($ch, CURLOPT_POST,0);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+          'X-Dyned-Tkn: ' . $token)
+        );
+
+        $resp = curl_exec($ch);
+
+        // close the connection, release resources used
+        curl_close($ch);
+
+        return $resp;
+
+        // echo $result;
+    }
+
 }
 
 
