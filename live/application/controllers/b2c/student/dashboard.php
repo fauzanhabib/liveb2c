@@ -428,16 +428,21 @@ class Dashboard extends MY_Site_Controller {
 
         // echo "<pre>";print_r($gsp);exit();
         if(@$check_study_data){
-          $array_study = array(
-            'json_gsp' => $gsp,
-            'json_gcp' => $gcp,
-            'json_gwp' => $gwp,
-            'updated_date' => $date,
-            'updated_time' => $time
-          );
+          $check_gsp = @$gsp->data->certification_level;
+          $check_gcp = @$gcp->data->certification_level;
+          $check_gwp = @$gwp->status;
 
-          $this->db->where('user_id', $id);
-          $this->db->update('b2c_student_progress', $array_study);
+          if(!empty(@$check_gsp) || !empty(@$check_gcp) || !empty(@$check_gwp)){
+            $array_study = array(
+              'json_gsp' => $gsp,
+              'json_gcp' => $gcp,
+              'json_gwp' => $gwp,
+              'updated_date' => $date,
+              'updated_time' => $time
+            );
+            $this->db->where('user_id', $id);
+            $this->db->update('b2c_student_progress', $array_study);
+          }
         }else{
           $array_study = array(
             'json_gsp' => $gsp,
