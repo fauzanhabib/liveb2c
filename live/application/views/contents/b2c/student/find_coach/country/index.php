@@ -379,7 +379,7 @@
         <script>
             $("#datepicker").each(function() {
                 $(this).datepicker({
-                    minDate: 0,
+                    minDate: 1,
                     beforeShow:function(textbox, instance){
                         $('.datepicker__here').append($('#ui-datepicker-div'));
                         $('#ui-datepicker-div').hide();
@@ -389,7 +389,7 @@
 
             $('.datepicker__each').each(function() {
                 $(this).datepicker({
-                    minDate: 0,
+                    minDate: 1,
                     beforeShow:function(textbox, instance){
                         $(this).next().append($('#ui-datepicker-div'));
                         $('#ui-datepicker-div').hide();
