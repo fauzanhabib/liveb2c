@@ -7,6 +7,10 @@ class Login extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->library('Study_progress');
+		$this->load->library('phpass');
+	  $this->load->library('auth');
+	  $this->load->library('auth_manager');
+	  $this->load->model('user_role_model');
 	}
 
 	// Index
@@ -181,6 +185,50 @@ class Login extends MY_Controller {
             echo false;
         }
     }
+
+	public function mobile($t, $token, $u, $username){
+		//http://localhost:8088/index.php/login/mobile/token/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTMwNjI0NjMsImV4cGlyYXRpb24iOjE1MTMwNjI0NjMsInVzZXJuYW1lIjoiYW5kcm9pZCIsInV1aWQiOiIyNzA3NjY4Mzc5NDMwNzQ4MTcifQ.mkmfJKgmsAqIqs8VsB6398DOpcLy3KYcOln0zS3VeFplVrNwIFx-0bIT4mjnrY8-7ck6mMrIuvZXEw22M1_vqB-hxkNg5mqg_uQKx_DjO8ySrZJSbHgL9rzVgaLtaw7R3w4IoImVbkiDF2Pp2qM6oUSsUnpgVzFCOg7H0OqzmgpnS7nbnb6Eqy-mCeziDoVSLCZmMNJilJ9oZN7TqhUUndUeFr3esHyGqoIjyr4_7tlAcAOfUeIyOP-KeD3FBRSEGExHr_Jof4X9piw5vPnxrPPHsqYUMfJL4laBHtFOiMeBQpFfYEGBlPSI9AAzI4XMxORNmCm2S3XcvHe_l1BqDQ/username/android
+
+		$is_verified = $this->study_progress->TokenVerify($token);
+
+		if(!$is_verified){
+			exit('Cannot access right now');
+			// echo $is_verified;
+		}else{
+			// exit('a');
+			$pull_user = $this->db->select('*')
+                 ->from('users')
+                 ->where('sso_username', $username)
+                 ->get()->result();
+
+			$user_id    = $pull_user[0]->id;
+			$user_eml   = $pull_user[0]->password;
+			$login_type = $pull_user[0]->sso_enabled;
+
+			$this->auth->login($user_id, TRUE);
+			$role_code = $this->user_role_model->dropdown('id', 'code');
+			$this->session->set_userdata("auth_role", $role_code[$pull_user[0]->role_id]);
+
+			// $remember = TRUE;
+			//
+			// if ($remember) {
+			// 		$this->create_autologin($id);
+			// }
+			$this->session->set_userdata(array('auth_user' => $user_id, 'auth_loggedin' => TRUE));
+
+			$id 	= $this->auth_manager->userid();
+			$role = $this->auth_manager->role();
+
+			if($this->auth_manager->role() == 'STD' && $login_type == 1){
+				 redirect('b2c/student/dashboard_wa');
+				//  exit;
+			}
+
+			echo "<pre>";print_r($role);exit();
+		}
+
+		// print_r($is_verified);exit();
+	}
 
 
 }

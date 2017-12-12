@@ -256,7 +256,7 @@ class Live extends MY_Site_Controller {
         $k = 1;
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
 
-        for($l=0;$l<$max_buletan_student;$l++){
+        for($l=0;$l<@$max_buletan_student;$l++){
           $mt_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
           $k++;
         }
@@ -272,7 +272,11 @@ class Live extends MY_Site_Controller {
 
         $coach_color = [];
         $j = 1;
-        $max_buletan = sizeof($gsp->data->coach->sessions);
+        if(@$gsp->data->coach->sessions || @$gsp != 0){
+          $max_buletan = sizeof($gsp->data->coach->sessions);
+        }else{
+          $max_buletan = 0;
+        }
 
         for($i=0;$i<$max_buletan;$i++){
           $coach_color['cc'.$j] = @$coach_status_color[$gsp->data->coach->sessions[$i]->status];
