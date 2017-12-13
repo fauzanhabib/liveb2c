@@ -187,7 +187,7 @@ class Login extends MY_Controller {
     }
 
 	public function mobile($t, $token, $u, $username){
-		//http://localhost:8088/index.php/login/mobile/token/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTMwNjI0NjMsImV4cGlyYXRpb24iOjE1MTMwNjI0NjMsInVzZXJuYW1lIjoiYW5kcm9pZCIsInV1aWQiOiIyNzA3NjY4Mzc5NDMwNzQ4MTcifQ.mkmfJKgmsAqIqs8VsB6398DOpcLy3KYcOln0zS3VeFplVrNwIFx-0bIT4mjnrY8-7ck6mMrIuvZXEw22M1_vqB-hxkNg5mqg_uQKx_DjO8ySrZJSbHgL9rzVgaLtaw7R3w4IoImVbkiDF2Pp2qM6oUSsUnpgVzFCOg7H0OqzmgpnS7nbnb6Eqy-mCeziDoVSLCZmMNJilJ9oZN7TqhUUndUeFr3esHyGqoIjyr4_7tlAcAOfUeIyOP-KeD3FBRSEGExHr_Jof4X9piw5vPnxrPPHsqYUMfJL4laBHtFOiMeBQpFfYEGBlPSI9AAzI4XMxORNmCm2S3XcvHe_l1BqDQ/username/android
+		//http://localhost:8088/index.php/login/mobile/token/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTMxNzc0NjEsImV4cGlyYXRpb24iOjE1MTMxNzc0NjEsInVzZXJuYW1lIjoiYW5kcm9pZCIsInV1aWQiOiIyNzA3NjY4Mzc5NDMwNzQ4MTcifQ.mwH84E3mIzl0J90bAvC7I89EDfapSB8_mA4GMCAaPww7DJgRAsgdwZCs_l2W9Ha7y67Zlc6rvvkLAK4Pk9MEYsfVULWy7hiZcNgvpllmfIeVl5E54tXWjXaMNQe0a0HVYRSm9vLMHWMrj26Cj3Y8hkwXXo-eR4CO8M74fwFxSxrrDdM5J90XIYzhii_rI0A7rokA-OQiktJuTNhh7kbhf2XW_TT2qCzpMFRyuNMH_3gtnyuEMDAavA-ITpnS2zEuPOXUuAugz56gBA1TLMuNdt0hLKfBP9W2dN5-8Q_8Qw_gtwT1HMrPaM6h3YDmSCYzA53q7kgMtqM2fkMcnmfRuQ/username/android
 
 		$is_verified = $this->study_progress->TokenVerify($token);
 
@@ -219,12 +219,14 @@ class Login extends MY_Controller {
 			$id 	= $this->auth_manager->userid();
 			$role = $this->auth_manager->role();
 
+			// print_r($role);exit();
+
 			if($this->auth_manager->role() == 'STD' && $login_type == 1){
 				 redirect('b2c/student/dashboard_wa');
 				//  exit;
 			}
 
-			echo "<pre>";print_r($role);exit();
+			// echo "<pre>";print_r($role);exit();
 		}
 
 		// print_r($is_verified);exit();
