@@ -73,7 +73,7 @@
                 // echo $this->auth_manager->get_avatar();exit();
                 if (strpos($check_url, 'b2ctest') !== false) {
               ?>
-        	       <img src="<?php echo "https://b2ctest.dyned.com/image/" . $data[0]->profile_picture;?>">
+        	       <img src="<?php echo "https://b2ctest.dyned.com/image/" . $this->auth_manager->get_avatar();?>">
               <?php }else{ ?>
                     <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . ($this->auth_manager->get_avatar()); ?>" alt="">
               <?php } ?>
