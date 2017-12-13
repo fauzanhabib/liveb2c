@@ -3,6 +3,18 @@
   $(".header__mobile").hide();
   $(".main__sidebar").hide();
 </script>
+
+                <!-- back button -->
+                <div class="header__wa">
+                    <div class="backBtn">
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
+                            back
+                        </a>
+                    </div>
+                </div>
+                <!-- back button end -->
+
                 <?php if(count($datasession)!=0){ ?>
                 <div class="dashboard__notif success__notif">
                     <?php if(count($datasession)==1){ ?>

@@ -1035,6 +1035,25 @@ footer span {
 .mobile__nav a.su_btn {
   color: #fff; }
 
+.header__wa {
+  width: 100%; }
+  .header__wa .backBtn {
+    border-bottom: 2px solid #5f6883; }
+    .header__wa .backBtn a {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      padding: 3px;
+      font-size: 1.1em; }
+      .header__wa .backBtn a svg {
+        margin: 0 10px 0 0; }
+
 /****** end mobile menu ******/
 .pagination {
   display: block;
