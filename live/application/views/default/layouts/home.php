@@ -111,7 +111,13 @@
                     </g>
                 </svg>
             </a>
+            <!-- version -->
+            <div class="version" style="position: absolute;right: 10px;">
+                <title style="display:block;font-size:12px">version 1.01</title>
+                <!-- 13-12-17 -->
+            </div>
         </footer>
+
     </div>
 
     <script>
