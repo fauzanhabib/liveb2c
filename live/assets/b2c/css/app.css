@@ -419,6 +419,11 @@ button:focus {
 .margin-b-25, .prev_step {
   margin: 0 0 25px; }
 
+.flex, .p10__button {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important; }
+
 .flex--center, .pic__circle--small, #noti__counter, .pt_logo, .dashboard__bookacoach .boxselect, .dashboard__bookacoach .tab-content .bookcoach__flexing, .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn, .contact__us--address .left {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4332,6 +4337,7 @@ textarea.parsley-error {
   width: 100%;
   height: 100%;
   position: fixed;
+  margin: 0 !important;
   top: 0;
   left: 0;
   background: rgba(39, 52, 84, 0.8);

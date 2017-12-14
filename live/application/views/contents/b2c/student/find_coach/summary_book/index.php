@@ -101,7 +101,7 @@
 
         <script>
             $('.trigger__loader').click(function() {
-                $('.page__loader').css('display', 'flex');
+                $('.page__loader').addClass('flex');
             })
         </script>
 
