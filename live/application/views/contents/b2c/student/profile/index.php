@@ -63,9 +63,11 @@
 			<div class="profile__info__picture">
       <?php
         $check_url = base_url();
-        if($check_url == "http://localhost/"){
+        // $check_url = "https://b2ctest.dyned.com/profile";
+        if (strpos($check_url, 'b2ctest') !== false) {
+          // echo 'true';exit();
       ?>
-				<img src="<?php echo base_url() . $data[0]->profile_picture;?>" alt="">
+				<img src="<?php echo "https://b2ctest.dyned.com/image/" . $data[0]->profile_picture;?>" alt="">
       <?php } else {?>
         <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . $data[0]->profile_picture;?>" alt="">
       <?php } ?>

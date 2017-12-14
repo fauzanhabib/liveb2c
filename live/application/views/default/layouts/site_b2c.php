@@ -70,9 +70,10 @@
             <div class="header__profpic pic__circle--small">
               <?php
                 $check_url = base_url();
-                if($check_url == "http://localhost/"){
+                // echo $this->auth_manager->get_avatar();exit();
+                if (strpos($check_url, 'b2ctest') !== false) {
               ?>
-        	       <img src="<?php echo base_url().''.($this->auth_manager->get_avatar()); ?>">
+        	       <img src="<?php echo "https://b2ctest.dyned.com/image/" . $this->auth_manager->get_avatar();?>">
               <?php }else{ ?>
                     <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . ($this->auth_manager->get_avatar()); ?>" alt="">
               <?php } ?>
