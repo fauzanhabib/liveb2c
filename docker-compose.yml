@@ -12,8 +12,9 @@ services:
       - "8088:80"
   live:
     image: dynedjakartacontainers/live:1.0.0
-    ports:
-      - "80:80"
+   #  ports:
+   #    - "443:443"
+   #    - "80:80"
     tty: true
     #command: start.sh
     depends_on:
