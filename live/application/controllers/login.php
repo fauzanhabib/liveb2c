@@ -26,135 +26,135 @@ class Login extends MY_Controller {
 		// }
 
       // User is already logged in
-      if ($this->auth->loggedin()) {
-					$this->auth_manager->logout();
-          // check user_id dan session
-          $user_id = $this->auth_manager->userid();
-          session_start();
-          $session_user_login = session_id();
-
-          $check_session = $this->db->select('user_login.user_id, user_login.session')
-                                ->from('user_login')
-                                ->where('user_login.user_id',$user_id)
-                                ->where('user_login.session',$session_user_login)
-                                ->get()->result();
-
-          if($check_session){
-              if((!$check_session[0]->user_id) && (!$check_session[0]->session)){
-								// exit('a');
-                  $this->session->set_userdata('user_id_session',$user->id);
-                  redirect('home/confirmation');
-              } else if (!$check_session){
-								// exit('b');
-                  redirect('login');
-              } else {
-								// exit('c');
-                  if($this->auth_manager->role() == 'STD'){
-                      redirect('b2c/student/dashboard');
-                  } else if($this->auth_manager->role() == 'CCH'){
-                      redirect('coach/dashboard');
-                  } else{
-                      redirect('account/identity/detail/profile');
-                  }
-              }
-          } else {
-						session_start();
-		        $session_user_login = session_id();
-
-		        $this->db->where('user_id',$user_id);
-		        $this->db->where('session',$session_user_login);
-		        $this->db->delete('user_login');
-
-						if($this->auth_manager->role() == 'STD'){
-								redirect('b2c/student/dashboard');
-						} else if($this->auth_manager->role() == 'CCH'){
-								redirect('coach/dashboard');
-						} else{
-								redirect('account/identity/detail/profile');
-						}
-						// echo $this->auth->loggedin();
-						// exit('d');
-              // redirect('logout');
-          }
-
-      }
+      // if ($this->auth->loggedin()) {
+			// 		$this->auth_manager->logout();
+      //     // check user_id dan session
+      //     $user_id = $this->auth_manager->userid();
+      //     session_start();
+      //     $session_user_login = session_id();
+			//
+      //     $check_session = $this->db->select('user_login.user_id, user_login.session')
+      //                           ->from('user_login')
+      //                           ->where('user_login.user_id',$user_id)
+      //                           ->where('user_login.session',$session_user_login)
+      //                           ->get()->result();
+			//
+      //     if($check_session){
+      //         if((!$check_session[0]->user_id) && (!$check_session[0]->session)){
+			// 					// exit('a');
+      //             $this->session->set_userdata('user_id_session',$user->id);
+      //             redirect('home/confirmation');
+      //         } else if (!$check_session){
+			// 					// exit('b');
+      //             redirect('login');
+      //         } else {
+			// 					// exit('c');
+      //             if($this->auth_manager->role() == 'STD'){
+      //                 redirect('b2c/student/dashboard');
+      //             } else if($this->auth_manager->role() == 'CCH'){
+      //                 redirect('coach/dashboard');
+      //             } else{
+      //                 redirect('account/identity/detail/profile');
+      //             }
+      //         }
+      //     } else {
+			// 			session_start();
+		  //       $session_user_login = session_id();
+			//
+		  //       $this->db->where('user_id',$user_id);
+		  //       $this->db->where('session',$session_user_login);
+		  //       $this->db->delete('user_login');
+			//
+			// 			if($this->auth_manager->role() == 'STD'){
+			// 					redirect('b2c/student/dashboard');
+			// 			} else if($this->auth_manager->role() == 'CCH'){
+			// 					redirect('coach/dashboard');
+			// 			} else{
+			// 					redirect('account/identity/detail/profile');
+			// 			}
+			// 			// echo $this->auth->loggedin();
+			// 			// exit('d');
+      //         // redirect('logout');
+      //     }
+			//
+      // }
 
       // Checking user's login attempt
       if($this->input->post('__submit')) {
 
-			$check_login = $this->db->select('*')
-												->from('users')
-												->where('email', $this->input->post('email'))
-												->get()->result();
+				$check_login = $this->db->select('*')
+													->from('users')
+													->where('email', $this->input->post('email'))
+													->get()->result();
 
-			$sso_enabled  = $check_login[0]->sso_enabled;
-			$sso_username = $check_login[0]->sso_username;
+				$sso_enabled  = $check_login[0]->sso_enabled;
+				$sso_username = $check_login[0]->sso_username;
 
-			if($sso_enabled == 0){
-				$this->messages->add('Not Registered on SSO', 'warning');
-				redirect('login');
-				exit;
-			}
+				if($sso_enabled == 0){
+					$this->messages->add('Not Registered on SSO', 'warning');
+					redirect('login');
+					exit;
+				}
 
 			// print_r($sso_enabled);exit();
          // Success to identify
-         else if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) && $sso_enabled == 1) {
-							// echo "<pre>";print_r($check_login);exit();
-              // insert timezone
+       else if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) && $sso_enabled == 1) {
+					// echo "<pre>";print_r($check_login);exit();
+          // insert timezone
 
-              $min_raw = $this->input->post("min_raw");
-              $userid  = $this->auth_manager->userid();
+      		$min_raw = $this->input->post("min_raw");
+          $userid  = $this->auth_manager->userid();
 
-              $this->session->set_userdata('u_p',$this->input->post('password'));
+          $this->session->set_userdata('u_p',$this->input->post('password'));
 
-              // get_sso_username;
-              $g_u_u = $this->db->select('sso_username')
-                                ->from('users')
-                                ->where('email',$this->input->post('email'))
-                                ->get()->result();
+          // get_sso_username;
+          $g_u_u = $this->db->select('sso_username')
+                            ->from('users')
+                            ->where('email',$this->input->post('email'))
+                            ->get()->result();
 
 
-              $this->session->set_userdata('u_u',$g_u_u[0]->sso_username);
-              // =====
+          $this->session->set_userdata('u_u',$g_u_u[0]->sso_username);
+          // =====
 
-              if ($min_raw < 0) {
-                $minutes = abs($min_raw);
-              }else if($min_raw > 0){
-                $minutes = $min_raw * -1;
-              }
+          if ($min_raw < 0) {
+            $minutes = abs($min_raw);
+          }else if($min_raw > 0){
+            $minutes = $min_raw * -1;
+          }
 
-              $gmt_val = @$minutes / 60;
+          $gmt_val = @$minutes / 60;
 
-              if(@$minutes == NULL){
-                  $minutes = 0;
-              }
+          if(@$minutes == NULL){
+              $minutes = 0;
+          }
 
-              $timezone = array(
-                     'user_id' => $userid,
-                     'gmt_val' => $gmt_val,
-                     'minutes_val' => @$minutes,
-                     'log_date' => date('Y-m-d H:i:s')
-                  );
-              $this->db->replace('user_timezones', $timezone);
-              // ====
+          $timezone = array(
+                 'user_id' => $userid,
+                 'gmt_val' => $gmt_val,
+                 'minutes_val' => @$minutes,
+                 'log_date' => date('Y-m-d H:i:s')
+              );
+          $this->db->replace('user_timezones', $timezone);
+          // ====
 
-              $check_login_type = $this->db->select('*')
-                                  ->from('users')
-                                  ->where('id', $this->auth_manager->userid())
-                                  ->get()->result();
+          $check_login_type = $this->db->select('*')
+                              ->from('users')
+                              ->where('id', $this->auth_manager->userid())
+                              ->get()->result();
 
-              $login_type = $check_login_type[0]->login_type;
-              //=====
+          $login_type = $check_login_type[0]->login_type;
+            //=====
 			// print_r($sso_enabled);exit();
 				if($this->auth_manager->role() == 'CCH'){
                redirect('coach/dashboard');
-					exit;
+					// exit;
             } else if($this->auth_manager->role() == 'STD' && $login_type == 1){
                redirect('b2c/student/dashboard');
-					exit;
+					// exit;
             } else {
                redirect('account/identity/detail/profile');
-					exit;
+					// exit;
             }
 
           }
@@ -187,7 +187,7 @@ class Login extends MY_Controller {
     }
 
 	public function mobile($t, $token, $u, $username){
-		//http://localhost:8088/index.php/login/mobile/token/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTMxNzc0NjEsImV4cGlyYXRpb24iOjE1MTMxNzc0NjEsInVzZXJuYW1lIjoiYW5kcm9pZCIsInV1aWQiOiIyNzA3NjY4Mzc5NDMwNzQ4MTcifQ.mwH84E3mIzl0J90bAvC7I89EDfapSB8_mA4GMCAaPww7DJgRAsgdwZCs_l2W9Ha7y67Zlc6rvvkLAK4Pk9MEYsfVULWy7hiZcNgvpllmfIeVl5E54tXWjXaMNQe0a0HVYRSm9vLMHWMrj26Cj3Y8hkwXXo-eR4CO8M74fwFxSxrrDdM5J90XIYzhii_rI0A7rokA-OQiktJuTNhh7kbhf2XW_TT2qCzpMFRyuNMH_3gtnyuEMDAavA-ITpnS2zEuPOXUuAugz56gBA1TLMuNdt0hLKfBP9W2dN5-8Q_8Qw_gtwT1HMrPaM6h3YDmSCYzA53q7kgMtqM2fkMcnmfRuQ/username/android
+		//http://localhost:8088/index.php/login/mobile/token/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTMyMzcxOTEsImV4cGlyYXRpb24iOjE1MTMyMzcxOTEsInVzZXJuYW1lIjoiaW9zIiwidXVpZCI6IjI3MDc2ODM1NDQzMzY5NTc0NSJ9.jX2rFfPTFhBWxBp6uglMGl4hYqbRxWJ8Lfi6ZyHtLmMJgwiNqQrU0ejWbOus4PnDeLVPADB_K9wCgysvokBVidmp_YkTATs94Lsd8rXJkXjICrGj4L981Rlt2D_If2_JXtVbexlPCLQbt0L1SBTb8yFuzdaWp1AMrhd7toYIn6YfMahSxPsH0fnyllGbkcGU0TBgLRX6DNw4yaVhF1am-mfd2xgidqqTepZ_NAXPSSNCDHowjW7Wfo0bR1JHULU9ZxlWbgzp6LvqqnnMKYuwTOgL0LfsBVwAmQ9dRINkZxJyUR0fWrLkNuvVb6QyvlHZR5WToaunaP-H9Q4BOL87Zg/username/ios
 
 		$is_verified = $this->study_progress->TokenVerify($token);
 
@@ -201,13 +201,13 @@ class Login extends MY_Controller {
                  ->where('sso_username', $username)
                  ->get()->result();
 
-			$user_id    = $pull_user[0]->id;
-			$user_eml   = $pull_user[0]->password;
-			$login_type = $pull_user[0]->sso_enabled;
+			$user_id    = @$pull_user[0]->id;
+			$user_eml   = @$pull_user[0]->password;
+			$login_type = @$pull_user[0]->sso_enabled;
 
 			$this->auth->login($user_id, TRUE);
 			$role_code = $this->user_role_model->dropdown('id', 'code');
-			$this->session->set_userdata("auth_role", $role_code[$pull_user[0]->role_id]);
+			$this->session->set_userdata("auth_role", @$role_code[$pull_user[0]->role_id]);
 
 			// $remember = TRUE;
 			//
