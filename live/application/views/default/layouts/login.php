@@ -173,6 +173,10 @@
                     </g>
                 </svg>
             </a>
+            <!-- version -->
+            <?php 
+                require_once(APPPATH.'views/default/layouts/version.php');
+            ?>
         </footer>
     </div>
 
