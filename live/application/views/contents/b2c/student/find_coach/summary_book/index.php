@@ -92,6 +92,18 @@
         <script>
                 $(document).on('touchstart click', '#submit_summary', function () {
                      location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+
+                    $.ajax({
+                        type:"POST",
+                        url:"<?php echo site_url('b2c/student/find_coaches/email_booking');?>",
+                        data: {
+                            'coach_id': "<?php echo $data_coach[0]->id; ?>",
+                            'date_': "<?php echo $date;?>",
+                            'start_time_': "<?php echo $start_time;?>",
+                            'end_time_': "<?php echo $end_time;?>",
+                            'token': "<?php echo $token;?>"
+                        }
+                    });
                 });
 
                 $(document).on('touchstart click', '#cancel_summary', function () {
