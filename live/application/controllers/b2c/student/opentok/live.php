@@ -234,7 +234,7 @@ class Live extends MY_Site_Controller {
         $gwp = json_decode($pull_gcp[0]->json_gwp);
 
         $mt_status_to_colour = array(
-          "passed" => "bg-blue-gradient",
+          "passed" => "bg-green-gradient",
           "open" => "bg-white-gradient",
           "locked" => "",
           "failed" => "bg-red-gradient"

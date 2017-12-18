@@ -68,7 +68,7 @@ class Study_dashboard extends MY_Site_Controller {
 
         // echo('<pre>');print_r($tokenresult); exit;
         $mt_status_to_colour = array(
-          "passed" => "bg-blue-gradient",
+          "passed" => "bg-green-gradient",
           "open" => "bg-white-gradient",
           "locked" => "",
           "failed" => "bg-red-gradient"
