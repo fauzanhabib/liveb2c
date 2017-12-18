@@ -264,8 +264,10 @@ opacity: 1 !important;
 
 @media only screen and (max-width: 568px) {
   #myPublisherElementId {
+    width: 100px;
+    top: 20%;
     right: 6%;
-    top: 13%;
+    left: auto;
   }
 }
 </style>
