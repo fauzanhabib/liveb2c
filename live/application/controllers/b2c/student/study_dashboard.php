@@ -70,7 +70,7 @@ class Study_dashboard extends MY_Site_Controller {
         $mt_status_to_colour = array(
           "passed" => "bg-green-gradient",
           "open" => "bg-white-gradient",
-          "locked" => "",
+          "locked" => "none",
           "failed" => "bg-red-gradient"
         );
         // $mt_color = array(
@@ -85,13 +85,16 @@ class Study_dashboard extends MY_Site_Controller {
         /*==============
           rendy bustari
         ===============*/
+        
 
         $student_color = [];
         $k = 1;
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
 
+
         for($l=0;$l<$max_buletan_student;$l++){
-          $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
+          $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->study->mastery_tests[$l]->status];
+
           $k++;
         }
 
@@ -101,7 +104,7 @@ class Study_dashboard extends MY_Site_Controller {
         $coach_status_color = array(
           "passed" => "bg-green-gradient",
           "open" => "bg-white-gradient",
-          "locked" => "",
+          "locked" => "none",
           "failed" => "bg-red-gradient"
           );
 

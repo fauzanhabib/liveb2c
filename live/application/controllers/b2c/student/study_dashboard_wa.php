@@ -58,7 +58,7 @@ class Study_dashboard_wa extends MY_Controller {
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
 
         for($l=0;$l<$max_buletan_student;$l++){
-          $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->coach->sessions[$l]->status];
+          $student_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->study->mastery_tests[$l]->status];
           $k++;
         }
 
