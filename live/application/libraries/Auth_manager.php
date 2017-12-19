@@ -33,7 +33,7 @@ class Auth_Manager {
         $this->CI->load->model('user_notification_model');
         $this->CI->load->model('user_notification_model');
         $this->CI->load->model('partner_model');
-        
+
         $this->CI->config->set_item('language','english');
     }
 
@@ -45,17 +45,17 @@ class Auth_Manager {
      */
     public function login($email, $password) {
         // Checking existing user
+
         if (!$email) {
             $this->CI->messages->add('Please Insert Email', 'danger');
             return FALSE;
         }
-        
+
         // Checking existing user
         if (!$password) {
             $this->CI->messages->add('Please Insert Password', 'danger');
             return FALSE;
         }
-
 
 
         // Querying user's data from database
@@ -70,20 +70,19 @@ class Auth_Manager {
         }
 
 
-
         // Checking validity password of user login with database
         if (!$this->CI->phpass->check($password, $user->password)) {
             $this->CI->messages->add('Incorrect password', 'danger');
             return FALSE;
         }
 
-        // IMPORTANT used for later after adding function for admin to approve user 
+        // IMPORTANT used for later after adding function for admin to approve user
         // Checking user status
         if ($user->status == 'disable') {
             $this->CI->messages->add('User does not actived yet', 'danger');
             return FALSE;
         }
-        
+
         if ($user->status == 'deactive') {
             $this->CI->messages->add('User has been deactivated by admin', 'danger');
             return FALSE;
@@ -97,34 +96,34 @@ class Auth_Manager {
         // update last_login
         // $this->CI->db->where('id', $user->id);
         // $this->CI->db->update('users',array('last_login' => date('Y-m-d')));
-        
+
         // Getting user role based on logged in user
         $role_code = $this->CI->user_role_model->dropdown('id', 'code');
         $this->CI->session->set_userdata("auth_role", $role_code[$user->role_id]);
 
         // insert to table user_session
-        session_start();    
-        $session_user_login = session_id(); 
+        session_start();
+        $session_user_login = session_id();
 
         $check_session = $this->CI->db->select('id, session')
                                       ->from('user_login')
                                       ->where('user_id',$user->id)
                                       ->get()->result();
      // jika id user sudah login dan sessionnya tidak sama
-        if(($check_session) && ($check_session[0]->session != $session_user_login)){
-                $this->CI->session->set_userdata('user_id_session',$user->id);
-                // check login type
-                $check_login_type = $this->CI->db->select('*')
-                                        ->from('users')
-                                        ->where('id', $user->id)
-                                        ->get()->result();
-
-                    $login_type = $check_login_type[0]->login_type;
-                if($login_type == 0){
-                    redirect('home/confirmation'); 
-                }               
-
-       } else {
+      //   if(($check_session) && ($check_session[0]->session != $session_user_login)){
+      //           $this->CI->session->set_userdata('user_id_session',$user->id);
+      //           // check login type
+      //           $check_login_type = $this->CI->db->select('*')
+      //                                   ->from('users')
+      //                                   ->where('id', $user->id)
+      //                                   ->get()->result();
+       //
+      //               $login_type = $check_login_type[0]->login_type;
+      //           if($login_type == 0){
+      //               redirect('home/confirmation');
+      //           }
+      //           print_r($login_type);exit();
+      //  } else {
             $data_user = array('user_id' => $user->id,
                               'session' => $session_user_login,
                               'dcrea' => time());
@@ -141,7 +140,7 @@ class Auth_Manager {
 
 
             return TRUE;
-        }
+        // }
     }
 
     /**
@@ -152,7 +151,7 @@ class Auth_Manager {
         // $user_id = $this->CI->auth->userid();
         // if($user_id){
         //     $this->CI->db->where('user_id',$user_id);
-        //     $this->CI->db->delete('user_login');            
+        //     $this->CI->db->delete('user_login');
         // }
 
         //destroying session auth_role and authenticated user
@@ -202,7 +201,7 @@ class Auth_Manager {
         $this->CI->db->where('status', 2);
         $this->CI->db->from('user_notifications');
         $notification = $this->CI->db->count_all_results();
-        
+
         $data_notification = $this->CI->user_notification_model->where('user_id', $this->CI->auth->userid())->limit(3)->order_by('dcrea', 'desc')->get_all();
         foreach($data_notification as $d){
             $received_time[$d->id] =  $this->human_timing(date('Y-m-d H:i:s' ,$d->dcrea));
@@ -253,17 +252,17 @@ class Auth_Manager {
         $this->CI->db->from('appointments');
 
         $ongoing = $this->CI->db->count_all_results();
-        
+
         $this->CI->db->where('coach_id', $this->CI->auth->userid());
         $this->CI->db->where('date =', date('Y-m-d'));
         $this->CI->db->where('start_time <=', date('H:i:s'));
         $this->CI->db->where('end_time >=', date('H:i:s'));
         $this->CI->db->from('class_meeting_days');
 
-        $ongoing_class = $this->CI->db->count_all_results();        
+        $ongoing_class = $this->CI->db->count_all_results();
         return(@$ongoing + @$ongoing_class);
     }
-    
+
     /**
      * Get coach ongoing session
      * @return mixed
@@ -277,7 +276,7 @@ class Auth_Manager {
         $this->CI->db->from('appointments');
 
         $ongoing = $this->CI->db->count_all_results();
-        
+
         $this->CI->db->from('class_members cm');
         $this->CI->db->join('class_meeting_days cmd', 'cm.class_id = cmd.class_id');
         $this->CI->db->where('cm.student_id', $this->CI->auth->userid());
@@ -305,9 +304,9 @@ class Auth_Manager {
             'Others' => 'Others'
         );
     }
-    
+
     /**
-     * Get User Email 
+     * Get User Email
      * @return mixed
      */
     public function user_email() {
@@ -315,7 +314,7 @@ class Auth_Manager {
         $user = $this->CI->identity_model->get_identity('user')->select('email')->where('id', $this->CI->auth->userid())->get();
         return(@$user->email);
     }
-    
+
     /**
      * @function check password
      * @return true / false
@@ -339,14 +338,14 @@ class Auth_Manager {
         }
         return TRUE;
     }
-    
+
     /**
      * @function hashing password
      */
     public function hashing_password($password=''){
         return $this->CI->phpass->hash($password);
     }
-    
+
     /**
      * @function get avatar
      * @return string url avatar profile picture
@@ -361,10 +360,10 @@ class Auth_Manager {
         if (!$user) {
             return FALSE;
         }
-        
+
         return $user->profile_picture;
     }
-    
+
     /**
      * @function get name
      * @return string name
@@ -379,12 +378,12 @@ class Auth_Manager {
         if (!$user) {
             return FALSE;
         }
-        
+
         $name = explode(" ", $user->fullname);
-        
+
         return $name[0];
     }
-    
+
     public function is_password_valid($pwd, &$errors) {
         $errors_init = $errors;
 
@@ -398,11 +397,11 @@ class Auth_Manager {
 
         if (!preg_match("#[a-zA-Z]+#", $pwd)) {
             $errors[] = "Password must include at least one letter!";
-        }     
+        }
 
         return ($errors == $errors_init);
     }
-    
+
     /**
      * Get User Language
      * @return (string) language
@@ -411,7 +410,7 @@ class Auth_Manager {
         $lang = $this->CI->user_model->select('lang')->where(Array('id'=>$this->CI->auth->userid(), 'status'=>'active'))->get();
         return(@$lang->lang);
     }
-    
+
     /**
      * Language
      * @return (string) language
