@@ -78,7 +78,7 @@ class Login extends MY_Controller {
       //     }
 			//
       // }
-
+			$this->auth_manager->logout();
       // Checking user's login attempt
       if($this->input->post('__submit')) {
 
