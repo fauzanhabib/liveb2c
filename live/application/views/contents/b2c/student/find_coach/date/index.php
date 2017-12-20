@@ -167,7 +167,7 @@
                        <?php if(!$data){ ?>
                         <span>No coaches matched your criteria</span>
                         <?php }else{ ?>
-                        <?php foreach($data as $d){ 
+                        <?php foreach($data as $d){
                                 $partner_id = $this->auth_manager->partner_id($d['coach_id']);
                                 $region_id = $this->auth_manager->region_id($partner_id);
 
@@ -208,7 +208,15 @@
                         <div class="boxprofilecoach article-loop">
                             <div class="profilecoach">
                                 <div class="profilecoach__picture">
+                                  <?php
+                                    $check_url = base_url();
+                                    // $check_url = 'https://54.254.255.216/liveb2itest';
+                                    if (strpos($check_url, 'liveb2itest') !== false) {
+                                  ?>
+                                    <img src="<?php echo "https://54.254.255.216/liveb2itest/".$d['profile_picture'];?>" alt="">
+                                  <?php }else{ ?>
                                     <img src="<?php echo "https://live.dyned.com/".$d['profile_picture'];?>" alt="">
+                                  <?php } ?>
                                 </div>
                                 <div class="profilecoach__name">
                                     <?php echo($d['fullname']); ?>
