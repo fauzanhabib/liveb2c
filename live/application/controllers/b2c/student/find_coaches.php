@@ -781,18 +781,6 @@ class find_coaches extends MY_Site_Controller {
                     $emailstudent = $this->user_model->select('id, email')->where('id', $this->auth_manager->userid())->get_all();
 
 
-                    if(count($valid_appointment) > 1){
-                            $double_id_appointment = $valid_appointment[0]->id;
-                            $double_student_id = $valid_appointment[0]->student_id;
-                            // balikin token student
-                            $token_double = $remain_token + $token_cost;
-
-                            $add_token_student2 = $this->db->where('user_id',$double_student_id)
-                                                           ->update(array('token_amount' => $add_token_student2));
-                            // delete double appointment
-                            $delete_double_appointment = $this->db->where('id',$double_id_appointment)
-                                                                  ->delete('appointments');
-                    }
 
                     if(($this->db->trans_status() === FALSE) || (!$appointment_id)){
                         
@@ -804,7 +792,27 @@ class find_coaches extends MY_Site_Controller {
                         redirect('b2c/student/find_coaches/search/name/');
                     } 
 
-                    elseif($this->db->trans_status() === TRUE && $appointment_id && count($valid_appointment) == 1){
+                    elseif($this->db->trans_status() === TRUE && $appointment_id && count($valid_appointment) > 0){
+                        if(count($valid_appointment) > 1){
+                                $double_id_appointment = $valid_appointment[0]->id;
+                                $double_student_id = $valid_appointment[0]->student_id;
+
+                                // balikin token student
+                                $token_double = $remain_token + $token_cost;
+                                $token_array = array(
+                                                'token_amount' => $token_double,
+                                );
+
+                                $this->db->trans_begin();
+                                $this->db->where('user_id',$double_student_id);
+                                $this->db->update('user_tokens',$token_array);
+
+                                // delete double appointment
+                                $this->db->where('id',$double_id_appointment);
+                                $this->db->delete('appointments');
+                                $this->db->trans_commit();
+                        }
+
                         $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                         // messaging to send email and creating notification based on appointment
                         // $this->email_notification_appointment($appointment_id);
@@ -841,8 +849,8 @@ class find_coaches extends MY_Site_Controller {
   
                         redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date));
                        }
-                    }   
-                }
+                    }
+                }   
 
             // If we arrive here, it means that no exception was thrown
             // i.e. no query has failed, and we can commit the transaction
@@ -2144,7 +2152,7 @@ class find_coaches extends MY_Site_Controller {
 
         //print_r(date('Y-m-d', $date)); exit;
         
-        // try{
+        try{
             // First of all, let's begin a transaction
             // A set of queries; if one fails, an exception should be thrown
             $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
@@ -2213,21 +2221,6 @@ class find_coaches extends MY_Site_Controller {
                     $emailstudent = $this->user_model->select('id, email')->where('id', $this->auth_manager->userid())->get_all();
 
                     $valid_appointment = $this->appointment_model->where('coach_id', $coach_id)->where('date', date('Y-m-d', $date))->where('start_time', $start_time)->where('end_time', $end_time)->where('status', 'active')->get_all();
-                    
-                    // die();
-
-                    if(count($valid_appointment) > 1){
-                            $double_id_appointment = $valid_appointment[0]->id;
-                            $double_student_id = $valid_appointment[0]->student_id;
-                            // balikin token student
-                            $token_double = $remain_token + $token_cost;
-
-                            $add_token_student2 = $this->db->where('user_id',$double_student_id)
-                                                           ->update(array('token_amount' => $add_token_student2));
-                            // delete double appointment
-                            $delete_double_appointment = $this->db->where('id',$double_id_appointment)
-                                                                  ->delete('appointments');
-                    }
 
                     if(($this->db->trans_status() === FALSE) || (!$appointment_id)){
                         
@@ -2239,7 +2232,26 @@ class find_coaches extends MY_Site_Controller {
                         redirect('b2c/student/find_coaches/search/name/');
                     } 
 
-                    elseif($this->db->trans_status() === TRUE && $appointment_id && count($valid_appointment) == 1){
+                    elseif($this->db->trans_status() === TRUE && $appointment_id && count($valid_appointment) > 0){
+                            if(count($valid_appointment) > 1){
+                                $double_id_appointment = $valid_appointment[0]->id;
+                                $double_student_id = $valid_appointment[0]->student_id;
+
+                                // balikin token student
+                                $token_double = $remain_token + $token_cost;
+                                $token_array = array(
+                                                'token_amount' => $token_double,
+                                );
+
+                                $this->db->trans_begin();
+                                $this->db->where('user_id',$double_student_id);
+                                $this->db->update('user_tokens',$token_array);
+
+                                // delete double appointment
+                                $this->db->where('id',$double_id_appointment);
+                                $this->db->delete('appointments');
+                                $this->db->trans_commit();
+                            }
                         // creating token history
                         $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                         // messaging to send email and creating notification based on appointment
@@ -2284,13 +2296,13 @@ class find_coaches extends MY_Site_Controller {
             // If we arrive here, it means that no exception was thrown
             // i.e. no query has failed, and we can commit the transaction
 
-        // }catch(Exception $e){
-        //     // An exception has been thrown
-        //     // We must rollback the transaction
-        //     $this->db->trans_rollback();
-        //     $this->messages->add('An error has occured, please try again.', 'warning');
-        //     redirect('b2c/student/find_coaches/search/name/');
-        // }
+        }catch(Exception $e){
+            // An exception has been thrown
+            // We must rollback the transaction
+            $this->db->trans_rollback();
+            $this->messages->add('An error has occured, please try again.', 'warning');
+            redirect('b2c/student/find_coaches/search/name/');
+        }
     }
 
     public function email_booking(){
