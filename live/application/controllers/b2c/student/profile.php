@@ -215,7 +215,7 @@ class Profile extends MY_Site_Controller {
            'password' => $updated_pass
         );
 
-        $this->load->library('Change_ssopass');
+        // $this->load->library('Change_ssopass');
         $data = array(
           'username' => $pull_username[0]->sso_username,
           'password' => $newpass
