@@ -10,7 +10,7 @@ class Change_ssopass {
     public function ch_pass($data){
       $super_user_u = 'tebetutara2';
       $super_user_p = '!@#DynEd12810*()';
-      $ch_url = "https://myneo.space/api/v1/sso";
+      $ch_url = getenv("SSO_API_HOST");
       $url = $ch_url . '/user/' . $super_user_u . '/userpass/' . $data['username'];
       // $url = 'https://b2ctest.dyned.com/api/v1/jwt/token-request';
       // $this->CI = &get_instance();
@@ -38,6 +38,7 @@ class Change_ssopass {
       // print_r($resp);exit();
 
  		return $resp;
+ 	// 	return $su_token;
 
       // return $tokenresult;
     }
@@ -56,7 +57,7 @@ class Change_ssopass {
       $rt = curl_init();
       curl_setopt_array($rt, array(
           CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_URL => 'https://myneo.space/api/v1/jwt/token-request',
+          CURLOPT_URL => getenv("JWT_API_HOST").'/token-request',
           CURLOPT_HTTPHEADER => array(
             'Content-Type' => 'application/json'),
           CURLOPT_POSTFIELDS => $useraccount
