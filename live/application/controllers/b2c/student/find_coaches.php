@@ -728,8 +728,10 @@ class find_coaches extends MY_Site_Controller {
             // A set of queries; if one fails, an exception should be thrown
             $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
 
-            if($isValid){
-
+            if(!$isValid){
+                $this->messages->add('Invalid Appointment', 'warning');
+                redirect('b2c/student/find_coaches/single_date/');
+            }else{
                 $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
                      
                 if(in_array(array('start_time' => $start_time_available, 'end_time' => $end_time_available), $availability)) {
@@ -740,7 +742,7 @@ class find_coaches extends MY_Site_Controller {
                     redirect('student/find_coaches/single_date/');
                 }
                 // begin the transaction to ensure all data created or modified structural
-                
+                $this->db->trans_begin();
                 // $token_cost = $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get();
                 $token_cost = $token;
                 // echo "<pre>";
@@ -752,8 +754,11 @@ class find_coaches extends MY_Site_Controller {
 
                 
                 // if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
-                if($this->db->trans_status() === true && $remain_token >= 0){
-                  
+                if($this->db->trans_status() === FALSE || $remain_token < 0){
+                    $this->db->trans_rollback();
+                    $this->messages->add('Not Enough Token', 'warning');
+                    redirect('b2c/student/find_coaches/single_date/');
+                  }elseif($this->db->trans_status() === TRUE && $remain_token >= 0){
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
@@ -788,9 +793,11 @@ class find_coaches extends MY_Site_Controller {
                     // echo $this->db->trans_status();
                     // exit();
 
-
-                    if($this->db->trans_status() == 1 && $appointment_id && $valid_appointment == 1){
-                        
+                    if($this->db->trans_status() === FALSE || !$appointment_id || $valid_appointment != 1){
+                        $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
+                        $this->messages->add('Fail to book appointment, please try again.', 'warning');
+                        redirect('b2c/student/find_coaches/single_date/');
+                    }elseif($this->db->trans_status() === TRUE && $appointment_id && $valid_appointment == 1){
                         $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                         // messaging to send email and creating notification based on appointment
                         // $this->email_notification_appointment($appointment_id);
@@ -820,29 +827,20 @@ class find_coaches extends MY_Site_Controller {
 
                         // $this->send_email->student_book_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
                         // $this->send_email->notif_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
+
+                        $this->db->trans_commit();
                         
                         $this->messages->add($message, 'success');
   
                         redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date));
-                    }else{
-                        $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
-                        $this->messages->add('Fail to book appointment, please try again.', 'warning');
-                        redirect('b2c/student/find_coaches/single_date/');
-                    }
-                }else{
-                    $this->messages->add('Not Enough Token', 'warning');
-                    redirect('b2c/student/find_coaches/single_date/');
+                       }
+                    }   
                 }
-            }else{
-                $this->messages->add('Invalid Appointment', 'warning');
-                redirect('b2c/student/find_coaches/single_date/');
-            }
-            
-
 
             // If we arrive here, it means that no exception was thrown
             // i.e. no query has failed, and we can commit the transaction
             //$this->db->trans_commit();
+
         }catch(Exception $e){
             // An exception has been thrown
             // We must rollback the transaction
@@ -2142,7 +2140,11 @@ class find_coaches extends MY_Site_Controller {
             // First of all, let's begin a transaction
             // A set of queries; if one fails, an exception should be thrown
             $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
-            if($isValid){
+            if(!$isValid){
+                // $this->db->trans_rollback();
+                $this->messages->add('Invalid Appointment', 'warning');
+                redirect('b2c/student/find_coaches/search/name/');
+            }else{
                 $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
 //                @date_default_timezone_set('Etc/GMT'.(7));
 //                print_r(date('Y-m-d', $convert['date'])); 
@@ -2177,9 +2179,11 @@ class find_coaches extends MY_Site_Controller {
                 $remain_token = $this->update_token($token_cost);
                 //if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
                 
-                if($this->db->trans_status() === true && $remain_token >= 0){
-                    $this->db->trans_commit();
-                    $this->db->trans_begin();
+                if($this->db->trans_status() === FALSE || $remain_token < 0){
+                    $this->db->trans_rollback();
+                    $this->messages->add('Not Enough Token', 'warning');
+                    redirect('b2c/student/find_coaches/search/name/');
+                }elseif($this->db->trans_status() === TRUE && $remain_token >= 0){
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
                     $new_date_apd_coach = strtotime($get_date_apd[0]->date);
@@ -2199,9 +2203,15 @@ class find_coaches extends MY_Site_Controller {
                     $emailstudent = $this->user_model->select('id, email')->where('id', $this->auth_manager->userid())->get_all();
 
                     $valid_appointment = count($this->appointment_model->where('coach_id', $coach_id)->where('date', date('Y-m-d', $date))->where('start_time', $start_time)->where('end_time', $end_time)->where('status', 'active')->get_all());
-                    if($this->db->trans_status() === true && $appointment_id && $valid_appointment == 1){
-                        $this->db->trans_commit();
-                        $this->db->trans_begin();
+                    // echo $appointment_id . '-' . $valid_appointment;
+                    // exit();
+                    // die();
+                    if($this->db->trans_status() === FALSE || !$appointment_id || $valid_appointment != 1){
+                        // $this->db->trans_rollback();
+                        $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
+                        $this->messages->add('Fail to book appointment, please try again.', 'warning');
+                        redirect('b2c/student/find_coaches/search/name/');
+                    }elseif($this->db->trans_status() === TRUE && $appointment_id && $valid_appointment == 1){
                         // creating token history
                         $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                         // messaging to send email and creating notification based on appointment
@@ -2238,23 +2248,9 @@ class find_coaches extends MY_Site_Controller {
                 
                         $this->messages->add($message, 'success');
                         redirect('b2c/student/find_coaches/search/name/');
-                    }else{
-                        //throw $e;
-                        $this->db->trans_rollback();
-                        $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
-                        $this->messages->add('Fail to book appointment, please try again.', 'warning');
-                        redirect('b2c/student/find_coaches/search/name/');
+                        }    
                     }
-                }else{
-                    $this->db->trans_rollback();
-                    $this->messages->add('Not Enough Token', 'warning');
-                    redirect('b2c/student/find_coaches/search/name/');
                 }
-            }else{
-                $this->db->trans_rollback();
-                $this->messages->add('Invalid Appointment', 'warning');
-                redirect('b2c/student/find_coaches/search/name/');
-            }
 
 
             // If we arrive here, it means that no exception was thrown
