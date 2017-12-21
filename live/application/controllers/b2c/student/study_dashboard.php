@@ -37,15 +37,32 @@ class Study_dashboard extends MY_Site_Controller {
       //   // echo('<pre>');print_r($tokenresult); exit;
       // }
 
-        // echo('<pre>');print_r($tokenresult); exit;
-
-
       // if(@$tokenresult){
         // $tokenresult = $this->study_progress->GenerateToken();
       $pull_gcp = $this->db->select('*')
                 ->from('b2c_student_progress')
                 ->where('user_id', $id)
                 ->get()->result();
+
+      $get_id_tz = $this->db->select('*')
+                ->from('user_timezones')
+                ->where('user_id', $id)
+                ->get()->result();
+
+      if(@$pull_gcp[0]->updated_date != '' || @$pull_gcp[0]->updated_time != ''){
+        $minutes   = @$get_id_tz[0]->minutes_val;
+        $pull_date = @$pull_gcp[0]->updated_date;
+        $pull_time = @$pull_gcp[0]->updated_time;
+
+        $upd_date  = $pull_date.' '.$pull_time;
+        $conv      = strtotime($upd_date);
+        $datetime  = $conv+(60*$minutes);
+        $echo_upd  = date("M, d Y - H:i:s", $datetime);
+      }else{
+        $echo_upd = "Unknown (please click update)";
+      }
+
+      // echo('<pre>');print_r($echo_upd); exit;
 
       $gsp = json_decode(@$pull_gcp[0]->json_gsp);
       $gcp = json_decode(@$pull_gcp[0]->json_gcp);
@@ -85,7 +102,7 @@ class Study_dashboard extends MY_Site_Controller {
         /*==============
           rendy bustari
         ===============*/
-        
+
 
         $student_color = [];
         $k = 1;
@@ -129,7 +146,8 @@ class Study_dashboard extends MY_Site_Controller {
             'student_color' => @$student_color,
             'coach_color' => @$coach_color,
             'max_buletan' => @$max_buletan,
-            'max_buletan_student' => @$max_buletan_student
+            'max_buletan_student' => @$max_buletan_student,
+            'echo_upd' => $echo_upd
         );
 
         // echo $key;
@@ -140,6 +158,66 @@ class Study_dashboard extends MY_Site_Controller {
         $this->template->content->view('contents/b2c/student/study_dashboard/nodata');
         $this->template->publish();
       }
+    }
+
+    public function update_studyprog(){
+      $id    = $this->auth_manager->userid();
+
+      $time  = date('H:i:s');
+      $date  = date('Y-m-d');
+
+      if($this->session->userdata('u_u') != NULL && $this->session->userdata('u_p') != NULL){
+
+        $tokenresult = $this->study_progress->GenerateToken();
+
+        $gsp = $this->study_progress->GetStudyProgress($tokenresult);
+        $gcp = $this->study_progress->GetCurrentProgress($tokenresult);
+        $gwp = $this->study_progress->GetWeeklyProgress($tokenresult);
+
+        $check_study_data = $this->db->select('user_id')
+                          ->from('b2c_student_progress')
+                          ->where('user_id',$id)
+                          ->get()->result();
+
+        // echo "<pre>";print_r($gsp);exit();
+        if(@$check_study_data){
+          $check_gsp = @$gsp->data->certification_level;
+          $check_gcp = @$gcp->data->certification_level;
+          $check_gwp = @$gwp->status;
+
+          if(empty(@$check_gsp) || empty(@$check_gcp) || empty(@$check_gwp)){
+            $array_study = array(
+              'json_gsp' => $gsp,
+              'json_gcp' => $gcp,
+              'json_gwp' => $gwp,
+              'updated_date' => $date,
+              'updated_time' => $time
+            );
+            $this->db->where('user_id', $id);
+            $this->db->update('b2c_student_progress', $array_study);
+
+            echo "1";
+          }
+        }else{
+          $array_study = array(
+            'json_gsp' => $gsp,
+            'json_gcp' => $gcp,
+            'json_gwp' => $gwp,
+            'user_id' => $id,
+            'updated_date' => $date,
+            'updated_time' => $time
+          );
+
+          $this->db->insert('b2c_student_progress', $array_study);
+          echo "2";
+          // exit();
+        }
+
+        // echo "string";
+      }else{
+        echo "3";
+      }
+
     }
 
 }
