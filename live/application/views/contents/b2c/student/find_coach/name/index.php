@@ -212,7 +212,7 @@
                                   <?php
                                     $check_url = base_url();
                                     // $check_url = 'https://54.254.255.216/liveb2itest';
-                                    if (strpos($check_url, 'liveb2itest') !== false) {
+                                    if (strpos($check_url, 'liveb2ctest') !== false) {
                                   ?>
                                     <img src="<?php echo "https://54.254.255.216/liveb2itest/".$coaches[$i]->profile_picture;?>" alt="">
                                   <?php }else{ ?>
