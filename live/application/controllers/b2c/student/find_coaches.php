@@ -793,19 +793,20 @@ class find_coaches extends MY_Site_Controller {
                     } 
 
                     elseif($this->db->trans_status() === TRUE && $appointment_id && count($valid_appointment) > 0){
-                        if(count($valid_appointment) > 1){
+                        $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
+                            if(count($valid_appointment) > 1){
                                 $double_id_appointment = $valid_appointment[0]->id;
                                 $double_student_id = $valid_appointment[0]->student_id;
 
                                 // balikin token student
-                                $token_double = $remain_token + $token_cost;
-                                $token_array = array(
-                                                'token_amount' => $token_double,
-                                );
+                                // $token_double = $remain_token + $token_cost;
+                                // $token_array = array(
+                                //                 'token_amount' => $token_double,
+                                // );
 
                                 $this->db->trans_begin();
-                                $this->db->where('user_id',$double_student_id);
-                                $this->db->update('user_tokens',$token_array);
+                                $this->db->where('appointment_id',$double_id_appointment);
+                                $this->db->delete('token_histories');
 
                                 // delete double appointment
                                 $this->db->where('id',$double_id_appointment);
@@ -813,7 +814,6 @@ class find_coaches extends MY_Site_Controller {
                                 $this->db->trans_commit();
                         }
 
-                        $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                         // messaging to send email and creating notification based on appointment
                         // $this->email_notification_appointment($appointment_id);
                         $message = 'Booking successful';                        
@@ -1983,6 +1983,7 @@ class find_coaches extends MY_Site_Controller {
             redirect('student/find_coaches/single_date');
         }
         $token_history = array(
+            'appointment_id' => $appointment_id,
             'user_id' => $this->auth_manager->userid(),
             // 'transaction_date' => strtotime(date('d-m-Y')),
             'transaction_date' => time(),
@@ -2233,27 +2234,27 @@ class find_coaches extends MY_Site_Controller {
                     } 
 
                     elseif($this->db->trans_status() === TRUE && $appointment_id && count($valid_appointment) > 0){
+                        $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                             if(count($valid_appointment) > 1){
                                 $double_id_appointment = $valid_appointment[0]->id;
                                 $double_student_id = $valid_appointment[0]->student_id;
 
                                 // balikin token student
-                                $token_double = $remain_token + $token_cost;
-                                $token_array = array(
-                                                'token_amount' => $token_double,
-                                );
+                                // $token_double = $remain_token + $token_cost;
+                                // $token_array = array(
+                                //                 'token_amount' => $token_double,
+                                // );
 
                                 $this->db->trans_begin();
-                                $this->db->where('user_id',$double_student_id);
-                                $this->db->update('user_tokens',$token_array);
+                                $this->db->where('appointment_id',$double_id_appointment);
+                                $this->db->delete('token_histories');
 
                                 // delete double appointment
                                 $this->db->where('id',$double_id_appointment);
                                 $this->db->delete('appointments');
                                 $this->db->trans_commit();
                             }
-                        // creating token history
-                        $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
+                        
                         // messaging to send email and creating notification based on appointment
                         //$this->email_notification_appointment($appointment_id);
                         // transaction finished / all criteria has been fulfilled
