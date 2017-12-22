@@ -26,6 +26,7 @@ class Study_dashboard extends MY_Site_Controller {
     public function index() {
       $id = $this->auth_manager->userid();
       $this->template->title = "Study Dashboard";
+      // echo('<pre>');print_r($this->session->userdata('u_p')); exit;
 
       // echo('<pre>');print_r($std_paswd); exit;
       // $tokenresult = $this->study_progress->GenerateToken();
@@ -151,7 +152,7 @@ class Study_dashboard extends MY_Site_Controller {
         );
 
         // echo $key;
-        // echo('<pre>');print_r($vars); exit;
+        // echo('<pre>');print_r($this->session->userdata('u_p')); exit;
         $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
         $this->template->publish();
       }else{

@@ -226,6 +226,8 @@ class Profile extends MY_Site_Controller {
         $this->db->update('users', $upd_pass_arr);
         //
         $message = 'Password updated';
+
+        $this->session->set_userdata('u_p',$newpass);
       }
 
       $var[] = [
