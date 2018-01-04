@@ -229,9 +229,9 @@ class Live extends MY_Site_Controller {
                   ->where('user_id', $std_id_for_cert)
                   ->get()->result();
 
-        $gsp = json_decode($pull_gcp[0]->json_gsp);
-        $gcp = json_decode($pull_gcp[0]->json_gcp);
-        $gwp = json_decode($pull_gcp[0]->json_gwp);
+        $gsp = json_decode(@$pull_gcp[0]->json_gsp);
+        $gcp = json_decode(@$pull_gcp[0]->json_gcp);
+        $gwp = json_decode(@$pull_gcp[0]->json_gwp);
 
         $mt_status_to_colour = array(
           "passed" => "bg-green-gradient",
