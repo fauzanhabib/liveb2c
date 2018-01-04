@@ -35,7 +35,7 @@
                                 <label>E-Mail</label>
                                 <span><?php echo($data_coach[0]->email); ?></span>
                             </div> -->
-                             <div class="bxcoacdate">
+                            <div class="bxcoacdate">
                                 <label>Date</label>
                                 <span><?php echo(date('l jS \of F Y', @$date)); ?></span>
                             </div>
@@ -47,11 +47,11 @@
                                 <label>End Time</label>
                                 <span>
                                     <?php 
-                                        $currentDate = strtotime($end_time);
-                                        $futureDate = $currentDate-(60*5);
-                                        $endtime = date("H:i:s", $futureDate);
+                                    $currentDate = strtotime($end_time);
+                                    $futureDate = $currentDate-(60*5);
+                                    $endtime = date("H:i:s", $futureDate);
 
-                                        echo($endtime); 
+                                    echo($endtime); 
                                     ?>
                                 </span>
                             </div>
@@ -59,14 +59,14 @@
                                 <label>Token Cost</label>
                                 <span>
                                     <?php
-                                        $token = '';
-                                        if($data_coach[0]->coach_type_id == 1){
-                                            $token = $standard_coach_cost;
-                                        }else if($data_coach[0]->coach_type_id == 2){
-                                            $token = $elite_coach_cost; 
-                                        }
+                                    $token = '';
+                                    if($data_coach[0]->coach_type_id == 1){
+                                        $token = $standard_coach_cost;
+                                    }else if($data_coach[0]->coach_type_id == 2){
+                                        $token = $elite_coach_cost; 
+                                    }
 
-                                        echo($token); 
+                                    echo($token); 
                                     ?>
                                 </span>
                             </div>
@@ -89,9 +89,19 @@
                 </div>
             </section>
 
-        <script>
+            <script>
+                
+            </script>
+
+            <script>
                 $(document).on('touchstart click', '#submit_summary', function () {
-                     location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+                    
+                    $('.page__loader').addClass('flex');
+
+
+                    setTimeout(function () {
+                       location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+                    }, 1000); //will call the function after 2 secs.
 
                     $.ajax({
                         type:"POST",
@@ -108,13 +118,7 @@
 
                 $(document).on('touchstart click', '#cancel_summary', function () {
                     location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches/search/' . $search_by); ?>";
-                });
-        </script>
-
-        <script>
-            $('.trigger__loader').click(function() {
-                $('.page__loader').addClass('flex');
-            })
-        </script>
+                });                
+            </script>
 
 
