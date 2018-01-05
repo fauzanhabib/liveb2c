@@ -291,7 +291,13 @@ class Dashboard extends MY_Site_Controller {
         $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime(@$last_upd_time);
         $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
         // echo "<pre>";print_r($sp_difftime_updated);exit();
+        if($wm->app_type == 1){
+          $url_session = site_url('b2c/student/agora/');
+        }else if($wm->app_type == 0){
+          $url_session = site_url('b2c/student/opentok/live/');
+        }
 
+        // echo "<pre>";print_r($url_session);exit();
         $vars = array(
             'title' => 'Upcoming Session',
             'role'  => 'Coach',
@@ -316,7 +322,8 @@ class Dashboard extends MY_Site_Controller {
             'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
             'err_gcp' => @$err_gcp,
             'err_gsp' => @$err_gsp,
-            'err_gwp' => @$err_gwp
+            'err_gwp' => @$err_gwp,
+            'url_session' => @$url_session
         );
 
         // echo "<pre>";print_r($vars);exit();

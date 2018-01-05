@@ -149,7 +149,7 @@
                                         <span class="date">You Have a Live Session</span>
                                             <div class="boxinfo activesession">
                                                 <div class="playsession">
-                                                    <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
+                                                    <form name ="livesession" action="<?php echo $url_session;?>" method="post">
                                                         <input type="hidden" name="appoint_id" value="<?php echo $wm_id ?>">
                                                             <button type="submit" class="fa fa-play"></button>
                                                     </form>
@@ -195,7 +195,7 @@
                                 <i class="fa fa-play"></i>
                             </div>
                             <div class="playsession hide" id="sess">
-                                <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
+                                <form name ="livesession" action="<?php echo $url_session;?>" method="post">
                                     <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
                                     <button type="submit" class="fa fa-play"></button>
                                 </form>
