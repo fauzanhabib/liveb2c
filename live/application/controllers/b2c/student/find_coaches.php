@@ -1878,7 +1878,7 @@ class find_coaches extends MY_Site_Controller {
         // edit dari sini
 
         if($check_sess[0]->session_type == '0'){
-          exit('a');
+          // exit('a');
           $opentok = new OpenTok($this->config->item('opentok_key'), $this->config->item('opentok_secret'));
           $sessionOptions = array(
               'archiveMode' => ArchiveMode::ALWAYS,

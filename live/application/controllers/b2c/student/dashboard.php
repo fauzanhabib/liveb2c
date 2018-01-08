@@ -291,13 +291,13 @@ class Dashboard extends MY_Site_Controller {
         $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime(@$last_upd_time);
         $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
         // echo "<pre>";print_r($sp_difftime_updated);exit();
-        if($wm->app_type == 1){
+        if(@$wm->app_type == 1){
           $url_session = site_url('b2c/student/agora/');
-        }else if($wm->app_type == 0){
+        }else if(@$wm->app_type == 0){
           $url_session = site_url('b2c/student/opentok/live/');
         }
 
-        // echo "<pre>";print_r($url_session);exit();
+        // echo "<pre>";print_r($wm);exit();
         $vars = array(
             'title' => 'Upcoming Session',
             'role'  => 'Coach',
