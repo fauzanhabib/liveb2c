@@ -199,6 +199,8 @@ opacity: 1 !important;
   z-index: 10;
   width: 200px;
   height: 200px;
+  right: 5px;
+  bottom: 5px;
 }
 </style>
 <section class="main__content">
@@ -235,7 +237,7 @@ opacity: 1 !important;
             <button id="videooff" class="pure-button btn-small btn-green w3-animate-opacity" onclick="javascript:toggleOff();" data-tooltip="Click to Turn Off Your Camera">Camera is On</button>
             <button id="videoon" class="pure-button btn-small btn-red w3-animate-opacity hidden" onclick="javascript:toggleOn();" data-tooltip="Click to Turn On Your Camera">Camera is Off</button>
           </div> -->
-          <div id="video" style="margin:0 auto;">
+          <div id="video" style="margin:0 auto; position: relative;">
               <div id="agora_local" class="localAgora"></div>
           </div>
         </div>
