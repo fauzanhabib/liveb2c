@@ -741,6 +741,7 @@ class Live extends MY_Site_Controller {
                 $checkstd = @$checksess[0]->status;
 
                 if(!@$checksess){
+                    $double = '1';
                     $sesslivestd = array(
                        'appointment_id' => $appoint_id,
                        'user_id' => $id,
@@ -751,6 +752,15 @@ class Live extends MY_Site_Controller {
                 }else if(@$checkstd == 0){
                     $updstd = array(
                        'status' => 1
+                    );
+
+                    $this->db->where('user_id', $id);
+                    $this->db->where('appointment_id', $appoint_id);
+                    $this->db->update('session_live', $updstd);
+                }
+                else if(@$checkstd == 1){
+                    $updstd = array(
+                       'status' => 2
                     );
 
                     $this->db->where('user_id', $id);
@@ -789,7 +799,7 @@ class Live extends MY_Site_Controller {
                 }
             }
         }
-
+        // echo $appoint_id;
     }
 
     public function check_sess(){
