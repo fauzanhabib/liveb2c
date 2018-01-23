@@ -803,127 +803,148 @@ opacity: 1 !important;
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
 <script>
-// lingkaran bulat pertama
+  // lingkaran bulat pertama
 
   var innerupcoach   = '<?php echo $gsp->data->coach->points_until_today;?>';
   var innerdowncoach = '<?php echo $gsp->data->coach->points_to_pass;?>';
   var innerperccoach = innerupcoach / innerdowncoach;
 
-var outter = $('.outter--circle.circle');
-outter.circleProgress({
-    startAngle: -Math.PI / 2,
-    value: innerperccoach,
-    lineCap: 'round',
-    fill: { gradient: ['green', 'yellow'] }
-});
+  var outter = $('.outter--circle.circle');
+  outter.circleProgress({
+      startAngle: -Math.PI / 2,
+      value: innerperccoach,
+      lineCap: 'round',
+      fill: { gradient: ['green', 'yellow'] }
+  });
 
-var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
-var innerperc = innerup / innerdown;
+  var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
+  var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+  var innerperc = innerup / innerdown;
 
-var inner = $('.inner--circle.circle');
-inner.circleProgress({
-    startAngle: -Math.PI / 2,
-    value: innerperc,
-    lineCap: 'round',
-    fill: { gradient: ['#49c0fe', '#4b80fc'] }
-});
+  var inner = $('.inner--circle.circle');
+  inner.circleProgress({
+      startAngle: -Math.PI / 2,
+      value: innerperc,
+      lineCap: 'round',
+      fill: { gradient: ['#49c0fe', '#4b80fc'] }
+  });
 
-// daily step progress
-var step = $('.step--circle.circle');
+  // daily step progress
+  var step = $('.step--circle.circle');
 
-    var stepVal = '<?php echo $gsp->data->percentage_points;?>';
+      var stepVal = '<?php echo $gsp->data->percentage_points;?>';
 
-    var titikVal = '<?php echo $gsp->data->percentage_days;?>';
+      var titikVal = '<?php echo $gsp->data->percentage_days;?>';
 
-    var newstepVal = stepVal/100;
-    var newtitikVal = titikVal/100;
+      var newstepVal = stepVal/100;
+      var newtitikVal = titikVal/100;
 
-// var stepVal = 0.6 // circle step value
-step.circleProgress({
-    startAngle: -Math.PI / 2,
-    value: newstepVal,
-    lineCap: 'round',
-    fill: { gradient: ['#5f6b8e', '#bcc2d3'] }
-});
-// circle step value condition to meet the goal
-if (newstepVal >= newtitikVal) {
-    step.circleProgress({
-        fill: { gradient: ['green', 'yellow'] }
-    });
-}
-
-// Source https://jsbin.com/yaqaxotete/edit?html,css,js,output
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-    var angleInRadians = (angleInDegrees + 90);
-    var dailyGoal = (angleInRadians + 360 / 100 * titikVal) * Math.PI / 180.0; //where to put the goal value
-    return {
-        x: centerX + (radius * Math.cos(dailyGoal)),
-        y: centerY + (radius * Math.sin(dailyGoal))
-    };
-}
-
-function describeArc(x, y, radius, startAngle, endAngle) {
-    var start = polarToCartesian(x, y, radius, endAngle);
-    var end = polarToCartesian(x, y, radius, startAngle);
-    var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
-    var d = [
-        "M", start.x, start.y,
-        "A", radius, radius, 0, arcSweep, 0, end.x, end.y
-    ].join(" ");
-    return d;
-}
-
-window.onload = function() {
-    document.getElementById("arc1").setAttribute("d", describeArc(80, 80, 67, 180, 539));
-    document.getElementById("arc2").setAttribute("d", describeArc(80, 80, 67, 180, 180));
-
-};
-</script>
-<script>
-var upgradeTime = '<?php echo $total_sec ?>';
-var seconds = upgradeTime;
-function timer() {
-    var days        = Math.floor(seconds/24/60/60);
-    var hoursLeft   = Math.floor((seconds) - (days*86400));
-    var hours       = Math.floor(hoursLeft/3600);
-    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
-    var minutes     = Math.floor(minutesLeft/60);
-    var remainingSeconds = seconds % 60;
-    if (remainingSeconds < 10) {
-        remainingSeconds = "0" + remainingSeconds;
-    }
-    document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
-    if (seconds == 0) {
-        clearInterval(countdownTimer);
-        document.getElementById('countdown').innerHTML = "Completed";
-    }else if ( seconds==300 ){
-        $("#sessionalert").removeClass("hidden");
-        seconds--;
-    }else {
-        seconds--;
-    }
-}
-var countdownTimer = setInterval('timer()', 1000);
-</script>
-<script type="text/javascript">
-  var secfromdb  = '<?php echo $total_sec ?>';
-  var milisecond = secfromdb * 1000;
-  window.setTimeout(function() {
-    alert(" Your session has ended ");
-    window.onbeforeunload = null;
-    document.forms['leaving'].submit();
-}, milisecond);
-</script>
-
-<script>
-function checkShare() {
-  if ($(".OT_fit-mode-contain")[0]){
-    $(".boxsession__livecomponentstue").addClass("custMargin")
-    // console.log($(".boxsession__livecomponentstue"));
-  } else {
-    $(".boxsession__livecomponentstue").removeClass("custMargin")
+  // var stepVal = 0.6 // circle step value
+  step.circleProgress({
+      startAngle: -Math.PI / 2,
+      value: newstepVal,
+      lineCap: 'round',
+      fill: { gradient: ['#5f6b8e', '#bcc2d3'] }
+  });
+  // circle step value condition to meet the goal
+  if (newstepVal >= newtitikVal) {
+      step.circleProgress({
+          fill: { gradient: ['green', 'yellow'] }
+      });
   }
-}
-setInterval('checkShare()', 1000);
+
+  // Source https://jsbin.com/yaqaxotete/edit?html,css,js,output
+  function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+      var angleInRadians = (angleInDegrees + 90);
+      var dailyGoal = (angleInRadians + 360 / 100 * titikVal) * Math.PI / 180.0; //where to put the goal value
+      return {
+          x: centerX + (radius * Math.cos(dailyGoal)),
+          y: centerY + (radius * Math.sin(dailyGoal))
+      };
+  }
+
+  function describeArc(x, y, radius, startAngle, endAngle) {
+      var start = polarToCartesian(x, y, radius, endAngle);
+      var end = polarToCartesian(x, y, radius, startAngle);
+      var arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+      var d = [
+          "M", start.x, start.y,
+          "A", radius, radius, 0, arcSweep, 0, end.x, end.y
+      ].join(" ");
+      return d;
+  }
+
+  window.onload = function() {
+      document.getElementById("arc1").setAttribute("d", describeArc(80, 80, 67, 180, 539));
+      document.getElementById("arc2").setAttribute("d", describeArc(80, 80, 67, 180, 180));
+
+  };
+</script>
+<script>
+  var upgradeTime = '<?php echo $total_sec ?>';
+  var seconds = upgradeTime;
+  function timer() {
+      var days        = Math.floor(seconds/24/60/60);
+      var hoursLeft   = Math.floor((seconds) - (days*86400));
+      var hours       = Math.floor(hoursLeft/3600);
+      var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+      var minutes     = Math.floor(minutesLeft/60);
+      var remainingSeconds = seconds % 60;
+      if (remainingSeconds < 10) {
+          remainingSeconds = "0" + remainingSeconds;
+      }
+      document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+      if (seconds == 0) {
+          clearInterval(countdownTimer);
+          document.getElementById('countdown').innerHTML = "Completed";
+      }else if ( seconds==300 ){
+          $("#sessionalert").removeClass("hidden");
+          seconds--;
+      }else {
+          seconds--;
+      }
+  }
+  var countdownTimer = setInterval('timer()', 1000);
+  </script>
+  <script type="text/javascript">
+    var secfromdb  = '<?php echo $total_sec ?>';
+    var milisecond = secfromdb * 1000;
+    window.setTimeout(function() {
+      alert(" Your session has ended ");
+      window.onbeforeunload = null;
+      document.forms['leaving'].submit();
+  }, milisecond);
+</script>
+<script>
+  var appointment_id = "<?php echo $appointment_id; ?>";
+  var stat_check;
+
+  // var checksess = setInterval(function() {
+  //   $.post("<?php echo site_url('opentok/live/check_sess');?>", { 'appointment_id': appointment_id },function(data) {
+  //     stat_check = data;
+  //     // console.log(stat_check);
+  //     if (stat_check == 0 || stat_check == '') {
+  //       closetab();
+  //     }
+  //   });
+  // }, 5000);
+  //check session
+  $.post("<?php echo site_url('opentok/live/check_sess');?>", { 'appointment_id': appointment_id },function(data) {
+    stat_check = data;
+    console.log(stat_check);
+    // if (stat_check == 0 || stat_check == '') {
+    //   closetab();
+    // }
+  });
+</script>
+<script>
+  function checkShare() {
+    if ($(".OT_fit-mode-contain")[0]){
+      $(".boxsession__livecomponentstue").addClass("custMargin")
+      // console.log($(".boxsession__livecomponentstue"));
+    } else {
+      $(".boxsession__livecomponentstue").removeClass("custMargin")
+    }
+  }
+  setInterval('checkShare()', 1000);
 </script>
