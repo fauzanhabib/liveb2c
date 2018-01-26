@@ -457,7 +457,7 @@ opacity: 1 !important;
                             <!-- =========edited by rendy bustar============== -->
                             <?php
                             for($i=1;$i<=$max_buletan;$i++){ ?>
-                              <div class="bullet__achievement <?php echo @$ct_color['cc'.$i];?>"></div>
+                              <div class="bullet__achievement <?php echo @$coach_color['cc'.$i];?>"></div>
                             <?php
                               }
                             ?>
