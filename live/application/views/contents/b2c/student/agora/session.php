@@ -987,7 +987,7 @@ setInterval('checkShare()', 1000);
       var stream = evt.stream;
       console.log("Subscribe remote stream successfully: " + stream.getId());
       if ($('div#video #agora_remote'+stream.getId()).length === 0) {
-        $('div#video').append('<div id="agora_remote'+stream.getId()+'" style="width:100%;height:600px;"></div>');
+        $('div#video').append('<div id="agora_remote'+stream.getId()+'" style="width:100%;height:330px;"></div>');
         // $('video#video'+stream.getId()).addClass('subscriber_video');
         // $('video#video'+stream.getId()).hide();
         // var video = document.getElementsByTagName("video")[0];
