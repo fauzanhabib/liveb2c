@@ -213,7 +213,7 @@
                                     // $check_url = 'https://54.254.255.216/liveb2itest';
                                     if (strpos($check_url, 'liveb2ctest') !== false) {
                                   ?>
-                                    <img src="<?php echo "https://54.254.255.216/liveb2itest/".$coaches[$i]->profile_picture;?>" alt="">
+                                    <img src="<?php echo "https://52.77.200.151/liveb2itest/".$coaches[$i]->profile_picture;?>" alt="">
                                   <?php }else{ ?>
                                     <img src="<?php echo "https://live.dyned.com/".$coaches[$i]->profile_picture;?>" alt="">
                                   <?php } ?>

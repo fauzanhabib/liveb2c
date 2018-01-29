@@ -367,7 +367,7 @@ opacity: 1 !important;
                             <!-- =======edited by rendy bustari========== -->
                             <?php
                             for($l=1;$l<=$max_buletan_student;$l++){ ?>
-                              <div class="bullet__achievement <?php echo @$mt['mt'.$l];?>"></div>
+                              <div class="bullet__achievement <?php echo @$mt_color['mt'.$l];?>"></div>
                             <?php
                               }
                             ?>
@@ -828,30 +828,30 @@ window.onload = function() {
 };
 </script>
 <script>
-var upgradeTime = '<?php echo $total_sec ?>';
-var seconds = upgradeTime;
-function timer() {
-    var days        = Math.floor(seconds/24/60/60);
-    var hoursLeft   = Math.floor((seconds) - (days*86400));
-    var hours       = Math.floor(hoursLeft/3600);
-    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
-    var minutes     = Math.floor(minutesLeft/60);
-    var remainingSeconds = seconds % 60;
-    if (remainingSeconds < 10) {
-        remainingSeconds = "0" + remainingSeconds;
-    }
-    document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
-    if (seconds == 0) {
-        clearInterval(countdownTimer);
-        document.getElementById('countdown').innerHTML = "Completed";
-    }else if ( seconds==300 ){
-        $("#sessionalert").removeClass("hidden");
-        seconds--;
-    }else {
-        seconds--;
-    }
-}
-var countdownTimer = setInterval('timer()', 1000);
+  var upgradeTime = '<?php echo $total_sec ?>';
+  var seconds = upgradeTime;
+  function timer() {
+      var days        = Math.floor(seconds/24/60/60);
+      var hoursLeft   = Math.floor((seconds) - (days*86400));
+      var hours       = Math.floor(hoursLeft/3600);
+      var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+      var minutes     = Math.floor(minutesLeft/60);
+      var remainingSeconds = seconds % 60;
+      if (remainingSeconds < 10) {
+          remainingSeconds = "0" + remainingSeconds;
+      }
+      document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+      if (seconds == 0) {
+          clearInterval(countdownTimer);
+          document.getElementById('countdown').innerHTML = "Completed";
+      }else if ( seconds==300 ){
+          $("#sessionalert").removeClass("hidden");
+          seconds--;
+      }else {
+          seconds--;
+      }
+  }
+  var countdownTimer = setInterval('timer()', 1000);
 </script>
 <script type="text/javascript">
   var secfromdb  = '<?php echo $total_sec ?>';
@@ -860,7 +860,7 @@ var countdownTimer = setInterval('timer()', 1000);
     alert(" Your session has ended ");
     window.onbeforeunload = null;
     document.forms['leaving'].submit();
-}, milisecond);
+  }, milisecond);
 </script>
 
 <script>
@@ -889,10 +889,10 @@ setInterval('checkShare()', 1000);
   // AgoraRTC.Logger.setLogLevel(AgoraRTC.Logger.DEBUG);
 
   /* simulated data to proof setLogLevel() */
-  AgoraRTC.Logger.error('this is error');
-  AgoraRTC.Logger.warning('this is warning');
-  AgoraRTC.Logger.info('this is info');
-  AgoraRTC.Logger.debug('this is debug');
+  // AgoraRTC.Logger.error('this is error');
+  // AgoraRTC.Logger.warning('this is warning');
+  // AgoraRTC.Logger.info('this is info');
+  // AgoraRTC.Logger.debug('this is debug');
 
   var client, localStream, camera, microphone;
 
@@ -905,19 +905,19 @@ setInterval('checkShare()', 1000);
     document.getElementById("video").disabled = true;
     var channel_key  = null;
     var channel_name = "<?php echo $sessionId; ?>";
-    console.log("Ch Name = " + channel_name);
-    console.log("Init AgoraRTC client with vendor key: " + app_id);
+    // console.log("Ch Name = " + channel_name);
+    // console.log("Init AgoraRTC client with vendor key: " + app_id);
     client = AgoraRTC.createClient({mode: 'interop'});
     client.init(app_id, function () {
-      console.log("AgoraRTC client initialized");
+      // console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
         // console.log("User " + channel_key + " join channel successfully");
-        console.log("=====================================");
-        console.log("Channel Key = " + channel_key);
-        console.log("Channel Value = " + channel.value);
-        console.log("UID = " + uid);
-        console.log("Ch Name = " + channel_name);
-        console.log("=====================================");
+        // console.log("=====================================");
+        // console.log("Channel Key = " + channel_key);
+        // console.log("Channel Value = " + channel.value);
+        // console.log("UID = " + uid);
+        // console.log("Ch Name = " + channel_name);
+        // console.log("=====================================");
 
         if (document.getElementById("video").checked) {
           camera = videoSource.value;
@@ -931,44 +931,44 @@ setInterval('checkShare()', 1000);
 
           // The user has granted access to the camera and mic.
           localStream.on("accessAllowed", function() {
-            console.log("accessAllowed");
+            // console.log("accessAllowed");
           });
 
           // The user has denied access to the camera and mic.
           localStream.on("accessDenied", function() {
-            console.log("accessDenied");
+            // console.log("accessDenied");
           });
 
           localStream.init(function() {
-            console.log("getUserMedia successfully");
+            // console.log("getUserMedia successfully");
             localStream.play('agora_local');
 
             client.publish(localStream, function (err) {
-              console.log("Publish local stream error: " + err);
+              // console.log("Publish local stream error: " + err);
             });
 
             client.on('stream-published', function (evt) {
-              console.log("Publish local stream successfully");
+              // console.log("Publish local stream successfully");
             });
           }, function (err) {
-            console.log("getUserMedia failed", err);
+            // console.log("getUserMedia failed", err);
           });
         }
       }, function(err) {
-        console.log("Join channel failed", err);
+        // console.log("Join channel failed", err);
       });
     }, function (err) {
-      console.log("AgoraRTC client init failed", err);
+      // console.log("AgoraRTC client init failed", err);
     });
 
     channelKey = "";
     client.on('error', function(err) {
-      console.log("Got error msg:", err.reason);
+      // console.log("Got error msg:", err.reason);
       if (err.reason === 'DYNAMIC_KEY_TIMEOUT') {
         client.renewChannelKey(channelKey, function(){
-          console.log("Renew channel key successfully");
+          // console.log("Renew channel key successfully");
         }, function(err){
-          console.log("Renew channel key failed: ", err);
+          // console.log("Renew channel key failed: ", err);
         });
       }
     });
@@ -976,22 +976,22 @@ setInterval('checkShare()', 1000);
 
     client.on('stream-added', function (evt) {
       var stream = evt.stream;
-      console.log("New stream added: " + stream.getId());
-      console.log("Subscribe ", stream);
+      // console.log("New stream added: " + stream.getId());
+      // console.log("Subscribe ", stream);
       client.subscribe(stream, function (err) {
-        console.log("Subscribe stream failed", err);
+        // console.log("Subscribe stream failed", err);
       });
     });
 
     client.on('stream-subscribed', function (evt) {
       var stream = evt.stream;
-      console.log("Subscribe remote stream successfully: " + stream.getId());
+      // console.log("Subscribe remote stream successfully: " + stream.getId());
       if ($('div#video #agora_remote'+stream.getId()).length === 0) {
         $('div#video').append('<div id="agora_remote'+stream.getId()+'" style="width:100%;height:330px;"></div>');
         // $('video#video'+stream.getId()).addClass('subscriber_video');
         // $('video#video'+stream.getId()).hide();
         // var video = document.getElementsByTagName("video")[0];
-        // console.log(video);
+        console.log(video);
       }
       stream.play('agora_remote' + stream.getId());
     });
@@ -1000,7 +1000,7 @@ setInterval('checkShare()', 1000);
       var stream = evt.stream;
       stream.stop();
       $('#agora_remote' + stream.getId()).remove();
-      console.log("Remote stream is removed " + stream.getId());
+      // console.log("Remote stream is removed " + stream.getId());
     });
 
     client.on('peer-leave', function (evt) {
@@ -1008,7 +1008,7 @@ setInterval('checkShare()', 1000);
       if (stream) {
         stream.stop();
         $('#agora_remote' + stream.getId()).remove();
-        console.log(evt.uid + " leaved from this channel");
+        // console.log(evt.uid + " leaved from this channel");
       }
     });
   // }
@@ -1016,9 +1016,9 @@ setInterval('checkShare()', 1000);
   function leave() {
     document.getElementById("leave").disabled = true;
     client.leave(function () {
-      console.log("Leavel channel successfully");
+      // console.log("Leavel channel successfully");
     }, function (err) {
-      console.log("Leave channel failed");
+      // console.log("Leave channel failed");
     });
   }
 
@@ -1026,7 +1026,7 @@ setInterval('checkShare()', 1000);
     document.getElementById("publish").disabled = true;
     document.getElementById("unpublish").disabled = false;
     client.publish(localStream, function (err) {
-      console.log("Publish local stream error: " + err);
+      // console.log("Publish local stream error: " + err);
     });
   }
 
@@ -1034,7 +1034,7 @@ setInterval('checkShare()', 1000);
     document.getElementById("publish").disabled = false;
     document.getElementById("unpublish").disabled = true;
     client.unpublish(localStream, function (err) {
-      console.log("Unpublish local stream failed" + err);
+      // console.log("Unpublish local stream failed" + err);
     });
   }
 
@@ -1051,7 +1051,7 @@ setInterval('checkShare()', 1000);
           option.text = device.label || 'camera ' + (videoSelect.length + 1);
           videoSelect.appendChild(option);
         } else {
-          console.log('Some other kind of source/device: ', device);
+          // console.log('Some other kind of source/device: ', device);
         }
       }
     });
@@ -1060,4 +1060,34 @@ setInterval('checkShare()', 1000);
   //audioSelect.onchange = getDevices;
   //videoSelect.onchange = getDevices;
   getDevices();
+</script>
+<script>
+  var appointment_id = "<?php echo $appointment_id; ?>";
+  $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
+    stat_first = data;
+    // console.log("==============================");
+    console.log(stat_first);
+    if (stat_first == 1) {
+      closetab();
+    }
+  });
+  var appointment_id = "<?php echo $appointment_id; ?>";
+  var stat_check;
+
+  var checksess = setInterval(function() {
+    $.post("<?php echo site_url('opentok/live/check_sess');?>", { 'appointment_id': appointment_id },function(data) {
+      stat_check = data;
+      console.log("==============================");
+      console.log(stat_check);
+      if (stat_check == 0 || stat_check == '') {
+        closetab();
+      }
+    });
+  }, 5000);
+  function closetab() {
+      clearInterval(checksess);
+      window.onbeforeunload = null;
+      alert("You're trying to open Live Session in multiple tabs/windows. This page will be closed.");
+      window.location.href = "<?php echo site_url('opentok/multiple'); ?>";
+    }
 </script>
