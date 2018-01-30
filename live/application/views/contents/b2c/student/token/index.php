@@ -58,7 +58,21 @@
                             <span>You are requesting <?php echo $data->token_amount; ?> token right now</span>
                         <?php }else{ ?>
                         <div class="bxrequest__requesttokens__buttonreq">
-                            <a class="neobutton" href="https://myneo.space" target="_blank">Buy Token</a>
+                          <?php
+                            $check_url = base_url();
+                            // $check_url = "https://b2ctest.dyned.com/profile";
+                            if (strpos($check_url, 'b2ctest') !== false) {
+                              $portal_url = "https://b2ctest.dyned.com/";
+                            }else{
+                              $portal_url = "https://myneo.space/";
+                            }
+
+                          ?>
+                          <form action="<?php echo $portal_url;?>profile/auth/purchase-token" method="post">
+                            <input type="hidden" value="<?php echo $useremail; ?>" name="email">
+                            <input type="hidden" value="<?php echo $tokenresult; ?>" name="token">
+                            <button type="submit" class="neobutton">Buy Token</button>
+                          </form>
                         </div>
                         <?php } ?>
 

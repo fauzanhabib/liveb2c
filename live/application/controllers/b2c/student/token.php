@@ -28,6 +28,7 @@ class Token extends MY_Site_Controller {
         $this->load->library('queue');
         $this->load->library('email_structure');
         $this->load->library('send_email');
+        $this->load->library('Study_progress');
 
         // Checking user role and giving action
         if (!$this->auth_manager->role() || $this->auth_manager->role() != 'STD') {
@@ -121,9 +122,12 @@ class Token extends MY_Site_Controller {
            $refu_tokens+= $key->token_amount;
         }
         // echo $sum;
-
-        // echo "<pre>";print_r($refu_tokens);exit();
-
+        $pullemail= $this->db->select('email')
+                  ->from('users')
+                  ->where('id', $id)
+                  ->get()->result();
+        $tokenresult = $this->study_progress->GenerateToken();
+        // echo "<pre>";print_r($tokenresult);exit();
         $vars = array(
             'histories' => $histories,
             'start_date' => date("Y-m-d", strtotime(date("Y-m-d", strtotime(date("Y-m-d"))) . "-2 month")),
@@ -132,7 +136,9 @@ class Token extends MY_Site_Controller {
             'remain_token' => $this->identity_model->select('id, token_amount')->get_identity('token')->where('user_id', $this->auth_manager->userid())->get(),
             'datasession' => $datasession,
             'used_token' => $used_tokens,
-            'refu_token' => $refu_tokens
+            'refu_token' => $refu_tokens,
+            'tokenresult' => $tokenresult,
+            'useremail' => $pullemail[0]->email
         );
 
 
@@ -407,6 +413,32 @@ class Token extends MY_Site_Controller {
     function isRequested() {
         $id = $this->token_request_model->where('user_id', $this->auth_manager->userid())->where('status', 'requested')->get();
         return (@$id->id);
+    }
+
+    public function buytoken(){
+
+    // public function GenerateToken($std_email='', $std_paswd=''){
+
+      $this->CI = &get_instance();
+
+      $useraccount = json_encode(array(
+          'username'=>$this->CI->session->userdata('u_u'),
+          'password'=>$this->CI->session->userdata('u_p')
+      ));
+      // Preparing API URL
+      $rt = curl_init();
+      curl_setopt_array($rt, array(
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_URL => getenv("JWT_API_HOST").'/token-request',
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type' => 'application/json'),
+          CURLOPT_POSTFIELDS => $useraccount
+      ));
+      $tokenconnect = curl_exec($rt) ;
+      $pulltr = json_decode($tokenconnect);
+      $tokenresult = @$pulltr->token;
+      // echo $tokenresult;exit('');
+      return $tokenresult;
     }
 
 }
