@@ -254,7 +254,7 @@ class Live extends MY_Site_Controller {
 
         $mt_color = [];
         $k = 1;
-        $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
+        $max_buletan_student = sizeof(@$gsp->data->study->mastery_tests);
 
         for($l=0;$l<@$max_buletan_student;$l++){
           $mt_color['mt'.$k] = @$mt_status_to_colour[$gsp->data->study->mastery_tests[$l]->status];
