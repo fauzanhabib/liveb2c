@@ -7,10 +7,23 @@
   </head>
   <body style="background:#2d3b5e;color:white;">
   <style>
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  .child-order:nth-of-type(1) { order: 1; }
+  .child-order:nth-of-type(2) { order: 3; }
+  .child-order:nth-of-type(3) { order: 4; }
+  .child-order:nth-of-type(4) { order: 2; }
+
   .header_sim{
     background-color: rgb(59, 74, 116);
     color: white;
-    height: 80px;
+    height: 100px;
+  }
+  .header_sim img {
+    padding: 10px;
   }
   h1{
     background-color: rgb(59, 74, 116);
@@ -24,6 +37,7 @@
   }
   .container{
     min-height: 400px;
+    position: relative;
   }
   /* The Modal (background) */
   .modal {
@@ -64,6 +78,13 @@
       text-decoration: none;
       cursor: pointer;
   }
+
+  .container {
+    position: relative;
+    margin: 0;
+    top: 0;
+    margin: 20px 0 0;
+  }
   </style>
 
   <style>
@@ -100,6 +121,7 @@
     height: 500px;
     transform: translateY(8px);
     background: #3c4c77;
+    border-radius: 3px;
   }
   #bwresult{
     padding: 15px 15px;
@@ -108,6 +130,7 @@
     width: 47%;
     display: inline-block;
     margin-top: 40px;
+    border-radius: 3px;
   }
   #liststat{
     height: 200px;
@@ -131,11 +154,11 @@
   }
   </style>
 
-  <div class="header_sim">
-    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_neo.png'); ?>"> <small>Network test</small>
+  <div class="header_sim child-order">
+    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_neo.png'); ?>">
   </div>
-  <div style="margin-top: 420px;text-align: center;">
-    <div id="status_container" class="prettyBox hover">
+  <div class="child-order" style="text-align: center;">
+    <div id="status_container" class="prettyBox">
       <h2>Testing stream capabilities</h2>
       <p>Acquiring camera</p>
       <img src="<?php echo base_url();?>assets/simulator/spinner.gif">
@@ -143,7 +166,7 @@
       <div id="liststat"></div>
     </div>
 
-    <div id="bwresult" class="hover">
+    <div id="bwresult">
       <div style="width: 100%;text-align: left;margin-bottom: 20px;">
       	<h5 style="margin: 0px !important;">Browser Info:</h5>
       	<p style="font-size: 14px;"><b id="browinfo"></b></p>
@@ -370,7 +393,7 @@ compositeOfCallbacks(
 
 document.addEventListener('DOMContentLoaded', function() {
   var container = document.createElement('div');
-  container.className = 'container';
+  container.className = 'container child-order';
 
   container.appendChild(publisherEl);
   container.appendChild(subscriberEl);
