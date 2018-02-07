@@ -2492,19 +2492,23 @@ class find_coaches extends MY_Site_Controller {
                              // ->where('user_id', $coach_id)
                              ->get()->result();
 
-        if(@$gmt_coach[0]->gmt == $gmt_student[0]->gmt){
-            $a = 1;
+        $co = @$gmt_coach[0]->gmt*(1);
+        $stu = $gmt_student[0]->gmt*(1);
+        $b = $co - $stu;
+
+        // echo $co."()".$stu;
+        // echo "<br >";
+        if($b == 0){
+            $a = 0;
+            $date_ = $date_;
+        } else if($b < 0) {
+            // $a = 1;
+            $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
         } else {
-            if(@$gmt_coach[0]->gmt < 0){
-            
-            $a = 1;
-            
-            } else {
-                
-                $a = -1;
-                
-            }
+            // $a = -1;
+            $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
         }
+       
 
         @date_default_timezone_set('Etc/GMT'.$gmt_coach[0]->gmt*($a));
         
@@ -2516,16 +2520,16 @@ class find_coaches extends MY_Site_Controller {
 
 
 
-        if($get_sel < 0){
-            if($a == 1){
-                $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
-            } 
-            if($a == -1){
-                $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
-            }
-        } else {
-            $date_ = $date_;
-        }
+        // if($get_sel < 0){
+        //     if($a == 1){
+        //         $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
+        //     } 
+        //     if($a == -1){
+        //         $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
+        //     }
+        // } else {
+        //     $date_ = $date_;
+        // }
 
 
         // $date_ = $chek_date;
