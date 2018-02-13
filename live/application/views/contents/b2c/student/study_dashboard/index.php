@@ -64,7 +64,7 @@
 				    </div>
 				</div>
 
-				<div class="progress__info__label"><?php echo $gsp->data->study->points_until_today;?> / 180.000</div>
+				<div class="progress__info__label"><?php echo $gsp->data->total_points_until_today;?> / <?php echo $gsp->data->total_points_to_pass;?></div>
 		  	</div>
 
 		  	<div class="progress__achievement">
