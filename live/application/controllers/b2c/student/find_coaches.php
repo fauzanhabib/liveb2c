@@ -1861,11 +1861,11 @@ class find_coaches extends MY_Site_Controller {
 //        print_r(date('Y-m-d', $date));
 //        print_r($start_time);
 //        print_r($end_time);
-        $id    = $this->auth_manager->userid();
-        $check_sess = $this->db->select('session_type')
-                    ->from('user_profiles')
-                    ->where('user_id',$id)
-                    ->get()->result();
+        // $id    = $this->auth_manager->userid();
+        // $check_sess = $this->db->select('session_type')
+        //             ->from('user_profiles')
+        //             ->where('user_id',$id)
+        //             ->get()->result();
 //
         // echo "<pre>";print_r($check_sess);exit();
 //        $this->db->trans_rollback();
@@ -2623,7 +2623,7 @@ class find_coaches extends MY_Site_Controller {
             }
         }
 
-        @date_default_timezone_set('Etc/GMT'.$gmt_coach[0]->gmt*($a));
+        // @date_default_timezone_set('Etc/GMT'.$gmt_coach[0]->gmt*($a));
 
 
         $chek_date = gmdate('Y-m-d', strtotime($date_) );
@@ -2635,13 +2635,13 @@ class find_coaches extends MY_Site_Controller {
 
         if($get_sel < 0){
             if($a == 1){
-                $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
+                // $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
             }
             if($a == -1){
-                $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
+                // $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
             }
         } else {
-            $date_ = $date_;
+            // $date_ = $date_;
         }
 
 
