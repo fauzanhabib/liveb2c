@@ -632,128 +632,134 @@ class find_coaches_wa extends MY_Site_Controller {
         $this->template->publish();
     }
 
-    public function book_single_coach($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '',$token) {
-        // for isOnAvailability
-        // convert date student
+    public function book_single_coach($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '', $token = ''){
+        $recuring = $this->session->userdata('recurring_booking_type');
+
+        if(!$recuring){
+            $recuring = 1;
+        }
+
+        if($recuring == 1) {
+            $frequency = [0];
+        }
+
+        if($recuring == 2) {
+            $frequency = [0,7];
+        }
+
+        if($recuring == 3) {
+            $frequency = [0,7,7];
+        }
+
+        if($recuring == 4) {
+            $frequency = [0,7,7,7];
+        }
 
 
-        // @date_default_timezone_set('Etc/GMT+7');
-        // $dateconvert_ = date('Y-m-d', $date_);
-        // echo $dateconvert_."<br>";
+        // book otomatis 4x
+        $arr_message = [];
+        foreach ($frequency as $value) {
+            $message = '';
+            $date_ = strtotime("+".$value." day", $date_);
+            // set defaul timezone
+           @date_default_timezone_set('Etc/GMT+0');
 
-        // @date_default_timezone_set('Etc/GMT7');
-        // $dateconvert_ = date('Y-m-d', $date_);
-        // echo $dateconvert_."<br>";
+            $start_time_available = $start_time_;
+            $end_time_available = $end_time_;
 
-        // $gmt_coach = $this->db->select("minutes_val as minutes, gmt_val as gmt")
-        //              ->from('user_timezones')
-        //              ->where('user_id', $this->auth_manager->userid())
-        //              ->get()->result();
-        // @date_default_timezone_set('Etc/GMT+'.$gmt_coach[0]->gmt*(1));
-        // $dateconvert_ = date('Y-m-d', $date_);
-        // echo '+'.$gmt_coach[0]->gmt*(1)." ". $dateconvert_;
-        // exit();
-
-        // $chek_date = gmdate('Y-m-d', strtotime($dateconvert_) );
-        // if($chek_date < $dateconvert_){
-        //     $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$dateconvert_"))));
-        // } else if($chek_date > $dateconvert_){
-        //     $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$dateconvert_"))));
-        // } else {
-        //     $date_ = $dateconvert_;
-        // }
-
-        // $date_ = strtotime($date_);
-        @date_default_timezone_set('Etc/GMT+0');
-        // $dateconvert_ = date('Y-m-d', $date_);
-        // $chek_date = gmdate('Y-m-d', strtotime($dateconvert_) );
-        // echo $chek_date;
-        // exit();
+            $date_notif = date('l jS \of F Y', @$date_);
+        
+            $convert = $this->schedule_function->convert_book_schedule(-($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), $date_, $start_time_, $end_time_);
+            $date = $convert['date'];
+    
+            $dateconvert = date('Y-m-d', $date_);
+            $dateconvertcoach = date('Y-m-d', $date);
+            $start_time = $convert['start_time'];
+            $end_time = $convert['end_time'];
+            // timezone
+            $id_student = $this->auth_manager->userid();
+    
+            // student
+            $gmt_student = $this->identity_model->new_get_gmt($id_student);
+            // coach
+            $gmt_coach = $this->identity_model->new_get_gmt($coach_id);
 
 
-        $start_time_available = $start_time_;
-        $end_time_available = $end_time_;
+            // student
+            $minutes = $gmt_student[0]->minutes;
+            // coach
+            $minutes_coach = $gmt_coach[0]->minutes;
 
-        $date_notif = date('l jS \of F Y', @$date_);
+            @date_default_timezone_set('UTC');
+            // student
+            $st  = strtotime($start_time);
+            $usertime1 = $st+(60*$minutes);
+            $start_hour = date("H:i", $usertime1);
 
-        $convert = $this->schedule_function->convert_book_schedule(-($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), $date_, $start_time_, $end_time_);
-        $date = $convert['date'];
-        $dateconvert = date('Y-m-d', $date_);
-        $dateconvertcoach = date('Y-m-d', $date);
-        $start_time = $convert['start_time'];
-        $end_time = $convert['end_time'];
+            $et  = strtotime($end_time);
+            $usertime2 = $et+(60*$minutes)-(5*60);
+            $end_hour = date("H:i", $usertime2);
 
-        // timezone
-                    $id_student = $this->auth_manager->userid();
+            // coach
 
-                    // student
-                    $gmt_student = $this->identity_model->new_get_gmt($id_student);
-                    // coach
-                    $gmt_coach = $this->identity_model->new_get_gmt($coach_id);
+            $st_coach  = strtotime($start_time);
+            $usertime1_coach = $st_coach+(60*$minutes_coach);
+            $start_hour_coach = date("H:i", $usertime1_coach);
+
+            $et_coach  = strtotime($end_time);
+            $usertime2_coach = $et_coach+(60*$minutes_coach)-(5*60);
+            $end_hour_coach = date("H:i", $usertime2_coach);
+
+            // $check_max_book_coach_per_day = $this->max_book_coach_per_day($coach_id,$date);
+            // if(!$check_max_book_coach_per_day){
+            //     $this->messages->add('This coach has exceeded maximum booked today', 'warning');
+            //     redirect('student/find_coaches/search/name/');
+            // }
 
 
-                    // student
-                    $minutes = $gmt_student[0]->minutes;
-                    // coach
-                    $minutes_coach = $gmt_coach[0]->minutes;
+                $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
 
-                    @date_default_timezone_set('UTC');
-                    // student
-                    $st  = strtotime($start_time);
-                    $usertime1 = $st+(60*$minutes);
-                    $start_hour = date("H:i", $usertime1);
-
-                    $et  = strtotime($end_time);
-                    $usertime2 = $et+(60*$minutes)-(5*60);
-                    $end_hour = date("H:i", $usertime2);
-
-                    // coach
-
-                    $st_coach  = strtotime($start_time);
-                    $usertime1_coach = $st_coach+(60*$minutes_coach);
-                    $start_hour_coach = date("H:i", $usertime1_coach);
-
-                    $et_coach  = strtotime($end_time);
-                    $usertime2_coach = $et_coach+(60*$minutes_coach)-(5*60);
-                    $end_hour_coach = date("H:i", $usertime2_coach);
-
-        // $check_max_book_coach_per_day = $this->max_book_coach_per_day($coach_id,$date);
-        // if(!$check_max_book_coach_per_day){
-        //     $this->messages->add('This coach has exceeded maximum booked today', 'warning');
-        //     redirect('student/find_coaches_wa/single_date/');
-        // }
-
-        try {
-            // First of all, let's begin a transaction
-            // A set of queries; if one fails, an exception should be thrown
-            $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
-
-            if ($isValid) {
-
-                $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
-
-                if (in_array(array('start_time' => $start_time_available, 'end_time' => $end_time_available), $availability)) {
-                    // go to next step
-
-                } else {
-                    $this->messages->add('Invalid Time', 'warning');
-                    redirect('student/find_coaches_wa/single_date/');
+                $message = '';
+                if(!$isValid){
+                    $this->messages->add('Invalid Appointment Or Coach is Having Day Off', 'warning');
+                    $message = 'Invalid Appointment Or Coach is Having Day Off';
                 }
-                // begin the transaction to ensure all data created or modified structural
+        
+               $dayoff = $this->is_day_off($coach_id, $dateconvertcoach,$start_time, $end_time);
 
-                // $token_cost = $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get();
+                // if dayoff 1, coach cuti
+                if($dayoff){
+                    $message = "Coach is Having Day Off";
+                    $this->messages->add('Coach is Having Day Off', 'warning');
+
+                }
+
                 $token_cost = $token;
-                // echo "<pre>";
-                // print_r($token_cost);
-                // exit();
-                // updating remaining token student
 
                 $remain_token = $this->update_token($token_cost);
 
+                if($remain_token < 1){
+                    $message = "Not Enough Token";
+                    $this->messages->add('Not Enough Token', 'warning');
+                }
 
-                // if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
-                if ($this->db->trans_status() === true && $remain_token >= 0) {
+                $data_schedule = $this->schedule_function->convert_book_schedule($this->identity_model->new_get_gmt($coach_id)[0]->minutes, strtotime($date), $start_time, $end_time);
+                    // print_r($data_schedule);
+                    // echo date('Y-m-d', 1523404800);
+                    // exit();                
 
+
+                if(($message == '') && ($remain_token >0)){
+                    // update token
+                    $s_t = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
+                    $r_t = $s_t->token_amount - $token;
+                    $data = array(
+                        'token_amount' => $r_t,
+                    );
+                    
+                    $u_t = $this->identity_model->get_identity('token')->update($s_t->id, $data);
+
+                    // =====
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
@@ -775,21 +781,9 @@ class find_coaches_wa extends MY_Site_Controller {
 
                     $emailstudent = $this->user_model->select('id, email')->where('id', $this->auth_manager->userid())->get_all();
 
+                    $message = 'Booking successful';
 
-                    // if($idutz == $idutz_coach){
-                    //     $start_hour_coach = $start_hour;
-                    //     $end_hour_coach = $end_hour;
-                    // }
-
-                    // =============
-
-                    // echo $emailstudent[0]->email." - ".$emailcoach[0]->email." - ".$namestudent[0]->fullname." - ".$namecoach[0]->fullname." - ".$start_time." - ".$end_time." - ".$dateconvert;
-                    // exit();
-                    // echo $this->db->trans_status();
-                    // exit();
-
-
-                    if ($this->db->trans_status() == 1 && $appointment_id && $valid_appointment == 1) {
+                    if(($this->db->trans_status() == 1) && ($appointment_id) && ($valid_appointment == 1)) {
 
                         $this->create_token_history($appointment_id, $token_cost, $remain_token, 1);
                         // messaging to send email and creating notification based on appointment
@@ -806,7 +800,7 @@ class find_coaches_wa extends MY_Site_Controller {
 
                         $student_notification = array(
                             'user_id' => $this->auth_manager->userid(),
-                            'description' => 'You have just booked a session with coach '.$namecoach[0]->fullname,
+                            'description' => 'New session booked with '.$namecoach[0]->fullname,
                             'status' => 2,
                             'dcrea' => time(),
                             'dupd' => time(),
@@ -818,38 +812,33 @@ class find_coaches_wa extends MY_Site_Controller {
                         $student_gmt = $gmt_student[0]->gmt;
                         $coach_gmt = $gmt_coach[0]->gmt;
 
-                        $this->send_email->student_book_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
-                        $this->send_email->notif_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
+                        $this->send_email->student_book_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
+                        $this->send_email->notif_coach($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
 
-                        $this->messages->add($message, 'success');
 
-                        redirect('b2c/student/find_coaches_wa/book_by_single_date/' . date("Y-m-d", $date));
                     } else {
+
                         $this->rollback_appointment($coach_id, date("Y-m-d", $date), $start_time, $end_time, ($remain_token + $token_cost));
-                        $this->messages->add('Fail to book appointment, please try again.', 'warning');
-                        redirect('b2c/student/find_coaches_wa/single_date/');
+                        $messages = 'Fail to book appointment, please try again.';
+
                     }
-                } else {
-                    $this->messages->add('Not Enough Token', 'warning');
-                    redirect('b2c/student/find_coaches_wa/single_date/');
+
                 }
-            } else {
-                $this->messages->add('Invalid Appointment', 'warning');
-                redirect('b2c/student/find_coaches_wa/single_date/');
-            }
 
 
+                if($message != 'Booking successful'){
+                    $arr_message[] = $message;
 
-            // If we arrive here, it means that no exception was thrown
-            // i.e. no query has failed, and we can commit the transaction
-            //$this->db->trans_commit();
-        } catch (Exception $e) {
-            // An exception has been thrown
-            // We must rollback the transaction
-            $this->db->trans_rollback();
-            $this->messages->add('An error has occured, please try again.', 'warning');
-            redirect('b2c/student/find_coaches_wa/single_date/');
+                }
+                
+                $this->session->set_flashdata('booking_message',$arr_message);
+                //redirect('student/upcoming_session');
+
         }
+
+            $this->session->set_flashdata('booking_message',$arr_message);
+            redirect('student/upcoming_session');
+
     }
 
     public function multiple_date() {
@@ -2472,59 +2461,16 @@ class find_coaches_wa extends MY_Site_Controller {
         }
     }
 
-    private function is_day_off($coach_id = '', $date_ = '') {
+    private function is_day_off($coach_id = '', $date_ = '',$start_time = '', $end_time = '') {
+    
+    $date_ = strtotime($date_);
 
-        $gmt_coach = $this->db->select("minutes_val as minutes, gmt_val as gmt")
-                             ->from('user_timezones')
-                             // ->where('user_id', $this->auth_manager->userid())
-                             ->where('user_id', $coach_id)
-                             ->get()->result();
+    $convert = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), $date_, $start_time, $end_time);
+    $date = $convert['date'];
 
-        $gmt_student = $this->db->select("minutes_val as minutes, gmt_val as gmt")
-                             ->from('user_timezones')
-                             ->where('user_id', $this->auth_manager->userid())
-                             // ->where('user_id', $coach_id)
-                             ->get()->result();
+   
+    $date_ = date('Y-m-d', $date);
 
-        if(@$gmt_coach[0]->gmt == $gmt_student[0]->gmt){
-            $a = 1;
-        } else {
-            if(@$gmt_coach[0]->gmt < 0){
-
-            $a = 1;
-
-            } else {
-
-                $a = -1;
-
-            }
-        }
-
-        @date_default_timezone_set('Etc/GMT'.$gmt_coach[0]->gmt*($a));
-
-
-        $chek_date = gmdate('Y-m-d', strtotime($date_) );
-
-        $diff=date_diff(date_create($date_),date_create($chek_date));
-        $get_sel = $diff->format("%R%a");
-
-
-
-        if($get_sel < 0){
-            if($a == 1){
-                $date_ = date('Y-m-d',date(strtotime("-1 day", strtotime("$date_"))));
-            }
-            if($a == -1){
-                $date_ = date('Y-m-d',date(strtotime("+1 day", strtotime("$date_"))));
-            }
-        } else {
-            $date_ = $date_;
-        }
-
-
-        // $date_ = $chek_date;
-
-        // exit();
         $day_off = $this->db->select('coach_id, start_date, end_date')
                         ->from('coach_dayoffs')
                         ->where('coach_id', $coach_id)
@@ -2532,9 +2478,6 @@ class find_coaches_wa extends MY_Site_Controller {
                         ->where('start_date <=', $date_)
                         ->where('end_date >=', $date_)
                         ->get()->result();
-        // echo strtotime($date_)." - ". mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-
-        // // $start_date = strtotime(@$day_off->start_date);
         $start_date = @$day_off->start_date;
         // $end_date = strtotime(@$day_off->end_date);
         $end_date = @$day_off->end_date;
