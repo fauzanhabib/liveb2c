@@ -303,6 +303,20 @@ class identity_model extends MY_Model {
         return $this->db->get()->result();
     }  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function get_coach_identity($id = '', $fullname = '', $country = '', $partner_id = '', $date_available = '', $creator_id = '', $spoken_language='', $limit='', $offset='', $subgroup_id = ''){
         // echo $subgroup_id;
         // exit();
@@ -597,8 +611,8 @@ class identity_model extends MY_Model {
                             $new_partner_array= array_unique($partner_array);
                             $new_group_array= array_unique($coregro_array);
                             foreach($partner_group2 as $pg2){
-                                $partners_group2[] = $pg2[$pagu_c]->partner_id;
-                                if(($key = array_search($pg2[$pagu_c]->partner_id, $new_partner_array)) !== false){
+                                $partners_group2[] = @$pg2[$pagu_c]->partner_id;
+                                if(($key = array_search(@$pg2[$pagu_c]->partner_id, $new_partner_array)) !== false){
                                         unset($new_partner_array[$key]);
                                 }
                             }
@@ -655,12 +669,12 @@ class identity_model extends MY_Model {
                 // echo $cert_studying;
                 // exit();
                 // $cert_studying = 'A2';
-               if($cert_studying != 'Unkno'){
+               if(@$cert_studying != 'Unkno'){
                     // echo "a";
                     // exit();
-                    if(($cert_studying == 'A1') || ($cert_studying == 'A2')){
+                    if((@$cert_studying == 'A1') || (@$cert_studying == 'A2')){
                        $this->db->where('c.pt_score >=','2.5');
-                    }elseif(($cert_studying == 'B1') || ($cert_studying == 'B2')){
+                    }elseif((@$cert_studying == 'B1') || (@$cert_studying == 'B2')){
                        $this->db->where('c.pt_score >=','3');
                     }elseif(($cert_studying == 'C1') || ($cert_studying == 'C2')){
                        $this->db->where('c.pt_score >=','3.5');
