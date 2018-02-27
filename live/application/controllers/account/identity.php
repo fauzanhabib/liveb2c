@@ -198,7 +198,7 @@ class identity extends MY_Site_Controller {
         $partner = $this->partner_model->select('name, address, country, state, city, zip')->where('id',$id_partner)->get_all();
         $partner_country = @$partner[0]->country;
         $get_country = $this->db->select('dial_code')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();
-        $country_code = $get_country[0]->dial_code;
+        $country_code = @$get_country[0]->dial_code;
         if (!$country_code){
             $option_country = $this->common_function->country_code;
             $code = array_column($option_country, 'dial_code', 'name');
