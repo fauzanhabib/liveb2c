@@ -737,7 +737,7 @@ class find_coaches_wa extends MY_Site_Controller {
 
                 } else {
                     $this->messages->add('Invalid Time', 'warning');
-                    redirect('student/find_coaches_wa/single_date/');
+                    redirect('b2c/student/find_coaches_wa/single_date/');
                 }
                 // begin the transaction to ensure all data created or modified structural
 

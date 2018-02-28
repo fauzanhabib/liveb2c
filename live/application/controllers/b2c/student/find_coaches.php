@@ -705,7 +705,7 @@ class find_coaches extends MY_Site_Controller {
 
                 }else{
                     $this->messages->add('Invalid Time', 'warning');
-                    redirect('student/find_coaches/single_date/');
+                    redirect('b2c/student/find_coaches/single_date/');
                 }
                 // begin the transaction to ensure all data created or modified structural
                 $this->db->trans_begin();
@@ -1827,16 +1827,16 @@ class find_coaches extends MY_Site_Controller {
 //        print_r(date('Y-m-d', $date));
 //        print_r($start_time);
 //        print_r($end_time);
-        // $id    = $this->auth_manager->userid();
-        // $check_sess = $this->db->select('session_type')
-        //             ->from('user_profiles')
-        //             ->where('user_id',$id)
-        //             ->get()->result();
+        $id    = $this->auth_manager->userid();
+        $check_sess = $this->db->select('session_type')
+                    ->from('user_profiles')
+                    ->where('user_id',$id)
+                    ->get()->result();
 //
         // echo "<pre>";print_r($check_sess);exit();
-//        $this->db->trans_rollback();
+       $this->db->trans_rollback();
 //        exit;
-        //$status = false;
+        $status = false;
         // getting the day of $date
         $day = strtolower(date('l', $date));
         $schedule_data = $this->schedule_model->select('id, start_time, end_time')->where('user_id', $coach_id)->where('day', $day)->get();
@@ -1867,7 +1867,7 @@ class find_coaches extends MY_Site_Controller {
         if($session == ''){
             $message = 'Booking failed';
             $this->messages->add($message, 'success');
-            redirect('student/find_coaches/single_date');
+            redirect('b2c/student/find_coaches/single_date');
         }
         $booked = array(
             'student_id' => $this->auth_manager->userid(),
