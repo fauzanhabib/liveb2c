@@ -412,8 +412,8 @@ class identity_model extends MY_Model {
             // exit();
         
         @$coach_supplier = $this->get_coach_supplier($partner_id);
-        echo('<pre>');
-        print_r($coach_relation); exit;
+        // echo('<pre>');
+        // print_r($coach_relation); exit;
         
         $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.dial_code, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.pt_score, d.teaching_credential, d.dyned_certification_level, d.year_experience, d.special_english_skill, d.higher_education, d.undergraduate, d.masters, d.phd, e.city, e.state, e.zip, e.country, e.address, h.token_for_student, h.token_for_group, j.timezone, c.coach_type_id as coach_type_id");
         $this->db->from('users a');
