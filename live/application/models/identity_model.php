@@ -303,20 +303,6 @@ class identity_model extends MY_Model {
         return $this->db->get()->result();
     }  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function get_coach_identity($id = '', $fullname = '', $country = '', $partner_id = '', $date_available = '', $creator_id = '', $spoken_language='', $limit='', $offset='', $subgroup_id = ''){
         // echo $subgroup_id;
         // exit();
@@ -349,6 +335,9 @@ class identity_model extends MY_Model {
             @$pt_score = $cert_studyingo[0]->pt_score;
             // echo $pt_score;
             // exit();
+
+            // @$check_array_coach = '';
+            // @$check_array_student = '';
 
             if($this->auth_manager->role() == 'STD'){
                 $user_subgroup = $this->db->select('user_profiles.subgroup_id as subgroup_id')->from('user_profiles')->where('user_profiles.user_id',$this->auth_manager->userid())->get()->result();
@@ -419,11 +408,12 @@ class identity_model extends MY_Model {
                 // }
             }
             // echo "<pre>";
-            // print_r($partner_group2);
+            // print_r($coach_group);
             // exit();
+        
         @$coach_supplier = $this->get_coach_supplier($partner_id);
         // echo('<pre>');
-        // print_r($this->get_coach_supplier($partner_id)); exit;
+        // print_r($cgval); exit;
         
         $this->db->select("a.id, a.status, a.email, b.code as 'role', c.profile_picture, c.fullname, c.nickname, c.gender, c.date_of_birth, c.dial_code, c.phone, c.skype_id, c.partner_id, c.dyned_pro_id, c.spoken_language, c.user_timezone, c.pt_score, d.teaching_credential, d.dyned_certification_level, d.year_experience, d.special_english_skill, d.higher_education, d.undergraduate, d.masters, d.phd, e.city, e.state, e.zip, e.country, e.address, h.token_for_student, h.token_for_group, j.timezone, c.coach_type_id as coach_type_id");
         $this->db->from('users a');
@@ -611,8 +601,8 @@ class identity_model extends MY_Model {
                             $new_partner_array= array_unique($partner_array);
                             $new_group_array= array_unique($coregro_array);
                             foreach($partner_group2 as $pg2){
-                                $partners_group2[] = @$pg2[$pagu_c]->partner_id;
-                                if(($key = array_search(@$pg2[$pagu_c]->partner_id, $new_partner_array)) !== false){
+                                $partners_group2[] = $pg2[$pagu_c]->partner_id;
+                                if(($key = array_search($pg2[$pagu_c]->partner_id, $new_partner_array)) !== false){
                                         unset($new_partner_array[$key]);
                                 }
                             }
@@ -669,12 +659,12 @@ class identity_model extends MY_Model {
                 // echo $cert_studying;
                 // exit();
                 // $cert_studying = 'A2';
-               if(@$cert_studying != 'Unkno'){
+               if($cert_studying != 'Unkno'){
                     // echo "a";
                     // exit();
-                    if((@$cert_studying == 'A1') || (@$cert_studying == 'A2')){
+                    if(($cert_studying == 'A1') || ($cert_studying == 'A2')){
                        $this->db->where('c.pt_score >=','2.5');
-                    }elseif((@$cert_studying == 'B1') || (@$cert_studying == 'B2')){
+                    }elseif(($cert_studying == 'B1') || ($cert_studying == 'B2')){
                        $this->db->where('c.pt_score >=','3');
                     }elseif(($cert_studying == 'C1') || ($cert_studying == 'C2')){
                        $this->db->where('c.pt_score >=','3.5');
@@ -1547,7 +1537,7 @@ class identity_model extends MY_Model {
         return $this->db->get()->result();
     }
     
-    private function get_coach_supplier($student_partner_id){
+        private function get_coach_supplier($student_partner_id){
             $this->db->select("csr.coach_supplier_id");
             $this->db->from('coach_supplier_relations csr');
             $this->db->join('student_supplier_relations ssr', 'csr.class_matchmaking_id = ssr.class_matchmaking_id');
@@ -1556,11 +1546,28 @@ class identity_model extends MY_Model {
             return $this->db->get()->result();
         }
 
-        private function get_coach_group($student_group_id){
+       private function get_coach_group($student_group_id){
             $this->db->select("cgr.subgroup_id");
             $this->db->from('coach_group_relations cgr');
             $this->db->join('student_group_relations sgr', 'cgr.class_matchmaking_id = sgr.class_matchmaking_id');
             $this->db->where('sgr.subgroup_id', $student_group_id);
+
+            return $this->db->get()->result();
+        }
+
+        private function get_student_group($student_group_id){
+            $this->db->select("sgr.subgroup_id");
+            $this->db->from('student_group_relations sgr');
+            $this->db->where('sgr.subgroup_id', $student_group_id);
+
+            return $this->db->get()->result();
+        }
+
+        private function get_partner_group($group_id){
+            $this->db->select("s.partner_id");
+            $this->db->from('subgroup s');
+            $this->db->join('partners p', 's.partner_id = p.id');
+            $this->db->where('s.id', $group_id);
 
             return $this->db->get()->result();
         }
