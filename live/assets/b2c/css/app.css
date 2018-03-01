@@ -3881,7 +3881,6 @@ table.table-reschedule {
           flex-direction: column; }
   .boxsession__livestue {
     border: 1px solid rgba(250, 250, 250, 0.1);
-    height: 400px;
     background: black; }
   .boxsession__livecomponentstue {
     margin-top: 10px; }

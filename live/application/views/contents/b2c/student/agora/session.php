@@ -199,8 +199,8 @@ opacity: 1 !important;
   z-index: 10;
   width: 200px;
   height: 200px;
-  /*right: 5px;
-  bottom: 5px;*/
+  right: 5px;
+  bottom: 5px;
 }
 
 /*best fit for student to see the coach*/
@@ -208,10 +208,13 @@ opacity: 1 !important;
   display: flex;
 }
 .agora_css :nth-child(1) > video {
-  width: 100%!important;
+  width: auto!important;
   margin: auto;
-  height: 100%!important;
+  height: 400px!important;
   top: 0px!important;
+}
+.agora_css > div > video {
+  position: relative!important;
 }
 /*best fit for student to see the coach*/
 
