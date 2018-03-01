@@ -339,9 +339,19 @@ function update_study(){
   });
 }
 </script>
+<?php
+  $check_url = base_url();
+  // $check_url = "https://liveb2ctest.dyned.com/profile";
+  if (strpos($check_url, 'liveb2ctest') !== false) {
+    $url = "https://52.77.200.151/liveb2itest/";
+  }else{
+    $url = "https://live.dyned.com/";
+  }
+?>
+<input type="hidden" value="<?php echo $url?>" id="url_coachpic">
 
 <script type="text/javascript">
-
+var url = $('#url_coachpic').val();
 
 $(".viewcoach").click(function() {
     var coach_id = $(this).attr('idcoach');
@@ -365,7 +375,7 @@ $(".viewcoach").click(function() {
                 $('.spoken_languagecoach').text(spoken_language);
                 $('.gendercoach').text(gender);
                 // $('.timezonecoach').text(': '+timezone);
-                $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
+                $('.profile_picturecoach').attr('src',,url+profile_picture);
 
             }
     });
