@@ -375,7 +375,7 @@ $(".viewcoach").click(function() {
                 $('.spoken_languagecoach').text(spoken_language);
                 $('.gendercoach').text(gender);
                 // $('.timezonecoach').text(': '+timezone);
-                $('.profile_picturecoach').attr('src',,url+profile_picture);
+                $('.profile_picturecoach').attr('src',url+profile_picture);
 
             }
     });
