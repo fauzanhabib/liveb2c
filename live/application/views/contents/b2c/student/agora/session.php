@@ -200,7 +200,7 @@ opacity: 1 !important;
   width: 200px;
   height: 200px;
   right: 5px;
-  bottom: 5px;
+  top: 5px;
 }
 
 /*best fit for student to see the coach*/
