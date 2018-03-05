@@ -1301,6 +1301,7 @@ footer span {
   z-index: 98;
   display: block;
   height: 25px;
+  max-width: 100%;
   width: 0%;
   border-radius: 15px 15px 15px 15px; }
 
