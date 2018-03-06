@@ -17,7 +17,8 @@ if(@$user_extract2){
 
 ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
-<script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script>
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.0.js"></script>
+<!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 
 <script>
 $(document).ready(function(){
@@ -277,7 +278,16 @@ opacity: 1 !important;
                 <!-- top point graph -->
                 <div class="progress__point__top">
                     <div class="stuepicture">
-                        <img src="<?php echo base_url().'/'.$std_img_pull[0]->profile_picture; ?>" alt="">
+                      <?php
+                        $check_url = base_url();
+                        // echo $this->auth_manager->get_avatar();exit();
+                        if (strpos($check_url, 'b2ctest') !== false) {
+                      ?>
+                         <img src="<?php echo "https://b2ctest.dyned.com/image/" . $this->auth_manager->get_avatar();?>">
+                      <?php }else{ ?>
+                         <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . ($this->auth_manager->get_avatar()); ?>" alt="">
+                      <?php } ?>
+                        <!-- <img src="<?php echo base_url().'/'.$std_img_pull[0]->profile_picture; ?>" alt=""> -->
                     </div>
 
                     <h5>Points</h5>
