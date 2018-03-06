@@ -216,6 +216,18 @@ opacity: 1 !important;
 .agora_css > div > video {
   position: relative!important;
 }
+
+@media only screen and (max-width: 425px) {
+  .localAgora {
+    width: 70px;
+    height: 70px;
+  }
+
+  .agora_css :nth-child(1) > video {
+    width: 100%!important;
+    left: 0!important;
+  }
+}
 /*best fit for student to see the coach*/
 
 .agora_css :nth-child(3) {
