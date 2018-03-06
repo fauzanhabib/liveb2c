@@ -17,7 +17,8 @@ if(@$user_extract2){
 
 ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
-<script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script>
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.0.js"></script>
+<!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 
 <script>
 $(document).ready(function(){
