@@ -69,7 +69,7 @@
       ?>
 				<img src="<?php echo "https://b2ctest.dyned.com/image/" . $data[0]->profile_picture;?>" alt="">
       <?php } else {?>
-        <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . $data[0]->profile_picture;?>" alt="">
+        <img src="<?php echo getenv("PORTAL_PROFILE_PICT_URL").'/' . str_replace('uploads/images/','',$data[0]->profile_picture);?>" alt="">
       <?php } ?>
 			</div>
 			<div class="profile__info__name">
