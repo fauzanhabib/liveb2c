@@ -717,7 +717,9 @@ class find_coaches extends MY_Site_Controller {
                 // updating remaining token student
 
                 $remain_token = $this->update_token($token_cost);
-
+                // echo $remain_token.'-'.$token_cost;
+                // exit();
+                // die();
 
                 // if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
                 if($this->db->trans_status() === FALSE || $remain_token < 0){
@@ -725,6 +727,15 @@ class find_coaches extends MY_Site_Controller {
                     $this->messages->add('Not Enough Token', 'warning');
                     redirect('b2c/student/find_coaches/single_date/');
                   }elseif($this->db->trans_status() === TRUE && $remain_token >= 0){
+
+                    // $s_t = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
+                    // $r_t = $s_t->token_amount - $token;
+                    // $data = array(
+                    //     'token_amount' => $r_t,
+                    // );
+                    
+                    // $u_t = $this->identity_model->get_identity('token')->update($s_t->id, $data);
+
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
@@ -1932,24 +1943,31 @@ class find_coaches extends MY_Site_Controller {
         return $status;
     }
 
-    private function update_token($cost = '') {
-        $status = false;
+    private function update_token($cost = ''){
+        $status = FALSE;
         $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
         //$coach_cost = $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get();
-        if ($student_token->token_amount < $cost) {
-            $status = false;
-        } else if ($student_token->token_amount >= $cost) {
+        if($student_token->token_amount < $cost){
+            $status = FALSE;
+        }elseif($student_token->token_amount >= $cost){
             $remain_token = $student_token->token_amount - $cost;
             $data = array(
                 'token_amount' => $remain_token,
             );
-            $this->identity_model->get_identity('token')->update($student_token->id, $data);
-            $status = true;
+            $this->db->trans_begin();
+            $this->db->where('id', $student_token->id);
+            $this->db->update('user_tokens', $data);
+            $this->db->trans_commit();
+            // $status = TRUE;
+            // echo $status.'+'.$student_token->token_amount.'+'.$remain_token.'<br>';
+            // echo $this->db->trans_status();
+            // exit();
+            // die();
         }
 
-        if ($status == true) {
+        if($this->db->trans_status() === TRUE){
             return $remain_token;
-        } else {
+        }else{
             return -1;
         }
     }
@@ -2173,6 +2191,9 @@ class find_coaches extends MY_Site_Controller {
                 // updating remaining token student
 
                 $remain_token = $this->update_token($token_cost);
+                // echo $remain_token.'-'.$token_cost;
+                // exit();
+                // die();
                 //if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
 
 
@@ -2181,6 +2202,15 @@ class find_coaches extends MY_Site_Controller {
                     $this->messages->add('Not Enough Token', 'warning');
                     redirect('b2c/student/find_coaches/search/name/');
                 }elseif($this->db->trans_status() === TRUE && $remain_token >= 0){
+
+                    // $s_t = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
+                    // $r_t = $s_t->token_amount - $token;
+                    // $data = array(
+                    //     'token_amount' => $r_t,
+                    // );
+                    
+                    // $u_t = $this->identity_model->get_identity('token')->update($s_t->id, $data);
+
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
