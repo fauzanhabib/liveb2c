@@ -217,7 +217,12 @@ opacity: 1 !important;
   top: 0px!important;
 }
 .agora_css > div > video {
+  width: auto!important;
+  height: 400px!important;
+  margin: auto;
   position: relative!important;
+  left: 0!important;
+  top: 0px!important;
 }
 
 @media only screen and (max-width: 425px) {
@@ -1030,7 +1035,7 @@ setInterval('checkShare()', 1000);
       var stream = evt.stream;
       // console.log("Subscribe remote stream successfully: " + stream.getId());
       if ($('div#video #agora_remote'+stream.getId()).length === 0) {
-        $('div#video').append('<div class="agora_css" id="agora_remote'+stream.getId()+'" style="width:100%;height:100%;"></div>');
+        $('div#video').append('<div class="agora_css" id="agora_remote'+stream.getId()+'" style="width:100%;"></div>');
         // $('video#video'+stream.getId()).addClass('subscriber_video');
         // $('video#video'+stream.getId()).hide();
         // var video = document.getElementsByTagName("video")[0];
