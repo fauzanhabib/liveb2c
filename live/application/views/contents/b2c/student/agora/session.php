@@ -17,7 +17,9 @@ if(@$user_extract2){
 
 ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
-<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.0.js"></script>
+
+<!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script> -->
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script>
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 
 <script>
@@ -1034,6 +1036,7 @@ setInterval('checkShare()', 1000);
         // var video = document.getElementsByTagName("video")[0];
         console.log(video);
       }
+      $("#heading1").hide();
       stream.play('agora_remote' + stream.getId());
     });
 
@@ -1041,7 +1044,8 @@ setInterval('checkShare()', 1000);
       var stream = evt.stream;
       stream.stop();
       $('#agora_remote' + stream.getId()).remove();
-      // console.log("Remote stream is removed " + stream.getId());
+      // $("#heading1").show();
+      // console.log("coach pergi1");
     });
 
     client.on('peer-leave', function (evt) {
@@ -1051,6 +1055,8 @@ setInterval('checkShare()', 1000);
         $('#agora_remote' + stream.getId()).remove();
         // console.log(evt.uid + " leaved from this channel");
       }
+      $("#heading1").show();
+      // console.log("coach pergi2");
     });
   // }
 
@@ -1118,7 +1124,7 @@ setInterval('checkShare()', 1000);
   var checksess = setInterval(function() {
     $.post("<?php echo site_url('opentok/live/check_sess');?>", { 'appointment_id': appointment_id },function(data) {
       stat_check = data;
-      console.log("==============================");
+      // console.log("==============================");
       console.log(stat_check);
       if (stat_check == 0 || stat_check == '') {
         closetab();
