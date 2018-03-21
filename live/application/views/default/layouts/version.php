@@ -1,3 +1,3 @@
 <div class="version" style="position: absolute;right: 10px;">
-    <title style="display:block;font-size:12px">version 1.0.37 </title>
+    <title style="display:block;font-size:12px">version 1.0.38 </title>
 </div>
