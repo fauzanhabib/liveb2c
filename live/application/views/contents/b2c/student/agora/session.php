@@ -302,10 +302,10 @@ opacity: 1 !important;
                     <div class="graph__wrap">
                         <div class="bar__graph">
                             <?php
-                            $bar_now = ( $gwp->data[0]->points_goal == 0 ? 0 : $gwp->data[0]->points / $gwp->data[0]->points_goal);
-                            $bar_w1  = ( $gwp->data[1]->points_goal == 0 ? 0 : $gwp->data[1]->points / $gwp->data[1]->points_goal);
-                            $bar_w2  = ( $gwp->data[2]->points_goal == 0 ? 0 : $gwp->data[2]->points / $gwp->data[2]->points_goal);
-                            $bar_w3  = ( $gwp->data[3]->points_goal == 0 ? 0 : $gwp->data[3]->points / $gwp->data[3]->points_goal);
+                            $bar_now = ( $gwp->data[0]->points_goal == 0 ? 0 : $gwp->data[0]->points / $gwp->data[0]->points_goal) * 100;
+                            $bar_w1  = ( $gwp->data[1]->points_goal == 0 ? 0 : $gwp->data[1]->points / $gwp->data[1]->points_goal) * 100;
+                            $bar_w2  = ( $gwp->data[2]->points_goal == 0 ? 0 : $gwp->data[2]->points / $gwp->data[2]->points_goal) * 100;
+                            $bar_w3  = ( $gwp->data[3]->points_goal == 0 ? 0 : $gwp->data[3]->points / $gwp->data[3]->points_goal) * 100;
                             ?>
                             <ul class="graph b2">
                                 <span class="graph__bar__cont">
@@ -724,12 +724,7 @@ opacity: 1 !important;
                       <div class="bar__graph">
                         <ul class="graph b2">
                             <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="
-                              <?php if(strtok($gwp->data[0]->speaking, '.') > 125){
-                                  echo '125';
-                                }else{
-                                strtok($gwp->data[0]->speaking, '.');
-                              };?>">
+                              <li class="graph__bar__each" data-value="<?php if(strtok($gwp->data[0]->speaking, '.') > 125){ echo '125'; }else{ echo strtok($gwp->data[0]->speaking, '.'); };?>">
                                 <span class="graph__legend">Now</span>
                               <label>
                               <?php echo strtok($gwp->data[0]->speaking, '.');?></label>
@@ -741,7 +736,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[1]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[1]->speaking, '.');
+                                echo strtok($gwp->data[1]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">w 1</span>
                               <label>
@@ -754,7 +749,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[2]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[2]->speaking, '.');
+                                echo strtok($gwp->data[2]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">w 2</span>
                               <label>
@@ -767,7 +762,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[3]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[3]->speaking, '.');
+                                echo strtok($gwp->data[3]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">w 3</span>
                               <label>

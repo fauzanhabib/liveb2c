@@ -741,7 +741,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[0]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[0]->speaking, '.');
+                                echo strtok($gwp->data[0]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">Now</span>
                               <label>
@@ -754,7 +754,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[1]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[1]->speaking, '.');
+                                echo strtok($gwp->data[1]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">w 1</span>
                               <label>
@@ -767,7 +767,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[2]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[2]->speaking, '.');
+                                echo strtok($gwp->data[2]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">w 2</span>
                               <label>
@@ -780,7 +780,7 @@ opacity: 1 !important;
                               <?php if(strtok($gwp->data[3]->speaking, '.') > 125){
                                   echo '125';
                                 }else{
-                                strtok($gwp->data[3]->speaking, '.');
+                                echo strtok($gwp->data[3]->speaking, '.');
                               };?>">
                                 <span class="graph__legend">w 3</span>
                               <label>
