@@ -292,7 +292,9 @@ class Live extends MY_Site_Controller {
                 $sa_exist = $std_hour_check[0]->std_attend;
 
                 if($sa_exist == NULL){
-
+                  if($hour < $starthour_conv){
+                    $hour = $starthour_conv;
+                  }
                   $id_appoint = $livesession['appointment_id'];
                   $data2s = array(
                      'std_attend' => $hour
@@ -406,7 +408,9 @@ class Live extends MY_Site_Controller {
                 $ca_exist = $cch_hour_check[0]->cch_attend;
 
                 if($ca_exist == NULL){
-
+                  if($hour < $starthour_conv){
+                    $hour = $starthour_conv;
+                  }
                   $id_appoint = $livesession['appointment_id'];
                   $data2c = array(
                      'cch_attend' => $hour
