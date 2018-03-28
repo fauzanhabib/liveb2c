@@ -52,7 +52,7 @@
                     <ul>
                         <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
                         <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" target="_self">Sign In</a></li>
                     </ul>
                 </nav>
             </div>
