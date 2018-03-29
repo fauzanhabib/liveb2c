@@ -355,7 +355,7 @@
 
                                         <div class="accordion-panel">
                                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date..">
+                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
                                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
                                                  <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
