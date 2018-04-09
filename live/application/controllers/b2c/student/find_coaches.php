@@ -1944,12 +1944,14 @@ class find_coaches extends MY_Site_Controller {
     }
 
     private function update_token($cost = ''){
-        $status = FALSE;
+        $status = 0;
         $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
         //$coach_cost = $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get();
         if($student_token->token_amount < $cost){
-            $status = FALSE;
+            $status = 0;
+            $remain_token = $student_token->token_amount;
         }elseif($student_token->token_amount >= $cost){
+            $status = 1;
             $remain_token = $student_token->token_amount - $cost;
             $data = array(
                 'token_amount' => $remain_token,
@@ -1958,14 +1960,14 @@ class find_coaches extends MY_Site_Controller {
             $this->db->where('id', $student_token->id);
             $this->db->update('user_tokens', $data);
             $this->db->trans_commit();
-            // $status = TRUE;
+            
             // echo $status.'+'.$student_token->token_amount.'+'.$remain_token.'<br>';
             // echo $this->db->trans_status();
             // exit();
             // die();
         }
 
-        if($this->db->trans_status() === TRUE){
+        if($status == 1){
             return $remain_token;
         }else{
             return -1;
