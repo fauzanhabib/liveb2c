@@ -64,7 +64,7 @@
 				    </div>
 				</div>
 
-				<div class="progress__info__label"><?php echo $gsp->data->total_points_until_today;?> / <?php echo $gsp->data->total_points_to_pass;?></div>
+				<div class="progress__info__label"><?php echo number_format($gsp->data->total_points_until_today);?> / <?php echo number_format($gsp->data->total_points_to_pass);?></div>
 		  	</div>
 
 		  	<div class="progress__achievement">
@@ -88,7 +88,7 @@
 					<!-- ========================================= -->
 
 		  			<div class="achievement__point__info">
-		  				<h5><?php echo $gsp->data->study->points_until_today;?></h5>
+		  				<h5><?php echo number_format($gsp->data->study->points_until_today);?></h5>
 		  				<h3>Study</h3>
 		  			</div>
 		  		</div>
@@ -109,7 +109,7 @@
 
 
 		  			<div class="achievement__point__info">
-		  				<h5><?php echo $gsp->data->coach->points_until_today;?></h5>
+		  				<h5><?php echo number_format($gsp->data->coach->points_until_today);?></h5>
 		  				<h3>Coach</h3>
 		  			</div>
 		  		</div>
@@ -132,28 +132,28 @@
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php echo $bar_now; ?>">
 			          		<span class="graph__legend">Now</span>
-			          		<label><?php echo $gwp->data[0]->points;?></label>
+			          		<label><?php echo number_format($gwp->data[0]->points);?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php echo $bar_w1; ?>">
 			          		<span class="graph__legend">w 1</span>
-			          		<label><?php echo $gwp->data[1]->points;?></label>
+			          		<label><?php echo number_format($gwp->data[1]->points);?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php echo $bar_w2; ?>">
 			          		<span class="graph__legend">w 2</span>
-			          		<label><?php echo $gwp->data[2]->points;?></label>
+			          		<label><?php echo number_format($gwp->data[2]->points);?></label>
 			        		</li>
 			      		</span>
 
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php echo $bar_w3; ?>">
 			          		<span class="graph__legend">w 3</span>
-			          		<label><?php echo $gwp->data[3]->points;?></label>
+			          		<label><?php echo number_format($gwp->data[3]->points);?></label>
 			        		</li>
 			      		</span>
 
