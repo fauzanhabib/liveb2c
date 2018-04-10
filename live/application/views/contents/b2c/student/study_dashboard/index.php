@@ -286,7 +286,7 @@
                             </svg>
 														<?php }else{?>
                             <!-- kondisi point belom ketemu goal -->
-                            <h5><?php echo (($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today)*-1);?></br>points left</h5>
+                            <h5><?php echo ($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today);?></br>points left</h5>
 														<?php } ?>
 		               	</div>
 		            </div>
