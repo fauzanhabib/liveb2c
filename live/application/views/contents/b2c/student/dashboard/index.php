@@ -137,8 +137,8 @@
         <div class="dashboard__menutab">
             <div class="tabsessions">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Today Sessions</li>
-                    <li class="tab-link" data-tab="tab-2">Upcoming Sessions</li>
+                    <li class="tab-link current" data-tab="tab-1">Today's Sessions</li>
+                    <li class="tab-link" data-tab="tab-2">Sessions</li>
                 </ul>
             </div>
             <div class="boxsessions">
