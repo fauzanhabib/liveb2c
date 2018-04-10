@@ -2378,10 +2378,12 @@ class find_coaches extends MY_Site_Controller {
 
         $new_date_for_coach = date('Y-m-d', $convert_coach_plus['date']);
 
+        $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
 
+        if($student_token->token_amount > $token){
         $this->send_email->student_book_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
         $this->send_email->notif_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
-
+        }
     }
 
     private function rollback_appointment($coach_id = '', $date = '', $start_time = '', $end_time = '', $token = '') {
