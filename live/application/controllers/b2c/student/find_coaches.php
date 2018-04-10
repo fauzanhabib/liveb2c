@@ -1944,12 +1944,14 @@ class find_coaches extends MY_Site_Controller {
     }
 
     private function update_token($cost = ''){
-        $status = FALSE;
+        $status = 0;
         $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
         //$coach_cost = $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get();
         if($student_token->token_amount < $cost){
-            $status = FALSE;
+            $status = 0;
+            $remain_token = $student_token->token_amount;
         }elseif($student_token->token_amount >= $cost){
+            $status = 1;
             $remain_token = $student_token->token_amount - $cost;
             $data = array(
                 'token_amount' => $remain_token,
@@ -1958,14 +1960,14 @@ class find_coaches extends MY_Site_Controller {
             $this->db->where('id', $student_token->id);
             $this->db->update('user_tokens', $data);
             $this->db->trans_commit();
-            // $status = TRUE;
+            
             // echo $status.'+'.$student_token->token_amount.'+'.$remain_token.'<br>';
             // echo $this->db->trans_status();
             // exit();
             // die();
         }
 
-        if($this->db->trans_status() === TRUE){
+        if($status == 1){
             return $remain_token;
         }else{
             return -1;
@@ -2376,10 +2378,12 @@ class find_coaches extends MY_Site_Controller {
 
         $new_date_for_coach = date('Y-m-d', $convert_coach_plus['date']);
 
+        $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
 
+        if($student_token->token_amount > $token){
         $this->send_email->student_book_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour, $end_hour, $dateconvert, 'booked', $student_gmt);
         $this->send_email->notif_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
-
+        }
     }
 
     private function rollback_appointment($coach_id = '', $date = '', $start_time = '', $end_time = '', $token = '') {
