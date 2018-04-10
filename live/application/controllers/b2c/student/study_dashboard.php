@@ -152,7 +152,7 @@ class Study_dashboard extends MY_Site_Controller {
         );
 
         // echo $key;
-        // echo('<pre>');print_r($this->session->userdata('u_p')); exit;
+        // echo('<pre>');print_r($vars); exit;
         $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
         $this->template->publish();
       }else{

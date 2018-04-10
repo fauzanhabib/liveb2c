@@ -286,7 +286,7 @@
 		            </div>
 				</div>
 		  	</div>
-      	<h5><font><?php echo (($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today)*-1);?></font> points left</h5>
+      	<h5><font>Congratulations! Keep up the good work!</font></h5>
 		</div>
 		<!-- end daily progress donut graph -->
 	</div>

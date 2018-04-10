@@ -53,7 +53,7 @@ $(document).ready(function(){
     <div class="bxleavesessionstue">
         <h2>Session Summaries</h2>
         <div class="bxleavesessionstue__statussession">
-            <p>Your Session With <span>Fajarudin </span> has Ended</p>
+            <p>Your Session With <span><?php echo @$user->fullname; ?> </span> has Ended</p>
         </div>
         <div class="bxleavesessionstue__statustime">
             <table>
@@ -69,7 +69,7 @@ $(document).ready(function(){
                 </thead>
                 <tbody>
                     <tr>
-                        <td>September 04, 2017</td>
+                        <td><?php $def = strtotime(@$user->date); echo date("M, d Y", $def); ?></td>
                         <?php
 
                           $id = $this->auth_manager->userid();
