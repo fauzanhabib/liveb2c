@@ -74,19 +74,19 @@ class Profile extends MY_Site_Controller {
               ->where('user_id', $idchecknum)
               ->get()->result();
 
-      $get_gl_users = $this->db->select('cl_id')
+      $get_gl_users = $this->db->select('goal_cl_id')
               ->from('users')
               ->where('id', $idchecknum)
               ->get()->result();
 
-      $id_gl_users = $get_gl_users[0]->cl_id+1;
+      $id_gl_users = @$get_gl_users[0]->goal_cl_id;
 
       $get_gl_dsa = $this->db->select('cl_name')
               ->from('dsa_cert_levels')
               ->where('cl_id', $id_gl_users)
               ->get()->result();
 
-      $goal_name = $get_gl_dsa[0]->cl_name;
+      $goal_name = @$get_gl_dsa[0]->cl_name;
       // echo('<pre>');print_r($get_gl_dsa); exit;
 
       $status = @$getsat[0]->status;

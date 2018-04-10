@@ -172,7 +172,7 @@
 
 		<!-- daily progress donut graph -->
 		<div class="progress__step">
-                  <h5>Progress to goals</h5>
+    		<h5>Progress to goals</h5>
 		  	<div class="donut__progress">
 		  		<div class="step--circle circle"
 			         data-thickness="15"
@@ -184,9 +184,10 @@
 		                <path stroke-linecap="round" id="arc2" fill="none" stroke="#fafafa" stroke-width="20" />
 		            </svg>
 		            <div class="step__progress__info">
-		               	<div class="step__info__label"> <!-- <?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?> -->
+		               	<div class="step__info__label">
+											<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_to_pass){?>
 		               		<!-- kondisi point telah ketemu goal -->
-		               		<!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		               		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  viewBox="0 0 61.8 61.8" style="enable-background:new 0 0 61.8 61.8;" xml:space="preserve">
                                 <style type="text/css">
                                     .st0{fill:#49C5FE;}
@@ -282,20 +283,23 @@
                                         </g>
                                     </g>
                                 </g>
-                            </svg> -->
-
+                            </svg>
+														<?php }else{?>
                             <!-- kondisi point belom ketemu goal -->
                             <h5><?php echo (($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today)*-1);?></br>points left</h5>
+														<?php } ?>
 		               	</div>
 		            </div>
-				</div>
+							</div>
 		  	</div>
+						<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_to_pass){?>
+							<!-- kondisi point telah ketemu goal -->
+	          	<h5>Congratulation!</h5>
+						<?php }else{?>
+							<!-- kondisi point belom ketemu goal -->
+							<h5>Keep up the good work!</h5>
+						<?php } ?>
 
-      		<!-- kondisi point belom ketemu goal -->
-          	<h5>Keep up the good work!</h5>
-
-          	<!-- kondisi point telah ketemu goal -->
-          	<!-- <h5>Congratulation!</h5> -->
 		</div>
 		<!-- end daily progress donut graph -->
 	</div>
