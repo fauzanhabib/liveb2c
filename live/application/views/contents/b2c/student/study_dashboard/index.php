@@ -64,12 +64,14 @@
 				    </div>
 				</div>
 
-				<div class="progress__info__label"><?php echo number_format($gsp->data->total_points_until_today);?> / <?php echo number_format($gsp->data->total_points_to_pass);?></div>
+				<div class="progress__info__label">
+					<?php echo number_format($gsp->data->total_points_until_today);?> / <?php echo number_format($gsp->data->total_points_to_pass);?>
+				</div>
 		  	</div>
 
 		  	<div class="progress__achievement">
 		  		<div class="study__progress__achievement">
-<!-- 		  			<div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
+					<!--<div class="bullet__achievement <?php echo $mt_color['mt1']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt2']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt3']; ?>"></div>
 		  			<div class="bullet__achievement <?php echo $mt_color['mt4']; ?>"></div>
@@ -284,22 +286,21 @@
                                     </g>
                                 </g>
                             </svg>
-														<?php }else{?>
+							<?php }else{?>
                             <!-- kondisi point belom ketemu goal -->
                             <h5><?php echo ($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today);?></br>points left</h5>
-														<?php } ?>
+							<?php } ?>
 		               	</div>
 		            </div>
-							</div>
+				</div>
 		  	</div>
-						<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_to_pass){?>
-							<!-- kondisi point telah ketemu goal -->
-	          	<h5>Congratulation!</h5>
-						<?php }else{?>
-							<!-- kondisi point belom ketemu goal -->
-							<h5>Keep up the good work!</h5>
-						<?php } ?>
-
+			<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_to_pass){?>
+				<!-- kondisi point telah ketemu goal -->
+  			<h5>Congratulation!</h5>
+			<?php }else{?>
+				<!-- kondisi point belom ketemu goal -->
+				<h5>Keep up the good work!</h5>
+			<?php } ?>
 		</div>
 		<!-- end daily progress donut graph -->
 	</div>
