@@ -983,7 +983,6 @@ setInterval('checkShare()', 1000);
         // console.log("Ch Name = " + channel_name);
         // console.log("=====================================");
 
-        if (document.getElementById("video").checked) {
           camera = videoSource.value;
           microphone = audioSource.value;
           localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
@@ -1016,8 +1015,6 @@ setInterval('checkShare()', 1000);
             });
           }, function (err) {
             // console.log("getUserMedia failed", err);
-          });
-        }
       }, function(err) {
         // console.log("Join channel failed", err);
       });
