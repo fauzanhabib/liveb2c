@@ -21,6 +21,8 @@ class manage_appointments extends MY_Site_Controller {
         $this->load->model('token_histories_model');
         $this->load->model('coach_day_off_model');
         $this->load->model('partner_model');
+        $this->load->model('settings_model');
+        $this->load->model('global_settings_model');
         $this->load->model('partner_setting_model');
         $this->load->model('specific_settings_model');
         $this->load->model('webex_host_model');
@@ -72,7 +74,7 @@ class manage_appointments extends MY_Site_Controller {
         
         if ($appointment_reschedule_data) {
             $this->messages->add('apppointment has already rescheduled', 'warning');
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
 
         $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, start_time, end_time, status')->where('id', $appointment_id)->get();
@@ -104,7 +106,7 @@ class manage_appointments extends MY_Site_Controller {
         $coach_type = $coach_type[0]->coach_type_id;
 
         
-        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/manage_appointments/reschedule/'.$appointment_id."/".$coach_id."/"), count($this->identity_model->get_coach_identity_reschedule(null, null, null, null, null, null, null,$coach_type)), $per_page, $uri_segment);
+        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('b2c/student/manage_appointments/reschedule/'.$appointment_id."/".$coach_id."/"), count($this->identity_model->get_coach_identity_reschedule(null, null, null, null, null, null, null,$coach_type)), $per_page, $uri_segment);
         $coaches = $this->identity_model->get_coach_identity_reschedule(null, null, null, null, null, null, null, $coach_type, $per_page, $offset);
         
         // echo "<pre>";
@@ -146,7 +148,7 @@ class manage_appointments extends MY_Site_Controller {
         if (!$date_ || !$coach_id) {
             
             $vars = array();
-            $this->template->content->view('default/contents/find_coach/availability', $vars);
+            $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
 
             //publish template
             $this->template->publish();
@@ -155,13 +157,13 @@ class manage_appointments extends MY_Site_Controller {
         // checking if the date is valid
         if (!$this->is_date_available(trim($date_), 0)) {
             $vars = array();
-            $this->template->content->view('default/contents/find_coach/availability', $vars);
+            $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
         }
          // checking if the date is in day off
         if ($this->is_day_off($coach_id, $date_) == true) {
 
             $vars = array();
-            $this->template->content->view('default/contents/find_coach/availability', $vars);
+            $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
         }
 
         // getting the day of $date
@@ -361,7 +363,7 @@ class manage_appointments extends MY_Site_Controller {
         // print_r($availability_temp);
         // exit();
 
-        $this->template->content->view('default/contents/find_coach/reschedule/availability', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/reschedule/availability', $vars);
 
         //publish template
         $this->template->publish();
@@ -371,7 +373,7 @@ class manage_appointments extends MY_Site_Controller {
         $schedule_data = $this->schedule_model->select('id, user_id, day, start_time, end_time, dcrea, dupd')->where('user_id', $id)->order_by('id', 'asc')->get_all();
         $minutes = $this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
         if (!$schedule_data) {
-            redirect('student/find_coaches/single_date');
+            redirect('b2c/student/find_coaches/single_date');
         }
 
         $schedule = array();
@@ -392,7 +394,7 @@ class manage_appointments extends MY_Site_Controller {
             'coach_id' => $id,
             'schedule' => $schedule,
         );
-        $this->template->content->view('default/contents/find_coach/schedule_detail', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/schedule_detail', $vars);
 
         //publish template
         $this->template->publish();
@@ -419,7 +421,7 @@ class manage_appointments extends MY_Site_Controller {
         );
 
 
-        $this->template->content->view('default/contents/find_coach/reschedule/summary_book', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/reschedule/summary_book', $vars);
         //publish template
         $this->template->publish();
     }
@@ -504,7 +506,7 @@ class manage_appointments extends MY_Site_Controller {
                     //exit;
                 } else {
                     $this->messages->add('Invalid Time', 'warning');
-                    redirect('student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
+                    redirect('b2c/student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
                 }
                 // begin the transaction to ensure all data created or modified structural
  
@@ -515,16 +517,16 @@ class manage_appointments extends MY_Site_Controller {
                 
                 if ($this->db->trans_status() === true){
                     
-                    redirect('student/manage_appointments/reschedule_booking/'.$appointment_id_old."/".$coach_id."/". $dateconvert."/". $start_hour."/". $end_hour);
+                    redirect('b2c/student/manage_appointments/reschedule_booking/'.$appointment_id_old."/".$coach_id."/". $dateconvert."/". $start_hour."/". $end_hour);
                 } else {
                     $this->db->trans_rollback();
                     $this->messages->add('Not Enough Token', 'warning');
-                    redirect('student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
+                    redirect('b2c/student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
                 }
             } else {
                 $this->db->trans_rollback();
                 $this->messages->add('Invalid Appointment', 'warning');
-                redirect('student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
+                redirect('b2c/student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
             }
 
 
@@ -536,7 +538,7 @@ class manage_appointments extends MY_Site_Controller {
             // We must rollback the transaction
             $this->db->trans_rollback();
             $this->messages->add('An error has occured, please try again.', 'warning');
-            redirect('student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
+            redirect('b2c/student/manage_appointments/reschedule/'.$appointment_id_old.'/'.$old_coach);
         }
     }
 
@@ -1358,7 +1360,7 @@ class manage_appointments extends MY_Site_Controller {
         $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, start_time, end_time')->where('id', $appointment_id)->where('student_id', $this->auth_manager->userid())->get();
         if (!$appointment_data) {
             $this->messages->add('Invalid Appointment', 'danger');
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
 
         $appointment_data_student = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), strtotime($appointment_data->date), $appointment_data->start_time, $appointment_data->end_time);
@@ -1396,7 +1398,7 @@ class manage_appointments extends MY_Site_Controller {
             }
         } else {
             $this->messages->add('Invalid Action', 'danger');
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
 
         // exit('hai');
@@ -1627,7 +1629,7 @@ class manage_appointments extends MY_Site_Controller {
         // }
         $message = "Session Rescheduled";
         $this->messages->add($message, 'success');
-        redirect('student/upcoming_session');
+        redirect('b2c/student/session');
     }
 
 
@@ -1636,7 +1638,7 @@ class manage_appointments extends MY_Site_Controller {
         $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, start_time, end_time, status')->where('id', $appointment_id)->get();
         if ($appointment_data->status == 'cancel') {
             $this->messages->add('Appointment has already cancelled', 'danger');
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
 
         // updating appointment (change status to cancel)
@@ -1658,7 +1660,7 @@ class manage_appointments extends MY_Site_Controller {
             if(!$this->delete_session($webex_host[0]->id, $appointment_id) || !$this->webex_model->delete($webex->id)){
                 $this->db->trans_rollback();
                 $this->messages->add('Error while deleting session in webex', 'error');
-                redirect('student/upcoming_session');
+                redirect('b2c/student/session');
             }
         }
         print_r($appointment);
