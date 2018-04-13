@@ -282,11 +282,12 @@
         <!-- dummy element to align left the content -->
     </div>
 </div>
-
+<?php echo @$pagination?>
 <script>
     $('.datepicker__each').each(function() {
         $(this).datepicker({
-            minDate: 1,
+            minDate: '<?php echo $min_date;?>',
+            maxDate: '<?php echo $max_date;?>',
             beforeShow:function(textbox, instance){
                 $(this).next().append($('#ui-datepicker-div'));
                 $('#ui-datepicker-div').hide();
@@ -336,7 +337,8 @@
         var resultDate = now.getFullYear() + "-" + (month) + "-" + (day);
 
         $('.datepicker__each').datepicker({
-            startDate: resultDate,
+            startDate: '<?php echo $start_date;?>',
+            endDate: '<?php echo $end_date;?>',
             format: 'yyyy-mm-dd',
             autoclose: true,
         });

@@ -82,6 +82,7 @@ class manage_appointments extends MY_Site_Controller {
         $old_coach_id = $appointment_data->coach_id;  
         $date = $appointment_data->date;  
         $get_start_time = $appointment_data->start_time;
+        $datenow = date("Y-m-d");
 
         $gmt_student = $this->identity_model->new_get_gmt($student_id_);
             
@@ -100,7 +101,7 @@ class manage_appointments extends MY_Site_Controller {
        // get other coach
         $offset = 0;
         $per_page = 6;
-        $uri_segment = 6;
+        $uri_segment = 7;
 
         $coach_type = $this->db->select('coach_type_id')->from('user_profiles')->where('user_id',$old_coach_id)->get()->result();
         $coach_type = $coach_type[0]->coach_type_id;
@@ -121,6 +122,12 @@ class manage_appointments extends MY_Site_Controller {
         $elite_coach_cost = $setting[0]->elite_coach_cost;
         $session_duration = $setting[0]->session_duration;
 
+        $substr_start_date = substr($date, -2);
+        $substr_end_date = substr($week_date[1], -2);
+        $substr_date_now = substr($datenow, -2);
+        $count_start_date = $substr_start_date - $substr_date_now;
+        $count_end_date = $substr_end_date - $substr_date_now;
+        
         $vars = array(
             'coaches' => $coaches,
             'rating' => $this->coach_rating_model->get_average_rate(),
@@ -133,6 +140,8 @@ class manage_appointments extends MY_Site_Controller {
             'start_date' => $date, 
             'start_time' => $start_time,
             'coach_type' => $coach_type,
+            'min_date' => $count_start_date,
+            'max_date' => $count_end_date,
         );
        // echo('<pre>');
        // print_r($vars); exit;
@@ -926,20 +935,20 @@ class manage_appointments extends MY_Site_Controller {
         $appointment_reschedule_data = $this->appointment_reschedule_model->select('id')->where('appointment_id', $appointment_id)->get();
         if ($appointment_reschedule_data) {
             $this->messages->add('apppointment has already rescheduled', 'danger');
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
 
         $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, status')->where('id', $appointment_id)->where('student_id', $this->auth_manager->userid())->get();
 
         if (!$appointment_data) {
             $this->messages->add('No Appointment Found', 'danger');
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
 
         $schedule_data = $this->schedule_model->select('id, user_id, day, start_time, end_time, dcrea, dupd')->where('user_id', $appointment_data->coach_id)->get_all();
 
         if (!$schedule_data) {
-            redirect('student/upcoming_session');
+            redirect('b2c/student/session');
         }
         $coach_name = $this->identity_model->get_identity('profile')->select('fullname')->where('user_id', $appointment_data->coach_id)->get();
         $vars = array(
@@ -1744,7 +1753,7 @@ class manage_appointments extends MY_Site_Controller {
         $this->queue->push($database_tube, $data_coach, 'database.insert');
 
         $this->messages->add('Updating Appointment Successful', 'success');
-        redirect('student/upcoming_session');
+        redirect('b2c/student/session');
     }
 
     public function time_reminder_before_session($session_time, $delay_time) {
