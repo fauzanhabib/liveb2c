@@ -100,7 +100,7 @@ class manage_appointments extends MY_Site_Controller {
  
        // get other coach
         $offset = 0;
-        $per_page = 6;
+        $per_page = '';
         $uri_segment = 7;
 
         $coach_type = $this->db->select('coach_type_id')->from('user_profiles')->where('user_id',$old_coach_id)->get()->result();

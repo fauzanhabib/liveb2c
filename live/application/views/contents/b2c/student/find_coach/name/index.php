@@ -1,19 +1,19 @@
                 <style>
-                        .pagination-items{
-                            width: 100%;
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-                            -ms-flex-wrap: wrap;
-                            flex-wrap: wrap;
-                            justify-content: space-around;
-                        }
+                    .pagination-items{
+                        width: 100%;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -ms-flex-wrap: wrap;
+                        flex-wrap: wrap;
+                        justify-content: space-around;
+                    }
 
 
-                        i svg {
-                           transform:translate(0,6px);
-                            margin-right: 5px;
-                        }
+                    i svg {
+                       transform:translate(0,6px);
+                        margin-right: 5px;
+                    }
 
                 </style>
                 <?php if(count($datasession)!=0){ ?>

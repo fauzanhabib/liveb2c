@@ -282,7 +282,7 @@
         <!-- dummy element to align left the content -->
     </div>
 </div>
-<?php echo @$pagination?>
+
 <script>
     $('.datepicker__each').each(function() {
         $(this).datepicker({
