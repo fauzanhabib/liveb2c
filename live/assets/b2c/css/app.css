@@ -386,7 +386,7 @@ button:focus {
 .warning__notif {
   background: #ffc966; }
 
-.text--center, .title {
+.text--center, .title, .title--small {
   text-align: center; }
 
 .textcl--primary {
@@ -489,6 +489,12 @@ button:focus {
   @media screen and (max-width: 480px) {
     .title {
       font-size: 24px; } }
+  .title--small {
+    font-family: "neoFontRegular", sans-serif;
+    font-size: 22.4px; }
+    @media screen and (max-width: 480px) {
+      .title--small {
+        font-size: 19.2px; } }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
