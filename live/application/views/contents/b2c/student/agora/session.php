@@ -19,8 +19,8 @@ if(@$user_extract2){
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
 
 <!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.0.0.js"></script> -->
-<script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script>
-<!-- <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script> -->
+<!-- <script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script> -->
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script>
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 
 <script>
@@ -990,7 +990,7 @@ setInterval('checkShare()', 1000);
           localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
           //localStream = AgoraRTC.createStream({streamID: uid, audio: false, cameraId: camera, microphoneId: microphone, video: false, screen: true, extensionId: 'minllpmhdgpndnkomcoccfekfegnlikg'});
           if (document.getElementById("video").checked) {
-            localStream.setVideoProfile('240P');
+            localStream.setVideoProfile('480P_1');
 
           }
 
