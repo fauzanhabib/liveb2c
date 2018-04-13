@@ -105,49 +105,43 @@
                                 
                                       // if(($difference->days > 0) && ($hour_now > date('H:i',strtotime($d->start_time))) ){
                                 if($h > 24){
-                            ?>
-                                    <div class="reschedule margin-auto padding-10-15 sm-12">
-                                        <?php
+                                    $dat = date('Y-m-d', strtotime(@$d->date));
+                                    $dat_now = date('Y-m-d');
 
-                                        $dat = date('Y-m-d', strtotime(@$d->date));
-                                        $dat_now = date('Y-m-d');
+                                    if($dat > $dat_now){
 
-                                        if($dat > $dat_now){
+                                        $appointmen_id = $d->id;
+                                        $sqla = $this->db->select('id')
+                                        ->from('appointment_reschedules')
+                                        ->where('appointment_id',$appointmen_id)
+                                        ->get()->result();
+                                        if(!$sqla){
 
-                                            $appointmen_id = $d->id;
-                                            $sqla = $this->db->select('id')
-                                            ->from('appointment_reschedules')
-                                            ->where('appointment_id',$appointmen_id)
-                                            ->get()->result();
-                                            if(!$sqla){
-
-                                                ?>
-                                                    <div class="coachinfo trigger viewcoaches">
-                                                        Reschedule
-                                                    </div>
-                                                    <div class="modal-wrapper reschedule">
-                                                        <div class="modal__signout">
-                                                            <div class="content">
-                                                                <div>Are you sure?</div>
-                                                                <div class="signout__content__confirmation">
-                                                                    <span><a href="<?php echo(site_url('b2c/student/manage_appointments/reschedule/'.$d->id.'/'.$d->coach_id));?>", 'single', 'Reschedule', '', 'rescheduled');">Yes</a></span>
-                                                                    <span><a class="span-close">No</a></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <?php 
-                                            }else{
-                                                ?>
-                                                <a class="reschedule-session text-cl-green">Already Rescheduled</a>
-                                                <?php } } ?>
-                                            </td> 
-                                            <?php } else {  ?>
-
-                                            <td><a class="pure-button btn-medium btn-grey rescheduled" style="cursor:not-allowed">Reschedule</a></td>
-                                            <!-- <td>Not Available</td> -->
-                                        </tr>
-                                        <?php } ?>
+                                    ?>
+                                    <div class="coachinfo trigger viewcoaches">
+                                        Reschedule
+                                    </div>
+                                    <div class="modal-wrapper reschedule">
+                                        <div class="modal__signout">
+                                            <div class="content">
+                                                <div>Are you sure?</div>
+                                                <div class="signout__content__confirmation reschedule__modal">
+                                                    <span><a href="<?php echo(site_url('b2c/student/manage_appointments/reschedule/'.$d->id.'/'.$d->coach_id));?>", 'single', 'Reschedule', '', 'rescheduled');">Yes</a></span>
+                                                    <span><a class="span-close">No</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php 
+                                    }else{
+                                    ?>
+                                        <div class="coachinfo--disabled">Already Rescheduled</div>
+                                    <?php } } ?>
+                                    <?php } else {  ?>
+                                        <!-- <div class="timeout__rescheduled tooltip">Reschedule
+                                            <span class="tooltiptext">Available +24 hours before session</span>
+                                        </div> -->
+                                    <?php } ?>
                             <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $d->coach_id;?>">
                                 Coach Info
                             </div>
