@@ -31,7 +31,7 @@
                                     ?>
                                 </span>
                             </div>
-                            <div class="bxcoactoken">
+                            <!-- <div class="bxcoactoken">
                                 <label>Token Cost</label>
                                 <span>
                                     <?php
@@ -64,7 +64,7 @@
                                     echo($token);
                                     ?>
                                 </span>
-                            </div>
+                            </div> -->
 
                             <div class="bxbutton">
                                 <button type="submit" id="submit_summary" class="neobutton trigger__loader"> Done</button>
@@ -98,17 +98,18 @@
                        location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/manage_appointments/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/manage_appointments/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
                     }, 1000); //will call the function after 2 secs.
 
-                    // $.ajax({
-                    //     type:"POST",
-                    //     url:"<?php echo site_url('b2c/student/find_coaches/email_booking');?>",
-                    //     data: {
-                    //         'coach_id': "<?php echo $data_coach[0]->id; ?>",
-                    //         'date_': "<?php echo $date;?>",
-                    //         'start_time_': "<?php echo $start_time;?>",
-                    //         'end_time_': "<?php echo $end_time;?>",
-                    //         'token': "<?php echo $token;?>"
-                    //     }
-                    // });
+                    $.ajax({
+                        type:"POST",
+                        url:"<?php echo site_url('b2c/student/manage_appointments/email_reschedule');?>",
+                        data: {
+                            'appointment_id': "<?php echo $appointment_id; ?>",
+                            'coach_id': "<?php echo $data_coach[0]->id; ?>",
+                            'date_': "<?php echo $date;?>",
+                            'start_time_': "<?php echo $start_time;?>",
+                            'end_time_': "<?php echo $end_time;?>",
+                            'token': "<?php echo $token;?>"
+                        }
+                    });
                 });
 
                 $(document).on('touchstart click', '#cancel_summary', function () {

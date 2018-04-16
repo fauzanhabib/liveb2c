@@ -200,8 +200,8 @@
 
                 <div class="profilecoach__token">
                     <i>
-                        <svg width="22px" height="22px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+                        <!-- <svg width="22px" height="22px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch
                             <title>Token</title>
                             <desc>Created with Sketch.</desc>
                             <defs></defs>
@@ -219,16 +219,16 @@
                                     </g>
                                 </g>
                             </g>
-                        </svg>
+                        </svg> -->
                     </i>
                     <?php
-                        if($coaches[$i]->coach_type_id == 1){
-                            echo $standard_coach_cost;
-                        } else if($coaches[$i]->coach_type_id == 2){
-                            echo $elite_coach_cost;
-                        }
+                        // if($coaches[$i]->coach_type_id == 1){
+                        //     echo $standard_coach_cost;
+                        // } else if($coaches[$i]->coach_type_id == 2){
+                        //     echo $elite_coach_cost;
+                        // }
                     ?>
-                    Tokens
+                    <!-- Tokens -->
                 </div>
             </div>
 
@@ -241,7 +241,7 @@
                         </div>
                         <div class="accordion-panel">
                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
+                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly id="<?php echo($appointment_id);?>">
                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
                                  <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
@@ -358,7 +358,8 @@
             var newdate = date.split('/');
             var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
             //alert(this.name);
-            var loadUrl = "<?php echo site_url('b2c/student/manage_appointments/availability/name'); ?>" + "/" + this.name + "/" + dateformat;
+            // alert(this.id);
+            var loadUrl = "<?php echo site_url('b2c/student/manage_appointments/availability/name'); ?>" + "/" + this.id + "/" + this.name + "/" + dateformat;
             var m = $('[id^=result_]').html($('[id^=result_]').val());
             // alert(loadUrl);
             if (dateformat != '') {
