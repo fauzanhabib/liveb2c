@@ -238,10 +238,11 @@
                         <div class="accordion-thumb available-at click">
                             <span>Available At</span>
                             <i class="fa fa-angle-down"></i>
+                            <input type="hidden" class="appo" value="<?php echo($appointment_id);?>">
                         </div>
                         <div class="accordion-panel">
                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly id="<?php echo($appointment_id);?>">
+                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
                                  <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
@@ -351,15 +352,16 @@
     $.ajaxSetup({
         cache: false
     });
-
+    var appo = $('.appo').val();
+    console.log(appo);
     $(".datepicker__each").each(function() {
         $(this).on('change', function () {
             var date = $(this).val();
             var newdate = date.split('/');
             var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
-            //alert(this.name);
-            // alert(this.id);
-            var loadUrl = "<?php echo site_url('b2c/student/manage_appointments/availability/name'); ?>" + "/" + this.id + "/" + this.name + "/" + dateformat;
+            // alert(this.name);
+            // alert(appo);
+            var loadUrl = "<?php echo site_url('b2c/student/manage_appointments/availability/name'); ?>" + "/" + appo + "/" + this.name + "/" + dateformat;
             var m = $('[id^=result_]').html($('[id^=result_]').val());
             // alert(loadUrl);
             if (dateformat != '') {
