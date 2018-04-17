@@ -24,7 +24,7 @@
                 <div class="booking">
                     <svg width="54px" height="65px" viewBox="0 0 54 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-                        <title>icBookCoach</title>
+                        <title></title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
@@ -57,7 +57,7 @@
                     <i><?php echo count($data)?></i>
                     <svg width="54px" height="63px" viewBox="0 0 54 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-                        <title>ic_Sessions</title>
+                        <title></title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -84,7 +84,7 @@
                 <div class="tokens">
                     <svg width="63px" height="63px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-                        <title>Token</title>
+                        <title></title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -109,7 +109,7 @@
                 <div class="help">
                     <svg width="46px" height="55px" viewBox="0 0 46 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-                        <title>icHelp</title>
+                        <title></title>
                         <desc>Created with Sketch.</desc>
                         <defs></defs>
                         <g id="WebView-NeoLive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
