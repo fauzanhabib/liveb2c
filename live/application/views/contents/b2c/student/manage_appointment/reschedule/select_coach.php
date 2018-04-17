@@ -200,8 +200,8 @@
 
                 <div class="profilecoach__token">
                     <i>
-                        <svg width="22px" height="22px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+                        <!-- <svg width="22px" height="22px" viewBox="0 0 63 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch
                             <title>Token</title>
                             <desc>Created with Sketch.</desc>
                             <defs></defs>
@@ -219,16 +219,16 @@
                                     </g>
                                 </g>
                             </g>
-                        </svg>
+                        </svg> -->
                     </i>
                     <?php
-                        if($coaches[$i]->coach_type_id == 1){
-                            echo $standard_coach_cost;
-                        } else if($coaches[$i]->coach_type_id == 2){
-                            echo $elite_coach_cost;
-                        }
+                        // if($coaches[$i]->coach_type_id == 1){
+                        //     echo $standard_coach_cost;
+                        // } else if($coaches[$i]->coach_type_id == 2){
+                        //     echo $elite_coach_cost;
+                        // }
                     ?>
-                    Tokens
+                    <!-- Tokens -->
                 </div>
             </div>
 
@@ -238,6 +238,7 @@
                         <div class="accordion-thumb available-at click">
                             <span>Available At</span>
                             <i class="fa fa-angle-down"></i>
+                            <input type="hidden" class="appo" value="<?php echo($appointment_id);?>">
                         </div>
                         <div class="accordion-panel">
                             <div style="display:flex;flex-direction: column;margin:15px;">
@@ -351,14 +352,16 @@
     $.ajaxSetup({
         cache: false
     });
-
+    var appo = $('.appo').val();
+    console.log(appo);
     $(".datepicker__each").each(function() {
         $(this).on('change', function () {
             var date = $(this).val();
             var newdate = date.split('/');
             var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
-            //alert(this.name);
-            var loadUrl = "<?php echo site_url('b2c/student/manage_appointments/availability/name'); ?>" + "/" + this.name + "/" + dateformat;
+            // alert(this.name);
+            // alert(appo);
+            var loadUrl = "<?php echo site_url('b2c/student/manage_appointments/availability/name'); ?>" + "/" + appo + "/" + this.name + "/" + dateformat;
             var m = $('[id^=result_]').html($('[id^=result_]').val());
             // alert(loadUrl);
             if (dateformat != '') {
