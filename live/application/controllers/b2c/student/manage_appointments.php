@@ -122,11 +122,14 @@ class manage_appointments extends MY_Site_Controller {
         $elite_coach_cost = $setting[0]->elite_coach_cost;
         $session_duration = $setting[0]->session_duration;
 
-        $substr_start_date = substr($date, -2);
-        $substr_end_date = substr($week_date[1], -2);
-        $substr_date_now = substr($datenow, -2);
-        $count_start_date = $substr_start_date - $substr_date_now;
-        $count_end_date = $substr_end_date - $substr_date_now;
+        $substr_start_date = str_replace("-", ", ", $date);
+        $substr_end_date = str_replace("-", ", ", $week_date[1]);
+        // $substr_date_now = substr($datenow, -2);
+        // $count_start_date = $substr_start_date - $substr_date_now;
+        // $count_end_date = $substr_end_date - $substr_date_now;
+        // echo $substr_start_date;
+        // exit();
+        // die();
         
         $vars = array(
             'coaches' => $coaches,
@@ -140,8 +143,8 @@ class manage_appointments extends MY_Site_Controller {
             'start_date' => $date, 
             'start_time' => $start_time,
             'coach_type' => $coach_type,
-            'min_date' => $count_start_date,
-            'max_date' => $count_end_date,
+            'min_date' => $substr_start_date,
+            'max_date' => $substr_end_date,
             'appointment_id' => $appointment_id,
         );
        // echo('<pre>');
@@ -415,6 +418,19 @@ class manage_appointments extends MY_Site_Controller {
         
         $this->template->title = 'Reschedule Booking Summary';
 
+        $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, start_time, end_time')->where('id', $appointment_id)->where('student_id', $this->auth_manager->userid())->get();
+
+        $appointment_data_coach = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($appointment_data->coach_id)[0]->minutes), strtotime($appointment_data->date), $appointment_data->start_time, $appointment_data->end_time);
+
+        $get_name_coach = $this->db->select('fullname')->from('user_profiles')->where('user_id',$appointment_data->coach_id)->get()->result();
+        $get_email_coach = $this->db->select('email')->from('users')->where('id',$appointment_data->coach_id)->get()->result();
+        $get_gmt_coach = $this->identity_model->new_get_gmt($appointment_data->coach_id);
+        $old_coach_gmt   = $get_gmt_coach[0]->gmt;
+
+        // echo "<pre>";
+        // print_r($appointment_data_coach['start_time']);
+        // exit();
+
         $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
         
         $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
@@ -430,7 +446,17 @@ class manage_appointments extends MY_Site_Controller {
             'standard_coach_cost' => $standard_coach_cost,
             'elite_coach_cost' => $elite_coach_cost,
             'appointment_id' => $appointment_id,
+            'old_coach_name' => $get_name_coach[0]->fullname,
+            'old_coach_email' => $get_email_coach[0]->email,
+            'old_date' => $appointment_data_coach['date'],
+            'old_start_time' => $appointment_data_coach['start_time'],
+            'old_end_time' => $appointment_data_coach['end_time'],
+            'old_coach_gmt' => $old_coach_gmt,
         );
+
+        // echo "<pre>";
+        // print_r($vars);
+        // exit();
 
 
         $this->template->content->view('contents/b2c/student/find_coach/reschedule/summary_book', $vars);
@@ -1645,17 +1671,20 @@ class manage_appointments extends MY_Site_Controller {
     }
 
     public function email_reschedule(){
-        $appointment_id = $this->input->post('appointment_id');
-        $coach_id       = $this->input->post('coach_id');
-        $date_          = $this->input->post('date_');
-        $start_time_    = $this->input->post('start_time_');
-        $end_time_      = $this->input->post('end_time_');
-        $token          = $this->input->post('token');
-
-        $appointment_data = $this->appointment_model->select('id, student_id, coach_id, date, start_time, end_time')->where('id', $appointment_id)->where('student_id', $this->auth_manager->userid())->get();
-
-        $appointment_data_student = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), strtotime($appointment_data->date), $appointment_data->start_time, $appointment_data->end_time);
-        $appointment_data_coach = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), strtotime($appointment_data->date), $appointment_data->start_time, $appointment_data->end_time);
+        $appointment_id     = $this->input->post('appointment_id');
+        $old_coach_name     = $this->input->post('old_coach_name');
+        $old_coach_email    = $this->input->post('old_coach_email');
+        $old_date           = $this->input->post('old_date');
+        $old_start_time     = $this->input->post('old_start_time');
+        $old_end_time       = $this->input->post('old_end_time');
+        $old_coach_gmt      = $this->input->post('old_coach_gmt');
+        $coach_id           = $this->input->post('coach_id');
+        $coach_email        = $this->input->post('coach_email');
+        $coach_name         = $this->input->post('coach_name');
+        $date_              = $this->input->post('date_');
+        $start_time_        = $this->input->post('start_time_');
+        $end_time_          = $this->input->post('end_time_');
+        $token              = $this->input->post('token');
 
         $convert = $this->schedule_function->convert_book_schedule(-($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), $date_, $start_time_, $end_time_);
         $date = $convert['date'];
@@ -1705,18 +1734,19 @@ class manage_appointments extends MY_Site_Controller {
         $emailcoach = $this->user_model->select('id, email')->where('id', $coach_id)->get_all();
         $namecoach = $this->user_profile_model->select('user_id, fullname')->where('user_id', $coach_id)->get_all();
         $namestudent = $this->user_profile_model->select('user_id, fullname')->where('user_id', $this->auth_manager->userid())->get_all();
+        $student_name = $namestudent[0]->fullname;
         $emailstudent = $this->user_model->select('id, email')->where('id', $this->auth_manager->userid())->get_all();
-
+        $student_email = $emailstudent[0]->email;
         $convert_coach_plus = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), $date, $start_time, $end_time);
 
         $new_date_for_coach = date('Y-m-d', $convert_coach_plus['date']);
 
         $student_token = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
 
-        if($student_token->token_amount > $token){
-        $this->send_email->student_reschedule($emailcoach, $namestudent, $namecoach, date('Y-m-d', strtotime($appointment_data->date)), $appointment_data_coach['start_time'], $appointment_data_coach['end_time'], $new_date_for_coach, $start_hour, $end_hour, $coach_gmt);
-        $this->send_email->notif_student_reschedule($emailstudent, $namestudent, $namecoach, date('Y-m-d', strtotime($appointment_data->date)), $appointment_data_student['start_time'], $appointment_data_student['end_time'], $dateconvert, $start_hour_coach, $end_hour_coach, $student_gmt);
-        }
+        
+        $this->send_email->student_reschedule_smtp($coach_email, $student_name, $coach_name, date('Y-m-d', $old_date), $old_start_time, $old_end_time, $new_date_for_coach, $start_hour_coach, $end_hour_coach, $coach_gmt);
+        $this->send_email->notif_student_reschedule_smtp($student_email, $student_name, $coach_name, date('Y-m-d', $old_date), $old_start_time, $old_end_time, $dateconvert, $start_hour, $end_hour, $student_gmt);
+        $this->send_email->notif_coach_reschedule_smtp($old_coach_email, $student_name, $old_coach_name, date('Y-m-d', $old_date), $old_start_time, $old_end_time, $new_date_for_coach, $start_hour_coach, $end_hour_coach, $old_coach_gmt);
     }
 
 

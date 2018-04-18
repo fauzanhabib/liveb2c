@@ -287,8 +287,8 @@
 <script>
     $('.datepicker__each').each(function() {
         $(this).datepicker({
-            minDate: '<?php echo $min_date;?>',
-            maxDate: '<?php echo $max_date;?>',
+            minDate: new Date('<?php echo $min_date; ?>'),
+            maxDate: new Date('<?php echo $max_date; ?>'),
             beforeShow:function(textbox, instance){
                 $(this).next().append($('#ui-datepicker-div'));
                 $('#ui-datepicker-div').hide();

@@ -102,12 +102,20 @@
                         type:"POST",
                         url:"<?php echo site_url('b2c/student/manage_appointments/email_reschedule');?>",
                         data: {
-                            'appointment_id': "<?php echo $appointment_id; ?>",
-                            'coach_id': "<?php echo $data_coach[0]->id; ?>",
-                            'date_': "<?php echo $date;?>",
-                            'start_time_': "<?php echo $start_time;?>",
-                            'end_time_': "<?php echo $end_time;?>",
-                            'token': "<?php echo $token;?>"
+                            'appointment_id': '<?php echo $appointment_id; ?>',
+                            'old_coach_name': '<?php echo $old_coach_name; ?>',
+                            'old_coach_email': '<?php echo $old_coach_email; ?>',
+                            'old_date': '<?php echo $old_date; ?>',
+                            'old_start_time': '<?php echo $old_start_time; ?>',
+                            'old_end_time': '<?php echo $old_end_time; ?>',
+                            'old_coach_gmt': '<?php echo $old_coach_gmt; ?>',
+                            'coach_id': '<?php echo $data_coach[0]->id; ?>',
+                            'coach_email': '<?php echo $data_coach[0]->email; ?>',
+                            'coach_name': '<?php echo $data_coach[0]->fullname; ?>',
+                            'date_': '<?php echo $date;?>',
+                            'start_time_': '<?php echo $start_time;?>',
+                            'end_time_': '<?php echo $end_time;?>',
+                            'token': '<?php echo $token;?>',
                         }
                     });
                 });
