@@ -16977,7 +16977,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
     }
 
     //---------------------------------------------------------Notif Coach Reschedule---------------------------------------------------------------
-    function notif_coach_reschedule($studentmail = '', $coachmail = '', $studentname = '', $oldcoachname = '', $olddate ='', $oldstart = '', $oldend = '', $newcoachname = '', $newdate = '', $newstart = '', $newend = '', $gmt = ''){
+    function notif_coach_reschedule($coachmail = '', $studentname = '', $oldcoachname = '', $olddate ='', $oldstart = '', $oldend = '', $newdate = '', $newstart = '', $newend = '', $gmt = ''){
 
         $tz = '';
         if ($gmt > 0) {
@@ -17228,7 +17228,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 28px; color: #919191; text-align:center; line-height: auto;" st-title="fulltext-heading" >
                                                                     <br>
-                                                                    Dear '.$oldcoachname.', Your Administrator has cancelled your session!
+                                                                    Hi '.$oldcoachname.', 
                                                                 </td>
                                                             </tr>
                                                             <!-- spacing -->
@@ -17266,13 +17266,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                             <!-- content -->
                                                             <tr>
                                                                 <td style="font-family: Helvetica, arial, sans-serif; font-size: 16px; color: #919191; text-align:center; line-height: 30px;" st-content="fulltext-content">
-
-
-                                                                    Student Name : '.$studentname.'
-                                                                   <br>
-                                                                    Date : '.$olddate.'
-                                                                   <br>
-                                                                    Time : From '.$oldstart.' to '.$oldend.' '.$tz.'
+                                                                    Your student '.$studentname.' has cancelled your session on '.$olddate.' from '.$oldstart.' to '.$oldend.' '.$tz.'
                                                                    <br>
                                                                    <br>
 
