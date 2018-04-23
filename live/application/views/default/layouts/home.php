@@ -28,10 +28,39 @@
 
             <!-- DESKTOP HEADER -->
             <div class="login__header__nav">
-                <ul>
+                <ul class="ulheder">
                     <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
                     <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
                     <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                    <li>
+                        <div id="lang_selector" class="language-dropdown">
+                            <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
+                                <span class="title1"> EN </span>
+                                <span class="flag"></span>
+                                <div class="bxarrow" id="bxarrow">
+                                    <span class="arrow"></span>
+                                </div>
+                            </label>
+                            <ul class="lang-list">
+                                <li class="lang lang-en selected" title="English">
+
+                                    <span class="title2">EN</span>
+                                    <span class="flag"></span>
+                                </li>
+                                <li class="lang lang-id" title="Indonesia">
+
+                                    <span class="title2">ID</span>
+                                    <span class="flag"></span>
+
+                                </li>
+                                <li class="lang lang-es" title="Spanish">
+
+                                    <span class="title2">ES</span>
+                                    <span class="flag"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </header>
@@ -43,6 +72,33 @@
             </div>
 
             <div class="mobile__menu">
+                <div id="lang_selector" class="language-dropdown">
+                    <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
+                        <span class="title1"> EN </span>
+                        <span class="flag"></span>
+                        <div class="bxarrow" id="bxarrow">
+                            <span class="arrow"></span>
+                        </div>
+                    </label>
+                    <ul class="lang-list">
+                        <li class="lang lang-en selected" title="English">
+
+                            <span class="title2">EN</span>
+                            <span class="flag"></span>
+                        </li>
+                        <li class="lang lang-id" title="Indonesia">
+
+                            <span class="title2">ID</span>
+                            <span class="flag"></span>
+
+                        </li>
+                        <li class="lang lang-es" title="Spanish">
+
+                            <span class="title2">ES</span>
+                            <span class="flag"></span>
+                        </li>
+                    </ul>
+                </div>
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>

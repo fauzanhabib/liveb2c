@@ -450,3 +450,27 @@
           return false; // DO NOTHING WHEN CONTAINER IS CLICKED.
       });
   });
+
+  $(document).ready(function() {
+    $(".lang-flag").click(function() {
+        $(".language-dropdown").toggleClass("open");
+        $(".bxarrow").toggleClass("active");
+    });
+    $("ul.lang-list li").click(function() {
+        $("ul.lang-list li").removeClass("selected");
+        $(this).addClass("selected");
+        if ($(this).hasClass('lang-en')) {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+            $(".title1").html("<p>EN</p>")
+        } else if ($(this).hasClass('lang-id')) {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+            $(".title1").html("<p>ID</p>")
+        } else {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+            $(".title1").html("<p>ES</p>")
+        }
+        $(".bxarrow").removeClass("active");
+        $(".language-dropdown").removeClass("open");
+        
+    });
+})
