@@ -501,6 +501,8 @@ path:hover + g.tooltip {
   cursor: pointer;
   margin-top: 15px;
   min-width: 160px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
   background-color: #3F4E7B;
   color: #49C5FE; }
   .neobutton:hover, .neobutton__white:hover, .neobutton__small__white:hover {
@@ -538,8 +540,11 @@ path:hover + g.tooltip {
     border: 0;
     color: #fff; }
 
-.neobutton__white a {
-  font-family: "neoFontMedium", sans-serif; }
+.neobutton__white {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent; }
+  .neobutton__white a {
+    font-family: "neoFontMedium", sans-serif; }
 
 .coachinfo {
   border: 1px solid #fff;
@@ -4166,7 +4171,9 @@ table.table-reschedule {
   font-size: 16px;
   margin: 85px 0 0 0; }
   .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn {
-    margin: 0 auto; }
+    margin: 0 auto;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; }
   @media screen and (max-width: 768px) {
     .box__assessment, .about__us, .contact__us {
       width: 50%;
@@ -4504,7 +4511,9 @@ textarea.parsley-error {
   -webkit-transition: all .5s;
   transition: all .5s;
   -webkit-backface-visibility: hidden;
-          backface-visibility: hidden; }
+          backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent; }
 
 .bxarrow {
   -webkit-transition: 0.15s ease;
