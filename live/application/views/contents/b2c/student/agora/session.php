@@ -650,6 +650,50 @@ opacity: 1 !important;
                 <!-- end daily progress donut graph -->
             </div>
             <div class="study__dashboard__bottom">
+                <div class="study__progress__graph">
+                  <h5>Comprehension</h5>
+                  <div class="graph__wrap">
+                      <div class="bar__graph">
+                        <ul class="graph b2">
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
+                                <span class="graph__legend">Now</span>
+                              <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[1]->comprehension_grammar;}?>">
+                                <span class="graph__legend">w 1</span>
+                              <label><?php echo strtok($gwp->data[1]->comprehension_grammar, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[2]->comprehension_grammar;}?>">
+                                <span class="graph__legend">w 2</span>
+                              <label><?php echo strtok($gwp->data[2]->comprehension_grammar, '.');?></label>
+                              </li>
+                            </span>
+
+                            <span class="graph__bar__cont">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[3]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[3]->comprehension_grammar;}?>">
+                                <span class="graph__legend">w 3</span>
+                              <label><?php echo strtok($gwp->data[3]->comprehension_grammar, '.');?></label>
+                              </li>
+                            </span>
+
+                            <div class="v__bar">
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                              <div class="v__line"></div>
+                            </div>
+                        </ul>
+                      </div>
+                  </div>
+                </div>
                 <!-- pronunciation graph -->
                 <div class="study__progress__graph">
                     <h5>Pronunciation</h5>

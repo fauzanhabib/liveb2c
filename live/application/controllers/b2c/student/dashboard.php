@@ -133,9 +133,7 @@ class Dashboard extends MY_Site_Controller {
         // $nowd  = "2016-08-21";
         $hour_start_db  = date('H:i:s');
         // $hour_start_db  = "02:40:01";
-        // echo "<pre>";
-        // print_r($tz);
-        // exit();
+        // echo "<pre>";print_r($tz);exit();
         $pull_appoint = $this->db->select('*')
                       ->from('appointments')
                       ->where($tipe, $id)

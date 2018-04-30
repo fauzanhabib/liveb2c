@@ -130,11 +130,13 @@ class Login extends MY_Controller {
           }
 
           $timezone = array(
-                 'user_id' => $userid,
-                 'gmt_val' => $gmt_val,
-                 'minutes_val' => @$minutes,
-                 'log_date' => date('Y-m-d H:i:s')
-              );
+             'user_id' => $userid,
+             'gmt_val' => $gmt_val,
+             'minutes_val' => @$minutes,
+             'log_date' => date('Y-m-d H:i:s')
+          );
+
+					// print_r($timezone);exit();
           $this->db->replace('user_timezones', $timezone);
           // ====
 

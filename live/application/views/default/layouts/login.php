@@ -186,6 +186,7 @@
                             <label class="label">Password</label>
                             <p class="control">
                                 <input class="input" type="password" placeholder="password" name="password" data-parsley-trigger="change" required data-parsley-required-message="Please input your password" style="letter-spacing:2px;">
+                                <input type="hidden" id="min_raw" name="min_raw" value=""/>
                             </p>
                         </div>
                     </div>
@@ -230,7 +231,7 @@
                 </svg>
             </a>
             <!-- version -->
-            <?php 
+            <?php
                 require_once(APPPATH.'views/default/layouts/version.php');
             ?>
         </footer>
