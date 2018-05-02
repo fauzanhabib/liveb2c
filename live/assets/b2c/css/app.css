@@ -4106,7 +4106,7 @@ table.table-reschedule {
         width: 35%; } }
     @media screen and (max-width: 768px) {
       .login__header .login__header__nav {
-        width: 45%; } }
+        width: 49%; } }
     @media screen and (max-width: 500px) {
       .login__header .login__header__nav {
         display: none; } }
@@ -4121,6 +4121,10 @@ table.table-reschedule {
               align-items: center; }
       .login__header .login__header__nav .ulheder .btn__signin a {
         color: #49c5fe; }
+      .login__header .login__header__nav .ulheder li a:hover {
+        color: #49c5fe;
+        -webkit-transition: all .5s;
+        transition: all .5s; }
   @media screen and (min-width: 768px) {
     .login__header .login__header__mobile {
       display: none; } }
