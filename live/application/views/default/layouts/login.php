@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
 
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/jquery.translate.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/flag-translate.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
@@ -78,12 +80,12 @@
             <!-- DESKTOP HEADER -->
             <div class="login__header__nav">
                 <ul class="ulheder">
-                    <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                    <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                    <li class="btn__signin"><a href="">Sign In</a></li>
+                    <li><a class="trn" href="<?php echo site_url('b2c/about'); ?>" data-trn-key="about">About Us</a></li>
+                    <li><a class="trn" href="<?php echo site_url('b2c/contact'); ?>" data-trn-key="contact">Contact Us</a></li>
+                    <li class="btn__signin"><a href="" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     <li>
                         <div id="lang_selector" class="language-dropdown">
-                            <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
+                            <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                                 <span class="title1"> EN </span>
                                 <span class="flag"></span>
                                 <div class="bxarrow" id="bxarrow">
@@ -92,18 +94,14 @@
                             </label>
                             <ul class="lang-list">
                                 <li class="lang lang-en selected" title="English">
-
                                     <span class="title2">EN</span>
                                     <span class="flag"></span>
                                 </li>
-                                <li class="lang lang-id" title="Indonesia">
-
+                                <li class="lang lang-id"  title="Indonesia">
                                     <span class="title2">ID</span>
                                     <span class="flag"></span>
-
                                 </li>
-                                <li class="lang lang-es" title="Spanish">
-
+                                <li class="lang lang-es"  title="Spanish">
                                     <span class="title2">ES</span>
                                     <span class="flag"></span>
                                 </li>
@@ -122,7 +120,7 @@
 
             <div class="mobile__menu">
                 <div id="lang_selector" class="language-dropdown">
-                    <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
+                    <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                         <span class="title1"> EN </span>
                         <span class="flag"></span>
                         <div class="bxarrow" id="bxarrow">
@@ -131,18 +129,14 @@
                     </label>
                     <ul class="lang-list">
                         <li class="lang lang-en selected" title="English">
-
                             <span class="title2">EN</span>
                             <span class="flag"></span>
                         </li>
-                        <li class="lang lang-id" title="Indonesia">
-
+                        <li class="lang lang-id"  title="Indonesia">
                             <span class="title2">ID</span>
                             <span class="flag"></span>
-
                         </li>
-                        <li class="lang lang-es" title="Spanish">
-
+                        <li class="lang lang-es"  title="Spanish">
                             <span class="title2">ES</span>
                             <span class="flag"></span>
                         </li>
@@ -155,9 +149,9 @@
                 </div>
                 <nav class="mobile__nav">
                     <ul>
-                        <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                        <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                        <li><a class="trn" href="<?php echo site_url('b2c/about'); ?>"data-trn-key="about">About Us</a></li>
+                        <li><a class="trn" href="<?php echo site_url('b2c/contact'); ?>" data-trn-key="contact">Contact Us</a></li>
+                        <li class="btn__signin"><a class="trn" href="<?php echo site_url('login'); ?>" data-trn-key="sign_in">Sign In</a></li>
                     </ul>
                 </nav>
             </div>
@@ -167,35 +161,36 @@
         <main class="main flex--center" >
             <section class="box__assessment">
                 <div class="assignup">
-                    <div class="signup__title">
+                    <div class="signup__title trn" data-trn-key="sign_in">
                         Sign In
                     </div>
-										<form id="login-form" action="login" method="POST">
-                    <div class="signup__form">
-                      <?php
-                          echo @$this->template->partial->widget('messages_widget_login', '', true);
-                          echo @$content;
-                      ?>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <p class="control">
-                                <input class="input" type="email" placeholder="email" data-parsley-trigger="change" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address" name="email">
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <p class="control">
-                                <input class="input" type="password" placeholder="password" name="password" data-parsley-trigger="change" required data-parsley-required-message="Please input your password" style="letter-spacing:2px;">
-                                <input type="hidden" id="min_raw" name="min_raw" value=""/>
-                            </p>
-                        </div>
+					<form id="login-form" action="login" method="POST">
+                        <div class="signup__form">
+                        <?php
+                            echo @$this->template->partial->widget('messages_widget_login', '', true);
+                            echo @$content;
+                        ?>
+                            <div class="field">
+                                <label class="label trn" data-trn-key="email">Email</label>
+                                <p class="control">
+                                    <input class="input trn" type="email" data-trn-holder="email2" placeholder="email" data-parsley-trigger="change" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address" name="email">
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label trn" data-trn-key="pass">Password</label>
+                                <p class="control">
+                                    <input class="input trn" type="password" data-trn-holder="pass2" placeholder="password" name="password" data-parsley-trigger="change" required data-parsley-required-message="Please input your password" style="letter-spacing:2px;">
+                                    <input type="hidden" id="min_raw" name="min_raw" value=""/>
+                                </p>
+                            </div>
                     </div>
-                </div>
-                <div class="signin">
-                    Don't have an account? <span><a href="#">Sign Up</a></span>
-                </div>
-								<button type="submit" class="neobutton next" value="Sign In" name="__submit">SIGN IN</button>
-								</form>
+                        </div>
+                        <div class="signin">
+                            Don't have an account? <span><a href="#">Sign Up</a></span>
+                        </div>
+                        <button type="submit" class="neobutton next trn" value="Sign In" name="__submit" data-trn-key="sign_in2" >SIGN IN</button>
+                                
+				    </form>          
                 <!-- <button class="neobutton next">SIGN IN</button> -->
             </section>
         </main>

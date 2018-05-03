@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="">
 
 <head>
     <meta charset="UTF-8">
@@ -31,8 +31,8 @@
             <!-- DESKTOP HEADER -->
             <div class="login__header__nav">
                 <ul class="ulheder">
-                    <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About Us</a></li>
-                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact Us</a></li>
+                    <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
                     <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     <li>
                         <div id="lang_selector" class="language-dropdown">
@@ -100,8 +100,8 @@
                 </div>
                 <nav class="mobile__nav">
                     <ul>
-                        <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About Us</a></li>
-                        <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact Us</a></li>
+                        <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                        <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
                         <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" target="_self" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     </ul>
                 </nav>

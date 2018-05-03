@@ -451,6 +451,7 @@
       });
   });
 
+  
   $(document).ready(function () {
       $(".lang-flag").click(function () {
           $(".language-dropdown").toggleClass("open");
@@ -474,6 +475,5 @@
           }
           $(".bxarrow").removeClass("active");
           $(".language-dropdown").removeClass("open");
-
       });
   })
