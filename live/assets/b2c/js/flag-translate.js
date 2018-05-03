@@ -46,12 +46,12 @@ $(document).ready(function () {
                 es: "correo electrónico",
                 id: "e-mail"
             },
-            account: {
-                en: "Sign Up to create your account",
-                es: "Regístrese para crear su cuenta",
-                id: "Daftar untuk membuat akun Anda"
+            signup: {
+                en: "Sign Up",
+                es: "Regístrese",
+                id: "Daftar"
             },
-            have: {
+            dont: {
                 en: "Don't have an account?",
                 es: "No tienes una cuenta?",
                 id: "Tidak punya akun?"

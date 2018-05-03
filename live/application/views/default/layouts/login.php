@@ -186,7 +186,7 @@
                     </div>
                         </div>
                         <div class="signin">
-                            Don't have an account? <span><a href="#">Sign Up</a></span>
+                           <span class="trn" data-trn-key="dont"> Don't have an account?</span> <span><a href="#"  class="trn" data-trn-key="signup">Sign Up</a></span>
                         </div>
                         <button type="submit" class="neobutton next trn" value="Sign In" name="__submit" data-trn-key="sign_in2" >SIGN IN</button>
                                 
