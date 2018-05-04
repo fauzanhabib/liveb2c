@@ -1125,8 +1125,8 @@ setInterval('checkShare()', 1000);
     });
   }
 
-  //audioSelect.onchange = getDevices;
-  //videoSelect.onchange = getDevices;
+  audioSelect.onchange = getDevices;
+  videoSelect.onchange = getDevices;
   getDevices();
 </script>
 <script>
