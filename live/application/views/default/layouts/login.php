@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
-
+    
 	<style>
 		.alert-login {
 			height: 0;
@@ -83,7 +83,7 @@
                     <li><a class="trn" href="<?php echo site_url('b2c/about'); ?>" data-trn-key="about">About Us</a></li>
                     <li><a class="trn" href="<?php echo site_url('b2c/contact'); ?>" data-trn-key="contact">Contact Us</a></li>
                     <li class="btn__signin"><a href="" class="trn" data-trn-key="sign_in">Sign In</a></li>
-                    <li>
+                    <!-- <li>
                         <div id="lang_selector" class="language-dropdown">
                             <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                                 <span class="title1"> EN </span>
@@ -107,7 +107,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </header>
@@ -119,7 +119,7 @@
             </div>
 
             <div class="mobile__menu">
-                <div id="lang_selector" class="language-dropdown">
+                <!-- <div id="lang_selector" class="language-dropdown">
                     <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                         <span class="title1"> EN </span>
                         <span class="flag"></span>
@@ -141,7 +141,7 @@
                             <span class="flag"></span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>
@@ -260,6 +260,7 @@
         //     return true;
         // }
     </script>
+    
 </body>
 
 </html>
