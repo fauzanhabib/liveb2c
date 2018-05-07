@@ -1,15 +1,15 @@
   // ============================jQuery Pagination==================================//
 
-  (function($) {
+  (function ($) {
 
       var paginate = {
-          startPos: function(pageNumber, perPage) {
+          startPos: function (pageNumber, perPage) {
               // determine what array position to start from
               // based on current page and # per page
               return pageNumber * perPage;
           },
 
-          getPage: function(items, startPos, perPage) {
+          getPage: function (items, startPos, perPage) {
               // declare an empty array to hold our page items
               var page = [];
 
@@ -24,12 +24,12 @@
               return page;
           },
 
-          totalPages: function(items, perPage) {
+          totalPages: function (items, perPage) {
               // determine total number of pages
               return Math.ceil(items.length / perPage);
           },
 
-          createBtns: function(totalPages, currentPage) {
+          createBtns: function (totalPages, currentPage) {
               // create buttons to manipulate current page
               var pagination = $('<div class="pagination" />');
 
@@ -77,7 +77,7 @@
               return pagination;
           },
 
-          createPage: function(items, currentPage, perPage) {
+          createPage: function (items, currentPage, perPage) {
               // remove pagination from the page
               $('.pagination').remove();
 
@@ -90,7 +90,7 @@
                   page = this.getPage(items, startPos, perPage);
 
               // loop items and readd to page
-              $.each(page, function() {
+              $.each(page, function () {
                   // prevent empty items that return as Window
                   if (this.window === undefined) {
                       container.append($(this));
@@ -106,7 +106,7 @@
       };
 
       // stuff it all into a jQuery method!
-      $.fn.paginate = function(perPage) {
+      $.fn.paginate = function (perPage) {
           var items = $(this);
 
           // default perPage to 5
@@ -128,7 +128,7 @@
           paginate.createPage(items, 1, perPage);
 
           // handle click events on the buttons
-          $(document).on('click', '.pagination-button', function(e) {
+          $(document).on('click', '.pagination-button', function (e) {
               // get current page from active button
               var currentPage = parseInt($('.pagination-button.active').text(), 10),
                   newPage = currentPage,
@@ -149,7 +149,7 @@
 
   })(jQuery);
 
-  $(document).ready(function() {
+  $(document).ready(function () {
 
       // MODAL
       // $('.trigger').each(function() {
@@ -158,10 +158,10 @@
       //         return false;
       //     });
       // });
-      $('a.btn-close').click(function() {
+      $('a.btn-close').click(function () {
           $(this).parents('.modal-wrapper').removeClass('open');
       });
-      $('a.span-close').click(function() {
+      $('a.span-close').click(function () {
           $(this).parents('.modal-wrapper').removeClass('open');
       });
 
@@ -170,7 +170,7 @@
       //     $(this).next(".accordion-panel").slideToggle();
       // });
 
-      $(document).on("click", ".accordion-item", function() {
+      $(document).on("click", ".accordion-item", function () {
           // $('.accordion-item').click( function() {
           $(this).children(".accordion__panel--history").slideToggle();
       });
@@ -191,7 +191,7 @@
       // });
 
       // GRAPH BAR IN STUDY DASHBOARD
-      $(".graph__bar__each").each(function() {
+      $(".graph__bar__each").each(function () {
           var dataWidth = $(this).data('value') / 125 * 100;
           $(this).css("width", dataWidth + "%");
 
@@ -201,7 +201,7 @@
       });
 
       // burger menu click event
-      $('.burger__menu').click(function() {
+      $('.burger__menu').click(function () {
           $('.menu__bar').toggleClass('clicked');
           if ($('.menu__bar').hasClass('clicked')) {
               $('.mobile__nav').addClass('act');
@@ -213,7 +213,7 @@
 
       //MENU TAB IN DASHBOARD
 
-      $('ul.tabs li').click(function() {
+      $('ul.tabs li').click(function () {
           var tab_id = $(this).attr('data-tab');
 
           $('ul.tabs li').removeClass('current');
@@ -224,7 +224,7 @@
 
       })
 
-      $('.tabs div').click(function() {
+      $('.tabs div').click(function () {
           var tab_id = $(this).attr('data-tab');
 
           $('.tabs div').removeClass('current');
@@ -288,8 +288,8 @@
 
       //SELECTED AND SHOW MENU BOOKING A COACH IN MOBILE
 
-      jQuery(function($) {
-          $('#town').on('change', function() {
+      jQuery(function ($) {
+          $('#town').on('change', function () {
               //use toggle for ease of use
               if ($(this).val() === "1") {
                   $(".alt1").show(this.value == 1);
@@ -324,11 +324,11 @@
       //RATING COACH  MENU BOOKING A COACH
 
       /* 1. Visualizing things on Hover - See next part for action on click */
-      $('#stars li').on('mouseover', function() {
+      $('#stars li').on('mouseover', function () {
           var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
 
           // Now highlight all the stars that's not after the current hovered star
-          $(this).parent().children('li.star').each(function(e) {
+          $(this).parent().children('li.star').each(function (e) {
               if (e < onStar) {
                   $(this).addClass('hover');
               } else {
@@ -336,15 +336,15 @@
               }
           });
 
-      }).on('mouseout', function() {
-          $(this).parent().children('li.star').each(function(e) {
+      }).on('mouseout', function () {
+          $(this).parent().children('li.star').each(function (e) {
               $(this).removeClass('hover');
           });
       });
 
 
       /* 2. Action to perform on click */
-      $('#stars li').on('click', function() {
+      $('#stars li').on('click', function () {
           var onStar = parseInt($(this).data('value'), 10); // The star currently selected
           var stars = $(this).parent().children('li.star');
 
@@ -373,7 +373,7 @@
           $('.success-box div.text-message').html("<span>" + msg + "</span>");
       }
 
-      $('.fa-times').click(function() {
+      $('.fa-times').click(function () {
           $('.dashboard__notif').remove();
       });
 
@@ -421,10 +421,10 @@
       // });
 
       // logout
-      $('#logout__button').click(function() {
+      $('#logout__button').click(function () {
 
           // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
-          $('#logout__box').fadeToggle('fast', 'linear', function() {
+          $('#logout__box').fadeToggle('fast', 'linear', function () {
               if ($('#logout__box').is(':hidden')) {
                   $('#logout__button').css('background-color', '#2E467C');
               } // CHANGE BACKGROUND COLOR OF THE BUTTON.
@@ -436,7 +436,7 @@
       });
 
       // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
-      $(document).click(function() {
+      $(document).click(function () {
           $('#logout__box').hide();
 
           // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
@@ -446,31 +446,34 @@
           }
       });
 
-      $('#logout__box').click(function() {
+      $('#logout__box').click(function () {
           return false; // DO NOTHING WHEN CONTAINER IS CLICKED.
       });
   });
 
-  $(document).ready(function() {
-    $(".lang-flag").click(function() {
-        $(".language-dropdown").toggleClass("open");
-        $(".bxarrow").toggleClass("active");
-    });
-    $("ul.lang-list li").click(function() {
-        $("ul.lang-list li").removeClass("selected");
-        $(this).addClass("selected");
-        if ($(this).hasClass('lang-en')) {
-            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
-            $(".title1").html("<p>EN</p>")
-        } else if ($(this).hasClass('lang-id')) {
-            $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
-            $(".title1").html("<p>ID</p>")
-        } else {
-            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
-            $(".title1").html("<p>ES</p>")
-        }
-        $(".bxarrow").removeClass("active");
-        $(".language-dropdown").removeClass("open");
-        
-    });
-})
+  
+  $(document).ready(function () {
+      $(".lang-flag").click(function () {
+          $(".language-dropdown").toggleClass("open");
+          $(".bxarrow").toggleClass("active");
+      });
+      $("ul.lang-list li").click(function () {
+          $("ul.lang-list li").removeClass("selected");
+          $(this).addClass("selected");
+          if ($(this).hasClass('lang-en')) {
+              $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+              $(".title1").html("<p>EN</p>")
+              $(".lang-en").attr("data-value", "en")
+          } else if ($(this).hasClass('lang-id')) {
+              $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+              $(".title1").html("<p>ID</p>")
+              $(".lang-id").attr("data-value", "id")
+          } else {
+              $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+              $(".title1").html("<p>ES</p>")
+              $(".lang-es").attr("data-value", "es")
+          }
+          $(".bxarrow").removeClass("active");
+          $(".language-dropdown").removeClass("open");
+      });
+  })

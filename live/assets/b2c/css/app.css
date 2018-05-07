@@ -4194,6 +4194,10 @@ table.table-reschedule {
           justify-content: space-around; }
       .login__header .login__header__nav ul .btn__signin a {
         color: #49c5fe; }
+      .login__header .login__header__nav .ulheder li a:hover {
+        color: #49c5fe;
+        -webkit-transition: all .5s;
+        transition: all .5s; }
   @media screen and (min-width: 768px) {
     .login__header .login__header__mobile {
       display: none; } }

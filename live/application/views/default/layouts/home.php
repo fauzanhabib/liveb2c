@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="">
 
 <head>
     <meta charset="UTF-8">
@@ -8,8 +8,10 @@
     <link href="<?php echo base_url();?>assets/b2c/font/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
 
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/jquery.translate.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/flag-translate.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
 
@@ -29,12 +31,12 @@
             <!-- DESKTOP HEADER -->
             <div class="login__header__nav">
                 <ul class="ulheder">
-                    <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                    <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
-                    <li>
+                    <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
+                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in">Sign In</a></li>
+                    <!-- <li>
                         <div id="lang_selector" class="language-dropdown">
-                            <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
+                            <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                                 <span class="title1"> EN </span>
                                 <span class="flag"></span>
                                 <div class="bxarrow" id="bxarrow">
@@ -43,24 +45,20 @@
                             </label>
                             <ul class="lang-list">
                                 <li class="lang lang-en selected" title="English">
-
                                     <span class="title2">EN</span>
                                     <span class="flag"></span>
                                 </li>
-                                <li class="lang lang-id" title="Indonesia">
-
+                                <li class="lang lang-id"  title="Indonesia">
                                     <span class="title2">ID</span>
                                     <span class="flag"></span>
-
                                 </li>
-                                <li class="lang lang-es" title="Spanish">
-
+                                <li class="lang lang-es"  title="Spanish">
                                     <span class="title2">ES</span>
                                     <span class="flag"></span>
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </header>
@@ -72,7 +70,7 @@
             </div>
 
             <div class="mobile__menu">
-                <div id="lang_selector" class="language-dropdown">
+                <!-- <div id="lang_selector" class="language-dropdown">
                     <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
                         <span class="title1"> EN </span>
                         <span class="flag"></span>
@@ -82,23 +80,19 @@
                     </label>
                     <ul class="lang-list">
                         <li class="lang lang-en selected" title="English">
-
                             <span class="title2">EN</span>
                             <span class="flag"></span>
                         </li>
                         <li class="lang lang-id" title="Indonesia">
-
                             <span class="title2">ID</span>
                             <span class="flag"></span>
-
                         </li>
                         <li class="lang lang-es" title="Spanish">
-
                             <span class="title2">ES</span>
                             <span class="flag"></span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>
@@ -106,9 +100,9 @@
                 </div>
                 <nav class="mobile__nav">
                     <ul>
-                        <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                        <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" target="_self">Sign In</a></li>
+                        <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                        <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
+                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" target="_self" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     </ul>
                 </nav>
             </div>
@@ -122,8 +116,8 @@
                         <img src="<?php echo base_url();?>assets/b2c/img/NeoForm.png">
                     </div>
                 </div>
-                <a href="<?php echo site_url('login'); ?>" class="home__loginbtn"><button class="neobutton__white">SIGN IN</button></a>
-                <button class="neobutton__white trigger">WATCH</button>
+                <a href="<?php echo site_url('login'); ?>" class="home__loginbtn"><button class="neobutton__white trn" data-trn-key="sign_in">SIGN IN</button></a>
+                <button class="neobutton__white trigger trn" data-trn-key="watch">WATCH VIDEO</button>
 
                 <!-- MODAL -->
                 <div class="modal-wrapper">

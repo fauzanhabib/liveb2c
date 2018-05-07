@@ -244,6 +244,7 @@ opacity: 1 !important;
 }
 </style>
 <section class="main__content">
+  <label for="videoSource">Video source: </label><select id="videoSource"></select>
   <div class="dashboard__notif success__notif width100perc" id="heading1">
     Waiting for <?php echo ' '.$student_name.' '; ?> to join the session. Remain in the session until the end in order to receive a refund of your tokens.
   </div>
@@ -466,41 +467,35 @@ opacity: 1 !important;
 
                 <!-- top point graph -->
                 <div class="progress__point__top">
-                  <h5>Points</h5>
+                  <h5 style="color: #49C5FE;">Comprehension</h5>
                   <div class="graph__wrap">
                       <div class="bar__graph">
-                        <?php
-                        $bar_now = ( $gwp->data[0]->points_goal == 0 ? 0 : $gwp->data[0]->points / $gwp->data[0]->points_goal) * 100;
-                        $bar_w1  = ( $gwp->data[1]->points_goal == 0 ? 0 : $gwp->data[1]->points / $gwp->data[1]->points_goal) * 100;
-                        $bar_w2  = ( $gwp->data[2]->points_goal == 0 ? 0 : $gwp->data[2]->points / $gwp->data[2]->points_goal) * 100;
-                        $bar_w3  = ( $gwp->data[3]->points_goal == 0 ? 0 : $gwp->data[3]->points / $gwp->data[3]->points_goal) * 100;
-                        ?>
                         <ul class="graph b2">
                             <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php echo $bar_now; ?>">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
                                 <span class="graph__legend">Now</span>
-                                <label><?php echo number_format($gwp->data[0]->points);?></label>
+                              <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
                               </li>
                             </span>
 
                             <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php echo $bar_w1; ?>">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[1]->comprehension_grammar;}?>">
                                 <span class="graph__legend">w 1</span>
-                                <label><?php echo number_format($gwp->data[1]->points);?></label>
+                              <label><?php echo strtok($gwp->data[1]->comprehension_grammar, '.');?></label>
                               </li>
                             </span>
 
                             <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php echo $bar_w2; ?>">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[2]->comprehension_grammar;}?>">
                                 <span class="graph__legend">w 2</span>
-                                <label><?php echo number_format($gwp->data[2]->points);?></label>
+                              <label><?php echo strtok($gwp->data[2]->comprehension_grammar, '.');?></label>
                               </li>
                             </span>
 
                             <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php echo $bar_w3; ?>">
+                              <li class="graph__bar__each" data-value="<?php if($gwp->data[3]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[3]->comprehension_grammar;}?>">
                                 <span class="graph__legend">w 3</span>
-                                <label><?php echo number_format($gwp->data[3]->points);?></label>
+                              <label><?php echo strtok($gwp->data[3]->comprehension_grammar, '.');?></label>
                               </li>
                             </span>
 
@@ -532,7 +527,7 @@ opacity: 1 !important;
                             </svg>
                             <div class="step__progress__info">
                                 <div class="step__info__label">
-                                  <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_to_pass){?>
+                                  <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
                                   <!-- kondisi point telah ketemu goal -->
                                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 61.8 61.8" style="enable-background:new 0 0 61.8 61.8;" xml:space="preserve">
@@ -633,13 +628,13 @@ opacity: 1 !important;
                                         </svg>
                           <?php }else{?>
                                         <!-- kondisi point belom ketemu goal -->
-                                        <h5><?php echo ($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today);?></br>points left</h5>
+                                        <h5><?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?></br>points left</h5>
                           <?php } ?>
                                 </div>
                             </div>
                     </div>
                     </div>
-                  <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_to_pass){?>
+                  <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
                     <!-- kondisi point telah ketemu goal -->
                     <h5>Congratulation!</h5>
                   <?php }else{?>
@@ -650,50 +645,6 @@ opacity: 1 !important;
                 <!-- end daily progress donut graph -->
             </div>
             <div class="study__dashboard__bottom">
-                <div class="study__progress__graph">
-                  <h5>Comprehension</h5>
-                  <div class="graph__wrap">
-                      <div class="bar__graph">
-                        <ul class="graph b2">
-                            <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
-                                <span class="graph__legend">Now</span>
-                              <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
-                              </li>
-                            </span>
-
-                            <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[1]->comprehension_grammar;}?>">
-                                <span class="graph__legend">w 1</span>
-                              <label><?php echo strtok($gwp->data[1]->comprehension_grammar, '.');?></label>
-                              </li>
-                            </span>
-
-                            <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[2]->comprehension_grammar;}?>">
-                                <span class="graph__legend">w 2</span>
-                              <label><?php echo strtok($gwp->data[2]->comprehension_grammar, '.');?></label>
-                              </li>
-                            </span>
-
-                            <span class="graph__bar__cont">
-                              <li class="graph__bar__each" data-value="<?php if($gwp->data[3]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[3]->comprehension_grammar;}?>">
-                                <span class="graph__legend">w 3</span>
-                              <label><?php echo strtok($gwp->data[3]->comprehension_grammar, '.');?></label>
-                              </li>
-                            </span>
-
-                            <div class="v__bar">
-                              <div class="v__line"></div>
-                              <div class="v__line"></div>
-                              <div class="v__line"></div>
-                              <div class="v__line"></div>
-                              <div class="v__line"></div>
-                            </div>
-                        </ul>
-                      </div>
-                  </div>
-                </div>
                 <!-- pronunciation graph -->
                 <div class="study__progress__graph">
                     <h5>Pronunciation</h5>
@@ -1163,6 +1114,10 @@ setInterval('checkShare()', 1000);
         } else if (device.kind === 'videoinput') {
           option.text = device.label || 'camera ' + (videoSelect.length + 1);
           videoSelect.appendChild(option);
+
+          console.log('======================================');
+          console.log(device);
+          console.log('======================================');
         } else {
           // console.log('Some other kind of source/device: ', device);
         }
@@ -1170,8 +1125,8 @@ setInterval('checkShare()', 1000);
     });
   }
 
-  //audioSelect.onchange = getDevices;
-  //videoSelect.onchange = getDevices;
+  audioSelect.onchange = getDevices;
+  videoSelect.onchange = getDevices;
   getDevices();
 </script>
 <script>
