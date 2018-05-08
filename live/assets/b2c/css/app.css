@@ -43,7 +43,7 @@ table {
   border-spacing: 0; }
 
 html {
-  background: -webkit-radial-gradient(bottom, ellipse, #3F4E7B 30%, #273454 100%);
+  background: -webkit-radial-gradient(bottom ellipse, #3F4E7B 30%, #273454 100%);
   background: radial-gradient(ellipse at bottom, #3F4E7B 30%, #273454 100%);
   z-index: -10; }
 
@@ -209,19 +209,87 @@ a {
 * {
   font-family: "neoFontRegular", sans-serif; }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -232,19 +300,32 @@ time, mark, audio, video {
   color: #fff; }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block; }
 
-ol, ul {
+ol,
+ul {
   text-decoration: none;
   list-style: none; }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none; }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: '';
   content: none; }
 
@@ -2580,8 +2661,7 @@ footer span {
       -webkit-box-pack: justify;
           -ms-flex-pack: justify;
               justify-content: space-between; }
-      .dashboard__menutab .boxsessions__today .todaysessions,
-      .dashboard__menutab .boxsessions__upcoming .todaysessions {
+      .dashboard__menutab .boxsessions__today .todaysessions, .dashboard__menutab .boxsessions__upcoming .todaysessions {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -3095,14 +3175,14 @@ footer span {
 .bylanguage,
 .boxselect {
   /**
-	 * Component: Button
-	 * --------------------------------------------------
-	 */
+   * Component: Button
+   * --------------------------------------------------
+   */
   /**
-	 * Component: Button
-	 * Modifier: Dropdown
-	 * --------------------------------------------------
-	 */ }
+   * Component: Button
+   * Modifier: Dropdown
+   * --------------------------------------------------
+   */ }
   .bycountry .c-dropdown,
   .bylanguage .c-dropdown,
   .boxselect .c-dropdown {
@@ -4192,7 +4272,8 @@ table.table-reschedule {
   .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn {
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: transparent; }
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer; }
   @media screen and (max-width: 768px) {
     .box__assessment, .about__us, .contact__us {
       width: 50%;
