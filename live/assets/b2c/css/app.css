@@ -2791,7 +2791,7 @@ footer span {
       border-radius: 2px; }
     .profile__additional div:nth-child(10) {
       border-radius: 2px; }
-    .profile__additional__token, .profile__additional__skype, .profile__additional__city, .profile__additional__state, .profile__additional__address, .profile__additional__goal, .profile__additional__like, .profile__additional__dislike, .profile__additional__timezone {
+    .profile__additional__token, .profile__additional__skype, .profile__additional__city, .profile__additional__state, .profile__additional__address, .profile__additional__goal, .profile__additional__like, .profile__additional__dislike, .profile__additional__timezone, .profile__additional__language {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -2810,6 +2810,21 @@ footer span {
       border-right: 1px solid #606983;
       padding-left: 1em;
       background-color: rgba(56, 70, 112, 0.98); }
+    .profile__additional__language {
+      height: 70px; }
+      .profile__additional__language .language-dropdown {
+        border-top: none !important;
+        margin-top: -10px !important; }
+        .profile__additional__language .language-dropdown .lang-flag {
+          width: 150px;
+          background-color: rgba(28, 35, 56, 0); }
+        .profile__additional__language .language-dropdown .title1, .profile__additional__language .language-dropdown .title2 {
+          font-size: 0.9em; }
+        .profile__additional__language .language-dropdown ul li {
+          width: 150px;
+          background-color: #1c2338; }
+        .profile__additional__language .language-dropdown .active {
+          background-color: rgba(28, 35, 56, 0) !important; }
   .profile__dynedpro {
     border: none;
     width: 45%;
