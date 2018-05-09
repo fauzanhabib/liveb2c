@@ -20,7 +20,8 @@ if(@$user_extract2){
 
 <!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.0.0.js"></script> -->
 <!-- <script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script> -->
-<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script>
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.2.0.js"></script>
+<!-- <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script> -->
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 
 <script>
@@ -1125,9 +1126,9 @@ setInterval('checkShare()', 1000);
     });
   }
 
-  audioSelect.onchange = getDevices;
-  videoSelect.onchange = getDevices;
   getDevices();
+  audioSelect.onchange = getDevices();
+  videoSelect.onchange = getDevices();
 </script>
 <script>
   var appointment_id = "<?php echo $appointment_id; ?>";
