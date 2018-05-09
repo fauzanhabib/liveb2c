@@ -168,6 +168,10 @@ class Leavesession extends MY_Site_Controller {
         $cch_att_val = $interval->format('%I:%S');
         $std_att_val = date("i:s", $std_att_dif);
 
+        if($cch_att_dif < '0'){
+          $cch_att_val = '00:00';
+        }
+
         // echo "<pre>";print_r($cch_att_val2);exit();
         // Coach get token
         if(@$cch_att_val < '05:00' && @$cch_att_val != NULL){
