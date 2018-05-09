@@ -279,9 +279,9 @@ opacity: 1 !important;
             <button id="videooff" class="pure-button btn-small btn-green w3-animate-opacity" onclick="javascript:toggleOff();" data-tooltip="Click to Turn Off Your Camera">Camera is On</button>
             <button id="videoon" class="pure-button btn-small btn-red w3-animate-opacity hidden" onclick="javascript:toggleOn();" data-tooltip="Click to Turn On Your Camera">Camera is Off</button>
           </div> -->
-          <div id="video" style="margin:0 auto; position: relative; height: 100%;">
+          <!-- <div id="video" style="margin:0 auto; position: relative; height: 100%;">
               <div id="agora_local" class="localAgora"></div>
-          </div>
+          </div> -->
         </div>
         <div class="boxsession__livecomponentstue">
             <div class="study__dashboard__top">
@@ -1127,8 +1127,8 @@ setInterval('checkShare()', 1000);
   }
 
   getDevices();
-  audioSelect.onchange = getDevices();
-  videoSelect.onchange = getDevices();
+  // audioSelect.onchange = getDevices();
+  // videoSelect.onchange = getDevices();
 </script>
 <script>
   var appointment_id = "<?php echo $appointment_id; ?>";
