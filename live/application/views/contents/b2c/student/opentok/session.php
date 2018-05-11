@@ -17,7 +17,7 @@ if(@$user_extract2){
 
 ?>
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
-<script src='//static.opentok.com/v2/js/opentok.min.js'></script>
+<script src='https://static.opentok.com/v2/js/opentok.min.js'></script>
 <script charset="utf-8">
     var apiKey = '<?php echo $apiKey ?>';
     var sessionId = '<?php echo $sessionId ?>';
@@ -25,7 +25,10 @@ if(@$user_extract2){
     var session = OT.initSession(apiKey, sessionId);
     var publisher;
     var checkcamera;
+
+    initializeSession();
     //Self
+    function initializeSession() {
         session.connect(token, function(error) {
             var publisherproperties = {insertMode: 'append',
                                   width: '100%',
@@ -62,6 +65,7 @@ if(@$user_extract2){
               }
             });
         });
+    }
 
     function toggleOff(){
       $("#videooff").hide();
