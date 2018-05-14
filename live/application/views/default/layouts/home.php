@@ -13,7 +13,7 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/flag-translate.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
+	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script> -->
 
 </head>
 
@@ -116,7 +116,7 @@
                         <img src="<?php echo base_url();?>assets/b2c/img/NeoForm.png">
                     </div>
                 </div>
-                <a href="<?php echo site_url('login'); ?>" class="home__loginbtn"><button class="neobutton__white trn" data-trn-key="sign_in">SIGN IN</button></a>
+                <button class="neobutton__white" id="signIn--btn" style="cursor: pointer;">SIGN IN</button>
                 <button class="neobutton__white trigger trn" data-trn-key="watch">WATCH VIDEO</button>
 
                 <!-- MODAL -->
@@ -186,7 +186,7 @@
 
     </script>
     <script>
-		$('#login-form').parsley();
+		// $('#login-form').parsley();
 
 		// TO REFRESH WHEN ADBLOCK POPUP SHOW UP
 		$('#alert-login-reload').click(function() {
@@ -219,6 +219,10 @@
                   $(this).next().addClass('open');
                   return false;
               });
+          });
+
+          $(document).on('touchstart click', '#signIn--btn', function(){
+            window.location = `<?php echo site_url('login'); ?>`;
           });
     </script>
     

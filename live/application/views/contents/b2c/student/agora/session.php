@@ -20,7 +20,8 @@ if(@$user_extract2){
 
 <!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.0.0.js"></script> -->
 <!-- <script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script> -->
-<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script>
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.2.0.js"></script>
+<!-- <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script> -->
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 
 <script>
@@ -244,7 +245,7 @@ opacity: 1 !important;
 }
 </style>
 <section class="main__content">
-  <label for="videoSource">Video source: </label><select id="videoSource"></select>
+  <!-- <label for="videoSource">Video source: </label><select id="videoSource"></select> -->
   <div class="dashboard__notif success__notif width100perc" id="heading1">
     Waiting for <?php echo ' '.$student_name.' '; ?> to join the session. Remain in the session until the end in order to receive a refund of your tokens.
   </div>
@@ -1115,9 +1116,9 @@ setInterval('checkShare()', 1000);
           option.text = device.label || 'camera ' + (videoSelect.length + 1);
           videoSelect.appendChild(option);
 
-          console.log('======================================');
-          console.log(device);
-          console.log('======================================');
+          // console.log('======================================');
+          // console.log(device);
+          // console.log('======================================');
         } else {
           // console.log('Some other kind of source/device: ', device);
         }
@@ -1125,9 +1126,9 @@ setInterval('checkShare()', 1000);
     });
   }
 
-  audioSelect.onchange = getDevices;
-  videoSelect.onchange = getDevices;
   getDevices();
+  // audioSelect.onchange = getDevices();
+  // videoSelect.onchange = getDevices();
 </script>
 <script>
   var appointment_id = "<?php echo $appointment_id; ?>";
