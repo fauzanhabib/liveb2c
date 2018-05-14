@@ -76,7 +76,7 @@
 				<?php echo $data[0]->fullname;?>
 			</div>
 			<div class="profile__info__birth">
-				<label>Date of Birth</label>
+				<label class="trn" data-trn-key="birth" >Date of Birth</label>
 				<span id="inputDate">
         <?php
         $newDate = date("d - M - Y", strtotime($data[0]->date_of_birth));
@@ -97,11 +97,11 @@
       <div class="datepicker__here"></div>
 			</div>
 			<div class="profile__info__email">
-				<label>	Email</label>
+				<label class="trn" data-trn-key="email">	Email</label>
 				<span><?php echo $data[0]->email;?></span>
 			</div>
 			<div class="profile__info__language">
-				<label>Native Language</label>
+				<label class="trn" data-trn-key="native">Native Language</label>
         <?php $langlist = str_replace("#", ", ", $data[0]->spoken_language); ?>
         <span class="conv_lang"><?php if(@$langlist){echo $langlist;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
         <div style="margin-top:0px !important" id='div_spoken'>
@@ -114,73 +114,98 @@
         </div>
 			</div>
 			<div class="profile__info__gender">
-				<label>Gender</label>
+				<label class="trn" data-trn-key="gender">Gender</label>
 				<span class="genderChange"><?php if($data[0]->gender){echo $data[0]->gender;}else{echo "";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 		</div>
 
 		<div class="profile__password">
-			<div class="profile__password__title">
+			<div class="profile__password__title trn" data-trn-key="changepass">
 				Change Password
 			</div>
 			<div class="profile__password__current">
-				<label>Current Password</label>
+				<label class="trn" data-trn-key="currentpw">Current Password</label>
 				<input type="password" value="" id='currpass' style="letter-spacing: 5px;">
 			</div>
 			<div class="profile__password__new">
-				<label>New Password</label>
+				<label class="trn" data-trn-key="newpw">New Password</label>
 				<input type="password" value="" id='newpass' style="letter-spacing: 5px;">
 			</div>
 			<div class="profile__password__confirm">
-				<label>Confirm New Password</label>
+				<label class="trn" data-trn-key="confirmpw">Confirm New Password</label>
 				<input type="password" id='confpass' style="letter-spacing: 5px;">
 			</div>
 			<div class="profile__password__button">
-				<button class="neobutton next" id='savepass'>Save Change</button>
+				<button class="neobutton next trn" id='savepass' data-trn-key="btnsave">Save Change</button>
 			</div>
 		</div>
 
 		<div class="profile__additional">
-			<div class="profile__additional__title">
+			<div class="profile__additional__title trn"  data-trn-key="additional">
 				Additional Info
 			</div>
       <div class="profile__additional__goal">
-				<label>Certification Goal</label>
+				<label class="trn" data-trn-key="certification">Certification Goal</label>
 				<span><?php echo $goal_name;?></span>
 			</div>
 			<div class="profile__additional__token">
-				<label>Token</label>
+				<label class="trn" data-trn-key="token">Token</label>
 				<span><?php echo $data[0]->token_amount;?></span>
 			</div>
 			<div class="profile__additional__skype">
-				<label>Phone</label>
+				<label class="trn" data-trn-key="phone">Phone</label>
 				<span><?php if($data[0]->phone){echo $data[0]->dial_code.' '.$data[0]->phone;}else{echo "<font class='grayed'>click to add</font>";}?></span>
 			</div>
 			<div class="profile__additional__city">
-				<label>City</label>
+				<label class="trn" data-trn-key="city">City</label>
 				<span class="switchText"><?php if($data[0]->city){echo $data[0]->city;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__state">
-				<label>State/Province</label>
+				<label class="trn" data-trn-key="state">State/Province</label>
 				<span class="switchText"><?php if($data[0]->state){echo $data[0]->state;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__address">
-				<label>Address</label>
+				<label class="trn" data-trn-key="address">Address</label>
 				<span class="switchText"><?php if($data[0]->address){echo $data[0]->address;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__like">
-				<label>Likes</label>
+				<label class="trn" data-trn-key="likes">Likes</label>
 				<span class="switchText"><?php if($data[0]->like){echo $data[0]->like;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__dislike">
-				<label>Dislikes</label>
+				<label class="trn" data-trn-key="dislikes">Dislikes</label>
 				<span class="switchText"><?php if($data[0]->dislike){echo $data[0]->dislike;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__timezone">
-				<label>Time Zone</label>
+				<label class="trn" data-trn-key="timezone">Time Zone</label>
 				<span><?php echo $data[0]->timezone;?></span>
 			</div>
-
+      <div class="profile__additional__language">
+        <label class="trn" data-trn-key="language">Language</label>
+        <div id="lang_selector" class="language-dropdown">
+          <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+              <span class="title1"> English </span>
+              <span class="flag"></span>
+              <div class="bxarrow" id="bxarrow">
+                  <span class="arrow"></span>
+              </div>
+          </label>
+          <ul class="lang-list">
+              <li class="lang lang-en selected" title="English">
+                  <span class="title2">English</span>
+                  <span class="flag"></span>
+              </li>
+              <li class="lang lang-id"  title="Indonesia">
+                  <span class="title2">Indonesia</span>
+                  <span class="flag"></span>
+              </li>
+              <li class="lang lang-es"  title="Spanish">
+                  <span class="title2">Spanyol</span>
+                  <span class="flag"></span>
+              </li>
+          </ul>
+        </div>
+      </div>
 		</div>
 
 		<!-- <div class="profile__dynedpro">
@@ -285,9 +310,9 @@
     genderVal = $(this).text();
     // console.log(genderVal);
     if(genderVal == 'Male'){
-      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender" value="Male">Male</option><option class="optGender" value="Female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
+      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender trn" value="Male" data-trn-key="male">Male</option><option class="optGender trn" value="Female" data-trn-key="female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
     }else{
-      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender" value="Male">Male</option><option class="optGender" value="Female" selected>Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
+      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender" value="Male" data-trn-key="male">Male</option><option class="optGender" value="Female" selected data-trn-key="female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
     }
     $(this).replaceWith(selectbox);
     $('.dropGender').focus();
@@ -478,4 +503,32 @@ $(document).on('click', '#savepass', function() {
 
   // console.log(newpass);
 });
+</script>
+<script>
+    $(document).ready(function () {
+        $(".lang-flag").click(function () {
+            $(".language-dropdown").toggleClass("open");
+            $(".bxarrow").toggleClass("active");
+        });
+        $("ul.lang-list li").click(function () {
+            $("ul.lang-list li").removeClass("selected");
+            $(this).addClass("selected");
+            if ($(this).hasClass('lang-en')) {
+                $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+                $(".title1").html("<p>English</p>")
+                $(".lang-en").attr("data-value", "en")
+            } else if ($(this).hasClass('lang-id')) {
+                $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+                $(".title1").html("<p>Indonesia</p>")
+                $(".lang-id").attr("data-value", "id")
+            } else {
+                $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+                $(".title1").html("<p>Spanyol</p>")
+                $(".lang-es").attr("data-value", "es")
+            }
+            $(".bxarrow").removeClass("active");
+            $(".language-dropdown").removeClass("open");
+
+        });
+    });
 </script>

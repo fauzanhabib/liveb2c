@@ -22,6 +22,8 @@
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/multiple-select.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/jquery.translate.js"></script>
+        <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/flag-translate.js"></script>
         <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
 
         <style media="screen">
@@ -85,10 +87,10 @@
             <div class="modal-wrapper">
                 <div class="modal__signout">
                     <div class="content">
-                        <div>Are you sure?</div>
+                    <div class="trn" data-trn-key="areyousure">Are you sure?</div>
                         <div class="signout__content__confirmation">
-                            <span><a href="<?php echo site_url('logout'); ?>">Yes</a></span>
-                            <span><a class="span-close">No</a></span>
+                        <span><a href="<?php echo site_url('logout'); ?>" class="yes" data-trn-key="yes">Yes</a></span>
+                            <span><a class="span-close trn" data-trn-key="no">No</a></span>
                         </div>
                     </div>
                 </div>
@@ -121,27 +123,28 @@
             <nav class="mobile__nav">
                 <ul>
                     <li id="dashboard" class="clicklimenu">
-                        <a>Dashboard</a>
+                        <a class="trn" data-trn-key="dashboard">Dashboard</a>
                     </li>
                     <li id='profile' class="clicklimenu">
-                        <a>Profile</a>
+                        <a class="trn" data-trn-key="profile">Profile</a>
                     </li>
                     <li id="study_dashboard" class="clicklimenu">
-                        <a>Study Dashboard</a>
+                        <a class="trn" data-trn-key="studydash">Study Dashboard</a>
                     </li>
                     <li id="session_simulator" class="clicklimenu">
-                        <a>Session Simulator</a>
+                        <a class="trn" data-trn-key="sessionsimulator">Session Simulator</a>
                     </li>
                     <li>
-                        <a id="logout__container" class="trigger">Logout</a>
+                        <a id="logout__container" class="trigger trn" data-trn-key="logout">Logout</a>
                         <!-- MODAL -->
                         <div class="modal-wrapper">
                             <div class="modal__signout">
                                 <div class="content">
-                                    <div>Are you sure?</div>
-                                    <span><a href="<?php echo site_url('logout'); ?>">Yes</a></span>
-                                    <span><a class="span-close">No</a></span>
+                                    <div class="trn" data-trn-key="areyousure">Are you sure?</div>
+                                    <span><a href="<?php echo site_url('logout'); ?>" class="yes" data-trn-key="yes">Yes</a></span>
+                                    <span><a class="span-close trn" data-trn-key="no">No</a></span>
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </li>
@@ -176,7 +179,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a> Dashboard </a></span>
+                        <span><a class="trn" data-trn-key="dashboard"> Dashboard </a></span>
                     </li>
                     <li id="profile" class="clicklimenu profileactive">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -196,7 +199,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a> Profile </a></span>
+                        <span><a class="trn" data-trn-key="profile"> Profile </a></span>
                     </li>
                     <li id="study_dashboard" class="clicklimenu study_dashboardactive">
                         <svg width="24px" height="24px" viewBox="0 0 14 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -219,7 +222,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a> Study Dashboard </a></span>
+                        <span><a class="trn" data-trn-key="studydash"> Study Dashboard </a></span>
                     </li>
                     <li id="session_simulator" class="clicklimenu session_simulatoractive">
                         <svg width="24px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -242,7 +245,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span><a> Session Simulator </a></span>
+                        <span><a class="trn" data-trn-key="sessionsimulator"> Session Simulator </a></span>
                     </li>
                 </ul>
             </aside>
