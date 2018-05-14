@@ -11,9 +11,9 @@
     <?php if(count($data)!=0){ ?>
         <div class="dashboard__notif success__notif">
             <?php if(count($data)==1){ ?>
-            <span>You Have <?php echo count($data); ?> Session For Today</span>
+            <span class="trn" data-trn-key="youhave">You Have <?php echo count($data); ?> Session For Today</span>
             <?php }else{ ?>
-            <span>You Have <?php echo count($data); ?> Sessions For Today</span>
+            <span class="trn" data-trn-key="youhave">You Have <?php echo count($data); ?> Sessions For Today</span>
             <?php } ?>
             <i class="fa fa-times"></i>
         </div>
@@ -49,7 +49,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>Book a coach</span>
+                    <span class="trn" data-trn-key="bookcoach">Book a coach</span>
                 </div>
             </a>
             <a href="<?php echo site_url('b2c/student/session'); ?>">
@@ -77,7 +77,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>Sessions</span>
+                    <span class="trn" data-trn-key="session">Sessions</span>
                 </div>
             </a>
             <a href="<?php echo site_url('b2c/student/token'); ?>">
@@ -102,7 +102,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>Tokens</span>
+                    <span class="trn" data-trn-key="tokens">Tokens</span>
                 </div>
             </a>
             <a href="<?php echo site_url('b2c/student/help'); ?>">
@@ -129,7 +129,7 @@
                             </g>
                         </g>
                     </svg>
-                    <span>Help</span>
+                    <span class="trn" data-trn-key="help">Help</span>
                 </div>
             </a>
         </div>
@@ -137,8 +137,8 @@
         <div class="dashboard__menutab">
             <div class="tabsessions">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Today's Sessions</li>
-                    <li class="tab-link" data-tab="tab-2">Sessions</li>
+                    <li class="tab-link current trn" data-tab="tab-1" data-trn-key="todays">Today's Sessions</li>
+                    <li class="tab-link trn" data-tab="tab-2" data-trn-key="session">Sessions</li>
                 </ul>
             </div>
             <div class="boxsessions">
@@ -146,7 +146,7 @@
                     <?php if(@$statuscheck == 0){ ?>
                                 <div class="boxsessions__today tab-content current" id="tab-1">
                                     <div class="todaysessions">
-                                        <span class="date">You Have a Live Session</span>
+                                        <span class="date trn" data-trn-key="havelive">You Have a Live Session</span>
                                             <div class="boxinfo activesession">
                                                 <div class="playsession">
                                                     <form name ="livesession" action="<?php echo $url_session;?>" method="post">
@@ -160,8 +160,8 @@
                         <?php }else if(@$statuscheck == 1){ ?>
                                 <div class="boxsessions__today tab-content current" id="tab-1">
                                     <div class="todaysessions">
-                                        <span class="date">You Have Opened Live Session</span>
-                                        <span id="clearlive" class="date refbtn">Not Yet Open? Click Here</span>
+                                        <span class="date trn" data-trn-key="openlive">You Have Opened Live Session</span>
+                                        <span id="clearlive" class="date refbtn trn" data-trn-key="notlive" >Not Yet Open? Click Here</span>
                                     </div>
                                 </div>
                     <?php } ?>
@@ -169,7 +169,7 @@
                 <?php }else if($wm == NULL){ ?>
                     <div class="boxsessions__today tab-content current" id="tab-1">
                         <div class="todaysessions">
-                            <span class="date">You Have No Sessions Today</span>
+                            <span class="date trn" data-trn-key="nohave">You Have No Sessions Today</span>
                         </div>
                     </div>
                 <?php }else{ ?>
@@ -186,7 +186,7 @@
                             <font>:</font>
                             <span class="seconds"></span>
                             <span>-</span>
-                            <span class="smalltext">Until Next Session</span>
+                            <span class="smalltext trn"  data-trn-key="until">Until Next Session</span>
                         </div>
                         <?php } ?>
                         </span>
@@ -200,7 +200,7 @@
                                     <button type="submit" class="fa fa-play"></button>
                                 </form>
                             </div>
-                            <div class="coachinfo trigger viewcoach" idcoach="<?php echo $d->coach_id;?>">
+                            <div class="coachinfo trigger viewcoach trn" idcoach="<?php echo $d->coach_id;?>" data-trn-key="coachinfo">
                                 Coach Info
                             </div>
                             <!-- MODAL -->
@@ -220,11 +220,11 @@
                                                 <span class="birthdatecoach"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Native Language </label>
+                                                <label class="trn" data-trn-key="native">Native Language </label>
                                                 <span class="spoken_languagecoach"></span>
                                             </div>
                                             <div class="profile__info__gender">
-                                                <label>Gender</label>
+                                                <label class="trn" data-trn-key="gender">Gender</label>
                                                 <span class="gendercoach"></span>
                                             </div>
                                         </div>
@@ -244,7 +244,7 @@
                         <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
 
                         <div class="boxinfo activesession">
-                            <div class="coachinfo trigger viewcoach" idcoach="<?php echo $d->coach_id;?>">
+                            <div class="coachinfo trigger viewcoach trn" idcoach="<?php echo $d->coach_id;?>" data-trn-key="coachinfo">
                                 Coach Info
                             </div>
                             <!-- MODAL -->
@@ -264,11 +264,11 @@
                                                 <span class="birthdatecoach"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Native Language </label>
+                                                <label class="trn" data-trn-key="native">Native Language </label>
                                                 <span class="spoken_languagecoach"></span>
                                             </div>
                                             <div class="profile__info__gender">
-                                                <label>Gender</label>
+                                                <label class="trn" data-trn-key="gender">Gender</label>
                                                 <span class="gendercoach"></span>
                                             </div>
                                         </div>

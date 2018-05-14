@@ -204,6 +204,68 @@ $(document).ready(function () {
                 es: "Idioma",
                 id: "Bahasa"
             },
+            //PAGE DASHBOARD
+            youhave: {
+                en: "You Have Session For Today",
+                es: "Tienes una sesión para hoy",
+                id: "Anda Memiliki Sesi Untuk Hari Ini"
+            },
+            bookcoach: {
+                en: "Book a coach",
+                es: "Reserve un entrenador",
+                id: "Pesan seorang Pelatih"
+            },
+            session: {
+                en: "Sessions",
+                es: "Sesiones",
+                id: "Sesi"
+            },
+            tokens: {
+                en: "Tokens",
+                es: "Tokens",
+                id: "Token"
+            },
+            help: {
+                en: "Help",
+                es: "Ayuda",
+                id: "Bantuan"
+            },
+            todays: {
+                en: "Today's Sessions",
+                es: "Sesiones De Hoy",
+                id: "Sesi Hari Ini"
+            },
+            havelive: {
+                en: "You Have a Live Session",
+                es: "Tienes una sesión en vivo",
+                id: "Anda Memiliki Sesi Live"
+            },
+            openlive: {
+                en: "You Have Opened Live Session",
+                es: "Usted Ha Abierto La Sesión En Vivo",
+                id: "Anda Memiliki Sesi Yang Sedang Berlangsung"
+            },
+            notlive: {
+                en: "Not Yet Open? Click Here",
+                es: "¿Todavía no abierto? Haga clic aquí",
+                id: "Belum Buka? Klik disini"
+            },
+            nohave: {
+                en: "You Have No Sessions Today",
+                es: "No tienes sesiones hoy",
+                id: "Anda Tidak Memiliki Sesi Hari Ini"
+            },
+            until: {
+                en: "Until Next Session",
+                es: "Hasta la próxima sesión",
+                id: "Sampai Sesi Berikutnya"
+            },
+            coachinfo: {
+                en: "Coach Info",
+                es: "Información del entrenador",
+                id: "Info Pelatih"
+            },
+         
 
 
         };
