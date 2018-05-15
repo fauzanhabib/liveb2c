@@ -18,6 +18,7 @@
 
 //$config['base_url'] = 'http://localhost/live/';
 $config['base_url'] = getenv("BASE_URL");
+// $config['base_url'] = 'http://192.168.2.32:8088';
 
 /* Live */
 // $config['base_url'] = 'https://live.dyned.com/';

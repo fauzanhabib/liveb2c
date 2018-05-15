@@ -265,6 +265,85 @@ $(document).ready(function () {
                 es: "Información del entrenador",
                 id: "Info Pelatih"
             },
+            //STUDY DASHBOARD
+            points: {
+                en: "Points",
+                es: "Puntos",
+                id: "Poin"
+            },
+            progresstogoal: {
+                en: "Progress to goals",
+                es: "Progreso hacia los objetivos",
+                id: "Kemajuan Gol"
+            },
+            congratulation: {
+                en: "Congratulation!",
+                es: "¡Enhorabuena!",
+                id: "Selamat!"
+            },
+            keepup: {
+                en: "Keep up the good work!",
+                es: "Sigan con el buen trabajo!",
+                id: "Teruskan kerja bagus!"
+            },
+            comprehension: {
+                en: "Comprehension",
+                es: "Comprensión",
+                id: "Pemahaman"
+            },
+            pronun: {
+                en: "Pronunciation",
+                es: "Pronunciación",
+                id: "Pengucapan"
+            },
+            listening: {
+                en: "Listening",
+                es: "Escuchando",
+                id: "Mendengarkan"
+            },
+            speaking: {
+                en: "Speaking",
+                es: "Hablando",
+                id: "Berbicara"
+            },
+            update: {
+                en: "Update",
+                es: "Actualizar",
+                id: "Perbarui"
+            },
+            sccess: {
+                en: "Success",
+                es: "Éxito",
+                id: "suksesv"
+            },
+            updatingyour: {
+                en: "Updating your study dashboard...",
+                es: "Actualizando el panel de tu estudio ...",
+                id: "Memperbarui dasbor studi Anda ..."
+            },
+            now: {
+                en: "Now",
+                es: "Ahora",
+                id: "Sekarang"
+            },
+            coach: {
+                en: "Coach",
+                es: "Entrenador",
+                id: "Pelatih"
+            },
+            study: {
+                en: "Study",
+                es: "Estudiar",
+                id: "Pelajar"
+            },
+            lastupdate: {
+                en: "Last updated on: ",
+                es: "Ultima actualizacion en:",
+                id: "Terakhir diperbarui saat:"
+            },
+            
+            
+         
          
 
 
