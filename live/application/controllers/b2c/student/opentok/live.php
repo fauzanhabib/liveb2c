@@ -36,6 +36,9 @@ class Live extends MY_Site_Controller {
         $this->template->title = "Live Session";
 
         $id = $this->auth_manager->userid();
+
+        $this->db->where('user_id', $id);
+        $this->db->delete('session_live');
         // $utz = $this->db->select('user_timezone')
         //         ->from('user_profiles')
         //         ->where('user_id', $id)
