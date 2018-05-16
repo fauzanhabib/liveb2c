@@ -245,7 +245,7 @@ opacity: 1 !important;
 }
 </style>
 <section class="main__content">
-  <!-- <label for="videoSource">Video source: </label><select id="videoSource"></select> -->
+  <label for="videoSource">Video source: </label><select id="videoSource"></select>
   <div class="dashboard__notif success__notif width100perc" id="heading1">
     Waiting for <?php echo ' '.$student_name.' '; ?> to join the session. Remain in the session until the end in order to receive a refund of your tokens.
   </div>
@@ -258,7 +258,7 @@ opacity: 1 !important;
     <label for="audioSource">Audio source: </label><select id="audioSource"></select>
     </div>
     <div class="select">
-    <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    <!-- <label for="videoSource">Video source: </label><select id="videoSource"></select> -->
     </div>
     <input id="channel" type="text" value="1000" size="4"></input>
     <input id="video" type="checkbox" checked></input>
@@ -1116,9 +1116,9 @@ setInterval('checkShare()', 1000);
           option.text = device.label || 'camera ' + (videoSelect.length + 1);
           videoSelect.appendChild(option);
 
-          // console.log('======================================');
-          // console.log(device);
-          // console.log('======================================');
+          console.log('======================================');
+          console.log(device);
+          console.log('======================================');
         } else {
           // console.log('Some other kind of source/device: ', device);
         }
