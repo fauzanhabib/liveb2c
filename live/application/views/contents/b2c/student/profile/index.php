@@ -183,23 +183,23 @@
       <div class="profile__additional__language">
         <label class="trn" data-trn-key="language">Language</label>
         <div id="lang_selector" class="language-dropdown">
-          <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
-              <span class="title1"> English </span>
+          <label for="toggle" class="lang-flag"  title="Click to select the language">
+              <span class="title1"> Select </span>
               <span class="flag"></span>
               <div class="bxarrow" id="bxarrow">
                   <span class="arrow"></span>
               </div>
           </label>
-          <ul class="lang-list">
-              <li class="lang lang-en selected" title="English">
+          <ul  class="lang-list">
+              <li class="lang lang-en" data-value="en" title="English">
                   <span class="title2">English</span>
                   <span class="flag"></span>
               </li>
-              <li class="lang lang-id"  title="Indonesia">
+              <li class="lang lang-id" data-value="id" title="Indonesia">
                   <span class="title2">Indonesia</span>
                   <span class="flag"></span>
               </li>
-              <li class="lang lang-es"  title="Spanish">
+              <li class="lang lang-es" data-value="es" title="Spanish">
                   <span class="title2">Spanyol</span>
                   <span class="flag"></span>
               </li>
@@ -504,31 +504,66 @@ $(document).on('click', '#savepass', function() {
   // console.log(newpass);
 });
 </script>
-<script>
-    $(document).ready(function () {
-        $(".lang-flag").click(function () {
-            $(".language-dropdown").toggleClass("open");
-            $(".bxarrow").toggleClass("active");
-        });
-        $("ul.lang-list li").click(function () {
-            $("ul.lang-list li").removeClass("selected");
-            $(this).addClass("selected");
-            if ($(this).hasClass('lang-en')) {
-                $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
-                $(".title1").html("<p>English</p>")
-                $(".lang-en").attr("data-value", "en")
-            } else if ($(this).hasClass('lang-id')) {
-                $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
-                $(".title1").html("<p>Indonesia</p>")
-                $(".lang-id").attr("data-value", "id")
-            } else {
-                $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
-                $(".title1").html("<p>Spanyol</p>")
-                $(".lang-es").attr("data-value", "es")
-            }
-            $(".bxarrow").removeClass("active");
-            $(".language-dropdown").removeClass("open");
 
-        });
+
+<script>
+  $(document).ready(function() {
+
+    $(".lang-flag").click(function() {
+        $(".language-dropdown").toggleClass("open");
+        $(".bxarrow").toggleClass("active");
     });
+    $("ul.lang-list li").click(function(e) {
+
+        $("ul.lang-list li").removeClass("selected");
+        $(this).addClass("selected");
+        if ($(this).hasClass('lang-en')) {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+            $(".title1").html("<p>English</p>")
+            langselect = "en";
+
+            // $(".lang-en").attr("data-value", "en")
+        } else if ($(this).hasClass('lang-id')) {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+            $(".title1").html("<p>Indonesia</p>")
+            langselect = "id";
+            // $(".lang-id").attr("data-value", "id")
+        } else {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+            $(".title1").html("<p>Spanyol</p>")
+            langselect = "es";
+            // $(".lang-es").attr("data-value", "es")
+        }
+        $(".bxarrow").removeClass("active");
+        $(".language-dropdown").removeClass("open");
+        ChangeLanguages();
+    });
+
+    //SETTING DEFAULT LANGUAGE
+    function DefaultLanguage() {
+        langselect = "en"
+        $(document).ready(ChangeLanguages());
+
+        //FUNCTION CHECK TO ADD CLASS TO DROPDOWN LANGUAGE
+        if (langselect == "en") {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+            $(".lang-list").find(".lang-en").addClass("selected");
+            $(".title1").html("<p>English</p>")
+        } else if (langselect == "id") {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+            $(".lang-list").find(".lang-id").addClass("selected");
+            $(".title1").html("<p>Indonesia</p>")
+        } else {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+            $(".lang-list").find(".lang-es").addClass("selected");
+            $(".title1").html("<p>Spanyol</p>")
+        }
+    };
+
+    DefaultLanguage();
+
+
+
+
+  });
 </script>

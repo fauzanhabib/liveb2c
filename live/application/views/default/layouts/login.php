@@ -36,6 +36,11 @@
 		#alert-login-reload {
 			display: none;
 		}
+       
+    .hidden{
+        visibility: hidden;
+    }
+  
 	</style>
 </head>
 
@@ -83,8 +88,8 @@
                     <li><a class="trn" href="<?php echo site_url('b2c/about'); ?>" data-trn-key="about">About Us</a></li>
                     <li><a class="trn" href="<?php echo site_url('b2c/contact'); ?>" data-trn-key="contact">Contact Us</a></li>
                     <li class="btn__signin"><a href="" class="trn" data-trn-key="sign_in">Sign In</a></li>
-                    <!-- <li>
-                        <div id="lang_selector" class="language-dropdown">
+                    <li>
+                        <div id="lang_selector" class="language-dropdown hidden">
                             <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                                 <span class="title1"> EN </span>
                                 <span class="flag"></span>
@@ -107,7 +112,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </header>
@@ -119,7 +124,7 @@
             </div>
 
             <div class="mobile__menu">
-                <!-- <div id="lang_selector" class="language-dropdown">
+                <div id="lang_selector" class="language-dropdown hidden">
                     <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                         <span class="title1"> EN </span>
                         <span class="flag"></span>
@@ -141,7 +146,7 @@
                             <span class="flag"></span>
                         </li>
                     </ul>
-                </div> -->
+                </div>
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>
@@ -272,19 +277,24 @@
                 if ($(this).hasClass('lang-en')) {
                     $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
                     $(".title1").html("<p>EN</p>")
-                    $(".lang-en").attr("data-value", "en")
+                    langselect = "en";
+                    // $(".lang-en").attr("data-value", "en")
                 } else if ($(this).hasClass('lang-id')) {
                     $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
                     $(".title1").html("<p>ID</p>")
-                    $(".lang-id").attr("data-value", "id")
+                    langselect = "id";
+                    // $(".lang-id").attr("data-value", "id")
                 } else {
                     $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
                     $(".title1").html("<p>ES</p>")
-                    $(".lang-es").attr("data-value", "es")
+                    langselect = "es";
+                    // $(".lang-es").attr("data-value", "es")
                 }
                 $(".bxarrow").removeClass("active");
                 $(".language-dropdown").removeClass("open");
+                ChangeLanguages();
             });
+
         })
     </script>
     

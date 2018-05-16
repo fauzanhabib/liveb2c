@@ -14,7 +14,11 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script> -->
-
+    <style>
+    .hidden{
+        visibility: hidden;
+    }
+    </style>
 </head>
 
 <body>
@@ -34,8 +38,8 @@
                     <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
                     <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
                     <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in">Sign In</a></li>
-                    <!-- <li>
-                        <div id="lang_selector" class="language-dropdown">
+                    <li>
+                        <div id="lang_selector" class="language-dropdown hidden">
                             <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
                                 <span class="title1"> EN </span>
                                 <span class="flag"></span>
@@ -58,7 +62,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </header>
@@ -70,7 +74,7 @@
             </div>
 
             <div class="mobile__menu">
-                <!-- <div id="lang_selector" class="language-dropdown">
+                <div id="lang_selector" class="language-dropdown hidden">
                     <label for="toggle" class="lang-flag lang-en" title="Click to select the language">
                         <span class="title1"> EN </span>
                         <span class="flag"></span>
@@ -92,7 +96,7 @@
                             <span class="flag"></span>
                         </li>
                     </ul>
-                </div> -->
+                </div>
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>
@@ -116,7 +120,7 @@
                         <img src="<?php echo base_url();?>assets/b2c/img/NeoForm.png">
                     </div>
                 </div>
-                <button class="neobutton__white" id="signIn--btn" style="cursor: pointer;">SIGN IN</button>
+                <button class="neobutton__white trn" id="signIn--btn" style="cursor: pointer;" data-trn-key="sign_in2">SIGN IN</button>
                 <button class="neobutton__white trigger trn" data-trn-key="watch">WATCH VIDEO</button>
 
                 <!-- MODAL -->
@@ -238,19 +242,24 @@
                 if ($(this).hasClass('lang-en')) {
                     $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
                     $(".title1").html("<p>EN</p>")
-                    $(".lang-en").attr("data-value", "en")
+                    langselect = "en";
+                    // $(".lang-en").attr("data-value", "en")
                 } else if ($(this).hasClass('lang-id')) {
                     $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
                     $(".title1").html("<p>ID</p>")
-                    $(".lang-id").attr("data-value", "id")
+                    langselect = "id";
+                    // $(".lang-id").attr("data-value", "id")
                 } else {
                     $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
                     $(".title1").html("<p>ES</p>")
-                    $(".lang-es").attr("data-value", "es")
+                    langselect = "es";
+                    // $(".lang-es").attr("data-value", "es")
                 }
                 $(".bxarrow").removeClass("active");
                 $(".language-dropdown").removeClass("open");
+                ChangeLanguages();
             });
+
         })
     </script>
 </body>
