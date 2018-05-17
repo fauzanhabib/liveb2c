@@ -583,5 +583,5 @@
             </script>
             <script>
                 $('.article-loop').paginate(6);
-                DefaultLanguage();
+                
             </script>
