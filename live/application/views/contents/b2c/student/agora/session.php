@@ -1138,10 +1138,11 @@ setInterval('checkShare()', 1000);
     leave();
 
 
-    // console.log("============");
-    // console.log(global_uid);
-    // console.log("============");
-    $('#player_'+global_uid).remove();
+    console.log("============");
+    console.log(global_uid);
+    console.log("============");
+    $('#player_'+global_uid).hide();
+    $('#player_'+global_uid).html('');
 
     // localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
     //
@@ -1149,7 +1150,7 @@ setInterval('checkShare()', 1000);
     //   // console.log("Publish local stream error: " + err);
     // });
 
-    client.init(app_id, function () {
+    // client.init(app_id, function () {
       // console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
         // console.log("User " + channel_key + " join channel successfully");
@@ -1164,9 +1165,9 @@ setInterval('checkShare()', 1000);
         initagora();
         function initagora() {
           camera = this.value;
-          console.log('===================');
-          console.log(camera);
-          console.log('===================');
+          // console.log('===================');
+          // console.log(camera);
+          // console.log('===================');
           microphone = audioSource.value;
           localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
           //localStream = AgoraRTC.createStream({streamID: uid, audio: false, cameraId: camera, microphoneId: microphone, video: false, screen: true, extensionId: 'minllpmhdgpndnkomcoccfekfegnlikg'});
@@ -1174,6 +1175,8 @@ setInterval('checkShare()', 1000);
             localStream.setVideoProfile('480P_1');
 
           }
+
+          global_uid = uid;
 
           // The user has granted access to the camera and mic.
           localStream.on("accessAllowed", function() {
@@ -1204,9 +1207,9 @@ setInterval('checkShare()', 1000);
       }, function(err) {
         // console.log("Join channel failed", err);
       });
-    }, function (err) {
-      // console.log("AgoraRTC client init failed", err);
-    });
+    // }, function (err) {
+    //   // console.log("AgoraRTC client init failed", err);
+    // });
 
 
   });
@@ -1218,7 +1221,7 @@ setInterval('checkShare()', 1000);
   $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
     stat_first = data;
     // console.log("==============================");
-    console.log(stat_first);
+    // console.log(stat_first);
     if (stat_first == 1) {
       closetab();
     }
@@ -1230,7 +1233,7 @@ setInterval('checkShare()', 1000);
     $.post("<?php echo site_url('opentok/live/check_sess');?>", { 'appointment_id': appointment_id },function(data) {
       stat_check = data;
       // console.log("==============================");
-      console.log(stat_check);
+      // console.log(stat_check);
       if (stat_check == 0 || stat_check == '') {
         closetab();
       }
