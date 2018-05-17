@@ -3369,6 +3369,10 @@ footer span {
         -webkit-box-align: baseline;
             -ms-flex-align: baseline;
                 align-items: baseline; }
+        .dashboard__resultbook .boxprofilecoach .profilecoach__token span {
+          color: gray;
+          font-size: 0.9em;
+          margin-left: 5px; }
       .dashboard__resultbook .boxprofilecoach .profilecoach .fa-google-wallet {
         color: gray;
         margin-right: 7px;

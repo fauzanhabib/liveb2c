@@ -15,15 +15,15 @@
                         }
 
                 </style>
-                <?php if(count($datasession)!=0){ ?>
-                    <div class="dashboard__notif success__notif">
-                        <?php if(count($datasession)==1){ ?>
-                        <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
-                        <?php }else{ ?>
-                        <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
-                        <?php } ?>
-                        <i class="fa fa-times"></i>
-                    </div>
+               <?php if(count($datasession)!=0){ ?>
+                <div class="dashboard__notif success__notif">
+                    <?php if(count($datasession)==1){ ?>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Session Left For Today</span>
+                    <?php }else{ ?>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Sessions Left For Today</span>
+                    <?php } ?>
+                    <i class="fa fa-times"></i>
+                </div>
                 <?php } ?>
 
                 <div class="dashboard">

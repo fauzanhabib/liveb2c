@@ -17,47 +17,47 @@
 
                 </style>
                 <?php if(count($datasession)!=0){ ?>
-                    <div class="dashboard__notif success__notif">
-                        <?php if(count($datasession)==1){ ?>
-                        <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
-                        <?php }else{ ?>
-                        <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
-                        <?php } ?>
-                        <i class="fa fa-times"></i>
-                    </div>
+                <div class="dashboard__notif success__notif">
+                    <?php if(count($datasession)==1){ ?>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Session Left For Today</span>
+                    <?php }else{ ?>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Sessions Left For Today</span>
+                    <?php } ?>
+                    <i class="fa fa-times"></i>
+                </div>
                 <?php } ?>
 
                 <div class="dashboard">
                     <div class="dashboard__menubookingcoachresult">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
-                            <div class="bookkacoach activediv">Book a Coach</div>
+                            <div class="bookkacoach activediv trn" data-trn-key="bookcoach">Book a Coach</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/session'); ?>">
-                            <div class="session ">Session</div>
+                            <div class="session trn" data-trn-key="session">Session</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/token'); ?>">
-                            <div class="token">Token</div>
+                            <div class="token trn" data-trn-key="tokens">Token</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/help'); ?>">
-                            <div class="help">Help</div>
+                            <div class="help trn" data-trn-key="help">Help</div>
                         </a>
                     </div>
 
                     <!-- web display -->
                     <div class="dashboard__bookacoach">
                         <div class="booking__tabs tabs">
-                            <div class="c-dropdown__item current" data-tab="tab-1" data-dropdown-value="Name">NAME</div>
-                            <div class="c-dropdown__item" data-tab="tab-2" data-dropdown-value="Date">DATE</div>
-                            <div class="c-dropdown__item" data-tab="tab-3" data-dropdown-value="Country">COUNTRY</div>
-                            <div class="c-dropdown__item" data-tab="tab-4" data-dropdown-value="Language">LANGUAGE</div>
+                            <div class="c-dropdown__item current trn" data-tab="tab-1" data-dropdown-value="Name"  data-trn-key="name1">NAME</div>
+                            <div class="c-dropdown__item trn" data-tab="tab-2" data-dropdown-value="Date"  data-trn-key="date1">DATE</div>
+                            <div class="c-dropdown__item trn" data-tab="tab-3" data-dropdown-value="Country"  data-trn-key="country1">COUNTRY</div>
+                            <div class="c-dropdown__item trn" data-tab="tab-4" data-dropdown-value="Language"  data-trn-key="language1">LANGUAGE</div>
                         </div>
 
                         <div id="tab-1" class="tab-content alt1 current">
                             <?php echo form_open('b2c/student/find_coaches/search/name', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                             <div class="bookcoach__flexing">
-                                <input type="text" name="name" placeholder=" Search Coach...">
+                                <input type="text" name="name"  class="trn" placeholder=" Search Coach..." data-trn-holder="searchcoach">
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                             </div>
                             <?php echo form_close(); ?>
@@ -66,7 +66,7 @@
                         <div id="tab-2" class="tab-content alt2 hide">
                             <?php echo form_open('b2c/student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
                             <div class="bookcoach__flexing">
-                                <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker">
+                                <input type="text" name="date" id="datepicker" placeholder="Date.." data-trn-holder="searchdate" class="dateavailable datepicker trn">
                                 <style>
                                     .datepicker__here #ui-datepicker-div {
                                         top: 0!important;
@@ -104,7 +104,7 @@
                                 </style>
                                 <div class="datepicker__here"></div>
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                             </div>
                             <?php echo form_close(); ?>
@@ -116,7 +116,7 @@
                                     <div class="c-dropdown js-dropdown">
                                         <?php echo form_open('b2c/student/find_coaches/search/country', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                                         <input type="hidden" name="country" id="country" class="js-dropdown__input">
-                                        <span class="c-button c-button--dropdown js-dropdown__current">Country..</span>
+                                        <span class="c-button c-button--dropdown js-dropdown__current trn"  data-trn-key="searchcountry">Country..</span>
                                         <ul class="c-dropdown__list">
                                             <!-- <li class="c-dropdown__item" data-dropdown-value="Indonesia">Indonesia</li>
                                             <li class="c-dropdown__item" data-dropdown-value="India">India</li>
@@ -130,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
@@ -142,7 +142,7 @@
                                     <div class="c-dropdown js-dropdown">
                                         <?php echo form_open('b2c/student/find_coaches/search/spoken_language', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                                         <input type="hidden" name="language" id="language" class="js-dropdown__input">
-                                        <span class="c-button c-button--dropdown js-dropdown__current">Language..</span>
+                                        <span class="c-button c-button--dropdown js-dropdown__current trn" data-trn-key="searchlanguage">Language..</span>
                                         <ul class="c-dropdown__list">
                                             <!-- <li class="c-dropdown__item" data-dropdown-value="Indonesia">Indonesia</li>
                                             <li class="c-dropdown__item" data-dropdown-value="India">India</li>
@@ -156,7 +156,7 @@
                                     </div>
                                 </div>
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
@@ -341,7 +341,7 @@
                                             echo $elite_coach_cost;
                                         }
                                     ?>
-                                    Tokens
+                                   <span class="trn" data-trn-key="tokens">Tokens</span>
                                 </div>
                             </div>
 
@@ -349,19 +349,19 @@
                                 <ul class="accordion_book">
                                     <li class="accordion-item">
                                         <div class="accordion-thumb available-at click">
-                                            <span>Available At</span>
+                                            <span class="trn" data-trn-key="availableat">Available At</span>
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="accordion-panel">
                                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
+                                                 <input type="text" class="datepicker__each trn" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly  data-trn-holder="searchdate">
                                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
-                                                 <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
+                                                 <button class="weekly_schedule btn-green btn-small trn" data-trn-key="weeklysc" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
 
                                                  <form class="pure-form">
                                                     <div class="list-schedule" style="color:#939393;height:150px;margin-top:5px;">
-                                                        <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
+                                                        <p class="txt text-cl-primary trn"  data-trn-key="clickinthe">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
                                                         <div class="schedule-loading" style="display:none;">
                                                             <div class="loader" id="loader">
                                                                 <span></span>
@@ -583,4 +583,5 @@
             </script>
             <script>
                 $('.article-loop').paginate(6);
+                DefaultLanguage();
             </script>

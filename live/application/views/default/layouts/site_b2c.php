@@ -298,6 +298,11 @@
 
     <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
     <script>
+        DefaultLanguage();
+    </script>
+
+    <script>
+
       //redirect ----------------------------------------- class="clicklimenu"
       $('.clicklimenu').on('click', function(){
         // var url_href =  window.location.pathname.split( '/' );;

@@ -539,13 +539,8 @@ $(document).on('click', '#savepass', function() {
         ChangeLanguages();
     });
 
-    //SETTING DEFAULT LANGUAGE
-    function DefaultLanguage() {
-        langselect = "en"
-        $(document).ready(ChangeLanguages());
-
-        //FUNCTION CHECK TO ADD CLASS TO DROPDOWN LANGUAGE
-        if (langselect == "en") {
+    //FUNCTION CHECK TO ADD CLASS TO DROPDOWN LANGUAGE
+    if (langselect == "en") {
             $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
             $(".lang-list").find(".lang-en").addClass("selected");
             $(".title1").html("<p>English</p>")
@@ -558,12 +553,6 @@ $(document).on('click', '#savepass', function() {
             $(".lang-list").find(".lang-es").addClass("selected");
             $(".title1").html("<p>Spanyol</p>")
         }
-    };
-
-    DefaultLanguage();
-
-
-
 
   });
 </script>

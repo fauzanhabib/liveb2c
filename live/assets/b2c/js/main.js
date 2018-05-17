@@ -129,6 +129,7 @@
 
           // handle click events on the buttons
           $(document).on('click', '.pagination-button', function (e) {
+            
               // get current page from active button
               var currentPage = parseInt($('.pagination-button.active').text(), 10),
                   newPage = currentPage,
@@ -143,6 +144,7 @@
               // ensure newPage is in available range
               if (newPage > 0 && newPage <= totalPages) {
                   paginate.createPage(items, newPage, perPage);
+                  DefaultLanguage();
               }
           });
       };

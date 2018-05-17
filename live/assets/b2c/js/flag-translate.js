@@ -100,6 +100,7 @@ function ChangeLanguages() {
             es: "Cerrar sesión",
             id: "Keluar"
         },
+
         //PAGE PROFILE
         birth: {
             en: "Date of Birth",
@@ -206,16 +207,30 @@ function ChangeLanguages() {
             es: "Idioma",
             id: "Bahasa"
         },
+
         //PAGE DASHBOARD
+        //this notification
         youhave: {
-            en: "You Have Session For Today",
-            es: "Tienes una sesión para hoy",
-            id: "Anda Memiliki Sesi Untuk Hari Ini"
+            en: "You Have &nbsp;",
+            es: "Tienes una &nbsp;",
+            id: "Anda Memiliki &nbsp;"
         },
+        sessionfor: {
+            en: "&nbsp; Session For Today",
+            es: "&nbsp; Sesión para hoy",
+            id: "&nbsp; Sesi Untuk Hari Ini"
+        },
+        sessionleft: {
+            en: "&nbsp; Session Left For Today",
+            es: "&nbsp; Sesión a la izquierda para hoy",
+            id: "&nbsp; Sesi Tersisa Untuk Hari Ini"
+        },
+        //End this notification
+
         bookcoach: {
             en: "Book a coach",
             es: "Reserve un entrenador",
-            id: "Pesan seorang Pelatih"
+            id: "Pesan Pelatih"
         },
         session: {
             en: "Sessions",
@@ -343,6 +358,66 @@ function ChangeLanguages() {
             es: "Ultima actualizacion en:",
             id: "Terakhir diperbarui saat:"
         },
+        name1: {
+            en: "NAME",
+            es: "NOMBRE",
+            id: "NAMA"
+        },
+        date1: {
+            en: "DATE",
+            es: "FECHA",
+            id: "TANGGAL"
+        },
+        country1: {
+            en: "COUNTRY",
+            es: "PAÍS",
+            id: "NEGARA"
+        },
+        language1: {
+            en: "LANGUAGE",
+            es: "IDIOMA",
+            id: "BAHASA"
+        },
+        searchcoach: {
+            en: "Search Coach...",
+            es: "Coach de búsqueda...",
+            id: "Cari Pelatih..."
+        },
+        searchdate: {
+            en: "Date..",
+            es: "Fecha..",
+            id: "Tanggal..."
+        },
+        searchcountry: {
+            en: "Country..",
+            es: "País..",
+            id: "Negara..."
+        },
+        searchlanguage: {
+            en: "Language..",
+            es: "Idioma..",
+            id: "Bahasa.."
+        },
+        searchcoach1: {
+            en: "Search Coach",
+            es: "Coach de búsqueda",
+            id: "Cari Pelatih"
+        },
+        availableat: {
+            en: "Available At",
+            es: "Disponible en",
+            id: "Tersedia Pada"
+        },
+        weeklysc: {
+            en: "WEEKLY SCHEDULE",
+            es: "PROGRAMACIÓN SEMANAL",
+            id: "JADWAL MINGGUAN"
+        },
+        clickinthe: {
+            en: "Click in the box for calendar or on Weekly Schedule to see your coach’s availability",
+            es: "Haga clic en la casilla de calendario o en Horario semanal para ver la disponibilidad de su entrenador",
+            id: "Klik di kotak untuk kalender atau di Jadwal Mingguan untuk melihat ketersediaan pelatih Anda"
+        },
 
     };
 
@@ -353,6 +428,13 @@ function ChangeLanguages() {
 
     translator.lang(langselect);
 }
+
+//SETTING DEFAULT LANGUAGE
+function DefaultLanguage() {
+    langselect = "en"
+    $(document).ready(ChangeLanguages());
+};
+
 
 
 

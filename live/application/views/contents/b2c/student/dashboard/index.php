@@ -11,9 +11,9 @@
     <?php if(count($data)!=0){ ?>
         <div class="dashboard__notif success__notif">
             <?php if(count($data)==1){ ?>
-            <span class="trn" data-trn-key="youhave">You Have <?php echo count($data); ?> Session For Today</span>
+            <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($data); ?> <span class="trn" data-trn-key="sessionfor"> Session For Today</span>
             <?php }else{ ?>
-            <span class="trn" data-trn-key="youhave">You Have <?php echo count($data); ?> Sessions For Today</span>
+            <span class="trn" data-trn-key="youhave">You Have</span>  <?php echo count($data); ?> <span class="trn" data-trn-key="sessionfor"> Sessions For Today</span>
             <?php } ?>
             <i class="fa fa-times"></i>
         </div>
@@ -291,6 +291,8 @@
     </div>
     Updating your study dashboard...
 </div>
+
+
 
 <script>
     var userid = "<?php echo $userid; ?>";

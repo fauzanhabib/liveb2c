@@ -1,45 +1,44 @@
                 <?php if(count($datasession)!=0){ ?>
                 <div class="dashboard__notif success__notif">
                     <?php if(count($datasession)==1){ ?>
-                    <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Session Left For Today</span>
                     <?php }else{ ?>
-                    <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Sessions Left For Today</span>
                     <?php } ?>
                     <i class="fa fa-times"></i>
                 </div>
                 <?php } ?>
-
                 <div class="dashboard">
                     <div class="dashboard__menubookingcoachresult">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>"> 
-                            <div class="bookkacoach activediv">Book a Coach</div>
+                            <div class="bookkacoach activediv trn" data-trn-key="bookcoach">Book a Coach</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/session'); ?>">
-                            <div class="session ">Session</div>
+                            <div class="session trn" data-trn-key="session">Session</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/token'); ?>">
-                            <div class="token">Token</div>
+                            <div class="token trn" data-trn-key="tokens">Token</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/help'); ?>">
-                            <div class="help">Help</div>
+                            <div class="help trn" data-trn-key="help">Help</div>
                         </a>
                     </div>
 
                     <!-- web display -->
                     <div class="dashboard__bookacoach">
                         <div class="booking__tabs tabs">
-                            <div class="c-dropdown__item current" data-tab="tab-1" data-dropdown-value="Name">NAME</div>
-                            <div class="c-dropdown__item" data-tab="tab-2" data-dropdown-value="Date">DATE</div>
-                            <div class="c-dropdown__item" data-tab="tab-3" data-dropdown-value="Country">COUNTRY</div>
-                            <div class="c-dropdown__item" data-tab="tab-4" data-dropdown-value="Language">LANGUAGE</div>
+                            <div class="c-dropdown__item trn current" data-tab="tab-1" data-dropdown-value="Name" data-trn-key="name1">NAME</div>
+                            <div class="c-dropdown__item trn" data-tab="tab-2" data-dropdown-value="Date" data-trn-key="date1">DATE</div>
+                            <div class="c-dropdown__item trn" data-tab="tab-3" data-dropdown-value="Country" data-trn-key="country1">COUNTRY</div>
+                            <div class="c-dropdown__item trn" data-tab="tab-4" data-dropdown-value="Language" data-trn-key="language1">LANGUAGE</div>
                         </div>
 
                         <div id="tab-1" class="tab-content alt1 current">
                             <?php echo form_open('b2c/student/find_coaches/search/name', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                             <div class="bookcoach__flexing">
-                                <input type="text" name="name" placeholder=" Search Coach...">
+                                <input type="text" name="name" class="trn"  placeholder=" Search Coach..." data-trn-holder="searchcoach">
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                             </div>
                             <?php echo form_close(); ?>
