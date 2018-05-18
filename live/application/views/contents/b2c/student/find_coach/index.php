@@ -47,7 +47,7 @@
                         <div id="tab-2" class="tab-content alt2 hide">
                             <?php echo form_open('b2c/student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
                             <div class="bookcoach__flexing">
-                                <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker">
+                                <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker trn" data-trn-holder="searchdate">
                                 <style>
                                     #ui-datepicker-div {
                                         top: 0!important;
@@ -56,7 +56,7 @@
                                 </style>
                                 <div class="datepicker__here"></div>
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                             </div>
                             <?php echo form_close(); ?>
@@ -68,7 +68,7 @@
                                     <div class="c-dropdown js-dropdown">
                                         <?php echo form_open('b2c/student/find_coaches/search/country', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                                         <input type="hidden" name="country" id="country" class="js-dropdown__input">
-                                        <span class="c-button c-button--dropdown js-dropdown__current">Country..</span>
+                                        <span class="c-button c-button--dropdown js-dropdown__current trn" data-trn-key="searchcountry">Country..</span>
                                         <ul class="c-dropdown__list">
                                             <!-- <li class="c-dropdown__item" data-dropdown-value="Indonesia">Indonesia</li>
                                             <li class="c-dropdown__item" data-dropdown-value="India">India</li>
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
@@ -94,7 +94,7 @@
                                     <div class="c-dropdown js-dropdown">
                                         <?php echo form_open('b2c/student/find_coaches/search/spoken_language', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                                         <input type="hidden" name="language" id="language" class="js-dropdown__input">
-                                        <span class="c-button c-button--dropdown js-dropdown__current">Language..</span>
+                                        <span class="c-button c-button--dropdown js-dropdown__current trn" data-trn-key="searchlanguage">Language..</span>
                                         <ul class="c-dropdown__list">
                                             <!-- <li class="c-dropdown__item" data-dropdown-value="Indonesia">Indonesia</li>
                                             <li class="c-dropdown__item" data-dropdown-value="India">India</li>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="btnsearch">
-                                    <button type="submit" class="neobutton ">Search Coach</button>
+                                    <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>

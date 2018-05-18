@@ -166,7 +166,7 @@
                     <!-- result -->
                     <div class="dashboard__resultbook">
                         <?php if(!$coaches){ ?>
-                        <span>No coaches matched your criteria</span>
+                        <span class="trn" data-trn-key="nocoaches">No coaches matched your criteria</span>
                         <?php }else{ ?>
                         <?php for($i=0;$i<count($coaches);$i++){
                             $partner_id = $this->auth_manager->partner_id($coaches[$i]->id);

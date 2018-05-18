@@ -282,6 +282,11 @@ function ChangeLanguages() {
             es: "Información del entrenador",
             id: "Info Pelatih"
         },
+        nocoaches: {
+            en: "No coaches matched your criteria",
+            es: "Ningún entrenador coincide con sus criterios",
+            id: "Tidak ditemukan pelatih sesuai dengan kriteria"
+        },
         //STUDY DASHBOARD
         points: {
             en: "Points",
