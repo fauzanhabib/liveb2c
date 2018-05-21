@@ -837,6 +837,10 @@ footer span {
   text-decoration: none;
   cursor: pointer;
   font-size: 0.9em; }
+  #notifications ul li a i {
+    color: #8b8b8b;
+    text-decoration: none;
+    font-size: 0.9em; }
   #notifications ul li a span {
     color: #26b2a1;
     font-size: 1em; }

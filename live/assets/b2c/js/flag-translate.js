@@ -225,6 +225,51 @@ function ChangeLanguages() {
             es: "&nbsp; Sesión a la izquierda para hoy",
             id: "&nbsp; Sesi Tersisa Untuk Hari Ini"
         },
+        booksucces: {
+            en: "Booking successful",
+            es: "Reserva exitosa",
+            id: "Pemesanan berhasil"
+        },
+        hassession: {
+            en: " has session booked with you",
+            es: " tiene una sesión reservada contigo",
+            id: " telah memesan sesi dengan Anda"
+        },
+        newsession: {
+            en: "New session booked with ",
+            es: "Nueva sesión reservada con ",
+            id: "Sesi baru dipesan dengan "
+        },
+        invalidapp: {
+            en: "Invalid Appointment",
+            es: "Cita inválida",
+            id: "Appointment Tidak valid"
+        },
+        maxsession: {
+            en: "Exceeded Max Session Per Day or Week",
+            es: "Superó la sesión máxima por día o por semana",
+            id: "Melebihi Sesi Max Per Hari atau Minggu"
+        },
+        invaliddate: {
+            en: "Invalid Date",
+            es: "Fecha invalida",
+            id: "Tanggal tidak berlaku"
+        },
+        invalidappid: {
+            en: "Invalid apppointment ID",
+            es: "ID de cita inválida",
+            id: "ID apppointment tidak valid"
+        },
+        invalidtime: {
+            en: "Invalid Time",
+            es: "Tiempo inválido",
+            id: "Waktu Tidak Valid"
+        },
+        invalidapptime: {
+            en: "Invalid Appointment Time",
+            es: "Hora de cita no válida",
+            id: "Waktu Appointment Tidak Valid"
+        },
         //End this notification
 
         bookcoach: {
@@ -423,6 +468,7 @@ function ChangeLanguages() {
             es: "Haga clic en la casilla de calendario o en Horario semanal para ver la disponibilidad de su entrenador",
             id: "Klik di kotak untuk kalender atau di Jadwal Mingguan untuk melihat ketersediaan pelatih Anda"
         },
+      
 
     };
 
