@@ -16,7 +16,8 @@ if(@$user_extract2){
   // echo "<pre>";print_r($std_img_pull);exit();
 
 ?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src='https://static.opentok.com/v2/js/opentok.min.js'></script>
 <script charset="utf-8">
     var apiKey = '<?php echo $apiKey ?>';
@@ -30,7 +31,9 @@ if(@$user_extract2){
     //Self
     function initializeSession() {
         session.connect(token, function(error) {
-            var publisherproperties = {insertMode: 'append',
+            var publisherproperties = {
+                                  insertMode: 'append',
+                                  facingMode: 'user',
                                   width: '100%',
                                   resolution: "640x480",
                                   frameRate:15,
@@ -56,7 +59,7 @@ if(@$user_extract2){
                                         frameRate:15, name: "b"};
             subscriber = session.subscribe(event.stream,
             'subscriberContainer',
-            subscriberProperties,
+            subscriberProperties,{testNetwork: true},
             function (error) {
               if (error) {
                 console.log(error);
