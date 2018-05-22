@@ -16,7 +16,8 @@ if(@$user_extract2){
   // echo "<pre>";print_r($std_img_pull);exit();
 
 ?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
 <!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.0.0.js"></script> -->
 <!-- <script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script> -->
