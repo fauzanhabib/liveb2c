@@ -332,6 +332,51 @@ function ChangeLanguages() {
             es: "Ningún entrenador coincide con sus criterios",
             id: "Tidak ditemukan pelatih sesuai dengan kriteria"
         },
+        booksumary: {
+            en: "Your Booking Summary",
+            es: "Su resumen de reserva",
+            id: "Ringkasan Pemesanan Anda"
+        },
+        coachname: {
+            en: "Coach Name",
+            es: "Ayuda",
+            id: "Nombre entrenador"
+        },
+        datee: {
+            en: "Date",
+            es: "Fecha",
+            id: "Tanggal"
+        },
+        starttime: {
+            en: "Start Time",
+            es: "Hora de inicio",
+            id: "Waktu mulai"
+        },
+        endtinme: {
+            en: "End Time",
+            es: "Hora de finalización",
+            id: "Waktu Akhir"
+        },
+        tokencost: {
+            en: "Token Cost",
+            es: "Costo simbólico",
+            id: "Biaya Token"
+        },
+        btndone: {
+            en: " Done",
+            es: " Hecho",
+            id: " Selesai"
+        },
+        btncancel: {
+            en: " Cancel",
+            es: " Cancelar",
+            id: " Batalkan"
+        },
+        proceesupdate: {
+            en: "Processing your booking...",
+            es: "Procesando su reserva ...",
+            id: "Memproses pemesanan Anda ..."
+        },
         //STUDY DASHBOARD
         points: {
             en: "Points",
@@ -482,7 +527,7 @@ function ChangeLanguages() {
 
 //SETTING DEFAULT LANGUAGE
 function DefaultLanguage() {
-    langselect = "en"
+    langselect = "id"
     $(document).ready(ChangeLanguages());
 };
 
