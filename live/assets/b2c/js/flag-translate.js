@@ -593,7 +593,7 @@ function ChangeLanguages() {
 
 //SETTING DEFAULT LANGUAGE
 function DefaultLanguage() {
-    langselect = "id"
+    langselect = "en"
     $(document).ready(ChangeLanguages());
 };
 
