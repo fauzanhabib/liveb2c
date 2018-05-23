@@ -2,9 +2,9 @@
                 <div class="dashboard">
                     <div class="dashboard__bxsummary">
                         <div class="dashboard__bxsummary__bookingsummary">
-                            <h3>Your Booking Summary</h3>
+                        <h3 class="trn" data-trn-key="booksumary">Your Booking Summary</h3>
                             <div class="bxcoachname">
-                                <label>Coach Name</label>
+                                <label  class="trn" data-trn-key="coachname">Coach Name</label>
                                 <span><?php echo($data_coach[0]->fullname); ?></span>
                             </div>
                             <!-- <div class="bxcoachemail">
@@ -12,15 +12,15 @@
                                 <span><?php echo($data_coach[0]->email); ?></span>
                             </div> -->
                             <div class="bxcoacdate">
-                                <label>Date</label>
+                                <label  class="trn" data-trn-key="datee">Date</label>
                                 <span><?php echo(date('l jS \of F Y', @$date)); ?></span>
                             </div>
                             <div class="bxcoachstart">
-                                <label>Start Time</label>
+                                <label  class="trn" data-trn-key="starttime">Start Time</label>
                                 <span><?php echo($start_time); ?></span>
                             </div>
                             <div class="bxcoachend">
-                                <label>End Time</label>
+                                <label  class="trn" data-trn-key="endtinme">End Time</label>
                                 <span>
                                     <?php
                                     $currentDate = strtotime($end_time);
@@ -67,8 +67,8 @@
                             </div> -->
 
                             <div class="bxbutton">
-                                <button type="submit" id="submit_summary" class="neobutton trigger__loader"> Done</button>
-                                <button type="submit" id="cancel_summary" class="neobutton"> Cancel</button>
+                                <button type="submit" id="submit_summary" class="neobutton trigger__loader trn" data-trn-key="btndone"> Done</button>
+                                <button type="submit" id="cancel_summary" class="neobutton trn" data-trn-key="btncancel"> Cancel</button>
                             </div>
                         </div>
                         <div class="page__loader">
@@ -77,7 +77,7 @@
                                 <span></span>
                                 <span></span>
                             </div>
-                            Processing your booking...
+                            <span  class="trn" data-trn-key="proceesupdate">Processing your booking...</span>  
                         </div>
                     </div>
 

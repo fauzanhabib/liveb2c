@@ -40,9 +40,9 @@
     <?php if(count($data)!=0){ ?>
         <div class="dashboard__notif success__notif">
             <?php if(count($data)==1){ ?>
-            <span>You Have <?php echo count($data); ?> Session Left For Today</span>
+            <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($data); ?> <span  class="trn" data-trn-key="sessionleft">Session Left For Today</span>
             <?php }else{ ?>
-            <span>You Have <?php echo count($data); ?> Sessions Left For Today</span>
+                <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($data); ?>  <span  class="trn" data-trn-key="sessionleft">Sessions Left For Today</span>
             <?php } ?>
             <i class="fa fa-times"></i>
         </div>
@@ -50,24 +50,24 @@
     <div class="dashboard">
         <div class="dashboard__menubookingcoachresult">
             <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
-                <div class="bookkacoach">Book a Coach</div>
+                <div class="bookkacoach trn"  data-trn-key="bookcoach">Book a Coach</div>
             </a>
             <a href="<?php echo site_url('b2c/student/session'); ?>">
-                <div class="session activediv">Session</div>
+                <div class="session trn activediv"  data-trn-key="session">Session</div>
             </a>
             <a href="<?php echo site_url('b2c/student/token'); ?>">
-                <div class="token">Token</div>
+                <div class="token trn"  data-trn-key="tokens">Token</div>
             </a>
             <a href="<?php echo site_url('b2c/student/help'); ?>">
-                <div class="help">Help</div>
+                <div class="help trn"  data-trn-key="help">Help</div>
             </a>
         </div>
 
         <div class="dashboard__menutab">
             <div class="tabsessions">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Upcoming Session</li>
-                    <li class="tab-link" data-tab="tab-2">Session History</li>
+                    <li class="tab-link trn current"  data-trn-key="upcomingsessin"  data-tab="tab-1">Upcoming Session</li>
+                    <li class="tab-link trn"   data-trn-key="sesssionhistory" data-tab="tab-2">Session History</li>
                 </ul>
             </div>
             <div class="boxsessions">
@@ -118,16 +118,16 @@
                                         if(!$sqla){
 
                                     ?>
-                                    <div class="coachinfo trigger viewcoaches">
+                                    <div class="coachinfo trigger trn  viewcoaches"  data-trn-key="reschedule">
                                         Reschedule
                                     </div>
                                     <div class="modal-wrapper reschedule">
                                         <div class="modal__signout">
                                             <div class="content">
-                                                <div>Are you sure?</div>
+                                                <div class="trn" data-trn-key="areyousure">Are you sure?</div>
                                                 <div class="signout__content__confirmation reschedule__modal">
-                                                    <span><a href="<?php echo(site_url('b2c/student/manage_appointments/reschedule/'.$d->id.'/'.$d->coach_id));?>", 'single', 'Reschedule', '', 'rescheduled');">Yes</a></span>
-                                                    <span><a class="span-close">No</a></span>
+                                                    <span><a href="<?php echo(site_url('b2c/student/manage_appointments/reschedule/'.$d->id.'/'.$d->coach_id));?>", 'single', 'Reschedule', '', 'rescheduled');" class="trn" data-trn-key="yes">Yes</a></span>
+                                                    <span><a class="span-close trn" data-trn-key="no">No</a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,14 +135,14 @@
                                     <?php 
                                     }else{
                                     ?>
-                                        <div class="coachinfo--disabled">Already Rescheduled</div>
+                                        <div class="coachinfo--disabled trn" data-trn-key="alreadyresche">Already Rescheduled</div>
                                     <?php } } ?>
                                     <?php } else {  ?>
                                         <!-- <div class="timeout__rescheduled tooltip">Reschedule
                                             <span class="tooltiptext">Available +24 hours before session</span>
                                         </div> -->
                                     <?php } ?>
-                            <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $d->coach_id;?>">
+                            <div class="coachinfo trigger viewcoaches trn" idcoaches="<?php echo $d->coach_id;?>" data-trn-key="coachinfo">
                                 Coach Info
                             </div>
                             <!-- MODAL -->
@@ -162,11 +162,11 @@
                                                 <span class="birthdatecoaches"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Native Language </label>
+                                                <label class="trn" data-trn-key="native" >Native Language </label>
                                                 <span class="spoken_languagecoaches"></span>
                                             </div>
                                             <div class="profile__info__gender">
-                                                <label>Gender</label>
+                                                <label class="trn" data-trn-key="gender" >Gender</label>
                                                 <span class="gendercoaches"></span>
                                             </div>
                                         </div>
@@ -202,11 +202,11 @@
                             </span>
                             <form name="sessiondone" target="_blank" action="<?php echo(site_url('b2c/student/opentok/checkrecord/'));?>" method="post">
                                 <input type="hidden" name="sessionid" value="<?php echo @$h->session; ?>">
-                                <input type="submit" class="recorded_session_download" value="Recorded Session">
+                                <input type="submit" class="recorded_session_download trn" value="Recorded Session" data-trn-value="recordedsesso">
                             </form>
 
                             <div class="boxinfo activesession">
-                                <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $h->coach_id;?>">
+                                <div class="coachinfo trigger viewcoaches trn" idcoaches="<?php echo $h->coach_id;?>" data-trn-key="coachinfo">
                                     Coach Info
                                 </div>
                             </div>
@@ -226,15 +226,15 @@
                                         <span class="namecoaches"></span>
                                     </div>
                                     <!-- <div class="profile__info__birth">
-                                        <label>Date Of Birth </label>
+                                        <label class="trn" data-trn-key="birth">Date Of Birth </label>
                                         <span class="birthdatecoaches"></span>
                                     </div> -->
                                     <div class="profile__info__language">
-                                        <label>Native Language </label>
+                                        <label class="trn" data-trn-key="native">Native Language </label>
                                         <span class="spoken_languagecoaches"></span>
                                     </div>
                                     <div class="profile__info__gender">
-                                        <label>Gender</label>
+                                        <label class="trn" data-trn-key="gender">Gender</label>
                                         <span class="gendercoaches"></span>
                                     </div>
                                 </div>

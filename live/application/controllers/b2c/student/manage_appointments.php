@@ -1572,7 +1572,7 @@ class manage_appointments extends MY_Site_Controller {
 
             $student_notification = array(
                 'user_id' => $this->auth_manager->userid(),
-                'description' => 'You have a rescheduled session with ' . $name_coach,
+                'description' => '<i class="trn" data-trn-key="newreschedule">You have as rescheduled session with </i> ' . $name_coach,
                 'status' => 2,
                 'dcrea' => time(),
                 'dupd' => time()
@@ -1665,7 +1665,7 @@ class manage_appointments extends MY_Site_Controller {
         // }else{
         //     $message = "Session Rescheduled, you will use Skype for your session";
         // }
-        $message = "Session Rescheduled";
+        $message = "<span class='trn' data-trn-key='sessionrec'>Session Rescheduled</span>";
         $this->messages->add($message, 'success');
         redirect('b2c/student/session');
     }

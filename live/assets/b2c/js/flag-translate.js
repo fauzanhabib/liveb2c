@@ -240,6 +240,11 @@ function ChangeLanguages() {
             es: "Nueva sesión reservada con ",
             id: "Sesi baru dipesan dengan "
         },
+        newreschedule: {
+            en: "You have a rescheduled session with ",
+            es: "Tienes una sesión reprogramada con ",
+            id: "Anda memiliki sesi yang dijadwalkan ulang dengan "
+        },
         invalidapp: {
             en: "Invalid Appointment",
             es: "Cita inválida",
@@ -269,6 +274,11 @@ function ChangeLanguages() {
             en: "Invalid Appointment Time",
             es: "Hora de cita no válida",
             id: "Waktu Appointment Tidak Valid"
+        },
+        sessionrec: {
+            en: "Session Rescheduled",
+            es: "Sesión reprogramada",
+            id: "Sesi Dijadwalkan Ulang"
         },
         //End this notification
 
@@ -324,7 +334,7 @@ function ChangeLanguages() {
         },
         coachinfo: {
             en: "Coach Info",
-            es: "Información del entrenador",
+            es: "Información entrenador",
             id: "Info Pelatih"
         },
         nocoaches: {
@@ -377,6 +387,62 @@ function ChangeLanguages() {
             es: "Procesando su reserva ...",
             id: "Memproses pemesanan Anda ..."
         },
+        upcomingsessin: {
+            en: "Upcoming Session",
+            es: "Próxima sesión",
+            id: "Sesi Mendatang"
+        },
+        sesssionhistory: {
+            en: "Session History",
+            es: "Historial de la sesión",
+            id: "Riwayat Sesi"
+        },
+        reschedule: {
+            en: "Reschedule",
+            es: "Reprogramar",
+            id: "Jadwal ulang"
+        },
+        alreadyresche: {
+            en: "Already Rescheduled",
+            es: "Ya reprogramado",
+            id: "Sudah Dijadwal Ulang"
+        },
+        recordedsesso: {
+            en: "Recorded Session",
+            es: "Sesión grabada",
+            id: "Rekaman Sesi"
+        },
+        watchrecord: {
+            en: "Watch Recording",
+            es: "Ver la grabación",
+            id: "Tonton Rekaman"
+        },
+        downloadrecord: {
+            en: "Download Recording",
+            es: "Descargar grabación",
+            id: "Unduh Rekaman"
+        },
+        downloadex: {
+            en: "This download link has expired. Recordings are only available for 72 hours after session.",
+            es: "Este enlace de descarga ha expirado. Las grabaciones solo están disponibles durante 72 horas después de la sesión.",
+            id: "Tautan unduhan ini telah kedaluwarsa. Rekaman hanya tersedia selama 72 jam setelah sesi."
+        },
+        norecorded: {
+            en: "No recorded session. Both student and coach didn't attend the session.",
+            es: "Sin sesión grabada. Tanto el estudiante como el entrenador no asistieron a la sesión.",
+            id: "Tidak ada sesi rekaman. Baik siswa maupun pelatih tidak menghadiri sesi."
+        },
+        recordinglinks: {
+            en: "Recording links are only available for 72 hours after end of session.",
+            es: "Los enlaces de grabación solo están disponibles durante 72 horas después del final de la sesión.",
+            id: "Tautan rekaman hanya tersedia selama 72 jam setelah akhir sesi."
+        },
+        meetcoach: {
+            en: "Meet Your Coaches",
+            es: "Conoce a tus entrenadores",
+            id: "Temui Pelatih Anda"
+        },
+        
         //STUDY DASHBOARD
         points: {
             en: "Points",
