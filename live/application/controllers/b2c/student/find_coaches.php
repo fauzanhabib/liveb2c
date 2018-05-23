@@ -824,7 +824,7 @@ class find_coaches extends MY_Site_Controller {
 
                         $this->messages->add($message, 'success');
 
-                        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date));
+                        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date_));
                        }
                     }
                 }
