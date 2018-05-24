@@ -16,7 +16,6 @@
 */
 /* Development */
 
-//$config['base_url'] = 'http://localhost/live/';
 $config['base_url'] = getenv("BASE_URL");
 
 /* Live */
