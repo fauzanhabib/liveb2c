@@ -56,7 +56,7 @@ if(@$user_extract2){
             var subscriberProperties = {insertMode: 'append',
                                         width: '100%',
                                         resolution: "320x240",
-                                        frameRate:15, name: "b"};
+                                        frameRate:15, name: "<?php echo $user_extract->fullname?>"};
             subscriber = session.subscribe(event.stream,
             'subscriberContainer',
             subscriberProperties,{testNetwork: true},
@@ -129,7 +129,7 @@ $(document).ready(function(){
     //  console.log(user);
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
-          alert("Oops, you can't send an empty chat");
+          // alert("Oops, you can't send an empty chat");
           return false;
       }
       else{
@@ -152,7 +152,7 @@ $(document).ready(function(){
      $('#pesan').val('');
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
-          alert("Oops, you can't send an empty chat");
+          // alert("Oops, you can't send an empty chat");
           return false;
       }
       else{
@@ -849,7 +849,7 @@ opacity: 1 !important;
   });
 
   var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-  var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+  var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
   var innerperc = innerup / innerdown;
 
   var inner = $('.inner--circle.circle');

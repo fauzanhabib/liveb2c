@@ -505,6 +505,7 @@
 	</div>
 </section>
 </main>
+
 <div class="page__loader" id='loading'>
     <div class="loader" id="loader">
         <span></span>
@@ -519,9 +520,24 @@
 		Please reload the page to see changes.
 </div> -->
 <div class="page__loader trn" id='inserted' data-trn-key="sccess">
-
     Success
 </div>
+
+<script>
+	setInterval(
+	  function(){
+			$.get('<?php echo site_url('b2c/student/study_dashboard/check_study');?>', function(data){
+				// console.log(data);
+				if(data == '1'){
+					$('#loading').css('display', 'flex').delay(3000).queue(function(){
+				    location.reload();
+				  });
+					// location.reload();
+				}
+			})
+	  },1000);
+</script>
+
 <script>
 $(".btn_u_sd").click(function() {
 	$('#loading').css('display', 'flex');
@@ -561,7 +577,7 @@ $(".btn_u_sd").click(function() {
 var inner = $('.inner--circle.circle');
 
 var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
 var innerperc = innerup / innerdown;
 // console.log(innerperc);
 inner.circleProgress({
