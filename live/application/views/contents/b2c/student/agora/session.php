@@ -16,7 +16,8 @@ if(@$user_extract2){
   // echo "<pre>";print_r($std_img_pull);exit();
 
 ?>
-<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/lib/jQuery/jquery-2.2.3.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
 <!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.0.0.js"></script> -->
 <!-- <script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script> -->
@@ -219,7 +220,7 @@ opacity: 1 !important;
   top: 0px!important;
 }
 .agora_css > div > video {
-  width: auto!important;
+  width: 100% !important;
   height: 400px!important;
   margin: auto;
   position: relative!important;
@@ -245,7 +246,9 @@ opacity: 1 !important;
 }
 </style>
 <section class="main__content">
-  <label for="videoSource">Video source: </label><select id="videoSource"></select>
+  <label for="videoSource">Video source: </label><select id="videoSource">
+    <!-- <option value="6cabac1ee4105fc446ab1a226a78db89ce137bdb3f008d979a01b1b64d46e623">camera 1</option><option value="6cabac1ee4105fc446ab1a226a78db89ce137bdb3f008d979a01b1b64d46e623">camera 2</option> -->
+  </select>
   <div class="dashboard__notif success__notif width100perc" id="heading1">
     Waiting for <?php echo ' '.$student_name.' '; ?> to join the session. Remain in the session until the end in order to receive a refund of your tokens.
   </div>
@@ -258,7 +261,7 @@ opacity: 1 !important;
     <label for="audioSource">Audio source: </label><select id="audioSource"></select>
     </div>
     <div class="select">
-    <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    <!-- <label for="videoSource">Video source: </label><select id="videoSource"></select> -->
     </div>
     <input id="channel" type="text" value="1000" size="4"></input>
     <input id="video" type="checkbox" checked></input>
@@ -279,9 +282,9 @@ opacity: 1 !important;
             <button id="videooff" class="pure-button btn-small btn-green w3-animate-opacity" onclick="javascript:toggleOff();" data-tooltip="Click to Turn Off Your Camera">Camera is On</button>
             <button id="videoon" class="pure-button btn-small btn-red w3-animate-opacity hidden" onclick="javascript:toggleOn();" data-tooltip="Click to Turn On Your Camera">Camera is Off</button>
           </div> -->
-          <!-- <div id="video" style="margin:0 auto; position: relative; height: 100%;">
+          <div id="video" style="margin:0 auto; position: relative; height: 100%;">
               <div id="agora_local" class="localAgora"></div>
-          </div> -->
+          </div>
         </div>
         <div class="boxsession__livecomponentstue">
             <div class="study__dashboard__top">
@@ -956,6 +959,7 @@ setInterval('checkShare()', 1000);
   // AgoraRTC.Logger.debug('this is debug');
 
   var client, localStream, camera, microphone;
+  var global_uid, uid;
 
   var audioSelect = document.querySelector('select#audioSource');
   var videoSelect = document.querySelector('select#videoSource');
@@ -981,7 +985,12 @@ setInterval('checkShare()', 1000);
         // console.log("=====================================");
 
         // if (document.getElementById("video").checked) {
+        initagora();
+        function initagora() {
           camera = videoSource.value;
+          // console.log('===================');
+          // console.log(camera);
+          // console.log('===================');
           microphone = audioSource.value;
           localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
           //localStream = AgoraRTC.createStream({streamID: uid, audio: false, cameraId: camera, microphoneId: microphone, video: false, screen: true, extensionId: 'minllpmhdgpndnkomcoccfekfegnlikg'});
@@ -989,6 +998,7 @@ setInterval('checkShare()', 1000);
             localStream.setVideoProfile('480P_1');
 
           }
+          global_uid = uid;
 
           // The user has granted access to the camera and mic.
           localStream.on("accessAllowed", function() {
@@ -1014,6 +1024,7 @@ setInterval('checkShare()', 1000);
           }, function (err) {
             // console.log("getUserMedia failed", err);
           });
+        }
         // }
       }, function(err) {
         // console.log("Join channel failed", err);
@@ -1052,7 +1063,7 @@ setInterval('checkShare()', 1000);
         // $('video#video'+stream.getId()).addClass('subscriber_video');
         // $('video#video'+stream.getId()).hide();
         // var video = document.getElementsByTagName("video")[0];
-        console.log(video);
+        // console.log(video);
       }
       $("#heading1").hide();
       stream.play('agora_remote' + stream.getId());
@@ -1079,7 +1090,7 @@ setInterval('checkShare()', 1000);
   // }
 
   function leave() {
-    document.getElementById("leave").disabled = true;
+    // document.getElementById("leave").disabled = true;
     client.leave(function () {
       // console.log("Leavel channel successfully");
     }, function (err) {
@@ -1088,16 +1099,12 @@ setInterval('checkShare()', 1000);
   }
 
   function publish() {
-    document.getElementById("publish").disabled = true;
-    document.getElementById("unpublish").disabled = false;
     client.publish(localStream, function (err) {
       // console.log("Publish local stream error: " + err);
     });
   }
 
   function unpublish() {
-    document.getElementById("publish").disabled = false;
-    document.getElementById("unpublish").disabled = true;
     client.unpublish(localStream, function (err) {
       // console.log("Unpublish local stream failed" + err);
     });
@@ -1116,9 +1123,9 @@ setInterval('checkShare()', 1000);
           option.text = device.label || 'camera ' + (videoSelect.length + 1);
           videoSelect.appendChild(option);
 
-          console.log('======================================');
-          console.log(device);
-          console.log('======================================');
+          // console.log('======================================');
+          // console.log(device);
+          // console.log('======================================');
         } else {
           // console.log('Some other kind of source/device: ', device);
         }
@@ -1127,6 +1134,86 @@ setInterval('checkShare()', 1000);
   }
 
   getDevices();
+
+  $(document).on('change','#videoSource',function(){
+    leave();
+
+
+    // console.log("============");
+    // console.log(global_uid);
+    // console.log("============");
+    $('#player_'+global_uid).hide();
+    $('#player_'+global_uid).html('');
+
+    // localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
+    //
+    // client.publish(localStream, function (err) {
+    //   // console.log("Publish local stream error: " + err);
+    // });
+
+    // client.init(app_id, function () {
+      // console.log("AgoraRTC client initialized");
+      client.join(channel_key, channel_name, null, function(uid) {
+        // console.log("User " + channel_key + " join channel successfully");
+        // console.log("=====================================");
+        // console.log("Channel Key = " + channel_key);
+        // console.log("Channel Value = " + channel.value);
+        // console.log("UID = " + uid);
+        // console.log("Ch Name = " + channel_name);
+        // console.log("=====================================");
+
+        // if (document.getElementById("video").checked) {
+        initagora();
+        function initagora() {
+          camera = this.value;
+          // console.log('===================');
+          // console.log(camera);
+          // console.log('===================');
+          microphone = audioSource.value;
+          localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
+          //localStream = AgoraRTC.createStream({streamID: uid, audio: false, cameraId: camera, microphoneId: microphone, video: false, screen: true, extensionId: 'minllpmhdgpndnkomcoccfekfegnlikg'});
+          if (document.getElementById("video").checked) {
+            localStream.setVideoProfile('480P_1');
+
+          }
+
+          global_uid = uid;
+
+          // The user has granted access to the camera and mic.
+          localStream.on("accessAllowed", function() {
+            // console.log("accessAllowed");
+          });
+
+          // The user has denied access to the camera and mic.
+          localStream.on("accessDenied", function() {
+            // console.log("accessDenied");
+          });
+
+          localStream.init(function() {
+            // console.log("getUserMedia successfully");
+            localStream.play('agora_local');
+
+            client.publish(localStream, function (err) {
+              // console.log("Publish local stream error: " + err);
+            });
+
+            client.on('stream-published', function (evt) {
+              // console.log("Publish local stream successfully");
+            });
+          }, function (err) {
+            // console.log("getUserMedia failed", err);
+          });
+        }
+        // }
+      }, function(err) {
+        // console.log("Join channel failed", err);
+      });
+    // }, function (err) {
+    //   // console.log("AgoraRTC client init failed", err);
+    // });
+
+
+  });
   // audioSelect.onchange = getDevices();
   // videoSelect.onchange = getDevices();
 </script>
@@ -1135,7 +1222,7 @@ setInterval('checkShare()', 1000);
   $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
     stat_first = data;
     // console.log("==============================");
-    console.log(stat_first);
+    // console.log(stat_first);
     if (stat_first == 1) {
       closetab();
     }
@@ -1147,7 +1234,7 @@ setInterval('checkShare()', 1000);
     $.post("<?php echo site_url('opentok/live/check_sess');?>", { 'appointment_id': appointment_id },function(data) {
       stat_check = data;
       // console.log("==============================");
-      console.log(stat_check);
+      // console.log(stat_check);
       if (stat_check == 0 || stat_check == '') {
         closetab();
       }

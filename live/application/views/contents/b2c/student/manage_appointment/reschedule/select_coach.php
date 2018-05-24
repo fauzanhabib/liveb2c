@@ -50,7 +50,7 @@
     }
 </style>
 <div class="dashboard">
-    <h2 class="title--small">Meet Your Coaches</h2>
+    <h2 class="title--small trn" data-trn-key="meetcoach">Meet Your Coaches</h2>
     <div class="dashboard__resultbook">
         <?php if(!$coaches){ ?>
         <span>No coaches matched your criteria</span>
@@ -236,20 +236,20 @@
                 <ul class="accordion_book">
                     <li class="accordion-item">
                         <div class="accordion-thumb available-at click">
-                            <span>Available At</span>
+                            <span class="trn" data-trn-key="availableat">Available At</span>
                             <i class="fa fa-angle-down"></i>
                             <input type="hidden" class="appo" value="<?php echo($appointment_id);?>">
                         </div>
                         <div class="accordion-panel">
                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
+                                 <input type="text" class="datepicker__each trn" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly data-trn-holder="searchdate">
                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
-                                 <button class="weekly_schedule btn-green btn-small" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
+                                 <button class="weekly_schedule btn-green btn-small trn" data-trn-key="weeklysc" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
 
                                  <form class="pure-form">
                                     <div class="list-schedule" style="color:#939393;height:150px;margin-top:5px;">
-                                        <p class="txt text-cl-primary">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
+                                        <p class="txt text-cl-primary trn" data-trn-key="clickinthe">Click in the box for calendar or on Weekly Schedule to see your coach’s availability</p>
                                         <div class="schedule-loading" style="display:none;">
                                             <div class="loader" id="loader">
                                                 <span></span>
@@ -257,7 +257,7 @@
                                                 <span></span>
                                             </div>
                                         </div>
-                                        <div id="result_<?php echo(@$coaches[$i]->id); ?>"></div>
+                                        <div id="result_<?php echo(@$coaches[$i]->id); ?>" style="color:#8b8b8b;"> </div>
                                     </div>
                                 </form>
                             </div>

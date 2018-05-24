@@ -91,7 +91,7 @@
 
 		  			<div class="achievement__point__info">
 		  				<h5><?php echo number_format($gsp->data->study->points_until_today);?></h5>
-		  				<h3>Study</h3>
+		  				<h3 class="trn" data-trn-key="study">Study</h3>
 		  			</div>
 		  		</div>
 		  		<div class="coach__progress__achievement">
@@ -112,7 +112,7 @@
 
 		  			<div class="achievement__point__info">
 		  				<h5><?php echo number_format($gsp->data->coach->points_until_today);?></h5>
-		  				<h3>Coach</h3>
+		  				<h3 class="trn" data-trn-key="coach">Coach</h3>
 		  			</div>
 		  		</div>
 		  	</div>
@@ -121,7 +121,7 @@
 
 		<!-- top point graph -->
 		<div class="progress__point__top">
-			<h5>Points</h5>
+			<h5 class="trn" data-trn-key="points">Points</h5>
 			<div class="graph__wrap">
 			  	<div class="bar__graph">
 						<?php
@@ -133,7 +133,7 @@
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php echo $bar_now; ?>">
-			          		<span class="graph__legend">Now</span>
+			          		<span class="graph__legend trn"  data-trn-key="now">Now</span>
 			          		<label><?php echo number_format($gwp->data[0]->points);?></label>
 			        		</li>
 			      		</span>
@@ -174,7 +174,7 @@
 
 		<!-- daily progress donut graph -->
 		<div class="progress__step">
-    		<h5>Progress to goals</h5>
+    		<h5 class="trn" data-trn-key="progresstogoal">Progress to goals</h5>
 		  	<div class="donut__progress">
 		  		<div class="step--circle circle"
 			         data-thickness="15"
@@ -296,10 +296,10 @@
 		  	</div>
 			<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
 				<!-- kondisi point telah ketemu goal -->
-  			<h5>Congratulation!</h5>
+  			<h5 class="trn" data-trn-key="congratulation">Congratulation!</h5>
 			<?php }else{?>
 				<!-- kondisi point belom ketemu goal -->
-				<h5>Keep up the good work!</h5>
+				<h5 class="trn" data-trn-key="keepup">Keep up the good work!</h5>
 			<?php } ?>
 		</div>
 		<!-- end daily progress donut graph -->
@@ -307,13 +307,13 @@
 	<div class="study__dashboard__bottom">
 		<!-- comprehension graph -->
 		<div class="study__progress__graph">
-			<h5>Comprehension</h5>
+			<h5 class="trn" data-trn-key="comprehension">Comprehension</h5>
 			<div class="graph__wrap">
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
-			          		<span class="graph__legend">Now</span>
+			          		<span class="graph__legend trn" data-trn-key="now">Now</span>
 			        		<label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
 			        		</li>
 			      		</span>
@@ -354,13 +354,13 @@
 
 		<!-- pronunciation graph -->
 		<div class="study__progress__graph">
-			<h5>Pronunciation</h5>
+			<h5 class="trn" data-trn-key="pronun">Pronunciation</h5>
 			<div class="graph__wrap">
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php if($gwp->data[0]->pronunciation >125){echo "125";}else{echo $gwp->data[0]->pronunciation;}?>">
-			          		<span class="graph__legend">Now</span>
+			          		<span class="graph__legend trn" data-trn-key="now">Now</span>
 			        		<label><?php echo strtok($gwp->data[0]->pronunciation, '.');?></label>
 			        		</li>
 			      		</span>
@@ -401,13 +401,13 @@
 
 		<!-- listening graph -->
 		<div class="study__progress__graph">
-			<h5>Listening</h5>
+			<h5 class="trn" data-trn-key="listening">Listening</h5>
 			<div class="graph__wrap">
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php if($gwp->data[0]->listening >125){echo "125";}else{echo $gwp->data[0]->listening;}?>">
-			          		<span class="graph__legend">Now</span>
+			          		<span class="graph__legend trn" data-trn-key="now">Now</span>
 			        		<label><?php echo strtok($gwp->data[0]->listening, '.');?></label>
 			        		</li>
 			      		</span>
@@ -448,13 +448,13 @@
 
 		<!-- speaking graph -->
 		<div class="study__progress__graph">
-			<h5>Speaking</h5>
+			<h5 class="trn" data-trn-key="speaking">Speaking</h5>
 			<div class="graph__wrap">
 			  	<div class="bar__graph">
 			    	<ul class="graph b2">
 			      		<span class="graph__bar__cont">
 			        		<li class="graph__bar__each" data-value="<?php if($gwp->data[0]->speaking >125){echo "125";}else{echo $gwp->data[0]->speaking;}?>">
-			          		<span class="graph__legend">Now</span>
+			          		<span class="graph__legend trn" data-trn-key="now">Now</span>
 			        		<label>
 									<?php echo strtok($gwp->data[0]->speaking, '.');?></label>
 			        		</li>
@@ -500,8 +500,8 @@
 	</div>
 
 	<div class="progress__step last__upd">
-		Last updated on: <?php echo $echo_upd;?>
-		<p class="btn_u_sd">Update</p>
+		<span class="trn" data-trn-key="lastupdate">Last updated on: </span><?php echo $echo_upd;?>
+		<p class="btn_u_sd trn" data-trn-key="update">Update</p>
 	</div>
 </section>
 </main>
@@ -511,14 +511,14 @@
         <span></span>
         <span></span>
     </div>
-    Updating your study dashboard...
+    <span class="trn" data-trn-key="updatingyour">Updating your study dashboard...</span>
 </div>
 <!-- <div class="page__loader" id='updated'>
 		<i class="fa fa-check-circle fa-5x" aria-hidden="true" style="color: #a5f3c9;"></i>
     <font style="color: #a5f3c9;font-size:20px;">Success</font> <br>
 		Please reload the page to see changes.
 </div> -->
-<div class="page__loader" id='inserted'>
+<div class="page__loader trn" id='inserted' data-trn-key="sccess">
 
     Success
 </div>

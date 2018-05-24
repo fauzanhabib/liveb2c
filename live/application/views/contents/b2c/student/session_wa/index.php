@@ -61,24 +61,24 @@
     <div class="dashboard">
         <div class="dashboard__menubookingcoachresult">
             <a href="<?php echo site_url('b2c/student/find_coaches_wa/single_date'); ?>">
-                <div class="bookkacoach">Book a Coach</div>
+                <div class="bookkacoach trn" data-trn-key="bookcoach">Book a Coach</div>
             </a>
             <a href="<?php echo site_url('b2c/student/session_wa'); ?>">
-                <div class="session activediv">Session</div>
+                <div class="session activediv" data-trn-key="session">Session</div>
             </a>
             <a href="<?php echo site_url('b2c/student/token_wa'); ?>">
-                <div class="token">Token</div>
+                <div class="token trn" data-trn-key="tokens">Token</div>
             </a>
             <a href="<?php echo site_url('b2c/student/help_wa'); ?>">
-                <div class="help">Help</div>
+                <div class="help trn" data-trn-key="help">Help</div>
             </a>
         </div>
 
         <div class="dashboard__menutab">
             <div class="tabsessions">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Upcoming Session</li>
-                    <li class="tab-link" data-tab="tab-2">Session History</li>
+                    <li class="tab-link trn current"  data-trn-key="upcomingsessin"  data-tab="tab-1">Upcoming Session</li>
+                    <li class="tab-link trn"   data-trn-key="sesssionhistory" data-tab="tab-2">Session History</li>
                 </ul>
             </div>
             <div class="boxsessions">
@@ -89,7 +89,7 @@
                         <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
 
                         <div class="boxinfo activesession">
-                            <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $d->coach_id;?>">
+                            <div class="coachinfo trigger viewcoaches trn" idcoaches="<?php echo $d->coach_id;?>" data-trn-key="coachinfo">
                                 Coach Info
                             </div>
                             <!-- MODAL -->
@@ -109,11 +109,11 @@
                                                 <span class="birthdatecoaches"></span>
                                             </div> -->
                                             <div class="profile__info__language">
-                                                <label>Native Language </label>
+                                                <label class="trn" data-trn-key="native">Native Language </label>
                                                 <span class="spoken_languagecoaches"></span>
                                             </div>
                                             <div class="profile__info__gender">
-                                                <label>Gender</label>
+                                                <label class="trn" data-trn-key="gender">Gender</label>
                                                 <span class="gendercoaches"></span>
                                             </div>
                                         </div>
@@ -153,7 +153,7 @@
                             </form>
 
                             <div class="boxinfo activesession">
-                                <div class="coachinfo trigger viewcoaches" idcoaches="<?php echo $h->coach_id;?>">
+                                <div class="coachinfo trigger viewcoaches trn" idcoaches="<?php echo $h->coach_id;?>" data-trn-key="coachinfo">
                                     Coach Info
                                 </div>
                             </div>
@@ -177,11 +177,11 @@
                                         <span class="birthdatecoaches"></span>
                                     </div> -->
                                     <div class="profile__info__language">
-                                        <label>Native Language </label>
+                                        <label class="trn" data-trn-key="native">Native Language </label>
                                         <span class="spoken_languagecoaches"></span>
                                     </div>
                                     <div class="profile__info__gender">
-                                        <label>Gender</label>
+                                        <label class="trn" data-trn-key="gender">Gender</label>
                                         <span class="gendercoaches"></span>
                                     </div>
                                 </div>

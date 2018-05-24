@@ -1,9 +1,9 @@
                 <?php if(count($datasession)!=0){ ?>
                 <div class="dashboard__notif success__notif">
                     <?php if(count($datasession)==1){ ?>
-                    <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Session Left For Today</span>
                     <?php }else{ ?>
-                    <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
+                    <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Sessions Left For Today</span>
                     <?php } ?>
                     <i class="fa fa-times"></i>
                 </div>
@@ -11,24 +11,24 @@
                 <div class="dashboard">
                     <div class="dashboard__menubookingcoachresult">
                         <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
-                            <div class="bookkacoach activediv">Book a Coach</div>
+                            <div class="bookkacoach activediv trn"  data-trn-key="bookcoach">Book a Coach</div>
                         </a>
-                        <a href="">
-                            <div class="session ">Session</div>
+                        <a href="<?php echo site_url('b2c/student/session'); ?>">
+                            <div class="session trn"  data-trn-key="session">Session</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/token'); ?>">
-                            <div class="token">Token</div>
+                            <div class="token trn"  data-trn-key="tokens">Token</div>
                         </a>
                         <a href="<?php echo site_url('b2c/student/help'); ?>">
-                            <div class="help ">Help</div>
+                            <div class="help trn"  data-trn-key="help">Help</div>
                         </a>
                     </div>
 
                     <div class="dashboard__bxsummary">
                         <div class="dashboard__bxsummary__bookingsummary">
-                            <h3>Your Booking Summary</h3>
+                            <h3 class="trn" data-trn-key="booksumary">Your Booking Summary</h3>
                             <div class="bxcoachname">
-                                <label>Coach Name</label>
+                                <label  class="trn" data-trn-key="coachname">Coach Name</label>
                                 <span><?php echo($data_coach[0]->fullname); ?></span>
                             </div>
                             <!-- <div class="bxcoachemail">
@@ -36,15 +36,15 @@
                                 <span><?php echo($data_coach[0]->email); ?></span>
                             </div> -->
                             <div class="bxcoacdate">
-                                <label>Date</label>
+                                <label  class="trn" data-trn-key="datee">Date</label>
                                 <span><?php echo(date('l jS \of F Y', @$date)); ?></span>
                             </div>
                             <div class="bxcoachstart">
-                                <label>Start Time</label>
+                                <label  class="trn" data-trn-key="starttime">Start Time</label>
                                 <span><?php echo($start_time); ?></span>
                             </div>
                             <div class="bxcoachend">
-                                <label>End Time</label>
+                                <label  class="trn" data-trn-key="endtinme">End Time</label>
                                 <span>
                                     <?php
                                     $currentDate = strtotime($end_time);
@@ -56,7 +56,7 @@
                                 </span>
                             </div>
                             <div class="bxcoactoken">
-                                <label>Token Cost</label>
+                                <label  class="trn" data-trn-key="tokencost">Token Cost</label>
                                 <span>
                                     <?php
                                     $partner_id = $this->auth_manager->partner_id($data_coach[0]->id);
@@ -91,8 +91,8 @@
                             </div>
 
                             <div class="bxbutton">
-                                <button type="submit" id="submit_summary" class="neobutton trigger__loader"> Done</button>
-                                <button type="submit" id="cancel_summary" class="neobutton"> Cancel</button>
+                                <button type="submit" id="submit_summary" class="neobutton trigger__loader trn" data-trn-key="btndone"> Done</button>
+                                <button type="submit" id="cancel_summary" class="neobutton trn" data-trn-key="btncancel"> Cancel</button>
                             </div>
                         </div>
                         <div class="page__loader">
@@ -101,7 +101,7 @@
                                 <span></span>
                                 <span></span>
                             </div>
-                            Processing your booking...
+                            <span  class="trn" data-trn-key="proceesupdate">Processing your booking...</span>       
                         </div>
                     </div>
 

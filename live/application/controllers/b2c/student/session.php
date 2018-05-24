@@ -409,12 +409,12 @@ class Session extends MY_Site_Controller {
 
       if (@$downloadurl == Null) {
           if($cchatt == NULL && $stdatt == NULL){
-              $note = "No recorded session. Both student and coach didn't attend the session.";
+              $note = "<span class='trn' data-trn-key='norecorded'> No recorded session. Both student and coach didn't attend the session.</span>";
           }else{
-              $note = "This download link has expired. Recordings are only available for 72 hours after session. ";
+              $note = "<span class='trn' data-trn-key='downloadex'>This download link has expired. Recordings are only available for 72 hours after session.</span>";
           }
       }else{
-          $note = "Recording links are only available for 72 hours after end of session.";
+          $note = "<span class='trn' data-trn-key='recordinglinks'>Recording links are only available for 72 hours after end of session.</span>";
       }
 
       $vars[] = [

@@ -542,7 +542,7 @@ class find_coaches extends MY_Site_Controller {
         $this->template->title = 'Detail Schedule';
 
         if ($date <= date('Y-m-d')) {
-            $this->messages->add('Invalid Date', 'warning');
+            $this->messages->add('<span class="trn" data-trn-key="invaliddate">Invalid Date</span>', 'warning');
             redirect('b2c/student/find_coaches/single_date/');
         }
 
@@ -695,7 +695,7 @@ class find_coaches extends MY_Site_Controller {
             $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
 
             if(!$isValid){
-                $this->messages->add('Invalid Appointment', 'warning');
+                $this->messages->add('<span class="trn" data-trn-key="invalidapp">Invalid Appointment</span>', 'warning');
                 redirect('b2c/student/find_coaches/single_date/');
             }else{
                 $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
@@ -704,7 +704,7 @@ class find_coaches extends MY_Site_Controller {
                     // go to next step
 
                 }else{
-                    $this->messages->add('Invalid Time', 'warning');
+                    $this->messages->add('<span class="trn" data-trn-key="invalidtime">Invalid Time</span>', 'warning');
                     redirect('b2c/student/find_coaches/single_date/');
                 }
                 // begin the transaction to ensure all data created or modified structural
@@ -824,7 +824,7 @@ class find_coaches extends MY_Site_Controller {
 
                         $this->messages->add($message, 'success');
 
-                        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date));
+                        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date_));
                        }
                     }
                 }
@@ -1978,7 +1978,7 @@ class find_coaches extends MY_Site_Controller {
         $appointment = $this->appointment_model->get_appointment($appointment_id);
 
         if(!$appointment){
-            $this->messages->add('Invalid apppointment id',  'warning');
+            $this->messages->add('<span class="trn" data-trn-key="invalidappid">Invalid apppointment id</span>',  'warning');
             redirect('student/find_coaches/single_date');
         }
         $token_history = array(
@@ -2158,7 +2158,7 @@ class find_coaches extends MY_Site_Controller {
             $isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
             if(!$isValid){
                 // $this->db->trans_rollback();
-                $this->messages->add('Invalid Appointment', 'warning');
+                $this->messages->add('<span class="trn" data-trn-key="invalidapp">Invalid Appointment</span>', 'warning');
                 redirect('b2c/student/find_coaches/search/name/');
             }else{
                 $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
@@ -2178,7 +2178,7 @@ class find_coaches extends MY_Site_Controller {
                     // go to next step
                     //exit;
                 }else{
-                    $this->messages->add('Invalid Time', 'warning');
+                    $this->messages->add('<span class="trn" data-trn-key="invalidtime">Invalid Time</span>', 'warning');
                     redirect('student/find_coaches/search/name/');
                 }
                 // begin the transaction to ensure all data created or modified structural
@@ -2269,11 +2269,11 @@ class find_coaches extends MY_Site_Controller {
                         // messaging to send email and creating notification based on appointment
                         //$this->email_notification_appointment($appointment_id);
                         // transaction finished / all criteria has been fulfilled
-                        $message = 'Booking successful';
+                        $message = '<span class="trn" data-trn-key="booksucces">Booking successful</span>';
 
                         $coach_notification = array(
                             'user_id' => $coach_id,
-                            'description' => $namestudent[0]->fullname.' has session booked with you',
+                            'description' => $namestudent[0]->fullname.'<i class="trn" data-trn-key="hassession"> has session booked with you</i>',
                             'status' => 2,
                             'dcrea' => time(),
                             'dupd' => time(),
@@ -2281,7 +2281,7 @@ class find_coaches extends MY_Site_Controller {
 
                         $student_notification = array(
                             'user_id' => $this->auth_manager->userid(),
-                            'description' => 'New session booked with '.$namecoach[0]->fullname,
+                            'description' => '<i class="trn" data-trn-key="newsession">New session booked with </i>'.$namecoach[0]->fullname,
                             'status' => 2,
                             'dcrea' => time(),
                             'dupd' => time(),
@@ -2550,12 +2550,12 @@ class find_coaches extends MY_Site_Controller {
                     return true;
                 }
                 else{
-                    $this->messages->add('Invalid Appointment Time', 'warning');
+                    $this->messages->add('<span class="trn" data-trn-key="invalidapptime">Invalid Appointment Time</span>', 'warning');
                     return false;
                 }
             }
             else{
-                $this->messages->add('Exceeded Max Session Per Day or Week', 'warning');
+                $this->messages->add('<span class="trn" data-trn-key="maxsession">Exceeded Max Session Per Day or Week</span>', 'warning');
                 return false;
             }
         }
