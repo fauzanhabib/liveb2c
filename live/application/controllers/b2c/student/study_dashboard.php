@@ -59,11 +59,15 @@ class Study_dashboard extends MY_Site_Controller {
         $conv      = strtotime($upd_date);
         $datetime  = $conv+(60*$minutes);
         $echo_upd  = date("M, d Y - H:i:s", $datetime);
+
+        // $this->session->set_userdata('ses_date',$pull_date);
+        // $this->session->set_userdata('ses_time',$pull_time);
+        // echo('<pre>');print_r($ses_time); exit;
       }else{
         $echo_upd = "Unknown (please click update)";
       }
 
-      // echo('<pre>');print_r($echo_upd); exit;
+      // echo('<pre>');print_r($datetime); exit;
 
       $gsp = json_decode(@$pull_gcp[0]->json_gsp);
       $gcp = json_decode(@$pull_gcp[0]->json_gcp);
@@ -104,7 +108,6 @@ class Study_dashboard extends MY_Site_Controller {
           rendy bustari
         ===============*/
 
-
         $student_color = [];
         $k = 1;
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
@@ -115,9 +118,6 @@ class Study_dashboard extends MY_Site_Controller {
 
           $k++;
         }
-
-
-
         // bulatan coach color
         $coach_status_color = array(
           "passed" => "bg-green-gradient",
@@ -197,6 +197,7 @@ class Study_dashboard extends MY_Site_Controller {
             $this->db->where('user_id', $id);
             $this->db->update('b2c_student_progress', $array_study);
 
+
             echo "1";
           }
         }else{
@@ -214,11 +215,50 @@ class Study_dashboard extends MY_Site_Controller {
           // exit();
         }
 
+        $this->session->set_userdata('ses_date', $date);
+        $this->session->set_userdata('ses_time', $time);
+
         // echo "string";
       }else{
         echo "3";
       }
 
+    }
+
+    public function check_study(){
+      $id = $this->auth_manager->userid();
+
+      $pull_gcp = $this->db->select('updated_time, updated_date')
+                ->from('b2c_student_progress')
+                ->where('user_id', $id)
+                ->get()->result();
+
+      $result_study = array(
+        'upd_date' => $pull_gcp[0]->updated_date,
+        'upd_time' => $pull_gcp[0]->updated_time
+      );
+
+      $ses_date = $this->session->userdata('ses_date');
+      $ses_time = $this->session->userdata('ses_time');
+
+      // 1 = ada data baru, page reload
+      if (strtotime($ses_date) < strtotime($pull_gcp[0]->updated_date)) {
+        echo "1";
+      }
+
+      if (strtotime($ses_date) <= strtotime($pull_gcp[0]->updated_date)) {
+        // echo "a";
+        if(strtotime($ses_time) < strtotime($pull_gcp[0]->updated_time)){
+          echo "1";
+          // echo $ses_time.'------'.$pull_gcp[0]->updated_time;
+          // echo $ses_time.'---'.$pull_gcp[0]->updated_time;
+        }
+      }
+      // echo $ses_time.'------'.$pull_gcp[0]->updated_time;
+      // echo strtotime($ses_time).'----'.strtotime($pull_gcp[0]->updated_time);
+      // echo('<pre>');print_r($this->session->userdata('ses_date')); exit;
+
+      // echo json_encode($result_study);
     }
 
 }

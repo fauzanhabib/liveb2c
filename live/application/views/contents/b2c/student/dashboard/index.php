@@ -292,8 +292,6 @@
     Updating your study dashboard...
 </div>
 
-
-
 <script>
     var userid = "<?php echo $userid; ?>";
     $("#clearlive").click(function() {
@@ -304,42 +302,42 @@
 </script>
 
 <script>
-var sp_date = "<?php echo $last_upd_date; ?>";
-var sp_time = "<?php echo $last_upd_time; ?>";
-
-var now_date = "<?php echo $nowd; ?>";
-var now_time = "<?php echo $hour_start_db; ?>";
-
-var err_gcp = "<?php echo $err_gcp;?>";
-var err_gsp = "<?php echo $err_gsp;?>";
-var err_gwp = "<?php echo $err_gwp;?>";
-
-var sp_difftime_updated = "<?php echo $sp_difftime_updated; ?>";
-// console.log(err_gcp);
-if(now_date > sp_date || err_gcp.indexOf("Invalid")>=0 || err_gsp.indexOf("Invalid")>=0 || err_gwp.indexOf("Invalid")>=0){
-  // alert(sp_difftime_updated);
-  $('.page__loader').css('display', 'flex');
-  update_study();
-}else if(now_date == sp_date){
-  if(sp_difftime_updated > 03){
-    // alert(sp_difftime_updated);
-    $('.page__loader').css('display', 'flex');
-    update_study();
-  }
-}
-
-function update_study(){
-  $.ajax({
-   type:"POST",
-   url:"<?php echo site_url('b2c/student/dashboard/update_studyprog');?>",
-   success: function(data){
-      $('.page__loader').hide();
-       //document.getElementById('chat_audio').play();
-      //  $('#isi_chat').html(data);
-       console.log(data);
-     }
-  });
-}
+// var sp_date = "<?php echo $last_upd_date; ?>";
+// var sp_time = "<?php echo $last_upd_time; ?>";
+//
+// var now_date = "<?php echo $nowd; ?>";
+// var now_time = "<?php echo $hour_start_db; ?>";
+//
+// var err_gcp = "<?php echo $err_gcp;?>";
+// var err_gsp = "<?php echo $err_gsp;?>";
+// var err_gwp = "<?php echo $err_gwp;?>";
+//
+// var sp_difftime_updated = "<?php echo $sp_difftime_updated; ?>";
+// // console.log(err_gcp);
+// if(now_date > sp_date || err_gcp.indexOf("Invalid")>=0 || err_gsp.indexOf("Invalid")>=0 || err_gwp.indexOf("Invalid")>=0){
+//   // alert(sp_difftime_updated);
+//   $('.page__loader').css('display', 'flex');
+//   update_study();
+// }else if(now_date == sp_date){
+//   if(sp_difftime_updated > 03){
+//     // alert(sp_difftime_updated);
+//     $('.page__loader').css('display', 'flex');
+//     update_study();
+//   }
+// }
+//
+// function update_study(){
+//   $.ajax({
+//    type:"POST",
+//    url:"<?php echo site_url('b2c/student/dashboard/update_studyprog');?>",
+//    success: function(data){
+//       $('.page__loader').hide();
+//        //document.getElementById('chat_audio').play();
+//       //  $('#isi_chat').html(data);
+//        console.log(data);
+//      }
+//   });
+// }
 </script>
 <?php
   $check_url = base_url();

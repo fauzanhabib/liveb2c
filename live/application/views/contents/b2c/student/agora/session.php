@@ -50,7 +50,7 @@ $(document).ready(function(){
     //  console.log(user);
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
-          alert("Oops, you can't send an empty chat");
+          // alert("Oops, you can't send an empty chat");
           return false;
       }
       else{
@@ -73,7 +73,7 @@ $(document).ready(function(){
      $('#pesan').val('');
      var appointment_id = '<?php echo $appointment_id ?>';
      if (pesan == null || pesan == "") {
-          alert("Oops, you can't send an empty chat");
+          // alert("Oops, you can't send an empty chat");
           return false;
       }
       else{
@@ -829,7 +829,7 @@ outter.circleProgress({
 });
 
 var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
 var innerperc = innerup / innerdown;
 
 var inner = $('.inner--circle.circle');

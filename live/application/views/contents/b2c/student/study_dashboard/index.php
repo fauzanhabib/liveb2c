@@ -501,17 +501,27 @@
 
 	<div class="progress__step last__upd">
 		<span class="trn" data-trn-key="lastupdate">Last updated on: </span><?php echo $echo_upd;?>
-		<p class="btn_u_sd trn" data-trn-key="update">Update</p>
+		<!-- <p class="btn_u_sd trn" data-trn-key="update">Update</p> -->
 	</div>
 </section>
 </main>
-<div class="page__loader" id='loading'>
+
+<!-- <div class="page__loader" id='loading'>
     <div class="loader" id="loader">
         <span></span>
         <span></span>
         <span></span>
     </div>
     <span class="trn" data-trn-key="updatingyour">Updating your study dashboard...</span>
+</div> -->
+
+<div class="page__loader">
+    <div class="loader" id="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    Updating your study dashboard...
 </div>
 <!-- <div class="page__loader" id='updated'>
 		<i class="fa fa-check-circle fa-5x" aria-hidden="true" style="color: #a5f3c9;"></i>
@@ -519,9 +529,46 @@
 		Please reload the page to see changes.
 </div> -->
 <div class="page__loader trn" id='inserted' data-trn-key="sccess">
-
     Success
 </div>
+<!-- ClickUpdate -->
+<script>
+
+$(window).ready(function(){
+	update_study();
+});
+function update_study(){
+	$.ajax({
+	 type:"POST",
+	 url:"<?php echo site_url('b2c/student/study_dashboard/update_studyprog');?>",
+	 success: function(data){
+			// $('.page__loader').hide();
+			 //document.getElementById('chat_audio').play();
+			//  $('#isi_chat').html(data);
+			 // console.log(data);
+			 // console.log('update');
+			 data_checker();
+		 }
+	});
+}
+
+function data_checker(){ setInterval(
+	function(){
+		$.get('<?php echo site_url('b2c/student/study_dashboard/check_study');?>', function(data){
+			// console.log('checker');
+			// console.log(data);
+			if(data == '1'){
+				$('.page__loader').css('display', 'flex').delay(3000).queue(function(){
+					// alert('kj')
+					location.reload();
+				});
+				// location.reload();
+			}
+		})
+	},1000)
+}
+</script>
+
 <script>
 $(".btn_u_sd").click(function() {
 	$('#loading').css('display', 'flex');
@@ -561,7 +608,7 @@ $(".btn_u_sd").click(function() {
 var inner = $('.inner--circle.circle');
 
 var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
 var innerperc = innerup / innerdown;
 // console.log(innerperc);
 inner.circleProgress({
