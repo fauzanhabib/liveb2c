@@ -60,8 +60,8 @@ class Study_dashboard extends MY_Site_Controller {
         $datetime  = $conv+(60*$minutes);
         $echo_upd  = date("M, d Y - H:i:s", $datetime);
 
-        $this->session->set_userdata('ses_date',$pull_date);
-        $this->session->set_userdata('ses_time',$pull_time);
+        // $this->session->set_userdata('ses_date',$pull_date);
+        // $this->session->set_userdata('ses_time',$pull_time);
         // echo('<pre>');print_r($ses_time); exit;
       }else{
         $echo_upd = "Unknown (please click update)";
@@ -108,7 +108,6 @@ class Study_dashboard extends MY_Site_Controller {
           rendy bustari
         ===============*/
 
-
         $student_color = [];
         $k = 1;
         $max_buletan_student = sizeof($gsp->data->study->mastery_tests);
@@ -119,9 +118,6 @@ class Study_dashboard extends MY_Site_Controller {
 
           $k++;
         }
-
-
-
         // bulatan coach color
         $coach_status_color = array(
           "passed" => "bg-green-gradient",
@@ -201,6 +197,7 @@ class Study_dashboard extends MY_Site_Controller {
             $this->db->where('user_id', $id);
             $this->db->update('b2c_student_progress', $array_study);
 
+
             echo "1";
           }
         }else{
@@ -217,6 +214,9 @@ class Study_dashboard extends MY_Site_Controller {
           echo "2";
           // exit();
         }
+
+        $this->session->set_userdata('ses_date', $date);
+        $this->session->set_userdata('ses_time', $time);
 
         // echo "string";
       }else{
@@ -247,11 +247,14 @@ class Study_dashboard extends MY_Site_Controller {
       }
 
       if (strtotime($ses_date) <= strtotime($pull_gcp[0]->updated_date)) {
-        // echo "1";
+        // echo "a";
         if(strtotime($ses_time) < strtotime($pull_gcp[0]->updated_time)){
           echo "1";
+          // echo $ses_time.'------'.$pull_gcp[0]->updated_time;
+          // echo $ses_time.'---'.$pull_gcp[0]->updated_time;
         }
       }
+      // echo $ses_time.'------'.$pull_gcp[0]->updated_time;
       // echo strtotime($ses_time).'----'.strtotime($pull_gcp[0]->updated_time);
       // echo('<pre>');print_r($this->session->userdata('ses_date')); exit;
 
