@@ -442,7 +442,56 @@ function ChangeLanguages() {
             es: "Conoce a tus entrenadores",
             id: "Temui Pelatih Anda"
         },
-        
+        history: {
+            en: "History",
+            es: "Historia",
+            id: "Riwayat"
+        },
+        balance: {
+            en: "Balance",
+            es: "Equilibrar",
+            id: "Saldo"
+        },
+        usedtokens: {
+            en: "Used Tokens",
+            es: "Tokens usados",
+            id: "Token digunakan"
+        },
+        refundtokens: {
+            en: "Refunded Tokens",
+            es: "Token reembolsados",
+            id: "Pengembalian Token"
+        },
+        cancelreq: {
+            en: "Cancel Request",
+            es: "Cancelar petición",
+            id: "Batalkan permintaan"
+        },
+        buytokens: {
+            en: "Buy Token",
+            es: "Comprar Token",
+            id: "Beli Token"
+        },
+        status: {
+            en: "Status",
+            es: "Status",
+            id: "Status"
+        },
+        debit: {
+            en: " Debit",
+            es: " Débito",
+            id: " Debet"
+        },
+        credit: {
+            en: "Credit",
+            es: "Crédit",
+            id: "Kredit"
+        },
+        status: {
+            en: "Status",
+            es: "Status",
+            id: "Status"
+        },
         //STUDY DASHBOARD
         points: {
             en: "Points",
@@ -593,7 +642,7 @@ function ChangeLanguages() {
 
 //SETTING DEFAULT LANGUAGE
 function DefaultLanguage() {
-    langselect = "en"
+    langselect = "id"
     $(document).ready(ChangeLanguages());
 };
 

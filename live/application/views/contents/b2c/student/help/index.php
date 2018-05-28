@@ -1,16 +1,16 @@
     <div class="help__content">
         <div class="dashboard__menubookingcoachresult">
             <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">
-                <div class="bookkacoach">Book a Coach</div>
+                <div class="bookkacoach trn"  data-trn-key="bookcoach">Book a Coach</div>
             </a>
             <a href="<?php echo site_url('b2c/student/session'); ?>">
-                <div class="session ">Session</div>
+                <div class="session trn"  data-trn-key="session">Session</div>
             </a>
             <a href="<?php echo site_url('b2c/student/token'); ?>">
-                <div class="token">Token</div>
+                <div class="token trn "  data-trn-key="tokens">Token</div>
             </a>
             <a href="<?php echo site_url('b2c/student/help'); ?>">
-                <div class="help activediv">Help</div>
+                <div class="help trn activediv"  data-trn-key="help">Help</div>
             </a>
         </div>
         <div class="help__accordion">

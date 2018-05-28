@@ -18,9 +18,9 @@
     <?php if(count($datasession)!=0){ ?>
     <div class="dashboard__notif success__notif">
         <?php if(count($datasession)==1){ ?>
-        <span>You Have <?php echo count($datasession); ?> Session Left For Today</span>
+        <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Session Left For Today</span>
         <?php }else{ ?>
-        <span>You Have <?php echo count($datasession); ?> Sessions Left For Today</span>
+        <span class="trn" data-trn-key="youhave">You Have</span> <?php echo count($datasession); ?> <span  class="trn" data-trn-key="sessionleft">Sessions Left For Today</span>
         <?php } ?>
         <i class="fa fa-times"></i>
     </div>
@@ -29,16 +29,16 @@
     <div class="dashboard">
         <div class="dashboard__menubookingcoachresult">
             <a href="<?php echo site_url('b2c/student/find_coaches/single_date_wa'); ?>">
-                <div class="bookkacoach">Book a Coach</div>
+                <div class="bookkacoach trn"  data-trn-key="bookcoach">Book a Coach</div>
             </a>
             <a href="<?php echo site_url('b2c/student/session_wa'); ?>">
-                <div class="session ">Session</div>
+                <div class="session trn"  data-trn-key="session">Session</div>
             </a>
             <a href="<?php echo site_url('b2c/student/token_wa'); ?>">
-                <div class="token activediv">Token</div>
+                <div class="token trn activediv"  data-trn-key="tokens">Token</div>
             </a>
             <a href="<?php echo site_url('b2c/student/help_wa'); ?>">
-                <div class="help ">Help</div>
+                <div class="help trn"  data-trn-key="help">Help</div>
             </a>
         </div>
 
@@ -46,30 +46,30 @@
 
             <div class="tabtokens">
                 <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Token</li>
-                    <li class="tab-link" data-tab="tab-2">History</li>
+                <li class="tab-link current trn" data-tab="tab-1"  data-trn-key="tokens">Token</li>
+                    <li class="tab-link trn" data-tab="tab-2" data-trn-key="history">History</li>
                 </ul>
             </div>
             <div class="bxtabtokens">
                 <div class="bxrequest tab-content current" id="tab-1">
                     <div class="bxrequest__requesttokens">
                         <div class="bxrequest__requesttokens__bxbalance">
-                            <label>Balance</label>
+                            <label class="trn" data-trn-key="balance">Balance</label>
                             <span><?php echo $remain_token->token_amount; ?></span>
                         </div>
                         <div class="bxrequest__requesttokens__bxbalance">
-                            <label>Used Tokens</label>
+                            <label class="trn" data-trn-key="usedtokens">Used Tokens</label>
                             <span><?php echo @$used_token; ?></span>
                         </div>
                         <div class="bxrequest__requesttokens__bxbalance">
-                            <label>Refunded Tokens</label>
+                            <label class="trn" data-trn-key="refundtokens">Refunded Tokens</label>
                             <span><?php echo @$refu_token; ?></span>
                         </div>
                         <?php if ($data){ ?>
                         <?php echo form_open('b2c/student/token/cancel', 'role="form" class="pure-form" data-parsley-validate');?>
                             <div class="bxrequest__requesttokens__buttonreq">
                                 <input type="hidden" name="cancel">
-                                <button type="submit" class="neobutton">Cancel Request</button>
+                                <button type="submit" class="neobutton trn" data-trn-key="cancelreq">Cancel Request</button>
                             </div>
                         <?php echo form_close(); ?>
                             <span>You are requesting <?php echo $data->token_amount; ?> token right now</span>
