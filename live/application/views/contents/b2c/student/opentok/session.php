@@ -235,6 +235,7 @@ function makeFullScreen(divId){
   margin-top: 0px;
   border-radius: 0px;
   font-size: 14px;
+  -webkit-appearance: none;
 }
 .chatlist{
   padding-left: 10px;
