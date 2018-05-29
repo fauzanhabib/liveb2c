@@ -63,11 +63,11 @@
             </div>
             <div class="profile__name">
                 <h4><?php echo $this->auth_manager->get_name();?></h4>
-                <h5><?php
+                <span><?php
                   if($this->auth_manager->role() == 'STD'){
-                    echo 'Student';
+                    echo '<h5 class="trn" data-trn-key="student">Student</h5>';
                   }
-                ?></h5>
+                ?></span>
             </div>
             <div class="header__profpic pic__circle--small">
               <?php

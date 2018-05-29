@@ -9,6 +9,11 @@ function ChangeLanguages() {
             es: "Acerca",
             id: "Tentang"
         },
+        student: {
+            en: "Student",
+            es: "Estudiante",
+            id: "Siswa"
+        },
         contact: {
             en: "Contact",
             es: "Contáctenos",
@@ -350,7 +355,7 @@ function ChangeLanguages() {
         coachname: {
             en: "Coach Name",
             es: "Ayuda",
-            id: "Nombre entrenador"
+            id: "Nama Pelatih"
         },
         datee: {
             en: "Date",
@@ -487,11 +492,162 @@ function ChangeLanguages() {
             es: "Crédit",
             id: "Kredit"
         },
-        status: {
-            en: "Status",
-            es: "Status",
-            id: "Status"
+        tzsetting: {
+            en: "Time Zone Setting",
+            es: "Configuración de zona horaria",
+            id: "Pengaturan Zona Waktu"
         },
+        oursystem: {
+            en: "Our system detects your device's location and it will set time zone automatically according to your current location.",
+            es: "Nuestro sistema detecta la ubicación de su dispositivo y establecerá la zona horaria automáticamente de acuerdo con su ubicación actual.",
+            id: "Sistem kami mendeteksi lokasi perangkat Anda dan akan mengatur zona waktu secara otomatis sesuai dengan lokasi Anda saat ini."
+        },
+        ifyouare: {
+            en: "If you are traveling, please check your time zone to make sure that it is correct.",
+            es: "Si viaja, verifique su zona horaria para asegurarse de que sea correcta.",
+            id: "Jika Anda bepergian, silakan periksa zona waktu Anda untuk memastikan bahwa itu benar."
+        },
+        tknsystem: {
+            en: "Token System",
+            es: "Sistema Token",
+            id: "Sistem Token"
+        },
+        tokensareusedto: {
+            en: "Tokens are used to book sessions. Your tokens will be automatically deducted after you book a session. You can check your current token balance in token menu and check the cost of each coach before you book a session.",
+            es: "Los tokens se utilizan para reservar sesiones. Tus tokens se deducirán automáticamente después de reservar una sesión. Puede verificar su saldo actual de fichas en el menú de fichas y verificar el costo de cada coach antes de reservar una sesión.",
+            id: "Token digunakan untuk memesan sesi. Token Anda akan dikurangi secara otomatis setelah Anda memesan sesi. Anda dapat memeriksa token saldo saat ini di menu token dan memeriksa biaya setiap pelatih sebelum Anda memesan sesi."
+        },
+        tokenrefund: {
+            en: "Token Refund",
+            es: "Reembolso de Token",
+            id: "Pengembalian Token"
+        },
+        ifyourcoach: {
+            en: "If your coach does not show up for a booked session, or is more than 5 minutes late, your tokens will be refunded whether you attended the session or not.",
+            es: "Si su entrenador no se presenta a una sesión reservada, o llega más de 5 minutos tarde, sus tokens serán reembolsados ya sea que haya asistido a la sesión o no.",
+            id: "Jika pelatih Anda tidak muncul untuk sesi yang dipesan, atau lebih dari 5 menit terlambat, token Anda akan dikembalikan apakah Anda menghadiri sesi atau tidak."
+        },
+        bookacoach: {
+            en: "Book a Coach",
+            es: "Reserve un entrenador",
+            id: "Pesan seorang Pelatih"
+        },
+        tobookacoach: {
+            en: "To book a coach, go to dashboard or to the side menu. You can search for a coach by date, name, country, or languages spoken.",
+            es: "Para reservar un entrenador, vaya al tablero o al menú lateral. Puede buscar un coach por fecha, nombre, país o idiomas hablados.",
+            id: "Untuk memesan pelatih, buka dasbor atau ke menu samping. Anda dapat mencari pelatih berdasarkan tanggal, nama, negara, atau bahasa yang diucapkan."
+        },
+        date: {
+            en: "Date",
+            es: "Fecha",
+            id: "Tanggal"
+        },
+        displayall: {
+            en: "Display all available coaches for the date you have selected.",
+            es: "Muestra todos los entrenadores disponibles para la fecha que has seleccionado.",
+            id: "Tampilkan semua pelatih yang tersedia untuk tanggal yang Anda pilih."
+        },
+        names: {
+            en: "Name",
+            es: "Nombre",
+            id: "Nama"
+        },
+        displayall2: {
+            en: "Display all available coaches that match the name you have entered.",
+            es: "Muestra todos los entrenadores disponibles que coincidan con el nombre que ingresaste.",
+            id: "Tampilkan semua pelatih yang tersedia yang cocok dengan nama yang Anda masukkan."
+        },
+        contry2: {
+            en: "Country",
+            es: "País",
+            id: "Negara"
+        },
+        displayall3: {
+            en: "Display all available coaches that match the country you have entered",
+            es: "Muestra todos los entrenadores disponibles que coinciden con el país que ingresaste",
+            id: "Tampilkan semua pelatih yang tersedia yang cocok dengan negara yang Anda masukkan"
+        },
+        laguagespoke2: {
+            en: "Language Spoken",
+            es: "Lenguaje hablado",
+            id: "bahasa yang dipakai"
+        },
+        displayall4: {
+            en: "Display all available coaches that match the language preference you have entered.",
+            es: "Muestra todos los entrenadores disponibles que coincidan con la preferencia de idioma que ingresaste.",
+            id: "Tampilkan semua pelatih yang tersedia yang sesuai dengan preferensi bahasa yang Anda masukkan."
+        },
+        youcanalso: {
+            en: "You can also choose the time you would like by clicking on 'View Schedule'",
+            es: "También puede elegir la hora que desea haciendo clic en 'Ver programa'",
+            id: "Anda juga dapat memilih waktu yang Anda inginkan dengan mengklik 'Lihat Jadwal'"
+        },
+        accessing: {
+            en: "Accessing neo LIVE Session",
+            es: "Accediendo a la sesión neo LIVE",
+            id: "Mengakses Sesi LANGSUNG LIVE"
+        },
+        enteryrsession: {
+            en: "Enter your session from Dashboard. A countdown display will appear 24 hours before session begins and remain until the session begins.",
+            es: "Ingrese su sesión desde el Tablero. Aparecerá una pantalla de cuenta regresiva 24 horas antes de que comience la sesión y permanecerá hasta que comience la sesión.",
+            id: "Masukkan sesi Anda dari Dasbor. Tampilan hitung mundur akan muncul 24 jam sebelum sesi dimulai dan tetap hingga sesi dimulai."
+        },
+        whentits: {
+            en: "When it's time to join session, countdown display will change into a play button. Click on the play button to enter your neo LIVE session.",
+            es: "Cuando llegue el momento de unirse a la sesión, la pantalla de cuenta regresiva se convertirá en un botón de reproducción. Haga clic en el botón de reproducción para ingresar a su sesión neo LIVE.",
+            id: "Ketika tiba saatnya untuk bergabung dengan sesi, tampilan hitung mundur akan berubah menjadi tombol putar. Klik pada tombol putar untuk memasuki sesi LANGSUNG Anda."
+        },
+        livessseionsgu: {
+            en: "Live Session Guides",
+            es: "Guías de sesión en vivo",
+            id: "Panduan Sesi Langsung"
+        },
+        onceyour: {
+            en: "Once your session begins, your coach will appear on the screen. The screen will display a blank black screen until then. To show your video and resize it to a full display, hover your mouse over the screen.",
+            es: "Una vez que comience su sesión, su entrenador aparecerá en la pantalla. La pantalla mostrará una pantalla negra en blanco hasta entonces. Para mostrar su video y cambiar su tamaño a una pantalla completa, pase el mouse sobre la pantalla.",
+            id: "Setelah sesi Anda dimulai, pelatih Anda akan muncul di layar. Layar akan menampilkan layar hitam kosong sampai saat itu. Untuk menampilkan video Anda dan mengubah ukurannya menjadi layar penuh, arahkan mouse Anda ke atas layar."
+        },
+        yourstudydatta: {
+            en: "Your study data appears on the lower part of the screen.",
+            es: "Los datos de su estudio aparecen en la parte inferior de la pantalla.",
+            id: "Data studi Anda muncul di bagian bawah layar."
+        },
+        chatfeatures: {
+            en: "Chat feature appears on the lower right part of the screen. From this chat window, you may communicate with your coach by writing.",
+            es: "La función de chat aparece en la parte inferior derecha de la pantalla. Desde esta ventana de chat, puede comunicarse con su entrenador por escrito.",
+            id: "Fitur obrolan muncul di bagian kanan bawah layar. Dari jendela obrolan ini, Anda dapat berkomunikasi dengan pelatih Anda dengan menulis."
+        },
+        affterthe: {
+            en: "After the session ends, the screen will redirect you to a Session Summaries page.",
+            es: "Una vez que la sesión finaliza, la pantalla lo redirigirá a una página de Resúmenes de sesión.",
+            id: "Setelah sesi berakhir, layar akan mengarahkan Anda ke halaman Ringkasan Sesi."
+        },
+        sessionsumma: {
+            en: "Session Summary Guides",
+            es: "Guías de resumen de sesión",
+            id: "Panduan Ringkasan Sesi"
+        },
+        thispage: {
+            en: "This page gives a summary of the session. Here you can rate your coach on a scale from 1 to 5, with 5 being the highest rating. You will not be able to rate your coach again if you leave this page.",
+            es: "Esta página ofrece un resumen de la sesión. Aquí puede calificar a su entrenador en una escala de 1 a 5, siendo 5 la calificación más alta. No podrá calificar a su coach nuevamente si abandona esta página.",
+            id: "Halaman ini memberikan ringkasan sesi. Di sini Anda dapat menilai pelatih Anda dalam skala dari 1 hingga 5, dengan 5 menjadi peringkat tertinggi. Anda tidak akan dapat menilai pelatih Anda lagi jika Anda meninggalkan halaman ini."
+        },
+        yourlessonhass: {
+            en: " Your lesson has been recorded, and it will be available to you approximately 15-20 minutes after the session has ended. The recording is only available for up to 72 hours after the session has been completed. However, you may download the session and access it later in your Session History.",
+            es: "Su lección ha sido grabada, y estará disponible para usted aproximadamente de 15 a 20 minutos después de que la sesión haya terminado. La grabación solo está disponible hasta 72 horas después de que se haya completado la sesión. Sin embargo, puede descargar la sesión y acceder a ella más adelante en su Historial de Sesión.",
+            id: "Pelajaran Anda telah direkam, dan akan tersedia untuk Anda sekitar 15-20 menit setelah sesi berakhir. Rekaman ini hanya tersedia hingga 72 jam setelah sesi selesai. Namun, Anda dapat mengunduh sesi dan mengaksesnya nanti di Riwayat Sesi Anda."
+        },
+        allowsyous: {
+            en: "Session History allows you to see all of your previous sessions. You can choose to download or watch your recorded neo LIVE session.",
+            es: "El Historial de la sesión le permite ver todas sus sesiones anteriores. Puedes elegir descargar o ver tu sesión neo-live grabada.",
+            id: "Sesi History memungkinkan Anda untuk melihat semua sesi sebelumnya. Anda dapat memilih untuk mengunduh atau menonton sesi direkam neo LIVE Anda."
+        },
+        recordedsession: {
+            en: " Recorded sessions usually appear approximately 20 - 30 minutes after the session has ended. Recorded session will be available to download or view for 72 hours after the session has ended.",
+            es: "Las sesiones grabadas generalmente aparecen aproximadamente de 20 a 30 minutos después de que la sesión haya finalizado. La sesión grabada estará disponible para descargar o ver durante 72 horas después de que la sesión haya finalizado.",
+            id: "Sesi rekaman biasanya muncul sekitar 20 - 30 menit setelah sesi berakhir. Sesi rekaman akan tersedia untuk diunduh atau dilihat selama 72 jam setelah sesi berakhir."
+        },
+
         //STUDY DASHBOARD
         points: {
             en: "Points",
