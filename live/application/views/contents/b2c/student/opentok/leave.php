@@ -51,20 +51,20 @@ $(document).ready(function(){
 </script>
 <section class="main__content">
     <div class="bxleavesessionstue">
-        <h2>Session Summaries</h2>
-        <div class="bxleavesessionstue__statussession">
-            <p>Your Session With <span><?php echo @$user->fullname; ?> </span> has Ended</p>
+        <h2 class="trn" data-trn-key="sessionsumm" >Session Summaries</h2>
+        <div class="bxleavesessionstue__statussession" style="display: -webkit-box;display: -ms-flexbox;display: flex;">
+            <p class="trn" data-trn-key="sessionwith">Your Session With </p><span><?php echo @$user->fullname; ?> </span> <span class="trn" data-trn-key="hasended">has Ended</span>
         </div>
         <div class="bxleavesessionstue__statustime">
             <table>
                 <thead>
                     <tr>
-                        <th>DATE</th>
-                        <th>START TIME</th>
-                        <th>END TIME</th>
-                        <th>COACH</th>
-                        <th>YOU JOINED AT</th>
-                        <th>YOUR COACH JOINED AT</th>
+                        <th class="trn" data-trn-key="date3">DATE</th>
+                        <th class="trn" data-trn-key="starttm">START TIME</th>
+                        <th class="trn" data-trn-key="endtm">END TIME</th>
+                        <th class="trn" data-trn-key="coachtm">COACH</th>
+                        <th class="trn" data-trn-key="joinat">YOU JOINED AT</th>
+                        <th class="trn" data-trn-key="coachjoin">YOUR COACH JOINED AT</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,7 +104,7 @@ $(document).ready(function(){
                         <td>
                           <?php
                             if(@$user->cch_attend == NULL){
-                              @$cch_att_conv = "Coach didn't attend the session.";
+                              @$cch_att_conv = "<span class='trn' data-trn-key='cocdint'>Coach didnt attend the session.";
                             }else{
                               $date3     = @$user->cch_attend;
                               $default3  = strtotime($date3);
@@ -113,7 +113,7 @@ $(document).ready(function(){
                             }
 
                             if(@$user->std_attend == NULL){
-                              @$std_att_conv = "Student didn't attend the session.";
+                              @$std_att_conv = "<span class='trn' data-trn-key='stnint'>Student didn't attend the session.";
                             }else{
                               $date4     = @$user->std_attend;
                               $default4  = strtotime($date4);
@@ -145,9 +145,9 @@ $(document).ready(function(){
             <table>
                 <thead>
                     <tr>
-                        <th>Rate Your Coach</th>
+                        <th class="trn" data-trn-key="ratecoach">Rate Your Coach</th>
 
-                        <th>Coach Name</th>
+                        <th class="trn" data-trn-key="namecoach">Coach Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -166,7 +166,7 @@ $(document).ready(function(){
                                 <label class="star star-1" for="star-1"></label>
                             </div>
 
-                              <button class="neobutton" id="ratecoach">Rate</button>
+                              <button class="neobutton trn" id="ratecoach" data-trn-key="rate">Rate</button>
                         </td>
 
                         <td>
@@ -178,12 +178,12 @@ $(document).ready(function(){
         </div>
 
         <div class="bxleavesessionstue__note">
-            <p><b>IMPORTANT NOTES:</b></p>
-            <p>Download the recorded session in Session History.</p>
-            <p>Recording will be ready in 2 minutes.</p>
-            <p>Recording is available for 72 hours after end of session.</p>
+            <p><b class="trn" data-trn-key="importannt">IMPORTANT NOTES:</b></p>
+            <p class="trn" data-trn-key="dnldthe">Download the recorded session in Session History.</p>
+            <p class="trn" data-trn-key="willreadyin">Recording will be ready in 2 minutes.</p>
+            <p class="trn" data-trn-key="isavvable">Recording is available for 72 hours after end of session.</p>
 
-             <button class="neobutton exitbtn">Exit</button>
+             <button class="neobutton exitbtn trn" data-trn-key="exitt">Exit</button>
         </div>
     </div>
 </section>

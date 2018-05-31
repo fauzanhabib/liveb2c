@@ -24,6 +24,8 @@ if(@$user_extract2){
 <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.2.0.js"></script>
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script> -->
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
+<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/jquery.translate.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/flag-translate.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -247,19 +249,19 @@ opacity: 1 !important;
 }
 </style>
 <section class="main__content">
-  <label for="videoSource">Video source: </label><select id="videoSource">
+  <label for="videoSource" class="trn" data-trn-key="vdsource">Video source: </label><select id="videoSource">
     <!-- <option value="6cabac1ee4105fc446ab1a226a78db89ce137bdb3f008d979a01b1b64d46e623">camera 1</option><option value="6cabac1ee4105fc446ab1a226a78db89ce137bdb3f008d979a01b1b64d46e623">camera 2</option> -->
   </select>
   <div class="dashboard__notif success__notif width100perc" id="heading1">
-    Waiting for <?php echo ' '.$student_name.' '; ?> to join the session. Remain in the session until the end in order to receive a refund of your tokens.
+    <span class="trn" data-trn-key="waiting">Waiting for </span> <?php echo ' '.$student_name.' '; ?> <span class="trn" data-trn-key="tojoin"> to join the session. Remain in the session until the end in order to receive a refund of your tokens.</span>
   </div>
-  <div class="dashboard__notif error__notif width100perc hidden" id="camerablocked">
+  <div class="dashboard__notif error__notif width100perc hidden trn" id="camerablocked" data-trn-key="yourblocking">
     Your browser is blocking your camera, please enable it and then reload the page.
   </div>
 
   <div id="div_device" class="panel panel-default" style="display:none;">
     <div class="select">
-    <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+    <label for="audioSource" class="trn" data-trn-key="audiosrc">Audio source: </label><select id="audioSource"></select>
     </div>
     <div class="select">
     <!-- <label for="videoSource">Video source: </label><select id="videoSource"></select> -->
@@ -271,7 +273,7 @@ opacity: 1 !important;
     <div class="boxsession">
         <div>
 
-          <h3>Remaining Time: <span id="countdown" class="timer"></span></h3>
+          <span style="display: -webkit-box;display: -ms-flexbox;display: flex;"><h3 class="trn" data-trn-key="remainingtime" style="margin-right:5px;">Remaining Time:</h3> <span id="countdown" class="timer"></span></span>
         </div>
         <div class="boxsession__livestue" id='fullarea'>
           <!-- <div class="subscriber" id="subscriber_agora"></div>
@@ -304,7 +306,7 @@ opacity: 1 !important;
                         <!-- <img src="<?php echo base_url().'/'.$std_img_pull[0]->profile_picture; ?>" alt=""> -->
                     </div>
 
-                    <h5>Points</h5>
+                    <h5  class="trn" data-trn-key="points">Points</h5>
                     <div class="graph__wrap">
                         <div class="bar__graph">
                             <?php
@@ -316,7 +318,7 @@ opacity: 1 !important;
                             <ul class="graph b2">
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php echo $bar_now; ?>">
-                            <span class="graph__legend">Now</span>
+                            <span class="graph__legend trn" data-trn-key="now">Now</span>
                                 <label><?php echo $gwp->data[0]->points;?></label>
                                 </li>
                                 </span>
@@ -442,7 +444,7 @@ opacity: 1 !important;
 
                         <div class="achievement__point__info">
                           <h5><?php echo number_format($gsp->data->study->points_until_today);?></h5>
-                          <h3>Study</h3>
+                          <h3 class="trn" data-trn-key="study">Study</h3>
                         </div>
                       </div>
                       <div class="coach__progress__achievement">
@@ -463,7 +465,7 @@ opacity: 1 !important;
 
                         <div class="achievement__point__info">
                           <h5><?php echo number_format($gsp->data->coach->points_until_today);?></h5>
-                          <h3>Coach</h3>
+                          <h3 class="trn" data-trn-key="coach">Coach</h3>
                         </div>
                       </div>
                     </div>
@@ -472,13 +474,13 @@ opacity: 1 !important;
 
                 <!-- top point graph -->
                 <div class="progress__point__top">
-                  <h5 style="color: #49C5FE;">Comprehension</h5>
+                  <h5 style="color: #49C5FE;" class="trn" data-trn-key="comprehension">Comprehension</h5>
                   <div class="graph__wrap">
                       <div class="bar__graph">
                         <ul class="graph b2">
                             <span class="graph__bar__cont">
                               <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
-                                <span class="graph__legend">Now</span>
+                                <span class="graph__legend trn" data-trn-key="now">Now</span>
                               <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
                               </li>
                             </span>
@@ -519,7 +521,7 @@ opacity: 1 !important;
 
                 <!-- daily progress donut graph -->
                 <div class="progress__step">
-                    <h5>Progress to goals</h5>
+                    <h5 class="trn" data-trn-key="progresstogoal">Progress to goals</h5>
                     <div class="donut__progress">
                       <div class="step--circle circle"
                            data-thickness="15"
@@ -641,10 +643,10 @@ opacity: 1 !important;
                     </div>
                   <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
                     <!-- kondisi point telah ketemu goal -->
-                    <h5>Congratulation!</h5>
+                    <h5  class="trn" data-trn-key="congratulation">Congratulation!</h5>
                   <?php }else{?>
                     <!-- kondisi point belom ketemu goal -->
-                    <h5>Keep up the good work!</h5>
+                    <h5 class="trn" data-trn-key="keepup">Keep up the good work!</h5>
                   <?php } ?>
                 </div>
                 <!-- end daily progress donut graph -->
@@ -652,13 +654,13 @@ opacity: 1 !important;
             <div class="study__dashboard__bottom">
                 <!-- pronunciation graph -->
                 <div class="study__progress__graph">
-                    <h5>Pronunciation</h5>
+                    <h5 class="trn" data-trn-key="pronun">Pronunciation</h5>
                     <div class="graph__wrap">
                         <div class="bar__graph">
                             <ul class="graph b2">
                                 <span class="graph__bar__cont">
                             <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->pronunciation >125){echo "125";}else{echo $gwp->data[0]->pronunciation;}?>" style="width: 20%;">
-                            <span class="graph__legend">Now</span>
+                            <span class="graph__legend trn" data-trn-key="now">Now</span>
                                 <label><?php echo strtok($gwp->data[0]->pronunciation, '.');?></label>
                                 </li>
                                 </span>
@@ -694,13 +696,13 @@ opacity: 1 !important;
                 <!-- End pronunciation graph -->
                 <!-- listening graph -->
                 <div class="study__progress__graph">
-                  <h5>Listening</h5>
+                  <h5 class="trn" data-trn-key="listening">Listening</h5>
                   <div class="graph__wrap">
                       <div class="bar__graph">
                         <ul class="graph b2">
                             <span class="graph__bar__cont">
                               <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->listening >125){echo "125";}else{echo $gwp->data[0]->listening;}?>">
-                                <span class="graph__legend">Now</span>
+                                <span class="graph__legend trn" data-trn-key="now">Now</span>
                               <label><?php echo strtok($gwp->data[0]->listening, '.');?></label>
                               </li>
                             </span>
@@ -740,13 +742,13 @@ opacity: 1 !important;
                 <!-- End listening graph -->
                 <!-- speaking graph -->
                 <div class="study__progress__graph">
-                  <h5>Speaking</h5>
+                  <h5 class="trn" data-trn-key="speaking">Speaking</h5>
                   <div class="graph__wrap">
                       <div class="bar__graph">
                         <ul class="graph b2">
                             <span class="graph__bar__cont">
                               <li class="graph__bar__each" data-value="<?php if(strtok($gwp->data[0]->speaking, '.') > 125){ echo '125'; }else{ echo strtok($gwp->data[0]->speaking, '.'); };?>">
-                                <span class="graph__legend">Now</span>
+                                <span class="graph__legend trn" data-trn-key="now">Now</span>
                               <label>
                               <?php echo strtok($gwp->data[0]->speaking, '.');?></label>
                               </li>
@@ -814,6 +816,8 @@ opacity: 1 !important;
 </section>
 
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
+
+
 <script>
 // lingkaran bulat pertama
 

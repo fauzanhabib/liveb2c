@@ -784,7 +784,152 @@ function ChangeLanguages() {
             es: "Haga clic en la casilla de calendario o en Horario semanal para ver la disponibilidad de su entrenador",
             id: "Klik di kotak untuk kalender atau di Jadwal Mingguan untuk melihat ketersediaan pelatih Anda"
         },
-      
+
+        //AGORA LIVESESSION
+        waiting: {
+            en: "Waiting a &nbsp;",
+            es: "Esperando a &nbsp;",
+            id: "Menunggu &nbsp;"
+        },
+        tojoin: {
+            en: "&nbsp; to join the session. Remain in the session until the end in order to receive a refund of your tokens.",
+            es: "&nbsp; para unirse a la sesión. Permanezca en la sesión hasta el final para recibir un reembolso de sus tokens.",
+            id: "&nbsp; untuk bergabung dalam sesi. Tetap dalam sesi hingga akhir untuk menerima pengembalian uang token Anda."
+        },
+        vdsource: {
+            en: "Video source:",
+            es: "Fuente de vídeo:",
+            id: "Sumber video:"
+        },
+        camerablocked: {
+            en: "Your browser is blocking your camera, please enable it and then reload the page.",
+            es: "Su navegador está bloqueando su cámara, por favor habilítelo y luego vuelva a cargar la página.",
+            id: "Browser Anda memblokir kamera Anda, mohon aktifkan dan kemudian muat ulang halaman."
+        },
+        remainingtime: {
+            en: "Remaining Time:",
+            es: "Tiempo restante:",
+            id: "Waktu yang tersisa:"
+        },
+        youcantopen: {
+            en: "You can't open Live Session in multiple tabs/windows",
+            es: "No puede abrir la sesión en vivo en varias pestañas / ventanas",
+            id: "Anda tidak dapat membuka Sesi Langsung di banyak tab / jendela"
+        },
+        progresstogoal: {
+            en: "Search Coach",
+            es: "Coach de búsqueda",
+            id: "Cari Pelatih"
+        },
+
+        //OPENTOOK Livesession
+        cameraon: {
+            en: "Camera is On",
+            es: "La cámara está encendida",
+            id: "Kamera Aktiv"
+        },
+        cameraoff: {
+            en: "Camera is Off",
+            es: "La cámara está apagada",
+            id: "Kamera Mati"
+        },
+
+        //LEAVESESSION
+        sessionsumm: {
+            en: "Session Summaries",
+            es: "Resúmenes de sesiones",
+            id: "Ringkasan sesi"
+        },
+        sessionwith: {
+            en: "Your Session With &nbsp;",
+            es: "Su sesión con &nbsp;",
+            id: "Sesi Anda Dengan &nbsp;"
+        },
+        hasended: {
+            en: "&nbsp; has Ended",
+            es: "&nbsp; ha terminado",
+            id: "&nbsp; telah berakhir"
+        },
+        date3: {
+            en: "DATE",
+            es: "FECHA",
+            id: "TANGGAL"
+        },
+        starttm: {
+            en: "START TIME",
+            es: "HORA DE INICIO",
+            id: "WAKTU MULAI"
+        },
+        endtm: {
+            en: "END TIME",
+            es: "FIN DE TIEMPO",
+            id: "AKHIR WAKTU"
+        },
+        coachtm: {
+            en: "COACH",
+            es: "ENTRENADOR",
+            id: "PELATIH"
+        },
+        joinat: {
+            en: "YOU JOINED AT",
+            es: "USTED SE UNIO A",
+            id: "ANDA BERGABUNG PADA"
+        },
+        coachjoin: {
+            en: "YOUR COACH JOINED AT",
+            es: "SU ENTRENADOR SE UNIO A",
+            id: "COACH ANDA BERGABUNG PADA"
+        },
+        ratecoach: {
+            en: "Rate Your Coach",
+            es: "Califica tu entrenador",
+            id: "Beri Nilai Pelatih Anda"
+        },
+        namecoach: {
+            en: "Coach Name",
+            es: "Nombre del entrenador",
+            id: "Nama Pelatih"
+        },
+        rate: {
+            en: "Rate",
+            es: "Tarifa",
+            id: "Nilai"
+        },
+        importannt: {
+            en: "IMPORTANT NOTES:",
+            es: "NOTAS IMPORTANTES:",
+            id: "CATATAN PENTING:"
+        },
+        dnldthe: {
+            en: "Download the recorded session in Session History.",
+            es: "Descargue la sesión grabada en el Historial de la sesión.",
+            id: "Unduh sesi yang direkam di Session History."
+        },
+        willreadyin: {
+            en: "Recording will be ready in 2 minutes.",
+            es: "La grabación estará lista en 2 minutos.",
+            id: "Perekaman akan siap dalam 2 menit."
+        },
+        isavvable: {
+            en: "Recording is available for 72 hours after end of session.",
+            es: "La grabación está disponible durante 72 horas después del final de la sesión.",
+            id: "Perekaman tersedia untuk 72 jam setelah akhir sesi."
+        },
+        exitt: {
+            en: "Exit",
+            es: "Salida",
+            id: "Keluar"
+        },
+        cocdint: {
+            en: "Coach didnt attend the session.",
+            es: "El entrenador no asistió a la sesión.",
+            id: "Pelatih tidak menghadiri sesi."
+        },
+        stnint: {
+            en: "Student didn't attend the session.",
+            es: "El estudiante no asistió a la sesión.",
+            id: "Siswa tidak menghadiri sesi."
+        },
 
     };
 
