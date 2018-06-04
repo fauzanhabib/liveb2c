@@ -280,6 +280,24 @@ opacity: 1 !important;
     left: auto;
   }
 }
+
+  @media screen and (max-width: 768px){
+  .dashboard__notif{
+      height:auto !important;
+      display:flex;
+      flex-wrap:wrap;
+      
+  }
+}
+
+@media screen and (max-width: 425px){
+  .dashboard__notif{
+      display:flex;
+      flex-wrap:wrap;
+      
+  }
+}
+
 </style>
 <section class="main__content">
   <div class="dashboard__notif success__notif width100perc" id="heading1">

@@ -201,6 +201,24 @@ opacity: 1 !important;
     left: auto;
   }
 }
+
+@media screen and (max-width: 768px){
+  .dashboard__notif{
+      height:auto !important;
+      display:flex;
+      flex-wrap:wrap;
+      
+  }
+}
+
+@media screen and (max-width: 425px){
+  .dashboard__notif{
+      display:flex;
+      flex-wrap:wrap;
+      
+  }
+}
+
 </style>
 <style>
 .localAgora{
