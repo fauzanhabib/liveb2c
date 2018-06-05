@@ -539,6 +539,31 @@ class find_coaches extends MY_Site_Controller {
     }
 
     public function book_by_single_date($date = '', $page='') {
+
+        $booking_type =  $this->input->post('selector');
+
+        if(!$booking_type){
+            $booking_type = $this->session->userdata("selector_booking_type");
+            if(!$booking_type){
+                $this->messages->add('Invalid Booking Type', 'warning');
+                redirect('b2c/student/find_coaches/single_date/');
+            }
+        }
+
+        $this->session->set_userdata('selector_booking_type',$booking_type);
+
+        $recurring_booking_type = '';
+        if($booking_type == 'single-book'){
+            $recurring_booking_type = 1;
+        } else if($booking_type = 'multiple-book'){
+            $recurring_booking_type = $this->input->post('type_booking');
+            if(!$recurring_booking_type){
+                $recurring_booking_type = $this->session->userdata("recurring_booking_type");
+            }
+        }
+
+        $this->session->set_userdata("recurring_booking_type",$recurring_booking_type);
+
         $this->template->title = 'Detail Schedule';
 
         if ($date <= date('Y-m-d')) {
@@ -633,7 +658,30 @@ class find_coaches extends MY_Site_Controller {
     }
 
     public function book_single_coach($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '',$token) {
-        
+        $recuring = $this->session->userdata('recurring_booking_type');
+        if(!$recuring){
+            $recuring = 1;
+        }
+
+        if($recuring == 1) {
+            $frequency = [0];
+        }
+
+        if($recuring == 2) {
+            $frequency = [0,7];
+        }
+
+        if($recuring == 3) {
+            $frequency = [0,7,7];
+        }
+
+        if($recuring == 4) {
+            $frequency = [0,7,7,7];
+        }
+        $arr_message = [];
+        foreach ($frequency as $value){
+            $message = '';
+            $date_ = strtotime("+".$value." day", $date_);
         @date_default_timezone_set('Etc/GMT+0');
        
 
@@ -821,13 +869,16 @@ class find_coaches extends MY_Site_Controller {
                         // $this->send_email->notif_coach_smtp_new($emailstudent[0]->email, $emailcoach[0]->email, $namestudent[0]->fullname, $namecoach[0]->fullname, $start_hour_coach, $end_hour_coach, $new_date_for_coach, 'booked', $coach_gmt);
 
                         $this->db->trans_commit();
-
+                        if($message != 'Booking successful'){
+                            $arr_message[] = $message;
+                        }
                         $this->messages->add($message, 'success');
 
-                        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date_));
+                        
                        }
                     }
                 }
+            
 
             // If we arrive here, it means that no exception was thrown
             // i.e. no query has failed, and we can commit the transaction
@@ -839,7 +890,9 @@ class find_coaches extends MY_Site_Controller {
             $this->db->trans_rollback();
             $this->messages->add('An error has occured, please try again.', 'warning');
             redirect('b2c/student/find_coaches/single_date/');
+            }
         }
+        redirect('b2c/student/find_coaches/book_by_single_date/' . date("Y-m-d", $date_));
     }
 
     public function multiple_date() {
@@ -2783,6 +2836,27 @@ class find_coaches extends MY_Site_Controller {
     public function summary_book($search_by = '', $coach_id = '', $date = '', $start_time = '', $end_time = '') {
         $this->template->title = 'Booking Summary';
 
+        $recuring = $this->session->userdata('recurring_booking_type');
+        if(!$recuring){
+            $recuring = 1;
+        }
+
+        if($recuring == 1) {
+            $frequency = [0];
+        }
+
+        if($recuring == 2) {
+            $frequency = [0,7];
+        }
+
+        if($recuring == 3) {
+            $frequency = [0,7,7];
+        }
+
+        if($recuring == 4) {
+            $frequency = [0,7,7,7];
+        }
+
         $partner_id = $this->auth_manager->partner_id($coach_id);
         $region_id = $this->auth_manager->region_id($partner_id);
 
@@ -2857,7 +2931,9 @@ class find_coaches extends MY_Site_Controller {
             'search_by' => $search_by,
             'standard_coach_cost' => $standard_coach_cost,
             'elite_coach_cost' => $elite_coach_cost,
-            'datasession' => $datasession
+            'datasession' => $datasession,
+            'recuring' => $recuring,
+            'frequency' => $frequency
         );
 
 

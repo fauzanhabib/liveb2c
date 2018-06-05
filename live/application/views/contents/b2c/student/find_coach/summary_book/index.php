@@ -37,7 +37,19 @@
                             </div> -->
                             <div class="bxcoacdate">
                                 <label  class="trn" data-trn-key="datee">Date</label>
-                                <span><?php echo(date('l jS \of F Y', @$date)); ?></span>
+                                <?php if($recuring > 1){ 
+                                        $temp = $date; ?>
+                                <span>
+                                    <?php foreach($frequency as $f){
+                                        $temp = strtotime("+".$f." day", $temp);
+                                        echo(date('l jS \of F Y', @$temp)).'<br> '; }
+                                    ?> 
+                                </span>
+                                <?php }else{ ?>
+                                <span>
+                                    <?php echo(date('l jS \of F Y', @$date)); ?> 
+                                </span>
+                            <?php } ?>
                             </div>
                             <div class="bxcoachstart">
                                 <label  class="trn" data-trn-key="starttime">Start Time</label>
@@ -68,24 +80,26 @@
                                     // $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('global_settings')->where('type','partner')->get()->result();
 
                                     // jika 0 / disallow
-                                    if($setting_region[0]->status_set_setting == 0){
-                                        $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('global_settings')->where('type','partner')->get()->result();
-                                        $standard_coach_cost = @$setting[0]->standard_coach_cost;
-                                        $elite_coach_cost = @$setting[0]->elite_coach_cost;
-                                    } else {
-                                        $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
-                                        $standard_coach_cost = @$setting[0]->standard_coach_cost;
-                                        $elite_coach_cost = @$setting[0]->elite_coach_cost;
-                                    }
+                                    // if($setting_region[0]->status_set_setting == 0){
+                                    //     $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('global_settings')->where('type','partner')->get()->result();
+                                    //     $standard_coach_cost = @$setting[0]->standard_coach_cost;
+                                    //     $elite_coach_cost = @$setting[0]->elite_coach_cost;
+                                    // } else {
+                                    //     $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
+                                    //     $standard_coach_cost = @$setting[0]->standard_coach_cost;
+                                    //     $elite_coach_cost = @$setting[0]->elite_coach_cost;
+                                    // }
                                     
                                     $token = '';
                                     if($data_coach[0]->coach_type_id == 1){
                                         $token = $standard_coach_cost;
-                                    }else if($data_coach[0]->coach_type_id == 2){
-                                        $token = $elite_coach_cost;
-                                    }
+                                        $show = $token * $recuring;
+                                    } else if($data_coach[0]->coach_type_id == 2){
+                                        $token = $elite_coach_cost; 
+                                        $show = $token * $recuring;
+                                    } 
 
-                                    echo($token);
+                                    echo($show);
                                     ?>
                                 </span>
                             </div>
