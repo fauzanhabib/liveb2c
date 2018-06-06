@@ -46,28 +46,30 @@
 
                         <div id="tab-2" class="tab-content alt2 hide">
                             <?php echo form_open('b2c/student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
-                        <div class="width100perc" style="padding: 0 15px;">
-                            <div class='border-2-primary border-rounded-5'>
-                                <span class='custom-dropdown'>
-                                    <select class="width100perc" name="selector" id="selector">
-                                        <option disabled selected>Booking Type</option>
-                                        <option value="single-book">Single Book</option>
-                                        <option value="multiple-book">Recurring Book</option>
-                                    </select>
-                                </span>
+                            <div class="recurring__book">
+                                <div class="bycountry" style="padding: 0 15px;">
+                                    <div class='border-2-primary border-rounded-5'>
+                                        <span class='custom-dropdown'>
+                                            <select class="select--recurring" name="selector" id="selector" style="width:100%;">
+                                                <option disabled selected>Booking Type</option>
+                                                <option value="single-book">Single Book</option>
+                                                <option value="multiple-book">Recurring Book</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="bycountry" id="multi-book2" style="padding: 10px 15px 0;">
+                                    <div class='border-2-primary border-rounded-5'>
+                                        <span class='custom-dropdown'>
+                                            <select class="select--recurring" name="type_booking" style="width:100%;">
+                                                <option value="2" selected>2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="width100perc" id="multi-book2" style="padding: 10px 15px 0;">
-                            <div class='border-2-primary border-rounded-5'>
-                                <span class='custom-dropdown'>
-                                    <select name="type_booking" style="width:100%;">
-                                        <option value="2" selected>2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </span>
-                            </div>
-                        </div>
                             <div class="bookcoach__flexing">
                                 <input type="text" name="date" id="datepicker" autocomplete="off" placeholder="Date.." class="dateavailable datepicker trn" data-trn-holder="searchdate">
                                 <style>
