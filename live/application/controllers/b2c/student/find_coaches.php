@@ -746,14 +746,22 @@ class find_coaches extends MY_Site_Controller {
                 $this->messages->add('<span class="trn" data-trn-key="invalidapp">Invalid Appointment</span>', 'warning');
                 redirect('b2c/student/find_coaches/single_date/');
             }else{
-                $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
+                // $availability = $this->isOnAvailability($coach_id, date('Y-m-d', $date_));
 
-                if(in_array(array('start_time' => $start_time_available, 'end_time' => $end_time_available), $availability)) {
-                    // go to next step
+                // if(in_array(array('start_time' => $start_time_available, 'end_time' => $end_time_available), $availability)) {
+                //     // go to next step
 
-                }else{
-                    $this->messages->add('<span class="trn" data-trn-key="invalidtime">Invalid Time</span>', 'warning');
-                    redirect('b2c/student/find_coaches/single_date/');
+                // }else{
+                //     $this->messages->add('<span class="trn" data-trn-key="invalidtime">Invalid Time</span>', 'warning');
+                //     redirect('b2c/student/find_coaches/single_date/');
+                // }
+                $dayoff = $this->is_day_off($coach_id, $dateconvertcoach,$start_time, $end_time);
+
+                // if dayoff 1, coach cuti
+                if($dayoff){
+                    $message = "Coach is Having Day Off";
+                    $this->messages->add('Coach is Having Day Off', 'warning');
+
                 }
                 // begin the transaction to ensure all data created or modified structural
                 $this->db->trans_begin();
@@ -763,8 +771,9 @@ class find_coaches extends MY_Site_Controller {
                 // print_r($token_cost);
                 // exit();
                 // updating remaining token student
-
+                if(!$dayoff){
                 $remain_token = $this->update_token($token_cost);
+                }
                 // echo $remain_token.'-'.$token_cost;
                 // exit();
                 // die();
@@ -774,7 +783,7 @@ class find_coaches extends MY_Site_Controller {
                     $this->db->trans_rollback();
                     $this->messages->add('Not Enough Token', 'warning');
                     redirect('b2c/student/find_coaches/single_date/');
-                  }elseif($this->db->trans_status() === TRUE && $remain_token >= 0){
+                  }elseif($this->db->trans_status() === TRUE && $remain_token >= 0  && (!$dayoff)){
 
                     // $s_t = $this->identity_model->get_identity('token')->select('id, token_amount')->where('user_id', $this->auth_manager->userid())->get();
                     // $r_t = $s_t->token_amount - $token;
@@ -2652,7 +2661,7 @@ class find_coaches extends MY_Site_Controller {
     
     $date_ = strtotime($date_);
 
-    $convert = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), $date_, $start_time, $end_time);
+    $convert = @$this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), $date_, $start_time, $end_time);
     $date = $convert['date'];
 
    
