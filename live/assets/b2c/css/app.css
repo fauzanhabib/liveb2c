@@ -3498,7 +3498,7 @@ select.select--recurring {
       border-bottom: 1px solid #606983;
       margin-left: 75px;
       margin-right: 75px;
-      height: 55px; }
+      min-height: 55px; }
       .dashboard__bxsummary__bookingsummary div:nth-child(7) {
         border: none; }
       .dashboard__bxsummary__bookingsummary div label {
