@@ -534,6 +534,11 @@ $(document).on('click', '#savepass', function() {
             langselect = "es";
             // $(".lang-es").attr("data-value", "es")
         }
+        $.ajax({
+          type:"POST",
+          url: "<?php echo site_url().'/b2c/student/language/update'; ?>",
+          data: {'language':langselect},
+         });
         $(".bxarrow").removeClass("active");
         $(".language-dropdown").removeClass("open");
         ChangeLanguages();

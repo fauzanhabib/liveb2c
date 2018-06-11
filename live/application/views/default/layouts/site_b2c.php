@@ -298,7 +298,8 @@
 
     <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/circle-progress.js"></script>
     <script>
-        DefaultLanguage();
+        var getlang  =  "<?php echo $this->auth_manager->get_language(); ?>";
+        DefaultLanguage(getlang);
     </script>
 
     <script>

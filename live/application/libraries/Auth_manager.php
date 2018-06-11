@@ -364,6 +364,20 @@ class Auth_Manager {
         return $user->profile_picture;
     }
 
+    public function get_language(){
+        // Querying user's data from database
+        $user = $this->CI->user_profile_model->select('user_language')
+                ->where('user_id', $this->CI->auth->userid())
+                ->get();
+
+        // Checking existing user
+        if (!$user) {
+            return FALSE;
+        }
+
+        return $user->user_language;
+    }
+
     /**
      * @function get name
      * @return string name

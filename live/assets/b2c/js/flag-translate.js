@@ -942,8 +942,8 @@ function ChangeLanguages() {
 }
 
 //SETTING DEFAULT LANGUAGE
-function DefaultLanguage() {
-    langselect = "en"
+function DefaultLanguage(xyz) {
+    langselect = xyz;
     $(document).ready(ChangeLanguages());
 };
 

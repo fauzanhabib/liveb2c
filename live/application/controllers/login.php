@@ -102,8 +102,8 @@ class Login extends MY_Controller {
 					// echo "<pre>";print_r($check_login);exit();
           // insert timezone
 
-      		$min_raw = $this->input->post("min_raw");
-          $userid  = $this->auth_manager->userid();
+      	$min_raw = $this->input->post("min_raw");
+        $userid  = $this->auth_manager->userid();
 
           $this->session->set_userdata('u_p',$this->input->post('password'));
 
@@ -139,6 +139,16 @@ class Login extends MY_Controller {
 					// print_r($timezone);exit();
           $this->db->replace('user_timezones', $timezone);
           // ====
+
+          $lang = $this->input->post("lang");
+
+          $language = array(
+             'user_language' => $lang,
+          );
+
+					// print_r($timezone);exit();
+          $this->db->where('user_id', $userid);
+          $this->db->update('user_profiles', $language);
 
           $check_login_type = $this->db->select('*')
                               ->from('users')

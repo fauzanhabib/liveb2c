@@ -37,9 +37,9 @@
 			display: none;
 		}
        
-    .hidden{
+    /*.hidden{
         visibility: hidden;
-    }
+    }*/
   
 	</style>
 </head>
@@ -186,6 +186,7 @@
                                 <p class="control">
                                     <input class="input trn" type="password" data-trn-holder="pass2" placeholder="password" name="password" data-parsley-trigger="change" required data-parsley-required-message="Please input your password" style="letter-spacing:2px;">
                                     <input type="hidden" id="min_raw" name="min_raw" value=""/>
+                                    <input type="hidden" id="lang" name="lang" value=""/>
                                 </p>
                             </div>
                     </div>
@@ -267,6 +268,8 @@
     </script>
     <script>
         $(document).ready(function () {
+            langselect = "en";
+            $('input[name="lang"]').val(langselect);
             $(".lang-flag").click(function () {
                 $(".language-dropdown").toggleClass("open");
                 $(".bxarrow").toggleClass("active");
@@ -292,10 +295,21 @@
                 }
                 $(".bxarrow").removeClass("active");
                 $(".language-dropdown").removeClass("open");
+                $('input[name="lang"]').val(langselect);
                 ChangeLanguages();
             });
-
-        })
+            // $('#login-form').submit(function(e) {
+            //     var email = $.trim($("input[name='email']").val());
+            //     $.ajax({
+            //             type:"POST",
+            //             url:"<?php echo site_url('b2c/student/language/update');?>",
+            //             data: {
+            //                 'email': email,
+            //                 'language': langselect,
+            //             },
+            //         });
+            //     });
+            });
     </script>
     
 </body>
