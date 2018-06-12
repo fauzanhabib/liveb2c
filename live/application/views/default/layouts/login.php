@@ -90,15 +90,25 @@
                     <li class="btn__signin"><a href="" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     <li>
                         <div id="lang_selector" class="language-dropdown hidden">
-                            <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
-                                <span class="title1"> EN </span>
-                                <span class="flag"></span>
-                                <div class="bxarrow" id="bxarrow">
-                                    <span class="arrow"></span>
-                                </div>
-                            </label>
+                            <?php if($this->session->userdata('language')){ ?>
+                                <label for="toggle" class="lang-flag lang-<?php echo $this->session->userdata('language'); ?>"  title="Click to select the language">
+                                    <span class="title1"> <?php echo strtoupper($this->session->userdata('language')); ?> </span>
+                                    <span class="flag"></span>
+                                    <div class="bxarrow" id="bxarrow">
+                                        <span class="arrow"></span>
+                                    </div>
+                                </label>
+                            <?php }else{ ?>
+                                <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+                                    <span class="title1"> EN </span>
+                                    <span class="flag"></span>
+                                    <div class="bxarrow" id="bxarrow">
+                                        <span class="arrow"></span>
+                                    </div>
+                                </label>
+                            <?php } ?>
                             <ul class="lang-list">
-                                <li class="lang lang-en selected" title="English">
+                                <li class="lang lang-en" title="English">
                                     <span class="title2">EN</span>
                                     <span class="flag"></span>
                                 </li>
@@ -125,15 +135,25 @@
 
             <div class="mobile__menu">
                 <div id="lang_selector" class="language-dropdown hidden">
-                    <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
-                        <span class="title1"> EN </span>
-                        <span class="flag"></span>
-                        <div class="bxarrow" id="bxarrow">
-                            <span class="arrow"></span>
-                        </div>
-                    </label>
+                    <?php if($this->session->userdata('language')){ ?>
+                        <label for="toggle" class="lang-flag lang-<?php echo $this->session->userdata('language'); ?>"  title="Click to select the language">
+                            <span class="title1"> <?php echo strtoupper($this->session->userdata('language')); ?> </span>
+                            <span class="flag"></span>
+                            <div class="bxarrow" id="bxarrow">
+                                <span class="arrow"></span>
+                            </div>
+                        </label>
+                    <?php }else{ ?>
+                        <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+                            <span class="title1"> EN </span>
+                            <span class="flag"></span>
+                            <div class="bxarrow" id="bxarrow">
+                                <span class="arrow"></span>
+                            </div>
+                        </label>
+                    <?php } ?>
                     <ul class="lang-list">
-                        <li class="lang lang-en selected" title="English">
+                        <li class="lang lang-en" title="English">
                             <span class="title2">EN</span>
                             <span class="flag"></span>
                         </li>
@@ -237,6 +257,13 @@
             ?>
         </footer>
     </div>
+    <script>
+        var getlang  =  "<?php echo $this->session->userdata('language'); ?>";
+        if (!getlang) {
+            getlang = "en";
+        }
+        DefaultLanguage(getlang);
+    </script>
 
     <script>
 		$('#login-form').parsley();
@@ -293,22 +320,16 @@
                     langselect = "es";
                     // $(".lang-es").attr("data-value", "es")
                 }
+                $.ajax({
+                  type:"POST",
+                  url: "<?php echo site_url().'/home/session'; ?>",
+                  data: {'language':langselect},
+                 });
                 $(".bxarrow").removeClass("active");
                 $(".language-dropdown").removeClass("open");
                 $('input[name="lang"]').val(langselect);
                 ChangeLanguages();
-            });
-            // $('#login-form').submit(function(e) {
-            //     var email = $.trim($("input[name='email']").val());
-            //     $.ajax({
-            //             type:"POST",
-            //             url:"<?php echo site_url('b2c/student/language/update');?>",
-            //             data: {
-            //                 'email': email,
-            //                 'language': langselect,
-            //             },
-            //         });
-            //     });
+                });
             });
     </script>
     

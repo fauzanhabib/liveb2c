@@ -25,6 +25,15 @@ class Home extends MY_Controller {
             $this->template->publish();
 	}
 
+    public function session() {
+
+        $language    = $this->input->post('language');
+        $this->session->set_userdata("language",$language);
+
+        return true;
+        
+    }
+
     public function check_login(){
         $user_id = $this->auth_manager->userid();
 
