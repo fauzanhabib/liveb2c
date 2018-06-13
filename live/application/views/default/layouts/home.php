@@ -15,9 +15,9 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script> -->
     <style>
-    /*.hidden{
+    .hidden{
         visibility: hidden;
-    }*/
+    }
     </style>
 </head>
 

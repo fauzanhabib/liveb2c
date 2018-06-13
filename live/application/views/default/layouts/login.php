@@ -37,9 +37,9 @@
 			display: none;
 		}
        
-    /*.hidden{
+    .hidden{
         visibility: hidden;
-    }*/
+    }
   
 	</style>
 </head>

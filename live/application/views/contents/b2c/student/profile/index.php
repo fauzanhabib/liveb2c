@@ -50,6 +50,24 @@
 .optGender{
   color: black;
 }
+.profile__additional__language .language-dropdown .lang-flag{
+   width:252px;
+}
+.language-dropdown .lang-flag .flag, .language-dropdown .lang-list .lang .flag{
+  display:none;
+}
+.bxarrow .arrow{
+  left:86px;
+}
+.profile__additional__language .language-dropdown ul li{
+  width:252px;
+}
+.lang-flag .title1{
+  width: 57% !important;
+}
+.lang .title2{
+  width: 57% !important;
+}
 </style>
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
       <span id='textNotif'></span>
@@ -196,11 +214,11 @@
                   <span class="flag"></span>
               </li>
               <li class="lang lang-id" data-value="id" title="Indonesia">
-                  <span class="title2">Indonesia</span>
+                  <span class="title2">Bahasa Indonesia</span>
                   <span class="flag"></span>
               </li>
               <li class="lang lang-es" data-value="es" title="Spanish">
-                  <span class="title2">Spanyol</span>
+                  <span class="title2">Spanish</span>
                   <span class="flag"></span>
               </li>
           </ul>
@@ -525,12 +543,12 @@ $(document).on('click', '#savepass', function() {
             // $(".lang-en").attr("data-value", "en")
         } else if ($(this).hasClass('lang-id')) {
             $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
-            $(".title1").html("<p>Indonesia</p>")
+            $(".title1").html("<p>Bahasa Indonesia</p>")
             langselect = "id";
             // $(".lang-id").attr("data-value", "id")
         } else {
             $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
-            $(".title1").html("<p>Spanyol</p>")
+            $(".title1").html("<p>Spanish</p>")
             langselect = "es";
             // $(".lang-es").attr("data-value", "es")
         }
@@ -552,11 +570,11 @@ $(document).on('click', '#savepass', function() {
         } else if (langselect == "id") {
             $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
             $(".lang-list").find(".lang-id").addClass("selected");
-            $(".title1").html("<p>Indonesia</p>")
+            $(".title1").html("<p>Bahasa Indonesia</p>")
         } else {
             $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
             $(".lang-list").find(".lang-es").addClass("selected");
-            $(".title1").html("<p>Spanyol</p>")
+            $(".title1").html("<p>Spanish</p>")
         }
 
   });
