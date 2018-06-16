@@ -1236,16 +1236,16 @@ setInterval('checkShare()', 1000);
   // videoSelect.onchange = getDevices();
 </script>
 <script>
-  // var appointment_id = "<?php echo $appointment_id; ?>";
-  // $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
-  //   stat_first = data;
-  //   // console.log("==============================");
-  //   // console.log(stat_first);
-  //   if (stat_first == 1) {
-  //     closetab();
-  //   }
-  // });
   var appointment_id = "<?php echo $appointment_id; ?>";
+  $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
+    // stat_first = data;
+    // console.log("==============================");
+    // console.log(stat_first);
+    // if (stat_first == 1) {
+    //   closetab();
+    // }
+  });
+
   var stat_check;
 
   var checksess = setInterval(function() {
