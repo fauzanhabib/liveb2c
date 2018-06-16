@@ -286,7 +286,7 @@ opacity: 1 !important;
       height:auto !important;
       display:flex;
       flex-wrap:wrap;
-      
+
   }
 }
 
@@ -294,7 +294,7 @@ opacity: 1 !important;
   .dashboard__notif{
       display:flex;
       flex-wrap:wrap;
-      
+
   }
 }
 
@@ -968,16 +968,16 @@ opacity: 1 !important;
   }, milisecond);
 </script>
 <script>
-  var appointment_id = "<?php echo $appointment_id; ?>";
-  $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
-    // console.log(data);
-    stat_first = data;
-    // console.log("==============================");
-    console.log(stat_first);
-    if (stat_first == 1) {
-      closetab();
-    }
-  });
+  // var appointment_id = "<?php echo $appointment_id; ?>";
+  // $.post("<?php echo site_url('opentok/live/store_session');?>", { 'appointment_id': appointment_id },function(data) {
+  //   // console.log(data);
+  //   stat_first = data;
+  //   // console.log("==============================");
+  //   console.log(stat_first);
+  //   if (stat_first == 1) {
+  //     closetab();
+  //   }
+  // });
   var appointment_id = "<?php echo $appointment_id; ?>";
   var stat_check;
 
