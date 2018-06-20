@@ -987,6 +987,11 @@ function ChangeLanguages() {
             es: "ENVIAR",
             id: "KIRIM"
         },
+        conti: {
+            en: "Continue",
+            es: "continuar",
+            id: "lanjutkan"
+        },
     };
 
     translator = $('body').translate({

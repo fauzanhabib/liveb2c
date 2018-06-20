@@ -47,7 +47,7 @@
 	<div class="alert-login">
 		<div id="alert-login-confirm">
 			<h3 id="alert-login-title"></h3>
-			<button id="alert-login-reload" class="btn-primary pure-button">Continue</button>
+			<button id="alert-login-reload" class="btn-primary pure-button trn" data-trn-key="conti">Continue</button>
 		</div>
 		<!-- pervent adblock -->
 		<script>
@@ -79,8 +79,8 @@
             <div class="login__header__nav">
                 <ul class="ulheder">
                     <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
-                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
-                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in">Sign In</a></li>
+                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact" style="color:#49C5FE!important;">Contact</a></li>
+                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in" style="color:#fff!important;">Sign In</a></li>
                     <li>
                         <div id="lang_selector" class="language-dropdown">
                             <?php if($this->session->userdata('language')){ ?>
