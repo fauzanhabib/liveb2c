@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
 
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/jquery.translate.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/flag-translate.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
@@ -75,10 +77,45 @@
                 <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
             </div>
             <div class="login__header__nav">
-                <ul>
-                    <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                    <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                <ul class="ulheder">
+                    <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
+                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in">Sign In</a></li>
+                    <li>
+                        <div id="lang_selector" class="language-dropdown">
+                            <?php if($this->session->userdata('language')){ ?>
+                                <label for="toggle" class="lang-flag lang-<?php echo $this->session->userdata('language'); ?>"  title="Click to select the language">
+                                    <span class="title1"> <?php echo strtoupper($this->session->userdata('language')); ?> </span>
+                                    <span class="flag"></span>
+                                    <div class="bxarrow" id="bxarrow">
+                                        <span class="arrow"></span>
+                                    </div>
+                                </label>
+                            <?php }else{ ?>
+                                <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+                                    <span class="title1"> EN </span>
+                                    <span class="flag"></span>
+                                    <div class="bxarrow" id="bxarrow">
+                                        <span class="arrow"></span>
+                                    </div>
+                                </label>
+                            <?php } ?>
+                            <ul class="lang-list">
+                                <li class="lang lang-en" title="English">
+                                    <span class="title2">EN</span>
+                                    <span class="flag"></span>
+                                </li>
+                                <li class="lang lang-id"  title="Indonesia">
+                                    <span class="title2">ID</span>
+                                    <span class="flag"></span>
+                                </li>
+                                <li class="lang lang-es"  title="Spanish">
+                                    <span class="title2">ES</span>
+                                    <span class="flag"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </header>
@@ -90,6 +127,39 @@
             </div>
 
             <div class="mobile__menu">
+                <div id="lang_selector" class="language-dropdown hidden">
+                    <?php if($this->session->userdata('language')){ ?>
+                        <label for="toggle" class="lang-flag lang-<?php echo $this->session->userdata('language'); ?>"  title="Click to select the language">
+                            <span class="title1"> <?php echo strtoupper($this->session->userdata('language')); ?> </span>
+                            <span class="flag"></span>
+                            <div class="bxarrow" id="bxarrow">
+                                <span class="arrow"></span>
+                            </div>
+                        </label>
+                    <?php }else{ ?>
+                        <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+                            <span class="title1"> EN </span>
+                            <span class="flag"></span>
+                            <div class="bxarrow" id="bxarrow">
+                                <span class="arrow"></span>
+                            </div>
+                        </label>
+                    <?php } ?>
+                    <ul class="lang-list">
+                        <li class="lang lang-en" title="English">
+                            <span class="title2">EN</span>
+                            <span class="flag"></span>
+                        </li>
+                        <li class="lang lang-id" title="Indonesia">
+                            <span class="title2">ID</span>
+                            <span class="flag"></span>
+                        </li>
+                        <li class="lang lang-es" title="Spanish">
+                            <span class="title2">ES</span>
+                            <span class="flag"></span>
+                        </li>
+                    </ul>
+                </div>
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>
@@ -97,9 +167,9 @@
                 </div>
                 <nav class="mobile__nav">
                     <ul>
-                        <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                        <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                        <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                        <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
+                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" target="_self" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     </ul>
                 </nav>
             </div>
@@ -108,13 +178,13 @@
 
         <main class="main flex--center">
             <div class="about__us">
-                <h2 class="title">About Us</h2>
+                <h2 class="title trn" data-trn-key="about3">About Us</h2>
                 <!-- <p><b>DynEd International, Inc.</b>, has the world's most comprehensive lineup of award-winning English Language Teaching (ELT/ESL) solutions.</p>
                 <p>DynEd's courses cover all proficiency levels and include a range of age-appropriate courses, from kids in school to adults in university, corporate, aviation or other vocational settings. DynEd courses have been approved by Ministries of Education in several countries.</p>
                 <p>With over 13 million active users, DynEd courses are designed to be used in a blended learning environment, along with teachers and classroom support.</p>
                 <p>DynEd's headquarters and development center is in Burlingame, California – overlooking the San Francisco Bay. The company has sales and support offices around the world and additional development centers in Beijing and Jakarta.</p>
                 <p>For a representative in your area, or to become a partner, please <a href="mailto:info@dyned.com">contact us</a>.</p> -->
-                <p style="text-align: justify;">neo LIVE is our online platform for your personalized coaching sessions where, from the very first session, you will talk about yourself using the English language you've already learned. That will help you personalize what you have been studying in the neo Study App. With neo LIVE, you can practice with our trained coaches anytime, anywhere. The coach can see all your study data, which they will use to help you learn more efficiently. neo LIVE also gives your coach a personalized coaching script to guide your conversation class.</p>
+                <p style="text-align: justify;" class="trn" data-trn-key="aboutdeckrip">neo LIVE is our online platform for your personalized coaching sessions where, from the very first session, you will talk about yourself using the English language you've already learned. That will help you personalize what you have been studying in the neo Study App. With neo LIVE, you can practice with our trained coaches anytime, anywhere. The coach can see all your study data, which they will use to help you learn more efficiently. neo LIVE also gives your coach a personalized coaching script to guide your conversation class.</p>
             </div>
         </main>
         <footer class="flex--center">
@@ -150,7 +220,13 @@
             </a>
         </footer>
     </div>
-
+    <script>
+        var getlang  =  "<?php echo $this->session->userdata('language'); ?>";
+        if (!getlang) {
+            getlang = "en";
+        }
+        DefaultLanguage(getlang);
+    </script>
     <script>
 		$('#login-form').parsley();
 
@@ -178,6 +254,59 @@
 
         //     return true;
         // }
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $(".lang-flag").click(function () {
+                $(".language-dropdown").toggleClass("open");
+                $(".bxarrow").toggleClass("active");
+            });
+            $("ul.lang-list li").click(function () {
+                $("ul.lang-list li").removeClass("selected");
+                $(this).addClass("selected");
+                if ($(this).hasClass('lang-en')) {
+                    $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+                    $(".title1").html("<p>EN</p>")
+                    langselect = "en";
+                    // $(".lang-en").attr("data-value", "en")
+                } else if ($(this).hasClass('lang-id')) {
+                    $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+                    $(".title1").html("<p>ID</p>")
+                    langselect = "id";
+                    // $(".lang-id").attr("data-value", "id")
+                } else {
+                    $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+                    $(".title1").html("<p>ES</p>")
+                    langselect = "es";
+                    // $(".lang-es").attr("data-value", "es")
+                }
+                $.ajax({
+                  type:"POST",
+                  url: "<?php echo site_url().'/home/session'; ?>",
+                  data: {'language':langselect},
+                 });
+                $(".bxarrow").removeClass("active");
+                $(".language-dropdown").removeClass("open");
+                ChangeLanguages();
+            });
+
+            //FUNCTION CHECK TO ADD CLASS TO DROPDOWN LANGUAGE
+        if (langselect == "en") {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+            $(".lang-list").find(".lang-en").addClass("selected");
+            $(".title1").html("<p>EN</p>")
+        } else if (langselect == "id") {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+            $(".lang-list").find(".lang-id").addClass("selected");
+            $(".title1").html("<p>ID</p>")
+        } else {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+            $(".lang-list").find(".lang-es").addClass("selected");
+            $(".title1").html("<p>ES</p>")
+        }
+
+        })
     </script>
 </body>
 

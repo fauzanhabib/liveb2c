@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/b2c/css/app.css">
 
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/jquery.translate.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/b2c/js/flag-translate.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
@@ -75,10 +77,45 @@
                 <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
             </div>
             <div class="login__header__nav">
-                <ul>
-                    <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                    <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                <ul class="ulheder">
+                    <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                    <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
+                    <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" class="trn" data-trn-key="sign_in">Sign In</a></li>
+                    <li>
+                        <div id="lang_selector" class="language-dropdown">
+                            <?php if($this->session->userdata('language')){ ?>
+                                <label for="toggle" class="lang-flag lang-<?php echo $this->session->userdata('language'); ?>"  title="Click to select the language">
+                                    <span class="title1"> <?php echo strtoupper($this->session->userdata('language')); ?> </span>
+                                    <span class="flag"></span>
+                                    <div class="bxarrow" id="bxarrow">
+                                        <span class="arrow"></span>
+                                    </div>
+                                </label>
+                            <?php }else{ ?>
+                                <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+                                    <span class="title1"> EN </span>
+                                    <span class="flag"></span>
+                                    <div class="bxarrow" id="bxarrow">
+                                        <span class="arrow"></span>
+                                    </div>
+                                </label>
+                            <?php } ?>
+                            <ul class="lang-list">
+                                <li class="lang lang-en" title="English">
+                                    <span class="title2">EN</span>
+                                    <span class="flag"></span>
+                                </li>
+                                <li class="lang lang-id"  title="Indonesia">
+                                    <span class="title2">ID</span>
+                                    <span class="flag"></span>
+                                </li>
+                                <li class="lang lang-es"  title="Spanish">
+                                    <span class="title2">ES</span>
+                                    <span class="flag"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </header>
@@ -89,7 +126,40 @@
                 <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
             </div>
 
-            <div class="mobile__menu">
+             <div class="mobile__menu">
+                <div id="lang_selector" class="language-dropdown hidden">
+                    <?php if($this->session->userdata('language')){ ?>
+                        <label for="toggle" class="lang-flag lang-<?php echo $this->session->userdata('language'); ?>"  title="Click to select the language">
+                            <span class="title1"> <?php echo strtoupper($this->session->userdata('language')); ?> </span>
+                            <span class="flag"></span>
+                            <div class="bxarrow" id="bxarrow">
+                                <span class="arrow"></span>
+                            </div>
+                        </label>
+                    <?php }else{ ?>
+                        <label for="toggle" class="lang-flag lang-en"  title="Click to select the language">
+                            <span class="title1"> EN </span>
+                            <span class="flag"></span>
+                            <div class="bxarrow" id="bxarrow">
+                                <span class="arrow"></span>
+                            </div>
+                        </label>
+                    <?php } ?>
+                    <ul class="lang-list">
+                        <li class="lang lang-en" title="English">
+                            <span class="title2">EN</span>
+                            <span class="flag"></span>
+                        </li>
+                        <li class="lang lang-id" title="Indonesia">
+                            <span class="title2">ID</span>
+                            <span class="flag"></span>
+                        </li>
+                        <li class="lang lang-es" title="Spanish">
+                            <span class="title2">ES</span>
+                            <span class="flag"></span>
+                        </li>
+                    </ul>
+                </div>
                 <div class="burger__menu">
                     <div class="menu__bar"></div>
                     <div class="menu__bar"></div>
@@ -97,9 +167,9 @@
                 </div>
                 <nav class="mobile__nav">
                     <ul>
-                        <li><a href="<?php echo site_url('b2c/about'); ?>">About Us</a></li>
-                        <li><a href="<?php echo site_url('b2c/contact'); ?>">Contact Us</a></li>
-                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>">Sign In</a></li>
+                        <li><a href="<?php echo site_url('b2c/about'); ?>" class="trn" data-trn-key="about">About</a></li>
+                        <li><a href="<?php echo site_url('b2c/contact'); ?>" class="trn" data-trn-key="contact">Contact</a></li>
+                        <li class="btn__signin"><a href="<?php echo site_url('login'); ?>" target="_self" class="trn" data-trn-key="sign_in">Sign In</a></li>
                     </ul>
                 </nav>
             </div>
@@ -108,28 +178,28 @@
         
         <main class="main flex--center">
             <div class="contact__us">
-                <h2 class="title">Contact Us</h2>
+                <h2 class="title trn" data-trn-key="contactus">Contact Us</h2>
                 <form class="pure-form pure-form-stacked" data-parsley-validate>
-                    <span>Do you have a question? Fill in the form below and we will get back to you within 24 hours:</span>
+                    <span class="trn" data-trn-key="contactdeckrip">Do you have a question? Fill in the form below and we will get back to you within 24 hours:</span>
                     <div class="contact__us__form">
                         <div class="p10">
-                            <input class="input" placeholder="Name" type="text" required data-parsley-required-message="Please input your name"  >
+                            <input class="input trn" data-trn-holder="cname" placeholder="Name" type="text" required data-parsley-required-message="Please input your name"  >
                         </div> 
                         <div class="p10">
-                            <input class="input" placeholder="Email" type="email" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address">
+                            <input class="input trn" data-trn-holder="cemail" placeholder="Email" type="email" required data-parsley-required-message="Please input your e-mail address" data-parsley-type-message="Invalid e-mail address">
                         </div>
                         <div class="p10">
-                            <input class="input" placeholder="Country" type="text" required data-parsley-required-message="Please input your Country">
+                            <input class="input trn" data-trn-holder="ccountry" placeholder="Country" type="text" required data-parsley-required-message="Please input your Country">
                         </div>
                         <div class="p10">
-                            <input class="input" placeholder="City" type="text" required data-parsley-required-message="Please input your City">
+                            <input class="input trn" data-trn-holder="ccity" placeholder="City" type="text" required data-parsley-required-message="Please input your City">
                         </div>  
                         <div class="p10__textarea">
-                            <textarea class="input" placeholder="Messages" style="height: 150px;resize: none;" required data-parsley-required-message="Please input your message"></textarea>
+                            <textarea class="input" data-trn-holder="cmessages" placeholder="Messages" style="height: 150px;resize: none;" required data-parsley-required-message="Please input your message"></textarea>
                         </div>
                     </div>
                     <div class="p10__button">
-                        <button type="submit" class="neobutton">SEND</button>
+                        <button type="submit" class="neobutton trn" data-trn-key="send">SEND</button>
                     </div>
                 </form>
             </div>
@@ -182,6 +252,14 @@
     </div>
 
     <script>
+        var getlang  =  "<?php echo $this->session->userdata('language'); ?>";
+        if (!getlang) {
+            getlang = "en";
+        }
+        DefaultLanguage(getlang);
+    </script>
+
+    <script>
 		$('#login-form').parsley();
 
 		// TO REFRESH WHEN ADBLOCK POPUP SHOW UP
@@ -208,6 +286,59 @@
 
         //     return true;
         // }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".lang-flag").click(function () {
+                $(".language-dropdown").toggleClass("open");
+                $(".bxarrow").toggleClass("active");
+            });
+            $("ul.lang-list li").click(function () {
+                $("ul.lang-list li").removeClass("selected");
+                $(this).addClass("selected");
+                if ($(this).hasClass('lang-en')) {
+                    $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+                    $(".title1").html("<p>EN</p>")
+                    langselect = "en";
+                    // $(".lang-en").attr("data-value", "en")
+                } else if ($(this).hasClass('lang-id')) {
+                    $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+                    $(".title1").html("<p>ID</p>")
+                    langselect = "id";
+                    // $(".lang-id").attr("data-value", "id")
+                } else {
+                    $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+                    $(".title1").html("<p>ES</p>")
+                    langselect = "es";
+                    // $(".lang-es").attr("data-value", "es")
+                }
+                $.ajax({
+                  type:"POST",
+                  url: "<?php echo site_url().'/home/session'; ?>",
+                  data: {'language':langselect},
+                 });
+                $(".bxarrow").removeClass("active");
+                $(".language-dropdown").removeClass("open");
+                ChangeLanguages();
+            });
+
+            //FUNCTION CHECK TO ADD CLASS TO DROPDOWN LANGUAGE
+        if (langselect == "en") {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-en").removeClass("lang-es").removeClass("lang-id");
+            $(".lang-list").find(".lang-en").addClass("selected");
+            $(".title1").html("<p>EN</p>")
+        } else if (langselect == "id") {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-id").removeClass("lang-es").removeClass("lang-en");
+            $(".lang-list").find(".lang-id").addClass("selected");
+            $(".title1").html("<p>ID</p>")
+        } else {
+            $(".language-dropdown").find(".lang-flag").addClass("lang-es").removeClass("lang-en").removeClass("lang-id");
+            $(".lang-list").find(".lang-es").addClass("selected");
+            $(".title1").html("<p>ES</p>")
+        }
+
+        })
     </script>
 </body>
 

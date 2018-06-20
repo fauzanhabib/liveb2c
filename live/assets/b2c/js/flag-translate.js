@@ -930,7 +930,63 @@ function ChangeLanguages() {
             es: "El estudiante no asistió a la sesión.",
             id: "Siswa tidak menghadiri sesi."
         },
-
+        //PAGE ABOUT
+        about3: {
+            en: "About Us",
+            es: "Sobre nosotros",
+            id: "Tentang Kami"
+        },
+        aboutdeckrip: {
+            en: "neo LIVE is our online platform for your personalized coaching sessions where, from the very first session, you will talk about yourself using the English language you've already learned. That will help you personalize what you have been studying in the neo Study App. With neo LIVE, you can practice with our trained coaches anytime, anywhere. The coach can see all your study data, which they will use to help you learn more efficiently. neo LIVE also gives your coach a personalized coaching script to guide your conversation class.",
+            es: "neo LIVE es nuestra plataforma en línea para sus sesiones de coaching personalizadas donde, desde la primera sesión, hablará de usted mismo utilizando el idioma que ya ha aprendido. Eso te ayudará a personalizar lo que has estado estudiando en la aplicación neo Study. Con neo LIVE, puedes practicar con nuestros entrenadores entrenados en cualquier momento y en cualquier lugar. El coach puede ver todos los datos de su estudio, que usarán para ayudarlo a aprender de manera más eficiente. neo LIVE también te aconseja entrenar un guión de entrenamiento personalizado para guiar tu clase de conversación.",
+            id: "neo LIVE adalah platform online kami untuk sesi pelatihan pribadi Anda di mana, dari sesi pertama, Anda akan berbicara tentang diri Anda menggunakan bahasa Inggris yang telah Anda pelajari. Itu akan membantu Anda mempersonalisasi apa yang telah Anda pelajari di App Studi neo.Dengan LANGSUNG, Anda dapat berlatih dengan pelatih terlatih kapan saja, di mana saja. Pelatih dapat melihat data studi Anda, yang akan mereka gunakan untuk membantu Anda mempelajari lebih lanjut. neo LIVE juga memberi pelatih Anda naskah pelatihan pribadi untuk memandu kelas percakapan Anda."
+        },
+        //PAGE CONTACT
+        contactus: {
+            en: "Contact Us",
+            es: "Contáctenos",
+            id: "Hubungi kami"
+        },
+        contactdeckrip: {
+            en: "Exit",
+            es: "Salida",
+            id: "Keluar"
+        },
+        contactdeckrip: {
+            en: "Do you have a question? Fill in the form below and we will get back to you within 24 hours:",
+            es: "¿Tienes una pregunta? Rellene el siguiente formulario y nos pondremos en contacto con usted en un plazo de 24 horas:",
+            id: "Apakah Anda punya pertanyaan? Isi formulir di bawah dan kami akan menghubungi Anda dalam 24 jam:"
+        },
+        cname: {
+            en: "Name",
+            es: "Nombre",
+            id: "Nama"
+        },
+        cemail: {
+            en: "Email",
+            es: "Email",
+            id: "E-mail"
+        },
+        ccountry: {
+            en: "Country",
+            es: "País",
+            id: "Negara"
+        },
+        ccity: {
+            en: "City",
+            es: "Ciudad",
+            id: "Kota"
+        },
+        cmessages: {
+            en: "Messages",
+            es: "Mensajes",
+            id: "Pesan"
+        },
+        send: {
+            en: "SEND",
+            es: "ENVIAR",
+            id: "KIRIM"
+        },
     };
 
     translator = $('body').translate({
