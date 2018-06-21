@@ -81,14 +81,14 @@ class Study_dashboard extends MY_Site_Controller {
       $check_gcp = @$gcp->data->certification_level;
       $check_gwp = @$gwp->status;
 
-      // echo('<pre>');print_r($err_gcp); exit;
+      // echo('<pre>');print_r($check_gsp); exit;
       // || @$check_gwp != 'OK' || !@$check_gsp || !@$check_gcp
-      if(!empty(@$check_gsp) || !empty(@$check_gcp) || !empty(@$check_gwp)){
+      if(!empty(@$check_gsp) && !empty(@$check_gcp) && !empty(@$check_gwp)){
         // $gsp = json_decode(@$this->study_progress->GetStudyProgress($tokenresult));
         // $gcp = json_decode(@$this->study_progress->GetCurrentProgress($tokenresult));
         // $gwp = json_decode(@$this->study_progress->GetWeeklyProgress($tokenresult));
 
-        // echo('<pre>');print_r($tokenresult); exit;
+        // echo('<pre>');print_r($id); exit;
         $mt_status_to_colour = array(
           "passed" => "bg-green-gradient",
           "open" => "bg-white-gradient",
@@ -152,7 +152,7 @@ class Study_dashboard extends MY_Site_Controller {
         );
 
         // echo $key;
-        // echo('<pre>');print_r($vars); exit;
+        echo('<pre>');print_r($vars); exit;
         $this->template->content->view('contents/b2c/student/study_dashboard/index',$vars);
         $this->template->publish();
       }else{
@@ -180,13 +180,14 @@ class Study_dashboard extends MY_Site_Controller {
                           ->where('user_id',$id)
                           ->get()->result();
 
-        // echo "<pre>";print_r($gsp);exit();
+        // echo "<pre>";print_r($gcp);exit();
         if(@$check_study_data){
           $check_gsp = @$gsp->data->certification_level;
           $check_gcp = @$gcp->data->certification_level;
           $check_gwp = @$gwp->status;
 
-          if(empty(@$check_gsp) || empty(@$check_gcp) || empty(@$check_gwp)){
+          // echo "<pre>";print_r($check_gsp);exit('a');
+          if(!empty(@$check_gsp) && !empty(@$check_gcp) && !empty(@$check_gwp)){
             $array_study = array(
               'json_gsp' => $gsp,
               'json_gcp' => $gcp,

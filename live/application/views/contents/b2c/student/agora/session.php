@@ -386,7 +386,10 @@ opacity: 1 !important;
             <div class="study__dashboard__bottom">
                 <!-- achievement goal step -->
                 <div class="progress__step">
-                    <div class="donut__progress">
+                  <?php
+                    if(@$gsp){
+                  ?>
+                  <div class="donut__progress">
                       <div class="outter--circle circle"
                            data-thickness="15"
                            data-size="140">
@@ -430,15 +433,15 @@ opacity: 1 !important;
                             </svg> -->
 
                             <div class="donut__progress__info">
-                                <div class="point__progress__info"><?php echo $gsp->data->certification_level;?></div>
+                                <div class="point__progress__info"><?php echo @$gsp->data->certification_level;?></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="progress__info__label">
-                      <?php echo number_format($gsp->data->total_points_until_today);?> / <?php echo number_format($gsp->data->total_points_to_pass);?>
+                      <?php echo number_format(@$gsp->data->total_points_until_today);?> / <?php echo number_format(@$gsp->data->total_points_to_pass);?>
                     </div>
-                    </div>
+                  </div>
 
                     <div class="progress__achievement">
                       <div class="study__progress__achievement">
@@ -461,7 +464,7 @@ opacity: 1 !important;
                       <!-- ========================================= -->
 
                         <div class="achievement__point__info">
-                          <h5><?php echo number_format($gsp->data->study->points_until_today);?></h5>
+                          <h5><?php echo number_format(@$gsp->data->study->points_until_today);?></h5>
                           <h3 class="trn" data-trn-key="study">Study</h3>
                         </div>
                       </div>
@@ -482,11 +485,16 @@ opacity: 1 !important;
 
 
                         <div class="achievement__point__info">
-                          <h5><?php echo number_format($gsp->data->coach->points_until_today);?></h5>
+                          <h5><?php echo number_format(@$gsp->data->coach->points_until_today);?></h5>
                           <h3 class="trn" data-trn-key="coach">Coach</h3>
                         </div>
                       </div>
                     </div>
+                    <?php
+                    }else{
+                      echo "Cannot acces progress data";
+                    }
+                    ?>
                 </div>
                 <!-- end achievement goal step -->
 
@@ -552,7 +560,7 @@ opacity: 1 !important;
                             </svg>
                             <div class="step__progress__info">
                                 <div class="step__info__label">
-                                  <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
+                                  <?php if(@$gsp->data->total_points_until_today >= @$gsp->data->total_points_expected_today){?>
                                   <!-- kondisi point telah ketemu goal -->
                                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                              viewBox="0 0 61.8 61.8" style="enable-background:new 0 0 61.8 61.8;" xml:space="preserve">
@@ -653,13 +661,13 @@ opacity: 1 !important;
                                         </svg>
                           <?php }else{?>
                                         <!-- kondisi point belom ketemu goal -->
-                                        <h5><?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?></br>points left</h5>
+                                        <h5><?php echo (@$gsp->data->total_points_expected_today - @$gsp->data->total_points_until_today);?></br>points left</h5>
                           <?php } ?>
                                 </div>
                             </div>
                     </div>
                     </div>
-                  <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
+                  <?php if(@$gsp->data->total_points_until_today >= @$gsp->data->total_points_expected_today){?>
                     <!-- kondisi point telah ketemu goal -->
                     <h5  class="trn" data-trn-key="congratulation">Congratulation!</h5>
                   <?php }else{?>
@@ -839,8 +847,8 @@ opacity: 1 !important;
 <script>
 // lingkaran bulat pertama
 
-  var innerupcoach   = '<?php echo $gsp->data->coach->points_until_today;?>';
-  var innerdowncoach = '<?php echo $gsp->data->coach->points_to_pass;?>';
+  var innerupcoach   = '<?php echo @$gsp->data->coach->points_until_today;?>';
+  var innerdowncoach = '<?php echo @$gsp->data->coach->points_to_pass;?>';
   var innerperccoach = innerupcoach / innerdowncoach;
 
 var outter = $('.outter--circle.circle');
@@ -851,8 +859,8 @@ outter.circleProgress({
     fill: { gradient: ['green', 'yellow'] }
 });
 
-var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
+var innerup   = '<?php echo @$gsp->data->study->points_until_today;?>';
+var innerdown = '<?php echo @$gsp->data->study->points_to_pass;?>';
 var innerperc = innerup / innerdown;
 
 var inner = $('.inner--circle.circle');
@@ -866,9 +874,9 @@ inner.circleProgress({
 // daily step progress
 var step = $('.step--circle.circle');
 
-    var stepVal = '<?php echo $gsp->data->percentage_points;?>';
+    var stepVal = '<?php echo @$gsp->data->percentage_points;?>';
 
-    var titikVal = '<?php echo $gsp->data->percentage_days;?>';
+    var titikVal = '<?php echo @$gsp->data->percentage_days;?>';
 
     var newstepVal = stepVal/100;
     var newtitikVal = titikVal/100;

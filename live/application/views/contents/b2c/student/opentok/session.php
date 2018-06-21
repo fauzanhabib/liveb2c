@@ -401,6 +401,9 @@ opacity: 1 !important;
             <div class="study__dashboard__bottom">
                 <!-- achievement goal step -->
                 <div class="progress__step">
+                  <?php
+                    if(@$gsp){
+                  ?>
                     <div class="donut__progress">
                       <div class="outter--circle circle"
                            data-thickness="15"
@@ -502,6 +505,11 @@ opacity: 1 !important;
                         </div>
                       </div>
                     </div>
+                    <?php
+                    }else{
+                      echo "Cannot acces progress data";
+                    }
+                    ?>
                 </div>
                 <!-- end achievement goal step -->
 
