@@ -144,7 +144,8 @@
               // ensure newPage is in available range
               if (newPage > 0 && newPage <= totalPages) {
                   paginate.createPage(items, newPage, perPage);
-                  DefaultLanguage();
+                ChangeLanguages();
+;
               }
           });
       };

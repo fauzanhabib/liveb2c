@@ -70,9 +70,9 @@
                                     <div class='border-2-primary border-rounded-5'>
                                         <span class='custom-dropdown'>
                                             <select class="select--recurring" name="selector" id="selector" style="width:100%;">
-                                                <option disabled selected>Booking Type</option>
-                                                <option value="single-book">Single Book</option>
-                                                <option value="multiple-book">Recurring Book</option>
+                                                <option class="trn" disabled selected  data-trn-key="typebook" >Booking Type</option>
+                                                <option class="trn" value="single-book" data-trn-key="singlebook">Single Book</option>
+                                                <option class="trn" value="multiple-book" data-trn-key="multiplebook">Recurring Book</option>
                                             </select>
                                         </span>
                                     </div>
@@ -557,6 +557,7 @@
                                     $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
                                 }
                                 $(".schedule-loading").hide();
+                                ChangeLanguages();
                             });
                         }
 
@@ -618,5 +619,5 @@
             </script>
             <script>
                 $('.article-loop').paginate(6);
-                
+
             </script>

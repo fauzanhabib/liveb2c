@@ -69,9 +69,9 @@
                                     <div class='border-2-primary border-rounded-5'>
                                         <span class='custom-dropdown'>
                                             <select class="select--recurring" name="selector" id="selector" style="width:100%;">
-                                                <option disabled selected>Booking Type</option>
-                                                <option value="single-book">Single Book</option>
-                                                <option value="multiple-book">Recurring Book</option>
+                                                <option class="trn" disabled selected data-trn-key="typebook">Booking Type</option>
+                                                <option class="trn" value="single-book" data-trn-key="singlebook">Single Book</option>
+                                                <option class="trn" value="multiple-book" data-trn-key="multiplebook">Recurring Book</option>
                                             </select>
                                         </span>
                                     </div>
@@ -372,13 +372,13 @@
                                 <ul class="accordion_book">
                                     <li class="accordion-item">
                                         <div class="accordion-thumb available-at click">
-                                            <span>Available At</span>
+                                            <span class="trn" data-trn-key="availableat">Available At</span>
                                             <i class="fa fa-angle-down"></i>
                                         </div>
 
                                         <div class="accordion-panel">
                                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
+                                                 <input type="text" class="datepicker__each trn" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." data-trn-holder="searchdate" readonly>
                                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
                                                  <button class="weekly_schedule btn-green btn-small trn" value="<?php echo(@$coaches[$i]->id); ?>" data-trn-key="weeklysc">WEEKLY SCHEDULE</button>
@@ -422,6 +422,7 @@
                     </div>
                 </div>
             </section>
+
             <script>
             $(function(){
                 $('#multi-book2').hide(); 
@@ -559,6 +560,7 @@
                                     $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
                                 }
                                 $(".schedule-loading").hide();
+                                ChangeLanguages();
                             });
                         }
 

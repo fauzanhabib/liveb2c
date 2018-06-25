@@ -8,8 +8,8 @@ if (!@$availability) {
     <table class="tbl-booking">
         <thead>
             <tr>
-                <th class="text-center">START TIME</th>
-                <th class="text-center">END TIME</th>
+                <th class="text-center trn" data-trn-key="starttm">START TIME</th>
+                <th class="text-center trn" data-trn-key="endtm">END TIME</th>
                 <th></th>
             </tr>
         </thead>
@@ -152,7 +152,7 @@ if (!@$availability) {
                         <td class="text-center"><?php echo $endtime; ?></td>
                         <td>
                         <?php if(($this->auth_manager->role() != "PRT") && ($this->auth_manager->role() != 'ADM') && ($this->auth_manager->role() != 'RAD')){ ?>
-                            <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/'.$search_by.'/' . $coach_id . '/' . strtotime(@$adate) . '/' . @$availability[$i]['start_time'] . '/' . @$availability[$i]['end_time']); ?>" class="pure-button btn-small btn-white">Book</a>
+                            <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/'.$search_by.'/' . $coach_id . '/' . strtotime(@$adate) . '/' . @$availability[$i]['start_time'] . '/' . @$availability[$i]['end_time']); ?>" class="pure-button btn-small btn-white trn" data-trn-key="book2">Book2</a>
                         <?php } ?>
                         </td>
                     </tr>

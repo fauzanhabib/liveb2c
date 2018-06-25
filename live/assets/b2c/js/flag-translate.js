@@ -897,6 +897,16 @@ function ChangeLanguages() {
         },
 
         //LEAVESESSION
+        book2: {
+            en: "Book",
+            es: "Libro",
+            id: "Pesan"
+        },
+        bknow: {
+            en: "Book Now",
+            es: "Libro",
+            id: "Pesan Sekarang"
+        },
         sessionsumm: {
             en: "Session Summaries",
             es: "Resúmenes de sesiones",

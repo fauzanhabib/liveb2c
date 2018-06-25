@@ -69,9 +69,9 @@
                                     <div class='border-2-primary border-rounded-5'>
                                         <span class='custom-dropdown'>
                                             <select class="select--recurring" name="selector" id="selector" style="width:100%;">
-                                                <option disabled selected>Booking Type</option>
-                                                <option value="single-book">Single Book</option>
-                                                <option value="multiple-book">Recurring Book</option>
+                                            <option class="trn" disabled selected data-trn-key="typebook">Booking Type</option>
+                                                <option class="trn" value="single-book" data-trn-key="singlebook">Single Book</option>
+                                                <option class="trn" value="multiple-book" data-trn-key="multiplebook">Recurring Book</option>
                                             </select>
                                         </span>
                                     </div>
@@ -379,7 +379,7 @@
 
                                         <div class="accordion-panel">
                                             <div style="display:flex;flex-direction: column;margin:15px;">
-                                                 <input type="text" class="datepicker__each" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly>
+                                                 <input type="text" class="datepicker__each trn" name="<?php echo($coaches[$i]->id);?>" placeholder="Date.." readonly data-trn-holder="searchdate">
                                                  <div class="datepickerEach__here" style="position: absolute;margin-left: 98px;margin-top:30px;"></div>
 
                                                  <button class="weekly_schedule btn-green btn-small trn" data-trn-key="weeklysc" value="<?php echo(@$coaches[$i]->id); ?>">WEEKLY SCHEDULE</button>
@@ -561,6 +561,7 @@
                                 $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
                             }
                             $(".schedule-loading").hide();
+                            ChangeLanguages();
                         });
                     }
 

@@ -69,9 +69,9 @@
                                     <div class='border-2-primary border-rounded-5'>
                                         <span class='custom-dropdown'>
                                             <select class="select--recurring" name="selector" id="selector" style="width:100%;">
-                                                <option disabled selected>Booking Type</option>
-                                                <option value="single-book">Single Book</option>
-                                                <option value="multiple-book">Recurring Book</option>
+                                                <option class="trn" disabled selected data-trn-key="typebook">Booking Type</option>
+                                                <option class="trn" value="single-book" data-trn-key="singlebook">Single Book</option>
+                                                <option class="trn" value="multiple-book" data-trn-key="multiplebook">Recurring Book</option>
                                             </select>
                                         </span>
                                     </div>
@@ -476,7 +476,7 @@
                                                             @date_default_timezone_set('Etc/GMT+0');
                                                                     ?>
                                                                     <i><?php echo(date('H:i',strtotime(@$av['start_time'])));?> - <?php echo $endtime; ?></i>
-                                                                    <a href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
+                                                                    <a class="trn" data-trn-key="bknow" href="<?php echo site_url('b2c/student/find_coaches/summary_book/single_date/' . $d['coach_id'] . '/' . strtotime(@$adate) . '/' . $av['start_time'] . '/' . $av['end_time']); ?>">Book Now</a>
                                                         <?php } ?>
                                                 </div>
                                             <?php } ?>
