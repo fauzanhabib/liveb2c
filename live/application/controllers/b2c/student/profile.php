@@ -131,50 +131,51 @@ class Profile extends MY_Site_Controller {
         if($fieldType == 'City'){
           $column = 'city';
           $table  = 'user_geography';
-          $txtUpd = 'City';
+          $txtUpd = "<p class='trn' data-trn-key='city'>City</p>";
           $idCol  = 'user_id';
         }else if($fieldType == 'State/Province'){
           $column = 'state';
           $table  = 'user_geography';
-          $txtUpd = 'State/Province';
+          $txtUpd = "<p class='trn' data-trn-key='state'>State/Province</p>";
           $idCol  = 'user_id';
         }else if($fieldType == 'Address'){
           $column = 'address';
           $table  = 'user_geography';
-          $txtUpd = 'Address';
+          $txtUpd = "<p class='trn' data-trn-key='address'>Address</p>";
           $idCol  = 'user_id';
         }else if($fieldType == 'Likes'){
           $column = 'like';
           $table  = 'student_detail_profiles';
-          $txtUpd = 'Likes';
+          $txtUpd = "<p class='trn' data-trn-key='likes'>Likes</p>";
           $idCol  = 'student_id';
         }else if($fieldType == 'Dislikes'){
           $column = 'dislike';
           $table  = 'student_detail_profiles';
-          $txtUpd = 'Dislikes';
+          $txtUpd = "<p class='trn' data-trn-key='dislikes'>Dislikes</p>";
           $idCol  = 'student_id';
         }else if($fieldType == 'Gender'){
           $column = 'gender';
           $table  = 'user_profiles';
-          $txtUpd = 'Gender';
+          $txtUpd = "<p class='trn' data-trn-key='gender3'>Gender</p>";
           $idCol  = 'user_id';
         }else if($fieldType == 'spoken'){
           $column = 'spoken_language';
           $table  = 'user_profiles';
-          $txtUpd = 'Native Languages';
+          $txtUpd = "<p class='trn' data-trn-key='native'>Native Language</p>";
           $idCol  = 'user_id';
         }else if($fieldType == 'birthdate'){
           $column = 'date_of_birth';
           $table  = 'user_profiles';
-          $txtUpd = 'Date of Birth';
+          $txtUpd = "<p class='trn' data-trn-key='birth'>Date of Birth</p>";
           $idCol  = 'user_id';
           $updatedVal = date("Y-m-d", strtotime($updatedVal));
           $mod_val = date("d - M - Y", strtotime($updatedVal));
         }
 
         $var[] = [
-          'textUpd' => $txtUpd.' has been updated to '.$updatedVal,
+          "textUpd" => $txtUpd." <p class='trn' data-trn-key='hsbeen'> has been updated to &nbsp;</p>".$updatedVal,
           'upd_date' => $mod_val
+          
         ];
 
         echo json_encode($var);
@@ -185,7 +186,7 @@ class Profile extends MY_Site_Controller {
 
         $this->db->where($idCol, $id);
         $this->db->update($table, $upd_geograph);
-
+        
     }
 
     public function upd_pass(){

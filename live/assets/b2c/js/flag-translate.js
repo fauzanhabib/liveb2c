@@ -107,6 +107,51 @@ function ChangeLanguages() {
         },
 
         //PAGE PROFILE
+        gender3: {
+            en: "Gender",
+            es: "Género",
+            id: "Jenis Kelamin"
+        },
+        dateofbirth: {
+            en: "Date of Birth  &nbsp;",
+            es: "Fecha de nacimiento  &nbsp;",
+            id: "Tanggal lahir  &nbsp;"
+        },
+        hsbeen: {
+            en: "&nbsp; has been updated to  &nbsp;",
+            es: "&nbsp; ha sido actualizado a  &nbsp;",
+            id: "&nbsp; telah diperbarui menjadi  &nbsp;"
+        },
+        blank: {
+            en: "Can not save a blank input",
+            es: "No se puede guardar una entrada en blanco",
+            id: "Tidak dapat menyimpan masukan kosong"
+        },
+        allfield: {
+            en: "All fields are required",
+            es: "Todos los campos son obligatorios",
+            id: "Semua bidang wajib diisi"
+        },
+        minimumpw: {
+            en: "Minimum password is 8 characters",
+            es: "La contraseña mínima es de 8 caracteres",
+            id: "Kata sandi minimum adalah 8 karakter"
+        },
+        canot: {
+            en: "Can not save only spaces",
+            es: "No se pueden guardar solo espacios",
+            id: "Tidak dapat menyimpan hanya spasi"
+        },
+        newpws: {
+            en: "New password did not matchNo",
+            es: "Nueva contraseña no coincide",
+            id: "Kata sandi baru tidak cocok"
+        },
+        nativeupdt: {
+            en: "Native Language updated",
+            es: "Idioma nativo actualizado",
+            id: "Bahasa Asli diperbarui"
+        },
         birth: {
             en: "Date of Birth",
             es: "Fecha de nacimiento",
@@ -769,6 +814,23 @@ function ChangeLanguages() {
             es: "Coach de búsqueda",
             id: "Cari Pelatih"
         },
+
+        typebook: {
+            en: "Booking Type",
+            es: "Libro individual",
+            id: "Jenis Pemesanan"
+        },
+        singlebook: {
+            en: "Single Book",
+            es: "Reserva individual",
+            id: "Pemesanan Tunggal"
+        },
+        multiplebook: {
+            en: "Recurring Book",
+            es: "Libro recurrente",
+            id: "Pemesanan Berulang"
+        },
+
         availableat: {
             en: "Available At",
             es: "Disponible en",

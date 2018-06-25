@@ -68,9 +68,14 @@
 .lang .title2{
   width: 57% !important;
 }
+.GridFlex{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+}
 </style>
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
-      <span id='textNotif'></span>
+      <span id='textNotif' class="GridFlex"></span>
   </div>
   <div class="dashboard__notif notifFailed" id='failedNotif' style="display:none !important;">
       <span id='textFail'></span>
@@ -164,38 +169,47 @@
 			</div>
       <div class="profile__additional__goal">
 				<label class="trn" data-trn-key="certification">Certification Goal</label>
+        <label style="display:none;">Certification Goal</label>
 				<span><?php echo $goal_name;?></span>
 			</div>
 			<div class="profile__additional__token">
 				<label class="trn" data-trn-key="token">Token</label>
+        <label style="display:none;">Token</label>
 				<span><?php echo $data[0]->token_amount;?></span>
 			</div>
 			<div class="profile__additional__skype">
 				<label class="trn" data-trn-key="phone">Phone</label>
+        <label style="display:none;">Phone</label>
 				<span><?php if($data[0]->phone){echo $data[0]->dial_code.' '.$data[0]->phone;}else{echo "<font class='grayed'>click to add</font>";}?></span>
 			</div>
 			<div class="profile__additional__city">
 				<label class="trn" data-trn-key="city">City</label>
+        <label style="display:none;">City</label>
 				<span class="switchText"><?php if($data[0]->city){echo $data[0]->city;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__state">
 				<label class="trn" data-trn-key="state">State/Province</label>
+        <label style="display:none;">State/Province</label>
 				<span class="switchText"><?php if($data[0]->state){echo $data[0]->state;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__address">
 				<label class="trn" data-trn-key="address">Address</label>
+        <label style="display:none;">Address</label>
 				<span class="switchText"><?php if($data[0]->address){echo $data[0]->address;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__like">
 				<label class="trn" data-trn-key="likes">Likes</label>
+        <label style="display:none;">Likes</label>
 				<span class="switchText"><?php if($data[0]->like){echo $data[0]->like;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__dislike">
 				<label class="trn" data-trn-key="dislikes">Dislikes</label>
+        <label style="display:none;">Dislikes</label>
 				<span class="switchText"><?php if($data[0]->dislike){echo $data[0]->dislike;}else{echo "<font class='grayed'>click to add</font>";}?><i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>
 			</div>
 			<div class="profile__additional__timezone">
 				<label class="trn" data-trn-key="timezone">Time Zone</label>
+        <label style="display:none;">Time Zone</label>
 				<span><?php echo $data[0]->timezone;?></span>
 			</div>
       <div class="profile__additional__language">
@@ -268,9 +282,10 @@
           //check if input is only spaces
           if((jQuery.trim( updatedVal )).length==0){
             // alert('a');
-            $("#textFail").text('Can not save only spaces');
+            $("#textFail").html("<p class='trn' data-trn-key='canot'>Can not save only spaces</p>");
             $("#failedNotif").show().delay(2000).fadeOut("slow");
           }else{
+            console.log(elPrev);
             var currParent = $(this).parent();
             $.ajax({
               type:"POST",
@@ -279,10 +294,11 @@
               success: function(data){
                 var obj = JSON.parse(data);
                 clicked = 0;
-                $("#textNotif").text(obj[0].textUpd);
+                $("#textNotif").html(obj[0].textUpd);
                 $("#successNotif").show().delay(2000).fadeOut("slow");
                 $repdef = "<span class='switchText'>"+updatedVal+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>";
                 currParent.replaceWith($repdef);
+                ChangeLanguages();
               },
               error: function(data){
         				// console.log(data);
@@ -300,7 +316,8 @@
            $(this).parent().replaceWith($repdef);
          }else if(updatedVal == ''){
           //  clicked = 0;
-           $("#textFail").text('Can not save a blank input');
+           $("#textFail").html("<p class='trn' data-trn-key='blank'>Can not save a blank input</p>");
+           ChangeLanguages();
            $("#failedNotif").show().delay(2000).fadeOut("slow");
          }
       });
@@ -325,12 +342,13 @@
   $(document).on("click",".switchText", switchText);
 
   $(document).on('click', '.genderChange', function() {
+
     genderVal = $(this).text();
-    // console.log(genderVal);
+    console.log(genderVal);
     if(genderVal == 'Male'){
-      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender trn" value="Male" data-trn-key="male">Male</option><option class="optGender trn" value="Female" data-trn-key="female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
+      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender trn" value="Male" data-trn-value="male">Male</option><option class="optGender trn" value="Female"  data-trn-value="female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
     }else{
-      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender" value="Male" data-trn-key="male">Male</option><option class="optGender" value="Female" selected data-trn-key="female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
+      selectbox = $('<div class="genderCont"><select class="dropGender" style="width: 90%;"><option class="optGender trn" value="Male" data-trn-value="male">Male</option><option class="optGender trn" value="Female" selected  data-trn-value="female">Female</option></select><div style="display: inline;margin-right: 5px;float: right;"><i id="gender_cancel" class="fa fa-times btn_cancel" aria-hidden="true"></i></div></div>');
     }
     $(this).replaceWith(selectbox);
     $('.dropGender').focus();
@@ -345,19 +363,25 @@
         data: {'elPrev':elPrevGen,'updatedVal': updatedValGen},
         success: function(data){
           var obj = JSON.parse(data);
-          $("#textNotif").text(obj[0].textUpd);
+          $("#textNotif").html(obj[0].textUpd);
           $("#successNotif").show().delay(2000).fadeOut("slow");
+          // console.log(data);
+          // ChangeLanguages();
           $(".dropGender").blur(function(){
             genderSpan = "<span class='genderChange'>"+updatedValGen+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i></span>";
             $('.genderCont').replaceWith(genderSpan);
+            
           });
+          
         },
         error: function(data){
           // console.log(data);
           return;
         }
        });
+       
     });
+    // ChangeLanguages();
   });
 
   $(document).on('click', '#gender_cancel', function() {
@@ -403,7 +427,8 @@
           url: "<?php echo site_url().'/b2c/student/profile/upd_text'; ?>",
           data: {'elPrev':'spoken','updatedVal': conv_changed},
           success: function(data){
-            $("#textNotif").text('Native Language updated');
+            $("#textNotif").html("<p class='trn' data-trn-key='nativeupdt'>Native Language updated</p>");
+            ChangeLanguages();
             $("#successNotif").show().delay(2000).fadeOut("slow");
             $('.conv_lang').html(conv_selected+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i>");
             $('.conv_lang').show();
@@ -454,11 +479,12 @@ $(document).on('click', '#inputDate', function() {
           success: function(data){
             var obj = JSON.parse(data);
             // console.log(obj[0].textUpd);
-            $("#textNotif").text(obj[0].textUpd);
+            $("#textNotif").html(obj[0].textUpd);
             $("#successNotif").show().delay(2000).fadeOut("slow");
             $("#inputDate").html(obj[0].upd_date+"<i class='fa fa-pencil-square-o iconEdit' aria-hidden='true'></i>");
             $('#dateChangeCont').hide();
             $('#inputDate').show();
+            ChangeLanguages();
           },
           error: function(data){
             // console.log(data);
@@ -482,18 +508,23 @@ $(document).on('click', '#savepass', function() {
   currpass = $('#currpass').val();
   newpass  = $('#newpass').val();
   confpass = $('#confpass').val();
+  
 
   if(currpass == '' || newpass == '' || confpass == ''){
-    $("#textFail").text('All fields are required');
+    $("#textFail").html("<p class='trn' data-trn-key='allfield'>All elds are required</p>");
+    ChangeLanguages();
     $("#failedNotif").show().delay(2000).fadeOut("slow");
   }else if((jQuery.trim( currpass )).length==0 || (jQuery.trim( newpass )).length==0 || (jQuery.trim( confpass )).length==0){
-    $("#textFail").text('Can not save only spaces');
+    $("#textFail").html("<p class='trn' data-trn-key='canot'>Can not save only spaces</p>");
+    ChangeLanguages();
     $("#failedNotif").show().delay(2000).fadeOut("slow");
   }else if((jQuery.trim( currpass )).length<8 || (jQuery.trim( newpass )).length<8 || (jQuery.trim( confpass )).length<8){
-    $("#textFail").text('Minimum password is 8 characters');
+    $("#textFail").html("<p class='trn' data-trn-key='minimumpw'>Minimum password is 8 characters</p>");
+    ChangeLanguages();
     $("#failedNotif").show().delay(2000).fadeOut("slow");
   }else if(newpass != confpass){
-    $("#textFail").text('New password did not match');
+    $("#textFail").html("<p class='trn' data-trn-key='newpws'>New password did not match</p>");
+    ChangeLanguages();
     $("#failedNotif").show().delay(2000).fadeOut("slow");
   }else{
 
