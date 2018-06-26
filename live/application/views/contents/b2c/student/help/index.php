@@ -1,3 +1,18 @@
+    <style>
+        .header__profile {
+            -webkit-box-flex: 1.1;
+            -ms-flex: 1.1;
+            flex: 1.1;
+        }
+        @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+            .mobile__menu {
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+            }
+        }
+    </style>
+    
     <div class="help__content">
         <div class="dashboard__menubookingcoachresult">
             <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>">

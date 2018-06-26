@@ -73,6 +73,19 @@
   flex-wrap:wrap;
   justify-content: center;
 }
+ .header__profile {
+    -webkit-box-flex: 1.1;
+    -ms-flex: 1.1;
+    flex: 1.1;
+  }
+
+@media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+  .mobile__menu {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+}
 </style>
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
       <span id='textNotif' class="GridFlex"></span>

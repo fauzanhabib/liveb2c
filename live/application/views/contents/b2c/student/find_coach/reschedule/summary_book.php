@@ -1,4 +1,21 @@
                 
+                 <style>
+                    .header__profile {
+                            -webkit-box-flex: 1.1;
+                            -ms-flex: 1.1;
+                            flex: 1.1;
+                    }
+
+                    @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+                        .mobile__menu {
+                            -webkit-box-flex: 1;
+                            -ms-flex: 1;
+                            flex: 1;
+                        }
+                    }
+
+                </style>
+                
                 <div class="dashboard">
                     <div class="dashboard__bxsummary">
                         <div class="dashboard__bxsummary__bookingsummary">

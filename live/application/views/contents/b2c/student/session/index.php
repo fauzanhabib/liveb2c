@@ -35,6 +35,18 @@
         -ms-flex-direction:row;
             flex-direction:row;
     }
+    .header__profile {
+        -webkit-box-flex: 1.1;
+        -ms-flex: 1.1;
+        flex: 1.1;
+    }
+    @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+        .mobile__menu {
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+    }
 </style>
 
     <?php if(count($data)!=0){ ?>

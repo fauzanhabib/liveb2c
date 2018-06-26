@@ -11,6 +11,18 @@
 	.btn_u_sd:hover{
 		cursor: pointer;
 	}
+	.header__profile {
+		-webkit-box-flex: 1.1;
+		-ms-flex: 1.1;
+		flex: 1.1;
+	}
+	@media only screen and (max-device-width: 768px) and (min-device-width: 320px){
+		.mobile__menu {
+			-webkit-box-flex: 1;
+			-ms-flex: 1;
+			flex: 1;
+		}
+	} 
 </style>
 	<div class="study__dashboard__top">
 		<!-- achievement goal step -->

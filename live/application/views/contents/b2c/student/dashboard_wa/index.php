@@ -11,6 +11,13 @@
         cursor: pointer;
         text-decoration: underline;
     }
+    @media only screen and (max-device-width: 568px) and (min-device-width: 320px){
+        .mobile__menu {
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+    }
 </style>
 
     <!-- back button -->
