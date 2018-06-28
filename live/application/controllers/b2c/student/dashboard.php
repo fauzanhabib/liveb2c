@@ -132,13 +132,18 @@ class Dashboard extends MY_Site_Controller {
         $nowdate  = date("Y-m-d");
         // $nowd  = "2016-08-21";
         $hour_start_db  = date('H:i:s');
+
+        $date_end = date("24:00:00");
+        $time_end = strtotime($date_end);
+        $time_end = $time_end - ($minutes * 60);
+        $date_end = date("H:i:s", $time_end);
         // $hour_start_db  = "02:40:01";
-        // echo "<pre>";print_r($tz);exit();
+        // echo "<pre>";print_r($nowdate);exit();
         $pull_appoint = $this->db->select('*')
                       ->from('appointments')
                       ->where($tipe, $id)
                       ->where('date =', $nowdate)
-                      ->where('end_time >=', $hour_start_db)
+                      ->where('end_time <=', $date_end)
                       ->where('status !=', 'completed')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
@@ -149,7 +154,7 @@ class Dashboard extends MY_Site_Controller {
                       ->from('appointments')
                       ->where($tipe, $id)
                       ->where('date =', $nowdate)
-                      ->where('end_time >=', $hour_start_db)
+                      ->where('end_time <=', $date_end)
                       ->where('status !=', 'completed')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
@@ -163,7 +168,7 @@ class Dashboard extends MY_Site_Controller {
                       ->where('status !=', 'completed')
                       ->or_where($tipe, $id)
                       ->where('date >=', $nowdate)
-                      ->where('end_time >=', $hour_start_db)
+                      ->where('end_time <=', $date_end)
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
                       // ->limit(5)
@@ -222,7 +227,7 @@ class Dashboard extends MY_Site_Controller {
             $n = 0;
         }
 
-        // echo "<pre>";print_r($n);exit();
+        // echo "<pre>";print_r($pull_appoint);exit();
 
         $wm   = @$pull_appoint[$n];
         $wm_id = @$wm->id;
@@ -351,11 +356,27 @@ class Dashboard extends MY_Site_Controller {
         // $hour_start_db  = "02:40:01";
         // print_r($hour_start_db);
         // exit();
+        $date_end = date("24:00:00");
+        $time_end = strtotime($date_end);
+        $time_end = $time_end - ($minutes * 60);
+        $date_end = date("H:i:s", $time_end);
+
         $pull_appoint = $this->db->select('*')
                       ->from('appointments')
                       ->where($tipe, $id)
                       ->where('date =', $nowdate)
-                      ->where('end_time >=', $hour_start_db)
+                      ->where('end_time <=', $date_end)
+                      ->where('status !=', 'completed')
+                      ->order_by('date', 'ASC')
+                      ->order_by('start_time', 'ASC')
+                      // ->limit(5)
+                      ->get()->result();
+
+        $pull_appoint2 = $this->db->select('*')
+                      ->from('appointments')
+                      ->where($tipe, $id)
+                      ->where('date =', $nowdate)
+                      ->where('end_time <=', $date_end)
                       ->where('status !=', 'completed')
                       ->order_by('date', 'ASC')
                       ->order_by('start_time', 'ASC')
@@ -363,7 +384,8 @@ class Dashboard extends MY_Site_Controller {
                       ->get()->result();
 
 
-        $he_pull2    = strtotime(@$pull_appoint[0]->end_time) - (5 * 60);
+        $wm2         = @$pull_appoint2[0];
+        $he_pull2    = strtotime(@$wm2->end_time) - (5 * 60);
         $hourend2    = date("H:i:s", $he_pull2);
 
         $n;
