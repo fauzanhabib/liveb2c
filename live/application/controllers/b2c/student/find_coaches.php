@@ -2947,6 +2947,7 @@ class find_coaches extends MY_Site_Controller {
 
 
         $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
+        $this->session->unset_userdata('recurring_booking_type');
         //publish template
         $this->template->publish();
     }
