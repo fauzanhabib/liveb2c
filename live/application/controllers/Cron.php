@@ -20,9 +20,9 @@ public function __construct()
 
 public function run()
     {
-     	if (!$this->input->is_cli_request()) {
-       	show_error('Direct access is not allowed');
-        }
+     	// if (!$this->input->is_cli_request()) {
+      //  	show_error('Direct access is not allowed');
+      //   }
 
    	$date = date("Y-m-d H:i:s");
     $str = strtotime($date);
@@ -138,9 +138,9 @@ public function run()
 
 public function done()
     {
-        if (!$this->input->is_cli_request()) {
-        show_error('Direct access is not allowed');
-        }
+        // if (!$this->input->is_cli_request()) {
+        // show_error('Direct access is not allowed');
+        // }
 
         $datenow = date("Y-m-d");
         $strdatenow = strtotime($datenow);
