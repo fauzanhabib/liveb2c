@@ -615,7 +615,7 @@ function makeFullScreen(divId){
                 <div class="comment-message padding-t-10 clearfix">
                       <div style="padding-top: 5px;">
                         <div class="col-md-2">
-                          <input placeholder="Please write here..." type="text" id="pesan" class="form-control" style="width: 84%">
+                          <input placeholder="Please write here..." data-trn-holder="plsewrite" type="text" id="pesan" class="form-control trn" style="width: 84%">
                           <input placeholder="<?php echo $this->auth_manager->get_name();?>" type="hidden" id="user" class="form-control" value="<?php echo $this->auth_manager->get_name();?>" disabled>
                           <audio id="chat_audio" src="<?php echo base_url();?>assets/sound/chat.mp3" preload="auto"></audio>
                           <input type="submit" value="Send" id="kirim" class="pure-button btn-small btn-tertiary" style="width: 14%;float: right;height:26px;">

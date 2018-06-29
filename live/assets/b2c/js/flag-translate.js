@@ -1064,6 +1064,11 @@ function ChangeLanguages() {
             es: "continuar",
             id: "lanjutkan"
         },
+        plsewrite: {
+            en: "Please write here...",
+            es: "Por favor escribe aquí ...",
+            id: "Tolong tulis di sini ..."
+        },
     };
 
     translator = $('body').translate({

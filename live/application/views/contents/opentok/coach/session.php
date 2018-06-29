@@ -939,7 +939,7 @@ div.panel.show {
                 <!-- ========== -->
                 <div class="col-md-12">
                       <div class="col-md-2">
-                          <input placeholder="Please write here..." type="text" id="pesan" class="form-control" style="width: 82%;">
+                          <input placeholder="Please write here..." data-trn-holder="plsewrite" type="text" id="pesan" class="form-control trn" style="width: 82%;">
                           <input placeholder="<?php echo $this->auth_manager->get_name();?>" type="hidden" id="user" 
                               style="width: 15%;float: right;" 
                               class="form-control" value="<?php echo $this->auth_manager->get_name();?>" disabled>
