@@ -109,8 +109,8 @@ class manage_appointments extends MY_Site_Controller {
             'end_date' => $week_date[1],
             'start_date' => $date, 
         );
-       echo('<pre>');
-       print_r($vars); exit;
+       // echo('<pre>');
+       // print_r($vars); exit;
         $this->session->set_userdata('appointment_id', $appointment_id);
 
        $this->template->content->view('default/contents/manage_appointment/reschedule/select_coach', $vars);
