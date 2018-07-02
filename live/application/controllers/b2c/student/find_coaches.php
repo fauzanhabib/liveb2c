@@ -683,7 +683,7 @@ class find_coaches extends MY_Site_Controller {
             $message = '';
             $date_ = strtotime("+".$value." day", $date_);
         @date_default_timezone_set('Etc/GMT+0');
-       
+
 
         $start_time_available = $start_time_;
         $end_time_available = $end_time_;
@@ -790,7 +790,7 @@ class find_coaches extends MY_Site_Controller {
                     // $data = array(
                     //     'token_amount' => $r_t,
                     // );
-                    
+
                     // $u_t = $this->identity_model->get_identity('token')->update($s_t->id, $data);
 
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
@@ -883,11 +883,11 @@ class find_coaches extends MY_Site_Controller {
                         }
                         $this->messages->add($message, 'success');
 
-                        
+
                        }
                     }
                 }
-            
+
 
             // If we arrive here, it means that no exception was thrown
             // i.e. no query has failed, and we can commit the transaction
@@ -1942,6 +1942,18 @@ class find_coaches extends MY_Site_Controller {
             $this->messages->add($message, 'success');
             redirect('b2c/student/find_coaches/single_date');
         }
+
+        //Inserting cl, cp, and cs =============================================
+        $pull_c_id = $this->db->select('cl_id, cp_id, cs_id')
+                    ->from('users')
+                    ->where('id',$id)
+                    ->get()->result();
+
+        $u_cl_id = @$pull_c_id[0]->cl_id;
+        $u_cp_id = @$pull_c_id[0]->cp_id;
+        $u_cs_id = @$pull_c_id[0]->cs_id;
+        //Inserting cl, cp, and cs =============================================
+
         $booked = array(
             'student_id' => $this->auth_manager->userid(),
             'coach_id' => $coach_id,
@@ -1951,11 +1963,12 @@ class find_coaches extends MY_Site_Controller {
             'end_time' => $end_time,
             'status' => $appointment_status,
             'session' => $session,
-            'app_type' => $app_type
+            'app_type' => $app_type,
+            'cl_id' => $u_cl_id,
+            'cp_id' => $u_cp_id,
+            'cs_id' => $u_cs_id
         );
-        //  echo "<pre>";
-        // print_r($booked);
-        // exit();
+        // echo "<pre>";print_r($booked);exit();
 
         //$isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
         $this->db->trans_begin();
@@ -2022,7 +2035,7 @@ class find_coaches extends MY_Site_Controller {
             $this->db->where('id', $student_token->id);
             $this->db->update('user_tokens', $data);
             $this->db->trans_commit();
-            
+
             // echo $status.'+'.$student_token->token_amount.'+'.$remain_token.'<br>';
             // echo $this->db->trans_status();
             // exit();
@@ -2272,7 +2285,7 @@ class find_coaches extends MY_Site_Controller {
                     // $data = array(
                     //     'token_amount' => $r_t,
                     // );
-                    
+
                     // $u_t = $this->identity_model->get_identity('token')->update($s_t->id, $data);
 
                     $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
@@ -2571,7 +2584,7 @@ class find_coaches extends MY_Site_Controller {
 
 
       // $appointment_count = count($this->appointment_model->where('coach_id', $coach_id)->where('status not like', 'cancel')->where('status not like', 'temporary')->where('date', date("Y-m-d", $date))->get_all());
-        
+
         $appointment_count = count($this->appointment_model->where('student_id', $student_id)->where('date', date("Y-m-d", $date))->get_all());
 
         // print_r($this->get_date_week($date)); exit;
@@ -2658,13 +2671,13 @@ class find_coaches extends MY_Site_Controller {
     }
 
     private function is_day_off($coach_id = '', $date_ = '',$start_time = '', $end_time = '') {
-    
+
     $date_ = strtotime($date_);
 
     $convert = @$this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), $date_, $start_time, $end_time);
     $date = $convert['date'];
 
-   
+
     $date_ = date('Y-m-d', $date);
 
         $day_off = $this->db->select('coach_id, start_date, end_date')
