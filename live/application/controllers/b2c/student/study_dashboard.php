@@ -180,14 +180,17 @@ class Study_dashboard extends MY_Site_Controller {
                           ->where('user_id',$id)
                           ->get()->result();
 
-        // echo "<pre>";print_r($gcp);exit();
+        // echo "<pre>";print_r($gsp);exit();
         if(@$check_study_data){
-          $check_gsp = @$gsp->data->certification_level;
-          $check_gcp = @$gcp->data->certification_level;
-          $check_gwp = @$gwp->status;
+          $dcd_gsp   = json_decode($gsp);
+          $dcd_gcp   = json_decode($gcp);
+          $dcd_gwp   = json_decode($gwp);
+          $check_gsp = @$dcd_gsp->data->certification_level;
+          $check_gcp = @$dcd_gcp->data->certification_level;
+          $check_gwp = @$dcd_gwp->status;
+          // echo "<pre>";print_r($check_gwp);exit('a');
 
-          // echo "<pre>";print_r($check_gsp);exit('a');
-          if(!empty(@$check_gsp) && !empty(@$check_gcp) && !empty(@$check_gwp)){
+          if(!empty(@$check_gsp) && !empty(@$check_gcp) && $check_gwp == "OK"){
             $array_study = array(
               'json_gsp' => $gsp,
               'json_gcp' => $gcp,
@@ -198,8 +201,10 @@ class Study_dashboard extends MY_Site_Controller {
             $this->db->where('user_id', $id);
             $this->db->update('b2c_student_progress', $array_study);
 
-
+            // echo "<pre>";print_r($check_study_data);exit();
             echo "1";
+          }else{
+            // echo "<pre>";print_r($gcp);exit('b');
           }
         }else{
           $array_study = array(

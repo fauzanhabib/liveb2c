@@ -22,7 +22,7 @@
 			-ms-flex: 1;
 			flex: 1;
 		}
-	} 
+	}
 </style>
 	<div class="study__dashboard__top">
 		<!-- achievement goal step -->
@@ -513,7 +513,7 @@
 
 	<div class="progress__step last__upd">
 		<span class="trn" data-trn-key="lastupdate">Last updated on: </span><?php echo $echo_upd;?>
-		<!-- <p class="btn_u_sd trn" data-trn-key="update">Update</p> -->
+		<p class="btn_u_sd trn" data-trn-key="update">Update</p>
 	</div>
 </section>
 </main>
@@ -595,7 +595,7 @@ $(".btn_u_sd").click(function() {
 				$('#inserted').css('display', 'flex');
 			}
 			window.location.href="<?php echo site_url('b2c/student/study_dashboard');?>";
-	    //  console.log(data);
+	     // console.log(data);
 	   }
 	});
 });
