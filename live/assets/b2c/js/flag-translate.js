@@ -878,11 +878,7 @@ function ChangeLanguages() {
             es: "No puede abrir la sesión en vivo en varias pestañas / ventanas",
             id: "Anda tidak dapat membuka Sesi Langsung di banyak tab / jendela"
         },
-        progresstogoal: {
-            en: "Search Coach",
-            es: "Coach de búsqueda",
-            id: "Cari Pelatih"
-        },
+      
 
         //OPENTOOK Livesession
         cameraon: {
