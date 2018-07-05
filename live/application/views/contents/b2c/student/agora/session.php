@@ -455,7 +455,7 @@ opacity: 1 !important;
                       <!-- =======edited by rendy bustari========== -->
                       <?php
                       for($l=1;$l<=$max_buletan_student;$l++){ ?>
-                        <div class="bullet__achievement <?php echo @$student_color['mt'.$l];?>"></div>
+                        <div class="bullet__achievement <?php echo @$mt_color['mt'.$l];?>"></div>
                       <?php
                         }
                       ?>
