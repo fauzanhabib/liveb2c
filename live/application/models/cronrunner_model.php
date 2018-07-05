@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class CronRunner_Model extends MY_Model
+class cronrunner_model extends MY_Model
 {
 
  public function get_days_appointments_student()
