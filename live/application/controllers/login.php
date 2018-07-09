@@ -158,7 +158,7 @@ class Login extends MY_Controller {
           $login_type = $check_login_type[0]->login_type;
             //=====
 			// print_r($sso_enabled);exit();
-				if($this->auth_manager->role() == 'CCH'){
+					if($this->auth_manager->role() == 'CCH'){
                redirect('coach/dashboard');
 					// exit;
             } else if($this->auth_manager->role() == 'STD' && $login_type == 1){
@@ -181,6 +181,83 @@ class Login extends MY_Controller {
 
 		$this->template->set_template('default/layouts/login');
 		$this->template->publish();
+	}
+
+	public function portal_parser($email, $password, $min_raw, $lang){
+		$check_login = $this->db->select('*')
+											->from('users')
+											->where('email', $email)
+											->get()->result();
+
+		$sso_enabled  = $check_login[0]->sso_enabled;
+		$sso_username = $check_login[0]->sso_username;
+
+		if($sso_enabled == 0){
+				$this->messages->add('Not Registered on SSO', 'warning');
+				// redirect('login');
+				exit;
+		}else{
+				$check_login = $this->auth_manager->login($email, $password);
+
+				//login success :
+				if($check_login == 1){
+					$userid  = $this->auth_manager->userid();
+					$this->session->set_userdata('u_p',$password);
+
+          $g_u_u = $this->db->select('sso_username')
+                            ->from('users')
+                            ->where('email',$email)
+                            ->get()->result();
+
+
+          $this->session->set_userdata('u_u',$g_u_u[0]->sso_username);
+          // =====
+
+          if ($min_raw < 0) {
+            $minutes = abs($min_raw);
+          }else if($min_raw > 0){
+            $minutes = $min_raw * -1;
+          }
+
+          $gmt_val = @$minutes / 60;
+
+          if(@$minutes == NULL){
+              $minutes = 0;
+          }
+
+          $timezone = array(
+             'user_id' => $userid,
+             'gmt_val' => $gmt_val,
+             'minutes_val' => @$minutes,
+             'log_date' => date('Y-m-d H:i:s')
+          );
+
+					// print_r($timezone);exit();
+          $this->db->replace('user_timezones', $timezone);
+          // ====
+
+          $language = array(
+             'user_language' => $lang,
+          );
+
+          $this->db->where('user_id', $userid);
+          $this->db->update('user_profiles', $language);
+
+					// echo "<pre>";print_r($this->session->userdata('u_p'));exit();
+
+          redirect('b2c/student/dashboard');
+
+          // $login_type = $check_login_type[0]->login_type;
+
+					// echo "<pre>";print_r($login_type);exit();
+				}else{
+					//login failed :
+					redirect('login');
+					exit;
+				}
+		}
+
+
 	}
 
     function update_login(){

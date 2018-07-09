@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/FuckAdBlock-master/fuckadblock.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/vendor/parsleyjs/parsley.min.js"></script>
-    
+
 	<style>
 		.alert-login {
 			height: 0;
@@ -36,11 +36,11 @@
 		#alert-login-reload {
 			display: none;
 		}
-       
+
     .hidden{
         visibility: hidden;
     }
-  
+
 	</style>
 </head>
 
@@ -215,8 +215,8 @@
                            <span class="trn" data-trn-key="dont"> Don't have an account?</span> <span><a href="#"  class="trn" data-trn-key="signup">Sign Up</a></span>
                         </div>
                         <button type="submit" class="neobutton next trn" value="Sign In" name="__submit" data-trn-key="sign_in2" >SIGN IN</button>
-                                
-				    </form>          
+
+				    </form>
                 <!-- <button class="neobutton next">SIGN IN</button> -->
             </section>
         </main>
@@ -274,9 +274,9 @@
 		});
 		// TO REFRESH WHEN ADBLOCK POPUP SHOW UP END
 
-		var d = new Date()
+		    var d = new Date();
         var n = d.getTimezoneOffset();
-
+        // console.log(n);
         $('#min_raw').val(n);
 
         // function validateEmail(emailField){
@@ -332,7 +332,7 @@
                 });
             });
     </script>
-    
+
 </body>
 
 </html>
