@@ -465,7 +465,7 @@ class manage_appointments extends MY_Site_Controller {
         $this->template->publish();
     }
 
-    public function booking($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '', $token) {
+    public function booking($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '') {
 
         $appointment_id_old = $this->session->userdata('appointment_id');
         // get_old_coach
@@ -1685,7 +1685,6 @@ class manage_appointments extends MY_Site_Controller {
         $date_              = $this->input->post('date_');
         $start_time_        = $this->input->post('start_time_');
         $end_time_          = $this->input->post('end_time_');
-        $token              = $this->input->post('token');
 
         $convert = $this->schedule_function->convert_book_schedule(-($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes), $date_, $start_time_, $end_time_);
         $date = $convert['date'];

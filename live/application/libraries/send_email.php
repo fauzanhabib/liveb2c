@@ -16504,7 +16504,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
     //---------------------------------------------------------Notif Student Reschedule SMTP-------------------------------------------------------
 
-    function notif_student_reschedule_smtp($coachmail = '', $studentname = '', $coachname = '', $olddate ='', $oldstart = '', $oldend = '', $newdate = '', $newstart = '', $newend = '', $gmt = ''){
+    function notif_student_reschedule_smtp($studentmail = '', $studentname = '', $coachname = '', $olddate ='', $oldstart = '', $oldend = '', $newdate = '', $newstart = '', $newend = '', $gmt = ''){
 
         $isi = 'Hi '.$coachname.', <br><br> Your student '.$studentname.' have rescheduled your session into '.$newdate.' from '.$newstart.' to '.$newend.'';
 
@@ -17789,9 +17789,9 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
                                                                     <br>
                                                                     <br>
                                                                 <p style="Margin:0;Margin-bottom:10px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;">Hi '.$coachname.',</p>
-                                                                <p style="Margin:0;Margin-bottom:10px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;letter-spacing:1px;">Your student '.$studentname.' has cancelled your session on '.$olddate.' from '.$oldstart.' to '.$oldend.' '.$tz.'</p><br><br>
+                                                                <p style="Margin:0;Margin-bottom:10px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;letter-spacing:1px;">Your student '.$studentname.' has cancelled your session on '.$olddate.' from '.$oldstart.' to '.$oldend.' '.$tz.'</p>
                                                                 
-                                                                <p style="Margin:0;Margin-bottom:10px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;"></br></br>Please don`t be late.<br><br>Best, <br>DynEd Live Teams</p>
+                                                                <p style="Margin:0;Margin-bottom:10px;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:15px;font-weight:400;line-height:19px;margin-top:0;margin-bottom:10px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;text-align:left;"></br><br><br>Best, <br>DynEd Live Teams</p>
 
                                                                 <br>
                                                             </th>
