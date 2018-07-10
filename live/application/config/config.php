@@ -363,6 +363,9 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@\=+';
+
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

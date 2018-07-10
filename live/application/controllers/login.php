@@ -189,12 +189,19 @@ class Login extends MY_Controller {
 											->where('email', $email)
 											->get()->result();
 
+		if(@!$check_login){
+			$this->messages->add('Invalid user ID, please re-login', 'warning');
+			redirect('login');
+			exit;
+		}
+		// echo "<pre>";print_r($check_login);exit();
+
 		$sso_enabled  = $check_login[0]->sso_enabled;
 		$sso_username = $check_login[0]->sso_username;
 
 		if($sso_enabled == 0){
 				$this->messages->add('Not Registered on SSO', 'warning');
-				// redirect('login');
+				redirect('login');
 				exit;
 		}else{
 				$check_login = $this->auth_manager->login($email, $password);
