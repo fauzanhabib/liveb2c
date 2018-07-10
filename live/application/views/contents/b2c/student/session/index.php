@@ -87,7 +87,7 @@
                     <?php foreach($dataupcoming as $d){ ?>
                     <div class="todaysessions">
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
-                        <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
+                        <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)-(5*60)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
 
                         <div class="boxinfo activesession">
                             <?php
