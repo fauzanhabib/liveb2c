@@ -112,7 +112,7 @@
 
 
                     setTimeout(function () {
-                       location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/manage_appointments/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/manage_appointments/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+                       location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/manage_appointments/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time) : site_url('b2c/student/manage_appointments/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time); ?>";
                     }, 1000); //will call the function after 2 secs.
 
                     $.ajax({
@@ -132,7 +132,6 @@
                             'date_': '<?php echo $date;?>',
                             'start_time_': '<?php echo $start_time;?>',
                             'end_time_': '<?php echo $end_time;?>',
-                            'token': '<?php echo $token;?>',
                         }
                     });
                 });
