@@ -87,7 +87,19 @@
                     <?php foreach($dataupcoming as $d){ ?>
                     <div class="todaysessions">
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
-                        <span class="time"><?php echo(date('H:i',strtotime($d->start_time)));?> - <?php echo(date('H:i',strtotime($d->end_time)-(5*60)));?> <?php echo "(UTC ".$gmt_val.")"?></span>
+                        <span class="time">
+                          <?php echo(date('H:i',strtotime($d->start_time)));?> -
+                          <?php
+                            if($d->end_time == '23:59:59'){
+                              $mins = 4;
+                            }else{
+                              $mins = 5;
+                            }
+                            $get_endtime = date('H:i',strtotime($d->end_time));
+                            echo(date('H:i',strtotime($get_endtime)-($mins*60)));
+                          ?>
+                          <?php echo "(UTC ".$gmt_val.")"?>
+                        </span>
 
                         <div class="boxinfo activesession">
                             <?php
@@ -96,8 +108,8 @@
                                 $hours     = date('H:i:s');
                                 $default_hours  = strtotime($hours);
                                 $usertime_hours = $default_hours+(60*$minutes);
-                                $hour_now = date("Y-m-d H:i:s", $usertime_hours); 
-                                
+                                $hour_now = date("Y-m-d H:i:s", $usertime_hours);
+
                                 $user_end_date = date('Y-m-d', strtotime($d->date));
                                 $user_end_time = date('H:i:s',strtotime($d->start_time));
                                 $user_time_final = $user_end_date." ".$user_end_time;
@@ -111,10 +123,10 @@
                                 $difference = $datetime1->diff($datetime2);
 
                                 $p1 = strtotime($hour_now);
-                                $p2 = strtotime($user_time_final); 
+                                $p2 = strtotime($user_time_final);
 
                                 $h = abs($p2-$p1)/(60*60);
-                                
+
                                       // if(($difference->days > 0) && ($hour_now > date('H:i',strtotime($d->start_time))) ){
                                 if($h > 24){
                                     $dat = date('Y-m-d', strtotime(@$d->date));
@@ -144,7 +156,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php 
+                                    <?php
                                     }else{
                                     ?>
                                         <div class="coachinfo--disabled trn" data-trn-key="alreadyresche">Already Rescheduled</div>
@@ -203,8 +215,15 @@
                                 ?>
                                 -
                                 <?php
-                                    $defaultend  = strtotime($h->end_time);
-                                    $endsession = $defaultend-(5*60);
+                                    if($h->end_time == '23:59:59'){
+                                      $mins = 4;
+                                    }else{
+                                      $mins = 5;
+                                    }
+                                    $get_endtime = date('H:i',strtotime($h->end_time));
+
+                                    $defaultend  = strtotime($get_endtime);
+                                    $endsession = $defaultend-($mins*60);
                                     $hourattend  = date("H:i", $endsession);
                                     echo $hourattend;
                                 ?>

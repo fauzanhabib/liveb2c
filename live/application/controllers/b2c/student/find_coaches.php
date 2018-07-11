@@ -2615,12 +2615,16 @@ class find_coaches extends MY_Site_Controller {
             return false;
         } else if (!$appointment) {
             if($appointment_count < $max_session_per_day && $appointment_count_week < $max_day_per_week){
-                foreach($schedule as $s){
-                    if(strtotime($start_time) >= strtotime($s['start_time']) && strtotime($end_time) <= strtotime($s['end_time'])){
-                        $status1 = 1;
-                        break;
-                    }
-                }
+              foreach($schedule as $s){
+                  $end_time_changer = $s['end_time'];
+                  if($end_time_changer == '16:59:00'){
+                    $end_time_changer = '17:00:00';
+                  }
+                  if(strtotime($start_time) >= strtotime($s['start_time']) && strtotime($end_time) <= strtotime($end_time_changer)){
+                      $status1 = 1;
+                      break;
+                  }
+              }
                 if($status1 == 1){
                     return true;
                 }
