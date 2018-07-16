@@ -180,157 +180,168 @@ class Dashboard extends MY_Site_Controller {
         // $data = $this->appointment_model->get_appointment_for_upcoming_session('student_id','','',  $this->auth_manager->userid());
         $data_class = $this->class_member_model->get_appointment_for_upcoming_session('', '', $this->auth_manager->userid());
 
-        if ($data) {
-            foreach ($data as $d) {
-                $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
-                $d->date = date('Y-m-d', $data_schedule['date']);
-                $d->start_time = $data_schedule['start_time'];
-                $d->end_time = $data_schedule['end_time'];
+        $tz_checker = @$this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes;
+        // echo "<pre>";print_r($tz_checker);exit();
 
-            }
-        }
-
-        if ($data_class) {
-            foreach ($data_class as $d) {
-                // echo date('H:i:s');
-                // exit();
-                $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
-                // print_r($data_schedule);
-                // echo date('H:i:s');
-                // exit();
-
-                $d->date = date('Y-m-d', $data_schedule['date']);
-                $d->start_time = $data_schedule['start_time'];
-                $d->end_time = $data_schedule['end_time'];
-            }
-        }
-
-        if ($dataupcoming) {
-            foreach ($dataupcoming as $d) {
-                $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
-                $d->date = date('Y-m-d', $data_schedule['date']);
-                $d->start_time = $data_schedule['start_time'];
-                $d->end_time = $data_schedule['end_time'];
-
-            }
-        }
-        // wimo----------------------
-        $wm2         = @$pull_appoint2[0];
-        $he_pull2    = strtotime(@$wm2->end_time) - (5 * 60);
-        $hourend2    = date("H:i:s", $he_pull2);
-
-        $n;
-
-        if (strtotime(date("H:i:s")) > strtotime($hourend2)) {
-            $n = 1;
+        if(!@$tz_checker){
+          // exit('a');
+          $this->template->content->view('contents/b2c/student/dashboard/notimezone');
+          $this->template->publish();
+          // exit();
         }else{
-            $n = 0;
-        }
 
-        // echo "<pre>";print_r($pull_appoint);exit();
+          if ($data) {
+              foreach ($data as $d) {
+                  $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
+                  $d->date = date('Y-m-d', $data_schedule['date']);
+                  $d->start_time = $data_schedule['start_time'];
+                  $d->end_time = $data_schedule['end_time'];
 
-        $wm   = @$pull_appoint[$n];
-        $wm_id = @$wm->id;
-        //User Hour
-        date_default_timezone_set('UTC');
-        $hourstart  = @$wm->start_time;
-        $datestart  = @$wm->date;
-        $he_pull    = strtotime(@$wm->end_time) - (5 * 60);
-        $hourend    = date("H:i:s", $he_pull);
+              }
+          }
 
-        // echo "<pre>";print_r($hourend);exit();
-        $date     = date('h:i:s');
-        $default2 = strtotime($date);
-        $usertime2 = $default2+(60*$minutes);
-        $nowh  = date("H:i:s", $usertime2);
-        // $nowh  = "09:40:01";
-        $dates     = date('Y-m-d h:i:s');
-        $def       = strtotime($dates);
-        $datetime  = $def+(60*$minutes);
-        $nowd      = date("Y-m-d", $datetime);
+          if ($data_class) {
+              foreach ($data_class as $d) {
+                  // echo date('H:i:s');
+                  // exit();
+                  $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt($this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
+                  // print_r($data_schedule);
+                  // echo date('H:i:s');
+                  // exit();
+
+                  $d->date = date('Y-m-d', $data_schedule['date']);
+                  $d->start_time = $data_schedule['start_time'];
+                  $d->end_time = $data_schedule['end_time'];
+              }
+          }
+
+          if ($dataupcoming) {
+              foreach ($dataupcoming as $d) {
+                  $data_schedule = $this->convertBookSchedule($this->identity_model->new_get_gmt(@$this->auth_manager->userid())[0]->minutes, strtotime($d->date), $d->start_time, $d->end_time);
+                  $d->date = date('Y-m-d', $data_schedule['date']);
+                  $d->start_time = $data_schedule['start_time'];
+                  $d->end_time = $data_schedule['end_time'];
+
+              }
+          }
+          // wimo----------------------
+          $wm2         = @$pull_appoint2[0];
+          $he_pull2    = strtotime(@$wm2->end_time) - (5 * 60);
+          $hourend2    = date("H:i:s", $he_pull2);
+
+          $n;
+
+          if (strtotime(date("H:i:s")) > strtotime($hourend2)) {
+              $n = 1;
+          }else{
+              $n = 0;
+          }
+
+          // echo "<pre>";print_r($pull_appoint);exit();
+
+          $wm   = @$pull_appoint[$n];
+          $wm_id = @$wm->id;
+          //User Hour
+          date_default_timezone_set('UTC');
+          $hourstart  = @$wm->start_time;
+          $datestart  = @$wm->date;
+          $he_pull    = strtotime(@$wm->end_time) - (5 * 60);
+          $hourend    = date("H:i:s", $he_pull);
+
+          // echo "<pre>";print_r($hourend);exit();
+          $date     = date('h:i:s');
+          $default2 = strtotime($date);
+          $usertime2 = $default2+(60*$minutes);
+          $nowh  = date("H:i:s", $usertime2);
+          // $nowh  = "09:40:01";
+          $dates     = date('Y-m-d h:i:s');
+          $def       = strtotime($dates);
+          $datetime  = $def+(60*$minutes);
+          $nowd      = date("Y-m-d", $datetime);
 
 
-        $nowc  = $nowd.' '.$nowh;
-        $countdown = $datestart.' '.$hourstart;
+          $nowc  = $nowd.' '.$nowh;
+          $countdown = $datestart.' '.$hourstart;
 
-        // wimo----------------------
+          // wimo----------------------
 
-        //Check Already Opened Live Session -------------------------------
-        $checksess = $this->db->select('*')
-                    ->from('session_live')
-                    ->where('user_id', $id)
-                    ->where('appointment_id', $wm_id)
-                    ->get()->result();
-
-        $statuscheck = @$checksess[0]->status;
-
-        // echo "<pre>";print_r($nowdate);exit();
-        //Check Already Opened Live Session -------------------------------
-
-        $pull_notif = $this->db->select('*')
-                      ->from('user_notifications')
+          //Check Already Opened Live Session -------------------------------
+          $checksess = $this->db->select('*')
+                      ->from('session_live')
                       ->where('user_id', $id)
+                      ->where('appointment_id', $wm_id)
                       ->get()->result();
 
-        $pull_name = $this->db->select('*')
-                      ->from('user_profiles')
-                      ->where('user_id', $id)
-                      ->get()->result();
+          $statuscheck = @$checksess[0]->status;
 
-        if(!$pull_notif){
+          // echo "<pre>";print_r($nowdate);exit();
+          //Check Already Opened Live Session -------------------------------
 
-            $user_notification = array(
-                'user_id' => $id,
-                'description' => 'Congratulations and Welcome to neo LIVE, '.$pull_name[0]->fullname.'!',
-                'status' => 2,
-                'dcrea' => time(),
-                'dupd' => time(),
-            );
+          $pull_notif = $this->db->select('*')
+                        ->from('user_notifications')
+                        ->where('user_id', $id)
+                        ->get()->result();
 
-            $this->user_notification_model->insert($user_notification);
+          $pull_name = $this->db->select('*')
+                        ->from('user_profiles')
+                        ->where('user_id', $id)
+                        ->get()->result();
+
+          if(!$pull_notif){
+
+              $user_notification = array(
+                  'user_id' => $id,
+                  'description' => 'Congratulations and Welcome to neo LIVE, '.$pull_name[0]->fullname.'!',
+                  'status' => 2,
+                  'dcrea' => time(),
+                  'dupd' => time(),
+              );
+
+              $this->user_notification_model->insert($user_notification);
+          }
+
+          $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime(@$last_upd_time);
+          $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
+          // echo "<pre>";print_r($sp_difftime_updated);exit();
+          if(@$wm->app_type == 1){
+            $url_session = site_url('b2c/student/agora/');
+          }else if(@$wm->app_type == 0){
+            $url_session = site_url('b2c/student/opentok/live/');
+          }
+
+          // echo "<pre>";print_r($wm);exit();
+          $vars = array(
+              'title' => 'Upcoming Session',
+              'role'  => 'Coach',
+              'userid'    => $id,
+              'wm'    => $wm,
+              'nowh'  => $nowh,
+              'data'  => $data,
+              'dataupcoming' => $dataupcoming,
+              'nowd'  => $nowd,
+              'nowc'  => $nowc,
+              'wm_id' => $wm_id,
+              'gmt_val' => @$gmt_val,
+              'statuscheck'  => @$statuscheck,
+              'hourend'    => $hourend,
+              'hourstart'  => $hourstart,
+              'hour_start_db'  => $hour_start_db,
+              'data_class' => $data_class,
+              'countdown'  => $countdown,
+              'last_upd_date'  => @$last_upd_date,
+              'last_upd_time'  => @$last_upd_time,
+              'sp_difftime_updated'  => $sp_difftime_updated,
+              'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
+              'err_gcp' => @$err_gcp,
+              'err_gsp' => @$err_gsp,
+              'err_gwp' => @$err_gwp,
+              'url_session' => @$url_session
+          );
+
+          // echo "<pre>";print_r($vars);exit();
+          $this->template->content->view('contents/b2c/student/dashboard/index',$vars);
+          $this->template->publish();
         }
-
-        $sp_difftime_updated_unix = strtotime($hour_start_db) - strtotime(@$last_upd_time);
-        $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
-        // echo "<pre>";print_r($sp_difftime_updated);exit();
-        if(@$wm->app_type == 1){
-          $url_session = site_url('b2c/student/agora/');
-        }else if(@$wm->app_type == 0){
-          $url_session = site_url('b2c/student/opentok/live/');
-        }
-
-        // echo "<pre>";print_r($wm);exit();
-        $vars = array(
-            'title' => 'Upcoming Session',
-            'role'  => 'Coach',
-            'userid'    => $id,
-            'wm'    => $wm,
-            'nowh'  => $nowh,
-            'data'  => $data,
-            'dataupcoming' => $dataupcoming,
-            'nowd'  => $nowd,
-            'nowc'  => $nowc,
-            'wm_id' => $wm_id,
-            'gmt_val' => @$gmt_val,
-            'statuscheck'  => @$statuscheck,
-            'hourend'    => $hourend,
-            'hourstart'  => $hourstart,
-            'hour_start_db'  => $hour_start_db,
-            'data_class' => $data_class,
-            'countdown'  => $countdown,
-            'last_upd_date'  => @$last_upd_date,
-            'last_upd_time'  => @$last_upd_time,
-            'sp_difftime_updated'  => $sp_difftime_updated,
-            'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
-            'err_gcp' => @$err_gcp,
-            'err_gsp' => @$err_gsp,
-            'err_gwp' => @$err_gwp,
-            'url_session' => @$url_session
-        );
-
-        // echo "<pre>";print_r($vars);exit();
-        $this->template->content->view('contents/b2c/student/dashboard/index',$vars);
-        $this->template->publish();
     }
 
     public function get_id(){
@@ -536,5 +547,49 @@ class Dashboard extends MY_Site_Controller {
         );
     }
 
+    public function update_tz(){
+      $min_raw = $this->input->post("min_raw");
+      $userid  = $this->auth_manager->userid();
+
+      $check_tz = $this->db->select('*')
+                    ->from('user_timezones')
+                    ->where('user_id', $userid)
+                    ->get()->result();
+
+      if ($min_raw < 0) {
+        $minutes = abs($min_raw);
+      }else if($min_raw > 0){
+        $minutes = $min_raw * -1;
+      }
+
+      $gmt_val = @$minutes / 60;
+
+      if(@$minutes == NULL){
+          $minutes = 0;
+      }
+
+      if(@$check_tz){
+        $timezone = array(
+           'user_id' => $userid,
+           'gmt_val' => $gmt_val,
+           'minutes_val' => @$minutes,
+           'log_date' => date('Y-m-d H:i:s')
+        );
+
+        // print_r($timezone);exit();
+        $this->db->replace('user_timezones', $timezone);
+      }else{
+        $timezone = array(
+           'user_id' => $userid,
+           'gmt_val' => $gmt_val,
+           'minutes_val' => @$minutes,
+           'log_date' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->insert('user_timezones', $timezone);
+      }
+
+      redirect('b2c/student/dashboard');
+    }
 
 }
