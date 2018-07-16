@@ -144,6 +144,17 @@ class ComposerStaticInit887e573b0c85717447780d426c90b428
                 0 => __DIR__ . '/..' . '/guzzle/guzzle/src',
             ),
         ),
+        'D' => 
+        array (
+            'Detection' => 
+            array (
+                0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced',
+            ),
+        ),
+    );
+
+    public static $classMap = array (
+        'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -152,6 +163,7 @@ class ComposerStaticInit887e573b0c85717447780d426c90b428
             $loader->prefixLengthsPsr4 = ComposerStaticInit887e573b0c85717447780d426c90b428::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit887e573b0c85717447780d426c90b428::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit887e573b0c85717447780d426c90b428::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit887e573b0c85717447780d426c90b428::$classMap;
 
         }, null, ClassLoader::class);
     }
