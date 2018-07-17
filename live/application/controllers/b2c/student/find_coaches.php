@@ -217,7 +217,8 @@ class find_coaches extends MY_Site_Controller {
     }
 
     public function single_date() {
-
+        
+        $this->session->unset_userdata('recurring_booking_type');
         $this->template->title = 'Single Date';
 
         $id    = $this->auth_manager->userid();
@@ -2964,7 +2965,7 @@ class find_coaches extends MY_Site_Controller {
 
 
         $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
-        $this->session->unset_userdata('recurring_booking_type');
+        
         //publish template
         $this->template->publish();
     }
