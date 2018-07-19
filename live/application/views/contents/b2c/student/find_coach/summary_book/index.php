@@ -118,7 +118,7 @@
                             </div>
                             <div class="bxcoachend">
                                 <label>Booking Device/Browser</label>
-                                <span><?php echo $user_device;?></span>
+                                <span id="textBrowser"><?php echo $user_device;?></span>
                             </div>
 
                             <div class="bxbutton">
@@ -139,34 +139,95 @@
                 </div>
             </section>
 
-            <script>
+<script>
+// Opera 8.0+
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
-            </script>
+// Firefox 1.0+
+var isFirefox = typeof InstallTrigger !== 'undefined';
 
-            <script>
-                $(document).on('touchstart click', '#submit_summary', function () {
+// Safari 3.0+ "[object HTMLElementConstructor]"
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
 
-                    $('.page__loader').addClass('flex');
+// Internet Explorer 6-11
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1+
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+// Blink engine detection
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+// detect_browser
+if(isOpera === true){
+  detect_browser = 'Opera';
+  // console.log(detect_browser)
+}
+if(isIE === true){
+  detect_browser = 'Internet Explorer';
+  // console.log(detect_browser)
+}
+if(isSafari === true){
+  detect_browser = 'Safari';
+  // console.log(detect_browser)
+}
+if(isChrome === true){
+  detect_browser = 'Chrome';
+  // console.log(detect_browser)
+}
+if(isFirefox === true){
+  detect_browser = 'Firefox';
+  // console.log(detect_browser)
+}
+
+navigator.sayswho= (function(){
+    var ua= navigator.userAgent, tem,
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+})();
+
+// console.log(navigator.sayswho);
+
+document.getElementById("textBrowser").innerHTML += ' / '+navigator.sayswho;
+
+</script>
+
+<script>
+    $(document).on('touchstart click', '#submit_summary', function () {
+
+        $('.page__loader').addClass('flex');
 
 
-                    setTimeout(function () {
-                       location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
-                    }, 1000); //will call the function after 2 secs.
+        setTimeout(function () {
+           location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+        }, 1000); //will call the function after 2 secs.
 
-                    $.ajax({
-                        type:"POST",
-                        url:"<?php echo site_url('b2c/student/find_coaches/email_booking');?>",
-                        data: {
-                            'coach_id': "<?php echo $data_coach[0]->id; ?>",
-                            'date_': "<?php echo $date;?>",
-                            'start_time_': "<?php echo $start_time;?>",
-                            'end_time_': "<?php echo $end_time;?>",
-                            'token': "<?php echo $token;?>"
-                        }
-                    });
-                });
+        $.ajax({
+            type:"POST",
+            url:"<?php echo site_url('b2c/student/find_coaches/email_booking');?>",
+            data: {
+                'coach_id': "<?php echo $data_coach[0]->id; ?>",
+                'date_': "<?php echo $date;?>",
+                'start_time_': "<?php echo $start_time;?>",
+                'end_time_': "<?php echo $end_time;?>",
+                'token': "<?php echo $token;?>"
+            }
+        });
+    });
 
-                $(document).on('touchstart click', '#cancel_summary', function () {
-                    location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches/search/' . $search_by); ?>";
-                });
-            </script>
+    $(document).on('touchstart click', '#cancel_summary', function () {
+        location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches/search/' . $search_by); ?>";
+    });
+</script>
