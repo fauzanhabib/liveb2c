@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>End Time</td>
-                    <td><?php 
+                    <td><?php
                     $currentDate = strtotime($end_time);
                     $futureDate = $currentDate-(60*5);
                     $endtime = date("H:i:s", $futureDate);
@@ -49,11 +49,16 @@
                                 if($data_coach[0]->coach_type_id == 1){
                                     $token = $standard_coach_cost;
                                 } else if($data_coach[0]->coach_type_id == 2){
-                                    $token = $elite_coach_cost; 
+                                    $token = $elite_coach_cost;
                                 } ?>
                         <input type="text" name="token" value="<?php echo $token;?>" readonly>
                     </td>
                 </tr>
+                <tr>
+                    <td>Booking Device/Browser</td>
+                    <td><input type="text" name="token" value="<?php echo $user_device;?>" readonly></td>
+                </tr>
+                <input type="text" name="token" value="<?php echo $user_device;?>" readonly>
                 <tr>
                     <td style="border-top:1px solid #f3f3f3;display: table-cell;  width: auto !important;">
                         <a id="submit_summary" class="pure-button btn-small btn-secondary confirm-booking" onclick="confirmation('<?php echo $search_by == 'single_date' ? site_url('student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>', 'single', 'Confirm Booking', '', 'confirm-booking');">

@@ -217,7 +217,7 @@ class find_coaches extends MY_Site_Controller {
     }
 
     public function single_date() {
-        
+
         $this->session->unset_userdata('recurring_booking_type');
         $this->template->title = 'Single Date';
 
@@ -2950,6 +2950,24 @@ class find_coaches extends MY_Site_Controller {
             }
         }
 
+        // Detect browser and device ==========================
+        $detect = new Mobile_Detect;
+
+        if ( $detect->isMobile() ) {
+          $user_device = 'Mobile';
+          if( $detect->isiOS() ){
+            $user_d_type = 'iOS';
+          }
+          if( $detect->isAndroidOS() ){
+            $user_d_type = 'Android';
+          }
+        }else {
+          $user_device = 'PC';
+        }
+
+        // echo "<pre>";print_r($user_device);exit();
+        // Detect browser and device ==========================
+
         $vars = array(
             'data_coach' => $this->identity_model->get_coach_identity($coach_id),
             'date' => $date,
@@ -2960,12 +2978,12 @@ class find_coaches extends MY_Site_Controller {
             'elite_coach_cost' => $elite_coach_cost,
             'datasession' => $datasession,
             'recuring' => $recuring,
-            'frequency' => $frequency
+            'frequency' => $frequency,
+            'user_device' => $user_device
         );
 
-
         $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
-        
+
         //publish template
         $this->template->publish();
     }

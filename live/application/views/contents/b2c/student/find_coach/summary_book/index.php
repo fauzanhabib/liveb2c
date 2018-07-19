@@ -1,5 +1,5 @@
                 <style>
-                    
+
                     @media only screen and (max-device-width: 768px) and (min-device-width: 320px){
                         .mobile__menu {
                             -webkit-box-flex: 1;
@@ -9,8 +9,8 @@
                     }
 
                 </style>
-                
-                
+
+
                 <?php if(count($datasession)!=0){ ?>
                 <div class="dashboard__notif success__notif">
                     <?php if(count($datasession)==1){ ?>
@@ -50,17 +50,17 @@
                             </div> -->
                             <div class="bxcoacdate">
                                 <label  class="trn" data-trn-key="datee">Date</label>
-                                <?php if($recuring > 1){ 
+                                <?php if($recuring > 1){
                                         $temp = $date; ?>
                                 <span>
                                     <?php foreach($frequency as $f){
                                         $temp = strtotime("+".$f." day", $temp);
                                         echo(date('l jS \of F Y', @$temp)).'<br> '; }
-                                    ?> 
+                                    ?>
                                 </span>
                                 <?php }else{ ?>
                                 <span>
-                                    <?php echo(date('l jS \of F Y', @$date)); ?> 
+                                    <?php echo(date('l jS \of F Y', @$date)); ?>
                                 </span>
                             <?php } ?>
                             </div>
@@ -102,19 +102,23 @@
                                     //     $standard_coach_cost = @$setting[0]->standard_coach_cost;
                                     //     $elite_coach_cost = @$setting[0]->elite_coach_cost;
                                     // }
-                                    
+
                                     $token = '';
                                     if($data_coach[0]->coach_type_id == 1){
                                         $token = $standard_coach_cost;
                                         $show = $token * $recuring;
                                     } else if($data_coach[0]->coach_type_id == 2){
-                                        $token = $elite_coach_cost; 
+                                        $token = $elite_coach_cost;
                                         $show = $token * $recuring;
-                                    } 
+                                    }
 
                                     echo($show);
                                     ?>
                                 </span>
+                            </div>
+                            <div class="bxcoachend">
+                                <label>Booking Device/Browser</label>
+                                <span><?php echo $user_device;?></span>
                             </div>
 
                             <div class="bxbutton">
@@ -128,7 +132,7 @@
                                 <span></span>
                                 <span></span>
                             </div>
-                            <span  class="trn" data-trn-key="proceesupdate">Processing your booking...</span>       
+                            <span  class="trn" data-trn-key="proceesupdate">Processing your booking...</span>
                         </div>
                     </div>
 
