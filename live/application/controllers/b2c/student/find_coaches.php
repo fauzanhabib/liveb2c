@@ -2962,7 +2962,8 @@ class find_coaches extends MY_Site_Controller {
             $user_d_type = 'Android';
           }
         }else {
-          $user_device = 'PC';
+          $user_device = 'Desktop';
+          $user_d_type = '';
         }
 
         // echo "<pre>";print_r($user_device);exit();
@@ -2979,7 +2980,8 @@ class find_coaches extends MY_Site_Controller {
             'datasession' => $datasession,
             'recuring' => $recuring,
             'frequency' => $frequency,
-            'user_device' => $user_device
+            'user_device' => $user_device,
+            'user_d_type' => @$user_d_type
         );
 
         $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
