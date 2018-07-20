@@ -1901,11 +1901,13 @@ class find_coaches extends MY_Site_Controller {
        if($browser_type == 'Chrome' && @$device_os == 'Android'){
          $opentok_key    = $this->config->item('opentok_key');
          $opentok_secret = $this->config->item('opentok_secret');
+         $key = 1;
          // print_r();
          // exit('a');
        }else{
          $opentok_key    = $this->config->item('opentok_key2');
          $opentok_secret = $this->config->item('opentok_secret2');
+         $key = 2;
          // exit('b');
        }
        // print_r($this->config->item('opentok_key2'));
@@ -1978,7 +1980,8 @@ class find_coaches extends MY_Site_Controller {
             'app_type' => $app_type,
             'cl_id' => $u_cl_id,
             'cp_id' => $u_cp_id,
-            'cs_id' => $u_cs_id
+            'cs_id' => $u_cs_id,
+            'key' => $key
         );
         // echo "<pre>";print_r($booked);exit();
 
