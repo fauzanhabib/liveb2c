@@ -139,6 +139,9 @@
                         }
                       ?>
                     </span>
+                    <input type="hidden" id="d_os" value="<?php echo $user_d_type; ?>"/>
+                    <input type="hidden" id="d_type" value="<?php echo $user_device; ?>"/>
+                    <input type="hidden" id="d_browser" value=""/>
                 </div>
                 <div class="bxcoactoken warning_box">
                     <label class="warning_font">It's recommended that you are using the same device to join the session</label>
@@ -223,19 +226,42 @@ navigator.sayswho= (function(){
 
 // console.log(navigator.sayswho);
 
-document.getElementById("textBrowser").innerHTML += ' / '+navigator.sayswho;
+document.getElementById("textBrowser").innerHTML += ' / '+detect_browser;
+$("#d_browser").val(detect_browser);
 
 </script>
 
 <script>
     $(document).on('touchstart click', '#submit_summary', function () {
 
+        browser_type = $("#d_browser").val();
+        device_type  = $("#d_type").val();
+        device_os    = $("#d_os").val();
+
+        if(!device_os){
+          device_os = "none"
+        }
+        if(!device_type){
+          device_type = "none"
+        }
+        if(!browser_type){
+          browser_type = "none"
+        }
+
+        href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+
+        href += '/'+browser_type+'/'+device_type+'/'+device_os;
+
+        // console.log(href);
         $('.page__loader').addClass('flex');
 
 
         setTimeout(function () {
-           location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+           location.href = href;
         }, 1000); //will call the function after 2 secs.
+        // setTimeout(function () {
+        //    location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+        // }, 1000); //will call the function after 2 secs.
 
         $.ajax({
             type:"POST",
