@@ -241,6 +241,12 @@ $("#d_browser").val(detect_browser);
         if(!device_os){
           device_os = "none"
         }
+        if(!device_type){
+          device_type = "none"
+        }
+        if(!browser_type){
+          browser_type = "none"
+        }
 
         href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
 
