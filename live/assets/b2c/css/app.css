@@ -396,6 +396,10 @@ button:focus {
       -ms-flex-direction: column;
           flex-direction: column; }
 
+.flex__wrap--wrap {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
 .no-select, .accordion {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2866,6 +2870,30 @@ footer span {
       .profile__dynedpro__id label, .profile__dynedpro__server label {
         margin-bottom: 10px; }
 
+.notimezone .danger__notif {
+  border-radius: 3px; }
+
+.notimezone__box {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-left: 1px solid #606983;
+  border-right: 1px solid #606983;
+  border-bottom: 1px solid #606983; }
+  .notimezone__box form {
+    margin: 15px 0 10px; }
+
 .iconEdit {
   float: right;
   margin-right: 1em; }
@@ -2876,6 +2904,63 @@ footer span {
 #inputDate, #btn_date_save, #btn_date_cancel,
 #savepass {
   cursor: pointer; }
+
+.div_upd {
+  margin-top: 0px !important;
+  border-top: 0px !important; }
+
+.switchText1 {
+  width: 80%;
+  min-height: 19px; }
+
+.grayed {
+  color: #606983; }
+
+.btn_save {
+  cursor: pointer; }
+
+.btn_cancel {
+  cursor: pointer;
+  margin-left: 5px; }
+
+.notifSuccess {
+  position: fixed;
+  background-color: rgba(38, 178, 161, 0.7) !important;
+  z-index: 2;
+  width: 30%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  left: 50%; }
+
+.notifFailed {
+  position: fixed;
+  background-color: rgba(165, 56, 83, 0.75) !important;
+  z-index: 2;
+  width: 30%; }
+
+.conv_lang {
+  max-height: 20px;
+  overflow: auto; }
+
+.dropGender {
+  border: solid 1px #606983;
+  color: white;
+  width: 50%;
+  background: none;
+  letter-spacing: 1px;
+  font-size: 11px;
+  border-radius: 5px;
+  -moz-appearance: none; }
+
+.optGender {
+  color: black; }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .mobile__menu {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1; } }
 
 .activetitle {
   font-weight: bold;

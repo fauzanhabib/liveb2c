@@ -2,54 +2,7 @@
 *:focus {
    outline: 0;
  }
-.div_upd{
-  margin-top:0px !important;border-top:0px !important;
-}
-.switchText1{
-  width: 80%;
-  min-height: 19px;
-}
-.grayed{
-  color:#606983;
-}
-.btn_save{
-  cursor: pointer;
-}
-.btn_cancel{
-  cursor: pointer;
-  margin-left: 5px;
-}
-.notifSuccess{
-  position: fixed;
-  background-color: rgba(38, 178, 161, 0.7) !important;
-  z-index: 2;
-  width: 30%;
-  transform: translateX(-50%);
-  left: 50%;
-}
-.notifFailed{
-  position: fixed;
-  background-color: rgba(165, 56, 83, 0.75) !important;
-  z-index: 2;
-  width: 30%;
-}
-.conv_lang{
-  max-height: 20px;
-    overflow: auto;
-}
-.dropGender{
-  border: solid 1px #606983;
-  color: white;
-  width: 50%;
-  background: none;
-  letter-spacing: 1px;
-  font-size: 11px;
-  border-radius: 5px;
-  -moz-appearance: none;
-}
-.optGender{
-  color: black;
-}
+
 .profile__additional__language .language-dropdown .lang-flag{
    width:252px;
 }
@@ -68,27 +21,10 @@
 .lang .title2{
   width: 57% !important;
 }
-.GridFlex{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: center;
-}
- .header__profile {
-    -webkit-box-flex: 1.1;
-    -ms-flex: 1.1;
-    flex: 1.1;
-  }
 
-@media only screen and (max-device-width: 768px) and (min-device-width: 320px){
-  .mobile__menu {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-  }
-}
 </style>
   <div class="dashboard__notif notifSuccess" id='successNotif' style="display:none !important;">
-      <span id='textNotif' class="GridFlex"></span>
+      <span id='textNotif' class="flex--center flex__wrap--wrap"></span>
   </div>
   <div class="dashboard__notif notifFailed" id='failedNotif' style="display:none !important;">
       <span id='textFail'></span>
