@@ -114,8 +114,7 @@ class Live extends MY_Site_Controller {
                     ->where('coach_id', $id)
                     ->where('id', $appoint_id)
                     ->get()->result();
-            // echo "<pre>";
-            // print_r($checkcch);exit();
+            // echo "<pre>";print_r($checkcch);exit();
         }
 
         //Appointment Hour
@@ -129,7 +128,7 @@ class Live extends MY_Site_Controller {
 
         //@$starthour_conv = date("H:i:s", $usertime1);
         //@$endhour_conv   = date("H:i:s", $usertime1);
-        if($sess[0]->key == '1'{
+        if($sess[0]->key == '1'){
           $opentok    = new OpenTok($this->config->item('opentok_key'), $this->config->item('opentok_secret'));
         }else{
           $opentok    = new OpenTok($this->config->item('opentok_key2'), $this->config->item('opentok_secret2'));
@@ -316,7 +315,7 @@ class Live extends MY_Site_Controller {
 
                     @$sessionIdn  = $sessioning[0]->session;
                     @$tokenn      = $sessioning[0]->token;
-                    if($sessioning[0]->key == '1'{
+                    if($sessioning[0]->key == '1'){
                       $apiKey       = $this->config->item('opentok_key');
                     }else{
                       $apiKey       = $this->config->item('opentok_key2');
@@ -353,7 +352,7 @@ class Live extends MY_Site_Controller {
 
                     @$sessionIde  = $sessioninge[0]->session;
                     @$tokene      = $sessioninge[0]->token;
-                    if($sessioninge[0]->key == '1'{
+                    if($sessioninge[0]->key == '1'){
                       $apiKey       = $this->config->item('opentok_key');
                     }else{
                       $apiKey       = $this->config->item('opentok_key2');
