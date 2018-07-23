@@ -303,7 +303,7 @@ opacity: 1 !important;
   <div class="dashboard__notif success__notif width100perc" id="heading1">
   <span class="trn" data-trn-key="waiting">Waiting for </span> <?php echo ' '.$student_name.' '; ?> <span class="trn" data-trn-key="tojoin"> to join the session. Remain in the session until the end in order to receive a refund of your tokens.</span>
   </div>
-  <div class="dashboard__notif error__notif width100perc hidden trn" id="camerablocked" data-trn-key="yourblocking">
+  <div class="dashboard__notif danger__notif width100perc hidden trn" id="camerablocked" data-trn-key="yourblocking">
     Your browser is blocking your camera, please enable it and then reload the page.
   </div>
     <div class="boxsession">
