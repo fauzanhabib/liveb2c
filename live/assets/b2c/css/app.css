@@ -305,6 +305,13 @@ button:focus {
 .warning__notif {
   background: #ffc966; }
 
+.box--warning {
+  padding: 5px 10px;
+  border: solid 1px #F7F052 !important;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 15px; }
+
 .text--center, .title, .title--small {
   text-align: center; }
 
@@ -322,6 +329,11 @@ button:focus {
 
 .font--xlarge, .nowgoal_content1 h2 {
   font-size: 24px; }
+
+.font--warning {
+  color: #F7F052 !important;
+  font-size: 12px !important;
+  letter-spacing: 1px; }
 
 .padding-tb-20 {
   padding: 20px 0; }

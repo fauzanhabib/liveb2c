@@ -7,19 +7,6 @@
             flex: 1;
         }
     }
-    .warning_box{
-      padding: 5px 10px;
-      border: solid 1px #b7b383 !important;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 15px;
-    }
-    .warning_font{
-      color: #e4de80 !important;
-      font-size: 12px !important;
-      letter-spacing: 1px;
-    }
-
 
 </style>
 
@@ -143,8 +130,8 @@
                     <input type="hidden" id="d_type" value="<?php echo $user_device; ?>"/>
                     <input type="hidden" id="d_browser" value=""/>
                 </div>
-                <div class="bxcoactoken warning_box">
-                    <label class="warning_font">It's recommended that you are using the same device to join the session</label>
+                <div class="bxcoactoken box--warning">
+                    <label class="font--warning">It's recommended that you are using the same device to join the session</label>
                 </div>
 
                 <div class="bxbutton">
