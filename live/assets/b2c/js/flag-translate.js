@@ -1065,6 +1065,11 @@ function ChangeLanguages() {
             es: "Por favor escribe aquí ...",
             id: "Tolong tulis di sini ..."
         },
+        yourblocking: {
+            en: "Your browser is blocking your camera, please enable it and then reload the page.",
+            es: "Browser Anda memblokir kamera Anda, mohon aktifkan dan kemudian muat ulang halaman.",
+            id: "Su navegador está bloqueando su cámara, por favor habilítelo y luego vuelva a cargar la página."
+        },
     };
 
     translator = $('body').translate({
