@@ -131,7 +131,7 @@
                     <input type="hidden" id="d_browser" value=""/>
                 </div>
                 <div class="bxcoactoken box--warning">
-                    <label class="font--warning">It's recommended that you are using the same device to join the session</label>
+                    <label class="font--warning">Please use the same device when you do this booking on the live session</label>
                 </div>
 
                 <div class="bxbutton">

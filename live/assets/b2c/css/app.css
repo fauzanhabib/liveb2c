@@ -2254,7 +2254,7 @@ footer span {
   .pagination {
     width: 100% !important; }
   .dashboard__notif {
-    margin-left: 0 !important;
+    margin: auto !important;
     width: 94% !important;
     height: auto !important; }
   .boxsession__livecomponentstue .study__dashboard__top {
