@@ -1657,9 +1657,7 @@ class find_coaches extends MY_Site_Controller {
             'search_by' => $search_by,
             'cost' => $this->coach_token_cost_model->select('token_for_student')->where('coach_id', $coach_id)->get()
         );
-        // echo "<pre>";
-        // print_r($availability_temp);
-        // exit();
+        // echo "<pre>";print_r($availability_temp);exit();
 //        echo('<pre>');
 //        print_r(date('Y-m-d','1450962000')); exit;
         $this->template->content->view('contents/b2c/student/find_coach/availability', $vars);
@@ -1910,6 +1908,11 @@ class find_coaches extends MY_Site_Controller {
          $key = 2;
          // exit('b');
        }
+       if(@$device_os){
+         $device_info = $device_type.''.($device_os).' / '.$browser_type;
+       }else{
+         $device_info = $device_type.' / '.$browser_type;
+       }
        // print_r($this->config->item('opentok_key2'));
        // exit();
 //        print_r($start_time);
@@ -1981,7 +1984,8 @@ class find_coaches extends MY_Site_Controller {
             'cl_id' => $u_cl_id,
             'cp_id' => $u_cp_id,
             'cs_id' => $u_cs_id,
-            'key' => $key
+            'key' => $key,
+            'device_info' => $device_info
         );
         // echo "<pre>";print_r($booked);exit();
 
@@ -2877,33 +2881,8 @@ class find_coaches extends MY_Site_Controller {
     }
 
     public function summary_book($search_by = '', $coach_id = '', $date = '', $start_time = '', $end_time = '') {
-        $this->template->title = 'Booking Summary';
-
-        $recuring = $this->session->userdata('recurring_booking_type');
-        if(!$recuring){
-            $recuring = 1;
-        }
-
-        if($recuring == 1) {
-            $frequency = [0];
-        }
-
-        if($recuring == 2) {
-            $frequency = [0,7];
-        }
-
-        if($recuring == 3) {
-            $frequency = [0,7,7];
-        }
-
-        if($recuring == 4) {
-            $frequency = [0,7,7,7];
-        }
-
-        $partner_id = $this->auth_manager->partner_id($coach_id);
-        $region_id = $this->auth_manager->region_id($partner_id);
-
         $id    = $this->auth_manager->userid();
+
         $tz = $this->db->select('*')
             ->from('user_timezones')
             ->where('user_id', $id)
@@ -2912,98 +2891,153 @@ class find_coaches extends MY_Site_Controller {
         $minutes = @$tz[0]->minutes_val;
         $gmt_val = @$tz[0]->gmt_val;
 
-        if(@$gmt_val > 0){
-            @$gmt_val = "+".@$gmt_val;
+        if($minutes > 0){
+          $minutes = $minutes * -1;
+        }else{
+          $minutes = $minutes;
         }
 
-        $tipe = '';
-        if($this->auth_manager->role() == "STD"){
-            $tipe = 'student_id';
-        } else if($this->auth_manager->role() == "CCH"){
-            $tipe = 'coach_id';
-        }
+        $st_time_str = strtotime($start_time);
+        $st_time_cal = $st_time_str+(60*$minutes);
+        $st_time_rsl = date('H:i:s', $st_time_cal);
 
-        $dates3     = date('Y-m-d H:i:s');
-        $def3      = strtotime($dates3);
-        $datetime3 = $def3+(60*$minutes);
-        $nowdate  = date("Y-m-d");
-        $hour_start_db  = date('H:i:s');
+        $end_time_str = strtotime($end_time);
+        $end_time_cal = $end_time_str+(60*$minutes);
+        $end_time_rsl = date('H:i:s', $end_time_cal);
 
-        $pull_appoint = $this->db->select('*')
-                      ->from('appointments')
-                      ->where($tipe, $id)
-                      ->where('date =', $nowdate)
-                      ->where('end_time >=', $hour_start_db)
-                      ->where('status', 'active')
-                      ->order_by('date', 'ASC')
-                      ->order_by('start_time', 'ASC')
-                      // ->limit(5)
-                      ->get()->result();
+        $conv_date = date('Y-m-d', $date);
+        $check_appointment = $this->db->select('*')
+                            ->from('appointments')
+                            ->where('date', $conv_date)
+                            ->where('start_time', $st_time_rsl)
+                            ->where('end_time', $end_time_rsl)
+                            ->get()->result();
 
-        $datasession = @$pull_appoint;
+        // echo "<pre>";print_r($check_appointment);exit('a');
+        if(@$check_appointment){
+          $this->messages->add('<span class="trn">Coach already has an appointment on this date and time</span>', 'warning');
+          redirect('b2c/student/find_coaches/search/name');
+        }else{
 
-        $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
-        $region_setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('user_id',$region_id)->get()->result();
-        $global_setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('global_settings')->where('type','partner')->get()->result();
+          $this->template->title = 'Booking Summary';
 
-        $standard_coach_cost = @$setting[0]->standard_coach_cost;
-        if(!$standard_coach_cost || $standard_coach_cost == 0){
-            $standard_coach_cost_region = @$region_setting[0]->standard_coach_cost;
-            $standard_coach_cost = $standard_coach_cost_region;
-            if(!$standard_coach_cost_region || $standard_coach_cost_region == 0){
-                $standard_coach_cost_global = @$global_setting[0]->standard_coach_cost;
-                $standard_coach_cost = $standard_coach_cost_global;
-            }
-        }
-
-        $elite_coach_cost = @$setting[0]->elite_coach_cost;
-        if(!$elite_coach_cost || $elite_coach_cost == 0){
-            $elite_coach_cost_region = @$region_setting[0]->elite_coach_cost;
-            $elite_coach_cost = $elite_coach_cost_region;
-            if(!$elite_coach_cost_region || $elite_coach_cost_region == 0){
-                $elite_coach_cost_global = @$global_setting[0]->elite_coach_cost;
-                $elite_coach_cost = $elite_coach_cost_global;
-            }
-        }
-
-        // Detect browser and device ==========================
-        $detect = new Mobile_Detect;
-
-        if ( $detect->isMobile() ) {
-          $user_device = 'Mobile';
-          if( $detect->isiOS() ){
-            $user_d_type = 'iOS';
+          $recuring = $this->session->userdata('recurring_booking_type');
+          if(!$recuring){
+              $recuring = 1;
           }
-          if( $detect->isAndroidOS() ){
-            $user_d_type = 'Android';
+
+          if($recuring == 1) {
+              $frequency = [0];
           }
-        }else {
-          $user_device = 'Desktop';
-          $user_d_type = '';
+
+          if($recuring == 2) {
+              $frequency = [0,7];
+          }
+
+          if($recuring == 3) {
+              $frequency = [0,7,7];
+          }
+
+          if($recuring == 4) {
+              $frequency = [0,7,7,7];
+          }
+
+          $partner_id = $this->auth_manager->partner_id($coach_id);
+          $region_id = $this->auth_manager->region_id($partner_id);
+
+          if(@$gmt_val > 0){
+              @$gmt_val = "+".@$gmt_val;
+          }
+
+          $tipe = '';
+          if($this->auth_manager->role() == "STD"){
+              $tipe = 'student_id';
+          } else if($this->auth_manager->role() == "CCH"){
+              $tipe = 'coach_id';
+          }
+
+          $dates3     = date('Y-m-d H:i:s');
+          $def3      = strtotime($dates3);
+          $datetime3 = $def3+(60*$minutes);
+          $nowdate  = date("Y-m-d");
+          $hour_start_db  = date('H:i:s');
+
+          $pull_appoint = $this->db->select('*')
+                        ->from('appointments')
+                        ->where($tipe, $id)
+                        ->where('date =', $nowdate)
+                        ->where('end_time >=', $hour_start_db)
+                        ->where('status', 'active')
+                        ->order_by('date', 'ASC')
+                        ->order_by('start_time', 'ASC')
+                        // ->limit(5)
+                        ->get()->result();
+
+          $datasession = @$pull_appoint;
+
+          $setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
+          $region_setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('specific_settings')->where('user_id',$region_id)->get()->result();
+          $global_setting = $this->db->select('standard_coach_cost,elite_coach_cost, session_duration')->from('global_settings')->where('type','partner')->get()->result();
+
+          $standard_coach_cost = @$setting[0]->standard_coach_cost;
+          if(!$standard_coach_cost || $standard_coach_cost == 0){
+              $standard_coach_cost_region = @$region_setting[0]->standard_coach_cost;
+              $standard_coach_cost = $standard_coach_cost_region;
+              if(!$standard_coach_cost_region || $standard_coach_cost_region == 0){
+                  $standard_coach_cost_global = @$global_setting[0]->standard_coach_cost;
+                  $standard_coach_cost = $standard_coach_cost_global;
+              }
+          }
+
+          $elite_coach_cost = @$setting[0]->elite_coach_cost;
+          if(!$elite_coach_cost || $elite_coach_cost == 0){
+              $elite_coach_cost_region = @$region_setting[0]->elite_coach_cost;
+              $elite_coach_cost = $elite_coach_cost_region;
+              if(!$elite_coach_cost_region || $elite_coach_cost_region == 0){
+                  $elite_coach_cost_global = @$global_setting[0]->elite_coach_cost;
+                  $elite_coach_cost = $elite_coach_cost_global;
+              }
+          }
+
+          // Detect browser and device ==========================
+          $detect = new Mobile_Detect;
+
+          if ( $detect->isMobile() ) {
+            $user_device = 'Mobile';
+            if( $detect->isiOS() ){
+              $user_d_type = 'iOS';
+            }
+            if( $detect->isAndroidOS() ){
+              $user_d_type = 'Android';
+            }
+          }else {
+            $user_device = 'Desktop';
+            $user_d_type = '';
+          }
+
+          // echo "<pre>";print_r($user_device);exit();
+          // Detect browser and device ==========================
+
+          $vars = array(
+              'data_coach' => $this->identity_model->get_coach_identity($coach_id),
+              'date' => $date,
+              'start_time' => $start_time,
+              'end_time' => $end_time,
+              'search_by' => $search_by,
+              'standard_coach_cost' => $standard_coach_cost,
+              'elite_coach_cost' => $elite_coach_cost,
+              'datasession' => $datasession,
+              'recuring' => $recuring,
+              'frequency' => $frequency,
+              'user_device' => $user_device,
+              'user_d_type' => @$user_d_type
+          );
+
+          $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
+
+          //publish template
+          $this->template->publish();
         }
-
-        // echo "<pre>";print_r($user_device);exit();
-        // Detect browser and device ==========================
-
-        $vars = array(
-            'data_coach' => $this->identity_model->get_coach_identity($coach_id),
-            'date' => $date,
-            'start_time' => $start_time,
-            'end_time' => $end_time,
-            'search_by' => $search_by,
-            'standard_coach_cost' => $standard_coach_cost,
-            'elite_coach_cost' => $elite_coach_cost,
-            'datasession' => $datasession,
-            'recuring' => $recuring,
-            'frequency' => $frequency,
-            'user_device' => $user_device,
-            'user_d_type' => @$user_d_type
-        );
-
-        $this->template->content->view('contents/b2c/student/find_coach/summary_book/index', $vars);
-
-        //publish template
-        $this->template->publish();
     }
 
     private function session_duration($partner_id = ''){
