@@ -794,7 +794,7 @@ class find_coaches extends MY_Site_Controller {
 
                     // $u_t = $this->identity_model->get_identity('token')->update($s_t->id, $data);
 
-                    $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
+                    $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active', $browser_type, $device_type, $device_os);
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
                     $new_date_apd_coach = strtotime($get_date_apd[0]->date);
