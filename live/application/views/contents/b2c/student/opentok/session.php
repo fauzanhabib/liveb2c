@@ -244,6 +244,7 @@ function makeFullScreen(divId){
   padding-right: 10px;
   border-radius: 5px;
   margin-top: 10px;
+  min-height: 150px;
   max-height: 260px;
   overflow: auto;
 }
