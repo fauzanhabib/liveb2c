@@ -1908,13 +1908,12 @@ class find_coaches extends MY_Site_Controller {
          $key = 2;
          // exit('b');
        }
-       if(@$device_os){
-         $device_info = $device_type.''.($device_os).' / '.$browser_type;
+       if(@$device_os && @$device_os != 'none'){
+         $device_info = $device_type.'('.$device_os.') / '.$browser_type;
        }else{
          $device_info = $device_type.' / '.$browser_type;
        }
-       // print_r($this->config->item('opentok_key2'));
-       // exit();
+       // print_r($device_info);exit();
 //        print_r($start_time);
 //        print_r($end_time);
         $id    = $this->auth_manager->userid();
