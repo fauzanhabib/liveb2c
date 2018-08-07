@@ -8,6 +8,12 @@
         }
     }
 
+    .choose_browser{
+      background: none;
+      color: white;
+      height: 20px;
+    }
+
 </style>
 
 
@@ -116,19 +122,25 @@
                         ?>
                     </span>
                 </div>
-                <div class="bxcoachend">
+                <div class="bxcoactoken" style="border-bottom: 1px solid #606983 !important;">
                     <label>Booking Device/Browser</label>
-                    <span id="textBrowser">
-                      <?php
+                    <span id="textBrowser"><?php
                         echo $user_device;
                         if ($user_device == "Mobile"){
                           echo " (".@$user_d_type.")";
                         }
-                      ?>
-                    </span>
+                      ?></span>
                     <input type="hidden" id="d_os" value="<?php echo $user_d_type; ?>"/>
                     <input type="hidden" id="d_type" value="<?php echo $user_device; ?>"/>
                     <input type="hidden" id="d_browser" value=""/>
+                </div>
+                <div class="bxcoachend" style="border-bottom: none !important;display:none;" id="ch_browser">
+                    <label>Choose Browser:</label>
+                    <select class="choose_browser" id="sel_browser">
+                      <option value="Chrome">Chrome</option>
+                      <option value="Firefox">Firefox</option>
+                      <option value="Safari">Safari</option>
+                    </select>
                 </div>
                 <div class="bxcoactoken box--warning">
                     <label class="font--warning">Please use the same device when you do this booking on the live session</label>
@@ -195,23 +207,29 @@ if(isFirefox === true){
   // console.log(detect_browser)
 }
 
-navigator.sayswho= (function(){
-    var ua= navigator.userAgent, tem,
-    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-    if(/trident/i.test(M[1])){
-        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return 'IE '+(tem[1] || '');
-    }
-    if(M[1]=== 'Chrome'){
-        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
-        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-    }
-    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
-    return M.join(' ');
-})();
-
+// detect_browser = '';
 // console.log(navigator.sayswho);
+
+if(!detect_browser){
+  $('#ch_browser').show();
+
+  $('#sel_browser').change(function(){
+    detect_browser = $(this).val();
+    textContent = '<?php
+        echo $user_device;
+        if ($user_device == "Mobile"){
+          echo " (".@$user_d_type.")";
+        }
+      ?>';
+
+    new_content = textContent+' / '+detect_browser
+
+    document.getElementById("textBrowser").innerHTML = new_content;
+    // $('#textBrowser').html(new_content);
+    $("#d_browser").val(detect_browser);
+    // console.log(new_content);
+  })
+}
 
 document.getElementById("textBrowser").innerHTML += ' / '+detect_browser;
 $("#d_browser").val(detect_browser);
