@@ -641,8 +641,9 @@ var step = $('.step--circle.circle');
     var newstepVal = stepVal/100;
     var newtitikVal = titikVal/100;
 
-
-
+    if (titikVal >= 100) {
+    	titikVal = 100;		//To prevent the dial to overlap
+  	}
 
 	step.circleProgress({
 	    startAngle: -Math.PI / 2,

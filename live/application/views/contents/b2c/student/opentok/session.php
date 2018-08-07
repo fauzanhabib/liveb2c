@@ -900,6 +900,10 @@ opacity: 1 !important;
       var newstepVal = stepVal/100;
       var newtitikVal = titikVal/100;
 
+      if (titikVal >= 100) {
+        titikVal = 100;   //To prevent the dial to overlap
+      }
+
   // var stepVal = 0.6 // circle step value
   step.circleProgress({
       startAngle: -Math.PI / 2,
