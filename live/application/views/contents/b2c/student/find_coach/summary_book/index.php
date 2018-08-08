@@ -214,7 +214,7 @@ if(detect_browser == null){
   // console.log(detect_browser)
 }
 
-// detect_browser = '';
+detect_browser = '';
 // console.log(navigator.sayswho);
 
 if(!detect_browser){
@@ -234,12 +234,13 @@ if(!detect_browser){
     document.getElementById("textBrowser").innerHTML = new_content;
     // $('#textBrowser').html(new_content);
     $("#d_browser").val(detect_browser);
-    // console.log(new_content);
+    console.log(new_content);
   })
-}
+}else{
 
-document.getElementById("textBrowser").innerHTML += ' / '+detect_browser;
-$("#d_browser").val(detect_browser);
+  document.getElementById("textBrowser").innerHTML += ' / '+detect_browser;
+  $("#d_browser").val(detect_browser);
+}
 
 </script>
 
