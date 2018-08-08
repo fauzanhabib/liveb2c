@@ -207,6 +207,11 @@ if(isFirefox === true){
   // console.log(detect_browser)
 }
 
+if(detect_browser == null){
+  detect_browser = '';
+  // console.log(detect_browser)
+}
+
 // detect_browser = '';
 // console.log(navigator.sayswho);
 
