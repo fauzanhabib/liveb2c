@@ -132,12 +132,12 @@
                       ?></span>
                     <input type="hidden" id="d_os" value="<?php echo $user_d_type; ?>"/>
                     <input type="hidden" id="d_type" value="<?php echo $user_device; ?>"/>
-                    <input type="hidden" id="d_browser" value=""/>
+                    <input type="hidden" id="d_browser" value="1"/>
                 </div>
                 <div class="bxcoachend" style="border-bottom: none !important;display:none;" id="ch_browser">
                     <label>Choose Browser:</label>
                     <select class="choose_browser" id="sel_browser">
-                      <option value="" selected="true" disabled="disabled">Choose Your Browser</option>
+                      <option value="1">Choose Your Browser</option>
                       <option value="Chrome">Chrome</option>
                       <option value="Firefox">Firefox</option>
                       <option value="Safari">Safari</option>
@@ -229,12 +229,16 @@ if(!detect_browser){
         }
       ?>';
 
+    // $('#textBrowser').html(new_content);
+    $("#d_browser").val(detect_browser);
+
+    if(detect_browser == '1'){
+      detect_browser = '';
+    }
+
     new_content = textContent+' / '+detect_browser
 
     document.getElementById("textBrowser").innerHTML = new_content;
-    // $('#textBrowser').html(new_content);
-    $("#d_browser").val(detect_browser);
-    console.log(new_content);
   })
 }else{
 
@@ -252,13 +256,18 @@ if(!detect_browser){
         device_os    = $("#d_os").val();
 
         if(!device_os){
-          device_os = "none"
+          device_os = "none";
         }
         if(!device_type){
-          device_type = "none"
+          device_type = "none";
         }
         if(!browser_type){
-          browser_type = "none"
+          browser_type = "none";
+        }
+
+        if(browser_type == '1'){
+          alert("Please choose your browser");
+          return false;
         }
 
         href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
