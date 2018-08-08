@@ -137,6 +137,7 @@
                 <div class="bxcoachend" style="border-bottom: none !important;display:none;" id="ch_browser">
                     <label>Choose Browser:</label>
                     <select class="choose_browser" id="sel_browser">
+                      <option value="" selected="true" disabled="disabled">Choose Your Browser</option>
                       <option value="Chrome">Chrome</option>
                       <option value="Firefox">Firefox</option>
                       <option value="Safari">Safari</option>
