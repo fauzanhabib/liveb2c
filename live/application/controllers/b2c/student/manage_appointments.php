@@ -3,6 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+require_once 'vendor/autoload.php';
+
 class manage_appointments extends MY_Site_Controller {
 
     var $day_index = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
@@ -438,6 +440,32 @@ class manage_appointments extends MY_Site_Controller {
         $standard_coach_cost = $setting[0]->standard_coach_cost;
         $elite_coach_cost = $setting[0]->elite_coach_cost;
 
+        $pull_dv_info = $this->db->select('device_info')
+                      ->from('appointments')
+                      ->where('id', $appointment_id)
+                      ->get()->result();
+
+        $device_info = $pull_dv_info[0]->device_info;
+
+        // Detect browser and device ==========================
+        // $detect = new Mobile_Detect;
+        //
+        // if ( $detect->isMobile() ) {
+        //   $user_device = 'Mobile';
+        //   if( $detect->isiOS() ){
+        //     $user_d_type = 'iOS';
+        //   }
+        //   if( $detect->isAndroidOS() ){
+        //     $user_d_type = 'Android';
+        //   }
+        // }else {
+        //   $user_device = 'Desktop';
+        //   $user_d_type = '';
+        // }
+
+        // echo "<pre>";print_r($user_device);exit();
+        // Detect browser and device ==========================
+
         $vars = array(
             'data_coach' => $this->identity_model->get_coach_identity($coach_id),
             'date' => $date,
@@ -453,6 +481,9 @@ class manage_appointments extends MY_Site_Controller {
             'old_start_time' => $appointment_data_coach['start_time'],
             'old_end_time' => $appointment_data_coach['end_time'],
             'old_coach_gmt' => $old_coach_gmt,
+            'user_device' => @$user_device,
+            'user_d_type' => @$user_d_type,
+            'device_info' => @$device_info,
         );
 
         // echo "<pre>";
@@ -474,7 +505,6 @@ class manage_appointments extends MY_Site_Controller {
 
         // exit($appointment_id_old);
 
-
         $start_time_available = $start_time_;
         $end_time_available = $end_time_;
 
@@ -485,42 +515,40 @@ class manage_appointments extends MY_Site_Controller {
         $start_time = $convert['start_time'];
         $end_time = $convert['end_time'];
 
-
-
         // timezone
-                    $id_student = $this->auth_manager->userid();
+        $id_student = $this->auth_manager->userid();
 
 
-                    // student
-                    $gmt_student = $this->identity_model->new_get_gmt($id_student);
-                    // coach
-                    $gmt_coach = $this->identity_model->new_get_gmt($coach_id);
+        // student
+        $gmt_student = $this->identity_model->new_get_gmt($id_student);
+        // coach
+        $gmt_coach = $this->identity_model->new_get_gmt($coach_id);
 
 
-                    // student
-                    $minutes = $gmt_student[0]->minutes;
-                    // coach
-                    $minutes_coach = $gmt_coach[0]->minutes;
+        // student
+        $minutes = $gmt_student[0]->minutes;
+        // coach
+        $minutes_coach = $gmt_coach[0]->minutes;
 
-                    @date_default_timezone_set('UTC');
-                    // student
-                    $st  = strtotime($start_time);
-                    $usertime1 = $st+(60*$minutes);
-                    $start_hour = date("H:i", $usertime1);
+        @date_default_timezone_set('UTC');
+        // student
+        $st  = strtotime($start_time);
+        $usertime1 = $st+(60*$minutes);
+        $start_hour = date("H:i", $usertime1);
 
-                    $et  = strtotime($end_time);
-                    $usertime2 = $et+(60*$minutes);
-                    $end_hour = date("H:i", $usertime2);
+        $et  = strtotime($end_time);
+        $usertime2 = $et+(60*$minutes);
+        $end_hour = date("H:i", $usertime2);
 
-                    // coach
+        // coach
 
-                    $st_coach  = strtotime($start_time);
-                    $usertime1_coach = $st_coach+(60*$minutes_coach);
-                    $start_hour_coach = date("H:i", $usertime1_coach);
+        $st_coach  = strtotime($start_time);
+        $usertime1_coach = $st_coach+(60*$minutes_coach);
+        $start_hour_coach = date("H:i", $usertime1_coach);
 
-                    $et_coach  = strtotime($end_time);
-                    $usertime2_coach = $et_coach+(60*$minutes_coach);
-                    $end_hour_coach = date("H:i", $usertime2_coach);
+        $et_coach  = strtotime($end_time);
+        $usertime2_coach = $et_coach+(60*$minutes_coach);
+        $end_hour_coach = date("H:i", $usertime2_coach);
 
 
         // $check_max_book_coach_per_day = $this->max_book_coach_per_day($coach_id,$date);

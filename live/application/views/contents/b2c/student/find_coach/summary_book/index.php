@@ -214,7 +214,7 @@ if(detect_browser == null){
   // console.log(detect_browser)
 }
 
-detect_browser = '';
+// detect_browser = '';
 // console.log(navigator.sayswho);
 
 if(!detect_browser){
