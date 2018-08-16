@@ -25,27 +25,42 @@ class Session_simulator extends MY_Site_Controller {
     public function index(){
         $this->template->title = "Live Session Simulator";
 
-        $openkey = $this->config->item('opentok_key');
-        // echo $openkey;exit();
+        $id = $this->auth_manager->userid();
 
-        $opentok    = new OpenTok($this->config->item('opentok_key'), $this->config->item('opentok_secret'));
-        $session    = $opentok->createSession(array('mediaMode' => MediaMode::ROUTED));
+        $pull_s_type = $this->db->select('session_type')
+                     ->from('user_profiles')
+                     ->where('user_id', $id)
+                     ->get()->result();
 
-        $apiKey     = $this->config->item('opentok_key');
-        $sessionId  = $session->getSessionId();
-        $token      = $opentok->generateToken($sessionId);
+        $sess_type = $pull_s_type[0]->session_type;
 
-        $var_simulator = array(
-            'sessionId'  => @$sessionId,
-            'token'      => @$token,
-            'apiKey'     => @$apiKey,
-        );
+        // echo "<pre>";print_r($sess_type);exit();
 
-        // echo "<pre>";print_r($var_simulator);exit();
+        if($sess_type == '0'){
+          $openkey = $this->config->item('opentok_key');
+          // echo $openkey;exit();
 
-        $this->load->view('contents/b2c/student/simulator/index.php', $var_simulator);
-        // $this->template->content->view('default/contents/coach/simulator/index.php');
-        // $this->template->publish();
+          $opentok    = new OpenTok($this->config->item('opentok_key'), $this->config->item('opentok_secret'));
+          $session    = $opentok->createSession(array('mediaMode' => MediaMode::ROUTED));
+
+          $apiKey     = $this->config->item('opentok_key');
+          $sessionId  = $session->getSessionId();
+          $token      = $opentok->generateToken($sessionId);
+
+          $var_simulator = array(
+              'sessionId'  => @$sessionId,
+              'token'      => @$token,
+              'apiKey'     => @$apiKey,
+          );
+
+          // echo "<pre>";print_r($var_simulator);exit();
+
+          $this->load->view('contents/b2c/student/simulator/index.php', $var_simulator);
+          // $this->template->content->view('default/contents/coach/simulator/index.php');
+          // $this->template->publish();
+        }else{
+          $this->load->view('contents/b2c/student/simulator/index_agora.php');
+        }
     }
 
 
