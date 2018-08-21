@@ -199,7 +199,7 @@
 		            </svg>
 		            <div class="step__progress__info">
 		               	<div class="step__info__label">
-											<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
+							<?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
 		               		<!-- kondisi point telah ketemu goal -->
 		               		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                  viewBox="0 0 61.8 61.8" style="enable-background:new 0 0 61.8 61.8;" xml:space="preserve">
@@ -300,7 +300,7 @@
                             </svg>
 							<?php }else{?>
                             <!-- kondisi point belom ketemu goal -->
-                            <h5><?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?></br>points left</h5>
+                            <h5><?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?></br>Points to Goal</h5>
 							<?php } ?>
 		               	</div>
 		            </div>
