@@ -1170,9 +1170,12 @@ footer span {
     color: #F7F052;
     font-size: 1.2em; }
     .step__progress__info .step__info__label h5 {
+      width: 100px;
       color: #F7F052;
       font-size: 0.8em;
-      font-weight: 300; }
+      font-weight: 300;
+      position: absolute;
+      left: -15px; }
     .step__progress__info .step__info__label svg {
       top: -55px;
       left: -45px; }
