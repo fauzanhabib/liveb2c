@@ -1896,16 +1896,18 @@ class find_coaches extends MY_Site_Controller {
     } */
 
      private function create_appointment($coach_id = '', $date = '', $start_time = '', $end_time = '', $appointment_status = '', $browser_type, $device_type, $device_os) {
-       if($browser_type == 'Chrome' && @$device_os == 'Android'){
-         $opentok_key    = $this->config->item('opentok_key');
-         $opentok_secret = $this->config->item('opentok_secret');
-         $key = 1;
-         // print_r();
-         // exit('a');
-       }else{
+       if($browser_type == 'Safari'){
          $opentok_key    = $this->config->item('opentok_key2');
          $opentok_secret = $this->config->item('opentok_secret2');
          $key = 2;
+         //h264
+         // print_r();
+         // exit('a');
+       }else{
+         $opentok_key    = $this->config->item('opentok_key');
+         $opentok_secret = $this->config->item('opentok_secret');
+         $key = 1;
+         //vp8
          // exit('b');
        }
        if(@$device_os && @$device_os != 'none'){
