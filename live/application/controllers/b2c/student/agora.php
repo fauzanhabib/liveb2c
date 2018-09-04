@@ -299,6 +299,7 @@ class Agora extends MY_Site_Controller {
                               ->get()->result();
 
                   @$sessionIdn  = $sessioning[0]->session;
+                  @$key_type    = $sessioning[0]->key;
 
                   $livesession = array(
                     'sessionId'  => @$sessionId,
