@@ -296,7 +296,23 @@ class Token extends MY_Site_Controller {
 
 
         // insert to token history
+        $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+        $id = $this->auth_manager->userid();
+        $organization_id = '';
+        $organization_id = $this->db->select('gv_organizations.id')
+                  ->from('gv_organizations')
+                  ->join('users', 'users.organization_code = gv_organizations.organization_code')
+                  ->where('users.id', $id)
+                  ->get()->result();
+
+        if(empty($organization_id)){
+            $organization_id = $organization_id;
+        }else{
+            $organization_id = $organization_id[0]->id;
+        }
         $data_token_history = array('user_id' => $this->auth_manager->userid(),
+                               'partner_id' => $partner_id,
+                               'organization_id' => $organization_id, 
                                'transaction_date' => time(),
                                'token_amount' => $this->input->post('token_amount'),
                                'description' => 'Request token',
