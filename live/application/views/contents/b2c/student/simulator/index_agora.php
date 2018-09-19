@@ -30,7 +30,7 @@
   </style>
 
   <div class="header_sim child-order" style="padding: 10px 20px;text-align: center;">
-    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_neo.png'); ?>">
+    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_newneo.svg'); ?>" style="width: 153px;height: 74;">
   </div>
   <div class="child-order" style="text-align: center;background: #1b2338;padding-top: 50px;">
 

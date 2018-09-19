@@ -79,7 +79,7 @@
     <div class="wrapper">
         <header class="login__header">
             <div class="login__header__logo">
-                <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
+                <img src="<?php echo base_url();?>assets/b2c/img/logo_newneo.svg">
             </div>
 
             <!-- DESKTOP HEADER -->
@@ -130,7 +130,7 @@
         <!-- mobile header and nav menu -->
         <header class="header__mobile--login">
             <div class="login__header__logo">
-                <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
+                <img src="<?php echo base_url();?>assets/b2c/img/logo_newneo.svg">
             </div>
 
             <div class="mobile__menu">

@@ -29,7 +29,7 @@
     <div class="wrapper">
         <header class="login__header">
             <div class="login__header__logo">
-                <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
+                <img src="<?php echo base_url();?>assets/b2c/img/logo_newneo.svg">
             </div>
 
             <!-- DESKTOP HEADER -->
@@ -80,7 +80,7 @@
         <!-- mobile header and nav menu -->
         <header class="header__mobile--login">
             <div class="login__header__logo">
-                <img src="<?php echo base_url();?>assets/b2c/img/logo_neo.png">
+                <img src="<?php echo base_url();?>assets/b2c/img/logo_newneo.svg">
             </div>
 
             <div class="mobile__menu">
@@ -133,12 +133,17 @@
         </header>
         <!-- mobile header and nav menu -->
 
+        <style>
+            
+           
+        </style>
+
         <main class="main flex--center" >
             <section class="box__assessment" style="min-height: 500px;">
                 <div class="assignup flex--center">
                     <div class="signup__title">
-                        <img src="<?php echo base_url();?>assets/b2c/img/NeoForm.png">
-                    </div>
+                        <img src="<?php echo base_url();?>assets/b2c/img/neo-logo-new.png" class="newBrand">
+                </div>
                 </div>
                 <button class="neobutton__white trn" id="signIn--btn" style="cursor: pointer;" data-trn-key="sign_in2">SIGN IN</button>
                 <button class="neobutton__white trigger trn" data-trn-key="watch">WATCH VIDEO</button>

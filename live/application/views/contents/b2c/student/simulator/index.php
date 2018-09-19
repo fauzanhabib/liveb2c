@@ -155,7 +155,7 @@
   </style>
 
   <div class="header_sim child-order">
-    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_neo.png'); ?>">
+    <img src="<?php echo base_url().'/'.('assets/b2c/img/logo_newneo.svg'); ?>" style="width: 153px;height: 74;">
   </div>
   <div class="child-order" style="text-align: center;">
     <div id="status_container" class="prettyBox">
