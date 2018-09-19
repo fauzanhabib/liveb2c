@@ -413,6 +413,54 @@
             // console.log(data);
          });
     </script>
+
+
+    <script>
+        $(document).ready(function() {
+
+        
+             // detect browser running on ios apps
+        var userAgent = window.navigator.userAgent.toLowerCase(),
+	    safari = /safari/.test( userAgent ),
+	    ios = /iphone|ipod|ipad/.test( userAgent );
+
+	    var ua = navigator.userAgent.toLowerCase();
+		var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+		if( ios ) {
+		    if ( safari ) {
+		        //browser
+		    } else if ( !safari ) {
+		        //webview
+                $('.header__mobile').hide()
+		    };
+		} else {
+		    //not iOS
+		};
+
+		if(typeof zE != 'undefined'){
+			zE(function() {
+				if(isAndroid || ios && !safari) {
+			    	zE.hide();
+			    }
+			});
+        }
+        
+
+		if (typeof Android === "undefined") {
+			
+		} else {
+			// do something else if is a web view
+			$('.header__mobile').hide()
+        }
+        
+
+        
+        })
+
+    </script>
     </div>
     </body>
 </html>
+
+
+       
