@@ -200,7 +200,8 @@
                       <path stroke-linecap="round" id="arc2" fill="none" stroke="#fafafa" stroke-width="20" />
                   </svg>
                   <div class="step__progress__info">
-                      <div class="step__info__label"> <!-- <?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?> -->
+                      <div class="step__info__label">
+                    <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                    viewBox="0 0 61.8 61.8" style="enable-background:new 0 0 61.8 61.8;" xml:space="preserve">
                                   <style type="text/css">
@@ -298,6 +299,10 @@
                                       </g>
                                   </g>
                               </svg>
+                      <?php }else{?>
+                                    <!-- kondisi point belom ketemu goal -->
+                                    <h5><?php echo ($gsp->data->total_points_expected_today - $gsp->data->total_points_until_today);?></br>Points to Goal</h5>
+        							<?php } ?>
                       </div>
                   </div>
           </div>
@@ -308,6 +313,7 @@
     			<?php }else{?>
     				<!-- kondisi point belom ketemu goal -->
     				<h5 class="trn" data-trn-key="keepup">Keep up the good work!</h5>
+          <?php } ?>
       </div>
       <!-- end daily progress donut graph -->
     </div>
@@ -318,7 +324,7 @@
         <div class="graph__wrap">
             <div class="bar__graph">
               <ul class="graph b2">
-                span class="graph__bar__cont">
+                <span class="graph__bar__cont">
                   <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
                     <span class="graph__legend trn" data-trn-key="now">Now</span>
                   <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
@@ -527,7 +533,7 @@ outter.circleProgress({
 
 var inner = $('.inner--circle.circle');
 
-vvar innerup  = '<?php echo $gsp->data->study->points_until_today;?>';
+var innerup  = '<?php echo $gsp->data->study->points_until_today;?>';
 var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
 var innerperc = innerup / innerdown;
 // console.log(innerperc);
