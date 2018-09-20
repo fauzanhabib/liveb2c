@@ -174,7 +174,7 @@ class Leavesession extends MY_Site_Controller {
 
         // echo "<pre>";print_r($cch_att_val2);exit();
         // Coach get token
-        if(@$cch_att_val < '05:00' && @$cch_att_val != NULL){
+        if(@$cch_att_val < '05:00' && @$coach_att != NULL){
             // exit('a');
             //Preventing refresh to insert token
             // echo "<pre>";print_r($cch_att_val);exit();
