@@ -90,6 +90,10 @@ class Login extends MY_Controller {
 				$sso_enabled  = $check_login[0]->sso_enabled;
 				$sso_username = $check_login[0]->sso_username;
 
+				$tokenresult = $this->study_progress->GenerateTokenLogin($sso_username, $this->input->post('password'));
+
+ 			 	// echo "<pre>";print_r($tokenresult);exit();
+
 				if($sso_enabled == 0){
 					$this->messages->add('Not Registered on SSO', 'warning');
 					redirect('login');
@@ -98,12 +102,24 @@ class Login extends MY_Controller {
 
 			// print_r($sso_enabled);exit();
          // Success to identify
-       else if( $this->auth_manager->login( $this->input->post('email'), $this->input->post('password')) && $sso_enabled == 1) {
-					// echo "<pre>";print_r($check_login);exit();
+
+       else if( @$tokenresult != NULL && $sso_enabled == 1) {
           // insert timezone
 
       	$min_raw = $this->input->post("min_raw");
-        $userid  = $this->auth_manager->userid();
+        $userid  = $check_login[0]->id;
+
+				$updated_pass = $this->phpass->hash($this->input->post('password'));
+
+				$upd_pass_arr = array(
+           'password' => $updated_pass
+        );
+
+				$this->db->where('id', $userid);
+        $this->db->update('users', $upd_pass_arr);
+
+				$this->auth_manager->login( $this->input->post('email'), $this->input->post('password'));
+				// echo "<pre>";print_r($updated_pass);exit();
 
           $this->session->set_userdata('u_p',$this->input->post('password'));
 
@@ -158,7 +174,7 @@ class Login extends MY_Controller {
           $login_type = $check_login_type[0]->login_type;
             //=====
 			// print_r($sso_enabled);exit();
-					if($this->auth_manager->role() == 'CCH'){
+						if($this->auth_manager->role() == 'CCH'){
                redirect('coach/dashboard');
 					// exit;
             } else if($this->auth_manager->role() == 'STD' && $login_type == 1){

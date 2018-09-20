@@ -9,6 +9,31 @@ class Study_progress {
 
     }
 
+    public function GenerateTokenLogin($u_name, $u_pass){
+
+    // public function GenerateToken($std_email='', $std_paswd=''){
+
+        $this->CI = &get_instance();
+
+      $useraccount = json_encode(array(
+          'username'=>$u_name,
+          'password'=>$u_pass
+      ));
+      // Preparing API URL
+      $rt = curl_init();
+      curl_setopt_array($rt, array(
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_URL => getenv("JWT_API_HOST").'/token-request',
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type' => 'application/json'),
+          CURLOPT_POSTFIELDS => $useraccount
+      ));
+      $tokenconnect = curl_exec($rt) ;
+      $pulltr = json_decode($tokenconnect);
+      $tokenresult = @$pulltr->token;
+      // echo $tokenresult;exit('');
+      return $tokenresult;
+    }
 
     public function GenerateToken(){
 
