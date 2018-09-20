@@ -426,6 +426,11 @@
 
 	    var ua = navigator.userAgent.toLowerCase();
 		var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+        if(isAndroid) {
+			//webview
+            $('.header__mobile').hide()
+		}
+
 		if( ios ) {
 		    if ( safari ) {
 		        //browser
@@ -444,16 +449,6 @@
 			    }
 			});
         }
-        
-
-		if (typeof Android === "undefined") {
-			
-		} else {
-			// do something else if is a web view
-			$('.header__mobile').hide()
-        }
-        
-
         
         })
 
