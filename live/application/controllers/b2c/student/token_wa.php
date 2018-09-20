@@ -299,6 +299,13 @@ class Token_wa extends MY_Site_Controller {
                   ->where('users.id', $id)
                   ->get()->result();
 
+        $subgroup_id = $this->db->select('subgroup_id')
+                                ->from('user_profiles')
+                                ->where('user_profiles.user_id', $id)
+                                ->get()->result();
+
+        @$subgroup_id = $subgroup_id[0]->subgroup_id;
+
         if(empty($organization_id)){
             $organization_id = '';
         }else{
@@ -306,6 +313,7 @@ class Token_wa extends MY_Site_Controller {
         }
         $data_token_history = array('user_id' => $this->auth_manager->userid(),
                                'partner_id' => $partner_id,
+                               'student_affiliate_subgroup_id' => $subgroup_id,
                                'organization_id' => $organization_id, 
                                'transaction_date' => time(),
                                'token_amount' => $this->input->post('token_amount'),
