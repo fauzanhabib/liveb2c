@@ -80,7 +80,7 @@
               </div>
           </div>
 
-          <div class="progress__info__label"><?php echo $gsp->data->study->points_until_today;?> / 180.000</div>
+          <div class="progress__info__label"><?php echo number_format($gsp->data->total_points_until_today);?> / <?php echo number_format($gsp->data->total_points_to_pass);?></div>
           </div>
 
           <div class="progress__achievement">
@@ -125,7 +125,7 @@
 
 
               <div class="achievement__point__info">
-                <h5><?php echo $gsp->data->coach->points_until_today;?></h5>
+                <h5><?php echo number_format($gsp->data->coach->points_until_today);?></h5>
                 <h3>Coach</h3>
               </div>
             </div>
@@ -139,37 +139,37 @@
         <div class="graph__wrap">
             <div class="bar__graph">
               <?php
-              $bar_now = ( $gwp->data[0]->points_goal == 0 ? 0 : $gwp->data[0]->points / $gwp->data[0]->points_goal);
-              $bar_w1  = ( $gwp->data[1]->points_goal == 0 ? 0 : $gwp->data[1]->points / $gwp->data[1]->points_goal);
-              $bar_w2  = ( $gwp->data[2]->points_goal == 0 ? 0 : $gwp->data[2]->points / $gwp->data[2]->points_goal);
-              $bar_w3  = ( $gwp->data[3]->points_goal == 0 ? 0 : $gwp->data[3]->points / $gwp->data[3]->points_goal);
+              $bar_now = ( $gwp->data[0]->points_goal == 0 ? 0 : $gwp->data[0]->points / $gwp->data[0]->points_goal) * 100;
+  						$bar_w1  = ( $gwp->data[1]->points_goal == 0 ? 0 : $gwp->data[1]->points / $gwp->data[1]->points_goal) * 100;
+  						$bar_w2  = ( $gwp->data[2]->points_goal == 0 ? 0 : $gwp->data[2]->points / $gwp->data[2]->points_goal) * 100;
+  						$bar_w3  = ( $gwp->data[3]->points_goal == 0 ? 0 : $gwp->data[3]->points / $gwp->data[3]->points_goal) * 100;
               ?>
               <ul class="graph b2">
                   <span class="graph__bar__cont">
                     <li class="graph__bar__each" data-value="<?php echo $bar_now; ?>">
-                      <span class="graph__legend">Now</span>
-                      <label><?php echo $gwp->data[0]->points;?></label>
+                      <span class="graph__legend trn"  data-trn-key="now">Now</span>
+                      <label><?php echo number_format($gwp->data[0]->points);?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $bar_w1; ?>">
+                    <li class="graph__bar__each" data-value="<?php if($bar_w1 > 125){echo "125";}else{ echo $bar_w1;} ?>">
                       <span class="graph__legend">w 1</span>
-                      <label><?php echo $gwp->data[1]->points;?></label>
+                      <label><?php echo number_format($gwp->data[1]->points);?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $bar_w2; ?>">
+                    <li class="graph__bar__each" data-value="<?php if($bar_w2 > 125){echo "125";}else{ echo $bar_w2;} ?>">
                       <span class="graph__legend">w 2</span>
-                      <label><?php echo $gwp->data[2]->points;?></label>
+                      <label><?php echo number_format($gwp->data[2]->points);?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $bar_w3; ?>">
+                    <li class="graph__bar__each" data-value="<?php if($bar_w3 > 125){echo "125";}else{ echo $bar_w3;} ?>">
                       <span class="graph__legend">w 3</span>
-                      <label><?php echo $gwp->data[3]->points;?></label>
+                      <label><?php echo number_format($gwp->data[3]->points);?></label>
                     </li>
                   </span>
 
@@ -188,7 +188,7 @@
 
       <!-- daily progress donut graph -->
       <div class="progress__step">
-                    <h5>Progress to goals</h5>
+          <h5>Progress to goals</h5>
           <div class="donut__progress">
             <div class="step--circle circle"
                  data-thickness="15"
@@ -302,7 +302,12 @@
                   </div>
           </div>
           </div>
-          <h5><font><?php echo (($gsp->data->total_points_to_pass - $gsp->data->total_points_until_today)*-1);?></font> points left</h5>
+          <?php if($gsp->data->total_points_until_today >= $gsp->data->total_points_expected_today){?>
+    				<!-- kondisi point telah ketemu goal -->
+      			<h5 class="trn" data-trn-key="congratulation">Congratulation!</h5>
+    			<?php }else{?>
+    				<!-- kondisi point belom ketemu goal -->
+    				<h5 class="trn" data-trn-key="keepup">Keep up the good work!</h5>
       </div>
       <!-- end daily progress donut graph -->
     </div>
@@ -313,33 +318,33 @@
         <div class="graph__wrap">
             <div class="bar__graph">
               <ul class="graph b2">
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->comprehension_grammar;?>">
-                      <span class="graph__legend">Now</span>
-                    <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
-                    </li>
-                  </span>
+                span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[0]->comprehension_grammar;}?>">
+                    <span class="graph__legend trn" data-trn-key="now">Now</span>
+                  <label><?php echo strtok($gwp->data[0]->comprehension_grammar, '.');?></label>
+                  </li>
+                </span>
 
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->comprehension_grammar;?>">
-                      <span class="graph__legend">w 1</span>
-                    <label><?php echo strtok($gwp->data[1]->comprehension_grammar, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[1]->comprehension_grammar;}?>">
+                    <span class="graph__legend">w 1</span>
+                  <label><?php echo strtok($gwp->data[1]->comprehension_grammar, '.');?></label>
+                  </li>
+                </span>
 
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->comprehension_grammar;?>">
-                      <span class="graph__legend">w 2</span>
-                    <label><?php echo strtok($gwp->data[2]->comprehension_grammar, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[2]->comprehension_grammar;}?>">
+                    <span class="graph__legend">w 2</span>
+                  <label><?php echo strtok($gwp->data[2]->comprehension_grammar, '.');?></label>
+                  </li>
+                </span>
 
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->comprehension_grammar;?>">
-                      <span class="graph__legend">w 3</span>
-                    <label><?php echo strtok($gwp->data[3]->comprehension_grammar, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[3]->comprehension_grammar >125){echo "125";}else{echo $gwp->data[3]->comprehension_grammar;}?>">
+                    <span class="graph__legend">w 3</span>
+                  <label><?php echo strtok($gwp->data[3]->comprehension_grammar, '.');?></label>
+                  </li>
+                </span>
 
                   <div class="v__bar">
                     <div class="v__line"></div>
@@ -361,28 +366,28 @@
             <div class="bar__graph">
               <ul class="graph b2">
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->pronunciation;?>">
-                      <span class="graph__legend">Now</span>
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->pronunciation >125){echo "125";}else{echo $gwp->data[0]->pronunciation;}?>">
+                      <span class="graph__legend trn" data-trn-key="now">Now</span>
                     <label><?php echo strtok($gwp->data[0]->pronunciation, '.');?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->pronunciation;?>">
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->pronunciation >125){echo "125";}else{echo $gwp->data[1]->pronunciation;}?>">
                       <span class="graph__legend">w 1</span>
                     <label><?php echo strtok($gwp->data[1]->pronunciation, '.');?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->pronunciation;?>">
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->pronunciation >125){echo "125";}else{echo $gwp->data[2]->pronunciation;}?>">
                       <span class="graph__legend">w 2</span>
                     <label><?php echo strtok($gwp->data[2]->pronunciation, '.');?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->pronunciation;?>">
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[3]->pronunciation >125){echo "125";}else{echo $gwp->data[3]->pronunciation;}?>">
                       <span class="graph__legend">w 3</span>
                     <label><?php echo strtok($gwp->data[3]->pronunciation, '.');?></label>
                     </li>
@@ -408,28 +413,28 @@
             <div class="bar__graph">
               <ul class="graph b2">
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[0]->listening;?>">
-                      <span class="graph__legend">Now</span>
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->listening >125){echo "125";}else{echo $gwp->data[0]->listening;}?>">
+                      <span class="graph__legend trn" data-trn-key="now">Now</span>
                     <label><?php echo strtok($gwp->data[0]->listening, '.');?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[1]->listening;?>">
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->listening >125){echo "125";}else{echo $gwp->data[1]->listening;}?>">
                       <span class="graph__legend">w 1</span>
                     <label><?php echo strtok($gwp->data[1]->listening, '.');?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[2]->listening;?>">
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->listening >125){echo "125";}else{echo $gwp->data[2]->listening;}?>">
                       <span class="graph__legend">w 2</span>
                     <label><?php echo strtok($gwp->data[2]->listening, '.');?></label>
                     </li>
                   </span>
 
                   <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="<?php echo $gwp->data[3]->listening;?>">
+                    <li class="graph__bar__each" data-value="<?php if($gwp->data[3]->listening >125){echo "125";}else{echo $gwp->data[3]->listening;}?>">
                       <span class="graph__legend">w 3</span>
                     <label><?php echo strtok($gwp->data[3]->listening, '.');?></label>
                     </li>
@@ -454,57 +459,38 @@
         <div class="graph__wrap">
             <div class="bar__graph">
               <ul class="graph b2">
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="
-                    <?php if(strtok($gwp->data[0]->speaking, '.') > 125){
-                        echo '125';
-                      }else{
-                      strtok($gwp->data[0]->speaking, '.');
-                    };?>">
-                      <span class="graph__legend">Now</span>
-                    <label>
-                    <?php echo strtok($gwp->data[0]->speaking, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[0]->speaking >125){echo "125";}else{echo $gwp->data[0]->speaking;}?>">
+                    <span class="graph__legend trn" data-trn-key="now">Now</span>
+                  <label>
+                  <?php echo strtok($gwp->data[0]->speaking, '.');?></label>
+                  </li>
+                </span>
 
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="
-                    <?php if(strtok($gwp->data[1]->speaking, '.') > 125){
-                        echo '125';
-                      }else{
-                      strtok($gwp->data[1]->speaking, '.');
-                    };?>">
-                      <span class="graph__legend">w 1</span>
-                    <label>
-                    <?php echo strtok($gwp->data[1]->speaking, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[1]->speaking >125){echo "125";}else{echo $gwp->data[1]->speaking;}?>">
+                    <span class="graph__legend">w 1</span>
+                  <label>
+                  <?php echo strtok($gwp->data[1]->speaking, '.');?></label>
+                  </li>
+                </span>
 
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="
-                    <?php if(strtok($gwp->data[2]->speaking, '.') > 125){
-                        echo '125';
-                      }else{
-                      strtok($gwp->data[2]->speaking, '.');
-                    };?>">
-                      <span class="graph__legend">w 2</span>
-                    <label>
-                    <?php echo strtok($gwp->data[2]->speaking, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="<?php if($gwp->data[2]->speaking >125){echo "125";}else{echo $gwp->data[2]->speaking;}?>">
+                    <span class="graph__legend">w 2</span>
+                  <label>
+                  <?php echo strtok($gwp->data[2]->speaking, '.');?></label>
+                  </li>
+                </span>
 
-                  <span class="graph__bar__cont">
-                    <li class="graph__bar__each" data-value="
-                    <?php if(strtok($gwp->data[3]->speaking, '.') > 125){
-                        echo '125';
-                      }else{
-                      strtok($gwp->data[3]->speaking, '.');
-                    };?>">
-                      <span class="graph__legend">w 3</span>
-                    <label>
-                    <?php echo strtok($gwp->data[3]->speaking, '.');?></label>
-                    </li>
-                  </span>
+                <span class="graph__bar__cont">
+                  <li class="graph__bar__each" data-value="
+                  <?php if($gwp->data[3]->speaking >125){echo "125";}else{echo $gwp->data[3]->speaking;}?>">
+                    <span class="graph__legend">w 3</span>
+                  <label>
+                  <?php echo strtok($gwp->data[3]->speaking, '.');?></label>
+                  </li>
+                </span>
 
                   <div class="v__bar">
                     <div class="v__line"></div>
@@ -541,8 +527,8 @@ outter.circleProgress({
 
 var inner = $('.inner--circle.circle');
 
-var innerup   = '<?php echo $gsp->data->study->points_until_today;?>';
-var innerdown = '<?php echo $gsp->data->total_points_to_pass;?>';
+vvar innerup  = '<?php echo $gsp->data->study->points_until_today;?>';
+var innerdown = '<?php echo $gsp->data->study->points_to_pass;?>';
 var innerperc = innerup / innerdown;
 // console.log(innerperc);
 inner.circleProgress({
