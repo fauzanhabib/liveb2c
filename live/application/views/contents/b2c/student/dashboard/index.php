@@ -20,6 +20,16 @@
             flex: 1;
         }
     }
+
+    .dev_notif{
+      margin-left: 0px !important;
+      font-size: 11px !important;
+      color: #a2a2a2 !important;
+    }
+    .dev_notif2{
+      font-size: 12px !important;
+      color: #a2a2a2 !important;
+    }
 </style>
 
     <?php if(count($data)!=0){ ?>
@@ -161,6 +171,8 @@
                                 <div class="boxsessions__today tab-content current" id="tab-1">
                                     <div class="todaysessions">
                                         <span class="date trn" data-trn-key="havelive">You Have a Live Session</span>
+                                        <span class="date dev_notif2">Session was booked using <b style="margin-left: 3px; color:#a2a2a2"><?php echo @$device_info; ?></b></span>
+                                        <span class="date dev_notif2">It's recommended that you're using the same device and browser</span>
                                             <div class="boxinfo activesession">
                                                 <div class="playsession">
                                                     <form name ="livesession" action="<?php echo $url_session;?>" method="post">
@@ -203,6 +215,7 @@
                             <span class="smalltext trn"  data-trn-key="until">Until Next Session</span>
                         </div>
                         <?php } ?>
+                        <span class="date dev_notif">Session was booked using <b style="margin-left: 3px; color:#a2a2a2"><?php echo @$device_info; ?></b></span>
                         </span>
                         <div id="todaysess" class="boxinfo">
                             <div class="playsession" id="nosess">

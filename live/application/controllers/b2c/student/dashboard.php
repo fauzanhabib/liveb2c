@@ -241,6 +241,7 @@ class Dashboard extends MY_Site_Controller {
 
           $wm   = @$pull_appoint[$n];
           $wm_id = @$wm->id;
+          $device_info = @$wm->device_info;
           //User Hour
           date_default_timezone_set('UTC');
           $hourstart  = @$wm->start_time;
@@ -335,6 +336,7 @@ class Dashboard extends MY_Site_Controller {
               'err_gcp' => @$err_gcp,
               'err_gsp' => @$err_gsp,
               'err_gwp' => @$err_gwp,
+              'device_info' => $device_info,
               'url_session' => @$url_session
           );
 
