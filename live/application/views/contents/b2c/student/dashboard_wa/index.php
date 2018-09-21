@@ -366,33 +366,33 @@ function update_study(){
 <script type="text/javascript">
 
 
-$(".viewcoach").click(function() {
-    var coach_id = $(this).attr('idcoach');
-    $.ajax({
-        url: "<?php echo site_url('b2c/student/dashboard_wa/coach_detail');?>",
-            type: 'POST',
-            dataType: 'json',
-            data: {coach_id : coach_id},
-            success: function(data) {
-                var name = data[0].name;
-                var email = data[0].email;
-                var birthdate = data[0].birthdate;
-                var spoken_language = data[0].spoken_language;
-                var gender = data[0].gender;
-                // var timezone = data[0].timezone;
-                var profile_picture = data[0].profile_picture;
-
-                $('.namecoach').text(name);
-                // $('.emailcoach').text(email);
-                $('.birthdatecoach').text(birthdate);
-                $('.spoken_languagecoach').text(spoken_language);
-                $('.gendercoach').text(gender);
-                // $('.timezonecoach').text(': '+timezone);
-                $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
-
-            }
-    });
-});
+// $(".viewcoach").click(function() {
+//     var coach_id = $(this).attr('idcoach');
+//     $.ajax({
+//         url: "<?php echo site_url('b2c/student/dashboard_wa/coach_detail');?>",
+//             type: 'POST',
+//             dataType: 'json',
+//             data: {coach_id : coach_id},
+//             success: function(data) {
+//                 var name = data[0].name;
+//                 var email = data[0].email;
+//                 var birthdate = data[0].birthdate;
+//                 var spoken_language = data[0].spoken_language;
+//                 var gender = data[0].gender;
+//                 // var timezone = data[0].timezone;
+//                 var profile_picture = data[0].profile_picture;
+//
+//                 $('.namecoach').text(name);
+//                 // $('.emailcoach').text(email);
+//                 $('.birthdatecoach').text(birthdate);
+//                 $('.spoken_languagecoach').text(spoken_language);
+//                 $('.gendercoach').text(gender);
+//                 // $('.timezonecoach').text(': '+timezone);
+//                 $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
+//
+//             }
+//     });
+// });
 
 </script>
 
