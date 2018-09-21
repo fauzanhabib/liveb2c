@@ -298,10 +298,16 @@ class Login extends MY_Controller {
         }
     }
 
-	public function mobile($t, $token, $u, $username){
+	public function mobile($t, $token, $u, $username, $w, $isWebview){
 		//http://localhost:8088/index.php/login/mobile/token/eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTMyMzcxOTEsImV4cGlyYXRpb24iOjE1MTMyMzcxOTEsInVzZXJuYW1lIjoiaW9zIiwidXVpZCI6IjI3MDc2ODM1NDQzMzY5NTc0NSJ9.jX2rFfPTFhBWxBp6uglMGl4hYqbRxWJ8Lfi6ZyHtLmMJgwiNqQrU0ejWbOus4PnDeLVPADB_K9wCgysvokBVidmp_YkTATs94Lsd8rXJkXjICrGj4L981Rlt2D_If2_JXtVbexlPCLQbt0L1SBTb8yFuzdaWp1AMrhd7toYIn6YfMahSxPsH0fnyllGbkcGU0TBgLRX6DNw4yaVhF1am-mfd2xgidqqTepZ_NAXPSSNCDHowjW7Wfo0bR1JHULU9ZxlWbgzp6LvqqnnMKYuwTOgL0LfsBVwAmQ9dRINkZxJyUR0fWrLkNuvVb6QyvlHZR5WToaunaP-H9Q4BOL87Zg/username/ios
 
 		$is_verified = $this->study_progress->TokenVerify($token);
+		$this->session->set_userdata('isWebview', $isWebview);
+
+		$userdata = $this->session->userdata;
+		$isWebVal = $userdata['isWebview'];
+
+		// echo "<pre>";print_r($isWebVal);exit();
 
 		if(!$is_verified){
 			exit('Cannot access right now');

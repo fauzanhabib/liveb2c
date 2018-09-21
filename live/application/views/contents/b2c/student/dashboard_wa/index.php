@@ -165,6 +165,7 @@
                 </ul>
             </div>
             <div class="boxsessions">
+              <?php if($isWebVal == "0"){?>
                 <?php if($wm != NULL && strtotime($countdown) <= strtotime($nowc) && $nowh <= $hourend && $nowh >= $hourstart){ ?>
                     <?php if(@$statuscheck == 0){ ?>
                                 <div class="boxsessions__today tab-content current" id="tab-1">
@@ -259,6 +260,7 @@
                     <?php $checkdt++; } ?>
                 </div>
                 <?php } ?>
+              <?php } ?>
 
                 <div class="boxsessions__upcoming tab-content" id="tab-2">
                     <?php foreach($dataupcoming as $d){ ?>

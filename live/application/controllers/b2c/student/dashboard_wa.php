@@ -285,6 +285,9 @@ class Dashboard_wa extends MY_Controller {
         $sp_difftime_updated = date("H", $sp_difftime_updated_unix);
         // echo "<pre>";print_r($sp_difftime_updated);exit();
 
+        $userdata = $this->session->userdata;
+    		$isWebVal = $userdata['isWebview'];
+
         $vars = array(
             'title' => 'Upcoming Session',
             'role'  => 'Coach',
@@ -309,7 +312,8 @@ class Dashboard_wa extends MY_Controller {
             'id_to_name' => $this->identity_model->get_identity('profile')->dropdown('user_id', 'fullname'),
             'err_gcp' => @$err_gcp,
             'err_gsp' => @$err_gsp,
-            'err_gwp' => @$err_gwp
+            'err_gwp' => @$err_gwp,
+            'isWebVal' => @$isWebVal
         );
 
         // echo "<pre>";print_r($vars);exit();
