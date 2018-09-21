@@ -288,6 +288,15 @@ class Dashboard_wa extends MY_Controller {
         $userdata = $this->session->userdata;
     		$isWebVal = $userdata['isWebview'];
 
+        $coach_id = $wm->coach_id;
+
+        $data_ch = $this->identity_model->get_coach_identity($coach_id);
+
+        $ch_name = $data_ch[0]->fullname;
+        $ch_spoken_language = $data_ch[0]->spoken_language;
+        $ch_gender = $data_ch[0]->gender;
+        $ch_profile_picture = $data_ch[0]->profile_picture;
+
         $vars = array(
             'title' => 'Upcoming Session',
             'role'  => 'Coach',
@@ -313,10 +322,14 @@ class Dashboard_wa extends MY_Controller {
             'err_gcp' => @$err_gcp,
             'err_gsp' => @$err_gsp,
             'err_gwp' => @$err_gwp,
-            'isWebVal' => @$isWebVal
+            'isWebVal' => @$isWebVal,
+            'ch_name' => $ch_name,
+            'ch_spoken_language' => $ch_spoken_language,
+            'ch_gender' => $ch_gender,
+            'ch_profile_picture' => $ch_profile_picture,
         );
 
-        // echo "<pre>";print_r($vars);exit();
+        // echo "<pre>ch_";print_r($vars);exit();
         $this->template->content->view('contents/b2c/student/dashboard_wa/index',$vars);
         $this->template->publish();
     }

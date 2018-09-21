@@ -18,6 +18,27 @@
             flex: 1;
         }
     }
+    .ch_info_webview{
+      margin-top: 5px;
+      background: url('<?php echo base_url().$ch_profile_picture;?>');
+      height: 50px;
+      background-size: 50px 50px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .hr_ch_info{
+      width: 90%;
+      border-color: #5f6985;
+      background: none;
+      border-style: solid;
+      border-width: 1px 0px 0px 0px;
+    }
+    .ch_font_info{
+      font-size: 12px !important;
+    }
+    .ch_tc{
+      text-align: center !important;
+    }
 </style>
 
     <!-- back button -->
@@ -165,20 +186,34 @@
                 </ul>
             </div>
             <div class="boxsessions">
-              <?php if($isWebVal == "0"){?>
                 <?php if($wm != NULL && strtotime($countdown) <= strtotime($nowc) && $nowh <= $hourend && $nowh >= $hourstart){ ?>
                     <?php if(@$statuscheck == 0){ ?>
                                 <div class="boxsessions__today tab-content current" id="tab-1">
+                                  <?php if($isWebVal == "1"){?>
+                                    <div class="todaysessions" style="height:100%;">
+                                  <?php }else{ ?>
                                     <div class="todaysessions">
+                                  <?php } ?>
                                         <span class="date">You Have a Live Session</span>
-                                            <div class="boxinfo activesession">
-                                                <div class="playsession">
-                                                    <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
-                                                        <input type="hidden" name="appoint_id" value="<?php echo $wm_id ?>">
-                                                            <button type="submit" class="fa fa-play"></button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <?php if($isWebVal == "1"){?>
+                                          <hr class="hr_ch_info" />
+                                          <span class="date ch_info_webview"></span>
+                                          <span class="date ch_tc" style="margin-top: 5px;"><?php echo $ch_name; ?></span>
+                                          <span class="date ch_tc ch_font_info">Native Language:</span>
+                                          <span class="date ch_tc ch_font_info"><?php echo $ch_spoken_language; ?></span>
+                                          <span class="date ch_tc ch_font_info">Gender</span>
+                                          <span class="date ch_tc ch_font_info" style="margin-bottom:5px;"><?php echo $ch_gender; ?></span>
+                                        <?php } ?>
+                                        <?php if($isWebVal == "0"){?>
+                                          <div class="boxinfo activesession">
+                                              <div class="playsession">
+                                                  <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
+                                                      <input type="hidden" name="appoint_id" value="<?php echo $wm_id ?>">
+                                                          <button type="submit" class="fa fa-play"></button>
+                                                  </form>
+                                              </div>
+                                          </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                         <?php }else if(@$statuscheck == 1){ ?>
@@ -199,7 +234,11 @@
                 <?php }else{ ?>
                     <div class="boxsessions__today tab-content current" id="tab-1">
                     <?php $checkdt=1; foreach($data as $d){ ?>
-                    <div class="todaysessions">
+                    <?php if($isWebVal == "1"){?>
+                      <div class="todaysessions" style="height:100%;">
+                    <?php }else{ ?>
+                      <div class="todaysessions">
+                    <?php } ?>
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
                         <span class="time">
                         <?php if($checkdt==1){ ?>
@@ -214,53 +253,63 @@
                         </div>
                         <?php } ?>
                         </span>
-                        <div id="todaysess" class="boxinfo">
-                            <div class="playsession" id="nosess">
-                                <i class="fa fa-play"></i>
-                            </div>
-                            <div class="playsession hide" id="sess">
-                                <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
-                                    <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
-                                    <button type="submit" class="fa fa-play"></button>
-                                </form>
-                            </div>
-                            <div class="coachinfo trigger viewcoach" idcoach="<?php echo $d->coach_id;?>">
-                                Coach Info
-                            </div>
-                            <!-- MODAL -->
-                            <div class="modal-wrapper">
-                                <div class="modal">
-                                    <a class="btn-close"></a>
-                                    <div class="content">
-                                        <div class="profile__info">
-                                            <div class="profile__info__picture">
-                                                <img src="" alt="" class="profile_picturecoach">
-                                            </div>
-                                            <div class="profile__info__name">
-                                                <span class="namecoach"></span>
-                                            </div>
-                                            <!-- <div class="profile__info__birth">
-                                                <label>Date Of Birth </label>
-                                                <span class="birthdatecoach"></span>
-                                            </div> -->
-                                            <div class="profile__info__language">
-                                                <label>Native Language </label>
-                                                <span class="spoken_languagecoach"></span>
-                                            </div>
-                                            <div class="profile__info__gender">
-                                                <label>Gender</label>
-                                                <span class="gendercoach"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php if($isWebVal == "1"){?>
+                          <hr class="hr_ch_info" />
+                          <span class="date ch_info_webview"></span>
+                          <span class="date ch_tc" style="margin-top: 5px;"><?php echo $ch_name; ?></span>
+                          <span class="date ch_tc ch_font_info">Native Language:</span>
+                          <span class="date ch_tc ch_font_info"><?php echo $ch_spoken_language; ?></span>
+                          <span class="date ch_tc ch_font_info">Gender</span>
+                          <span class="date ch_tc ch_font_info" style="margin-bottom:5px;"><?php echo $ch_gender; ?></span>
+                        <?php } ?>
+                        <?php if($isWebVal == "0"){?>
+                          <div id="todaysess" class="boxinfo">
+                              <div class="playsession" id="nosess">
+                                  <i class="fa fa-play"></i>
+                              </div>
+                              <div class="playsession hide" id="sess">
+                                  <form name ="livesession" action="<?php echo(site_url('b2c/student/opentok/live/'));?>" method="post">
+                                      <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
+                                      <button type="submit" class="fa fa-play"></button>
+                                  </form>
+                              </div>
+                              <div class="coachinfo trigger viewcoach" idcoach="<?php echo $d->coach_id;?>">
+                                  Coach Info
+                              </div>
+                              <!-- MODAL -->
+                              <div class="modal-wrapper">
+                                  <div class="modal">
+                                      <a class="btn-close"></a>
+                                      <div class="content">
+                                          <div class="profile__info">
+                                              <div class="profile__info__picture">
+                                                  <img src="" alt="" class="profile_picturecoach">
+                                              </div>
+                                              <div class="profile__info__name">
+                                                  <span class="namecoach"></span>
+                                              </div>
+                                              <!-- <div class="profile__info__birth">
+                                                  <label>Date Of Birth </label>
+                                                  <span class="birthdatecoach"></span>
+                                              </div> -->
+                                              <div class="profile__info__language">
+                                                  <label>Native Language </label>
+                                                  <span class="spoken_languagecoach"></span>
+                                              </div>
+                                              <div class="profile__info__gender">
+                                                  <label>Gender</label>
+                                                  <span class="gendercoach"></span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        <?php } ?>
                     </div>
                     <?php $checkdt++; } ?>
                 </div>
                 <?php } ?>
-              <?php } ?>
 
                 <div class="boxsessions__upcoming tab-content" id="tab-2">
                     <?php foreach($dataupcoming as $d){ ?>
@@ -368,33 +417,33 @@ function update_study(){
 <script type="text/javascript">
 
 
-// $(".viewcoach").click(function() {
-//     var coach_id = $(this).attr('idcoach');
-//     $.ajax({
-//         url: "<?php echo site_url('b2c/student/dashboard_wa/coach_detail');?>",
-//             type: 'POST',
-//             dataType: 'json',
-//             data: {coach_id : coach_id},
-//             success: function(data) {
-//                 var name = data[0].name;
-//                 var email = data[0].email;
-//                 var birthdate = data[0].birthdate;
-//                 var spoken_language = data[0].spoken_language;
-//                 var gender = data[0].gender;
-//                 // var timezone = data[0].timezone;
-//                 var profile_picture = data[0].profile_picture;
-//
-//                 $('.namecoach').text(name);
-//                 // $('.emailcoach').text(email);
-//                 $('.birthdatecoach').text(birthdate);
-//                 $('.spoken_languagecoach').text(spoken_language);
-//                 $('.gendercoach').text(gender);
-//                 // $('.timezonecoach').text(': '+timezone);
-//                 $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
-//
-//             }
-//     });
-// });
+$(".viewcoach").click(function() {
+    var coach_id = $(this).attr('idcoach');
+    $.ajax({
+        url: "<?php echo site_url('b2c/student/dashboard_wa/coach_detail');?>",
+            type: 'POST',
+            dataType: 'json',
+            data: {coach_id : coach_id},
+            success: function(data) {
+                var name = data[0].name;
+                var email = data[0].email;
+                var birthdate = data[0].birthdate;
+                var spoken_language = data[0].spoken_language;
+                var gender = data[0].gender;
+                // var timezone = data[0].timezone;
+                var profile_picture = data[0].profile_picture;
+
+                $('.namecoach').text(name);
+                // $('.emailcoach').text(email);
+                $('.birthdatecoach').text(birthdate);
+                $('.spoken_languagecoach').text(spoken_language);
+                $('.gendercoach').text(gender);
+                // $('.timezonecoach').text(': '+timezone);
+                $('.profile_picturecoach').attr('src','<?php echo base_url();?>'+profile_picture);
+
+            }
+    });
+});
 
 </script>
 
