@@ -288,7 +288,7 @@ class Dashboard_wa extends MY_Controller {
         $userdata = $this->session->userdata;
     		$isWebVal = $userdata['isWebview'];
 
-        $coach_id = $wm->coach_id;
+        $coach_id = @$wm->coach_id;
 
         $data_ch = $this->identity_model->get_coach_identity($coach_id);
 
