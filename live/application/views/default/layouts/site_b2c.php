@@ -398,12 +398,12 @@
        });
 
       // MODAL
-      $('.trigger').each(function() {
-          $(this).click(function() {
-              $(this).next().addClass('open');
-              return false;
-          });
-      });
+        $('.trigger').each(function() {
+            $(this).on('touchstart, click', function() {
+                $(this).next().addClass('open');
+                return false;
+            });
+        });
     </script>
     <script type="text/javascript">
         var d = new Date()

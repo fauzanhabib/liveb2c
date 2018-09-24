@@ -240,38 +240,37 @@
                                 <div class="coachinfo trigger viewcoaches trn" idcoaches="<?php echo $h->coach_id;?>" data-trn-key="coachinfo">
                                     Coach Info
                                 </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-
-                    <!-- MODAL -->
-                    <div class="modal-wrapper modalkedua">
-                        <div class="modal">
-                            <a class="btn-close"></a>
-                            <div class="content">
-                                <div class="profile__info">
-                                    <div class="profile__info__picture">
-                                        <img src="" alt="" class="profile_picturecoaches">
-                                    </div>
-                                    <div class="profile__info__name">
-                                        <span class="namecoaches"></span>
-                                    </div>
-                                    <!-- <div class="profile__info__birth">
-                                        <label class="trn" data-trn-key="birth">Date Of Birth </label>
-                                        <span class="birthdatecoaches"></span>
-                                    </div> -->
-                                    <div class="profile__info__language">
-                                        <label class="trn" data-trn-key="native">Native Language </label>
-                                        <span class="spoken_languagecoaches"></span>
-                                    </div>
-                                    <div class="profile__info__gender">
-                                        <label class="trn" data-trn-key="gender">Gender</label>
-                                        <span class="gendercoaches"></span>
+                                <!-- MODAL -->
+                                <div class="modal-wrapper">
+                                    <div class="modal">
+                                        <a class="btn-close"></a>
+                                        <div class="content">
+                                            <div class="profile__info">
+                                                <div class="profile__info__picture">
+                                                    <img src="" alt="" class="profile_picturecoaches">
+                                                </div>
+                                                <div class="profile__info__name">
+                                                    <span class="namecoaches"></span>
+                                                </div>
+                                                <!-- <div class="profile__info__birth">
+                                                    <label class="trn" data-trn-key="birth">Date Of Birth </label>
+                                                    <span class="birthdatecoaches"></span>
+                                                </div> -->
+                                                <div class="profile__info__language">
+                                                    <label class="trn" data-trn-key="native">Native Language </label>
+                                                    <span class="spoken_languagecoaches"></span>
+                                                </div>
+                                                <div class="profile__info__gender">
+                                                    <label class="trn" data-trn-key="gender">Gender</label>
+                                                    <span class="gendercoaches"></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
 
                     </div>
                 </div>
@@ -297,7 +296,7 @@
     $(".viewcoaches").click(function() {
         var coach_id = $(this).attr('idcoaches');
         // console.log(coach_id);
-        $('.modalkedua').addClass('open');
+        // $('.modalkedua').addClass('open');
         $.ajax({
             url: "<?php echo site_url('b2c/student/session/coach_detail');?>",
             type: 'POST',
