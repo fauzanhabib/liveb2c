@@ -417,39 +417,35 @@
 
     <script>
         $(document).ready(function() {
-
-        
-             // detect browser running on ios apps
-        var userAgent = window.navigator.userAgent.toLowerCase(),
-	    safari = /safari/.test( userAgent ),
-	    ios = /iphone|ipod|ipad/.test( userAgent );
-
-	    var ua = navigator.userAgent.toLowerCase();
-		var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-        if(isAndroid) {
-			//webview
-            $('.header__mobile').hide()
-		}
-
-		if( ios ) {
-		    if ( safari ) {
-		        //browser
-		    } else if ( !safari ) {
-		        //webview
+            var nua = navigator.userAgent;
+            var is_android = ((nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 &&     nua.indexOf('AppleWebKit') > -1) && !(nua.indexOf('Chrome') > -1));
+            if(is_android){
                 $('.header__mobile').hide()
-		    };
-		} else {
-		    //not iOS
-		};
+            }
+            
+                // detect browser running on ios apps
+            var userAgent = window.navigator.userAgent.toLowerCase(),
+            safari = /safari/.test( userAgent ),
+            ios = /iphone|ipod|ipad/.test( userAgent );
+                if( ios ) {
+                    if ( safari ) {
+                        //browser
+                    } else if ( !safari ) {
+                        //webview
+                        $('.header__mobile').hide()
+                    };
+                } else {
+                    //not iOS
+                };
 
-		if(typeof zE != 'undefined'){
-			zE(function() {
-				if(isAndroid || ios && !safari) {
-			    	zE.hide();
-			    }
-			});
-        }
-        
+
+            // var ua = navigator.userAgent.toLowerCase();
+            // var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+            //     if(isAndroid) {
+            //         //webview
+                   
+            //     }
+
         })
 
     </script>
