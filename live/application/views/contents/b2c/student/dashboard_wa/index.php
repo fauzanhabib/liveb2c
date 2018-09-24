@@ -259,7 +259,7 @@
                           <span class="date ch_tc" style="margin-top: 5px;"><?php echo $ch_name; ?></span>
                           <span class="date ch_tc ch_font_info">Native Language:</span>
                           <span class="date ch_tc ch_font_info"><?php echo $ch_spoken_language; ?></span>
-                          <span class="date ch_tc ch_font_info">Gender</span>
+                          <span class="date ch_tc ch_font_info">Gender:</span>
                           <span class="date ch_tc ch_font_info" style="margin-bottom:5px;"><?php echo $ch_gender; ?></span>
                         <?php } ?>
                         <?php if($isWebVal == "0"){?>
@@ -417,7 +417,7 @@ function update_study(){
 <script type="text/javascript">
 
 
-$(".viewcoach").click(function() {
+$(".viewcoach").bind('touchstart click', function(){
     var coach_id = $(this).attr('idcoach');
     $.ajax({
         url: "<?php echo site_url('b2c/student/dashboard_wa/coach_detail');?>",
