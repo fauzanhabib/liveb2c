@@ -9103,6 +9103,7 @@ function coach_partner_approve_dayoff($email = '', $content = '', $fullname = ''
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($studentmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
         $this->CI->email->message($stu_book);
@@ -9579,6 +9580,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($studentmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
         $this->CI->email->message($stu_book);
@@ -10385,6 +10387,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($coachmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
         $this->CI->email->message($notifcoach);
@@ -10860,6 +10863,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($coachmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session ' .ucfirst($content));
         $this->CI->email->message($notifcoach);
@@ -16496,6 +16500,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($coachmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session Rescheduled');
         $this->CI->email->message($stu_reschedule);
@@ -17379,6 +17384,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($studentmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session Rescheduled');
         $this->CI->email->message($notif_stu_reschedule);
@@ -18256,6 +18262,7 @@ auto;color:#fefefe;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-we
 
         $this->CI->email->from('support@nexgenenglishonline.co', 'neo - nexgen English Online');
         $this->CI->email->to($coachmail);
+        $this->CI->email->reply_to('help@nexgenenglishonline.co', 'neo - Helpdesk');
 
         $this->CI->email->subject('DynEd Live Session Rescheduled');
         $this->CI->email->message($notif_coa_reschedule);
