@@ -399,7 +399,7 @@
 
       // MODAL
         $('.trigger').each(function() {
-            $(this).on('touchstart, click', function() {
+            $(this).bind('touchstart click', function() {
                 $(this).next().addClass('open');
                 return false;
             });
