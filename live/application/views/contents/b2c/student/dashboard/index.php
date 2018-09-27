@@ -22,7 +22,7 @@
     }
 
     .dev_notif{
-      margin-left: 0px !important;
+      /* margin-left: 0px !important; */
       font-size: 11px !important;
       color: #a2a2a2 !important;
     }
@@ -171,7 +171,7 @@
                                 <div class="boxsessions__today tab-content current" id="tab-1">
                                     <div class="todaysessions">
                                         <span class="date trn" data-trn-key="havelive">You Have a Live Session</span>
-                                        <span class="date dev_notif2">Session was booked using <b style="margin-left: 3px; color:#a2a2a2"><?php echo @$d->device_info; ?></b></span>
+                                        <span class="date dev_notif2">Session was booked using <b style="margin-left: 3px; color:#a2a2a2"><?php echo @$device_info; ?></b></span>
                                         <span class="date dev_notif2">It's recommended that you're using the same device and browser</span>
                                             <div class="boxinfo activesession">
                                                 <div class="playsession">
@@ -182,6 +182,60 @@
                                                 </div>
                                             </div>
                                     </div>
+                                    <?php $checkdt=1; foreach($data as $d){ ?>
+                                    <?php if($checkdt==1){ ?>
+                                    <?php }else {?>
+                                    <div class="todaysessions">
+                                        <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
+                                        <span class="time">
+                                          <?php echo date('H:i', strtotime($d->start_time)).' - '.date('H:i', strtotime($d->end_time)); ?>
+                                        </span>
+                                        <span class="date dev_notif">Session was booked using <b style="margin-left: 3px; color:#a2a2a2"><?php echo @$d->device_info; ?></b></span>
+                                        </span>
+                                        <div id="todaysess" class="boxinfo">
+                                            <div class="playsession" id="nosess">
+                                                <i class="fa fa-play"></i>
+                                            </div>
+                                            <div class="playsession hide" id="sess">
+                                                <form name ="livesession" action="<?php echo $url_session;?>" method="post">
+                                                    <input type="hidden" name="appoint_id2" id="get_id_ajax" value="">
+                                                    <button type="submit" class="fa fa-play"></button>
+                                                </form>
+                                            </div>
+                                            <div class="coachinfo trigger viewcoach trn" idcoach="<?php echo $d->coach_id;?>" data-trn-key="coachinfo">
+                                                Coach Info
+                                            </div>
+                                            <!-- MODAL -->
+                                            <div class="modal-wrapper">
+                                                <div class="modal">
+                                                    <a class="btn-close"></a>
+                                                    <div class="content">
+                                                        <div class="profile__info">
+                                                            <div class="profile__info__picture">
+                                                                <img src="" alt="" class="profile_picturecoach">
+                                                            </div>
+                                                            <div class="profile__info__name">
+                                                                <span class="namecoach"></span>
+                                                            </div>
+                                                            <!-- <div class="profile__info__birth">
+                                                                <label>Date Of Birth </label>
+                                                                <span class="birthdatecoach"></span>
+                                                            </div> -->
+                                                            <div class="profile__info__language">
+                                                                <label class="trn" data-trn-key="native">Native Language </label>
+                                                                <span class="spoken_languagecoach"></span>
+                                                            </div>
+                                                            <div class="profile__info__gender">
+                                                                <label class="trn" data-trn-key="gender">Gender</label>
+                                                                <span class="gendercoach"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  <?php } $checkdt++; } ?>
                                 </div>
                         <?php }else if(@$statuscheck == 1){ ?>
                                 <div class="boxsessions__today tab-content current" id="tab-1">
@@ -203,7 +257,11 @@
                     <?php $checkdt=1; foreach($data as $d){ ?>
                     <div class="todaysessions">
                         <span class="date"><?php echo date('D, j F  Y', strtotime($d->date)); ?></span>
-                        <span class="time">
+                        <?php if($checkdt!=1){ ?>
+                          <span class="time">
+                            <?php echo date('H:i', strtotime($d->start_time)).' - '.date('H:i', strtotime($d->end_time)); ?>
+                          </span>
+                        <?php } ?>
                         <?php if($checkdt==1){ ?>
                         <div id="clockdiv" class="datetime">
                             <span class="hours"></span>
@@ -218,6 +276,7 @@
                         <span class="date dev_notif">Session was booked using <b style="margin-left: 3px; color:#a2a2a2"><?php echo @$d->device_info; ?></b></span>
                         </span>
                         <div id="todaysess" class="boxinfo">
+                          <?php if($checkdt==1){ ?>
                             <div class="playsession" id="nosess">
                                 <i class="fa fa-play"></i>
                             </div>
@@ -227,6 +286,7 @@
                                     <button type="submit" class="fa fa-play"></button>
                                 </form>
                             </div>
+                          <?php } ?>
                             <div class="coachinfo trigger viewcoach trn" idcoach="<?php echo $d->coach_id;?>" data-trn-key="coachinfo">
                                 Coach Info
                             </div>

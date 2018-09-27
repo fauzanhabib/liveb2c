@@ -310,7 +310,7 @@ class Dashboard extends MY_Site_Controller {
             $url_session = site_url('b2c/student/opentok/live/');
           }
 
-          // echo "<pre>";print_r($wm);exit();
+          // echo "<pre>";print_r($data);exit();
           $vars = array(
               'title' => 'Upcoming Session',
               'role'  => 'Coach',
