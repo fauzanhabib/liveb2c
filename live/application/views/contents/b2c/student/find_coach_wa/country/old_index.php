@@ -12,7 +12,7 @@
                     <?php } ?>
 
                     <div class="dashboard__menu">
-                        <a href="<?php echo site_url('b2c/student/find_coaches/single_date'); ?>" >
+                        <a href="<?php echo site_url('b2c/student/find_coaches_wa/single_date'); ?>" >
                             <div class="booking activediv">
                                 <svg width="54px" height="65px" viewBox="0 0 54 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
@@ -136,7 +136,7 @@
                         </div>
 
                         <div id="tab-1" class="tab-content alt1 current">
-                            <?php echo form_open('b2c/student/find_coaches/search/name', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
+                            <?php echo form_open('b2c/student/find_coaches_wa/search/name', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                             <div class="bookcoach__flexing">
                                 <input type="text" name="name" placeholder=" Search Coach...">
                                 <div class="btnsearch">
@@ -147,7 +147,7 @@
                         </div>
 
                         <div id="tab-2" class="tab-content alt2 hide">
-                            <?php echo form_open('b2c/student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
+                            <?php echo form_open('b2c/student/find_coaches_wa/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
                             <div class="bookcoach__flexing">
                                 <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker">
                                 <style>
@@ -168,7 +168,7 @@
                             <div class="bookcoach__flexing">
                                 <div class="bycountry">
                                     <div class="c-dropdown js-dropdown">
-                                        <?php echo form_open('b2c/student/find_coaches/search/country', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
+                                        <?php echo form_open('b2c/student/find_coaches_wa/search/country', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                                         <input type="hidden" name="country" id="country" class="js-dropdown__input">
                                         <span class="c-button c-button--dropdown js-dropdown__current">Country..</span>
                                         <ul class="c-dropdown__list">
@@ -194,7 +194,7 @@
                             <div class="bookcoach__flexing">
                                 <div class="bylanguage">
                                     <div class="c-dropdown js-dropdown">
-                                        <?php echo form_open('b2c/student/find_coaches/search/spoken_language', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
+                                        <?php echo form_open('b2c/student/find_coaches_wa/search/spoken_language', 'class="pure-form search-b-2 margin-auto border-2-primary border-rounded-5 width100perc"'); ?>
                                         <input type="hidden" name="language" id="language" class="js-dropdown__input">
                                         <span class="c-button c-button--dropdown js-dropdown__current">Language..</span>
                                         <ul class="c-dropdown__list">
@@ -448,7 +448,7 @@
                 var newdate = date.split('/');
                 var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
                 //alert(this.name);
-                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/availability/country'); ?>" + "/" + this.name + "/" + dateformat;
+                var loadUrl = "<?php echo site_url('b2c/student/find_coaches_wa/availability/country'); ?>" + "/" + this.name + "/" + dateformat;
                 var m = $('[id^=result_]').html($('[id^=result_]').val());
                 // alert(loadUrl);
                 if (dateformat != '') {
@@ -467,7 +467,7 @@
 
             $(".weekly_schedule").click(function () {
                 //alert(this.name);
-                var loadUrl = "<?php echo site_url('b2c/student/find_coaches/schedule_detail'); ?>" + "/" + this.value;
+                var loadUrl = "<?php echo site_url('b2c/student/find_coaches_wa/schedule_detail'); ?>" + "/" + this.value;
                 var m = $('[id^=result_]').html($('[id^=result_]').val());
                 //alert(loadUrl);
                 if (this.value != '') {
@@ -508,7 +508,7 @@
             var newdate = date.split('/');
             var dateformat = newdate[2]+'-'+newdate[0]+'-'+newdate[1];
             // console.log(dateformat);
-            var newurl = "<?php echo site_url('b2c/student/find_coaches/book_by_single_date'); ?>"+"/"+dateformat;
+            var newurl = "<?php echo site_url('b2c/student/find_coaches_wa/book_by_single_date'); ?>"+"/"+dateformat;
             $('#date_value').attr('action', newurl);
         };
 
