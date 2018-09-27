@@ -146,14 +146,14 @@
                 </div>
                 </div>
                 <button class="neobutton__white trn" id="signIn--btn" style="cursor: pointer;" data-trn-key="sign_in2">SIGN IN</button>
-                <button class="neobutton__white trigger trn" data-trn-key="watch">WATCH VIDEO</button>
+                <button class="neobutton__white trigger open__video trn" data-trn-key="watch">WATCH VIDEO</button>
 
                 <!-- MODAL -->
                 <div class="modal-wrapper">
                     <div class="modal__watch">
                         <a class="btn-close"></a>
                         <div class="content">
-                            <iframe id="video" width="854" height="480" src="https://www.youtube.com/embed/4jf5lcfqgV4" frameborder="0" allowfullscreen=""></iframe>
+                            <iframe id="video" width="854" height="480" src="" frameborder="0" allowfullscreen=""></iframe>
                         </div>
                     </div>
                 </div>
@@ -208,13 +208,24 @@
     <script>
 
         // Finds all iframes from youtubes and gives them a unique class
-        $('iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
+        // $('iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
 
-        $(".btn-close").click(function() {
+        // var src = $('#videoplayer').children('iframe').attr('src');
+
+        // when object with class open-popup is clicked...
+        $('.open__video').click(function(e) {
+            e.preventDefault();
+            // change the src value of the video
+            $('.content').children('iframe').attr('src', 'https://myneo.space/assets/video/neostudyapps.mp4');
+        });
+
+        $(".btn-close").click(function(e) {
             // changes the iframe src to prevent playback or stop the video playback in our case
-            $('.youtube-iframe').each(function(index) {
-                $(this).attr('src', $(this).attr('src'));
-                return false;
+            $('.content').each(function(index) {
+                // $(this).attr('src', $(this).attr('src'));
+                e.preventDefault();
+                $(this).children('iframe').attr('src', '');
+                // return false;
             });
           
         //click function
