@@ -754,7 +754,7 @@ class find_coaches_wa extends MY_Site_Controller {
                 // if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
                 if ($this->db->trans_status() === true && $remain_token >= 0) {
 
-                    $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
+                    $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active', $browser_type, $device_type, $device_os);
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
                     $new_date_apd_coach = strtotime($get_date_apd[0]->date);
@@ -1844,73 +1844,121 @@ class find_coaches_wa extends MY_Site_Controller {
 
     } */
 
-     private function create_appointment($coach_id = '', $date = '', $start_time = '', $end_time = '', $appointment_status = '') {
-//        print_r(date('Y-m-d', $date));
-//        print_r($start_time);
-//        print_r($end_time);
-//
-//
-//        $this->db->trans_rollback();
-//        exit;
-        //$status = false;
-        // getting the day of $date
-        $day = strtolower(date('l', $date));
-        $schedule_data = $this->schedule_model->select('id, start_time, end_time')->where('user_id', $coach_id)->where('day', $day)->get();
-        // Retrieve post
-        // edit dari sini
-        $opentok = new OpenTok($this->config->item('opentok_key'), $this->config->item('opentok_secret'));
-        $sessionOptions = array(
-            'archiveMode' => ArchiveMode::ALWAYS,
-            'mediaMode' => MediaMode::ROUTED
-        );
-        $gensession = $opentok->createSession($sessionOptions);
-        $session    = $gensession->getSessionId();
-
-        // $token = $opentok->generateToken($session, array(
-        //                                  'expireTime' => time()+(7 * 24 * 60 * 60)
-        //                                  ));
-        // =========
-        // echo "<pre>";
-        // print_r($gensession);
-        // exit();
-        if($session == ''){
-            $message = 'Booking failed';
-            $this->messages->add($message, 'success');
-            redirect('student/find_coaches_wa/single_date');
+      private function create_appointment($coach_id = '', $date = '', $start_time = '', $end_time = '', $appointment_status = '', $browser_type, $device_type, $device_os) {
+        if($browser_type == 'Safari'){
+          $opentok_key    = $this->config->item('opentok_key2');
+          $opentok_secret = $this->config->item('opentok_secret2');
+          $key = 2;
+          //h264
+          // print_r();
+          // exit('a');
+        }else{
+          $opentok_key    = $this->config->item('opentok_key');
+          $opentok_secret = $this->config->item('opentok_secret');
+          $key = 1;
+          //vp8
+          // exit('b');
         }
-        $booked = array(
-            'student_id' => $this->auth_manager->userid(),
-            'coach_id' => $coach_id,
-            'schedule_id' => $schedule_data->id,
-            'date' => date("Y-m-d", $date),
-            'start_time' => $start_time,
-            'end_time' => $end_time,
-            'status' => $appointment_status,
-            'session' => $session
-        );
-        //  echo "<pre>";
-        // print_r($booked);
-        // exit();
-
-        //$isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
-        $this->db->trans_begin();
-        //if ($isValid) {
-            // Inserting and checking
-            $appointment_id = $this->appointment_model->insert($booked);
-            $status = $appointment_id;
-//        } else if (!$isValid) {
-//            $this->db->trans_rollback();
-//            $status = false;
-//        }
-
-        if ($appointment_id && $status == true && $this->db->trans_status() === true) {
-            $this->db->trans_commit();
-            return $appointment_id;
-        } else {
-            $this->db->trans_rollback();
-            return false;
+        if(@$device_os && @$device_os != 'none'){
+          $device_info = $device_type.'('.$device_os.') / '.$browser_type;
+        }else{
+          $device_info = $device_type.' / '.$browser_type;
         }
-    }
+        // print_r($device_info);exit();
+  //        print_r($start_time);
+  //        print_r($end_time);
+         $id    = $this->auth_manager->userid();
+         $check_sess = $this->db->select('session_type')
+                     ->from('user_profiles')
+                     ->where('user_id',$id)
+                     ->get()->result();
+  //
+         // echo "<pre>";print_r($check_sess);exit();
+        $this->db->trans_rollback();
+  //        exit;
+         $status = false;
+         // getting the day of $date
+         $day = strtolower(date('l', $date));
+         $schedule_data = $this->schedule_model->select('id, start_time, end_time')->where('user_id', $coach_id)->where('day', $day)->get();
+         // Retrieve post
+         // edit dari sini
+
+         if($check_sess[0]->session_type == '0'){
+           // exit('a');
+           $opentok = new OpenTok($opentok_key, $opentok_secret);
+           $sessionOptions = array(
+               'archiveMode' => ArchiveMode::ALWAYS,
+               'mediaMode' => MediaMode::ROUTED
+           );
+           $gensession = $opentok->createSession($sessionOptions);
+           $session    = $gensession->getSessionId();
+           $app_type = '0';
+         }else if($check_sess[0]->session_type == '1'){
+           $session = date("Y-m-d", $date)."".$id."".$coach_id."".$start_time."".$end_time;
+           // echo "<pre>";print_r($session);exit();
+           // exit('b');
+           $app_type = '1';
+         }
+         // $token = $opentok->generateToken($session, array(
+         //                                  'expireTime' => time()+(7 * 24 * 60 * 60)
+         //                                  ));
+         // =========
+
+         if($session == ''){
+             $message = 'Booking failed';
+             $this->messages->add($message, 'success');
+             redirect('b2c/student/find_coaches_wa/single_date');
+         }
+
+         //Inserting cl, cp, and cs =============================================
+         $pull_c_id = $this->db->select('cl_id, cp_id, cs_id')
+                     ->from('users')
+                     ->where('id',$id)
+                     ->get()->result();
+
+         $u_cl_id = @$pull_c_id[0]->cl_id;
+         $u_cp_id = @$pull_c_id[0]->cp_id;
+         $u_cs_id = @$pull_c_id[0]->cs_id;
+         //Inserting cl, cp, and cs =============================================
+
+         $booked = array(
+             'student_id' => $this->auth_manager->userid(),
+             'coach_id' => $coach_id,
+             'schedule_id' => $schedule_data->id,
+             'date' => date("Y-m-d", $date),
+             'start_time' => $start_time,
+             'end_time' => $end_time,
+             'status' => $appointment_status,
+             'session' => $session,
+             'app_type' => $app_type,
+             'cl_id' => $u_cl_id,
+             'cp_id' => $u_cp_id,
+             'cs_id' => $u_cs_id,
+             'key' => $key,
+             'device_info' => $device_info
+         );
+         // echo "<pre>";print_r($booked);exit();
+
+         //$isValid = $this->isAvailable($coach_id, $date, $start_time, $end_time);
+         $this->db->trans_begin();
+         //if ($isValid) {
+             // Inserting and checking
+             $appointment_id = $this->appointment_model->insert($booked);
+             // $status = $appointment_id;
+             $status = true;
+  //        } else if (!$isValid) {
+  //            $this->db->trans_rollback();
+  //            $status = false;
+  //        }
+
+         if ($appointment_id && $status == true && $this->db->trans_status() === true) {
+             $this->db->trans_commit();
+             return $appointment_id;
+         } else {
+             $this->db->trans_rollback();
+             return false;
+         }
+     }
     // used when confirmation book coach with multiple date
     private function update_appointment($appointment_id) {
         $status = false;
@@ -2116,7 +2164,7 @@ class find_coaches_wa extends MY_Site_Controller {
         }
     }
 
-    public function booking($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '', $token) {
+    public function booking($coach_id = '', $date_ = '', $start_time_ = '', $end_time_ = '', $token, $browser_type, $device_type, $device_os) {
         //print_r(date('Y-m-d','1450962000'));exit;
         // exit('hai');
         // for isOnAvailability
@@ -2213,7 +2261,7 @@ class find_coaches_wa extends MY_Site_Controller {
                 //if ($this->db->trans_status() === true && $remain_token >= 0 && $this->isAvailable($coach_id, $date, $start_time, $end_time)) {
 
                 if ($this->db->trans_status() === true && $remain_token >= 0){
-                    $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active');
+                    $appointment_id = $this->create_appointment($coach_id, $date, $start_time, $end_time, 'active', $browser_type, $device_type, $device_os);
 
                     $get_date_apd = $this->db->select('date, start_time, end_time')->from('appointments')->where('id',$appointment_id)->get()->result();
                     $new_date_apd_coach = strtotime($get_date_apd[0]->date);
@@ -2508,13 +2556,13 @@ class find_coaches_wa extends MY_Site_Controller {
     }
 
     private function is_day_off($coach_id = '', $date_ = '',$start_time = '', $end_time = '') {
-    
+
     $date_ = strtotime($date_);
 
     $convert = $this->schedule_function->convert_book_schedule(($this->identity_model->new_get_gmt($coach_id)[0]->minutes), $date_, $start_time, $end_time);
     $date = $convert['date'];
 
-   
+
     $date_ = date('Y-m-d', $date);
 
         $day_off = $this->db->select('coach_id, start_date, end_date')

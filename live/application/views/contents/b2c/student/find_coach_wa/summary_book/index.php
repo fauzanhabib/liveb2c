@@ -88,6 +88,32 @@
                                 </span>
                             </div>
 
+                            <div class="bxcoactoken" style="border-bottom: 1px solid #606983 !important;">
+                                <label>Booking Device/Browser</label>
+                                <span id="textBrowser">Mobile</span>
+                                <input type="hidden" id="d_os" value="1"/>
+                                <input type="hidden" id="d_type" value="Mobile"/>
+                                <input type="hidden" id="d_browser" value="1"/>
+                            </div>
+
+                            <div class="bxcoachend" style="border-bottom: none !important;">
+                                <label>Choose OS:</label>
+                                <select class="choose_browser" id="sel_os">
+                                  <option value="1">Choose Your OS</option>
+                                  <option value="ios">iOS</option>
+                                  <option value="android">Android</option>
+                                </select>
+                            </div>
+
+                            <div class="bxcoachend" style="border-bottom: none !important;" id="ch_browser">
+                                <label>Choose Browser:</label>
+                                <select class="choose_browser" id="sel_browser">
+                                  <option value="1">Choose Your Browser</option>
+                                  <option value="Safari">Safari</option>
+                                  <option value="Other">Other Browsers</option>
+                                </select>
+                            </div>
+
                             <div class="bxbutton">
                                 <button type="submit" id="submit_summary" class="neobutton trigger__loader"> Done</button>
                                 <button type="submit" id="cancel_summary" class="neobutton"> Cancel</button>
@@ -106,18 +132,91 @@
                 </div>
             </section>
 
-        <script>
-                $(document).on('touchstart click', '#submit_summary', function () {
-                     location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches_wa/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches_wa/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
-                });
+<script>
+  $('#sel_os').change(function(){
+    detect_os = $(this).val();
+    $("#d_os").val(detect_os);
+  })
 
-                $(document).on('touchstart click', '#cancel_summary', function () {
-                    location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches_wa/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches_wa/search/' . $search_by); ?>";
-                });
-        </script>
+  $('#sel_browser').change(function(){
+    detect_browser = $(this).val();
+    textContent = 'Mobile';
 
-        <script>
-            $('.trigger__loader').click(function() {
-                $('.page__loader').css('display', 'flex');
-            })
-        </script>
+    // $('#textBrowser').html(new_content);
+    $("#d_browser").val(detect_browser);
+
+    if(detect_browser == '1'){
+      detect_browser = '';
+    }
+
+    new_content = textContent+' / '+detect_browser
+
+    document.getElementById("textBrowser").innerHTML = new_content;
+  })
+</script>
+
+<script>
+  $(document).on('touchstart click', '#submit_summary', function () {
+
+      browser_type = $("#d_browser").val();
+      device_type  = $("#d_type").val();
+      device_os    = $("#d_os").val();
+
+      if(!device_os){
+        device_os = "none";
+      }
+      if(!device_type){
+        device_type = "none";
+      }
+      if(!browser_type){
+        browser_type = "none";
+      }
+
+      if(device_os == '1'){
+        alert("Please choose your OS");
+        return false;
+      }
+
+      if(browser_type == '1'){
+        alert("Please choose your browser");
+        return false;
+      }
+
+      href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches_wa/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches_wa/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+
+      href += '/'+browser_type+'/'+device_type+'/'+device_os;
+
+      // console.log(href);
+      $('.page__loader').addClass('flex');
+
+
+      setTimeout(function () {
+         location.href = href;
+      }, 1000); //will call the function after 2 secs.
+      // setTimeout(function () {
+      //    location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches_wa/book_single_coach/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token) : site_url('b2c/student/find_coaches_wa/booking/' . $data_coach[0]->id . '/' . $date . '/' . $start_time . '/' . $end_time.'/' . $token); ?>";
+      // }, 1000); //will call the function after 2 secs.
+
+      $.ajax({
+          type:"POST",
+          url:"<?php echo site_url('b2c/student/find_coaches_wa/email_booking');?>",
+          data: {
+              'coach_id': "<?php echo $data_coach[0]->id; ?>",
+              'date_': "<?php echo $date;?>",
+              'start_time_': "<?php echo $start_time;?>",
+              'end_time_': "<?php echo $end_time;?>",
+              'token': "<?php echo $token;?>"
+          }
+      });
+  });
+
+  $(document).on('touchstart click', '#cancel_summary', function () {
+      location.href = "<?php echo $search_by == 'single_date' ? site_url('b2c/student/find_coaches_wa/book_by_single_date/'.date('Y-m-d', @$date)) : site_url('b2c/student/find_coaches_wa/search/' . $search_by); ?>";
+  });
+</script>
+
+<script>
+    // $('.trigger__loader').click(function() {
+    //     $('.page__loader').css('display', 'flex');
+    // })
+</script>
