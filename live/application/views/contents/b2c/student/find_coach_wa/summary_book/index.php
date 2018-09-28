@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="dashboard__bxsummary">
-                        <div class="dashboard__bxsummary__bookingsummary">
+                        <div class="dashboard__bxsummary__bookingsummary" style="width: 100%; !important;">
                             <h3>Your Booking Summary</h3>
                             <div class="bxcoachname">
                                 <label>Coach Name</label>
@@ -105,14 +105,18 @@
                                 </select>
                             </div>
 
-                            <div class="bxcoachend" style="border-bottom: none !important;" id="ch_browser">
+                            <div class="bxcoactoken box--warning">
+                                <label class="font--warning">Please use the same device when you do this booking on the live session</label>
+                            </div>
+
+                            <!-- <div class="bxcoachend" style="border-bottom: none !important;" id="ch_browser">
                                 <label>Choose Browser:</label>
                                 <select class="choose_browser" id="sel_browser">
                                   <option value="1">Choose Your Browser</option>
                                   <option value="Safari">Safari</option>
                                   <option value="Other">Other Browsers</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <div class="bxbutton">
                                 <button type="submit" id="submit_summary" class="neobutton trigger__loader"> Done</button>
@@ -136,13 +140,15 @@
   $('#sel_os').change(function(){
     detect_os = $(this).val();
     $("#d_os").val(detect_os);
-  })
 
-  $('#sel_browser').change(function(){
-    detect_browser = $(this).val();
     textContent = 'Mobile';
 
     // $('#textBrowser').html(new_content);
+    if(detect_os == 'ios'){
+      detect_browser = 'Safari';
+    }else{
+      detect_browser = 'Other';
+    }
     $("#d_browser").val(detect_browser);
 
     if(detect_browser == '1'){
@@ -153,6 +159,22 @@
 
     document.getElementById("textBrowser").innerHTML = new_content;
   })
+
+  // $('#sel_browser').change(function(){
+  //   detect_browser = $(this).val();
+  //   textContent = 'Mobile';
+  //
+  //   // $('#textBrowser').html(new_content);
+  //   $("#d_browser").val(detect_browser);
+  //
+  //   if(detect_browser == '1'){
+  //     detect_browser = '';
+  //   }
+  //
+  //   new_content = textContent+' / '+detect_browser
+  //
+  //   document.getElementById("textBrowser").innerHTML = new_content;
+  // })
 </script>
 
 <script>
