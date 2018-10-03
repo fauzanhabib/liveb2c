@@ -539,11 +539,36 @@ class find_coaches_wa extends MY_Site_Controller {
     }
 
     public function book_by_single_date($date = '', $page='') {
+
+        $booking_type =  $this->input->post('selector');
+
+        if(!$booking_type){
+            $booking_type = $this->session->userdata("selector_booking_type");
+            if(!$booking_type){
+                $this->messages->add('Invalid Booking Type', 'warning');
+                redirect('b2c/student/find_coaches/single_date/');
+            }
+        }
+
+        $this->session->set_userdata('selector_booking_type',$booking_type);
+
+        $recurring_booking_type = '';
+        if($booking_type == 'single-book'){
+            $recurring_booking_type = 1;
+        } else if($booking_type = 'multiple-book'){
+            $recurring_booking_type = $this->input->post('type_booking');
+            if(!$recurring_booking_type){
+                $recurring_booking_type = $this->session->userdata("recurring_booking_type");
+            }
+        }
+
+        $this->session->set_userdata("recurring_booking_type",$recurring_booking_type);
+
         $this->template->title = 'Detail Schedule';
 
         if ($date <= date('Y-m-d')) {
-            $this->messages->add('Invalid Date', 'warning');
-            redirect('b2c/student/find_coaches_wa/single_date/');
+            $this->messages->add('<span class="trn" data-trn-key="invaliddate">Invalid Date</span>', 'warning');
+            redirect('b2c/student/find_coaches/single_date/');
         }
 
         $id    = $this->auth_manager->userid();
@@ -593,17 +618,17 @@ class find_coaches_wa extends MY_Site_Controller {
         $offset = 0;
         $per_page = '';
         $uri_segment = 5;
-        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches_wa/book_by_single_date/'.$date), count($this->get_available_coach($date)), $per_page, $uri_segment);
+        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches/book_by_single_date/'.$date), count($this->get_available_coach($date)), $per_page, $uri_segment);
 
         $cert_studying = $this->db->select('cert_studying')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();
 
         $data = $this->get_available_coach($date, $per_page, $offset);
 
-        $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
+        // $partner_id = $this->auth_manager->partner_id($this->auth_manager->userid());
 
-        $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
-        $standard_coach_cost = $setting[0]->standard_coach_cost;
-        $elite_coach_cost = $setting[0]->elite_coach_cost;
+        // $setting = $this->db->select('standard_coach_cost,elite_coach_cost')->from('specific_settings')->where('partner_id',$partner_id)->get()->result();
+        // $standard_coach_cost = $setting[0]->standard_coach_cost;
+        // $elite_coach_cost = $setting[0]->elite_coach_cost;
 
         $gmt_student = $this->identity_model->new_get_gmt($this->auth_manager->userid());
 
@@ -628,7 +653,7 @@ class find_coaches_wa extends MY_Site_Controller {
         // print_r($data);
         // exit();
 
-        $this->template->content->view('contents/b2c/student/find_coach_wa/date/index', $vars);
+        $this->template->content->view('contents/b2c/student/find_coach/date/index', $vars);
         $this->template->publish();
     }
 
