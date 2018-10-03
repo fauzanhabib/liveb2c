@@ -177,6 +177,7 @@ $(document).ready(function(){
             </table>
         </div>
 
+        <?php if($user->app_type == '0'){ ?>
         <div class="bxleavesessionstue__note">
             <p><b class="trn" data-trn-key="importannt">IMPORTANT NOTES:</b></p>
             <p class="trn" data-trn-key="dnldthe">Download the recorded session in Session History.</p>
@@ -185,5 +186,11 @@ $(document).ready(function(){
 
              <button class="neobutton exitbtn trn" data-trn-key="exitt">Exit</button>
         </div>
+      <?php }else{ ?>
+        <div class="bxleavesessionstue__note text--center">
+             <button class="neobutton exitbtn trn" data-trn-key="exitt">Exit</button>
+        </div>
+      <?php } ?>
+
     </div>
 </section>
