@@ -571,7 +571,7 @@
                                     $('#'+m[i].id).html($('#'+m[i].id).html().replace('*/',' '));
                                 }
                                 $(".schedule-loading").hide();
-                                ChangeLanguages();
+                                // ChangeLanguages();
                             });
                         }
 
