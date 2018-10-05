@@ -546,7 +546,7 @@ class find_coaches_wa extends MY_Site_Controller {
             $booking_type = $this->session->userdata("selector_booking_type");
             if(!$booking_type){
                 $this->messages->add('Invalid Booking Type', 'warning');
-                redirect('b2c/student/find_coaches/single_date/');
+                redirect('b2c/student/find_coaches_wa/single_date/');
             }
         }
 
@@ -568,7 +568,7 @@ class find_coaches_wa extends MY_Site_Controller {
 
         if ($date <= date('Y-m-d')) {
             $this->messages->add('<span class="trn" data-trn-key="invaliddate">Invalid Date</span>', 'warning');
-            redirect('b2c/student/find_coaches/single_date/');
+            redirect('b2c/student/find_coaches_wa/single_date/');
         }
 
         $id    = $this->auth_manager->userid();
@@ -618,7 +618,7 @@ class find_coaches_wa extends MY_Site_Controller {
         $offset = 0;
         $per_page = '';
         $uri_segment = 5;
-        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches/book_by_single_date/'.$date), count($this->get_available_coach($date)), $per_page, $uri_segment);
+        $pagination = $this->common_function->create_link_pagination($page, $offset, site_url('student/find_coaches_wa/book_by_single_date/'.$date), count($this->get_available_coach($date)), $per_page, $uri_segment);
 
         $cert_studying = $this->db->select('cert_studying')->from('user_profiles')->where('user_id',$this->auth_manager->userid())->get()->result();
 

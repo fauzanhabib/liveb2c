@@ -82,7 +82,7 @@
             <div id="tab-2" class="tab-content alt2 hide">
                 <?php echo form_open('b2c/student/find_coaches_wa/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
                 <div class="bookcoach__flexing">
-                    <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker">
+                    <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker" readonly>
                     <style>
                         .datepicker__here #ui-datepicker-div {
                             top: 0!important;

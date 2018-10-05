@@ -3,24 +3,24 @@
   $(".header__mobile").hide();
   $(".main__sidebar").hide();
 </script>
-  <style>
-          .pagination-items{
-              width: 100%;
-              display: -webkit-box;
-              display: -ms-flexbox;
-              display: flex;
-              -ms-flex-wrap: wrap;
-              flex-wrap: wrap;
-              justify-content: space-around;
-          }
+<style>
+  .pagination-items{
+      width: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      justify-content: space-around;
+  }
 
 
-          i svg {
-             transform:translate(0,6px);
-              margin-right: 5px;
-          }
+  i svg {
+     transform:translate(0,6px);
+      margin-right: 5px;
+  }
 
-  </style>
+</style>
 
   <!-- back button -->
   <div class="header__wa">
@@ -81,47 +81,42 @@
           </div>
 
           <div id="tab-2" class="tab-content alt2 hide">
-              <?php echo form_open('b2c/student/find_coaches_wa/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
+              <?php echo form_open('b2c/student/find_coaches/book_by_single_date', 'id="date_value" role="form" class="pure-g pure-form"'); ?>
+              <div class="recurring__book">
+                  <div class="bycountry" style="padding: 0 15px;">
+                      <div class='border-2-primary border-rounded-5'>
+                          <span class='custom-dropdown'>
+                              <select class="select--recurring" name="selector" id="selector" style="width:100%;">
+                                  <option class="trn" disabled selected data-trn-key="typebook">Booking Type</option>
+                                  <option class="trn" value="single-book" data-trn-key="singlebook">Single Book</option>
+                                  <option class="trn" value="multiple-book" data-trn-key="multiplebook">Recurring Book</option>
+                              </select>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="bycountry" id="multi-book2" style="padding: 10px 15px 0;">
+                      <div class='border-2-primary border-rounded-5'>
+                          <span class='custom-dropdown'>
+                              <select class="select--recurring" name="type_booking" style="width:100%;">
+                                  <option value="2" selected>2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                              </select>
+                          </span>
+                      </div>
+                  </div>
+              </div>
               <div class="bookcoach__flexing">
-                  <input type="text" name="date" id="datepicker" placeholder="Date.." class="dateavailable datepicker">
+                  <input type="text" name="date" id="datepicker" autocomplete="off" placeholder="Date.." class="dateavailable datepicker trn" data-trn-holder="searchdate" readonly>
                   <style>
-                      .datepicker__here #ui-datepicker-div {
+                      #ui-datepicker-div {
                           top: 0!important;
                           left: -140px!important;
-                      }
-                      .datepickerEach__here #ui-datepicker-div {
-                          top: 0!important;
-                          left: -140px!important;
-                      }
-                      @media only screen and (device-width:768px) and (device-height:1024px) and (-webkit-min-device-pixel-ratio:1) {
-                          .datepickerEach__here #ui-datepicker-div {
-                              left: -117px!important;
-                          }
-                      }
-                      @media only screen and (max-device-width:414px) {
-                          .datepickerEach__here #ui-datepicker-div {
-                              left: -50px!important;
-                          }
-                      }
-                      @media only screen and (max-device-width:375px) {
-                          .datepickerEach__here #ui-datepicker-div {
-                              left: -76px!important;
-                          }
-                      }
-                      @media only screen and (max-device-width:360px) {
-                          .datepickerEach__here #ui-datepicker-div {
-                              left: -83px!important;
-                          }
-                      }
-                      @media only screen and (max-device-width:320px) {
-                          .datepickerEach__here #ui-datepicker-div {
-                              left: -102px!important;
-                          }
                       }
                   </style>
                   <div class="datepicker__here"></div>
                   <div class="btnsearch">
-                      <button type="submit" class="neobutton ">Search Coach</button>
+                      <button type="submit" class="neobutton trn" data-trn-key="searchcoach1">Search Coach</button>
                   </div>
               </div>
               <?php echo form_close(); ?>
@@ -391,7 +386,18 @@
   </div>
 </section>
 
-
+<script>
+  $(function(){
+      $('#multi-book2').hide();
+      $('#selector').change(function(){
+          if($('#selector').val() == 'multiple-book') {
+              $('#multi-book2').show();
+          } else {
+              $('#multi-book2').hide();
+          }
+      });
+  });
+</script>
 <script>
   $('.datepicker__each').each(function() {
       $(this).datepicker({
