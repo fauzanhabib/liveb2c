@@ -59,7 +59,7 @@
                         </div>
                         <div class="bxrequest__requesttokens__bxbalance">
                             <label class="trn" data-trn-key="usedtokens">Used Tokens</label>
-                            <span><?php echo @$used_token; ?></span>
+                            <span><?php echo @$real_used; ?></span>
                         </div>
                         <div class="bxrequest__requesttokens__bxbalance">
                             <label class="trn" data-trn-key="refundtokens">Refunded Tokens</label>

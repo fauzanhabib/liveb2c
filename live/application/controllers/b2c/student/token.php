@@ -121,6 +121,12 @@ class Token extends MY_Site_Controller {
         foreach($pull_refu_t as $key){
            $refu_tokens+= $key->token_amount;
         }
+
+        if($used_tokens != 0){
+            $real_used = $used_tokens - $refu_tokens; 
+        }else{ 
+            $real_used = $used_tokens - $refu_tokens; 
+        }
         // echo $sum;
         $pullemail= $this->db->select('email')
                   ->from('users')
@@ -137,6 +143,7 @@ class Token extends MY_Site_Controller {
             'datasession' => $datasession,
             'used_token' => $used_tokens,
             'refu_token' => $refu_tokens,
+            'real_used' => $real_used,
             'tokenresult' => $tokenresult,
             'useremail' => $pullemail[0]->email
         );

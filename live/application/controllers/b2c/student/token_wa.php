@@ -120,6 +120,12 @@ class Token_wa extends MY_Site_Controller {
         foreach($pull_refu_t as $key){
            $refu_tokens+= $key->token_amount;
         }
+
+        if($used_tokens != 0){
+            $real_used = $used_tokens - $refu_tokens; 
+        }else{ 
+            $real_used = $used_tokens - $refu_tokens; 
+        }
         // echo $sum;
 
         // echo "<pre>";print_r($refu_tokens);exit();
@@ -132,7 +138,8 @@ class Token_wa extends MY_Site_Controller {
             'remain_token' => $this->identity_model->select('id, token_amount')->get_identity('token')->where('user_id', $this->auth_manager->userid())->get(),
             'datasession' => $datasession,
             'used_token' => $used_tokens,
-            'refu_token' => $refu_tokens
+            'refu_token' => $refu_tokens,
+            'real_used' => $real_used,
         );
 
 
