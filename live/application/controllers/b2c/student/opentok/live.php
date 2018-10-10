@@ -278,8 +278,13 @@ class Live extends MY_Site_Controller {
 
         $coach_color = [];
         $j = 1;
-        if(@$gsp->data->coach->sessions || @$gsp != 0){
-          $max_buletan = sizeof($gsp->data->coach->sessions);
+
+        if(@$gsp->data){
+          if(@$gsp->data->coach->sessions || @$gsp != 0){
+            $max_buletan = sizeof(@$gsp->data->coach->sessions);
+          }else{
+            $max_buletan = 0;
+          }
         }else{
           $max_buletan = 0;
         }
