@@ -517,7 +517,7 @@ path:hover + g.tooltip {
   cursor: pointer;
   margin-top: 15px;
   min-width: 160px;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   background-color: #3F4E7B;
   color: #49C5FE; }
@@ -557,7 +557,7 @@ path:hover + g.tooltip {
     color: #fff; }
 
 .neobutton__white {
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent; }
   .neobutton__white a {
     font-family: "neoFontMedium", sans-serif; }
@@ -2312,6 +2312,10 @@ footer span {
           -ms-flex-order: 1;
               order: 1; } }
 
+@media screen and (max-width: 731px) and (orientation: landscape) {
+  .main__sidebar {
+    display: none; } }
+
 .starsPos {
   z-index: -999 !important;
   position: absolute;
@@ -3222,14 +3226,14 @@ select.select--recurring {
 .bylanguage,
 .boxselect {
   /**
-	 * Component: Button
-	 * --------------------------------------------------
-	 */
+   * Component: Button
+   * --------------------------------------------------
+   */
   /**
-	 * Component: Button
-	 * Modifier: Dropdown
-	 * --------------------------------------------------
-	 */ }
+   * Component: Button
+   * Modifier: Dropdown
+   * --------------------------------------------------
+   */ }
   .bycountry .c-dropdown,
   .bylanguage .c-dropdown,
   .boxselect .c-dropdown {
@@ -4236,15 +4240,15 @@ table.table-reschedule {
     .login__header {
       display: none; } }
   .login__header .login__header__logo {
-    width: 18%; }
+    width: 15%; }
     @media screen and (max-width: 768px) {
       .login__header .login__header__logo {
-        width: 25%; } }
+        width: 20%; } }
     @media screen and (max-width: 500px) {
       .login__header .login__header__logo {
         width: 40%; } }
     .login__header .login__header__logo img {
-      height: 46px;
+      height: 55px;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -4301,11 +4305,6 @@ table.table-reschedule {
         -ms-flex: 4;
             flex: 4;
     margin: 15px 0 0 10px; }
-    @media screen and (max-width: 500px) {
-      .header__mobile--login .login__header__logo {
-        -webkit-box-flex: 1;
-            -ms-flex: 1;
-                flex: 1; } }
     .header__mobile--login .login__header__logo img {
       width: 100px; }
 
@@ -4331,7 +4330,7 @@ table.table-reschedule {
   margin: 85px 0 0 0; }
   .box__assessment .home__loginbtn, .about__us .home__loginbtn, .contact__us .home__loginbtn {
     margin: 0 auto;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
     cursor: pointer; }
   @media screen and (max-width: 768px) {
@@ -4362,10 +4361,8 @@ table.table-reschedule {
   margin-bottom: 20px;
   margin-top: 10px;
   text-align: center; }
-
-.signup__title .newBrand {
-  width: 62%;
-  margin-right: 31px; }
+  .signup__title img {
+    width: 70%; }
 
 .signup__form {
   padding: 2em; }
@@ -4676,7 +4673,7 @@ textarea.parsley-error {
   transition: all .5s;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent; }
 
 .bxarrow {

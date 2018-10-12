@@ -282,12 +282,19 @@ opacity: 1 !important;
   }
 }
 
-  @media screen and (max-width: 768px){
+@media screen and (max-width: 768px){
   .dashboard__notif{
       height:auto !important;
       display:flex;
       flex-wrap:wrap;
 
+  }
+}
+
+@media screen and (max-width: 731px) and (orientation : landscape) {
+  #myPublisherElementId {
+    left: 77%;
+    top: 20%;
   }
 }
 
