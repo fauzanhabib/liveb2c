@@ -1168,7 +1168,7 @@ setInterval('checkShare()', 1000);
           videoSelect.appendChild(option);
 
           // console.log('======================================');
-          // console.log(device);
+          console.log(device);
           // console.log('======================================');
         } else {
           // console.log('Some other kind of source/device: ', device);
