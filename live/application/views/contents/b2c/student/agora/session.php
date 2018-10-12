@@ -1019,6 +1019,7 @@ setInterval('checkShare()', 1000);
       console.log('h264');
       console.log(key_type);
     }
+    getDevices();
     client.init(app_id, function () {
       // console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
@@ -1031,7 +1032,7 @@ setInterval('checkShare()', 1000);
         // console.log("=====================================");
 
         // if (document.getElementById("video").checked) {
-          getDevices();
+         
         initagora();
         function initagora() {
           camera = videoSource.value;
