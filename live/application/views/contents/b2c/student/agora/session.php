@@ -1031,6 +1031,7 @@ setInterval('checkShare()', 1000);
         // console.log("=====================================");
 
         // if (document.getElementById("video").checked) {
+          getDevices();
         initagora();
         function initagora() {
           camera = videoSource.value;
@@ -1157,6 +1158,7 @@ setInterval('checkShare()', 1000);
         var device = devices[i];
         var option = document.createElement('option');
         option.value = device.deviceId;
+        
         if (device.kind === 'audioinput') {
           option.text = device.label || 'microphone ' + (audioSelect.length + 1);
           audioSelect.appendChild(option);
