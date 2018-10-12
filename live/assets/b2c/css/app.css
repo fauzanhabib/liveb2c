@@ -4361,6 +4361,8 @@ table.table-reschedule {
   margin-bottom: 20px;
   margin-top: 10px;
   text-align: center; }
+  .signup__title img {
+    width: 70%; }
 
 .signup__form {
   padding: 2em; }
