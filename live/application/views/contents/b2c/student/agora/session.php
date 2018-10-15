@@ -1019,8 +1019,20 @@ setInterval('checkShare()', 1000);
       console.log('h264');
       console.log(key_type);
     }
-    getDevices();
+    
     client.init(app_id, function () {
+
+    $(document).on('change','#videoSource',function(){
+    leave();
+
+
+    // console.log("============");
+    // console.log(global_uid);
+    // console.log("============");
+    $('#player_'+global_uid).hide();
+    $('#player_'+global_uid).html('');
+
+    
       // console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
         // console.log("User " + channel_key + " join channel successfully");
@@ -1072,9 +1084,11 @@ setInterval('checkShare()', 1000);
       }, function(err) {
         // console.log("Join channel failed", err);
       });
+    });
     }, function (err) {
       // console.log("AgoraRTC client init failed", err);
     });
+  
 
     channelKey = "";
     client.on('error', function(err) {
@@ -1178,6 +1192,11 @@ setInterval('checkShare()', 1000);
   }
 
   getDevices();
+
+  AgoraRTC.Logger.error('this is error');
+  AgoraRTC.Logger.warning('this is warning');
+  AgoraRTC.Logger.info('this is info');
+  AgoraRTC.Logger.debug('this is debug');
 
   $(document).on('change','#videoSource',function(){
     leave();
