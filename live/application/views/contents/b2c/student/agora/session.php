@@ -1022,16 +1022,12 @@ setInterval('checkShare()', 1000);
     
     client.init(app_id, function () {
 
-    $(document).on('change','#videoSource',function(){
-    leave();
+    
 
 
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
-    $('#player_'+global_uid).hide();
-    $('#player_'+global_uid).html('');
-
     
       // console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
@@ -1047,7 +1043,7 @@ setInterval('checkShare()', 1000);
          
         initagora();
         function initagora() {
-          camera = videoSource.value;
+          camera = this.value;
           microphone = audioSource.value;
           localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
           //localStream = AgoraRTC.createStream({streamID: uid, audio: false, cameraId: camera, microphoneId: microphone, video: false, screen: true, extensionId: 'minllpmhdgpndnkomcoccfekfegnlikg'});
@@ -1084,7 +1080,7 @@ setInterval('checkShare()', 1000);
       }, function(err) {
         // console.log("Join channel failed", err);
       });
-    });
+    
     }, function (err) {
       // console.log("AgoraRTC client init failed", err);
     });
