@@ -1221,7 +1221,7 @@ setInterval('checkShare()', 1000);
         // if (document.getElementById("video").checked) {
         initagora();
         function initagora() {
-          camera = this.value;
+          camera = videoSource.value;
           // console.log('===================');
           // console.log(camera);
           // console.log('===================');
