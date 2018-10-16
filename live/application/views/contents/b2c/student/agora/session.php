@@ -21,7 +21,8 @@ if(@$user_extract2){
 
 <!-- <script src="https://live.myneo.space/assets/b2c/js/AgoraRTCSDK-2.0.0.js"></script> -->
 <!-- <script src="https://cdn.agora.io/sdk/web/AgoraRTCSDK-2.1.0.js"></script> -->
-<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.4.0.js"></script>
+<script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.4.1.js"></script> 
+<!-- <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.4.0.js"></script> -->
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/AgoraRTCSDK-2.1.1.js"></script> -->
 <!-- <script src="<?php echo base_url();?>assets/b2c/js/agora.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url();?>assets/b2c/js/jquery.translate.js"></script>
@@ -1189,11 +1190,7 @@ setInterval('checkShare()', 1000);
 
   getDevices();
 
-  AgoraRTC.Logger.error('this is error');
-  AgoraRTC.Logger.warning('this is warning');
-  AgoraRTC.Logger.info('this is info');
-  AgoraRTC.Logger.debug('this is debug');
-
+  
   $(document).on('change','#videoSource',function(){
     leave();
 
@@ -1224,7 +1221,7 @@ setInterval('checkShare()', 1000);
         // if (document.getElementById("video").checked) {
         initagora();
         function initagora() {
-          camera = videoSource.value;
+          camera = this.value;
           // console.log('===================');
           // console.log(camera);
           // console.log('===================');
