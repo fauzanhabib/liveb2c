@@ -1044,7 +1044,7 @@ setInterval('checkShare()', 1000);
          
         initagora();
         function initagora() {
-          var videoSource1 = document.getElementByid("videoSource");
+          var videoSource1 = document.getElementById("videoSource");
 
           camera = videoSource1.value;
           microphone = audioSource.value;
