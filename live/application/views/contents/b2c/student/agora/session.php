@@ -1023,8 +1023,6 @@ setInterval('checkShare()', 1000);
     
     client.init(app_id, function () {
 
-    
-
 
     // console.log("============");
     // console.log(global_uid);
@@ -1200,7 +1198,7 @@ setInterval('checkShare()', 1000);
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
-    //$('#player_'+global_uid).hide();
+    $('#player_'+global_uid).hide();
     $('#player_'+global_uid).html('');
 
     // localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
