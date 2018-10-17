@@ -1189,13 +1189,13 @@ setInterval('checkShare()', 1000);
     });
   }
 
-  
+  getDevices();
 
   
   $(document).on('change','#videoSource',function(){
     leave();
     
-    
+    getDevices();
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
@@ -1263,7 +1263,6 @@ setInterval('checkShare()', 1000);
   // }
   
   });
-  getDevices();
   // audioSelect.onchange = getDevices();
   // videoSelect.onchange = getDevices();
 </script>
