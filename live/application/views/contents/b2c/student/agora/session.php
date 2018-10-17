@@ -1200,8 +1200,8 @@ setInterval('checkShare()', 1000);
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
-    //$('#player_'+global_uid).hide();
-    //$('#player_'+global_uid).html('');
+    $('#player_'+global_uid).hide();
+    $('#player_'+global_uid).html('');
 
     // localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
     //
@@ -1218,13 +1218,13 @@ setInterval('checkShare()', 1000);
         console.log("Channel Value = " + channel.value);
         console.log("UID = " + uid);
         console.log("Ch Name = " + channel_name);
-        onsole.log("=====================================");
+        console.log("=====================================");
 
         // if (document.getElementById("video").checked) {
         initagora();
         function initagora() {
           
-          camera = videoSource.value;
+          camera = this.value;
           // console.log('===================');
           // console.log(camera);
           // console.log('===================');
@@ -1270,7 +1270,61 @@ setInterval('checkShare()', 1000);
     // }, function (err) {
     //   // console.log("AgoraRTC client init failed", err);
     // });
+    channelKey = "";
+    client.on('error', function(err) {
+      // console.log("Got error msg:", err.reason);
+      if (err.reason === 'DYNAMIC_KEY_TIMEOUT') {
+        client.renewChannelKey(channelKey, function(){
+          // console.log("Renew channel key successfully");
+        }, function(err){
+          // console.log("Renew channel key failed: ", err);
+        });
+      }
+    });
 
+
+    client.on('stream-added', function (evt) {
+      var stream = evt.stream;
+      // console.log("New stream added: " + stream.getId());
+      // console.log("Subscribe ", stream);
+      client.subscribe(stream, function (err) {
+        // console.log("Subscribe stream failed", err);
+      });
+    });
+
+    client.on('stream-subscribed', function (evt) {
+      var stream = evt.stream;
+      // console.log("Subscribe remote stream successfully: " + stream.getId());
+      if ($('div#video #agora_remote'+stream.getId()).length === 0) {
+        $('div#video').append('<div class="agora_css" id="agora_remote'+stream.getId()+'" style="width:100%;"></div>');
+        // $('video#video'+stream.getId()).addClass('subscriber_video');
+        // $('video#video'+stream.getId()).hide();
+        // var video = document.getElementsByTagName("video")[0];
+        // console.log(video);
+      }
+      $("#heading1").hide();
+      stream.play('agora_remote' + stream.getId());
+    });
+
+    client.on('stream-removed', function (evt) {
+      var stream = evt.stream;
+      stream.stop();
+      $('#agora_remote' + stream.getId()).remove();
+      // $("#heading1").show();
+      // console.log("coach pergi1");
+    });
+
+    client.on('peer-leave', function (evt) {
+      var stream = evt.stream;
+      if (stream) {
+        stream.stop();
+        $('#agora_remote' + stream.getId()).remove();
+        // console.log(evt.uid + " leaved from this channel");
+      }
+      $("#heading1").show();
+      // console.log("coach pergi2");
+    });
+  // }
 
   });
   // audioSelect.onchange = getDevices();
