@@ -1195,12 +1195,12 @@ setInterval('checkShare()', 1000);
   
   $(document).on('change','#videoSource',function(){
     leave();
-
+    getDevices();
 
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
-    $('#player_'+global_uid).hide();
+    //$('#player_'+global_uid).hide();
     $('#player_'+global_uid).html('');
 
     // localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
@@ -1224,7 +1224,7 @@ setInterval('checkShare()', 1000);
         initagora();
         function initagora() {
           
-          camera = this.value;
+          camera = videoSource.value;
           // console.log('===================');
           // console.log(camera);
           // console.log('===================');
