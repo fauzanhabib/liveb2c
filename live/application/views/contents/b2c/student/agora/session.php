@@ -1044,7 +1044,7 @@ setInterval('checkShare()', 1000);
         function initagora() {
           
 
-          camera = this.value;
+          camera = videoSource.value;
           microphone = audioSource.value;
           localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
           //localStream = AgoraRTC.createStream({streamID: uid, audio: false, cameraId: camera, microphoneId: microphone, video: false, screen: true, extensionId: 'minllpmhdgpndnkomcoccfekfegnlikg'});
@@ -1176,7 +1176,7 @@ setInterval('checkShare()', 1000);
           audioSelect.appendChild(option);
         } else if (device.kind === 'videoinput') {
          // option.text = device.label || 'camera ' + (videoSelect.length + 1);
-         option.text = device.label;
+          option.text = device.label;
           videoSelect.appendChild(option);
 
           // console.log('======================================');
@@ -1261,10 +1261,10 @@ setInterval('checkShare()', 1000);
       });
   
   // }
-  getDevices();
+  
   });
   // audioSelect.onchange = getDevices();
-  // videoSelect.onchange = getDevices();
+   //videoSelect.onchange = getDevices();
 </script>
 <script>
   var appointment_id = "<?php echo $appointment_id; ?>";
