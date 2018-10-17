@@ -1175,7 +1175,8 @@ setInterval('checkShare()', 1000);
           option.text = device.label || 'microphone ' + (audioSelect.length + 1);
           audioSelect.appendChild(option);
         } else if (device.kind === 'videoinput') {
-          option.text = device.label || 'camera ' + (videoSelect.length + 1);
+          //option.text = device.label || 'camera ' + (videoSelect.length + 1);
+         
           videoSelect.appendChild(option);
 
           // console.log('======================================');
