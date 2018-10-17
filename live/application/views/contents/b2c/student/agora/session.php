@@ -1200,8 +1200,8 @@ setInterval('checkShare()', 1000);
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
-    $('#player_'+global_uid).hide();
-    $('#player_'+global_uid).html('');
+    //$('#player_'+global_uid).hide();
+    //$('#player_'+global_uid).html('');
 
     // localStream = AgoraRTC.createStream({streamID: uid, audio: true, cameraId: camera, microphoneId: microphone, video: document.getElementById("video").checked, screen: false});
     //
@@ -1212,19 +1212,19 @@ setInterval('checkShare()', 1000);
     // client.init(app_id, function () {
       // console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
-        // console.log("User " + channel_key + " join channel successfully");
-        // console.log("=====================================");
-        // console.log("Channel Key = " + channel_key);
-        // console.log("Channel Value = " + channel.value);
-        // console.log("UID = " + uid);
-        // console.log("Ch Name = " + channel_name);
-        // console.log("=====================================");
+        console.log("User " + channel_key + " join channel successfully");
+        console.log("=====================================");
+        console.log("Channel Key = " + channel_key);
+        console.log("Channel Value = " + channel.value);
+        console.log("UID = " + uid);
+        console.log("Ch Name = " + channel_name);
+        onsole.log("=====================================");
 
         // if (document.getElementById("video").checked) {
         initagora();
         function initagora() {
-          var videoSource1 = document.getElementById("videoSource");
-          camera = videoSource1.value;
+          
+          camera = videoSource.value;
           // console.log('===================');
           // console.log(camera);
           // console.log('===================');
