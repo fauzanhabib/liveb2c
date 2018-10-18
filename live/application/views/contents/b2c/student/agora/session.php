@@ -981,7 +981,7 @@ setInterval('checkShare()', 1000);
   if(!AgoraRTC.checkSystemRequirements()) {
     alert("browser is no support webRTC");
   }
-
+  document.getElementById("videoSource").style.display = "none";
   /* select Log type */
   // AgoraRTC.Logger.setLogLevel(AgoraRTC.Logger.NONE);
   // AgoraRTC.Logger.setLogLevel(AgoraRTC.Logger.ERROR);
