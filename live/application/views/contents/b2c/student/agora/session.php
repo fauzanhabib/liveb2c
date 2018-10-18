@@ -1192,7 +1192,7 @@ setInterval('checkShare()', 1000);
   getDevices();
 
   
-  $(document).on('change',videoselect,function(){
+  $(document).on('change','#videoSource',function(){
     leave();
     
     //getDevices();
