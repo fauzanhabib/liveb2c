@@ -1195,7 +1195,7 @@ setInterval('checkShare()', 1000);
   $(document).on('change','#videoSource',function(){
     leave();
     
-    getDevices();
+    //getDevices();
     // console.log("============");
     // console.log(global_uid);
     // console.log("============");
@@ -1266,7 +1266,7 @@ setInterval('checkShare()', 1000);
   
   });
   // audioSelect.onchange = getDevices();
-  // videoSelect.onchange = getDevices();
+  videoSelect.onchange = getDevices();
 </script>
 <script>
   var appointment_id = "<?php echo $appointment_id; ?>";
