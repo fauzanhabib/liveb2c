@@ -1208,8 +1208,8 @@ setInterval('checkShare()', 1000);
     //   // console.log("Publish local stream error: " + err);
     // });
 
-    // client.init(app_id, function () {
-      // console.log("AgoraRTC client initialized");
+    client.init(app_id, function () {
+      console.log("AgoraRTC client initialized");
       client.join(channel_key, channel_name, null, function(uid) {
      
         // if (document.getElementById("video").checked) {
@@ -1259,7 +1259,9 @@ setInterval('checkShare()', 1000);
       }, function(err) {
         // console.log("Join channel failed", err);
       });
-  
+    }, function (err) {
+      // console.log("AgoraRTC client init failed", err);
+    });
   // }
   
   });
